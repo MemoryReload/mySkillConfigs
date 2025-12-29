@@ -1,0 +1,3579 @@
+{
+  "repo_info": {
+    "name": "YYText",
+    "full_name": "ibireme/YYText",
+    "description": "Powerful text framework for iOS to display and edit rich text.",
+    "url": "https://github.com/ibireme/YYText",
+    "homepage": null,
+    "stars": 8894,
+    "forks": 1731,
+    "open_issues": 515,
+    "default_branch": "master",
+    "created_at": "2015-11-05T13:13:53+00:00",
+    "updated_at": "2025-12-24T03:02:49+00:00",
+    "language": "Objective-C",
+    "license": "MIT License",
+    "topics": []
+  },
+  "readme": "YYText\n==============\n[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/ibireme/YYText/master/LICENSE)&nbsp;\n[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)&nbsp;\n[![CocoaPods](http://img.shields.io/cocoapods/v/YYText.svg?style=flat)](http://cocoapods.org/pods/YYText)&nbsp;\n[![CocoaPods](http://img.shields.io/cocoapods/p/YYText.svg?style=flat)](http://cocoadocs.org/docsets/YYText)&nbsp;\n[![Support](https://img.shields.io/badge/support-iOS%206%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;\n[![Build Status](https://travis-ci.org/ibireme/YYText.svg?branch=master)](https://travis-ci.org/ibireme/YYText)\n\nPowerful text framework for iOS to display and edit rich text.<br/>\n(It's a component of [YYKit](https://github.com/ibireme/YYKit))\n\n\nFeatures\n==============\n\n- UILabel and UITextView API compatible\n- High performance asynchronous text layout and rendering\n- Extended CoreText attributes with more text effects\n- Text attachments with UIImage, UIView and CALayer\n- Custom highlight text range to allow user interact with\n- Text parser support (built in markdown/emoticon parser)\n- Text container path and exclusion paths support\n- Vertical form layout support (for CJK text)\n- Image and attributed text copy/paste support\n- Attributed text placeholder support\n- Custom keyboard view support\n- Undo and redo control\n- Attributed text archiver and unarchiver support\n- Multi-language and VoiceOver support\n- Interface Builder support\n- Fully documented\n\n\nArchitecture\n==============\nYYText vs TextKit\n\n<img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/architecture.png\" width=\"400\">\n\n\nText Attributes\n==============\n\n### YYText supported attributes\n<table>\n  <thead>\n    <tr>\n      <th>Demo</th>\n      <th>Attribute Name</th>\n      <th>Class</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextAttachment.gif\" width=\"200\"></td>\n      <td>TextAttachment</td>\n      <td>YYTextAttachment</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextHighlight.gif\" width=\"200\"></td>\n      <td>TextHighlight</td>\n      <td>YYTextHighlight</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBinding.gif\" width=\"200\"></td>\n      <td>TextBinding</td>\n      <td>YYTextBinding</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextShadow.png\" width=\"200\"></td>\n      <td>TextShadow<br/>TextInnerShadow</td>\n      <td>YYTextShadow</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBorder.png\" width=\"200\"></td>\n      <td>TextBorder</td>\n      <td>YYTextBorder</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBackgroundBorder.png\" width=\"200\"></td>\n      <td>TextBackgroundBorder</td>\n      <td>YYTextBorder</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBlockBorder.png\" width=\"200\"></td>\n      <td>TextBlockBorder</td>\n      <td>YYTextBorder</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Obliqueness.png\" width=\"200\"></td>\n      <td>TextGlyphTransform</td>\n      <td> NSValue(CGAffineTransform)</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Underline.png\" width=\"200\"></td>\n      <td>TextUnderline</td>\n      <td>YYTextDecoration</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Strikethrough.png\" width=\"200\"></td>\n      <td>TextStrickthrough</td>\n      <td>YYTextDecoration</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBackedString.png\" width=\"200\"></td>\n      <td>TextBackedString</td>\n      <td>YYTextBackedString</td>\n    </tr>\n  </tbody>\n</table>\n\n### CoreText attributes which is supported by YYText\n<table>\n  <thead>\n    <tr>\n      <th>Demo</th>\n      <th>Attribute Name</th>\n      <th>Class</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Font.png\" width=\"200\"></td>\n      <td> Font </td>\n      <td>UIFont(CTFontRef)</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Kern.png\" width=\"200\"></td>\n      <td> Kern </td>\n      <td>NSNumber</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Stroke.png\" width=\"200\"></td>\n      <td> StrokeWidth </td>\n      <td> NSNumber </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/StrokeColor.png\" width=\"200\"></td>\n      <td> StrokeColor </td>\n      <td> CGColorRef </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Shadow.png\" width=\"200\"></td>\n      <td> Shadow </td>\n      <td> NSShadow </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Ligature.png\" width=\"200\"></td>\n      <td> Ligature </td>\n      <td> NSNumber </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/VerticalForms.png\" width=\"200\"></td>\n      <td> VerticalGlyphForm </td>\n      <td> NSNumber(BOOL) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/WriteDirection.png\" width=\"200\"></td>\n      <td> WritingDirection </td>\n      <td> NSArray(NSNumber) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/RunDelegate.png\" width=\"200\"></td>\n      <td> RunDelegate </td>\n      <td> CTRunDelegateRef </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/Alignment.png\" width=\"200\"></td>\n      <td> TextAlignment </td>\n      <td> NSParagraphStyle <br/>(NSTextAlignment) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/LineBreakMode.png\" width=\"200\"></td>\n      <td> LineBreakMode </td>\n      <td> NSParagraphStyle <br/>(NSLineBreakMode) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/LineSpacing.png\" width=\"200\"></td>\n      <td> LineSpacing </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/ParagraphSpacing.png\" width=\"200\"></td>\n      <td> ParagraphSpacing <br/> ParagraphSpacingBefore </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/FirstLineHeadIndent.png\" width=\"200\"></td>\n      <td> FirstLineHeadIndent </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/HeadIndent.png\" width=\"200\"></td>\n      <td> HeadIndent </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/TailIndent.png\" width=\"200\"></td>\n      <td> TailIndent </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/MinimumLineHeight.png\" width=\"200\"></td>\n      <td> MinimumLineHeight </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/MaximumLineHeight.png\" width=\"200\"></td>\n      <td> MaximumLineHeight </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/LineHeightMultiple.png\" width=\"200\"></td>\n      <td> LineHeightMultiple </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/BaseWritingDirection.png\" width=\"200\"></td>\n      <td> BaseWritingDirection </td>\n      <td> NSParagraphStyle <br/>(NSWritingDirection) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/Tab.png\" width=\"200\"></td>\n      <td> DefaultTabInterval <br/> TabStops </td>\n      <td> NSParagraphStyle <br/>CGFloat/NSArray(NSTextTab)</td>\n    </tr>\n  </tbody>\n</table>\n\n\nUsage\n==============\n\n### Basic\n```objc\n// YYLabel (similar to UILabel)\nYYLabel *label = [YYLabel new];\nlabel.frame = ...\nlabel.font = ...\nlabel.textColor = ...\nlabel.textAlignment = ...\nlabel.lineBreakMode = ...\nlabel.numberOfLines = ...\nlabel.text = ...\n    \n// YYTextView (similar to UITextView)\nYYTextView *textView = [YYTextView new];\ntextView.frame = ...\ntextView.font = ...\ntextView.textColor = ...\ntextView.dataDetectorTypes = ...\ntextView.placeHolderText = ...\ntextView.placeHolderTextColor = ...\ntextView.delegate = ...\n```    \n\n### Attributed text\n```objc\n// 1. Create an attributed string.\nNSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:@\"Some Text, blabla...\"];\n    \n// 2. Set attributes to text, you can use almost all CoreText attributes.\ntext.yy_font = [UIFont boldSystemFontOfSize:30];\ntext.yy_color = [UIColor blueColor];\n[text yy_setColor:[UIColor redColor] range:NSMakeRange(0, 4)];\ntext.yy_lineSpacing = 10;\n    \n// 3. Set to YYLabel or YYTextView.\nYYLabel *label = [YYLabel new];\nlabel.frame = ...\nlabel.attributedString = text;\n    \nYYTextView *textView = [YYTextView new];\ntextView.frame = ...\ntextView.attributedString = text;\n```\n\n### Text highlight\n    \nYou can use some convenience methods to set text highlight:\n```objc\n[text yy_setTextHighlightRange:range\n                       color:[UIColor blueColor]\n             backgroundColor:[UIColor grayColor]\n                   tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){ \n                       NSLog(@\"tap text range:...\"); \n                   }];\n```\nOr set the text highlight with your custom config:\n```objc\n// 1. Create a 'highlight' attribute for text.\nYYTextBorder *border = [YYTextBorder borderWithFillColor:[UIColor grayColor] cornerRadius:3];\n   \nYYTextHighlight *highlight = [YYTextHighlight new];\n[highlight setColor:[UIColor whiteColor]];\n[highlight setBackgroundBorder:highlightBorder];\nhighlight.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {\n NSLog(@\"tap text range:...\"); \n // you can also set the action handler to YYLabel or YYTextView.\n};\n    \n// 2. Add 'highlight' attribute to a range of text.\n[attributedText yy_setTextHighlight:highlight range:highlightRange];\n    \n// 3. Set text to label or text view.\nYYLabel *label = ...\nlabel.attributedText = attributedText\n    \nYYTextView *textView = ...\ntextView.attributedText = ...\n    \n// 4. Receive user interactive action.\nlabel.highlightTapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {\n   NSLog(@\"tap text range:...\");\n};\nlabel.highlightLongPressAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {\n   NSLog(@\"long press text range:...\");\n};\n    \n@UITextViewDelegate\n- (void)textView:(YYTextView *)textView didTapHighlight:(YYTextHighlight *)highlight inRange:(NSRange)characterRange rect:(CGRect)rect {\n   NSLog(@\"tap text range:...\");\n}\n- (void)textView:(YYTextView *)textView didLongPressHighlight:(YYTextHighlight *)highlight inRange:(NSRange)characterRange rect:(CGRect)rect {\n   NSLog(@\"long press text range:...\");\n}\n```\n\n### Text attachments\n```objc\nNSMutableAttributedString *text = [NSMutableAttributedString new];\nUIFont *font = [UIFont systemFontOfSize:16];\nNSMutableAttributedString *attachment = nil;\n\t\n// UIImage attachment\nUIImage *image = [UIImage imageNamed:@\"dribbble64_imageio\"];\nattachment = [NSMutableAttributedString yy_attachmentStringWithContent:image contentMode:UIViewContentModeCenter attachmentSize:image.size alignToFont:font alignment:YYTextVerticalAlignmentCenter];\n[text appendAttributedString: attachment];\n\t\n// UIView attachment\nUISwitch *switcher = [UISwitch new];\n[switcher sizeToFit];\nattachment = [NSMutableAttributedString yy_attachmentStringWithContent:switcher contentMode:UIViewContentModeBottom attachmentSize:switcher.size alignToFont:font alignment:YYTextVerticalAlignmentCenter];\n[text appendAttributedString: attachment];\n\t\n// CALayer attachment\nCASharpLayer *layer = [CASharpLayer layer];\nlayer.path = ...\nattachment = [NSMutableAttributedString yy_attachmentStringWithContent:layer contentMode:UIViewContentModeBottom attachmentSize:switcher.size alignToFont:font alignment:YYTextVerticalAlignmentCenter];\n[text appendAttributedString: attachment];\n```\n\n### Text layout calculation\n```objc\nNSAttributedString *text = ...\nCGSize size = CGSizeMake(100, CGFLOAT_MAX);\nYYTextLayout *layout = [YYTextLayout layoutWithContainerSize:size text:text];\n\t\n// get text bounding\nlayout.textBoundingRect; // get bounding rect\nlayout.textBoundingSize; // get bounding size\n\t\n // query text layout\n[layout lineIndexForPoint:CGPointMake(10,10)];\n[layout closestLineIndexForPoint:CGPointMake(10,10)];\n[layout closestPositionToPoint:CGPointMake(10,10)];\n[layout textRangeAtPoint:CGPointMake(10,10)];\n[layout rectForRange:[YYTextRange rangeWithRange:NSMakeRange(10,2)]];\n[layout selectionRectsForRange:[YYTextRange rangeWithRange:NSMakeRange(10,2)]];\n\t\n// text layout display\nYYLabel *label = [YYLabel new];\nlabel.size = layout.textBoundingSize;\nlabel.textLayout = layout;\n```\n\n### Adjust text line position\n```objc\n// Convenience methods:\n// 1. Create a text line position modifier, implements `YYTextLinePositionModifier` protocol.\n// 2. Set it to label or text view.\n\t\nYYTextLinePositionSimpleModifier *modifier = [YYTextLinePositionSimpleModifier new];\nmodifier.fixedLineHeight = 24;\n\t\nYYLabel *label = [YYLabel new];\nlabel.linePositionModifier = modifier;\n\t\n// Fully control\nYYTextLinePositionSimpleModifier *modifier = [YYTextLinePositionSimpleModifier new];\nmodifier.fixedLineHeight = 24;\n\t\nYYTextContainer *container = [YYTextContainer new];\ncontainer.size = CGSizeMake(100, CGFLOAT_MAX);\ncontainer.linePositionModifier = modifier;\n\t\nYYTextLayout *layout = [YYTextLayout layoutWithContainer:container text:text];\nYYLabel *label = [YYLabel new];\nlabel.size = layout.textBoundingSize;\nlabel.textLayout = layout;\n```\t\n\t\n### Asynchronous layout and rendering\n```objc\n// If you have performance issues,\n// you may enable the asynchronous display mode.\nYYLabel *label = ...\nlabel.displaysAsynchronously = YES;\n    \n// If you want to get the highest performance, you should do \n// text layout with `YYTextLayout` class in background thread.\nYYLabel *label = [YYLabel new];\nlabel.displaysAsynchronously = YES;\nlabel.ignoreCommonProperties = YES;\n    \ndispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{\n   // Create attributed string.\n   NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:@\"Some Text\"];\n   text.yy_font = [UIFont systemFontOfSize:16];\n   text.yy_color = [UIColor grayColor];\n   [text yy_setColor:[UIColor redColor] range:NSMakeRange(0, 4)];\n \t\n   // Create text container\n   YYTextContainer *container = [YYTextContainer new];\n   container.size = CGSizeMake(100, CGFLOAT_MAX);\n   container.maximumNumberOfRows = 0;\n   \n   // Generate a text layout.\n   YYTextLayout *layout = [YYTextLayout layoutWithContainer:container text:text];\n   \n   dispatch_async(dispatch_get_main_queue(), ^{\n       label.size = layout.textBoundingSize;\n       label.textLayout = layout;\n   });\n});\n```\n\n### Text container control\n```objc\nYYLabel *label = ...\nlabel.textContainerPath = [UIBezierPath bezierPathWith...];\nlabel.exclusionPaths = \t@[[UIBezierPath bezierPathWith...];,...];\nlabel.textContainerInset = UIEdgeInsetsMake(...);\nlabel.verticalForm = YES/NO;\n    \nYYTextView *textView = ...\ntextView.exclusionPaths = \t@[[UIBezierPath bezierPathWith...];,...];\ntextView.textContainerInset = UIEdgeInsetsMake(...);\ntextView.verticalForm = YES/NO;\n```\n   \n### Text parser\n```objc\n// 1. Create a text parser\n\t\nYYTextSimpleEmoticonParser *parser = [YYTextSimpleEmoticonParser new];\nNSMutableDictionary *mapper = [NSMutableDictionary new];\nmapper[@\":smile:\"] = [UIImage imageNamed:@\"smile.png\"];\nmapper[@\":cool:\"] = [UIImage imageNamed:@\"cool.png\"];\nmapper[@\":cry:\"] = [UIImage imageNamed:@\"cry.png\"];\nmapper[@\":wink:\"] = [UIImage imageNamed:@\"wink.png\"];\nparser.emoticonMapper = mapper;\n\t\nYYTextSimpleMarkdownParser *parser = [YYTextSimpleMarkdownParser new];\n[parser setColorWithDarkTheme];\n    \nMyCustomParser *parser = ... // custom parser\n    \n// 2. Attach parser to label or text view\nYYLabel *label = ...\nlabel.textParser = parser;\n    \nYYTextView *textView = ...\ntextView.textParser = parser;\n```\n  \n### Debug\n```objc\n// Set a shared debug option to show text layout result.\nYYTextDebugOption *debugOptions = [YYTextDebugOption new];\ndebugOptions.baselineColor = [UIColor redColor];\ndebugOptions.CTFrameBorderColor = [UIColor redColor];\ndebugOptions.CTLineFillColor = [UIColor colorWithRed:0.000 green:0.463 blue:1.000 alpha:0.180];\ndebugOptions.CGGlyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.000 alpha:0.200];\n[YYTextDebugOption setSharedDebugOption:debugOptions];\n```\n\n### More examples\nSee `Demo/YYTextDemo.xcodeproj` for more examples:\n\n<img src=\"https://raw.github.com/ibireme/YYText/master/Demo/DemoSnapshot/text_path.gif\" width=\"320\">\n<img src=\"https://raw.github.com/ibireme/YYText/master/Demo/DemoSnapshot/text_markdown.gif\" width=\"320\">\n<br/> <br/>\n<img src=\"https://raw.github.com/ibireme/YYText/master/Demo/DemoSnapshot/text_vertical.gif\" width=\"320\">\n<img src=\"https://raw.github.com/ibireme/YYText/master/Demo/DemoSnapshot/text_paste.gif\" width=\"320\">\n\n\nInstallation\n==============\n\n### CocoaPods\n\n1. Add `pod 'YYText'` to your Podfile.\n2. Run `pod install` or `pod update`.\n3. Import \\<YYText/YYText.h\\>.\n\n\n### Carthage\n\n1. Add `github \"ibireme/YYText\"` to your Cartfile.\n2. Run `carthage update --platform ios` and add the framework to your project.\n3. Import \\<YYText/YYText.h\\>.\n\n\n### Manually\n\n1. Download all the files in the `YYText` subdirectory.\n2. Add the source files to your Xcode project.\n3. Link with required frameworks:\n    * UIKit\n    * CoreFoundation\n    * CoreText\n    * QuartzCore\n    * Accelerate\n    * MobileCoreServices\n4. Import `YYText.h`.\n\n\n### Notice\nYou may add [YYImage](https://github.com/ibireme/YYImage) or [YYWebImage](https://github.com/ibireme/YYWebImage) to your project if you want to support animated image (GIF/APNG/WebP).\n\n\nDocumentation\n==============\nFull API documentation is available on [CocoaDocs](http://cocoadocs.org/docsets/YYText/).<br/>\nYou can also install documentation locally using [appledoc](https://github.com/tomaz/appledoc).\n\n\nRequirements\n==============\nThis library requires `iOS 6.0+` and `Xcode 8.0+`.\n\n\nLicense\n==============\nYYText is released under the MIT license. See LICENSE file for details.\n\n\n<br/><br/>\n---\n中文介绍\n==============\n功能强大的 iOS 富文本编辑与显示框架。<br/>\n(该项目是 [YYKit](https://github.com/ibireme/YYKit) 组件之一)\n\n\n特性\n==============\n- API 兼容 UILabel 和 UITextView\n- 支持高性能的异步排版和渲染\n- 扩展了 CoreText 的属性以支持更多文字效果\n- 支持 UIImage、UIView、CALayer 作为图文混排元素\n- 支持添加自定义样式的、可点击的文本高亮范围\n- 支持自定义文本解析 (内置简单的 Markdown/表情解析)\n- 支持文本容器路径、内部留空路径的控制\n- 支持文字竖排版，可用于编辑和显示中日韩文本\n- 支持图片和富文本的复制粘贴\n- 文本编辑时，支持富文本占位符\n- 支持自定义键盘视图\n- 撤销和重做次数的控制\n- 富文本的序列化与反序列化支持\n- 支持多语言，支持 VoiceOver\n- 支持 Interface Builder\n- 全部代码都有文档注释\n\n\n架构\n==============\nYYText 和 TextKit 架构对比\n\n<img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/architecture.png\" width=\"400\">\n\n\n文本属性\n==============\n\n### YYText 原生支持的属性\n<table>\n  <thead>\n    <tr>\n      <th>Demo</th>\n      <th>Attribute Name</th>\n      <th>Class</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextAttachment.gif\" width=\"200\"></td>\n      <td>TextAttachment</td>\n      <td>YYTextAttachment</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextHighlight.gif\" width=\"200\"></td>\n      <td>TextHighlight</td>\n      <td>YYTextHighlight</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBinding.gif\" width=\"200\"></td>\n      <td>TextBinding</td>\n      <td>YYTextBinding</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextShadow.png\" width=\"200\"></td>\n      <td>TextShadow<br/>TextInnerShadow</td>\n      <td>YYTextShadow</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBorder.png\" width=\"200\"></td>\n      <td>TextBorder</td>\n      <td>YYTextBorder</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBackgroundBorder.png\" width=\"200\"></td>\n      <td>TextBackgroundBorder</td>\n      <td>YYTextBorder</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBlockBorder.png\" width=\"200\"></td>\n      <td>TextBlockBorder</td>\n      <td>YYTextBorder</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Obliqueness.png\" width=\"200\"></td>\n      <td>TextGlyphTransform</td>\n      <td> NSValue(CGAffineTransform)</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Underline.png\" width=\"200\"></td>\n      <td>TextUnderline</td>\n      <td>YYTextDecoration</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Strikethrough.png\" width=\"200\"></td>\n      <td>TextStrickthrough</td>\n      <td>YYTextDecoration</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/YYText Extended/YYTextBackedString.png\" width=\"200\"></td>\n      <td>TextBackedString</td>\n      <td>YYTextBackedString</td>\n    </tr>\n  </tbody>\n</table>\n\n### YYText 支持的 CoreText 属性\n<table>\n  <thead>\n    <tr>\n      <th>Demo</th>\n      <th>Attribute Name</th>\n      <th>Class</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Font.png\" width=\"200\"></td>\n      <td> Font </td>\n      <td>UIFont(CTFontRef)</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Kern.png\" width=\"200\"></td>\n      <td> Kern </td>\n      <td>NSNumber</td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Stroke.png\" width=\"200\"></td>\n      <td> StrokeWidth </td>\n      <td> NSNumber </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/StrokeColor.png\" width=\"200\"></td>\n      <td> StrokeColor </td>\n      <td> CGColorRef </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Shadow.png\" width=\"200\"></td>\n      <td> Shadow </td>\n      <td> NSShadow </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Ligature.png\" width=\"200\"></td>\n      <td> Ligature </td>\n      <td> NSNumber </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/VerticalForms.png\" width=\"200\"></td>\n      <td> VerticalGlyphForm </td>\n      <td> NSNumber(BOOL) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/WriteDirection.png\" width=\"200\"></td>\n      <td> WritingDirection </td>\n      <td> NSArray(NSNumber) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/RunDelegate.png\" width=\"200\"></td>\n      <td> RunDelegate </td>\n      <td> CTRunDelegateRef </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/Alignment.png\" width=\"200\"></td>\n      <td> TextAlignment </td>\n      <td> NSParagraphStyle <br/>(NSTextAlignment) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/LineBreakMode.png\" width=\"200\"></td>\n      <td> LineBreakMode </td>\n      <td> NSParagraphStyle <br/>(NSLineBreakMode) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/LineSpacing.png\" width=\"200\"></td>\n      <td> LineSpacing </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/ParagraphSpacing.png\" width=\"200\"></td>\n      <td> ParagraphSpacing <br/> ParagraphSpacingBefore </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/FirstLineHeadIndent.png\" width=\"200\"></td>\n      <td> FirstLineHeadIndent </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/HeadIndent.png\" width=\"200\"></td>\n      <td> HeadIndent </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/TailIndent.png\" width=\"200\"></td>\n      <td> TailIndent </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/MinimumLineHeight.png\" width=\"200\"></td>\n      <td> MinimumLineHeight </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/MaximumLineHeight.png\" width=\"200\"></td>\n      <td> MaximumLineHeight </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/LineHeightMultiple.png\" width=\"200\"></td>\n      <td> LineHeightMultiple </td>\n      <td> NSParagraphStyle <br/>(CGFloat) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/BaseWritingDirection.png\" width=\"200\"></td>\n      <td> BaseWritingDirection </td>\n      <td> NSParagraphStyle <br/>(NSWritingDirection) </td>\n    </tr>\n    <tr>\n      <td><img src=\"https://raw.github.com/ibireme/YYText/master/Attributes/CoreText and TextKit/Paragraph/Tab.png\" width=\"200\"></td>\n      <td> DefaultTabInterval <br/> TabStops </td>\n      <td> NSParagraphStyle <br/>CGFloat/NSArray(NSTextTab)</td>\n    </tr>\n  </tbody>\n</table>\n\n\n用法\n==============\n\n### 基本用法\n```objc\n// YYLabel (和 UILabel 用法一致)\nYYLabel *label = [YYLabel new];\nlabel.frame = ...\nlabel.font = ...\nlabel.textColor = ...\nlabel.textAlignment = ...\nlabel.lineBreakMode = ...\nlabel.numberOfLines = ...\nlabel.text = ...\n    \n// YYTextView (和 UITextView 用法一致)\nYYTextView *textView = [YYTextView new];\ntextView.frame = ...\ntextView.font = ...\ntextView.textColor = ...\ntextView.dataDetectorTypes = ...\ntextView.placeHolderText = ...\ntextView.placeHolderTextColor = ...\ntextView.delegate = ...\n```    \n\n### 属性文本\n```objc\n// 1. 创建一个属性文本\nNSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:@\"Some Text, blabla...\"];\n    \n// 2. 为文本设置属性\ntext.yy_font = [UIFont boldSystemFontOfSize:30];\ntext.yy_color = [UIColor blueColor];\n[text yy_setColor:[UIColor redColor] range:NSMakeRange(0, 4)];\ntext.yy_lineSpacing = 10;\n    \n// 3. 赋值到 YYLabel 或 YYTextView\nYYLabel *label = [YYLabel new];\nlabel.frame = ...\nlabel.attributedString = text;\n    \nYYTextView *textView = [YYTextView new];\ntextView.frame = ...\ntextView.attributedString = text;\n```   \n\n### 文本高亮\n\n你可以用一些已经封装好的简便方法来设置文本高亮：\n```objc\n[text yy_setTextHighlightRange:range\n                       color:[UIColor blueColor]\n             backgroundColor:[UIColor grayColor]\n                   tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){ \n                       NSLog(@\"tap text range:...\"); \n                   }];\n```\n或者用更复杂的办法来调节文本高亮的细节：\n```objc\n// 1. 创建一个\"高亮\"属性，当用户点击了高亮区域的文本时，\"高亮\"属性会替换掉原本的属性\nYYTextBorder *border = [YYTextBorder borderWithFillColor:[UIColor grayColor] cornerRadius:3];\n   \nYYTextHighlight *highlight = [YYTextHighlight new];\n[highlight setColor:[UIColor whiteColor]];\n[highlight setBackgroundBorder:highlightBorder];\nhighlight.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {\n NSLog(@\"tap text range:...\"); \n // 你也可以把事件回调放到 YYLabel 和 YYTextView 来处理。\n};\n    \n// 2. 把\"高亮\"属性设置到某个文本范围\n[attributedText yy_setTextHighlight:highlight range:highlightRange];\n    \n// 3. 把属性文本设置到 YYLabel 或 YYTextView\nYYLabel *label = ...\nlabel.attributedText = attributedText\n    \nYYTextView *textView = ...\ntextView.attributedText = ...\n    \n// 4. 接受事件回调\nlabel.highlightTapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {\n   NSLog(@\"tap text range:...\");\n};\nlabel.highlightLongPressAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {\n   NSLog(@\"long press text range:...\");\n};\n    \n@UITextViewDelegate\n- (void)textView:(YYTextView *)textView didTapHighlight:(YYTextHighlight *)highlight inRange:(NSRange)characterRange rect:(CGRect)rect {\n   NSLog(@\"tap text range:...\");\n}\n- (void)textView:(YYTextView *)textView didLongPressHighlight:(YYTextHighlight *)highlight inRange:(NSRange)characterRange rect:(CGRect)rect {\n   NSLog(@\"long press text range:...\");\n}\n```\n\n### 图文混排\n```objc\nNSMutableAttributedString *text = [NSMutableAttributedString new];\nUIFont *font = [UIFont systemFontOfSize:16];\nNSMutableAttributedString *attachment = nil;\n\t\n// 嵌入 UIImage\nUIImage *image = [UIImage imageNamed:@\"dribbble64_imageio\"];\nattachment = [NSMutableAttributedString yy_attachmentStringWithContent:image contentMode:UIViewContentModeCenter attachmentSize:image.size alignToFont:font alignment:YYTextVerticalAlignmentCenter];\n[text appendAttributedString: attachment];\n\t\n// 嵌入 UIView\nUISwitch *switcher = [UISwitch new];\n[switcher sizeToFit];\nattachment = [NSMutableAttributedString yy_attachmentStringWithContent:switcher contentMode:UIViewContentModeBottom attachmentSize:switcher.size alignToFont:font alignment:YYTextVerticalAlignmentCenter];\n[text appendAttributedString: attachment];\n\t\n// 嵌入 CALayer\nCASharpLayer *layer = [CASharpLayer layer];\nlayer.path = ...\nattachment = [NSMutableAttributedString yy_attachmentStringWithContent:layer contentMode:UIViewContentModeBottom attachmentSize:switcher.size alignToFont:font alignment:YYTextVerticalAlignmentCenter];\n[text appendAttributedString: attachment];\n```\n\n### 文本布局计算\n```objc\nNSAttributedString *text = ...\nCGSize size = CGSizeMake(100, CGFLOAT_MAX);\nYYTextLayout *layout = [YYTextLayout layoutWithContainerSize:size text:text];\n\t\n// 获取文本显示位置和大小\nlayout.textBoundingRect; // get bounding rect\nlayout.textBoundingSize; // get bounding size\n\t\n // 查询文本排版结果\n[layout lineIndexForPoint:CGPointMake(10,10)];\n[layout closestLineIndexForPoint:CGPointMake(10,10)];\n[layout closestPositionToPoint:CGPointMake(10,10)];\n[layout textRangeAtPoint:CGPointMake(10,10)];\n[layout rectForRange:[YYTextRange rangeWithRange:NSMakeRange(10,2)]];\n[layout selectionRectsForRange:[YYTextRange rangeWithRange:NSMakeRange(10,2)]];\n\t\n// 显示文本排版结果\nYYLabel *label = [YYLabel new];\nlabel.size = layout.textBoundingSize;\nlabel.textLayout = layout;\n```\n\t\n### 文本行位置调整\n```objc\n// 由于中文、英文、Emoji 等字体高度不一致，或者富文本中出现了不同字号的字体，\n// 可能会造成每行文字的高度不一致。这里可以添加一个修改器来实现固定行高，或者自定义文本行位置。\n  \n// 简单的方法:\n// 1. 创建一个文本行位置修改类，实现 `YYTextLinePositionModifier` 协议。\n// 2. 设置到 Label 或 TextView。\n\t\nYYTextLinePositionSimpleModifier *modifier = [YYTextLinePositionSimpleModifier new];\nmodifier.fixedLineHeight = 24;\n\t\nYYLabel *label = [YYLabel new];\nlabel.linePositionModifier = modifier;\n\t\n// 完全控制:\nYYTextLinePositionSimpleModifier *modifier = [YYTextLinePositionSimpleModifier new];\nmodifier.fixedLineHeight = 24;\n\t\nYYTextContainer *container = [YYTextContainer new];\ncontainer.size = CGSizeMake(100, CGFLOAT_MAX);\ncontainer.linePositionModifier = modifier;\n\t\nYYTextLayout *layout = [YYTextLayout layoutWithContainer:container text:text];\nYYLabel *label = [YYLabel new];\nlabel.size = layout.textBoundingSize;\nlabel.textLayout = layout;\n```\n\n### 异步排版和渲染\n```objc  \n// 如果你在显示字符串时有性能问题，可以这样开启异步模式：\nYYLabel *label = ...\nlabel.displaysAsynchronously = YES;\n    \n// 如果需要获得最高的性能，你可以在后台线程用 `YYTextLayout` 进行预排版： \nYYLabel *label = [YYLabel new];\nlabel.displaysAsynchronously = YES; //开启异步绘制\nlabel.ignoreCommonProperties = YES; //忽略除了 textLayout 之外的其他属性\n    \ndispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{\n   // 创建属性字符串\n   NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:@\"Some Text\"];\n   text.yy_font = [UIFont systemFontOfSize:16];\n   text.yy_color = [UIColor grayColor];\n   [text yy_setColor:[UIColor redColor] range:NSMakeRange(0, 4)];\n \n   // 创建文本容器\n   YYTextContainer *container = [YYTextContainer new];\n   container.size = CGSizeMake(100, CGFLOAT_MAX);\n   container.maximumNumberOfRows = 0;\n   \n   // 生成排版结果\n   YYTextLayout *layout = [YYTextLayout layoutWithContainer:container text:text];\n   \n   dispatch_async(dispatch_get_main_queue(), ^{\n       label.size = layout.textBoundingSize;\n       label.textLayout = layout;\n   });\n});\n```\n\n### 文本容器控制\n```objc\nYYLabel *label = ...\nlabel.textContainerPath = [UIBezierPath bezierPathWith...];\nlabel.exclusionPaths = \t@[[UIBezierPath bezierPathWith...];,...];\nlabel.textContainerInset = UIEdgeInsetsMake(...);\nlabel.verticalForm = YES/NO;\n    \nYYTextView *textView = ...\ntextView.exclusionPaths = \t@[[UIBezierPath bezierPathWith...];,...];\ntextView.textContainerInset = UIEdgeInsetsMake(...);\ntextView.verticalForm = YES/NO;\n```    \n\n### 文本解析\n```objc\n// 1. 创建一个解析器\n\t\n// 内置简单的表情解析\nYYTextSimpleEmoticonParser *parser = [YYTextSimpleEmoticonParser new];\nNSMutableDictionary *mapper = [NSMutableDictionary new];\nmapper[@\":smile:\"] = [UIImage imageNamed:@\"smile.png\"];\nmapper[@\":cool:\"] = [UIImage imageNamed:@\"cool.png\"];\nmapper[@\":cry:\"] = [UIImage imageNamed:@\"cry.png\"];\nmapper[@\":wink:\"] = [UIImage imageNamed:@\"wink.png\"];\nparser.emoticonMapper = mapper;\n\t\n// 内置简单的 markdown 解析\nYYTextSimpleMarkdownParser *parser = [YYTextSimpleMarkdownParser new];\n[parser setColorWithDarkTheme];\n    \n// 实现 `YYTextParser` 协议的自定义解析器\nMyCustomParser *parser = ... \n    \n// 2. 把解析器添加到 YYLabel 或 YYTextView\nYYLabel *label = ...\nlabel.textParser = parser;\n    \nYYTextView *textView = ...\ntextView.textParser = parser;\n```\n\n### Debug\n```objc\n// 设置一个全局的 debug option 来显示排版结果。\nYYTextDebugOption *debugOptions = [YYTextDebugOption new];\ndebugOptions.baselineColor = [UIColor redColor];\ndebugOptions.CTFrameBorderColor = [UIColor redColor];\ndebugOptions.CTLineFillColor = [UIColor colorWithRed:0.000 green:0.463 blue:1.000 alpha:0.180];\ndebugOptions.CGGlyphBorderColor = [UIColor colorWithRed:1.000 green:0.524 blue:0.000 alpha:0.200];\n[YYTextDebugOption setSharedDebugOption:debugOptions];\n```\n\n### 更多示例\n查看演示工程 `Demo/YYTextDemo.xcodeproj`:\n\n<img src=\"https://raw.github.com/ibireme/YYText/master/Demo/DemoSnapshot/text_path.gif\" width=\"320\">\n<img src=\"https://raw.github.com/ibireme/YYText/master/Demo/DemoSnapshot/text_markdown.gif\" width=\"320\">\n<br/> <br/>\n<img src=\"https://raw.github.com/ibireme/YYText/master/Demo/DemoSnapshot/text_vertical.gif\" width=\"320\">\n<img src=\"https://raw.github.com/ibireme/YYText/master/Demo/DemoSnapshot/text_paste.gif\" width=\"320\">\n\n\n安装\n==============\n\n### CocoaPods\n\n1. 在 Podfile 中添加 `pod 'YYText'`。\n2. 执行 `pod install` 或 `pod update`。\n3. 导入 \\<YYText/YYText.h\\>。\n\n\n### Carthage\n\n1. 在 Cartfile 中添加 `github \"ibireme/YYText\"`。\n2. 执行 `carthage update --platform ios` 并将生成的 framework 添加到你的工程。\n3. 导入 \\<YYText/YYText.h\\>。\n\n\n### 手动安装\n\n1. 下载 YYText 文件夹内的所有内容。\n2. 将 YYText 内的源文件添加(拖放)到你的工程。\n3. 链接以下 frameworks:\n    * UIKit\n    * CoreFoundation\n    * CoreText\n    * QuartzCore\n    * Accelerate\n    * MobileCoreServices\n4. 导入 `YYText.h`。\n\n\n### 注意\n你可以添加 [YYImage](https://github.com/ibireme/YYImage) 或 [YYWebImage](https://github.com/ibireme/YYWebImage) 到你的工程，以支持动画格式(GIF/APNG/WebP)的图片。\n\n\n文档\n==============\n你可以在 [CocoaDocs](http://cocoadocs.org/docsets/YYText/) 查看在线 API 文档，也可以用 [appledoc](https://github.com/tomaz/appledoc) 本地生成文档。\n\n\n系统要求\n==============\n该项目最低支持 `iOS 6.0` 和 `Xcode 8.0`。\n\n\n已知问题\n==============\n* YYText 并不能支持所有 CoreText/TextKit 的属性，比如 NSBackgroundColor、NSStrikethrough、NSUnderline、NSAttachment、NSLink 等，但 YYText 中基本都有对应属性作为替代。详情见上方表格。\n* YYTextView 未实现局部刷新，所以在输入和编辑大量的文本（比如超过大概五千个汉字、或大概一万个英文字符）时会出现较明显的卡顿现象。\n* 竖排版时，添加 exclusionPaths 在少数情况下可能会导致文本显示空白。\n* 当添加了非矩形的 textContainerPath，并且有嵌入大于文本排版方向宽度的 RunDelegate 时，RunDelegate 之后的文字会无法显示。这是 CoreText 的 Bug（或者说是 Feature）。\n\n许可证\n==============\nYYText 使用 MIT 许可证，详情见 LICENSE 文件。\n\n\n",
+  "file_tree": [
+    {
+      "path": ".gitignore",
+      "type": "file",
+      "size": 1430
+    },
+    {
+      "path": ".travis.yml",
+      "type": "file",
+      "size": 320
+    },
+    {
+      "path": "Attributes",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Framework",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "LICENSE",
+      "type": "file",
+      "size": 1095
+    },
+    {
+      "path": "README.md",
+      "type": "file",
+      "size": 40679
+    },
+    {
+      "path": "YYText.podspec",
+      "type": "file",
+      "size": 760
+    },
+    {
+      "path": "YYText",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Attributes/CoreText and TextKit Attributes.pdf",
+      "type": "file",
+      "size": 890134
+    },
+    {
+      "path": "Attributes/CoreText and TextKit",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Attributes/YYText Extended",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Attributes/architecture.png",
+      "type": "file",
+      "size": 148173
+    },
+    {
+      "path": "Demo/DemoSnapshot",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo.xcodeproj",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Framework/Info.plist",
+      "type": "file",
+      "size": 776
+    },
+    {
+      "path": "Framework/YYText.xcodeproj",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "YYText/Component",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "YYText/String",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "YYText/Utility",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "YYText/YYLabel.h",
+      "type": "file",
+      "size": 14733
+    },
+    {
+      "path": "YYText/YYLabel.m",
+      "type": "file",
+      "size": 47776
+    },
+    {
+      "path": "YYText/YYText.h",
+      "type": "file",
+      "size": 1480
+    },
+    {
+      "path": "YYText/YYTextView.h",
+      "type": "file",
+      "size": 17249
+    },
+    {
+      "path": "YYText/YYTextView.m",
+      "type": "file",
+      "size": 156132
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Attachment.png",
+      "type": "file",
+      "size": 25251
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/BackgroundColor.png",
+      "type": "file",
+      "size": 24346
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Baseline.png",
+      "type": "file",
+      "size": 24264
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Color.png",
+      "type": "file",
+      "size": 24963
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Effect.png",
+      "type": "file",
+      "size": 190400
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Expansion.png",
+      "type": "file",
+      "size": 23649
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Font.png",
+      "type": "file",
+      "size": 28375
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Kern.png",
+      "type": "file",
+      "size": 31999
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Ligature.png",
+      "type": "file",
+      "size": 21123
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Link.png",
+      "type": "file",
+      "size": 19247
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Obliqueness.png",
+      "type": "file",
+      "size": 24626
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Ruby.png",
+      "type": "file",
+      "size": 26009
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/RunDelegate.png",
+      "type": "file",
+      "size": 19800
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Shadow.png",
+      "type": "file",
+      "size": 31557
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Strikethrough.png",
+      "type": "file",
+      "size": 22700
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/StrikethroughColor.png",
+      "type": "file",
+      "size": 22702
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Stroke.png",
+      "type": "file",
+      "size": 38857
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/StrokeColor.png",
+      "type": "file",
+      "size": 31716
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Superscript.png",
+      "type": "file",
+      "size": 23658
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Underline.png",
+      "type": "file",
+      "size": 23205
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/UnderlineColor.png",
+      "type": "file",
+      "size": 23260
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/VerticalForms.png",
+      "type": "file",
+      "size": 24769
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/WriteDirection.png",
+      "type": "file",
+      "size": 23135
+    },
+    {
+      "path": "Attributes/YYText Extended/YYTextAttachment.gif",
+      "type": "file",
+      "size": 2025124
+    },
+    {
+      "path": "Attributes/YYText Extended/YYTextBackedString.png",
+      "type": "file",
+      "size": 55766
+    },
+    {
+      "path": "Attributes/YYText Extended/YYTextBackgroundBorder.png",
+      "type": "file",
+      "size": 44790
+    },
+    {
+      "path": "Attributes/YYText Extended/YYTextBinding.gif",
+      "type": "file",
+      "size": 673309
+    },
+    {
+      "path": "Attributes/YYText Extended/YYTextBlockBorder.png",
+      "type": "file",
+      "size": 16788
+    },
+    {
+      "path": "Attributes/YYText Extended/YYTextBorder.png",
+      "type": "file",
+      "size": 32245
+    },
+    {
+      "path": "Attributes/YYText Extended/YYTextHighlight.gif",
+      "type": "file",
+      "size": 513661
+    },
+    {
+      "path": "Attributes/YYText Extended/YYTextShadow.png",
+      "type": "file",
+      "size": 54138
+    },
+    {
+      "path": "Demo/DemoSnapshot/text_markdown.gif",
+      "type": "file",
+      "size": 907702
+    },
+    {
+      "path": "Demo/DemoSnapshot/text_paste.gif",
+      "type": "file",
+      "size": 4695421
+    },
+    {
+      "path": "Demo/DemoSnapshot/text_path.gif",
+      "type": "file",
+      "size": 4347012
+    },
+    {
+      "path": "Demo/DemoSnapshot/text_vertical.gif",
+      "type": "file",
+      "size": 1662915
+    },
+    {
+      "path": "Demo/YYTextDemo.xcodeproj/project.pbxproj",
+      "type": "file",
+      "size": 57974
+    },
+    {
+      "path": "Demo/YYTextDemo.xcodeproj/project.xcworkspace",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo/AppDelegate.h",
+      "type": "file",
+      "size": 277
+    },
+    {
+      "path": "Demo/YYTextDemo/AppDelegate.m",
+      "type": "file",
+      "size": 2031
+    },
+    {
+      "path": "Demo/YYTextDemo/Assets.xcassets",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo/Base.lproj",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo/CALayer+YYAdd.h",
+      "type": "file",
+      "size": 3312
+    },
+    {
+      "path": "Demo/YYTextDemo/CALayer+YYAdd.m",
+      "type": "file",
+      "size": 7952
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo/Info.plist",
+      "type": "file",
+      "size": 1695
+    },
+    {
+      "path": "Demo/YYTextDemo/NSBundle+YYAdd.h",
+      "type": "file",
+      "size": 3363
+    },
+    {
+      "path": "Demo/YYTextDemo/NSBundle+YYAdd.m",
+      "type": "file",
+      "size": 2834
+    },
+    {
+      "path": "Demo/YYTextDemo/NSData+YYAdd.h",
+      "type": "file",
+      "size": 840
+    },
+    {
+      "path": "Demo/YYTextDemo/NSData+YYAdd.m",
+      "type": "file",
+      "size": 563
+    },
+    {
+      "path": "Demo/YYTextDemo/NSString+YYAdd.h",
+      "type": "file",
+      "size": 8838
+    },
+    {
+      "path": "Demo/YYTextDemo/NSString+YYAdd.m",
+      "type": "file",
+      "size": 20278
+    },
+    {
+      "path": "Demo/YYTextDemo/UIControl+YYAdd.h",
+      "type": "file",
+      "size": 2544
+    },
+    {
+      "path": "Demo/YYTextDemo/UIControl+YYAdd.m",
+      "type": "file",
+      "size": 3457
+    },
+    {
+      "path": "Demo/YYTextDemo/UIGestureRecognizer+YYAdd.h",
+      "type": "file",
+      "size": 1167
+    },
+    {
+      "path": "Demo/YYTextDemo/UIGestureRecognizer+YYAdd.m",
+      "type": "file",
+      "size": 1990
+    },
+    {
+      "path": "Demo/YYTextDemo/UIImage+YYWebImage.h",
+      "type": "file",
+      "size": 9306
+    },
+    {
+      "path": "Demo/YYTextDemo/UIImage+YYWebImage.m",
+      "type": "file",
+      "size": 28414
+    },
+    {
+      "path": "Demo/YYTextDemo/UIView+YYAdd.h",
+      "type": "file",
+      "size": 3555
+    },
+    {
+      "path": "Demo/YYTextDemo/UIView+YYAdd.m",
+      "type": "file",
+      "size": 6154
+    },
+    {
+      "path": "Demo/YYTextDemo/ViewController.h",
+      "type": "file",
+      "size": 221
+    },
+    {
+      "path": "Demo/YYTextDemo/ViewController.m",
+      "type": "file",
+      "size": 406
+    },
+    {
+      "path": "Demo/YYTextDemo/YYFPSLabel.h",
+      "type": "file",
+      "size": 343
+    },
+    {
+      "path": "Demo/YYTextDemo/YYFPSLabel.m",
+      "type": "file",
+      "size": 2322
+    },
+    {
+      "path": "Demo/YYTextDemo/YYGestureRecognizer.h",
+      "type": "file",
+      "size": 1188
+    },
+    {
+      "path": "Demo/YYTextDemo/YYGestureRecognizer.m",
+      "type": "file",
+      "size": 1794
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextAsyncExample.h",
+      "type": "file",
+      "size": 219
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextAsyncExample.m",
+      "type": "file",
+      "size": 6495
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextAttachmentExample.h",
+      "type": "file",
+      "size": 230
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextAttachmentExample.m",
+      "type": "file",
+      "size": 7136
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextAttributeExample.h",
+      "type": "file",
+      "size": 228
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextAttributeExample.m",
+      "type": "file",
+      "size": 11861
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextBindingExample.h",
+      "type": "file",
+      "size": 223
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextBindingExample.m",
+      "type": "file",
+      "size": 3978
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextCopyPasteExample.h",
+      "type": "file",
+      "size": 228
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextCopyPasteExample.m",
+      "type": "file",
+      "size": 2600
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextEditExample.h",
+      "type": "file",
+      "size": 217
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextEditExample.m",
+      "type": "file",
+      "size": 9035
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextEmoticonExample.h",
+      "type": "file",
+      "size": 225
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextEmoticonExample.m",
+      "type": "file",
+      "size": 3443
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextExample.h",
+      "type": "file",
+      "size": 215
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextExample.m",
+      "type": "file",
+      "size": 2496
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextExampleHelper.h",
+      "type": "file",
+      "size": 323
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextExampleHelper.m",
+      "type": "file",
+      "size": 1616
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextMarkdownExample.h",
+      "type": "file",
+      "size": 225
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextMarkdownExample.m",
+      "type": "file",
+      "size": 2839
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextRubyExample.h",
+      "type": "file",
+      "size": 217
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextRubyExample.m",
+      "type": "file",
+      "size": 3852
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextTagExample.h",
+      "type": "file",
+      "size": 216
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextTagExample.m",
+      "type": "file",
+      "size": 4185
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextUndoRedoExample.h",
+      "type": "file",
+      "size": 226
+    },
+    {
+      "path": "Demo/YYTextDemo/YYTextUndoRedoExample.m",
+      "type": "file",
+      "size": 2334
+    },
+    {
+      "path": "Demo/YYTextDemo/YYWeakProxy.h",
+      "type": "file",
+      "size": 1227
+    },
+    {
+      "path": "Demo/YYTextDemo/YYWeakProxy.m",
+      "type": "file",
+      "size": 1642
+    },
+    {
+      "path": "Demo/YYTextDemo/dribbble256_imageio.png",
+      "type": "file",
+      "size": 12833
+    },
+    {
+      "path": "Demo/YYTextDemo/dribbble64_imageio.png",
+      "type": "file",
+      "size": 2989
+    },
+    {
+      "path": "Demo/YYTextDemo/main.m",
+      "type": "file",
+      "size": 334
+    },
+    {
+      "path": "Demo/YYTextDemo/pia@2x.png",
+      "type": "file",
+      "size": 24181
+    },
+    {
+      "path": "Framework/YYText.xcodeproj/project.pbxproj",
+      "type": "file",
+      "size": 37084
+    },
+    {
+      "path": "Framework/YYText.xcodeproj/project.xcworkspace",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Framework/YYText.xcodeproj/xcshareddata",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "YYText/Component/YYTextContainerView.h",
+      "type": "file",
+      "size": 1817
+    },
+    {
+      "path": "YYText/Component/YYTextContainerView.m",
+      "type": "file",
+      "size": 4647
+    },
+    {
+      "path": "YYText/Component/YYTextDebugOption.h",
+      "type": "file",
+      "size": 3267
+    },
+    {
+      "path": "YYText/Component/YYTextDebugOption.m",
+      "type": "file",
+      "size": 4312
+    },
+    {
+      "path": "YYText/Component/YYTextEffectWindow.h",
+      "type": "file",
+      "size": 1630
+    },
+    {
+      "path": "YYText/Component/YYTextEffectWindow.m",
+      "type": "file",
+      "size": 18759
+    },
+    {
+      "path": "YYText/Component/YYTextInput.h",
+      "type": "file",
+      "size": 2901
+    },
+    {
+      "path": "YYText/Component/YYTextInput.m",
+      "type": "file",
+      "size": 4257
+    },
+    {
+      "path": "YYText/Component/YYTextKeyboardManager.h",
+      "type": "file",
+      "size": 3126
+    },
+    {
+      "path": "YYText/Component/YYTextKeyboardManager.m",
+      "type": "file",
+      "size": 18144
+    },
+    {
+      "path": "YYText/Component/YYTextLayout.h",
+      "type": "file",
+      "size": 21864
+    },
+    {
+      "path": "YYText/Component/YYTextLayout.m",
+      "type": "file",
+      "size": 152725
+    },
+    {
+      "path": "YYText/Component/YYTextLine.h",
+      "type": "file",
+      "size": 3244
+    },
+    {
+      "path": "YYText/Component/YYTextLine.m",
+      "type": "file",
+      "size": 5516
+    },
+    {
+      "path": "YYText/Component/YYTextMagnifier.h",
+      "type": "file",
+      "size": 2032
+    },
+    {
+      "path": "YYText/Component/YYTextMagnifier.m",
+      "type": "file",
+      "size": 12716
+    },
+    {
+      "path": "YYText/Component/YYTextSelectionView.h",
+      "type": "file",
+      "size": 2529
+    },
+    {
+      "path": "YYText/Component/YYTextSelectionView.m",
+      "type": "file",
+      "size": 11303
+    },
+    {
+      "path": "YYText/String/YYTextArchiver.h",
+      "type": "file",
+      "size": 920
+    },
+    {
+      "path": "YYText/String/YYTextArchiver.m",
+      "type": "file",
+      "size": 7115
+    },
+    {
+      "path": "YYText/String/YYTextAttribute.h",
+      "type": "file",
+      "size": 15368
+    },
+    {
+      "path": "YYText/String/YYTextAttribute.m",
+      "type": "file",
+      "size": 17851
+    },
+    {
+      "path": "YYText/String/YYTextParser.h",
+      "type": "file",
+      "size": 3125
+    },
+    {
+      "path": "YYText/String/YYTextParser.m",
+      "type": "file",
+      "size": 20732
+    },
+    {
+      "path": "YYText/String/YYTextRubyAnnotation.h",
+      "type": "file",
+      "size": 2378
+    },
+    {
+      "path": "YYText/String/YYTextRubyAnnotation.m",
+      "type": "file",
+      "size": 3379
+    },
+    {
+      "path": "YYText/String/YYTextRunDelegate.h",
+      "type": "file",
+      "size": 1587
+    },
+    {
+      "path": "YYText/String/YYTextRunDelegate.m",
+      "type": "file",
+      "size": 2206
+    },
+    {
+      "path": "YYText/Utility/NSAttributedString+YYText.h",
+      "type": "file",
+      "size": 58894
+    },
+    {
+      "path": "YYText/Utility/NSAttributedString+YYText.m",
+      "type": "file",
+      "size": 49020
+    },
+    {
+      "path": "YYText/Utility/NSParagraphStyle+YYText.h",
+      "type": "file",
+      "size": 871
+    },
+    {
+      "path": "YYText/Utility/NSParagraphStyle+YYText.m",
+      "type": "file",
+      "size": 9509
+    },
+    {
+      "path": "YYText/Utility/UIPasteboard+YYText.h",
+      "type": "file",
+      "size": 1405
+    },
+    {
+      "path": "YYText/Utility/UIPasteboard+YYText.m",
+      "type": "file",
+      "size": 4832
+    },
+    {
+      "path": "YYText/Utility/UIView+YYText.h",
+      "type": "file",
+      "size": 2601
+    },
+    {
+      "path": "YYText/Utility/UIView+YYText.m",
+      "type": "file",
+      "size": 4158
+    },
+    {
+      "path": "YYText/Utility/YYTextAsyncLayer.h",
+      "type": "file",
+      "size": 2481
+    },
+    {
+      "path": "YYText/Utility/YYTextAsyncLayer.m",
+      "type": "file",
+      "size": 8321
+    },
+    {
+      "path": "YYText/Utility/YYTextTransaction.h",
+      "type": "file",
+      "size": 1143
+    },
+    {
+      "path": "YYText/Utility/YYTextTransaction.m",
+      "type": "file",
+      "size": 2509
+    },
+    {
+      "path": "YYText/Utility/YYTextUtilities.h",
+      "type": "file",
+      "size": 18689
+    },
+    {
+      "path": "YYText/Utility/YYTextUtilities.m",
+      "type": "file",
+      "size": 13343
+    },
+    {
+      "path": "YYText/Utility/YYTextWeakProxy.h",
+      "type": "file",
+      "size": 1303
+    },
+    {
+      "path": "YYText/Utility/YYTextWeakProxy.m",
+      "type": "file",
+      "size": 1660
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/Alignment.png",
+      "type": "file",
+      "size": 34064
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/BaseWritingDirection.png",
+      "type": "file",
+      "size": 25355
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/FirstLineHeadIndent.png",
+      "type": "file",
+      "size": 51054
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/HeadIndent.png",
+      "type": "file",
+      "size": 51031
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/HyphenationFactor.png",
+      "type": "file",
+      "size": 9225
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/LineBreakMode.png",
+      "type": "file",
+      "size": 48914
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/LineHeightMultiple.png",
+      "type": "file",
+      "size": 47615
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/LineSpacing.png",
+      "type": "file",
+      "size": 40794
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/MaximumLineHeight.png",
+      "type": "file",
+      "size": 43635
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/MinimumLineHeight.png",
+      "type": "file",
+      "size": 40972
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/ParagraphSpacing.png",
+      "type": "file",
+      "size": 51195
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/Tab.png",
+      "type": "file",
+      "size": 21372
+    },
+    {
+      "path": "Attributes/CoreText and TextKit/Paragraph/TailIndent.png",
+      "type": "file",
+      "size": 42893
+    },
+    {
+      "path": "Demo/YYTextDemo.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+      "type": "file",
+      "size": 155
+    },
+    {
+      "path": "Demo/YYTextDemo/Assets.xcassets/AppIcon.appiconset",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo/Base.lproj/LaunchScreen.storyboard",
+      "type": "file",
+      "size": 1740
+    },
+    {
+      "path": "Demo/YYTextDemo/Base.lproj/Main.storyboard",
+      "type": "file",
+      "size": 1689
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/001@2x.gif",
+      "type": "file",
+      "size": 3952
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/001@2x.png",
+      "type": "file",
+      "size": 2221
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/002@2x.gif",
+      "type": "file",
+      "size": 8214
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/002@2x.png",
+      "type": "file",
+      "size": 2082
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/003@2x.gif",
+      "type": "file",
+      "size": 14524
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/003@2x.png",
+      "type": "file",
+      "size": 1914
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/004@2x.gif",
+      "type": "file",
+      "size": 3991
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/004@2x.png",
+      "type": "file",
+      "size": 2147
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/005@2x.gif",
+      "type": "file",
+      "size": 3991
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/005@2x.png",
+      "type": "file",
+      "size": 1790
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/006@2x.gif",
+      "type": "file",
+      "size": 4046
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/006@2x.png",
+      "type": "file",
+      "size": 1997
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/007@2x.gif",
+      "type": "file",
+      "size": 28623
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/007@2x.png",
+      "type": "file",
+      "size": 2203
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/008@2x.gif",
+      "type": "file",
+      "size": 2103
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/008@2x.png",
+      "type": "file",
+      "size": 2056
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/009@2x.gif",
+      "type": "file",
+      "size": 1119
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/009@2x.png",
+      "type": "file",
+      "size": 1054
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/010@2x.gif",
+      "type": "file",
+      "size": 18571
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/010@2x.png",
+      "type": "file",
+      "size": 2115
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/011@2x.gif",
+      "type": "file",
+      "size": 15241
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/011@2x.png",
+      "type": "file",
+      "size": 1794
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/012@2x.gif",
+      "type": "file",
+      "size": 15075
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/012@2x.png",
+      "type": "file",
+      "size": 2101
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/013@2x.gif",
+      "type": "file",
+      "size": 3685
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/013@2x.png",
+      "type": "file",
+      "size": 2017
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/014@2x.gif",
+      "type": "file",
+      "size": 12558
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/014@2x.png",
+      "type": "file",
+      "size": 2221
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/015@2x.gif",
+      "type": "file",
+      "size": 12678
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/015@2x.png",
+      "type": "file",
+      "size": 2136
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/016@2x.gif",
+      "type": "file",
+      "size": 4072
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/016@2x.png",
+      "type": "file",
+      "size": 1766
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/017@2x.gif",
+      "type": "file",
+      "size": 1746
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/017@2x.png",
+      "type": "file",
+      "size": 1149
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/018@2x.gif",
+      "type": "file",
+      "size": 9658
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/018@2x.png",
+      "type": "file",
+      "size": 1148
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/019@2x.gif",
+      "type": "file",
+      "size": 2779
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/019@2x.png",
+      "type": "file",
+      "size": 1957
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/020@2x.gif",
+      "type": "file",
+      "size": 6835
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/020@2x.png",
+      "type": "file",
+      "size": 2079
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/021@2x.gif",
+      "type": "file",
+      "size": 5586
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/021@2x.png",
+      "type": "file",
+      "size": 1982
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/022@2x.gif",
+      "type": "file",
+      "size": 3673
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/022@2x.png",
+      "type": "file",
+      "size": 1924
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/023@2x.gif",
+      "type": "file",
+      "size": 18654
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/023@2x.png",
+      "type": "file",
+      "size": 2246
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/024@2x.gif",
+      "type": "file",
+      "size": 3639
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/024@2x.png",
+      "type": "file",
+      "size": 1920
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/025@2x.gif",
+      "type": "file",
+      "size": 35781
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/025@2x.png",
+      "type": "file",
+      "size": 2069
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/026@2x.gif",
+      "type": "file",
+      "size": 6097
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/026@2x.png",
+      "type": "file",
+      "size": 1770
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/027@2x.gif",
+      "type": "file",
+      "size": 15798
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/027@2x.png",
+      "type": "file",
+      "size": 1948
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/028@2x.gif",
+      "type": "file",
+      "size": 13903
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/028@2x.png",
+      "type": "file",
+      "size": 2091
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/029@2x.gif",
+      "type": "file",
+      "size": 1743
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/029@2x.png",
+      "type": "file",
+      "size": 1384
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/030@2x.gif",
+      "type": "file",
+      "size": 2445
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/030@2x.png",
+      "type": "file",
+      "size": 1367
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/031@2x.gif",
+      "type": "file",
+      "size": 14884
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/031@2x.png",
+      "type": "file",
+      "size": 1935
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/032@2x.gif",
+      "type": "file",
+      "size": 5033
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/032@2x.png",
+      "type": "file",
+      "size": 2005
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/033@2x.gif",
+      "type": "file",
+      "size": 2103
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/033@2x.png",
+      "type": "file",
+      "size": 1944
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/034@2x.gif",
+      "type": "file",
+      "size": 10319
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/034@2x.png",
+      "type": "file",
+      "size": 1972
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/035@2x.gif",
+      "type": "file",
+      "size": 3944
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/035@2x.png",
+      "type": "file",
+      "size": 2286
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/036@2x.gif",
+      "type": "file",
+      "size": 15482
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/036@2x.png",
+      "type": "file",
+      "size": 1886
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/037@2x.gif",
+      "type": "file",
+      "size": 2386
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/037@2x.png",
+      "type": "file",
+      "size": 1961
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/038@2x.gif",
+      "type": "file",
+      "size": 12631
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/038@2x.png",
+      "type": "file",
+      "size": 2026
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/039@2x.gif",
+      "type": "file",
+      "size": 8995
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/039@2x.png",
+      "type": "file",
+      "size": 2152
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/040@2x.gif",
+      "type": "file",
+      "size": 2150
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/040@2x.png",
+      "type": "file",
+      "size": 1600
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/041@2x.gif",
+      "type": "file",
+      "size": 2239
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/041@2x.png",
+      "type": "file",
+      "size": 2083
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/042@2x.gif",
+      "type": "file",
+      "size": 7916
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/042@2x.png",
+      "type": "file",
+      "size": 1964
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/043@2x.gif",
+      "type": "file",
+      "size": 3637
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/043@2x.png",
+      "type": "file",
+      "size": 1749
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/044@2x.gif",
+      "type": "file",
+      "size": 5540
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/044@2x.png",
+      "type": "file",
+      "size": 2057
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/045@2x.gif",
+      "type": "file",
+      "size": 16705
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/045@2x.png",
+      "type": "file",
+      "size": 1480
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/046@2x.gif",
+      "type": "file",
+      "size": 3960
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/046@2x.png",
+      "type": "file",
+      "size": 1730
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/047@2x.gif",
+      "type": "file",
+      "size": 2770
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/047@2x.png",
+      "type": "file",
+      "size": 1885
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/048@2x.gif",
+      "type": "file",
+      "size": 1614
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/048@2x.png",
+      "type": "file",
+      "size": 1493
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/049@2x.gif",
+      "type": "file",
+      "size": 3879
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/049@2x.png",
+      "type": "file",
+      "size": 2185
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/050@2x.gif",
+      "type": "file",
+      "size": 4734
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/050@2x.png",
+      "type": "file",
+      "size": 2095
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/051@2x.gif",
+      "type": "file",
+      "size": 13543
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/051@2x.png",
+      "type": "file",
+      "size": 1963
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/052@2x.gif",
+      "type": "file",
+      "size": 4064
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/052@2x.png",
+      "type": "file",
+      "size": 2296
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/053@2x.gif",
+      "type": "file",
+      "size": 2896
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/053@2x.png",
+      "type": "file",
+      "size": 1314
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/054@2x.gif",
+      "type": "file",
+      "size": 5133
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/054@2x.png",
+      "type": "file",
+      "size": 1277
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/055@2x.gif",
+      "type": "file",
+      "size": 3332
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/055@2x.png",
+      "type": "file",
+      "size": 1445
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/056@2x.gif",
+      "type": "file",
+      "size": 4121
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/056@2x.png",
+      "type": "file",
+      "size": 1807
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/057@2x.gif",
+      "type": "file",
+      "size": 5478
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/057@2x.png",
+      "type": "file",
+      "size": 1445
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/058@2x.gif",
+      "type": "file",
+      "size": 1250
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/058@2x.png",
+      "type": "file",
+      "size": 947
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/059@2x.gif",
+      "type": "file",
+      "size": 1802
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/059@2x.png",
+      "type": "file",
+      "size": 1725
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/060@2x.gif",
+      "type": "file",
+      "size": 5581
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/060@2x.png",
+      "type": "file",
+      "size": 1919
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/061@2x.gif",
+      "type": "file",
+      "size": 1842
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/061@2x.png",
+      "type": "file",
+      "size": 1805
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/062@2x.gif",
+      "type": "file",
+      "size": 19327
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/062@2x.png",
+      "type": "file",
+      "size": 2028
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/063@2x.gif",
+      "type": "file",
+      "size": 6940
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/063@2x.png",
+      "type": "file",
+      "size": 1734
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/064@2x.gif",
+      "type": "file",
+      "size": 9955
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/064@2x.png",
+      "type": "file",
+      "size": 1356
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/065@2x.gif",
+      "type": "file",
+      "size": 1886
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/065@2x.png",
+      "type": "file",
+      "size": 1509
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/066@2x.gif",
+      "type": "file",
+      "size": 3349
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/066@2x.png",
+      "type": "file",
+      "size": 1385
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/067@2x.gif",
+      "type": "file",
+      "size": 5629
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/067@2x.png",
+      "type": "file",
+      "size": 1934
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/068@2x.gif",
+      "type": "file",
+      "size": 2069
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/068@2x.png",
+      "type": "file",
+      "size": 2144
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/069@2x.gif",
+      "type": "file",
+      "size": 5581
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/069@2x.png",
+      "type": "file",
+      "size": 1068
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/070@2x.gif",
+      "type": "file",
+      "size": 2119
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/070@2x.png",
+      "type": "file",
+      "size": 2190
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/071@2x.gif",
+      "type": "file",
+      "size": 4054
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/071@2x.png",
+      "type": "file",
+      "size": 1361
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/072@2x.gif",
+      "type": "file",
+      "size": 3537
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/072@2x.png",
+      "type": "file",
+      "size": 1334
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/073@2x.gif",
+      "type": "file",
+      "size": 9657
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/073@2x.png",
+      "type": "file",
+      "size": 1402
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/074@2x.gif",
+      "type": "file",
+      "size": 2018
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/074@2x.png",
+      "type": "file",
+      "size": 2101
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/075@2x.gif",
+      "type": "file",
+      "size": 1961
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/075@2x.png",
+      "type": "file",
+      "size": 2149
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/076@2x.gif",
+      "type": "file",
+      "size": 9619
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/076@2x.png",
+      "type": "file",
+      "size": 1461
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/077@2x.gif",
+      "type": "file",
+      "size": 2306
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/077@2x.png",
+      "type": "file",
+      "size": 1608
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/078@2x.gif",
+      "type": "file",
+      "size": 21113
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/078@2x.png",
+      "type": "file",
+      "size": 1960
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/079@2x.gif",
+      "type": "file",
+      "size": 1236
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/079@2x.png",
+      "type": "file",
+      "size": 793
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/080@2x.gif",
+      "type": "file",
+      "size": 7788
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/080@2x.png",
+      "type": "file",
+      "size": 2138
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/081@2x.gif",
+      "type": "file",
+      "size": 7639
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/081@2x.png",
+      "type": "file",
+      "size": 2156
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/082@2x.gif",
+      "type": "file",
+      "size": 9428
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/082@2x.png",
+      "type": "file",
+      "size": 2089
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/083@2x.gif",
+      "type": "file",
+      "size": 61431
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/083@2x.png",
+      "type": "file",
+      "size": 2244
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/084@2x.gif",
+      "type": "file",
+      "size": 7608
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/084@2x.png",
+      "type": "file",
+      "size": 2036
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/085@2x.gif",
+      "type": "file",
+      "size": 49181
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/085@2x.png",
+      "type": "file",
+      "size": 2132
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/086@2x.gif",
+      "type": "file",
+      "size": 15973
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/086@2x.png",
+      "type": "file",
+      "size": 2165
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/087@2x.gif",
+      "type": "file",
+      "size": 16698
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/087@2x.png",
+      "type": "file",
+      "size": 1846
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/088@2x.gif",
+      "type": "file",
+      "size": 17692
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/088@2x.png",
+      "type": "file",
+      "size": 2285
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/089@2x.gif",
+      "type": "file",
+      "size": 4085
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/089@2x.png",
+      "type": "file",
+      "size": 1958
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/090@2x.gif",
+      "type": "file",
+      "size": 4978
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/090@2x.png",
+      "type": "file",
+      "size": 1902
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/091@2x.gif",
+      "type": "file",
+      "size": 9222
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/091@2x.png",
+      "type": "file",
+      "size": 1708
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/092@2x.gif",
+      "type": "file",
+      "size": 3479
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/092@2x.png",
+      "type": "file",
+      "size": 1414
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/093@2x.gif",
+      "type": "file",
+      "size": 8175
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/093@2x.png",
+      "type": "file",
+      "size": 1271
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/094@2x.gif",
+      "type": "file",
+      "size": 3666
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/094@2x.png",
+      "type": "file",
+      "size": 1600
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/095@2x.gif",
+      "type": "file",
+      "size": 10397
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/095@2x.png",
+      "type": "file",
+      "size": 1940
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/096@2x.gif",
+      "type": "file",
+      "size": 22942
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/096@2x.png",
+      "type": "file",
+      "size": 1680
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/097@2x.gif",
+      "type": "file",
+      "size": 6896
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/097@2x.png",
+      "type": "file",
+      "size": 1734
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/098@2x.gif",
+      "type": "file",
+      "size": 16429
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/098@2x.png",
+      "type": "file",
+      "size": 1615
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/099@2x.gif",
+      "type": "file",
+      "size": 5488
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/099@2x.png",
+      "type": "file",
+      "size": 2034
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/100@2x.gif",
+      "type": "file",
+      "size": 8109
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/100@2x.png",
+      "type": "file",
+      "size": 2252
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/101@2x.gif",
+      "type": "file",
+      "size": 7832
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/101@2x.png",
+      "type": "file",
+      "size": 1996
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/102@2x.gif",
+      "type": "file",
+      "size": 3532
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/102@2x.png",
+      "type": "file",
+      "size": 1735
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/103@2x.gif",
+      "type": "file",
+      "size": 7920
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/103@2x.png",
+      "type": "file",
+      "size": 1933
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/104@2x.gif",
+      "type": "file",
+      "size": 7665
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/104@2x.png",
+      "type": "file",
+      "size": 1875
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/105@2x.gif",
+      "type": "file",
+      "size": 12856
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/105@2x.png",
+      "type": "file",
+      "size": 1817
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/106@2x.gif",
+      "type": "file",
+      "size": 2455
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/106@2x.png",
+      "type": "file",
+      "size": 2596
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/107@2x.gif",
+      "type": "file",
+      "size": 1779
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/107@2x.png",
+      "type": "file",
+      "size": 1122
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/108@2x.gif",
+      "type": "file",
+      "size": 1974
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/108@2x.png",
+      "type": "file",
+      "size": 2049
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/109@2x.gif",
+      "type": "file",
+      "size": 2183
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/109@2x.png",
+      "type": "file",
+      "size": 2100
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/110@2x.gif",
+      "type": "file",
+      "size": 2029
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/110@2x.png",
+      "type": "file",
+      "size": 1163
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/111@2x.gif",
+      "type": "file",
+      "size": 1845
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/111@2x.png",
+      "type": "file",
+      "size": 1396
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/112@2x.gif",
+      "type": "file",
+      "size": 1514
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/112@2x.png",
+      "type": "file",
+      "size": 1130
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/113@2x.gif",
+      "type": "file",
+      "size": 1307
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/113@2x.png",
+      "type": "file",
+      "size": 581
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/114@2x.gif",
+      "type": "file",
+      "size": 2972
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/114@2x.png",
+      "type": "file",
+      "size": 2261
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/115@2x.gif",
+      "type": "file",
+      "size": 2459
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/115@2x.png",
+      "type": "file",
+      "size": 2681
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/116@2x.gif",
+      "type": "file",
+      "size": 1432
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/116@2x.png",
+      "type": "file",
+      "size": 920
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/117@2x.gif",
+      "type": "file",
+      "size": 1112
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/117@2x.png",
+      "type": "file",
+      "size": 508
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/118@2x.gif",
+      "type": "file",
+      "size": 2420
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/118@2x.png",
+      "type": "file",
+      "size": 2415
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/119@2x.gif",
+      "type": "file",
+      "size": 1886
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/119@2x.png",
+      "type": "file",
+      "size": 1654
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/120@2x.gif",
+      "type": "file",
+      "size": 2384
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/120@2x.png",
+      "type": "file",
+      "size": 2456
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/121@2x.gif",
+      "type": "file",
+      "size": 1495
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/121@2x.png",
+      "type": "file",
+      "size": 1335
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/122@2x.gif",
+      "type": "file",
+      "size": 2427
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/122@2x.png",
+      "type": "file",
+      "size": 2301
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/123@2x.gif",
+      "type": "file",
+      "size": 1843
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/123@2x.png",
+      "type": "file",
+      "size": 1759
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/124@2x.gif",
+      "type": "file",
+      "size": 1721
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/124@2x.png",
+      "type": "file",
+      "size": 1112
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/125@2x.gif",
+      "type": "file",
+      "size": 1791
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/125@2x.png",
+      "type": "file",
+      "size": 873
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/126@2x.gif",
+      "type": "file",
+      "size": 1736
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/126@2x.png",
+      "type": "file",
+      "size": 1144
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/127@2x.gif",
+      "type": "file",
+      "size": 2067
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/127@2x.png",
+      "type": "file",
+      "size": 975
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/128@2x.gif",
+      "type": "file",
+      "size": 2229
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/128@2x.png",
+      "type": "file",
+      "size": 1351
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/129@2x.gif",
+      "type": "file",
+      "size": 1871
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/129@2x.png",
+      "type": "file",
+      "size": 1174
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/130@2x.gif",
+      "type": "file",
+      "size": 2103
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/130@2x.png",
+      "type": "file",
+      "size": 1398
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/131@2x.gif",
+      "type": "file",
+      "size": 1976
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/131@2x.png",
+      "type": "file",
+      "size": 1926
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/132@2x.gif",
+      "type": "file",
+      "size": 1892
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/132@2x.png",
+      "type": "file",
+      "size": 2211
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/133@2x.gif",
+      "type": "file",
+      "size": 2188
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/133@2x.png",
+      "type": "file",
+      "size": 1783
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/134@2x.gif",
+      "type": "file",
+      "size": 1782
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/134@2x.png",
+      "type": "file",
+      "size": 1395
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/135@2x.gif",
+      "type": "file",
+      "size": 1697
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/135@2x.png",
+      "type": "file",
+      "size": 1454
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/136@2x.gif",
+      "type": "file",
+      "size": 2052
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/136@2x.png",
+      "type": "file",
+      "size": 2236
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/137@2x.gif",
+      "type": "file",
+      "size": 1747
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/137@2x.png",
+      "type": "file",
+      "size": 1406
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/138@2x.gif",
+      "type": "file",
+      "size": 2559
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/138@2x.png",
+      "type": "file",
+      "size": 1792
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/139@2x.gif",
+      "type": "file",
+      "size": 1610
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/139@2x.png",
+      "type": "file",
+      "size": 910
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/140@2x.gif",
+      "type": "file",
+      "size": 1657
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/140@2x.png",
+      "type": "file",
+      "size": 1145
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/141@2x.gif",
+      "type": "file",
+      "size": 2555
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/141@2x.png",
+      "type": "file",
+      "size": 2634
+    },
+    {
+      "path": "Demo/YYTextDemo/EmoticonQQ.bundle/info.plist",
+      "type": "file",
+      "size": 8701
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/Animated image support.txt",
+      "type": "file",
+      "size": 102
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYAnimatedImageView.h",
+      "type": "file",
+      "size": 4376
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYAnimatedImageView.m",
+      "type": "file",
+      "size": 23375
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYFrameImage.h",
+      "type": "file",
+      "size": 3905
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYFrameImage.m",
+      "type": "file",
+      "size": 5398
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYImage.h",
+      "type": "file",
+      "size": 2998
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYImage.m",
+      "type": "file",
+      "size": 8936
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYImageCoder.h",
+      "type": "file",
+      "size": 18507
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYImageCoder.m",
+      "type": "file",
+      "size": 113340
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYSpriteSheetImage.h",
+      "type": "file",
+      "size": 3549
+    },
+    {
+      "path": "Demo/YYTextDemo/YYImage/YYSpriteSheetImage.m",
+      "type": "file",
+      "size": 2553
+    },
+    {
+      "path": "Framework/YYText.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+      "type": "file",
+      "size": 151
+    },
+    {
+      "path": "Framework/YYText.xcodeproj/xcshareddata/xcschemes",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Demo/YYTextDemo/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "type": "file",
+      "size": 1495
+    },
+    {
+      "path": "Framework/YYText.xcodeproj/xcshareddata/xcschemes/YYText.xcscheme",
+      "type": "file",
+      "size": 2841
+    }
+  ],
+  "languages": {
+    "Objective-C": {
+      "bytes": 767559,
+      "percentage": 99.9
+    },
+    "Ruby": {
+      "bytes": 760,
+      "percentage": 0.1
+    }
+  },
+  "signatures": [],
+  "test_examples": [],
+  "issues": [
+    {
+      "number": 1019,
+      "title": "请问有大佬把这个集成到SPM里么",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-09-22T15:58:21+00:00",
+      "updated_at": "2025-09-22T15:58:21+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1019",
+      "body": null
+    },
+    {
+      "number": 538,
+      "title": "YYLabel的HighLight.tapAction不起作用",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-10-24T06:44:24+00:00",
+      "updated_at": "2025-09-22T07:09:33+00:00",
+      "closed_at": "2016-10-25T03:40:21+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/538",
+      "body": "在自定义tableViewCell中，我使用一个UIImageView作为背景图（聊天界面的气泡）并添加了UITapGestureRecognizer来处理点击事件。当添加一个YYLabel在UIImageView中来显示文本内容时，因为需要对链接进行突出显示，就按demo中的例子添加了highLight效果，发现高亮的效果是正常的（点击时链接变色，并显示设置的背景色），但是添加的tapAction事件不会被执行，当我把UIImageView的点击事件去掉后，tapAction就正常了，所以应该是UIImageView拦截了YYLabel的tapAction，这个如何处理？\n"
+    },
+    {
+      "number": 1018,
+      "title": "YYLabel绑定富文本，设置中间截断的情况下，会出现中间和尾部都出现截断符的现象",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-30T13:13:57+00:00",
+      "updated_at": "2025-08-07T12:25:25+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1018",
+      "body": "`YYLabel *label = [YYLabel new];\nlabel.textAlignment = NSTextAlignmentCenter;\nlabel.numberOfLines = 1;\nlabel.lineBreakMode = NSLineBreakByTruncatingMiddle;\nlabel.userInteractionEnabled = NO;\nNSMutableAttributedString *textAttr = richTextModel.attr.mutableCopy;\nlabel.attributedText = textAttr; \n[textAttr setYy_lineBreakMode:NSLineBreakByTruncatingMiddle]; //必须设置富文本的截断才有作用`\n\n源码中\n`- (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode {\n        // ...\n        case NSLineBreakByTruncatingMiddle: {\n"
+    },
+    {
+      "number": 1007,
+      "title": "YYLable 在tableviewcell 中 _displayAsync 方法内存不释放",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-08-19T04:39:39+00:00",
+      "updated_at": "2025-07-21T09:28:56+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1007",
+      "body": "<img width=\"1222\" alt=\"image\" src=\"https://github.com/user-attachments/assets/50ecee2a-76f1-43be-9c93-69f17af125df\">\r\n"
+    },
+    {
+      "number": 1010,
+      "title": "iOS 18 下划线不显示",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-10-24T07:09:04+00:00",
+      "updated_at": "2025-07-14T07:51:49+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1010",
+      "body": "如何修复iOS 18 下划线不显示问题，有谁知道？"
+    },
+    {
+      "number": 1013,
+      "title": "新API UIGraphicsImageRenderer",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-03-13T03:12:29+00:00",
+      "updated_at": "2025-05-27T09:38:58+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1013",
+      "body": "bitmapInfo=0x2002. Use UIGraphicsImageRenderer to avoid this assert.'\n*** First throw call stack:\n(0x1964fd08c 0x1937ff2e4 0x1958ce2fc 0x198cfa5c8 0x101dd864c 0x101dd7eb4 0x197f992c8 0x197ff0268 0x197f6f0a0 0x197fb2364 0x198cf2848 0x198cefe44 0x198cefcb8 0x198cef908 0x198cf087c 0x1964d0088 0x1964d001c 0x1964cdb08 0x1964ccd04 0x1964cc5b8 0x1e1f621c4 0x1990222c0 0x1990d0ddc 0x100520a5c 0x1bbca0d34)\nlibc++abi: terminating due to uncaught exception of type NSException\n\n这个UIGraphicsBeginImageContextW"
+    },
+    {
+      "number": 1015,
+      "title": "YYLabel  显示表情包富文本的时候变成一下字符了？请问是啥原因怎么解决",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-04-29T11:01:18+00:00",
+      "updated_at": "2025-05-27T09:37:50+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1015",
+      "body": "![Image](https://github.com/user-attachments/assets/c8c1ab7b-ccdf-4bb0-b6e2-04406c9181ee)\n\n![Image](https://github.com/user-attachments/assets/f2277cc3-c9e6-42e6-9a67-8683047cfce7)\n\n"
+    },
+    {
+      "number": 1009,
+      "title": "不支持UISemanticContentAttributeForceRightToLeft布局时候，根据内容自动算高宽？",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-10-14T06:56:43+00:00",
+      "updated_at": "2025-05-24T07:41:48+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1009",
+      "body": "View 设置成UISemanticContentAttributeForceRightToLeft布局的时候，YYLabel 通过<Masonry/Masonry.h>设置约束的时候，不能像UISemanticContentAttributeForceLeftToRight布局的时候，不设置宽度约束的时候，宽度根据内容自动撑。请问是不支持UISemanticContentAttributeForceRightToLeft？如果支持请问该怎么设置约束，宽度按照内容自动设置。\r\n**案例如下**：\r\n```\r\n#import \"ESDViewController.h\"\r\n#import <Masonry/Masonry.h>\r\n#import <YYText/YYText.h>\r\n\r\n@implementation ESDViewController\r\n\r\n- (void)viewDidLoad {\r\n    [super viewDidLoad];\r\n    [self testRightToLeft];\r\n    \r\n}\r\n- (void)testRightToLeft{\r\n    "
+    },
+    {
+      "number": 1011,
+      "title": "delete ",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-11-19T07:53:57+00:00",
+      "updated_at": "2025-05-09T07:08:25+00:00",
+      "closed_at": "2025-05-09T06:35:38+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/1011",
+      "body": null
+    },
+    {
+      "number": 1016,
+      "title": "delete",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-05-09T04:05:16+00:00",
+      "updated_at": "2025-05-09T06:38:05+00:00",
+      "closed_at": "2025-05-09T06:36:38+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/1016",
+      "body": null
+    },
+    {
+      "number": 1014,
+      "title": "大佬，麻烦问下我用YYLabel显示富文本，很多文字的时候最多展示2行，也可能就显示一行，我设置了truncationToken属性，如何判断最终这个truncationToken属性是否展示了没，我要判断有省略号的时候做些特殊的事",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-04-21T13:56:34+00:00",
+      "updated_at": "2025-04-21T13:56:34+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1014",
+      "body": null
+    },
+    {
+      "number": 930,
+      "title": "YYLabel 怎么做RTL适配",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2020-06-18T06:26:25+00:00",
+      "updated_at": "2025-02-21T06:33:15+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/930",
+      "body": "求助，有人知道YYLabel怎么做阿拉伯语的RTL适配吗？"
+    },
+    {
+      "number": 662,
+      "title": "YYLabel设置属性文字居中有可能失效",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-05-12T05:42:13+00:00",
+      "updated_at": "2025-02-10T10:14:51+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/662",
+      "body": " 在显示attributedText时，这样的顺序：\r\nlabel.attributedText = mutAttStr;\r\n label.textAlignment = NSTextAlignmentCenter;\r\n是可以居中的。\r\n\r\n但是调换顺序为：\r\nlabel.textAlignment = NSTextAlignmentCenter;\r\nlabel.attributedText = mutAttStr;\r\n就不能居中了。"
+    },
+    {
+      "number": 907,
+      "title": "YYLabel设置NSLineBreakByTruncatingHead、NSLineBreakByTruncatingMiddle、YYTextTruncationTypeStart、YYTextTruncationTypeMiddle和UILabel显示效果不一样",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2019-10-17T13:16:27+00:00",
+      "updated_at": "2025-01-14T03:12:24+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/907",
+      "body": "在设置NSLineBreakByTruncatingMiddle之后，发现YYLabel的折行和UILabel的原生效果不一样，怎么破？"
+    },
+    {
+      "number": 1012,
+      "title": "`label.attributedText = text` Doesn't work",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-01-13T12:14:12+00:00",
+      "updated_at": "2025-01-13T12:14:12+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1012",
+      "body": "有人经历过这个问题么，设置好这个值之后文本不不显示？"
+    },
+    {
+      "number": 985,
+      "title": "多段落文本，如何设置某个段落只显示一行",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-08-11T07:03:15+00:00",
+      "updated_at": "2024-12-23T04:39:41+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/985",
+      "body": "请问作者， 当我有多段文本时 我想让  段落 2 只显示1 行 ，怎么做 ？\r\n\r\n例如：\r\n \r\n段落1：空间大概i可热哦i日哦诶u个就看看辅导机构看到房价贵看到价格晶科科技地方观看寄快递分级管控发达国家江口街道奉公克己发的刚看到分级管控辅导机构快进到付过款假道伐虢快哦辅导机构哦的发卡机工卡发达国际客服打个进度款覆盖角度客服管家梵蒂冈假道伐虢假道伐虢科技打个卡接口寄快递开发gj \r\n\r\n\r\n段落2：空间大概i可热哦i日哦诶u个就看看辅导机构看到房价贵看到价格晶科科技地方观看寄快递分级管控发达国家江口街道奉公克己发的刚看到分级管控辅j \r\n\r\n\r\n一般的实现方式都是用多个label ，但如果我不用多个label，只用富文本 或者 YYLable 怎么设置\r\n\r\n"
+    },
+    {
+      "number": 1008,
+      "title": "引入方式",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-09-20T05:15:35+00:00",
+      "updated_at": "2024-09-20T05:15:35+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1008",
+      "body": "能否支持Package.swift引入方式"
+    },
+    {
+      "number": 973,
+      "title": "iOS16 创建YYTextView后 导致旋转屏幕失败",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-08-23T08:51:48+00:00",
+      "updated_at": "2024-08-21T12:17:21+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/973",
+      "body": " UIWindowSceneGeometryPreferencesIOS *geometryPreferences = [UIWindowSceneGeometryPreferencesIOS.alloc initWithInterfaceOrientations:1 << orientation];\r\n                [ws requestGeometryUpdateWithPreferences:geometryPreferences\r\n                                            errorHandler:^(NSError * _Nonnull error) {\r\n                }];\r\n\r\n创建YYTextView后，requestGeometryUpdateWithPreferences方法的block会返回错误"
+    },
+    {
+      "number": 577,
+      "title": "关于内存释放的问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-12-10T06:10:49+00:00",
+      "updated_at": "2024-08-19T04:41:56+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/577",
+      "body": "在tableview中使用，但是内存未得到释放"
+    },
+    {
+      "number": 584,
+      "title": "内存消耗好大呀，是我的用法不对吗",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-12-19T02:02:45+00:00",
+      "updated_at": "2024-08-19T04:41:19+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/584",
+      "body": "<img width=\"648\" alt=\"2016-12-19 9 59 15\" src=\"https://cloud.githubusercontent.com/assets/7370128/21299006/41e3baea-c5d2-11e6-8195-10517bc304b9.png\">\r\n"
+    },
+    {
+      "number": 843,
+      "title": "YYLabel的truncationToken的位置",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2018-11-10T06:51:31+00:00",
+      "updated_at": "2024-08-08T06:17:14+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/843",
+      "body": "请教一下YYLabel的truncationToken 如果想放在lastLine的最右边该怎么做(屏幕的最右边)"
+    },
+    {
+      "number": 339,
+      "title": "显示超出 label 大小的文字截断有问题",
+      "state": "open",
+      "labels": [
+        "enhancement"
+      ],
+      "milestone": null,
+      "created_at": "2016-05-27T03:48:29+00:00",
+      "updated_at": "2024-07-19T08:20:11+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/339",
+      "body": "下面是分别用 UILabel 和 YYLabel 实现的显示效果。\n代码：\n\n``` objc\n  UILabel *l1 = [UILabel new];\n  l1.numberOfLines = 1;\n  l1.frame = CGRectMake(0, 64, 320, 20);\n  l1.lineBreakMode = NSLineBreakByTruncatingTail;\n  l1.text = @\"[草稿]aaaaaassssdfsdfsdfrgrehbgfbhthrtrhtfhdyhytjyhftrfgdrgdegrdfrdffdgd\";\n  [self.view addSubview:l1];\n\n  YYLabel *l2 = [YYLabel new];\n  l2.numberOfLines = 1;\n  l2.frame = CGRectMake(0, 84, 320, 20);\n  l2.lineBreakMode = NSLineBreakByTruncatingTail;\n  l2.text = @\"[草稿]aaaaaassssdfsdfsdfrgrehbg"
+    },
+    {
+      "number": 998,
+      "title": "window.overrideUserInterfaceStyle = UIUserInterfaceStyleDark 强制暗黑模式动态颜色不起作用，这个要怎么解决？",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-03-25T07:47:27+00:00",
+      "updated_at": "2024-06-26T01:35:05+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/998",
+      "body": "window.overrideUserInterfaceStyle = UIUserInterfaceStyleDark 强制暗黑模式动态颜色不起作用，这个要怎么解决？"
+    },
+    {
+      "number": 524,
+      "title": "对一些从右往左的语言（阿拉伯语），layout中的textboundingsize的宽度计算不准确",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-10-09T04:43:33+00:00",
+      "updated_at": "2024-06-25T07:39:43+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/524",
+      "body": "因为size的width是需要和rect的x修正，导致算出的textlayout中的textboundingsize的宽度会过宽\n"
+    },
+    {
+      "number": 1004,
+      "title": "YYLayout layoutWithContainer related API issue",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-06-25T04:41:57+00:00",
+      "updated_at": "2024-06-25T04:42:43+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1004",
+      "body": "1. Swift API issue\r\n\r\nOn Swift side, the signature of `+[YYTextLayout layoutWithContainer:text:]` and `+[YYTextLayout layoutWithContainers:text:]` would both be `YYTextLayout.layout(with:text:)` automatically.\r\n\r\nWe need some manually `NS_SWIFT_NAME` to fix it.\r\n\r\nSaying it, it is now will call the `+[YYTextLayout layoutWithContainers:text:]` API and we should workaround it by using `YYTextLayout.layout(with:[container], text: text)[0]`.\r\n\r\nBut it will bring out to the issue 2\r\n\r\n2. layoutWithCo"
+    },
+    {
+      "number": 1003,
+      "title": "IOS17.0 UIGraphicsBeginImageContextWithOptions崩溃",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-05-17T02:54:25+00:00",
+      "updated_at": "2024-06-21T10:25:41+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1003",
+      "body": "_UIGraphicsBeginImageContextWithOptions(CGSize, BOOL, CGFloat, BOOL)(), UIGraphics.m:410"
+    },
+    {
+      "number": 993,
+      "title": "- (void)yy_setAttribute:(NSString *)name value:(id)value range:(NSRange)range 崩溃问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-11-24T01:53:42+00:00",
+      "updated_at": "2024-06-13T09:39:44+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/993",
+      "body": "项目中出现了一些崩溃，就设置个color，font等都会与崩溃，偶现，例如\r\nNSMutableAttributedString * attributing = [[NSMutableAttributedString alloc] init];\r\n NSMutableAttributedString * nameString = [[NSMutableAttributedString alloc] initWithString:@\"𝐊𝐇 ⁵ ¹ ¹ F²\"];\r\n nameString.yy_color = [UIColor whiteColor];//这句代码进去，最终蹦到- (void)yy_setAttribute:(NSString *)name value:(id)value range:(NSRange)range里面，有大神知道怎么解决吗？\r\n<img width=\"739\" alt=\"image\" src=\"https://github.com/ibireme/YYText/assets/12890995/538b9aaf-4916-4247-b062-564ca057"
+    },
+    {
+      "number": 535,
+      "title": "配合HPGrowingTextView使用时，超过设置的行数后会，滚动ScrollView出现放大镜异常划出的问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-10-21T03:09:25+00:00",
+      "updated_at": "2024-05-22T12:59:02+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/535",
+      "body": "复现步骤\n1.在HPGrowingTextView 中HPTextViewInternal继承YYTextView\n2.在任意界面中加入HPGrowingTextView\n3.写文字超过设置的最大行数，高度固定，contentSize超过高度TextView的ScrollView可滚动\n4.正常滚动时出现放大镜\n实际：出现放大镜\n预期：不出现放大镜\n\n解决方案：\n## YYTextView 2610行\n\nshowMagnifierCaret = YES;\n-----替换为\nif(_state.showingMagnifierCaret){\n     showMagnifierCaret = YES;\n}\n"
+    },
+    {
+      "number": 1002,
+      "title": "请求添加PrivacyInfo.xcprivacy",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-05-09T02:39:58+00:00",
+      "updated_at": "2024-05-09T02:39:58+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1002",
+      "body": "苹果更新审核策略，需要添加PrivacyInfo.xcprivacy"
+    },
+    {
+      "number": 984,
+      "title": "UIGraphicsBeginImageContext Deprecated",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-06-14T09:39:34+00:00",
+      "updated_at": "2024-05-06T09:35:44+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/984",
+      "body": "大佬，我们这边使用了您的YYText，发现在iOS 17上运行会崩溃，触发了系统的断言：\r\nUIGraphicsBeginImageContext() failed to allocate CGBitampContext: size={382, 0}, scale=3.000000, bitmapInfo=0x2002. Use UIGraphicsImageRenderer to avoid this assert.\r\n\r\n 查了下 api，发现UIGraphicsBeginImageContext在iOS 17上已经deprecated了，\r\n \r\n \r\n![image](https://github.com/ibireme/YYText/assets/9333001/c1a12a15-58f0-4b65-9da2-80d002b60319)\r\n\r\n\r\n大佬是否需要更新下"
+    },
+    {
+      "number": 1001,
+      "title": "-[YYTextLayout firstRectForRange:(YYTextRange *)]，这个方法中有一段代码的逻辑好像有些错误：",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-04-26T02:38:54+00:00",
+      "updated_at": "2024-04-26T02:38:54+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/1001",
+      "body": "-[YYTextLayout firstRectForRange:(YYTextRange *)]\r\n\r\n```\r\n    NSUInteger startLineIndex = [self lineIndexForPosition:range.start];\r\n    NSUInteger endLineIndex = [self lineIndexForPosition:range.end];\r\n\r\n   /* ... 此处省略若干行代码 ... */\r\n\r\n    NSMutableArray *lines = [NSMutableArray new];\r\n   // 这里的 `for` 循环, `i <= startLineIndex` 是不是应该 `i <= endLineIndex`\r\n  //  用来获取 range 范围内的相关 “line”\r\n    for (NSUInteger i = startLineIndex; i <= startLineIndex; i++) {\r\n        YYTextLine *line = _lines[i];\r\n      "
+    },
+    {
+      "number": 332,
+      "title": "韩文(朝鲜语)绘制有问题？",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-05-23T14:14:14+00:00",
+      "updated_at": "2024-03-25T08:08:42+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/332",
+      "body": "[http://ww1.sinaimg.cn/mw690/6210c37fgw1f45odbcfqdj20hs0vkmyi.jpg](url)\n都变成部分了 这个可能什么原因？\n"
+    },
+    {
+      "number": 911,
+      "title": "可以进行iOS13黑暗模式适配吗",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2019-12-10T07:30:12+00:00",
+      "updated_at": "2024-03-25T07:46:40+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/911",
+      "body": "YYLabel的attributedText属性设置了后不能跟着模式的切换而变化。是不是不支持黑暗模式"
+    },
+    {
+      "number": 997,
+      "title": "富文本同时设置下划线和斜体，下划线就不显示了yy_setTextGlyphTransform，yy_setUnderlineStyle",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-03-22T02:30:15+00:00",
+      "updated_at": "2024-03-22T02:45:31+00:00",
+      "closed_at": "2024-03-22T02:45:31+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/997",
+      "body": null
+    },
+    {
+      "number": 996,
+      "title": "Any Plan support Apple Privacy Manifest for cocoapods ?",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-03-19T10:00:05+00:00",
+      "updated_at": "2024-03-21T02:50:45+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/996",
+      "body": "From [Apple docs](https://developer.apple.com/support/third-party-SDK-requirements/):\r\n\r\nStarting in spring 2024, you must include the privacy manifest for any SDK listed below when you submit new apps in App Store Connect that include those SDKs, or when you submit an app update that adds one of the listed SDKs as part of the update. Signatures are also required in these cases where the listed SDKs are used as binary dependencies.\r\n\r\nCould you please add a privacy manifest for this library? See"
+    },
+    {
+      "number": 995,
+      "title": "UIGraphicsBeginImageContext ios17 crash",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-02-23T06:16:38+00:00",
+      "updated_at": "2024-03-19T02:46:26+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/995",
+      "body": "发现在iOS 17上运行会崩溃，触发了系统的断言：\r\nUIGraphicsBeginImageContext() failed to allocate CGBitampContext: size={382, 0}, scale=3.000000, bitmapInfo=0x2002. Use UIGraphicsImageRenderer to avoid this assert."
+    },
+    {
+      "number": 994,
+      "title": "yy_attachmentStringWithContent内存泄露",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-01-10T12:09:22+00:00",
+      "updated_at": "2024-03-15T09:51:17+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/994",
+      "body": "UIImageView *image = [UIImageView new];\r\n    attachment = [NSMutableAttributedString yy_attachmentStringWithContent:image contentMode:UIViewContentModeCenter attachmentSize:image.size alignToFont:font alignment:YYTextVerticalAlignmentCenter];\r\n    [text appendAttributedString: attachment];\r\n\r\nyy_attachmentStringWithContent当我为Content设置一个image view时，会报内存泄露。\r\n\r\n![IMG_5966](https://github.com/ibireme/YYText/assets/7879979/9930f6bb-9d4b-4907-a643-3f4374eff199)\r\n\r\n为什么要设置UIImageView而不是image，因为我需要先显示占位图"
+    },
+    {
+      "number": 723,
+      "title": "设置富文本偏斜率不起作用",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-09-05T03:48:36+00:00",
+      "updated_at": "2023-12-14T01:40:57+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/723",
+      "body": "temp.yy_obliqueness = @(0.17);//无效\r\ntemp.yy_font = [UIFont italicSystemFontOfSize:fontNumber]; //有效。"
+    },
+    {
+      "number": 938,
+      "title": "YYTextEffectWindow   的rootViewController方法死循环",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2020-09-24T05:18:24+00:00",
+      "updated_at": "2023-12-05T03:06:40+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/938",
+      "body": "在使用中发现偶尔会出现该方法死循环崩溃，非必现，不知道有没有处理方式？"
+    },
+    {
+      "number": 702,
+      "title": "YYLabel在特殊字符串下会崩溃",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-07-25T07:33:07+00:00",
+      "updated_at": "2023-11-24T02:19:53+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/702",
+      "body": "问题：YYLabel在特殊字符串下会崩溃\r\n导致崩溃的文本：ޙޓゝ₯\r\n测试机型：iPhone 6 plus 10.3.2\r\nXcode版本：8.3.3\r\nYYText版本：1.0.7，1.0.5\r\n测试代码：新建一个工程，使用cocoapods集成最新的YYText（1.0.7）\r\n```objc\r\n    YYLabel *label = [YYLabel new];\r\n    label.textColor = [UIColor blackColor];\r\n    label.text = @\"ޙޓゝ₯\";\r\n    [self.view addSubview:label];\r\n    [label sizeToFit];\r\n    \r\n    label.center = CGPointMake(self.view.frame.size.width * 0.5, self.view.frame.size.height * 0.5);\r\n```\r\n\r\n崩溃原因：`_displayAsync` 函数中`UIGraphicsBeginImageContextWithOptions(s"
+    },
+    {
+      "number": 559,
+      "title": "yytextTag demo 里涉及到中文标签，标签换行不对，全英文没问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-11-22T12:40:47+00:00",
+      "updated_at": "2023-11-16T09:36:26+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/559",
+      "body": "@[@\"◉red\", @\"◉orange\", @\"◉yellow\", @\"猪猪猪猪侠\", @\"◉blue\", @\"◉purple\", @\"black\"];"
+    },
+    {
+      "number": 885,
+      "title": "YYTextBorder 填充颜色文字显示不出来,文字被覆盖",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2019-05-16T08:39:14+00:00",
+      "updated_at": "2023-11-15T06:38:31+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/885",
+      "body": "YYKit 版本 1.0.9\r\n`NSArray * chars = @[@\"测\",@\"试\",@\"测\",@\"试\",@\"测\",@\"试\",@\"测\",@\"试\",@\"测\",@\"试\"];\r\n\r\n    for (int i = 0; i < chars.count; i++) {\r\n        NSString * tempString = chars[i];\r\n        NSLog(@\"%@\",tempString);\r\n        NSMutableAttributedString * tempAttribute = [[NSMutableAttributedString alloc] initWithString:tempString];\r\n        tempAttribute.font = UIFontMake(20);\r\n        tempAttribute.color = UIColorMakeWithHex(@\"#B4B4B4\");\r\n        UIColor * fillColor = i % 2 == 1 ? UIColorRed : UICol"
+    },
+    {
+      "number": 978,
+      "title": "_YYTextKeyboardViewFrameObserver崩溃",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-11-08T07:03:15+00:00",
+      "updated_at": "2023-11-14T01:56:08+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/978",
+      "body": "    __unsafe_unretained UIView *_keyboardView;\r\n推测：_keyboardView在_YYTextKeyboardViewFrameObserver对象dealloc前被释放掉了，导致访问了野指针。很可能两者的关联处理有关系。\r\n场景：并未使用YY相关组件，而是使用了UITextField，调起了键盘。YYTextKeyboardManager单例收到了UIKeyboardDidChangeFrameNotification通知，最后导致的崩溃。"
+    },
+    {
+      "number": 991,
+      "title": "yyLabel显示html富文本标签异常",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-11-10T07:05:01+00:00",
+      "updated_at": "2023-11-10T07:06:10+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/991",
+      "body": "sub和sup标签不显示上下的效果"
+    },
+    {
+      "number": 671,
+      "title": "tableviewcell上使用YYlabel，添加高亮点击事件，点击事件不响应",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-05-24T14:43:56+00:00",
+      "updated_at": "2023-10-25T07:39:57+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/671",
+      "body": "首先很感谢您的这份开源库。功能很强大。使用的时候遇到了一个问题，希望您可以给解答一下。在tableview用YYLabel做了富文本处理和高亮点击事件，同时也在tableView上加了tap手势。点击YYLabel的时候，触发了tableview的点击事件，高亮点击没有作用，有什么解决方案嘛？ 大大。将tableview的点击事件注释之后，YYLabel的高亮点击事件还是没有触发。求正确的食用方法。大大。\r\n代码如下：\r\nif (modelSource.attMessage) {\r\n        self.Binfo.attributedText = modelSource.attMessage;\r\n        self.Binfo.textLayout = modelSource.textLayout;\r\n        self.Binfo.size = modelSource.textLayout.textBoundingSize;\r\n    }\r\n    WS(weakSelf);\r\n    [modelSource.attMessage yy_setTextHighli"
+    },
+    {
+      "number": 892,
+      "title": "YYTextView 内存泄漏",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2019-07-22T07:44:59+00:00",
+      "updated_at": "2023-09-19T09:14:23+00:00",
+      "closed_at": "2023-09-19T09:14:23+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/892",
+      "body": "1. iPhone6 -- iOS 12.0 -- Swift5.0\r\n2. 文本输入出现内存泄漏\r\n![屏幕快照 2019-07-22 15 43 58](https://user-images.githubusercontent.com/26921676/61614977-89982700-ac97-11e9-888e-49b53f37d8b6.png)\r\n![屏幕快照 2019-07-22 15 44 35](https://user-images.githubusercontent.com/26921676/61615010-9fa5e780-ac97-11e9-9a85-4c06991165c0.png)\r\n"
+    },
+    {
+      "number": 986,
+      "title": "竖向排列最后一行被省略",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-08-11T07:33:48+00:00",
+      "updated_at": "2023-08-11T07:33:48+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/986",
+      "body": "代码：\r\n\r\n        let lab = YYLabel()\r\n        lab.numberOfLines = 4\r\n        lab.isVerticalForm = true\r\n        lab.textVerticalAlignment = .top\r\n        lab.exclusionPaths = [UIBezierPath.init(rect: .zero)]\r\n        lab.preferredMaxLayoutWidth = adapt_size(300)\r\n        lab.backgroundColor = .randomColor\r\n\r\n当文本小于4行时，正常展示；超过4行时，第四行整体顶部对齐只有 \"...\" , 文字被省略，期望是第四行 \"xxxxxxx ...\"\r\n"
+    },
+    {
+      "number": 957,
+      "title": "删除YYTextBinding 时，怎么知道删掉了哪一个 。 如何把字符串 和 用户信息绑定在一起",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2021-05-14T10:34:37+00:00",
+      "updated_at": "2023-08-11T07:05:44+00:00",
+      "closed_at": "2023-08-11T07:05:44+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/957",
+      "body": "我们的需求类似微博，选中@的用户，删除时移除用户，那么我怎么在删除时判断删的是哪一个，是否有把字符串绑定用户信息的方法？"
+    },
+    {
+      "number": 918,
+      "title": "如何解决这个库这么久没有更新？",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2020-03-16T07:44:02+00:00",
+      "updated_at": "2023-08-03T06:33:08+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/918",
+      "body": null
+    },
+    {
+      "number": 901,
+      "title": "YYLabel 动画过程中不响应 highlightTapAction",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2019-09-06T04:10:40+00:00",
+      "updated_at": "2023-07-16T09:59:14+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/901",
+      "body": "设置好了 TextHighlightRange \r\nUIView animation 的option为 UIViewAnimationOptionAllowUserInteraction\r\nhighlight部分点击无效\r\n\r\n如果去掉动画\r\nhighlight部分点击有效"
+    },
+    {
+      "number": 926,
+      "title": "在设置完numberOfLines 后的高度计算问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2020-06-05T10:50:33+00:00",
+      "updated_at": "2023-07-14T08:16:00+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/926",
+      "body": "当我设置 numberOfLines = X 时, 这时候我怎么计算这个文本的高度啊"
+    },
+    {
+      "number": 610,
+      "title": "YYLabel使用autolayout后intrinsicContentSize和UILabel的结果不一致的问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-01-17T08:44:21+00:00",
+      "updated_at": "2023-06-08T04:31:45+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/610",
+      "body": "在UITableViewCell子类内使用了YYLabel并用autolayout约束, 利用self-sizing自动适应cell高度.\r\n原实现使用UILabel时, self-sizing自适应算出的cell高度是正确并能多行显示. 但现在换成YYLabel后self-sizing效果出现偏差总是算出一行的高度而已.\r\n通过跟踪YYLabel代码, 做些一些比较绕的处理才能实现与UILabel一致\r\n约束如下, 这种情况, 在superview宽度之前, 根本不知道preferredMaxLayoutWidth该是多少的\r\n    UIView *superview;\r\n    superview = [self.bubbleImageView superview];\r\n    [self.bubbleImageView mas_remakeConstraints:^(MASConstraintMaker *make) {\r\n        make.left.equalTo(superview).offset(8);\r\n        make.right.lessThanOr"
+    },
+    {
+      "number": 696,
+      "title": "中文粗斜体问题",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-07-14T01:21:31+00:00",
+      "updated_at": "2023-05-25T02:27:19+00:00",
+      "closed_at": "2017-07-14T06:11:06+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/696",
+      "body": "请问怎么支持中文粗斜体。使用YYTextFontWithBoldItalic(); 设置了font，中文只变成了粗体，英文倒是可以支持粗斜体。\r\n我想通过设置matrix来简单的旋转字体，但是这样设置貌似会造成绘制的时候坐标会偏移。\r\nCGAffineTransform matrix = CGAffineTransformMake(1, 0, tanf(15 * (CGFloat)M_PI / 180), 1, 1000, 0);\r\nUIFontDescriptor *desc = [UIFontDescriptor fontDescriptorWithName:[UIFont boldSystemFontOfSize:17].fontName matrix:matrix];\r\nUIFont *font = [UIFont fontWithDescriptor:desc size:17];\r\n\r\n\r\n\r\n"
+    },
+    {
+      "number": 983,
+      "title": "YYTextLayout中计算_lineWidth的代码直接使用了CTLineGetTypographicBounds，这将在文本设置居中的时候出现一些布局的错误",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-05-24T13:35:38+00:00",
+      "updated_at": "2023-05-24T13:39:57+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/983",
+      "body": "文本的Paragraph Style设置居中，在计算布局的时候，左侧缩进后右侧并没有缩进。这将导致计算的结果实际上是居右的。\r\n\r\n嘛  算了我描述好像不太清楚。总之就是设置居中看起来像是居右。\r\n原始代码：\r\n---\r\n- (void)setCTLine:(_Nonnull CTLineRef)CTLine {\r\n    if (_CTLine != CTLine) {\r\n        if (CTLine) CFRetain(CTLine);\r\n        if (_CTLine) CFRelease(_CTLine);\r\n        _CTLine = CTLine;\r\n        if (_CTLine) {\r\n            _lineWidth = CTLineGetTypographicBounds(_CTLine, &_ascent, &_descent, &_leading);\r\n            CFRange range = CTLineGetStringRange(_CTLine);\r\n            _range = NSM"
+    },
+    {
+      "number": 982,
+      "title": "YYLabel 在StoryBoard中使用, 约束上下设置了, 为什么不自动换行?只显示一行?",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-04-25T10:53:14+00:00",
+      "updated_at": "2023-04-25T10:55:36+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/982",
+      "body": "<img width=\"253\" alt=\"图片\" src=\"https://user-images.githubusercontent.com/61976046/234255533-9eecdca9-d2ca-403e-a020-7731dc5a195e.png\">\r\n<img width=\"317\" alt=\"图片\" src=\"https://user-images.githubusercontent.com/61976046/234255926-ee7d18d9-d178-4b8a-aca2-7ce0e8ad09ec.png\">\r\n<img width=\"262\" alt=\"图片\" src=\"https://user-images.githubusercontent.com/61976046/234256088-aefa6eea-af11-42d9-9401-88106b8a6d06.png\">\r\n"
+    },
+    {
+      "number": 784,
+      "title": "YYTextView在cell上长按copy。滚动tableview会出现两个蓝点",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2018-03-22T00:32:33+00:00",
+      "updated_at": "2023-04-25T01:57:53+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/784",
+      "body": "<img width=\"377\" alt=\"wx20180322-083207 2x\" src=\"https://user-images.githubusercontent.com/9930250/37744690-886ffec8-2dab-11e8-854a-02b678590133.png\">\r\n如图所示"
+    },
+    {
+      "number": 981,
+      "title": "File not found: libarclite_iphoneos.a",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-03-31T08:07:12+00:00",
+      "updated_at": "2023-04-20T02:46:00+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/981",
+      "body": "Xcode 升级14.3后报错\r\nFile not found: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/arc/libarclite_iphoneos.a\r\nLinker command failed with exit code 1 (use -v to see invocation)\r\n\r\n大神看一下怎么解决啊\r\nSwift工程"
+    },
+    {
+      "number": 801,
+      "title": "富文本添加的图片总会消失",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2018-05-28T04:01:19+00:00",
+      "updated_at": "2023-04-14T02:22:26+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/801",
+      "body": "正常：<img width=\"100\" alt=\"normal\" src=\"https://user-images.githubusercontent.com/5137016/40596561-4b8efa84-626e-11e8-82c7-b55cb1b1cdbc.png\">\r\n\r\n消失：<img width=\"108\" alt=\"error\" src=\"https://user-images.githubusercontent.com/5137016/40596560-4b3898a6-626e-11e8-88ab-56c5f9e09f85.png\">\r\n\r\n我是用在cell里面，有时候点击cell跳转后，在返回 就没有了，\r\n![34f26560-dffb-4765-bd8e-22d9832db0a5](https://user-images.githubusercontent.com/5137016/40596604-9710fe44-626e-11e8-88c8-bbd100f4d8ad.png)\r\n\r\n代码就是普通的添加附件，麻烦大神解答\r\n"
+    },
+    {
+      "number": 971,
+      "title": "各位，有好用的替代库吗？主要是计算size和读取html str。",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-07-22T05:59:26+00:00",
+      "updated_at": "2023-02-27T09:49:04+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/971",
+      "body": "使用label加载html str 和使用web加载html str 不一致。有大佬遇到过吗"
+    },
+    {
+      "number": 969,
+      "title": "CoreText note: Client requested name \".SFUI-Regular\" 如何解决",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-06-06T07:37:59+00:00",
+      "updated_at": "2023-02-16T06:29:21+00:00",
+      "closed_at": "2022-06-09T08:56:11+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/969",
+      "body": "CoreText note: Client requested name \".SFUI-Regular\", it will get TimesNewRomanPSMT rather than the intended font. All system UI font access should be through proper APIs such as CTFontCreateUIFontForLanguage() or +[UIFont systemFontOfSize:].\r\n\r\n出现该问题的时候会有明显的UI 卡顿"
+    },
+    {
+      "number": 980,
+      "title": "字符错误截断的问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-02-07T02:09:47+00:00",
+      "updated_at": "2023-02-07T02:09:47+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/980",
+      "body": "<img width=\"1402\" alt=\"image\" src=\"https://user-images.githubusercontent.com/1712759/217129701-f60c47ed-9853-4f87-8ea6-e3d35b102525.png\">\r\n如图，在debug下字符是可以显示下的但是莫名截断了"
+    },
+    {
+      "number": 794,
+      "title": "YYTextView使用键盘右下方的语音录入时，光标位置不正确",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2018-04-26T06:12:14+00:00",
+      "updated_at": "2023-02-01T08:34:59+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/794",
+      "body": "光标会跳到输入的文字中间以及会多插入一些文字。\r\n"
+    },
+    {
+      "number": 975,
+      "title": "系统语音识别功能无法工作",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-09-05T09:38:30+00:00",
+      "updated_at": "2023-02-01T08:25:20+00:00",
+      "closed_at": "2022-09-05T11:15:30+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/975",
+      "body": "[Dictation] UIDictationController could not find the last hypothesis \"一二\" in range '(null)'. The likely cause is that something modified the text store or the hypothesis during dictation.\r\n\r\n Given text range '(null)' we could not find the last hypothesis \"一二\". The likely cause is that something modified the text store or the hypothesis during dictation.\r\n\r\n[Dictation] UIDictationController could not find the last hypothesis \"123\" in range '(null)'. The likely cause is that something modified th"
+    },
+    {
+      "number": 979,
+      "title": "大神 UIAlertController 使用失效了 是怎么回事呢",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-11-30T09:10:23+00:00",
+      "updated_at": "2022-11-30T09:10:23+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/979",
+      "body": "\r\n [messageAttribute yy_setTextHighlightRange:[msg rangeOfString:redMsg] color:[UIColor colorConvertFromString:@\"#999999\"] backgroundColor:[UIColor clearColor] tapAction:^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {\r\n        [weakSelf sendOrderGuide];\r\n    }];\r\nUIAlertController *alert = [UIAlertController alertControllerWithTitle:@\"\" message:@\"\" preferredStyle:UIAlertControllerStyleAlert];\r\n    [alert setValue:messageAttribute forKey:@\"attr"
+    },
+    {
+      "number": 924,
+      "title": "YYTextKeyboardManager在键盘处理上会出现以下偶现闪退，多数是ios9.3 ios10  ipad的机型",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2020-05-07T06:38:24+00:00",
+      "updated_at": "2022-11-22T12:40:50+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/924",
+      "body": "An instance 0x167d5fc0 of class UIInputSetHostView was deallocated while key value observers were still registered with it. Current observation info: <NSKeyValueObservationInfo 0x167f8e20> ( <NSKeyValueObservance 0x167f8e50: Observer: 0x167f8b90, Key path: frame, Options: <New: NO, Old: NO, Prior: NO> Context: 0x0, Property: 0x167f8e80> <NSKeyValueObservance 0x167f9650: Observer: 0x167f8b90, Key path: center, Options: <New: NO, Old: NO, Prior: NO> Context: 0x0, Property: 0x167f9680> <NSKeyValueO"
+    },
+    {
+      "number": 976,
+      "title": "YYTextView和YYLabel TapAction不响应",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-09-08T03:34:17+00:00",
+      "updated_at": "2022-11-04T10:37:30+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/976",
+      "body": "为YYTextView设置了YYTextHighlight后，tapAction没有响应，而如果同时设置了tapAction和YYTextView的delegate的话，代理也没有响应，只有屏蔽tapAction后代理才有响应回调，但delegate也是需要用力按压才有响应；\r\n同时YYLabel的tapAction也没有任何响应。\r\n看这个问题已经有很多人反映了，到现在还没有解决方案"
+    },
+    {
+      "number": 666,
+      "title": "YYTextView无法向UITextView一样由内容自适应高度。",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-05-18T01:18:46+00:00",
+      "updated_at": "2022-10-26T16:30:44+00:00",
+      "closed_at": "2022-10-26T16:30:44+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/666",
+      "body": "我们在开发中经常会出现多行文本输入框由输入的内容自适应高度，如：输入标注等信息。使用 UITextView可以设置 scrollEnabled = NO不设置高度约束达到此需求，但YYTextView目前好像不行，不知是否为我的姿势不对，如果没有此功能，YY大神是否可以增加此功能呢，其他同学是否有好的解决方案。\r\n效果如下：\r\n![untitled](https://cloud.githubusercontent.com/assets/12118567/26182367/909bdfa2-3baa-11e7-8a23-01e899012669.gif)\r\n\r\n"
+    },
+    {
+      "number": 977,
+      "title": "大神你好，考虑出个安卓版吗",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-10-09T08:41:48+00:00",
+      "updated_at": "2022-10-09T08:41:48+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/977",
+      "body": "大神你好，考虑出个安卓版吗"
+    },
+    {
+      "number": 618,
+      "title": "YYTextView使用系统的语音录入时，光标位置不正确，导致最后输入的内容有错误",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-02-17T03:01:04+00:00",
+      "updated_at": "2022-09-08T07:18:00+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/618",
+      "body": "如题"
+    },
+    {
+      "number": 638,
+      "title": "yytextview系统自带的语音输入有问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-03-27T01:59:26+00:00",
+      "updated_at": "2022-09-08T07:17:43+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/638",
+      "body": "yytextview系统自带的语音输入 \r\n听写后文本错位，前几个字必然重复，只能听写几个字"
+    },
+    {
+      "number": 721,
+      "title": "快速切换文本和语音输入，replaceCharactersInRange崩溃",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2017-09-04T08:08:44+00:00",
+      "updated_at": "2022-09-08T07:17:29+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/721",
+      "body": "越界问题"
+    },
+    {
+      "number": 412,
+      "title": "YYTextView 点击 backspace 后的选中问题",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-07-19T09:12:45+00:00",
+      "updated_at": "2022-09-07T08:43:05+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/412",
+      "body": "你好，\n\n点击回退按钮后，我在 textView(textView: YYTextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool 方法中重新对 textView 进行了赋值，并且 return NO, 但是之后会选中剩余的所有文字\n\n![bug2](https://cloud.githubusercontent.com/assets/717699/16944611/fea201d6-4dd3-11e6-8372-36a04e5a8e29.gif)\n"
+    },
+    {
+      "number": 896,
+      "title": "PCH 文件引入YYText报错",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2019-08-19T05:43:34+00:00",
+      "updated_at": "2022-08-25T01:49:15+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/896",
+      "body": "Could not build module 'YYText'"
+    },
+    {
+      "number": 974,
+      "title": "在居中布局下，点击yy_setTextHighlight的文本，导致富文本最后一行闪烁",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-08-24T07:53:35+00:00",
+      "updated_at": "2022-08-24T07:53:35+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/974",
+      "body": null
+    },
+    {
+      "number": 457,
+      "title": "YYTextView依赖YYTextEffectWindow 重新初始化window崩溃",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-08-12T09:29:07+00:00",
+      "updated_at": "2022-07-15T06:56:31+00:00",
+      "closed_at": "2016-08-13T03:14:31+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/457",
+      "body": "我们一个controller里面调用 了YYTextView后。点另一个按钮调用 AppDelegate里面的方法,把window释放，重新初始化window和controller。应用就闪退了。以下是重新初始化window和controller的代码。\n\n if (self.window) {\n        [self.window.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];\n        self.window.rootViewController = nil;\n        [self.window resignKeyWindow];\n        [self.window removeFromSuperview];\n    }\n self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];\n    self.viewController = [[ViewController allo"
+    },
+    {
+      "number": 811,
+      "title": "使用html标签自动生成attributedstring后，如果有超链接，点击无反应",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2018-06-27T06:36:53+00:00",
+      "updated_at": "2022-06-29T09:14:13+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/811",
+      "body": "使用html标签自动生成attributedstring后，如果有超链接，点击无反应，请问如何使点击有反应，由于超链接的点击回调事件不像demo中set进去的时候就设置好了 ，所以，yylael或yytextview如何获取点击超链接的这个点击事件"
+    },
+    {
+      "number": 970,
+      "title": "NSMutableRLEArray replaceObjectsInRange:withObject:length:: Out of bounds",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-06-09T12:23:43+00:00",
+      "updated_at": "2022-06-09T12:23:43+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/970",
+      "body": "\r\n![9411654777225_ pic](https://user-images.githubusercontent.com/10813764/172845449-0ba7284b-2a4f-4ee6-9828-1bb9d00fb2bc.jpg)\r\n\r\n"
+    },
+    {
+      "number": 916,
+      "title": "iOS 13 CTFontRef控制台报错",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2020-01-06T08:22:17+00:00",
+      "updated_at": "2022-06-06T08:09:11+00:00",
+      "closed_at": "2020-01-06T08:23:25+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/916",
+      "body": "CoreText performance note: Client called CTFontCreateWithName() using name \".SFUI-Regular\" and got font with PostScript name \"TimesNewRomanPSMT\". For best performance, only use PostScript names when calling this API."
+    },
+    {
+      "number": 962,
+      "title": "YYTextView的allowsPasteAttributedString属性设为YES时，粘贴富文本崩溃",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2021-09-29T03:16:20+00:00",
+      "updated_at": "2022-05-30T08:07:21+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/962",
+      "body": "我同时试了下你们的demo，粘贴富文本时虽然没崩溃，但是只粘贴到文字，图片没粘贴过来，而且和我在本地试报同样的错误：Thread 26: \"-[UIImage encodedData]: unrecognized selector sent to instance 0x6000001b18c0\""
+    },
+    {
+      "number": 967,
+      "title": "真机运行不起来,没人解决了吗????",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2021-12-09T01:11:33+00:00",
+      "updated_at": "2022-05-13T01:33:32+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/967",
+      "body": "![image](https://user-images.githubusercontent.com/12755246/145316144-4831cb59-1a69-4526-a5ce-b08b9447f256.png)\r\n"
+    },
+    {
+      "number": 325,
+      "title": "求助： YYLabel在显示emoji表情的时候有一部分表情不能正常显示，而且表情的高度不一致，如下图",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-05-18T06:17:47+00:00",
+      "updated_at": "2022-04-19T13:34:30+00:00",
+      "closed_at": "2016-05-25T15:20:18+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/325",
+      "body": "![img_1138](https://cloud.githubusercontent.com/assets/3861150/15349153/446a15a2-1d03-11e6-9be9-8a828d3cf724.jpg)\n![img_1139](https://cloud.githubusercontent.com/assets/3861150/15349155/44df6cf8-1d03-11e6-9d2e-56259b62dd0f.jpg)\n"
+    },
+    {
+      "number": 968,
+      "title": "Ggh",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-03-11T13:05:28+00:00",
+      "updated_at": "2022-03-11T13:20:12+00:00",
+      "closed_at": "2022-03-11T13:20:12+00:00",
+      "url": "https://github.com/ibireme/YYText/issues/968",
+      "body": null
+    },
+    {
+      "number": 948,
+      "title": "关于yy_attachmentString",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2021-03-06T10:03:29+00:00",
+      "updated_at": "2022-03-03T14:08:47+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/948",
+      "body": "let imgText = NSAttributedString.yy_attachmentString(withContent: img, contentMode: .center, attachmentSize: img?.size ?? CGSize.zero, alignTo: Font(size: 15), alignment: .center)\r\n我使用图片生成的NSAttributedString ，当我使用UILabel时加载不出来"
+    },
+    {
+      "number": 409,
+      "title": "_textView.textVerticalAlignment = YYTextVerticalAlignmentCenter 没有效果呀",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2016-07-18T06:35:26+00:00",
+      "updated_at": "2022-02-15T02:35:34+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/409",
+      "body": "- (YYTextView *)textView\n  {\n  if (!_textView) {\n      _textView = [YYTextView new];\n      _textView.backgroundColor = [UIColor whiteColor];\n      _textView.textAlignment = NSTextAlignmentCenter;\n      _textView.textVerticalAlignment = YYTextVerticalAlignmentCenter;\n      _textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);\n  \n  }\n  return _textView;\n  }\n\n光标是在中间了，可是文字没有在中间。、\n"
+    },
+    {
+      "number": 964,
+      "title": "替代库",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2021-11-26T02:42:23+00:00",
+      "updated_at": "2021-12-22T10:16:54+00:00",
+      "closed_at": null,
+      "url": "https://github.com/ibireme/YYText/issues/964",
+      "body": "有替代库吗\r\nswift 或者objc 都可以"
+    }
+  ],
+  "changelog": "",
+  "releases": [
+    {
+      "tag_name": "1.0.6",
+      "name": "Bug fixes",
+      "body": "- iOS 7 compatible when set font name with InterfaceBuilder: #404\n- iOS 10 compatible for text layout: #459\n- Fix text border draw defect when the border is out of the view's bounds: #341 \n- Fix incorrect state when resize vertical form textview: #483\n- Fix potential crash when get attribute from NSAttributedString with invalid index.\n- Fix Xcode8 warnings\n",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2016-09-13T10:12:39+00:00",
+      "published_at": "2016-09-13T10:35:13+00:00",
+      "url": "https://github.com/ibireme/YYText/releases/tag/1.0.6",
+      "tarball_url": "https://api.github.com/repos/ibireme/YYText/tarball/1.0.6",
+      "zipball_url": "https://api.github.com/repos/ibireme/YYText/zipball/1.0.6"
+    },
+    {
+      "tag_name": "1.0.5",
+      "name": "Bug fixes",
+      "body": "- Avoid YYTextEffectWindow become key window\n- Optimize the line truncation token's attributes\n- Fix text render error when use TextGlyphTransformAttribute [#284](https://github.com/ibireme/YYText/issues/284)\n",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2016-04-21T05:58:02+00:00",
+      "published_at": "2016-04-21T06:23:59+00:00",
+      "url": "https://github.com/ibireme/YYText/releases/tag/1.0.5",
+      "tarball_url": "https://api.github.com/repos/ibireme/YYText/tarball/1.0.5",
+      "zipball_url": "https://api.github.com/repos/ibireme/YYText/zipball/1.0.5"
+    },
+    {
+      "tag_name": "1.0.4",
+      "name": "Bug fixes",
+      "body": "- Add KVO support for property 'textLayout' of YYTextView\n- Fix potential crash in iOS7 [#261](https://github.com/ibireme/YYText/issues/261)\n- Fix text rendering problem [#229](https://github.com/ibireme/YYText/issues/229) [#262](https://github.com/ibireme/YYText/issues/262)\n",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2016-04-02T16:07:52+00:00",
+      "published_at": "2016-04-21T06:22:12+00:00",
+      "url": "https://github.com/ibireme/YYText/releases/tag/1.0.4",
+      "tarball_url": "https://api.github.com/repos/ibireme/YYText/tarball/1.0.4",
+      "zipball_url": "https://api.github.com/repos/ibireme/YYText/zipball/1.0.4"
+    },
+    {
+      "tag_name": "1.0.3",
+      "name": "Bug fixes",
+      "body": "- Set the default `textAlignment` to `NSTextAlignmentNatural` [#239](https://github.com/ibireme/YYText/issues/239)\n",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2016-03-22T08:13:27+00:00",
+      "published_at": "2016-04-21T06:19:50+00:00",
+      "url": "https://github.com/ibireme/YYText/releases/tag/1.0.3",
+      "tarball_url": "https://api.github.com/repos/ibireme/YYText/tarball/1.0.3",
+      "zipball_url": "https://api.github.com/repos/ibireme/YYText/zipball/1.0.3"
+    },
+    {
+      "tag_name": "1.0.2",
+      "name": "Bug fixes",
+      "body": "- iOS 9.2 compatible\n- Remove `YYDispatchQueuePool` due to dynamic library compile error\n- Copy observers before enumerate in YYKeyboardManager\n- Support opaque layer's background color for YYAsyncLayer\n",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2016-03-15T17:07:08+00:00",
+      "published_at": "2016-04-21T06:18:26+00:00",
+      "url": "https://github.com/ibireme/YYText/releases/tag/1.0.2",
+      "tarball_url": "https://api.github.com/repos/ibireme/YYText/tarball/1.0.2",
+      "zipball_url": "https://api.github.com/repos/ibireme/YYText/zipball/1.0.2"
+    },
+    {
+      "tag_name": "1.0.1",
+      "name": "Bug fixes",
+      "body": "- Fix Interface Builder (IBInspectable) error in YYLabel\n",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2016-02-28T06:52:31+00:00",
+      "published_at": "2016-04-21T06:16:23+00:00",
+      "url": "https://github.com/ibireme/YYText/releases/tag/1.0.1",
+      "tarball_url": "https://api.github.com/repos/ibireme/YYText/tarball/1.0.1",
+      "zipball_url": "https://api.github.com/repos/ibireme/YYText/zipball/1.0.1"
+    },
+    {
+      "tag_name": "1.0",
+      "name": "First release, stable API",
+      "body": "",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2016-02-27T15:02:15+00:00",
+      "published_at": "2016-04-21T06:15:32+00:00",
+      "url": "https://github.com/ibireme/YYText/releases/tag/1.0",
+      "tarball_url": "https://api.github.com/repos/ibireme/YYText/tarball/1.0",
+      "zipball_url": "https://api.github.com/repos/ibireme/YYText/zipball/1.0"
+    }
+  ]
+}
