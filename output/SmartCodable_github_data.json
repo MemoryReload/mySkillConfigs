@@ -1,0 +1,2801 @@
+{
+  "repo_info": {
+    "name": "SmartCodable",
+    "full_name": "iAmMccc/SmartCodable",
+    "description": "SmartCodable is a data parsing library built on Swift’s Codable, designed for simple usage and strong real-world compatibility. It gracefully handles missing fields, default values, and evolving JSON structures. SmartCodable 是基于 Swift Codable 的数据解析库，主打简单易用与真实业务场景下的强兼容性，能够优雅应对不断变化的 JSON 数据。",
+    "url": "https://github.com/iAmMccc/SmartCodable",
+    "homepage": "",
+    "stars": 712,
+    "forks": 84,
+    "open_issues": 0,
+    "default_branch": "main",
+    "created_at": "2023-09-28T02:34:03+00:00",
+    "updated_at": "2025-12-29T09:13:58+00:00",
+    "language": "Swift",
+    "license": "MIT License",
+    "topics": [
+      "codable",
+      "handyjson",
+      "json",
+      "mapping",
+      "serialization",
+      "swift",
+      "swift-codable",
+      "metacodable",
+      "swift-syntax-builder",
+      "data-model",
+      "decodable",
+      "decoding",
+      "json-parsing"
+    ]
+  },
+  "readme": "<p align=\"center\">\n<img src=\"https://github.com/intsig171/SmartCodable/assets/87351449/89de27ac-1760-42ee-a680-4811a043c8b1\" alt=\"SmartCodable\" title=\"SmartCodable\" width=\"500\"/>\n</p>\n<h1 align=\"center\">SmartCodable - Resilient & Flexible Codable for Swift </h1>\n\n<p align=\"center\">\n<a href=\"https://github.com/iAmMccc/SmartCodable/blob/main/README_CN.md\">\n    <img src=\"https://img.shields.io/badge/中文-可用-brightgreen.svg\" alt=\"中文文档\">\n</a>\n<a href=\"https://github.com/iAmMccc/SmartCodable/releases\">\n    <img src=\"https://img.shields.io/github/v/release/iAmMccc/SmartCodable?color=blue&label=version\" alt=\"Latest Release\">\n</a>\n<a href=\"https://swift.org/\">\n    <img src=\"https://img.shields.io/badge/Swift-5.0%2B-orange.svg\" alt=\"Swift 5.0+\">\n</a>\n<a href=\"https://github.com/iAmMccc/SmartCodable/wiki\">\n    <img src=\"https://img.shields.io/badge/Documentation-available-brightgreen.svg\" alt=\"Documentation\">\n</a>\n<a href=\"https://swift.org/package-manager/\">\n    <img src=\"https://img.shields.io/badge/SPM-supported-DE5C43.svg?style=flat\" alt=\"SPM Supported\">\n</a>\n<a href=\"https://github.com/iAmMccc/SmartCodable/blob/main/LICENSE\">\n    <img src=\"https://img.shields.io/badge/license-MIT-black.svg\" alt=\"MIT License\">\n</a>\n<a href=\"https://deepwiki.com/intsig171/SmartCodable\">\n    <img src=\"https://deepwiki.com/badge.svg\" alt=\"Ask DeepWiki\">\n</a>\n</p>\n\n**SmartCodable** redefines Swift data parsing by enhancing Apple's native Codable with production-ready resilience and flexibility. It provides seamless support for default values, nested flattening, and ignored properties, reducing boilerplate while increasing reliability. \n\n## Features\n\n### **Compatibility**\n\n- **Robust Parsing** – Handles missing keys, type mismatches, and null values safely.\n- **Safe Defaults** – Falls back to property initializers when parsing fails.\n- **Smart Type Conversion** – Converts common types automatically (e.g., `Int ⇄ String`, `Bool ⇄ String`).\n\n### **Enhancements**\n\n- **Any & Collection Support** – Parses `Any`, `[Any]`, `[String: Any]` safely.\n- **Nested Path Parsing** – Decode nested JSON using designated paths.\n- **Custom Value Transformation** – Apply transformers for advanced conversions.\n- **SmartFlat Support** – Flatten nested objects into parent models seamlessly.\n- **SmartPublished Support** – Supports `ObservableObject` properties with real-time updates.\n- **Inheritance Support** – Enables model inheritance via `@SmartSubclass`.\n- **Stringified JSON Parsing** – Converts string-encoded JSON into objects or arrays automatically.\n\n### **Convenience**\n\n- **Property Ignoring** – Skip specific properties with `@IgnoredKey`, including non-`Codable` fields.\n- **Flexible Input Formats** – Deserialize from dictionaries, arrays, JSON strings, or `Data`.\n\n### **Callbacks**\n\n- **Post-Processing Callback** – `didFinishMapping()` runs after decoding for custom initialization or adjustments.\n\n### **Debugging**\n\n- **SmartSentinel Logging** – Real-time parsing logs to track errors and data issues.\n\n\n\n## Quick Start\n\n```swift\nimport SmartCodable\n\nstruct User: SmartCodableX {\n    var name: String = \"\"\n    var age: Int = 0\n}\n\nlet user = User.deserialize(from: [\"name\": \"John\", \"age\": 30])\n```\n\n\n\n## Explore & Contribute\n\n| Project / Tool                                               | Description                                                  |\n| :----------------------------------------------------------- | :----------------------------------------------------------- |\n| 🔧 [HandyJSON](https://github.com/iAmMccc/SmartCodable/blob/main/Explore%26Contribute/CompareWithHandyJSON.md) | Step-by-step guide to replace HandyJSON with SmartCodable in your project. |\n| 🛠 [SmartModeler](https://github.com/iAmMccc/SmartModeler)    | Companion tool for converting JSON into SmartCodable Swift models. |\n| 👀 [SmartSentinel](https://github.com/iAmMccc/SmartCodable/blob/main/Explore%26Contribute/Sentinel.md) | Real-time parsing logs to track errors and issues. Supports. |\n| 💖 [Contributing](https://github.com/iAmMccc/SmartCodable/blob/main/Explore%26Contribute/Contributing.md) | Support the development of SmartCodable through donations.   |\n| 🏆 [Contributors](https://github.com/iAmMccc/SmartCodable/blob/main/Explore%26Contribute/Contributors.md) | Key contributors to the SmartCodable codebase.               |\n\n\n\n## Installation\n\n### 🛠 CocoaPods Installation\n\n| Version     | Installation Method          | Platform Requirements                                        |\n| :---------- | :--------------------------- | :----------------------------------------------------------- |\n| Basic       | `pod 'SmartCodable'`         | `iOS 13+` `tvOS 15+` `macOS 10.15+` `watchOS 6.0+` `visionOS 1.0+` |\n| Inheritance | `pod 'SmartCodable/Inherit'` | `iOS 13+` `macOS 11+`                                        |\n\n⚠️ **Important Notes**:\n\n- If you don't have strong inheritance requirements, the basic version is recommended\n\n- Inheritance features require **Swift Macro support**, **Xcode 15+**, and **Swift 5.9+**\n\n  \n\n\n📌 **About Swift Macros Support (CocoaPods)**:\n\n* requires downloading `swift-syntax` dependencies for the first time (may take longer)\n* CocoaPods internally sets `user_target_xcconfig[\"OTHER_SWIFT_FLAGS\"]` to load the macro plugin during build.\n* This may affect your main target's build flags and lead to subtle differences in complex projects or CI environments.\n* If needed, please [open an issue](https://github.com/iAmMccc/SmartCodable/issues) for custom setups.\n\n\n\n### 📦 Swift Package Manager\n\n```swift\ndependencies: [\n    .package(url: \"https://github.com/iAmMccc/SmartCodable.git\", from: \"xxx\")\n]\n```\n\n\n\n## Documentation\n\n### 1. The Basics\n\nTo conform to 'SmartCodable', a class need to implement an empty initializer\n\n```swift\nclass BasicTypes: SmartCodableX {\n    var int: Int = 2\n    var doubleOptional: Double?\n    required init() {}\n}\nlet model = BasicTypes.deserialize(from: json)\n```\n\nFor struct, since the compiler provide a default empty initializer, we use it for free.\n\n```swift\nstruct BasicTypes: SmartCodableX {\n    var int: Int = 2\n    var doubleOptional: Double?\n}\nlet model = BasicTypes.deserialize(from: json)\n```\n\n\n\n### 2. Deserialization API\n\n#### 2.1 deserialize\n\nOnly types conforming to `SmartCodable` (or `[SmartCodable]` for arrays) can use these methods\n\n```swift\npublic static func deserialize(from dict: [String: Any]?, designatedPath: String? = nil,  options: Set<SmartDecodingOption>? = nil) -> Self?\n\npublic static func deserialize(from json: String?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> Self?\n\npublic static func deserialize(from data: Data?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> Self?\n\npublic static func deserializePlist(from data: Data?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> Self?\n```\n\n**1. Multi-Format Input Support**\n\n| Input Type  | Example Usage                         | Internal Conversion                   |\n| :---------- | :------------------------------------ | :------------------------------------ |\n| Dictionary  | `Model.deserialize(from: dict)`       | Directly processes native collections |\n| Array       | `[Model].deserialize(from: arr)`      | Directly processes native collections |\n| JSON String | `Model.deserialize(from: jsonString)` | Converts to `Data` via UTF-8          |\n| Data        | `Model.deserialize(from: data)`       | Processes directly                    |\n\n**2. Deep Path Navigation (`designatedPath`)**\n\n```swift\n// JSON Structure:\n{\n  \"data\": {\n    \"user\": {\n      \"info\": { ...target content... }\n    }\n  }\n}\n\n// Access nested data:\nModel.deserialize(from: json, designatedPath: \"data.user.info\")\n```\n\n**Path Resolution Rules:**\n\n1. Dot-separated path components\n2. Handles both dictionaries and arrays\n3. Returns `nil` if any path segment is invalid\n4. Empty path returns entire content\n\n**3. Decoding Strategies (`options`)**\n\n```swift\nlet options: Set<SmartDecodingOption> = [\n    .key(.convertFromSnakeCase),\n    .date(.iso8601),\n    .data(.base64)\n]\n```\n\n| Strategy Type      | Available Options                     | Description                  |\n| :----------------- | :------------------------------------ | :--------------------------- |\n| **Key Decoding**   | `.fromSnakeCase`                      | snake_case → camelCase       |\n|                    | `.firstLetterLower`                   | \"FirstName\" → \"firstName\"    |\n|                    | `.firstLetterUpper`                   | \"firstName\" → \"FirstName\"    |\n| **Date Decoding**  | `.iso8601`, `.secondsSince1970`, etc. | Full Codable date strategies |\n| **Data Decoding**  | `.base64`                             | Binary data processing       |\n| **Float Decoding** | `.convertToString`, `.throw`          | NaN/∞ handling               |\n\n> ⚠️ **Important**: Only one strategy per type is allowed (last one wins if duplicates exist)\n\n\n\n#### 2.2 Post-processing callback invoked after successful decoding\n\n```swift\nstruct Model: SmartCodableX {\n    var name: String = \"\"\n    \n    mutating func didFinishMapping() {\n        name = \"I am \\(name)\"\n    }\n}\n```\n\n\n\n#### 3.2 Key Transformation\n\nDefines key mapping transformations during decoding，First non-null mapping is preferred。\n\n```swift\nstatic func mappingForKey() -> [SmartKeyTransformer]? {\n    return [\n        CodingKeys.id <--- [\"user_id\", \"userId\", \"id\"],\n        CodingKeys.joinDate <--- \"joined_at\"\n    ]\n}\n```\n\n\n\n#### 4.3 **Value Transformation**\n\nConvert between JSON values and custom types\n\n**Built-in Value Transformers**\n\n| Transformer                    | JSON Type     | Object Type | Description                                                  |\n| :----------------------------- | :------------ | :---------- | :----------------------------------------------------------- |\n| **SmartDataTransformer**       | String        | Data        | Converts between Base64 strings and Data objects             |\n| **SmartHexColorTransformer**   | String        | ColorObject | Converts hex color strings to platform-specific color objects (UIColor/NSColor) |\n| **SmartDateTransformer**       | Double/String | Date        | Handles multiple date formats (timestamp Double or String) to Date objects |\n| **SmartDateFormatTransformer** | String        | Date        | Uses DateFormatter for custom date string formats            |\n| **SmartURLTransformer**        | String        | URL         | Converts strings to URLs with optional encoding and prefixing |\n\n```swift\nstruct Model: SmartCodableX {\n    \n    ...\n    \n    static func mappingForValue() -> [SmartValueTransformer]? {\n        let format = DateFormatter()\n        format.dateFormat = \"yyyy-MM-dd\"\n        return [\n            CodingKeys.url <--- SmartURLTransformer(prefix: \"https://\"),\n            CodingKeys.date2 <--- SmartDateTransformer(),\n            CodingKeys.date1 <--- SmartDateFormatTransformer(format)\n        ]\n    }\n}\n```\n\nIf you need additional parsing rules, **Transformer** will implement them yourself. Follow **ValueTransformable** to implement the requirements of the protocol.\n\n```swift\npublic protocol ValueTransformable {\n    associatedtype Object\n    associatedtype JSON\n    \n    /// transform from ’json‘ to ’object‘\n    func transformFromJSON(_ value: Any?) -> Object?\n    \n    /// transform to ‘json’ from ‘object’\n    func transformToJSON(_ value: Object?) -> JSON?\n}\n```\n\n**Built-in Fast Transformer Helper**\n\n```swift\nstatic func mappingForValue() -> [SmartValueTransformer]? {\n    [\n        CodingKeys.name <--- FastTransformer<String, String>(fromJSON: { json in\n            \"abc\"\n        }, toJSON: { object in\n            \"123\"\n        }),\n        CodingKeys.subModel <--- FastTransformer<TestEnum, String>(fromJSON: { json in\n            TestEnum.man\n        }, toJSON: { object in\n            object?.rawValue\n        }),\n    ]\n}\n```\n\n\n\n\n\n\n### 3. propertyWrapper\n\n#### 3.1 @SmartAny\n\nCodable does not support Any resolution, but can be implemented using @SmartAny。\n\n```swift\nstruct Model: SmartCodableX {\n    @SmartAny var dict: [String: Any] = [:]\n    @SmartAny var arr: [Any] = []\n    @SmartAny var any: Any?\n}\nlet dict: [String: Any] = [\n    \"dict\": [\"name\": \"Lisa\"],\n    \"arr\": [1,2,3],\n    \"any\": \"Mccc\"\n]\n\nlet model = Model.deserialize(from: dict)\nprint(model)\n// Model(dict: [\"name\": \"Lisa\"], arr: [1, 2, 3], any: \"Mccc\")\n```\n\n\n\n#### 3.2 @IgnoredKey\n\nIf you need to ignore the parsing of attributes, you can override `CodingKeys` or use `@IgnoredKey`.\n\n```swift\nstruct Model: SmartCodableX {\n    @IgnoredKey\n    var name: String = \"\"\n}\n\nlet dict: [String: Any] = [\n    \"name\": \"Mccc\"\n]\n\nlet model = Model.deserialize(from: dict)\nprint(model)\n// Model(name: \"\")\n```\n\n\n\n#### 3.3 @SmartFlat\n\n```swift\nstruct Model: SmartCodableX {\n    var name: String = \"\"\n    var age: Int = 0\n  \n    @SmartFlat\n    var model: FlatModel?\n   \n}\nstruct FlatModel: SmartCodableX {\n    var name: String = \"\"\n    var age: Int = 0\n}\n\nlet dict: [String: Any] =  [\n    \"name\": \"Mccc\",\n    \"age\": 18,\n]\n\nlet model = Model.deserialize(from: dict)\nprint(model)\n// Model(name: \"Mccc\", age: 18, model: FlatModel(name: \"Mccc\", age: 18))\n```\n\n\n\n#### 3.4 @SmartPublished\n\n```swift\nclass PublishedModel: ObservableObject, SmartCodable {\n    required init() {}\n    \n    @SmartPublished\n    var name: ABC?\n}\n\nstruct ABC: SmartCodableX {\n    var a: String = \"\"\n}\n\nif let model = PublishedModel.deserialize(from: dict) {\n    model.$name\n        .sink { newName in\n            print(\"name updated，newValue is: \\(newName)\")\n        }\n        .store(in: &cancellables)\n}\n```\n\n#### 3.5 @SmartHexColor\n\nAdds Codable support for UIColor/NSColor using hex string encoding/decoding.\n\n```swift\nstruct Model: SmartCodableX {\n    @SmartHexColor\n    var color: UIColor?\n}\n\nlet dict: [String: Any] = [\n    \"color\": \"7DA5E3\"\n]\n\nlet model = Model.deserialize(from: dict)\nprint(model)\n// print: Model(color: UIExtendedSRGBColorSpace 0.490196 0.647059 0.890196 1)\n```\n\n\n\n### 4. Inheritance Support\n\nThis feature relies on **Swift Macros**, which requires **Swift 5.9+** and is compatible with **iOS 13+**. Therefore, it is only supported in SmartCodable version 5.0 and above.\n\n> For using inheritance on lower versions, refer to: [Inheritance in Lower Versions](https://github.com/iAmMccc/SmartCodable/blob/main/Document/QA/QA2.md)\n\nIf you need inheritance support, annotate your subclass with `@SmartSubclass`.\n\n#### 4.1 Basic Usage\n\n```swift\nclass BaseModel: SmartCodableX {\n    var name: String = \"\"\n    required init() { }\n}\n\n@SmartSubclass\nclass StudentModel: BaseModel {\n    var age: Int?\n}\n```\n\n#### 4.2 Subclass Implements Protocol Method\n\nJust implement it directly—no need for the `override` keyword.\n\n```swift\nclass BaseModel: SmartCodableX {\n    var name: String = \"\"\n    required init() { }\n    \n    class func mappingForKey() -> [SmartKeyTransformer]? {\n        retrun nil\n    }\n}\n\n@SmartSubclass\nclass StudentModel: BaseModel {\n    var age: Int?\n    \n    override static func mappingForKey() -> [SmartKeyTransformer]? {\n        [ CodingKeys.age <--- \"stu_age\" ]\n    }\n}\n```\n\n#### 4.3 Parent Class Implements Protocol Method\n\n```swift\nclass BaseModel: SmartCodableX {\n    var name: String = \"\"\n    required init() { }\n    \n    static func mappingForKey() -> [SmartKeyTransformer]? {\n        [ CodingKeys.name <--- \"stu_name\" ]\n    }\n}\n\n@SmartSubclass\nclass StudentModel: BaseModel {\n    var age: Int?\n}\n```\n\n#### 4.4 Both Parent and Subclass Implement Protocol Method\n\nA few things to note:\n\n- The protocol method in the parent class must be marked with `class`.\n- The subclass should call the parent class's implementation.\n\n```swift\nclass BaseModel: SmartCodableX {\n    var name: String = \"\"\n    required init() { }\n    \n    class func mappingForKey() -> [SmartKeyTransformer]? {\n        [ CodingKeys.name <--- \"stu_name\" ]\n    }\n}\n\n@SmartSubclass\nclass StudentModel: BaseModel {\n    var age: Int?\n    \n    override static func mappingForKey() -> [SmartKeyTransformer]? {\n        let trans = [ CodingKeys.age <--- \"stu_age\" ]\n        \n        if let superTrans = super.mappingForKey() {\n            return trans + superTrans\n        } else {\n            return trans\n        }\n    }\n}\n```\n\n\n\n### 5. Special support\n\n#### 5.1 Smart Stringified JSON Parsing\n\nSmartCodable automatically handles string-encoded JSON values during decoding, seamlessly converting them into nested model objects or arrays while maintaining all key mapping rules.\n\n- **Automatic Parsing**: Detects and decodes stringified JSON (`\"{\\\"key\\\":value}\"`) into proper objects/arrays\n- **Recursive Mapping**: Applies `mappingForKey()` rules to parsed nested structures\n- **Type Inference**: Determines parsing strategy (object/array) based on property type\n\n```swift\nstruct Model: SmartCodableX {\n    var hobby: Hobby?\n    var hobbys: [Hobby]?\n}\n\nstruct Hobby: SmartCodableX {\n    var name: String = \"\"\n}\n\nlet dict: [String: Any] = [\n    \"hobby\": \"{\\\"name\\\":\\\"sleep1\\\"}\",\n    \"hobbys\": \"[{\\\"name\\\":\\\"sleep2\\\"}]\",\n]\n\nguard let model = Model.deserialize(from: dict) else { return }\n```\n\n\n\n#### 5.2 Compatibility\n\nIf attribute resolution fails, SmartCodable performs compatibility processing for thrown exceptions. Ensure that the entire parsing is not interrupted. Even better, you don't have to do anything about it.\n\n```swift\nlet dict = [\n    \"number1\": \"123\",\n    \"number2\": \"Mccc\",\n    \"number3\": \"Mccc\"\n]\n\nstruct Model: SmartCodableX {\n    var number1: Int?\n    var number2: Int?\n    var number3: Int = 1\n}\n\n// decode result\n// Model(number1: 123, number2: nil, number3: 1)\n```\n\n**Type conversion compatibility**\n\nWhen the data is parsed, the type cannot be matched. Raises a.typeMismatch error. SmartCodable will attempt to convert data of type String to the desired type Int.\n\n**Default Fill compatible**\n\nWhen the type conversion fails, the initialization value of the currently parsed property is retrieved for padding.\n\n#### 5.3 parse very large data\n\nWhen you parse very large data, try to avoid the compatibility of parsing exceptions, such as: more than one attribute is declared in the attribute, and the declared attribute type does not match. \n\nDo not use @IgnoredKey when there are attributes that do not need to be parsed, override CodingKeys to ignore unwanted attribute parsing. \n\nThis can greatly improve the analytical efficiency.\n\n\n\n#### 5.4 The Enum\n\nTo be convertable, An `enum` must conform to `SmartCaseDefaultable` protocol. Nothing special need to do now.\n\n```swift\nstruct Student: SmartCodableX {\n    var name: String = \"\"\n    var sex: Sex = .man\n\n    enum Sex: String, SmartCaseDefaultable {\n        case man = \"man\"\n        case woman = \"woman\"\n    }\n}\nlet model = Student.deserialize(from: json)\n```\n\n\n\n**Decoding of associative value enum**\n\nMake the enumeration follow **SmartAssociatedEnumerable**。Override the **mappingForValue** method and take over the decoding process yourself.\n\n```swift\nstruct Model: SmartCodableX {\n    var sex: Sex = .man\n    static func mappingForValue() -> [SmartValueTransformer]? {\n        [\n            CodingKeys.sex <--- RelationEnumTranformer()\n        ]\n    }\n}\n\nenum Sex: SmartAssociatedEnumerable {    \n    case man\n    case women\n    case other(String)\n}\n\nstruct RelationEnumTranformer: ValueTransformable {\n    typealias Object = Sex\n    typealias JSON = String\n\n    func transformToJSON(_ value: Introduce_8ViewController.Sex?) -> String? {\n        // do something\n    }\n    func transformFromJSON(_ value: Any?) -> Sex? {\n        // do something\n    }\n}\n```\n\n\n\n#### 5.5 Update Existing Model\n\nIt can accommodate any data structure, including nested array structures.\n\n```swift\nstruct Model: SmartCodableX {\n    var name: String = \"\"\n    var age: Int = 0\n}\n\nvar dic1: [String : Any] = [\n    \"name\": \"mccc\",\n    \"age\": 10\n]\nlet dic2: [String : Any] = [\n    \"age\": 200\n]\nguard var model = Model.deserialize(from: dic1) else { return }\nSmartUpdater.update(&model, from: dic2)\n\n// now: model is [\"name\": mccc, \"age\": 200].\n```\n\n\n\n\n\n\n## FAQ\n\nIf you're looking forward to learning more about the Codable protocol and the design thinking behind SmartCodable, check it out.\n\n[👉 **learn SmartCodable**](https://github.com/iAmMccc/SmartCodable/blob/main/Document/Usages/LearnMore.md)\n\n[👉 **github discussions**](https://github.com/iAmMccc/SmartCodable/discussions)\n\n[👉 **SmartCodable Test**](https://github.com/iAmMccc/SmartCodable/blob/main/Document/Usages/HowToTest.md)\n\n\n\n## Github Stars\n\n<p style=\"margin:0\">\n  <img src=\"https://starchart.cc/iAmMccc/SmartCodable.svg\" alt=\"Stars\" width=\"750\">\n</p>\n\n\n\n## Join Community 🚀\n\nSmartCodable is an open-source project dedicated to making Swift data parsing more robust, flexible and efficient. We welcome all developers to join our community!\n\n<p>\n  <img src=\"https://github.com/user-attachments/assets/7b1f8108-968e-4a38-91dd-b99abdd3e500\" alt=\"JoinUs\" width=\"700\">\n</p>\n\n\n",
+  "file_tree": [
+    {
+      "path": ".github",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": ".gitignore",
+      "type": "file",
+      "size": 2521
+    },
+    {
+      "path": ".swiftpm",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Document",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Explore&Contribute",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "LICENSE",
+      "type": "file",
+      "size": 1052
+    },
+    {
+      "path": "Package.resolved",
+      "type": "file",
+      "size": 308
+    },
+    {
+      "path": "Package.swift",
+      "type": "file",
+      "size": 2413
+    },
+    {
+      "path": "README.md",
+      "type": "file",
+      "size": 21012
+    },
+    {
+      "path": "README_CN.md",
+      "type": "file",
+      "size": 25881
+    },
+    {
+      "path": "SmartCodable.podspec",
+      "type": "file",
+      "size": 2410
+    },
+    {
+      "path": "Sources",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Tests",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "_Pods.xcodeproj",
+      "type": "symlink",
+      "size": null
+    },
+    {
+      "path": ".github/workflows",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": ".swiftpm/xcode",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Document/QA",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Document/Usages",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/Podfile",
+      "type": "file",
+      "size": 710
+    },
+    {
+      "path": "Example/Podfile.lock",
+      "type": "file",
+      "size": 1261
+    },
+    {
+      "path": "Example/SmartCodable.xcodeproj",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable.xcworkspace",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/Tests",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Explore&Contribute/CompareWithHandyJSON.md",
+      "type": "file",
+      "size": 10734
+    },
+    {
+      "path": "Explore&Contribute/Contributing.md",
+      "type": "file",
+      "size": 2480
+    },
+    {
+      "path": "Explore&Contribute/Contributors.md",
+      "type": "file",
+      "size": 2986
+    },
+    {
+      "path": "Explore&Contribute/Images",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Explore&Contribute/Sentinel.md",
+      "type": "file",
+      "size": 2096
+    },
+    {
+      "path": "Sources/SmartCodable",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodableMacros",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Tests/Example.swift",
+      "type": "file",
+      "size": 4810
+    },
+    {
+      "path": ".github/workflows/swift.yml",
+      "type": "file",
+      "size": 431
+    },
+    {
+      "path": ".swiftpm/xcode/package.xcworkspace",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Document/QA/QA1.md",
+      "type": "file",
+      "size": 10660
+    },
+    {
+      "path": "Document/QA/QA2.md",
+      "type": "file",
+      "size": 7385
+    },
+    {
+      "path": "Document/QA/QA3.md",
+      "type": "file",
+      "size": 3887
+    },
+    {
+      "path": "Document/Usages/HowToTest.md",
+      "type": "file",
+      "size": 1320
+    },
+    {
+      "path": "Document/Usages/LearnMore.md",
+      "type": "file",
+      "size": 1554
+    },
+    {
+      "path": "Document/Usages/Usages.md",
+      "type": "file",
+      "size": 14181
+    },
+    {
+      "path": "Example/SmartCodable.xcodeproj/project.pbxproj",
+      "type": "file",
+      "size": 99943
+    },
+    {
+      "path": "Example/SmartCodable.xcodeproj/project.xcworkspace",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable.xcodeproj/xcshareddata",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable.xcworkspace/contents.xcworkspacedata",
+      "type": "file",
+      "size": 230
+    },
+    {
+      "path": "Example/SmartCodable.xcworkspace/xcshareddata",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/10000.json",
+      "type": "file",
+      "size": 3206859
+    },
+    {
+      "path": "Example/SmartCodable/1231231.swift",
+      "type": "file",
+      "size": 1151
+    },
+    {
+      "path": "Example/SmartCodable/AppDelegate.swift",
+      "type": "file",
+      "size": 1137
+    },
+    {
+      "path": "Example/SmartCodable/Base.lproj",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Base",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Info.plist",
+      "type": "file",
+      "size": 1425
+    },
+    {
+      "path": "Example/SmartCodable/Smart",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Test2ViewController.swift",
+      "type": "file",
+      "size": 872
+    },
+    {
+      "path": "Example/SmartCodable/Test3ViewController.swift",
+      "type": "file",
+      "size": 7158
+    },
+    {
+      "path": "Example/SmartCodable/TestViewController.swift",
+      "type": "file",
+      "size": 1654
+    },
+    {
+      "path": "Example/SmartCodable/ViewController.swift",
+      "type": "file",
+      "size": 6243
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/说明信息",
+      "type": "file",
+      "size": 837
+    },
+    {
+      "path": "Example/Tests/AreaTest.swift",
+      "type": "file",
+      "size": 3605
+    },
+    {
+      "path": "Example/Tests/Info.plist",
+      "type": "file",
+      "size": 733
+    },
+    {
+      "path": "Example/Tests/MultilineStringTest.swift",
+      "type": "file",
+      "size": 1438
+    },
+    {
+      "path": "Example/Tests/PerformanceTest.swift",
+      "type": "file",
+      "size": 3560
+    },
+    {
+      "path": "Example/Tests/Resource",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/Tests/Tests.swift",
+      "type": "file",
+      "size": 3089
+    },
+    {
+      "path": "Example/Tests/Tests_Base.swift",
+      "type": "file",
+      "size": 1255
+    },
+    {
+      "path": "Explore&Contribute/Images/support.png",
+      "type": "file",
+      "size": 76690
+    },
+    {
+      "path": "Sources/SmartCodable/.gitkeep",
+      "type": "file",
+      "size": 0
+    },
+    {
+      "path": "Sources/SmartCodable/Core",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/MacroSupport",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodableMacros/MacroError.swift",
+      "type": "file",
+      "size": 533
+    },
+    {
+      "path": "Sources/SmartCodableMacros/ModelMemberPropertyContainer.swift",
+      "type": "file",
+      "size": 464
+    },
+    {
+      "path": "Sources/SmartCodableMacros/PatternBindingSyntax+Extension.swift",
+      "type": "file",
+      "size": 2197
+    },
+    {
+      "path": "Sources/SmartCodableMacros/Plugin.swift",
+      "type": "file",
+      "size": 185
+    },
+    {
+      "path": "Sources/SmartCodableMacros/SmartSubclassMacro.swift",
+      "type": "file",
+      "size": 7962
+    },
+    {
+      "path": ".swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata",
+      "type": "file",
+      "size": 135
+    },
+    {
+      "path": "Example/SmartCodable.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+      "type": "file",
+      "size": 157
+    },
+    {
+      "path": "Example/SmartCodable.xcodeproj/xcshareddata/xcschemes",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+      "type": "file",
+      "size": 238
+    },
+    {
+      "path": "Example/SmartCodable/Base.lproj/LaunchScreen.xib",
+      "type": "file",
+      "size": 3924
+    },
+    {
+      "path": "Example/SmartCodable/Base.lproj/Main.storyboard",
+      "type": "file",
+      "size": 2950
+    },
+    {
+      "path": "Example/SmartCodable/Base/ArraySafe.swift",
+      "type": "file",
+      "size": 2055
+    },
+    {
+      "path": "Example/SmartCodable/Base/BaseCompatibilityViewController.swift",
+      "type": "file",
+      "size": 4363
+    },
+    {
+      "path": "Example/SmartCodable/Base/BaseTwoViewController.swift",
+      "type": "file",
+      "size": 1146
+    },
+    {
+      "path": "Example/SmartCodable/Base/BaseViewController.swift",
+      "type": "file",
+      "size": 6900
+    },
+    {
+      "path": "Example/SmartCodable/Base/Data+Extension.swift",
+      "type": "file",
+      "size": 852
+    },
+    {
+      "path": "Example/SmartCodable/Base/NSDictionary+Extension.swift",
+      "type": "file",
+      "size": 1228
+    },
+    {
+      "path": "Example/SmartCodable/Base/UITableView+Reusable.swift",
+      "type": "file",
+      "size": 4060
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/Contents.json",
+      "type": "file",
+      "size": 63
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/question.imageset",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/3.SmartLog(调试日志)",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSONViewController.swift",
+      "type": "file",
+      "size": 4188
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_1ViewController.swift",
+      "type": "file",
+      "size": 1566
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_2ViewController.swift",
+      "type": "file",
+      "size": 1063
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_3ViewController.swift",
+      "type": "file",
+      "size": 1701
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_4ViewController.swift",
+      "type": "file",
+      "size": 1163
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_5ViewController.swift",
+      "type": "file",
+      "size": 1350
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_6ViewController.swift",
+      "type": "file",
+      "size": 1177
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_7ViewController.swift",
+      "type": "file",
+      "size": 1384
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_7_arr.plist",
+      "type": "file",
+      "size": 290
+    },
+    {
+      "path": "Example/SmartCodable/平替HandyJSON/ReplaceHandyJSON_7_dict.plist",
+      "type": "file",
+      "size": 267
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/继承",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/Tests/Resource/airports1.json",
+      "type": "file",
+      "size": 271
+    },
+    {
+      "path": "Example/Tests/Resource/airports10.json",
+      "type": "file",
+      "size": 2888
+    },
+    {
+      "path": "Example/Tests/Resource/airports100.json",
+      "type": "file",
+      "size": 31915
+    },
+    {
+      "path": "Example/Tests/Resource/airports1000.json",
+      "type": "file",
+      "size": 325043
+    },
+    {
+      "path": "Example/Tests/Resource/airports10000.json",
+      "type": "file",
+      "size": 3206859
+    },
+    {
+      "path": "Example/Tests/Resource/area.json",
+      "type": "file",
+      "size": 340807
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Cache",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONExtractor",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONValue",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Sentinel",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/SmartCodable",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/SmartType",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Transformer",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/MacroSupport/SmartCodableMacros.swift",
+      "type": "file",
+      "size": 202
+    },
+    {
+      "path": "Example/SmartCodable.xcodeproj/xcshareddata/xcschemes/SmartCodable-Example.xcscheme",
+      "type": "file",
+      "size": 4370
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/Contents.json",
+      "type": "file",
+      "size": 1202
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_1024pt@3x.png",
+      "type": "file",
+      "size": 162735
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_20pt@2x.png",
+      "type": "file",
+      "size": 693
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_20pt@3x.png",
+      "type": "file",
+      "size": 925
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_29pt@2x.png",
+      "type": "file",
+      "size": 915
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_29pt@3x.png",
+      "type": "file",
+      "size": 1309
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_40pt@2x.png",
+      "type": "file",
+      "size": 1240
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_40pt@3x.png",
+      "type": "file",
+      "size": 1711
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_60pt@2x.png",
+      "type": "file",
+      "size": 1711
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/AppIcon.appiconset/icon_60pt@3x.png",
+      "type": "file",
+      "size": 2544
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/question.imageset/Contents.json",
+      "type": "file",
+      "size": 343
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/question.imageset/疑问@2x.png",
+      "type": "file",
+      "size": 570
+    },
+    {
+      "path": "Example/SmartCodable/Images.xcassets/question.imageset/疑问@3x.png",
+      "type": "file",
+      "size": 807
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/IntroduceViewController.swift",
+      "type": "file",
+      "size": 4516
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_10ViewController.swift",
+      "type": "file",
+      "size": 6284
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_11ViewController.swift",
+      "type": "file",
+      "size": 781
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_12ViewController.swift",
+      "type": "file",
+      "size": 1443
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_1ViewController.swift",
+      "type": "file",
+      "size": 1701
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_2ViewController.swift",
+      "type": "file",
+      "size": 3439
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_3ViewController.swift",
+      "type": "file",
+      "size": 3786
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_4ViewController.swift",
+      "type": "file",
+      "size": 1235
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_5ViewController.swift",
+      "type": "file",
+      "size": 2151
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_6ViewController.swift",
+      "type": "file",
+      "size": 756
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_7ViewController.swift",
+      "type": "file",
+      "size": 854
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_8ViewController.swift",
+      "type": "file",
+      "size": 2634
+    },
+    {
+      "path": "Example/SmartCodable/Smart/1.Introduce(使用介绍)/Introduce_9ViewController.swift",
+      "type": "file",
+      "size": 789
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/DecodingStrategyViewController.swift",
+      "type": "file",
+      "size": 4993
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/混合使用",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码前",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码后",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/3.SmartLog(调试日志)/ConcurrenceLogViewController.swift",
+      "type": "file",
+      "size": 1825
+    },
+    {
+      "path": "Example/SmartCodable/Smart/3.SmartLog(调试日志)/DecodingArrayLogViewController.swift",
+      "type": "file",
+      "size": 2961
+    },
+    {
+      "path": "Example/SmartCodable/Smart/3.SmartLog(调试日志)/DecodingDictLogViewController.swift",
+      "type": "file",
+      "size": 3759
+    },
+    {
+      "path": "Example/SmartCodable/Smart/3.SmartLog(调试日志)/DecodingLogViewController.swift",
+      "type": "file",
+      "size": 1256
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseEightViewController.swift",
+      "type": "file",
+      "size": 4500
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseFiveViewController.swift",
+      "type": "file",
+      "size": 2703
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseFourViewController.swift",
+      "type": "file",
+      "size": 978
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseOneViewController.swift",
+      "type": "file",
+      "size": 5041
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseSeven",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseSixViewController.swift",
+      "type": "file",
+      "size": 5348
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseThreeViewController.swift",
+      "type": "file",
+      "size": 1254
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseTwoViewController.swift",
+      "type": "file",
+      "size": 3585
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/继承/TestInheritCaseViewController.swift",
+      "type": "file",
+      "size": 2984
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/BaseData",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/Container",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/CustomKey",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/SpecialData",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/TestEncodeCaseViewController.swift",
+      "type": "file",
+      "size": 5209
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/TestDecodeCaseViewController.swift",
+      "type": "file",
+      "size": 7709
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Cache/Cachable.swift",
+      "type": "file",
+      "size": 2919
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Patcher",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/Container",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/EncodingCache.swift",
+      "type": "file",
+      "size": 4262
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/Impl",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/JSONFuture.swift",
+      "type": "file",
+      "size": 4198
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/SmartJSONEncoder.swift",
+      "type": "file",
+      "size": 5237
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/SmartKeyEncodingStrategy.swift",
+      "type": "file",
+      "size": 5824
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONExtractor/JSONExtractor.swift",
+      "type": "file",
+      "size": 4874
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONValue/JSONValue+Extension.swift",
+      "type": "file",
+      "size": 1635
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONValue/JSONValue.swift",
+      "type": "file",
+      "size": 5481
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/PropertyWrapperProtocol.swift",
+      "type": "file",
+      "size": 3957
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/SmartAny",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/SmartDate.swift",
+      "type": "file",
+      "size": 4519
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/SmartFlat.swift",
+      "type": "file",
+      "size": 2244
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/SmartHexColor.swift",
+      "type": "file",
+      "size": 10701
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/SmartIgnored.swift",
+      "type": "file",
+      "size": 3435
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/SmartPublished.swift",
+      "type": "file",
+      "size": 4345
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Sentinel/LogCache.swift",
+      "type": "file",
+      "size": 5100
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Sentinel/LogContainer.swift",
+      "type": "file",
+      "size": 3530
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Sentinel/LogItem.swift",
+      "type": "file",
+      "size": 3145
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Sentinel/SafeDictionary.swift",
+      "type": "file",
+      "size": 1660
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Sentinel/SmartSentinel.swift",
+      "type": "file",
+      "size": 7209
+    },
+    {
+      "path": "Sources/SmartCodable/Core/SmartCodable/SmartCodable.swift",
+      "type": "file",
+      "size": 655
+    },
+    {
+      "path": "Sources/SmartCodable/Core/SmartCodable/SmartCodableOptions.swift",
+      "type": "file",
+      "size": 2219
+    },
+    {
+      "path": "Sources/SmartCodable/Core/SmartCodable/SmartDecodable.swift",
+      "type": "file",
+      "size": 11044
+    },
+    {
+      "path": "Sources/SmartCodable/Core/SmartCodable/SmartEncodable.swift",
+      "type": "file",
+      "size": 7610
+    },
+    {
+      "path": "Sources/SmartCodable/Core/SmartCodable/SmartUpdater.swift",
+      "type": "file",
+      "size": 2999
+    },
+    {
+      "path": "Sources/SmartCodable/Core/SmartType/SmartCaseDefaultable.swift",
+      "type": "file",
+      "size": 2200
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Transformer/DataTransformer.swift",
+      "type": "file",
+      "size": 577
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Transformer/DateTransformer.swift",
+      "type": "file",
+      "size": 1062
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Transformer/HexColorTransformer.swift",
+      "type": "file",
+      "size": 797
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Transformer/Transformer.swift",
+      "type": "file",
+      "size": 2977
+    },
+    {
+      "path": "Sources/SmartCodable/Core/Transformer/URLTransformer.swift",
+      "type": "file",
+      "size": 1418
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/混合使用/MixDecodingViewController.swift",
+      "type": "file",
+      "size": 2980
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中/全局策略",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中/局部策略",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码前/BeforeDecodingViewController.swift",
+      "type": "file",
+      "size": 1669
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码后/FinishMappingViewController.swift",
+      "type": "file",
+      "size": 761
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseSeven/CaseSevenViewController.swift",
+      "type": "file",
+      "size": 4547
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseSeven/ComplexDataStructureCell.swift",
+      "type": "file",
+      "size": 2889
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseSeven/ComplexDataStructureModel.swift",
+      "type": "file",
+      "size": 920
+    },
+    {
+      "path": "Example/SmartCodable/Smart/4.Case(案例)/CaseSeven/ComplexDataStructureSectionHeader.swift",
+      "type": "file",
+      "size": 1988
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/BaseData/Encode_BaseData_BoolViewController.swift",
+      "type": "file",
+      "size": 1629
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/BaseData/Encode_BaseData_FloatiewController.swift",
+      "type": "file",
+      "size": 1450
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/BaseData/Encode_BaseData_IntViewController.swift",
+      "type": "file",
+      "size": 1412
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/BaseData/Encode_BaseData_StringViewController.swift",
+      "type": "file",
+      "size": 1593
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/Container/Encode_ContainerDictViewcontroller.swift",
+      "type": "file",
+      "size": 723
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/CustomKey/Encode_CustomKeyViewController.swift",
+      "type": "file",
+      "size": 1550
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/CustomKey/Encode_IgnoredKeyViewController.swift",
+      "type": "file",
+      "size": 1497
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/SpecialData/Encode_SpecialData_anyViewController.swift",
+      "type": "file",
+      "size": 2260
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/SpecialData/Encode_SpecialData_colorViewController.swift",
+      "type": "file",
+      "size": 803
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/SpecialData/Encode_SpecialData_dataViewController.swift",
+      "type": "file",
+      "size": 1015
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/SpecialData/Encode_SpecialData_dateViewController.swift",
+      "type": "file",
+      "size": 1182
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/SpecialData/Encode_SpecialData_enumViewController.swift",
+      "type": "file",
+      "size": 2634
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/SpecialData/Encode_SpecialData_modelViewController.swift",
+      "type": "file",
+      "size": 2200
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/编码/SpecialData/Encode_SpecialData_urlViewController.swift",
+      "type": "file",
+      "size": 1030
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/BaseData",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/CaseFive",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container_keyedViewController.swift",
+      "type": "file",
+      "size": 4700
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container_unKeyedViewController.swift",
+      "type": "file",
+      "size": 6605
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Decoding",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/SpecialData",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Support",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/DecodingCache.swift",
+      "type": "file",
+      "size": 7260
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/DecodingError+Extension.swift",
+      "type": "file",
+      "size": 2300
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/Impl",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/KeysMapper.swift",
+      "type": "file",
+      "size": 4407
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/SmartJSONDecoder.swift",
+      "type": "file",
+      "size": 4618
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/SmartKeyDecodingStrategy.swift",
+      "type": "file",
+      "size": 5166
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Patcher/Patcher+Provider.swift",
+      "type": "file",
+      "size": 3076
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Patcher/Patcher+Transformer.swift",
+      "type": "file",
+      "size": 5689
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Patcher/Patcher.swift",
+      "type": "file",
+      "size": 443
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/Container/JSONKeyedEncodingContainer.swift",
+      "type": "file",
+      "size": 7059
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/Container/JSONSingleValueEncodingContainer.swift",
+      "type": "file",
+      "size": 3098
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/Container/JSONUnkeyedEncodingContainer.swift",
+      "type": "file",
+      "size": 4049
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/Impl/JSONEncoderImpl.swift",
+      "type": "file",
+      "size": 3264
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONEncoder/Impl/_SpecialTreatmentEncoder.swift",
+      "type": "file",
+      "size": 8370
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/SmartAny/SmartAny.swift",
+      "type": "file",
+      "size": 3436
+    },
+    {
+      "path": "Sources/SmartCodable/Core/PropertyWrapper/SmartAny/SmartAnyImpl.swift",
+      "type": "file",
+      "size": 14672
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中/全局策略/DataDecodingStrategyViewController.swift",
+      "type": "file",
+      "size": 894
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中/全局策略/DateDecodingStrategyViewController.swift",
+      "type": "file",
+      "size": 966
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中/全局策略/FloatDecodingStrategyViewController.swift",
+      "type": "file",
+      "size": 1298
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中/全局策略/KeyDecodingStrategyViewController.swift",
+      "type": "file",
+      "size": 3074
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中/局部策略/CustomDecodingKeyViewContriller.swift",
+      "type": "file",
+      "size": 1827
+    },
+    {
+      "path": "Example/SmartCodable/Smart/2.Strategy(解码策略)/解码中/局部策略/CustomDecodingValueViewContriller.swift",
+      "type": "file",
+      "size": 5752
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/BaseData/BaseData_BoolViewController.swift",
+      "type": "file",
+      "size": 2995
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/BaseData/BaseData_DateViewController.swift",
+      "type": "file",
+      "size": 1407
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/BaseData/BaseData_FloatViewController.swift",
+      "type": "file",
+      "size": 1336
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/BaseData/BaseData_Int8ViewController.swift",
+      "type": "file",
+      "size": 1485
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/BaseData/BaseData_IntViewController.swift",
+      "type": "file",
+      "size": 1406
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/BaseData/BaseData_StringViewController.swift",
+      "type": "file",
+      "size": 1095
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/CaseFive/CaseFive_concurrenceViewController.swift",
+      "type": "file",
+      "size": 1727
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Arr",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Dict",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Decoding/Key",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Decoding/Value",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/SpecialData/SpecialData_ColorViewController.swift",
+      "type": "file",
+      "size": 1073
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/SpecialData/SpecialData_EnumViewController.swift",
+      "type": "file",
+      "size": 1160
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/SpecialData/SpecialData_FloatViewController.swift",
+      "type": "file",
+      "size": 1158
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/SpecialData/SpecialData_SmartAnyViewController.swift",
+      "type": "file",
+      "size": 2814
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/SpecialData/SpecialData_URLViewController.swift",
+      "type": "file",
+      "size": 2040
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/SpecialData/SpecialData_dataViewController.swift",
+      "type": "file",
+      "size": 1736
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/SpecialData/SpecialData_dateViewController.swift",
+      "type": "file",
+      "size": 4237
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Support/Support_JSONStringViewController.swift",
+      "type": "file",
+      "size": 1084
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Support/Support_didFinishMappingViewController.swift",
+      "type": "file",
+      "size": 3867
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/Impl/JSONDecoderImpl+KeyedContainer.swift",
+      "type": "file",
+      "size": 19392
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/Impl/JSONDecoderImpl+SingleValueContainer.swift",
+      "type": "file",
+      "size": 3880
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/Impl/JSONDecoderImpl+UnkeyedContainer.swift",
+      "type": "file",
+      "size": 14376
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/Impl/JSONDecoderImpl+Unwrap.swift",
+      "type": "file",
+      "size": 14741
+    },
+    {
+      "path": "Sources/SmartCodable/Core/JSONDecoder/Decoder/Impl/JSONDecoderImpl.swift",
+      "type": "file",
+      "size": 4422
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Arr/Container_ArrayKeylessViewController.swift",
+      "type": "file",
+      "size": 769
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Arr/Container_ArrayNestArrayViewController.swift",
+      "type": "file",
+      "size": 1282
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Arr/Container_ArrayNestDictViewController.swift",
+      "type": "file",
+      "size": 1995
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Arr/Container_ArrayNullViewController.swift",
+      "type": "file",
+      "size": 732
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Arr/Container_ArrayTypeMismatchViewController.swift",
+      "type": "file",
+      "size": 778
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Arr/Container_ArrayViewController.swift",
+      "type": "file",
+      "size": 1152
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Dict/Container_DictKeylessViewController.swift",
+      "type": "file",
+      "size": 3581
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Dict/Container_DictNestArrayViewController.swift",
+      "type": "file",
+      "size": 1791
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Dict/Container_DictNestDictViewController.swift",
+      "type": "file",
+      "size": 1348
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Dict/Container_DictNullViewController.swift",
+      "type": "file",
+      "size": 4749
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Dict/Container_DictTypeMismatchViewController.swift",
+      "type": "file",
+      "size": 3595
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Container/Dict/Container_DictViewController.swift",
+      "type": "file",
+      "size": 4744
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Decoding/Key/Decoding_globalKeyStrategyViewController.swift",
+      "type": "file",
+      "size": 2727
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Decoding/Key/Decoding_keyIgnoreViewController.swift",
+      "type": "file",
+      "size": 1367
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Decoding/Key/Decoding_keyMapViewController.swift",
+      "type": "file",
+      "size": 1631
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Decoding/Value/Decoding_globalValueStrategyViewController.swift",
+      "type": "file",
+      "size": 1664
+    },
+    {
+      "path": "Example/SmartCodable/测试用例/解码/数据测试/Decoding/Value/Decoding_valueMapViewController.swift",
+      "type": "file",
+      "size": 2668
+    }
+  ],
+  "languages": {
+    "Swift": {
+      "bytes": 549190,
+      "percentage": 99.44
+    },
+    "Ruby": {
+      "bytes": 3120,
+      "percentage": 0.56
+    }
+  },
+  "signatures": [],
+  "test_examples": [],
+  "issues": [
+    {
+      "number": 121,
+      "title": "私有库，依赖SmartCodable， 打包xcframework，会有命名空间冲突",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-11-11T02:39:38+00:00",
+      "updated_at": "2025-12-18T06:20:13+00:00",
+      "closed_at": "2025-12-18T06:20:13+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/121",
+      "body": "比如A私有库，依赖SmartCodable， 将A私有库，打包为xcframework， 会有命名空间冲突， 原因是 库名为SmartCodable， 内部又typlies SmartCodable， 导致有问题 "
+    },
+    {
+      "number": 126,
+      "title": "@IgnoredKey看起来会影响到@SmartFlat解析",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-12-15T03:24:31+00:00",
+      "updated_at": "2025-12-18T03:45:05+00:00",
+      "closed_at": "2025-12-18T03:45:05+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/126",
+      "body": "SDK Version:5.1.7\n\n```\n    final class FlatModel: SmartCodable {\n        var my_name = \"\"\n//        @SmartIgnored\n//        var _cover: UIImage?\n    }\n    final class StudentModel: SmartCodable {\n        @SmartFlat\n        var flatModel: FlatModel?\n    }\n        let dict: [String: Any] = [\n            \"my_name\": \"Tom\",\n            \"student\": [\n                \"my_age\": \"18\"\n            ]\n        ]\n        \n        let student = StudentModel.deserialize(from: dict)\n        print(\"1111 \\(String(de"
+    },
+    {
+      "number": 125,
+      "title": "泛型和基础类型的支持",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-12-03T15:29:42+00:00",
+      "updated_at": "2025-12-11T14:49:10+00:00",
+      "closed_at": "2025-12-11T02:06:38+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/125",
+      "body": "应为解析时候用到泛型 T:SmartCodable  但偶尔T可能是string  int 之类的基础类型，之前handjson是支持的，请问使用SmartCodable  有什么好方案支持这个需求"
+    },
+    {
+      "number": 123,
+      "title": "请问是否支持actor？",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-11-17T09:38:26+00:00",
+      "updated_at": "2025-12-11T03:22:12+00:00",
+      "closed_at": "2025-12-11T03:22:12+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/123",
+      "body": null
+    },
+    {
+      "number": 124,
+      "title": "基础配置设置",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-11-21T09:11:50+00:00",
+      "updated_at": "2025-11-26T07:12:44+00:00",
+      "closed_at": "2025-11-26T07:12:44+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/124",
+      "body": "希望可以有个配置类，用来设置整体的encode与decode，比如 fromSnakeCase、iso8601、base64。"
+    },
+    {
+      "number": 120,
+      "title": "无法与swiftlint兼容",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-11-06T14:49:28+00:00",
+      "updated_at": "2025-11-26T07:11:19+00:00",
+      "closed_at": "2025-11-26T07:11:19+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/120",
+      "body": "swift-syntax版本要求无法与最新版的swiftlint兼容,希望能升级swift-syntax"
+    },
+    {
+      "number": 122,
+      "title": "无法使用@SmartSubclass宏",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-11-12T06:38:20+00:00",
+      "updated_at": "2025-11-12T08:04:27+00:00",
+      "closed_at": "2025-11-12T08:04:27+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/122",
+      "body": "我创建了demo使用pod导入pod 'SmartCodable/Inherit'，可以正常使用@SmartSubclass。\n\n但是我在自己的工程（和demo一样都是最低支持iOS13），使用会报错External macro implementation type 'SmartCodableMacros.SmartSubclassMacro' could not be found for macro 'SmartSubclass()'; plugin for module 'SmartCodableMacros' not found，我看pod.lock中SmartCoable也是5.1.3版本，不知道如何排查。"
+    },
+    {
+      "number": 116,
+      "title": "多行字符因缩进导致解析失败",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-10-11T03:01:14+00:00",
+      "updated_at": "2025-10-13T09:38:30+00:00",
+      "closed_at": "2025-10-13T09:38:30+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/116",
+      "body": "以下方式在 5.0.2 解析失败，4.4.4 成功：\n\n```swift\nlet jsonString = \"\"\"\n                {\n                    \"name\": \"Sam\",\n                    \"age\": 22\n                }\n        \"\"\"\nlet user = User.deserialize(from: jsonString)\nprint(\"\\(user?.name ?? \"\")\")\n```\n\n将多行字符去掉缩进可解析成功：\n```swift\nlet jsonString = \"\"\"\n                {\n                    \"name\": \"Sam\",\n                    \"age\": 22\n                }\n                \"\"\"\nlet user = User.deserialize(from: jsonString)\nprint(\"\\(user?.name ?? \"\")\")\n```"
+    },
+    {
+      "number": 118,
+      "title": "键映射转换处理方式请教",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-10-11T08:19:57+00:00",
+      "updated_at": "2025-10-13T09:23:32+00:00",
+      "closed_at": "2025-10-13T09:23:32+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/118",
+      "body": "SmartCodable (5.1.2)中，如果我定义了一个Model\nclass CourseModel: SmartCodable {\n    \n    /// 教材Id\n    var textbookId: String = \"\"\n    /// 是此教材下课表\n    var units: [UnitModel] = []\n  \n    static func mappingForKey() -> [SmartKeyTransformer]? {\n        return [\n            CodingKeys.textbookId <--- \"key\",\n            CodingKeys.units <--- \"value\",\n        ]\n    }\n    required init() {}\n}\n\n后来返回字段后台把 value 改成了 units，会有什么问题吗？请问下"
+    },
+    {
+      "number": 117,
+      "title": "枚举返回没有定义的  转model解析失败，这种如何处理呀",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-10-11T07:22:36+00:00",
+      "updated_at": "2025-10-11T08:20:13+00:00",
+      "closed_at": "2025-10-11T08:20:13+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/117",
+      "body": null
+    },
+    {
+      "number": 114,
+      "title": "Swift.DecodingError.typeMismatch",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-09-25T13:47:49+00:00",
+      "updated_at": "2025-10-09T02:04:11+00:00",
+      "closed_at": "2025-10-09T02:04:11+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/114",
+      "body": "Printing description of response:\n▿ [Request]: GET https://test.olanote.cn/v1/system/cos/temp-credential\n    [Headers]:\n        Content-Type: application/json\n        X-App-Version: 10000\n        X-Auth: APP@eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4NTYyMTM4MjA1NTIzOTY4IiwiaWF0IjoxNzU1OTMyNTg5LCJleHAiOjE3ODc0Njg1ODl9.WdS7rQrFi2MkQseFoHx5Jk3ogYDUw5ZbIbMrXAz97Qw\n        X-Channel: iOS\n        X-Model: iPhone14,5\n        X-Nonce: 1B560563-2D23-482B-B863-50A71EEB5932\n        X-Os-Version: 16.1.1\n        X-Si"
+    },
+    {
+      "number": 100,
+      "title": "使用 @SmartSubclass修饰子类的问题",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-30T09:45:00+00:00",
+      "updated_at": "2025-09-28T06:21:31+00:00",
+      "closed_at": "2025-09-28T06:21:31+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/100",
+      "body": "使用 @SmartSubclass子类，并且子类里的属性，使用@objc修饰对应的属性时，该宏定义生成的对应代码报错。\n\n<img width=\"1190\" height=\"810\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/bb80cd19-85d8-4a8d-89da-badcf4c1f2c7\" />"
+    },
+    {
+      "number": 111,
+      "title": "No exact matches in call to static method 'deserialize'",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-09-06T07:17:26+00:00",
+      "updated_at": "2025-09-26T01:57:14+00:00",
+      "closed_at": "2025-09-26T01:57:14+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/111",
+      "body": "No exact matches in call to static method 'deserialize'"
+    },
+    {
+      "number": 112,
+      "title": "版本5.0.15之后配合Alamofire解析就不管用了",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-09-15T05:49:57+00:00",
+      "updated_at": "2025-09-26T01:57:00+00:00",
+      "closed_at": "2025-09-26T01:57:00+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/112",
+      "body": "SmartJsonDecoder应该实现decode而不是对decodable的扩展新方法smartDecoder，\n\n<img width=\"698\" height=\"43\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/4ab9c85a-d1aa-485d-b2ad-64053b4b9a22\" />"
+    },
+    {
+      "number": 109,
+      "title": "代码逻辑判断错误",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-08-24T17:04:56+00:00",
+      "updated_at": "2025-09-03T03:12:57+00:00",
+      "closed_at": "2025-09-03T03:12:57+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/109",
+      "body": "<img width=\"838\" height=\"417\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/201ab134-f434-4dbe-b7be-adac15f911ad\" />"
+    },
+    {
+      "number": 108,
+      "title": "iPad端崩溃必现",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-08-22T11:10:22+00:00",
+      "updated_at": "2025-08-24T10:51:33+00:00",
+      "closed_at": "2025-08-24T10:51:33+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/108",
+      "body": "一直好好的，不知道什么时候出现这种情况。之前用的版本号是5.0.10，提交了一个版本去审核，结果被打回，原因是审核人员的机器崩溃。我在模拟器iPad运行后发现也是一样，以为是版本的问题，更新到5.1.2之后问题依然存在。另外怎么添加你的QQ或者V？在这个时候出现这种事实在揪心，谢谢！iOS一切正常。\n\n我这边有足够的崩溃数据给作者。\n\n<img width=\"1409\" height=\"690\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/bb952cfc-63cf-4512-8172-90ddd7a7af68\" />"
+    },
+    {
+      "number": 107,
+      "title": "如图所示，调整自定义映射键的优先级",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-08-12T09:50:38+00:00",
+      "updated_at": "2025-08-13T02:09:45+00:00",
+      "closed_at": "2025-08-13T02:09:45+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/107",
+      "body": "<img width=\"569\" height=\"335\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/118facf5-79b7-4123-ac8c-9b2d14b80fc9\" />\n\n默认映射键优先级第一个为自定义model里的属性名称，比如图中的name，age；而不是优先级第一个是后面数组里的第一个；有一种场景为，解析为自定义model后，可能以jsonstring的形式存储到keychain内，再次取出解析的时候，就会导致需要额外在自定义的键映射里增加属性名，而这个属性名在自定义键映射的时候，已经在<---左边写过了；"
+    },
+    {
+      "number": 106,
+      "title": "不支持的 JSON 值类型",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-08-12T08:16:17+00:00",
+      "updated_at": "2025-08-12T09:07:51+00:00",
+      "closed_at": "2025-08-12T09:07:51+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/106",
+      "body": "更新到 SmartCodable (5.1.1)"
+    },
+    {
+      "number": 105,
+      "title": "_deserializeArray Failed",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-08-11T11:25:34+00:00",
+      "updated_at": "2025-08-12T03:31:05+00:00",
+      "closed_at": "2025-08-12T03:31:05+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/105",
+      "body": "/// 解析[Model]类型\nfileprivate func _deserializeArray<T>(input: Any, type: [T].Type, options: Set<SmartDecodingOption>? = nil) -> [T]? where T: SmartDecodable {\n\n    do {\n        let _decoder = createDecoder(type: type, options: options)\n        \n        \n        if options?.isEmpty ?? false {\n            let obj = try _decoder.smartDecode(type, from: input)\n            return obj\n\n        } else {\n            let obj = try _decoder.decode(type, from: input as! Data)\n            return obj\n\n       "
+    },
+    {
+      "number": 104,
+      "title": "是否能从数组元素读取外层的字段",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-08-08T03:25:34+00:00",
+      "updated_at": "2025-08-11T03:00:07+00:00",
+      "closed_at": "2025-08-11T03:00:07+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/104",
+      "body": "例子如下，我希望B也能读取A的head字段，除了用didMaping或者打死后台之外还有别的方法可以做到么？\n{\n\"head\":\"\"\n\"members\":[\n{\"name\":\"\"},\n{\"name\":\"\"}\n]\n}\n\nclass A {\nvar head = \"\"\nvar members = [ClassB]()\n}\n\nclass B {\n// TODO:\nvar head = \"\"\nvar name = \"\"\n}"
+    },
+    {
+      "number": 101,
+      "title": "Model encode 结果不符合预期",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-31T07:05:52+00:00",
+      "updated_at": "2025-08-01T03:53:46+00:00",
+      "closed_at": "2025-08-01T03:53:46+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/101",
+      "body": "我的模型包含嵌套的SmartCodable类型， 在序列化时，使用了 useMappedKeys: true， 但结果并未按预期使用转换后的key。\n\n具体可以看这个测试用例 https://github.com/perfect0ooo/SmartCodable/commit/214224be221e02155bf08d4146d60ca14b755c2e#diff-9c429511d55a92ae8b4bafdd31109b27b1a6e8d1ae5ac3fd7144fb4656d09e11R39\n"
+    },
+    {
+      "number": 98,
+      "title": "Double 类型数据过长时，会出现解析为科学计数法的问题，如何配置？",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-28T08:58:14+00:00",
+      "updated_at": "2025-07-29T01:52:56+00:00",
+      "closed_at": "2025-07-29T01:52:56+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/98",
+      "body": "        let json =\n        \"\"\"\n        {\"data\": {\"value\": 1878.853, \"time\": 9999998999942448413.59}}\n        \"\"\"\n\n        let model = TestModel.deserialize(from: json, designatedPath: \"data\")\n\n        struct TestModel: SmartCodable {\n            var time: Double = 0.0\n            var value: String = \"\"\n        }\n        \n        print(model?.time)\n        print(model?.value)\n        \n//        Optional(\"9.99999899994245e+18\")\n//        Optional(\"1878.853\")\n\n<img width=\"1908\" height=\"806\" alt=\"Im"
+    },
+    {
+      "number": 99,
+      "title": "https://github.com/cba023/model-maker, 免费开源，支持解析SmartCodable规则的数据模型，欢迎使用",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-28T09:50:17+00:00",
+      "updated_at": "2025-07-28T10:52:37+00:00",
+      "closed_at": "2025-07-28T10:52:37+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/99",
+      "body": "https://github.com/cba023/model-maker,  不仅支持解析SmartCodable规则，还支持YYModel和原生Codable。完全开源免费，欢迎大家使用并提出宝贵意见"
+    },
+    {
+      "number": 96,
+      "title": "小数强转成string 的时候内容会出现变化，这是有啥参数能控制？",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-21T07:46:25+00:00",
+      "updated_at": "2025-07-28T07:22:42+00:00",
+      "closed_at": "2025-07-25T07:29:27+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/96",
+      "body": "ChartData\n    - time : \"1750215600\"  ->  String \n    - value : \"1878.8530000000001\" -> String  实际值为 1878.853， 但经过模型转换成 String 后变成这种\"异常\"值了\n    - realTime : 1750183200 -> Int\n    - realValue : 1878.853 -> Double 类型, data 返回的实际值\n\n能帮忙看下原因吗？如果能配置这种处理的话，能告我下设置参数吗？\n谢谢大佬开源；"
+    },
+    {
+      "number": 95,
+      "title": "Linux Version",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-19T01:43:34+00:00",
+      "updated_at": "2025-07-25T07:28:56+00:00",
+      "closed_at": "2025-07-25T07:28:56+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/95",
+      "body": "麻烦兼容一下  Swift 的 Linux 在 Linux上执行大量报错"
+    },
+    {
+      "number": 92,
+      "title": "泛型解析可选值枚举属性",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-11T09:17:32+00:00",
+      "updated_at": "2025-07-15T09:03:27+00:00",
+      "closed_at": "2025-07-15T09:03:27+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/92",
+      "body": "    struct ApiData<T>: SmartCodable, Error {\n        var code: Int?\n        var message: String?\n        @SmartAny var data: T?\n        var time: Double?\n        var token: String?\n        @SmartAny var metaData: Any?\n    }\n    \n    struct Trip: SmartCodable {\n        var status: Status?\n        var distance: Int = 0\n        \n        enum Status: String, SmartCaseDefaultable {\n            case a = \"A\"\n            case b = \"B\"\n        }\n    }\n\n    let jsonStringArray = [\n            \"\"\"\n         "
+    },
+    {
+      "number": 91,
+      "title": "你这个用struct 时是否需要优化一下",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-09T08:13:27+00:00",
+      "updated_at": "2025-07-15T07:18:44+00:00",
+      "closed_at": "2025-07-15T07:18:44+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/91",
+      "body": "<img width=\"748\" height=\"136\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/823a8f1d-316b-4a3f-ae66-4fa09e986f52\" />\n一定要给默认值\n\n<img width=\"340\" height=\"100\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/1f6dbe49-9d12-4df6-bb42-cd115b5b5421\" />\n可以不给默认值"
+    },
+    {
+      "number": 89,
+      "title": "为什么SPM中没有把SmartCodableMacros分离",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-07-04T01:54:59+00:00",
+      "updated_at": "2025-07-07T01:56:38+00:00",
+      "closed_at": "2025-07-07T01:56:28+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/89",
+      "body": "SmartCodableMacros 也应该放在单独的.library中吧？"
+    },
+    {
+      "number": 88,
+      "title": "SmartCodable/Inherit Does not Support watchOS",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-06-19T03:05:41+00:00",
+      "updated_at": "2025-06-23T11:16:46+00:00",
+      "closed_at": "2025-06-23T11:16:46+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/88",
+      "body": " is not compatible with `SmartCodable/Inherit (5.0.14)`, which does not support `watchOS`."
+    },
+    {
+      "number": 84,
+      "title": "SmartUpdater error",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-05-30T09:12:00+00:00",
+      "updated_at": "2025-06-19T02:23:44+00:00",
+      "closed_at": "2025-06-19T02:23:44+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/84",
+      "body": "`\nclass TestSubclass: SmartCodable, CustomStringConvertible {\n    required init() {}\n    var prop1: Int = 1\n    var prop2: String = \"sh\"\n    \n    static func mappingForKey() -> [SmartKeyTransformer]? {\n        [\n            CodingKeys.prop1 <--- \"p1\",\n            CodingKeys.prop2 <--- \"p2\"\n        ]\n    }\n    \n    convenience init(prop1: Int, prop2: String) {\n        self.init()\n        self.prop1 = prop1\n        self.prop2 = prop2\n    }\n    var description: String {\n        \"sub: [prop1: \\(prop"
+    },
+    {
+      "number": 85,
+      "title": "服务端数据为'null'时，Int 类型默认值不对",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-06-03T02:36:44+00:00",
+      "updated_at": "2025-06-04T10:58:11+00:00",
+      "closed_at": "2025-06-04T10:58:11+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/85",
+      "body": "class ClassA: SmartCodable {\n    required init() {}\n    \n    var adShowCount: Int = -1\n}\n\n当服务端数据为：\n\n{\n  \"code\": 200,\n  \"msg\": \"success\",\n  \"success\": true,\n  \"data\": {\n    \"agentId\": 1,\n    \"adShowCount\": null,\n  }\n}\n\n经过解析后 adShowCount 的值为 0，不是预设的 -1 \nSmartCodable 版本 5.0.9"
+    },
+    {
+      "number": 86,
+      "title": "demo项目中，并发日志崩溃",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-06-04T03:01:43+00:00",
+      "updated_at": "2025-06-04T10:57:53+00:00",
+      "closed_at": "2025-06-04T10:10:17+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/86",
+      "body": "在github下载下来的项目，\npodfile.lock的版本：SmartCodable/Core (5.0.10)\nXcode：Version 16.3 (16E140)\nMacOS：15.4 (24E248)\n在ConcurrenceLogViewController中，多线程崩溃，如下图\n\n![Image](https://github.com/user-attachments/assets/7130aa67-3417-4a83-a0c7-585f2d7c9485)"
+    },
+    {
+      "number": 83,
+      "title": "支持泛型吗",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-05-25T10:53:36+00:00",
+      "updated_at": "2025-05-29T09:09:55+00:00",
+      "closed_at": "2025-05-29T09:09:55+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/83",
+      "body": "例如我原来用handyjson，定义的model是这样的\nclass JsonModel<T>: HandyJson { \n    var success = \"\"\n    var data: T?\n    var code = \"\"\n    var msg = \"\"\n    required init() {}\n}\n直接换成这个\nclass JsonModel<T>: SmartCodable { \n    var success = \"\"\n    var data: T?\n    var code = \"\"\n    var msg = \"\"\n    required init() {}\n}\n\n会报错\nType 'JsonModel' does not conform to protocol 'Decodable'"
+    },
+    {
+      "number": 82,
+      "title": "`toJSONString`转换的问题",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-05-16T07:39:36+00:00",
+      "updated_at": "2025-05-19T03:06:52+00:00",
+      "closed_at": "2025-05-19T03:06:52+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/82",
+      "body": "```swift\nstruct SmartModel: SmartCodable {\n        @SmartAny\n        var name: Any?\n        @SmartAny\n        var dict: [Any]?\n    }\nstruct SmartModel2: SmartCodable {\n        var age: Int?\n    }\nlet dict: [String: Any] = [\n            \"name\": \"Mccc\",\n            \"dict\": [[\n                \"age\": 10\n            ]]\n        ] as [String : Any]\nguard var smartModel = SmartModel.deserialize(from: dict) else { return }\nguard let smartModel2 = [SmartModel2].deserialize(from: smartModel.dict) else { re"
+    },
+    {
+      "number": 80,
+      "title": "pod更新到5.0.5，报错",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-05-15T01:51:19+00:00",
+      "updated_at": "2025-05-16T12:58:31+00:00",
+      "closed_at": "2025-05-16T12:58:31+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/80",
+      "body": "<img width=\"256\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/d7b6ea0b-63a1-422f-a337-a08ef222d4a6\" />\n\n<img width=\"886\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/17adeed4-304e-4195-8448-4be6cb014e84\" />\n\n<img width=\"909\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/cd900af5-2f7a-4da5-89e5-720938ddbdfa\" />"
+    },
+    {
+      "number": 76,
+      "title": "终于支持继承了",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-05-12T02:50:58+00:00",
+      "updated_at": "2025-05-15T10:56:46+00:00",
+      "closed_at": "2025-05-15T10:56:46+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/76",
+      "body": "代码可以进行更高级别的抽象建模了\n撒个花庆祝下🎉"
+    },
+    {
+      "number": 79,
+      "title": "属性不显式声明类型的时候解析不到值",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-05-14T03:39:34+00:00",
+      "updated_at": "2025-05-14T13:39:37+00:00",
+      "closed_at": "2025-05-14T13:39:37+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/79",
+      "body": "如题，有个小bug，测试代码：\n```\nenum Gender: Int, SmartCaseDefaultable {\n    case unknown\n    case male\n    case female\n}\n\nclass SMCClassAnimal: SmartCodable {\n    var age: Int = 0\n    var sex: Gender = .unknown\n    \n    required init() {\n        \n    }\n}\n\n@SmartSubclass\nclass SMCClassPerson: SMCClassAnimal {\n    var name: String = \"\"\n    var motto: String = \"\"\n    var height = 0 //不显式声明类型\n}\n\nfunc testSmartCodableInherit() {\n        let deJsonStr = \"\"\"\n        {\n            \"name\": \"张三丰\",\n            \"age\":"
+    },
+    {
+      "number": 72,
+      "title": "自定义解析器传入的数据类型不对",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-04-22T04:00:37+00:00",
+      "updated_at": "2025-05-12T02:04:21+00:00",
+      "closed_at": "2025-04-23T06:59:10+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/72",
+      "body": "服务器返回 json 中格式为时间戳，也就是整数，但是在自定义解析器的解析时传给解析器的数据类型成了字符串\n\n<img width=\"807\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/18023e43-0572-49dd-baf8-6c7fbfc51b59\" />"
+    },
+    {
+      "number": 74,
+      "title": "数组字典属性该如何映射",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-05-06T12:28:28+00:00",
+      "updated_at": "2025-05-07T06:12:07+00:00",
+      "closed_at": "2025-05-07T06:12:07+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/74",
+      "body": "```\nclass TestAttr: SmartCodable{\n    var enabled = false\n    var settings = [[String: Any]]()\n    required init() {}\n    \n}\n```\n\n由于settings属性不是基础类型，直接Xcode提示报错，该如何兼容此种类型，服务器返回的是一个字典数组"
+    },
+    {
+      "number": 70,
+      "title": "能不能增加数据不足时置空的方法",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-04-14T03:22:35+00:00",
+      "updated_at": "2025-04-15T06:39:09+00:00",
+      "closed_at": "2025-04-15T06:39:09+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/70",
+      "body": "比如说\n{\n   \"data\": {}\n}\n\n这个时候self.data == nil"
+    },
+    {
+      "number": 67,
+      "title": "SmartCodable resolution performance optimization",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-03-27T14:03:47+00:00",
+      "updated_at": "2025-04-08T06:27:11+00:00",
+      "closed_at": "2025-03-31T12:09:24+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/67",
+      "body": "希望作者持续更新，非常感谢。"
+    },
+    {
+      "number": 68,
+      "title": "model序列化后，再调用toDictionary(useMappedKeys: true)，得到的字典部分参数没有用原始key",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-03-29T16:08:29+00:00",
+      "updated_at": "2025-03-31T14:56:07+00:00",
+      "closed_at": "2025-03-31T14:56:06+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/68",
+      "body": "model反序列化后，再使用`toDictionary(useMappedKeys: true)`进行序列化，得到的字典如下\n```\nOptional([\"out_array\": <__NSSingleObjectArrayI 0x600000006310>(\n{\n    \"person_age\" = 11;\n    \"person_array\" =     (\n                {\n            \"person_sub_age\" = 2;\n            \"person_sub_name\" = tom;\n        },\n                {\n            \"person_sub_age\" = 3;\n            \"person_sub_name\" = jb;\n        }\n    );\n    \"person_name\" = jack;\n}\n)\n, \"mapping\": {\n    1 = 1;\n    2 = 2;\n}, \"enable\": 1])\n```\n可以看到👆mapping和enable两个key"
+    },
+    {
+      "number": 66,
+      "title": "什么时候能支持Swift Package Manager集成",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-03-20T06:50:55+00:00",
+      "updated_at": "2025-03-20T06:53:27+00:00",
+      "closed_at": "2025-03-20T06:53:27+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/66",
+      "body": "什么时候能支持Swift Package Manager集成"
+    },
+    {
+      "number": 65,
+      "title": "如何支持反射 Mirror",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-03-03T03:12:52+00:00",
+      "updated_at": "2025-03-05T06:56:56+00:00",
+      "closed_at": "2025-03-05T06:30:44+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/65",
+      "body": "我用反射的方式获取结构体的数据 ，发现@SmartAny修饰的对象label的值前面自动加了一个'_'\n\nlet e = Mirror(reflecting: self).children\nfor item in e {\n  print(item.label)\n}\n\n因为之前用的HandyJson反射没问题，迁移后导致有些对象数据没拿到。对于反射支持不太友好，如果没文档提示的话确实容易遗漏。\n希望能新增对反射的支持，或者是补充一下迁移需要注意的case，提醒大家不要用反射获取@SmartAny的数据。\n\n目前这个库很有好用，感谢开发者的贡献。为了这个issue我也贡献一个了生产bug 😭"
+    },
+    {
+      "number": 64,
+      "title": "解析数组，内存飙升",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2025-02-25T04:50:11+00:00",
+      "updated_at": "2025-02-25T05:35:22+00:00",
+      "closed_at": "2025-02-25T05:35:22+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/64",
+      "body": "import SmartCodable\nimport Foundation\n\nAPI.request(method: .get, path: ApiPath.getCardList(uid: uid), showIndicator: false) { [weak self] response, error in\n    guard let self = self else { return }\n    MBPHUD().hideHUD()\n    if let response = response, response.code == 0{\n        let dic = response.data\n        let list = dic[\"cards\"] as? [[String: Any]] ?? []\n        guard let lists = [CardListModel].deserialize(from: list) else { return completion([], false)}\n        var newLists = lists\n    "
+    },
+    {
+      "number": 63,
+      "title": "Apple Customer Privacy Policy",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-12-27T01:08:57+00:00",
+      "updated_at": "2024-12-31T03:20:15+00:00",
+      "closed_at": "2024-12-31T03:20:15+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/63",
+      "body": "The apple Privacy policy requires a list of privacy items that you want to add to the project, otherwise a warning will be issued during the review"
+    },
+    {
+      "number": 62,
+      "title": "能否优化支持 网络请求返回数据中另一个值code值为任意类型！！！",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-12-19T03:09:41+00:00",
+      "updated_at": "2024-12-20T02:51:03+00:00",
+      "closed_at": "2024-12-20T02:51:03+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/62",
+      "body": "![嗷嗷](https://github.com/user-attachments/assets/2727fa34-1ed7-46dc-9d80-193638baf7fd)\r\n"
+    },
+    {
+      "number": 61,
+      "title": "在iOS 12上，数据转换会有问题",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-11-22T00:41:35+00:00",
+      "updated_at": "2024-12-05T02:24:09+00:00",
+      "closed_at": "2024-12-05T02:24:09+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/61",
+      "body": "    public func toDictionary(useMappedKeys: Bool = false, options: Set<SmartEncodingOption>? = nil) -> [String: Any]? {\r\n        return _transformToJson(self, type: Self.self, useMappedKeys: useMappedKeys, options: options)\r\n    }\r\n\r\n这个解析CPU飙升并且没有任何结果反馈，一直卡死在这里面\r\n"
+    },
+    {
+      "number": 60,
+      "title": "能不能完善demo中实际网络请求数据业务中data可能是其他任意类型，比如string ， nul ， int等等",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-11-21T11:36:07+00:00",
+      "updated_at": "2024-11-25T03:21:50+00:00",
+      "closed_at": "2024-11-25T03:21:50+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/60",
+      "body": "![image](https://github.com/user-attachments/assets/4fdb64f4-d21b-40cf-8f6d-e1f148822818)\r\n"
+    },
+    {
+      "number": 58,
+      "title": "请问下，模拟器支持吗？因为用到一些第三方，只能在模拟器运行，但是xcode运行报错",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-11-19T08:56:03+00:00",
+      "updated_at": "2024-11-21T10:05:37+00:00",
+      "closed_at": "2024-11-21T10:05:37+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/58",
+      "body": "![image](https://github.com/user-attachments/assets/2a785c9f-3a17-4ccc-be17-ae1d04a39523)\r\n"
+    },
+    {
+      "number": 59,
+      "title": "增加对泛型的兼容",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-11-21T10:00:02+00:00",
+      "updated_at": "2024-11-21T10:05:27+00:00",
+      "closed_at": "2024-11-21T10:05:27+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/59",
+      "body": "如图所示，HandyJSON支持任意类型的泛型，您的框架能否增加兼容~\r\n![image](https://github.com/user-attachments/assets/4d5045da-5d69-4a26-b940-54f95cd64ed9)\r\n![image](https://github.com/user-attachments/assets/80eb5f02-9f47-48ab-bded-fe90d2e0ebde)\r\n"
+    },
+    {
+      "number": 57,
+      "title": "大神，4.2.1版本，运行有框架的打印",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-11-11T01:26:58+00:00",
+      "updated_at": "2024-11-11T08:01:58+00:00",
+      "closed_at": "2024-11-11T08:01:58+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/57",
+      "body": "![image](https://github.com/user-attachments/assets/b6e4555b-9e99-47ea-b0b3-7be65611d743)\r\n"
+    },
+    {
+      "number": 48,
+      "title": "既然都支持UIColor这种对象转色值，何不兼容一下CloutKit的CKAsset转路径字符串？",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-09-27T09:30:33+00:00",
+      "updated_at": "2024-11-08T03:49:54+00:00",
+      "closed_at": "2024-11-08T03:49:54+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/48",
+      "body": "我看wiki没搜到CKAsset，也许已经支持了？如果没有，希望可以支持！star先点上👍"
+    },
+    {
+      "number": 56,
+      "title": "SmartCodable与数据库WCDBSwift兼容问题",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-11-07T09:53:24+00:00",
+      "updated_at": "2024-11-08T03:49:22+00:00",
+      "closed_at": "2024-11-08T03:49:22+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/56",
+      "body": "当我使用SmartCodable构建模型并绑定属性到表时发现，自定义模型的解码并不生效，以下代码model都转换失败为nil，当注去除数据库协议TableCodable，解析正常,两个库之间有协议冲突？\r\nimport UIKit\r\nimport SmartCodable\r\nimport WCDBSwift\r\n\r\nfinal class SAKURA_AnchorModel: SmartCodable,Hashable,TableCodable {\r\n    \r\n    required init() {}\r\n    var id = 0\r\n    var is_nsfw:Bool = false\r\n    @SmartAny\r\n    var profile:SAKURA_ProfileModel = SAKURA_ProfileModel()\r\n    @SmartAny\r\n    var chat_cover_obj:SAKURA_CoverObjModel?\r\n    var media_count = 0\r\n    var need_vip:Bool = false\r\n   "
+    },
+    {
+      "number": 55,
+      "title": "你好，创建model继承SmartCodable时候，model里面的属性支持使用官方Combine框架里面的@Published嘛",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-11-01T05:32:23+00:00",
+      "updated_at": "2024-11-01T06:36:51+00:00",
+      "closed_at": "2024-11-01T06:36:51+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/55",
+      "body": "你好，创建model继承SmartCodable时候，model里面的属性支持使用官方Combine框架里面的@Published嘛？\r\n如下面\r\nclass UserModel: SmartCodable {\r\n    @Published var age: Int?\r\n    @Published var name: String?\r\n}\r\n\r\n然后使用的时候，UserModel.deserialize(from: json)后，就可以自动更新UI嘛？"
+    },
+    {
+      "number": 54,
+      "title": "你好，如何实现JSON转Model的时候，同时往UserDefaults中存，取值的时候，通过UserDefaults取啊？",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-10-23T03:43:27+00:00",
+      "updated_at": "2024-10-23T09:01:10+00:00",
+      "closed_at": "2024-10-23T06:51:10+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/54",
+      "body": "你好，如何实现JSON转Model的时候，同时往UserDefaults中存，取值的时候，通过UserDefaults取啊？"
+    },
+    {
+      "number": 52,
+      "title": "基础类型转换异常",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-10-15T04:57:33+00:00",
+      "updated_at": "2024-10-16T01:52:17+00:00",
+      "closed_at": "2024-10-16T01:52:17+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/52",
+      "body": "1. 接口返回如下\r\n`{\"code\":0,\"timestamp\":1728967712559,\"message\":\"success\",\"result\":true}`\r\n2. 解析对象如下\r\n`public struct HZResponse<T: SmartCodable>: SmartCodable {\r\n    \r\n    public var code: Int? = 0\r\n    public var message: String?\r\n    public var result: T?\r\n    public var timestamp: Int? = 0\r\n    \r\n    public init() {}\r\n}`\r\n3. 解析时候T传入 Bool.self， 解析报错\r\n\"失败responseSerializationFailed(reason: Alamofire.AFError.ResponseSerializationFailureReason.decodingFailed(error: Swift.DecodingError.typeMismatch(Swif"
+    },
+    {
+      "number": 51,
+      "title": "多字段映射为null时判断有误",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-10-12T07:45:31+00:00",
+      "updated_at": "2024-10-14T01:41:04+00:00",
+      "closed_at": "2024-10-14T01:41:04+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/51",
+      "body": "<img width=\"1073\" alt=\"image\" src=\"https://github.com/user-attachments/assets/07dd60a3-d1b9-45f8-a9bf-4187252e7890\">\r\nvalue 为JSONValue类型，应该使用  JSONValue.null 判断是否相等"
+    },
+    {
+      "number": 50,
+      "title": "V4.2.0-V4.2.1版本自定义value解码结果会不正确",
+      "state": "closed",
+      "labels": [
+        "invalid"
+      ],
+      "milestone": null,
+      "created_at": "2024-10-01T03:18:23+00:00",
+      "updated_at": "2024-10-08T06:53:22+00:00",
+      "closed_at": "2024-10-08T06:52:48+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/50",
+      "body": "<img width=\"786\" alt=\"image\" src=\"https://github.com/user-attachments/assets/41215284-dc2a-42c1-ac13-3920d027a244\">\r\n转出来的结果为空数组"
+    },
+    {
+      "number": 49,
+      "title": "打印信息去一下",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-09-27T17:22:47+00:00",
+      "updated_at": "2024-10-08T06:31:15+00:00",
+      "closed_at": "2024-10-08T06:31:15+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/49",
+      "body": "print(\"type = \\(type)\");"
+    },
+    {
+      "number": 47,
+      "title": "class 解析继承",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-09-24T13:50:45+00:00",
+      "updated_at": "2024-09-27T08:56:38+00:00",
+      "closed_at": "2024-09-27T08:56:38+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/47",
+      "body": "    class BaseModel: SmartCodable {\r\n        var name: String = \"\"\r\n        var age: Int = 0\r\n        \r\n        \r\n        private enum BaseCodingKeys: CodingKey {\r\n            case name\r\n            case age\r\n        }\r\n        \r\n        required init(from decoder: Decoder) throws {\r\n            let container: KeyedDecodingContainer<BaseCodingKeys> = try decoder.container(keyedBy: BaseCodingKeys.self)\r\n            self.name = try container.decode(String.self, forKey: .name)\r\n            self.age"
+    },
+    {
+      "number": 46,
+      "title": "是否有机会获取到解析前的数据",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-09-12T08:14:58+00:00",
+      "updated_at": "2024-09-27T08:54:22+00:00",
+      "closed_at": "2024-09-27T08:54:22+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/46",
+      "body": "例如在 `didFinishMapping()` 或其他方法中是否可以获取到 原始的 json(dictionary， array等)，\r\n类似YYModel中的 `- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic` 方法中的`dic`"
+    },
+    {
+      "number": 45,
+      "title": "希望增加这种解析方式",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-08-22T10:41:16+00:00",
+      "updated_at": "2024-08-23T06:21:17+00:00",
+      "closed_at": "2024-08-23T06:21:17+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/45",
+      "body": "服务端返回的Json如下：\r\n```\r\n{\r\n    \"code\": 0,\r\n    \"message\": \"success\",\r\n    \"data\": {\r\n      \"amount\": 666\r\n    }\r\n}\r\n```\r\n\r\n我的基础网络请求响应模型\r\n```\r\nstruct BaseResponse<T: SmartCodable>: SmartCodable {\r\n    var code = 0\r\n    var message = \"\"\r\n    var reason = \"\"\r\n    var timestamp = 0\r\n    var data: T?\r\n}\r\n```\r\n\r\n通过这种方式解析时，解不到值\r\n```\r\n// jsonDic: [String : Any]\r\n\r\nguard let response = Int.deserialize(\r\n    from: jsonDic,\r\n    designatedPath: \"amount\"\r\n) else {\r\n    throw NetworkError.dataMapping\r\n}\r\n```"
+    },
+    {
+      "number": 44,
+      "title": "关于使用方法请教",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-08-20T08:16:57+00:00",
+      "updated_at": "2024-08-20T09:04:01+00:00",
+      "closed_at": "2024-08-20T09:04:01+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/44",
+      "body": "```\r\nclass NFRequestResponse<T: SmartCodable>: SmartCodable {\r\n    var code: Int?\r\n    var msg: String?\r\n    var body: T?\r\n    required init() {}\r\n}\r\n```\r\n现在我有这样一个结构体，其中body可能是nil、string、key-value、array，我用moya框架构造请求：\r\n```\r\nstatic func NFRequestModule<T: SmartCodable>(path: String, method: Moya.Method = .get, param: [String: Any]?, done: @escaping ((_ succeed: Bool, _ data: T?) -> Void)) {\r\n        let api = NFAPI()\r\n        api.requestPath = path\r\n        api.requestParam = param\r\n        api.re"
+    },
+    {
+      "number": 43,
+      "title": "map映射是如何使用的?",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-08-08T08:14:18+00:00",
+      "updated_at": "2024-08-12T01:49:33+00:00",
+      "closed_at": "2024-08-12T01:49:33+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/43",
+      "body": "刚更新到4.1.1\r\n```Swift\r\npublic struct EGNetworkRecordWorkflowTaskRequest: SmartCodable {\r\n    public init() {}\r\n    public var workflowAgentId: String = \"assistants.voice_summary.bot.lite\"\r\n    public var params: EGNetworkRecordWorkflowTaskParameters?\r\n    \r\n    public static func mappingForKey() -> [SmartKeyTransformer]? {\r\n        return [\r\n            CodingKeys.workflowAgentId <--- \"workflow_agent_id\"\r\n        ]\r\n    }\r\n}\r\n\r\npublic struct EGNetworkRecordWorkflowTaskParameters: SmartCodable {\r\n "
+    },
+    {
+      "number": 42,
+      "title": "mapkey 和 value支持resultBuilder",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-07-26T03:20:59+00:00",
+      "updated_at": "2024-07-29T06:23:42+00:00",
+      "closed_at": "2024-07-29T06:23:42+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/42",
+      "body": "类似这样：\r\n<img width=\"1312\" alt=\"image\" src=\"https://github.com/user-attachments/assets/7141895f-a086-41f5-a55a-63aabc4e4a73\">\r\n可以不用写中括号和逗号\r\n\r\n旧调用和重写的地方都不需要修改能同时兼容：\r\n<img width=\"780\" alt=\"image\" src=\"https://github.com/user-attachments/assets/7192507e-ae5a-40fa-8bb0-24ef9f19b6b9\">\r\n"
+    },
+    {
+      "number": 39,
+      "title": "感谢您的作品,当时在使用过程中遇到了崩溃",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-07-17T03:30:53+00:00",
+      "updated_at": "2024-07-29T06:22:26+00:00",
+      "closed_at": "2024-07-29T06:22:26+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/39",
+      "body": "有两处崩溃,但是崩溃数量非常少,我也没有查到到底是哪种情况\r\n1: 0  SmartCodable                   0x18080 LogCache.alignTypeNamesInAllSnapshots() + 156 (LogCache.swift:156)\r\n    1  SmartCodable                   0x16e40 LogCache.formatLogs() + 31 (LogCache.swift:31)\r\n    2  SmartCodable                   0x3b904 specialized static SmartLog.printCacheLogs(in:) + 73 (SmartLog.swift:73)\r\n    3  SmartCodable                   0x30520 SmartJSONDecoder.decode<A>(_:from:) + 55 (SmartJSONDecoder.swift:55)\r\n\r\n2: 0  SmartCodable      "
+    },
+    {
+      "number": 41,
+      "title": "使用UInt32等类型来接收字符串类型的时间戳，解析出来的结果是nil。",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-07-23T08:45:13+00:00",
+      "updated_at": "2024-07-26T02:14:13+00:00",
+      "closed_at": "2024-07-24T11:19:17+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/41",
+      "body": "微信支付的时间戳类型是UInt32，后台返回是的字符串。导致微信支付时报错”签名认证失败“。为了解决问题，我暂时用TimeInterval替换 UInt32，替换后微信支付正常。\r\n\r\nstruct Model: SmartCodable {\r\n    var timestamp: UInt32?\r\n}\r\n\r\nlet dic: [String : Any] = [\r\n    \"timestamp\": \"1721721316\"\r\n]\r\n\r\nlet model = Model.deserialize(from: dic)\r\nmodel.timestamp 打印出来为nil。"
+    },
+    {
+      "number": 40,
+      "title": "泛型反序列化问题",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-07-20T03:58:45+00:00",
+      "updated_at": "2024-07-22T03:21:44+00:00",
+      "closed_at": "2024-07-22T03:21:44+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/40",
+      "body": "```swift\r\nstruct Response<Content: Any>: SmartCodable {\r\n    var status: String?\r\n    @SmartAny\r\n    var content: Content?\r\n    var errorCode: String?\r\n}\r\n\r\nstruct Check: SmartCodable {\r\n    var token: String?\r\n}\r\n\r\nlet JSON = \"\"\"\r\n{\"status\":\"SUCCESS\",\"errorCode\":null,\"content\":{\"token\":\"b3d0e432037d9db9e468a95250dead5c\"}}\r\n\"\"\"\r\n\r\nlet resp = Response<T>.deserialize(from: JSON) \r\n```\r\n\r\n\r\n\r\nHandyJSON 是支持这样的反序列的，但 SmartCodable 会有下面的报错：\r\n\r\n```\r\n========================  [Smart Decoding Log]  ======"
+    },
+    {
+      "number": 36,
+      "title": "4.0.4版本解析结果不符合期望",
+      "state": "closed",
+      "labels": [
+        "bug"
+      ],
+      "milestone": null,
+      "created_at": "2024-06-27T11:03:55+00:00",
+      "updated_at": "2024-07-03T07:56:21+00:00",
+      "closed_at": "2024-07-03T07:56:15+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/36",
+      "body": "struct Room: SmartCodable {\r\n    var game: Game?\r\n}\r\n\r\nstruct Game: SmartCodable {}\r\n\r\n这种结构下，当json返回room结构中的game为null时。\r\n3.4.5版本的game为null。\r\n4.0.4版本的game不为null。"
+    },
+    {
+      "number": 35,
+      "title": "类型转换失败 json中为int  double Bool类型字符串，分别转为int",
+      "state": "closed",
+      "labels": [
+        "invalid"
+      ],
+      "milestone": null,
+      "created_at": "2024-06-27T07:54:41+00:00",
+      "updated_at": "2024-06-28T02:59:05+00:00",
+      "closed_at": "2024-06-27T09:09:08+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/35",
+      "body": "```\r\nfileprivate let jsonStr = \"\"\"\r\n{\r\n    \"age\": \"18\",\r\n    \"weight\": \"65.4\",\r\n    \"sex\": \"1\"\r\n}\r\n\"\"\"\r\n//模型\r\nstruct ZJSmartCodableModel: SmartCodable {\r\n    var age: Int?\r\n    var weight: Double?\r\n    var sex: Bool?\r\n}\r\n```\r\n\r\n\r\n使用该方式转化失败 \r\nlet model = ZJSmartCodableModel.deserialize(from: jsonStr)!\r\n日志中输出\r\n```\r\n========================  [Smart Decoding Log]  ========================\r\nZJSmartCodableModel 👈🏻 👀\r\n   |- age   : Expected to decode Int but found a string instead.\r\n   |- weight: Expec"
+    },
+    {
+      "number": 37,
+      "title": "JSON中值和Model定义的类型不一致 解析失败(类型不兼容)",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-06-28T01:55:40+00:00",
+      "updated_at": "2024-06-28T02:58:50+00:00",
+      "closed_at": "2024-06-28T02:49:08+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/37",
+      "body": "```\r\nfileprivate let jsonStr = \"\"\"\r\n{\r\n    \"username\": \"yuhanle\",\r\n    \"age\": \"18\",\r\n    \"weight\": 65.4,\r\n    \"sex\": 1,\r\n    \"location\": \"Toronto, Canada\",\r\n}\r\n\"\"\"\r\n\r\n\r\n// 模型定义\r\nstruct ZJSmartCodableModel: SmartCodable {\r\n    var username: String?\r\n    var age: Int?\r\n    var weight: Double?\r\n    var sex: Int?\r\n    var location: String?\r\n}\r\n\r\n//模型解析\r\nlet people = ZJSmartCodableModel.deserialize(from: jsonStr)!\r\n\r\n```\r\n\r\n解析后错误提示\r\n```\r\n========================  [Smart Decoding Log]  ==============="
+    },
+    {
+      "number": 25,
+      "title": "Int32等接收，转化不了String类型的int值",
+      "state": "closed",
+      "labels": [
+        "bug"
+      ],
+      "milestone": null,
+      "created_at": "2024-05-23T06:18:36+00:00",
+      "updated_at": "2024-06-18T07:04:23+00:00",
+      "closed_at": "2024-05-24T06:49:38+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/25",
+      "body": "后端返回了一个int值的字符串，如\"11111111\"，此时我用Int32/Int16/Int64/UInt/Uint16/UInt32等类型去接收，会转化不出来，只能使用Int去接收。能否兼容一下Int的其它类型。"
+    },
+    {
+      "number": 24,
+      "title": "使用SmartAny遇到类型转化错误",
+      "state": "closed",
+      "labels": [
+        "invalid"
+      ],
+      "milestone": null,
+      "created_at": "2024-05-20T12:33:06+00:00",
+      "updated_at": "2024-06-18T07:04:08+00:00",
+      "closed_at": "2024-05-21T07:27:24+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/24",
+      "body": "解析数据:\r\n```swift\r\n{\"code\":1,\"data\":{\"index\":\"4\",\"msg\":\"上传成功\",\"size\":1780},\"msg\":\"success\",\"rid\":\"Dg0S\"}\r\n```\r\n\r\n使用Moya进行网络请求，返回结果中使用泛型的方式进行解析上面的数据\r\n```swift\r\n let jsonString = String(data: moyaResponse.data, encoding: String.Encoding.utf8) ?? \"\"\r\nguard let data = try? moyaResponse.mapModel(T.self,jsonString: jsonString) else { return }\r\n\r\nextension Response{\r\n    func mapModel<T: SmartCodable>(_ type: T.Type, jsonString: String) throws -> T{\r\n        guard let model = type.deserialize(from:jsonSt"
+    },
+    {
+      "number": 23,
+      "title": "建议完善的单元测试",
+      "state": "closed",
+      "labels": [
+        "documentation"
+      ],
+      "milestone": null,
+      "created_at": "2024-05-15T16:20:36+00:00",
+      "updated_at": "2024-06-18T07:03:30+00:00",
+      "closed_at": "2024-06-03T03:28:44+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/23",
+      "body": "基础库的稳定性极为重要，这个项目缺少完整单元测试，无法确定是否具备生产可用的条件，建议召集社区力量完善单元测试，以100%代码覆盖为目标建设。"
+    },
+    {
+      "number": 22,
+      "title": "能提供具体的使用案例和文档么，类似MJExtension那样的",
+      "state": "closed",
+      "labels": [
+        "documentation"
+      ],
+      "milestone": null,
+      "created_at": "2024-05-11T09:13:20+00:00",
+      "updated_at": "2024-06-18T07:03:22+00:00",
+      "closed_at": "2024-05-15T12:33:05+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/22",
+      "body": null
+    },
+    {
+      "number": 21,
+      "title": "像HandyJSON一样支持已有模型的update？",
+      "state": "closed",
+      "labels": [
+        "enhancement"
+      ],
+      "milestone": null,
+      "created_at": "2024-05-09T08:41:43+00:00",
+      "updated_at": "2024-06-18T07:03:12+00:00",
+      "closed_at": "2024-06-13T06:46:13+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/21",
+      "body": "`HandyJSON`中，可以使用`JSONDeserializer.update(object: &object, from: jsonString)`来更新已有的模型，`SmartCodable`现行版本（3.4.0）并无相关特性。"
+    },
+    {
+      "number": 19,
+      "title": "为啥不支持继承？",
+      "state": "closed",
+      "labels": [
+        "good first issue"
+      ],
+      "milestone": null,
+      "created_at": "2024-04-29T06:24:54+00:00",
+      "updated_at": "2024-06-18T07:02:59+00:00",
+      "closed_at": "2024-05-06T10:07:09+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/19",
+      "body": "太多场景都是继承的"
+    },
+    {
+      "number": 18,
+      "title": "局部的值解析策略支持SmartDataTransformer",
+      "state": "closed",
+      "labels": [
+        "enhancement"
+      ],
+      "milestone": null,
+      "created_at": "2024-04-29T06:23:34+00:00",
+      "updated_at": "2024-06-18T07:02:41+00:00",
+      "closed_at": "2024-05-06T10:06:20+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/18",
+      "body": "局部的值解析策略\r\nstruct SmartModel: SmartCodable {\r\n    var date1: Date?\r\n    var date2: Date?\r\n    var url: URL?\r\n            \r\n    // value的解析策略\r\n    static func mappingForValue() -> [SmartValueTransformer]? {\r\n        let format = DateFormatter()\r\n        format.dateFormat = \"yyyy-MM-dd\"\r\n        return [\r\n            CodingKeys.url <--- SmartURLTransformer(prefix: \"https://\"),\r\n            CodingKeys.date2 <--- SmartDateTransformer(),\r\n            CodingKeys.date1 <--- SmartDateFormatTransformer(fo"
+    },
+    {
+      "number": 17,
+      "title": "AnyHashable",
+      "state": "closed",
+      "labels": [
+        "invalid"
+      ],
+      "milestone": null,
+      "created_at": "2024-04-29T06:21:09+00:00",
+      "updated_at": "2024-06-18T07:02:21+00:00",
+      "closed_at": "2024-04-29T06:45:13+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/17",
+      "body": "    var dps : [AnyHashable : SmartAny] = [:]\r\nAnyHashable 这个类型需要帮着支持下，或者怎么解决"
+    },
+    {
+      "number": 16,
+      "title": "枚举类型不匹配的时候没有使用默认值",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-04-22T01:51:11+00:00",
+      "updated_at": "2024-06-18T07:01:47+00:00",
+      "closed_at": "2024-04-23T02:30:10+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/16",
+      "body": "3.3.1中，json转模型，枚举类型不匹配的时候，没有使用默认值。\r\n例如：下例中默认值都是.good\r\n\r\n struct QLSocial: SmartCodable {\r\n        var n_type: QLPersonType = .good\r\n        var g_type: QLPersonType = .good\r\n    }\r\n    \r\n    \r\n    public enum QLPersonType: Int, SmartCaseDefaultable {\r\n        static var defaultCase: QLPersonType = .normal\r\n        case normal = 0\r\n        case good = 1\r\n        case best = 2\r\n    }\r\n    \r\n  let json1 = \"\"\"\r\n         {\r\n            \"n_type\": 2,\r\n            \"g_type\": \"2\"\r\n                }\r\n     "
+    },
+    {
+      "number": 15,
+      "title": "字符串的Model化相关问题",
+      "state": "closed",
+      "labels": [
+        "bug"
+      ],
+      "milestone": null,
+      "created_at": "2024-04-17T04:34:14+00:00",
+      "updated_at": "2024-06-18T07:01:21+00:00",
+      "closed_at": "2024-04-19T08:42:43+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/15",
+      "body": "您好，\r\n字符串的Model可以将value为String类型的json转换为对应的model，但如果json的最外层是数组，似乎无法成功转换为对应的model，例如：\r\nlet dict: [String: Any] = [\r\n    \"hobby\": \"{\\\"name\\\":\\\"sleep\\\"}\",\r\n]\r\n如上这种情况可以成功转换为model，\r\n而如果是如下这种情况，似乎无法成功转换为model\r\nlet dict: [String: Any] = [\r\n    \"hobby\": \"[{\\\"name\\\":\\\"sleep\\\"}]\",\r\n]\r\n\r\n在阅读源码后发现如下地方是产生问题的原因：\r\n![WechatIMG257](https://github.com/intsig171/SmartCodable/assets/12538981/4623462a-aaf1-458f-b6c4-a00842ea30ac)\r\n\r\n由于此时T为数组类型的model（[M\u001dodel].type），而value为string，所以会return nil，不会继续解析。\r\n所以我在这里加了一个判断，才得"
+    },
+    {
+      "number": 14,
+      "title": "能否增加自定义转换规则",
+      "state": "closed",
+      "labels": [
+        "enhancement"
+      ],
+      "milestone": null,
+      "created_at": "2024-04-07T08:30:05+00:00",
+      "updated_at": "2024-06-18T07:00:54+00:00",
+      "closed_at": "2024-04-11T10:24:16+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/14",
+      "body": "您好 \r\n得益于类HandyJSON的API，我们也比较平滑地迁移到了Codable协议的方案。\r\n迁移的过程中也发现了一些问题。希望作者能够参考一下提议。\r\n\r\n增加模型内部对每个字段的转换规则来支撑一下场景（HandyJSON已支持）。\r\n例1： \r\nvar createDate: Date?\r\n服务端有可能返回字符串（如：2024-04-07）也有可能返回时间戳。 \r\n\r\n例2: \r\nvar createDate: Date?\r\nvar updateDate: Date?\r\n这两个字段中一个返回了字符串（如：2024-04-07），一个返回了时间戳。"
+    },
+    {
+      "number": 13,
+      "title": "兼容类String型时  int值为1时解析不出来",
+      "state": "closed",
+      "labels": [
+        "bug"
+      ],
+      "milestone": null,
+      "created_at": "2024-04-03T10:03:36+00:00",
+      "updated_at": "2024-06-18T07:00:43+00:00",
+      "closed_at": "2024-04-03T11:35:49+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/issues/13",
+      "body": "     // demo中的代码\r\n        let dict = [\r\n            \"string1\": 1, //解析不出来！！\r\n            \"string2\": 345.0,\r\n            \"string3\": [],\r\n            \"string4\": NSNull()\r\n        ] as [String : Any]\r\n        \r\n        guard let feed = CompatibleString.deserialize(from: dict) else { return }\r\n        print(\"string1的值为\", feed.string1)\r\n        print(\"string2的值为\", feed.string2)\r\n        print(\"string3的值为\", feed.string3)\r\n        print(\"string4的值为\", feed.string4 ?? \"\")"
+    }
+  ],
+  "changelog": "",
+  "releases": [
+    {
+      "tag_name": "6.0.0",
+      "name": "V6.0.0",
+      "body": "协议名SmartCodable调整为SmartCodableX\r\n```\r\nstruct User: SmartCodableX {\r\n    var name: String = \"\"\r\n}\r\n```\r\n解决打包xcframework，命名空间冲突问题 #121 .",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2025-12-18T03:52:21+00:00",
+      "published_at": "2025-12-18T06:23:13+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/6.0.0",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/6.0.0",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/6.0.0"
+    },
+    {
+      "tag_name": "5.0.2",
+      "name": "V5.0.2",
+      "body": "V5.0.2更新说明\r\n\r\n【新增】支持继承！\r\n\r\n【新增】支持继承！\r\n\r\n【新增】支持继承！\r\n\r\n```\r\nclass BaseModel: SmartCodable {\r\n    var name: String = \"\"\r\n    \r\n    required init() { }\r\n}\r\n\r\n@SmartSubclass\r\nclass SubModel: BaseModel {\r\n    var age: Int = 0\r\n}\r\n```",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2025-05-08T11:45:38+00:00",
+      "published_at": "2025-05-08T11:56:05+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/5.0.2",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/5.0.2",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/5.0.2"
+    },
+    {
+      "tag_name": "4.4.0",
+      "name": "V4.4.0",
+      "body": "V4.4.0更新说明 \r\n\r\n【新增】提供属性包装器 `@SmartHexColor`，用来修饰UIColor.\r\n\r\n【新增】提供属性包装器 `@SmartDate`，用来修饰Date类型。\r\n\r\n【优化】优化CGFloat的实现代码。\r\n\r\n【优化】提升解析性能。\r\n\r\n【修复】某些场景下未使用初始化值的情况。\r\n\r\n【修复】修复[Any] 类型 encode 时，transformer.toJSON不调用问题。\r\n\r\n【删除】删除`SmartColor`类型，减少自创的类型。\r\n",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2025-05-06T09:00:57+00:00",
+      "published_at": "2025-05-06T09:03:34+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.4.0",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.4.0",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.4.0"
+    },
+    {
+      "tag_name": "4.3.8",
+      "name": "优化@SmartFlat的encode实现",
+      "body": "",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2025-03-28T08:38:33+00:00",
+      "published_at": "2025-03-28T09:00:23+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.3.8",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.3.8",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.3.8"
+    },
+    {
+      "tag_name": "4.3.0",
+      "name": "V4.3.0: 日志系统大升级",
+      "body": "1. 优化日志性能，减少遍历。\r\n2. 优化属性日志的信息表达。\r\n3. 支持日志的导出，如有需求可以上传服务器。\r\n4. 优化日志格式：unkeyedContainer的解析格式化；格式的优化。\r\n\r\n```\r\n================================  [Smart Sentinel]  ================================\r\nArray<SomeModel> 👈🏻 👀\r\n   ╆━ Index 0\r\n      ┆┄ a: Expected to decode 'Int' but found ‘String’ instead.\r\n      ┆┄ b: Expected to decode 'Int' but found ’Array‘ instead.\r\n      ┆┄ c: No value associated with key.\r\n      ╆━ sub: SubModel\r\n         ┆┄ sub_a: No value associated with key.\r\n         ┆┄ sub_b: No value associated with key.\r\n         ┆┄ sub_c: No value associated with key.\r\n      ╆━ sub2s: [SubTwoModel]\r\n         ╆━ Index 0\r\n            ┆┄ sub2_a: No value associated with key.\r\n            ┆┄ sub2_b: No value associated with key.\r\n            ┆┄ sub2_c: No value associated with key.\r\n         ╆━ Index 1\r\n            ┆┄ sub2_a: Expected to decode 'Int' but found ’Array‘ instead.\r\n   ╆━ Index 1\r\n      ┆┄ a: No value associated with key.\r\n      ┆┄ b: Expected to decode 'Int' but found ‘String’ instead.\r\n      ┆┄ c: Expected to decode 'Int' but found ’Array‘ instead.\r\n      ╆━ sub: SubModel\r\n         ┆┄ sub_a: Expected to decode 'Int' but found ‘String’ instead.\r\n      ╆━ sub2s: [SubTwoModel]\r\n         ╆━ Index 0\r\n            ┆┄ sub2_a: Expected to decode 'Int' but found ‘String’ instead.\r\n         ╆━ Index 1\r\n            ┆┄ sub2_a: Expected to decode 'Int' but found 'null' instead.\r\n====================================================================================\r\n```",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-11-25T08:41:51+00:00",
+      "published_at": "2024-11-25T08:49:20+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.3.0",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.3.0",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.3.0"
+    },
+    {
+      "tag_name": "4.2.6",
+      "name": "V4.2.6更新说明",
+      "body": "【优化】优化继承关系下的父类属性的解析。\r\n【新增】SmartAny支持修饰Model类型。",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-10-31T01:54:49+00:00",
+      "published_at": "2024-10-31T02:00:09+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.2.6",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.2.6",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.2.6"
+    },
+    {
+      "tag_name": "4.2.5",
+      "name": "优化KeyMap映射关系",
+      "body": "",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-10-18T09:49:31+00:00",
+      "published_at": "2024-10-18T11:01:17+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.2.5",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.2.5",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.2.5"
+    },
+    {
+      "tag_name": "4.2.3",
+      "name": "V4.2.3-BugFix  发布公告",
+      "body": "【BugFix】修改非基本数据类型的自定义解析的失效问题。\r\n【BugFix】修复key的映射关系中，当前值为null的判断错误问题。\r\n【新功能】提供FastTransformer快捷ValueTransformer\r\n```\r\nCodingKeys.name <--- FastTransformer<String, String>(fromJSON: { json in\r\n    \"abc\"\r\n},toJSON: { object in\r\n    \"123\"\r\n})\r\n```",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-10-12T11:13:36+00:00",
+      "published_at": "2024-10-12T11:19:51+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.2.3",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.2.3",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.2.3"
+    },
+    {
+      "tag_name": "4.2.0",
+      "name": " V4.1.12 发布公告",
+      "body": " 1. 【新功能】支持Combine，允许 @ Published修饰的属性解析。\r\n 2. 【新功能】支持@igonreKey修饰的属性在encode时，不出现在json中（屏蔽这个属性key）\r\n 3. 【新功能】支持encode时候的options，同decode的options使用。\r\n 4. 【优化】Data类型在decode和encode时，只能使用base64解析.",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-09-27T08:48:22+00:00",
+      "published_at": "2024-09-27T08:53:33+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.2.0",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.2.0",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.2.0"
+    },
+    {
+      "tag_name": "4.1.7",
+      "name": "4.1.7 - BugFix",
+      "body": "\"Fixed the crash issue when entering compatibility logic due to parsing failure, and added handling for cases where the data is NaN or exceeds the Int type range.\"\r\n修复了解析失败时进入兼容逻辑导致的crash问题，针对数据为NaN或超出Int类型长度的情况进行了处理。\r\n",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-08-27T08:54:16+00:00",
+      "published_at": "2024-08-27T09:30:34+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.1.7",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.1.7",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.1.7"
+    },
+    {
+      "tag_name": "4.1.3",
+      "name": "4.1.3 - SmartUpdater",
+      "body": "Optimize implementation of SmartUpdater.",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-07-29T06:49:58+00:00",
+      "published_at": "2024-07-29T06:56:11+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.1.3",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.1.3",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.1.3"
+    },
+    {
+      "tag_name": "4.1.1",
+      "name": "Optimize the precision of floating-point numbers",
+      "body": "When the json data is not 4.99 and the attribute is String, it is internally compatible and returns \"4.99\" instead of \"4.899999999 \".",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-07-05T10:17:37+00:00",
+      "published_at": "2024-07-05T10:22:24+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.1.1",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.1.1",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.1.1"
+    },
+    {
+      "tag_name": "4.0.0",
+      "name": "new decoder, new encoder, new feature.",
+      "body": "V4.0.0 Release Notes\r\nNew Feature: Support for watchOS usage\r\nNew Feature: Support for visionOS usage\r\nNew Feature: Support for tvOS usage\r\nNew Feature: Custom encoder support, allowing for custom encoding, i.e., mappingForValue.\r\nNew Feature: Support for custom strategies for any type of Value, including Int, Bool, etc.\r\nOptimization: Optimized decoder, synchronized with the master branch of Codable.\r\nOptimization: Improved enum parsing, no longer requiring defaultCase.\r\nOptimization: Enhanced README with detailed Chinese instructions.\r\nBugfix: Fixed a memory issue in concurrent logging.",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-06-13T07:06:23+00:00",
+      "published_at": "2024-06-13T07:31:58+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/4.0.0",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/4.0.0",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/4.0.0"
+    },
+    {
+      "tag_name": "3.4.3",
+      "name": "SmartAny使用优化",
+      "body": "包含SmartAny的model转json失败的优化",
+      "draft": false,
+      "prerelease": false,
+      "created_at": "2024-05-15T12:26:39+00:00",
+      "published_at": "2024-05-15T12:32:44+00:00",
+      "url": "https://github.com/iAmMccc/SmartCodable/releases/tag/3.4.3",
+      "tarball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/tarball/3.4.3",
+      "zipball_url": "https://api.github.com/repos/iAmMccc/SmartCodable/zipball/3.4.3"
+    }
+  ]
+}
