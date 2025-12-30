@@ -1,0 +1,68 @@
+{
+  "name": "Firebase-iOS",
+  "description": "Firebase SDK documentation for iOS and Swift development, covering authentication, databases, cloud messaging, analytics, and more.",
+  "base_url": "https://firebase.google.com/docs",
+  "selectors": {
+    "main_content": "article.devsite-article, article.devsite-article-inner, .devsite-article-body",
+    "title": "h1.devsite-page-title, h1[itemprop='name']",
+    "code_blocks": "pre.devsite-click-to-copy, pre.prettyprint, code.devsite-terminal, devsite-code",
+    "navigation": "nav.devsite-nav, devsite-toc, .devsite-nav-list",
+    "description": "meta[name='description'], .devsite-article-meta"
+  },
+  "url_patterns": {
+    "include": [
+      "/docs/",
+      "/docs/guides/**",
+      "/docs/reference/**",
+      "/docs/ios/**",
+      "/docs/**/ios",
+      "/docs/**/ios/**",
+      "/docs/**/swift",
+      "/docs/**/swift/**",
+      "/docs/auth/ios/**",
+      "/docs/firestore/ios/**",
+      "/docs/database/ios/**",
+      "/docs/storage/ios/**",
+      "/docs/functions/ios/**",
+      "/docs/cloud-messaging/ios/**",
+      "/docs/analytics/ios/**",
+      "/docs/crashlytics/ios/**",
+      "/docs/perf-mon/ios/**",
+      "/docs/remote-config/ios/**",
+      "/docs/app-check/ios/**",
+      "/docs/ml/ios/**",
+      "/docs/dynamic-links/ios/**",
+      "/docs/in-app-messaging/ios/**"
+    ],
+    "exclude": [
+      "/docs/android/**",
+      "/docs/web/**",
+      "/docs/flutter/**",
+      "/docs/unity/**",
+      "/docs/games/**",
+      "/docs/cpp/**",
+      "/docs/admin/**",
+      "/docs/**/android/**",
+      "/docs/**/web/**",
+      "/docs/**/flutter/**",
+      "/docs/**/rest/**",
+      "?hl=",
+      "/docs/reference/android/**",
+      "/docs/reference/js/**"
+    ]
+  },
+  "categories": {
+    "authentication": ["/docs/auth/"],
+    "firestore": ["/docs/firestore/"],
+    "realtime-database": ["/docs/database/"],
+    "storage": ["/docs/storage/"],
+    "cloud-messaging": ["/docs/cloud-messaging/"],
+    "analytics": ["/docs/analytics/"],
+    "crashlytics": ["/docs/crashlytics/"],
+    "remote-config": ["/docs/remote-config/"],
+    "app-check": ["/docs/app-check/"],
+    "cloud-functions": ["/docs/functions/"]
+  },
+  "rate_limit": 0.5,
+  "max_pages": 150
+}

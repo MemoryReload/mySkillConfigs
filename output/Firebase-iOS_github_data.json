@@ -1,0 +1,1390 @@
+{
+  "repo_info": {
+    "name": "firebase-docs",
+    "full_name": "firebase/firebase-docs",
+    "description": null,
+    "url": "https://github.com/firebase/firebase-docs",
+    "homepage": null,
+    "stars": 17,
+    "forks": 11,
+    "open_issues": 25,
+    "default_branch": "main",
+    "created_at": "2021-11-30T18:58:58+00:00",
+    "updated_at": "2025-11-06T08:23:26+00:00",
+    "language": "TypeScript",
+    "license": "Apache License 2.0",
+    "topics": []
+  },
+  "readme": "# Firebase Open Source Docs\nFirebase Open Source Docs is a monorepo that contains\nall Firebase written documentation that accepts community\ncontributions. This includes Firebase product documentation\nor codelab steps.\n",
+  "file_tree": [
+    {
+      "path": ".github",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "type": "file",
+      "size": 1103
+    },
+    {
+      "path": "LICENSE",
+      "type": "file",
+      "size": 11358
+    },
+    {
+      "path": "README.md",
+      "type": "file",
+      "size": 218
+    },
+    {
+      "path": "codelabs",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": ".github/workflows",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": ".github/workflows/pull-and-push-all.yml",
+      "type": "file",
+      "size": 4537
+    },
+    {
+      "path": ".github/workflows/pull-map-and-push-repo.yml",
+      "type": "file",
+      "size": 5148
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/README.md",
+      "type": "file",
+      "size": 3713
+    },
+    {
+      "path": "docs/flutter/analytics",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/app-check",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/auth",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/cloud-messaging",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/crashlytics",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/database",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/dynamic-links",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/in-app-messaging",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/ml",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/perf-mon",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/reference",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/remote-config",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/setup",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/storage",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/test-lab",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/.gitignore",
+      "type": "file",
+      "size": 79
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/index.lab.md",
+      "type": "file",
+      "size": 32536
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/.editorconfig",
+      "type": "file",
+      "size": 274
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/.gitignore",
+      "type": "file",
+      "size": 29
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/README.md",
+      "type": "file",
+      "size": 1066
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/angular.json",
+      "type": "file",
+      "size": 2713
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/firebase.json",
+      "type": "file",
+      "size": 1070
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/firestore.indexes.json",
+      "type": "file",
+      "size": 44
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/firestore.rules",
+      "type": "file",
+      "size": 154
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/functions",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/package.json",
+      "type": "file",
+      "size": 1162
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/storage.rules",
+      "type": "file",
+      "size": 315
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/tailwind.config.js",
+      "type": "file",
+      "size": 1046
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/test.md",
+      "type": "file",
+      "size": 43773
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/tsconfig.app.json",
+      "type": "file",
+      "size": 263
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/tsconfig.json",
+      "type": "file",
+      "size": 901
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/tsconfig.spec.json",
+      "type": "file",
+      "size": 273
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/index.lab.md",
+      "type": "file",
+      "size": 33539
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "docs/flutter/analytics/_events.md",
+      "type": "file",
+      "size": 5022
+    },
+    {
+      "path": "docs/flutter/analytics/_get-started.md",
+      "type": "file",
+      "size": 2989
+    },
+    {
+      "path": "docs/flutter/analytics/_user-properties.md",
+      "type": "file",
+      "size": 1387
+    },
+    {
+      "path": "docs/flutter/app-check/custom-resource.md",
+      "type": "file",
+      "size": 1741
+    },
+    {
+      "path": "docs/flutter/app-check/debug-provider.md",
+      "type": "file",
+      "size": 5341
+    },
+    {
+      "path": "docs/flutter/app-check/default-providers.md",
+      "type": "file",
+      "size": 5892
+    },
+    {
+      "path": "docs/flutter/auth/account-linking.md",
+      "type": "file",
+      "size": 3274
+    },
+    {
+      "path": "docs/flutter/auth/anonymous-auth.md",
+      "type": "file",
+      "size": 4841
+    },
+    {
+      "path": "docs/flutter/auth/custom-auth.md",
+      "type": "file",
+      "size": 2656
+    },
+    {
+      "path": "docs/flutter/auth/email-link-auth.md",
+      "type": "file",
+      "size": 9944
+    },
+    {
+      "path": "docs/flutter/auth/errors.md",
+      "type": "file",
+      "size": 4174
+    },
+    {
+      "path": "docs/flutter/auth/federated-auth.md",
+      "type": "file",
+      "size": 18382
+    },
+    {
+      "path": "docs/flutter/auth/manage-users.md",
+      "type": "file",
+      "size": 7298
+    },
+    {
+      "path": "docs/flutter/auth/multi-factor.md",
+      "type": "file",
+      "size": 10421
+    },
+    {
+      "path": "docs/flutter/auth/passing-state-in-email-actions.md",
+      "type": "file",
+      "size": 11013
+    },
+    {
+      "path": "docs/flutter/auth/password-auth.md",
+      "type": "file",
+      "size": 3952
+    },
+    {
+      "path": "docs/flutter/auth/phone-auth.md",
+      "type": "file",
+      "size": 10884
+    },
+    {
+      "path": "docs/flutter/auth/start.md",
+      "type": "file",
+      "size": 8127
+    },
+    {
+      "path": "docs/flutter/cloud-messaging/client.md",
+      "type": "file",
+      "size": 9063
+    },
+    {
+      "path": "docs/flutter/cloud-messaging/first-message.md",
+      "type": "file",
+      "size": 5698
+    },
+    {
+      "path": "docs/flutter/cloud-messaging/receive.md",
+      "type": "file",
+      "size": 23362
+    },
+    {
+      "path": "docs/flutter/cloud-messaging/topic-messaging.md",
+      "type": "file",
+      "size": 3329
+    },
+    {
+      "path": "docs/flutter/crashlytics/_customize-crash-reports.md",
+      "type": "file",
+      "size": 11310
+    },
+    {
+      "path": "docs/flutter/crashlytics/_deobfuscated.md",
+      "type": "file",
+      "size": 10841
+    },
+    {
+      "path": "docs/flutter/crashlytics/_force-test-crash.md",
+      "type": "file",
+      "size": 1117
+    },
+    {
+      "path": "docs/flutter/crashlytics/_get-started.md",
+      "type": "file",
+      "size": 7690
+    },
+    {
+      "path": "docs/flutter/crashlytics/_start-using-analytics.md",
+      "type": "file",
+      "size": 1281
+    },
+    {
+      "path": "docs/flutter/database/_usecase_security_preamble.md",
+      "type": "file",
+      "size": 430
+    },
+    {
+      "path": "docs/flutter/database/lists-of-data.md",
+      "type": "file",
+      "size": 13199
+    },
+    {
+      "path": "docs/flutter/database/offline-capabilities.md",
+      "type": "file",
+      "size": 11552
+    },
+    {
+      "path": "docs/flutter/database/read-and-write.md",
+      "type": "file",
+      "size": 14515
+    },
+    {
+      "path": "docs/flutter/database/start.md",
+      "type": "file",
+      "size": 4006
+    },
+    {
+      "path": "docs/flutter/database/structure-data.md",
+      "type": "file",
+      "size": 7213
+    },
+    {
+      "path": "docs/flutter/dynamic-links/create.md",
+      "type": "file",
+      "size": 11144
+    },
+    {
+      "path": "docs/flutter/dynamic-links/receive.md",
+      "type": "file",
+      "size": 8620
+    },
+    {
+      "path": "docs/flutter/in-app-messaging/_customize-messages.md",
+      "type": "file",
+      "size": 1708
+    },
+    {
+      "path": "docs/flutter/in-app-messaging/_get-started.md",
+      "type": "file",
+      "size": 3230
+    },
+    {
+      "path": "docs/flutter/in-app-messaging/_modify-message-behavior.md",
+      "type": "file",
+      "size": 5190
+    },
+    {
+      "path": "docs/flutter/ml/use-custom-models.md",
+      "type": "file",
+      "size": 6307
+    },
+    {
+      "path": "docs/flutter/perf-mon/_custom-code-traces.md",
+      "type": "file",
+      "size": 9011
+    },
+    {
+      "path": "docs/flutter/perf-mon/_custom-network-traces.md",
+      "type": "file",
+      "size": 2376
+    },
+    {
+      "path": "docs/flutter/perf-mon/_disable-sdk.md",
+      "type": "file",
+      "size": 2759
+    },
+    {
+      "path": "docs/flutter/perf-mon/get-started.md",
+      "type": "file",
+      "size": 6422
+    },
+    {
+      "path": "docs/flutter/reference/_toc.yaml",
+      "type": "file",
+      "size": 3025
+    },
+    {
+      "path": "docs/flutter/remote-config/_get-started.md",
+      "type": "file",
+      "size": 8649
+    },
+    {
+      "path": "docs/flutter/setup/_setup_main.md",
+      "type": "file",
+      "size": 14334
+    },
+    {
+      "path": "docs/flutter/setup/_setup_prereq_android.md",
+      "type": "file",
+      "size": 1113
+    },
+    {
+      "path": "docs/flutter/setup/_setup_prereq_ios.md",
+      "type": "file",
+      "size": 1386
+    },
+    {
+      "path": "docs/flutter/setup/_setup_prereq_web.md",
+      "type": "file",
+      "size": 715
+    },
+    {
+      "path": "docs/flutter/storage/create-reference.md",
+      "type": "file",
+      "size": 4360
+    },
+    {
+      "path": "docs/flutter/storage/delete-files.md",
+      "type": "file",
+      "size": 1639
+    },
+    {
+      "path": "docs/flutter/storage/download-files.md",
+      "type": "file",
+      "size": 5472
+    },
+    {
+      "path": "docs/flutter/storage/file-metadata.md",
+      "type": "file",
+      "size": 4869
+    },
+    {
+      "path": "docs/flutter/storage/handle-errors.md",
+      "type": "file",
+      "size": 3668
+    },
+    {
+      "path": "docs/flutter/storage/list-files.md",
+      "type": "file",
+      "size": 4097
+    },
+    {
+      "path": "docs/flutter/storage/start.md",
+      "type": "file",
+      "size": 7351
+    },
+    {
+      "path": "docs/flutter/storage/upload-files.md",
+      "type": "file",
+      "size": 7496
+    },
+    {
+      "path": "docs/flutter/test-lab/integration-testing-with-flutter.md",
+      "type": "file",
+      "size": 3780
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img/add-android-app.png",
+      "type": "file",
+      "size": 9830
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img/add-message.gif",
+      "type": "file",
+      "size": 283994
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img/android_studio_folder.png",
+      "type": "file",
+      "size": 194
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img/emulators-auth-user.png",
+      "type": "file",
+      "size": 71618
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img/emulators-home.png",
+      "type": "file",
+      "size": 111387
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img/execute.png",
+      "type": "file",
+      "size": 839
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img/import-data.gif",
+      "type": "file",
+      "size": 258073
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-android/steps/img/screenshot.png",
+      "type": "file",
+      "size": 148181
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/functions/.gitignore",
+      "type": "file",
+      "size": 14
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/functions/package.json",
+      "type": "file",
+      "size": 550
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/assets",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/environments",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/favicon.ico",
+      "type": "file",
+      "size": 196478
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/index.html",
+      "type": "file",
+      "size": 319
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/main.ts",
+      "type": "file",
+      "size": 250
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/styles.css",
+      "type": "file",
+      "size": 59
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/1129441c6ebb5eaf.png",
+      "type": "file",
+      "size": 95644
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/4c68c6654f4168ad.png",
+      "type": "file",
+      "size": 52355
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/67898572a35672a5.png",
+      "type": "file",
+      "size": 31430
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/73d151ed16016421.png",
+      "type": "file",
+      "size": 219550
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/78fa16cdf8ef435a.png",
+      "type": "file",
+      "size": 432225
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/7a67a8a400c80c50.png",
+      "type": "file",
+      "size": 30042
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/95691e9b71ba55e3.png",
+      "type": "file",
+      "size": 9042
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/9d2f625aebcab6af.png",
+      "type": "file",
+      "size": 64438
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/9e45f40faefce5d0.png",
+      "type": "file",
+      "size": 538310
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/a670188398c3c59.png",
+      "type": "file",
+      "size": 537249
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/de06424023ffb4b9.png",
+      "type": "file",
+      "size": 245242
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/emulators-auth.png",
+      "type": "file",
+      "size": 192062
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/emulators-firebase.png",
+      "type": "file",
+      "size": 326781
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/f9e670f40bd615b0.png",
+      "type": "file",
+      "size": 573636
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-android/steps/img/sign-in-providers.png",
+      "type": "file",
+      "size": 148447
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/.gitignore",
+      "type": "file",
+      "size": 70
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/img",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/index.lab.md",
+      "type": "file",
+      "size": 26110
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/app-routing.module.ts",
+      "type": "file",
+      "size": 1085
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/app.component.css",
+      "type": "file",
+      "size": 0
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/app.component.html",
+      "type": "file",
+      "size": 128
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/app.component.spec.ts",
+      "type": "file",
+      "size": 1009
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/app.component.ts",
+      "type": "file",
+      "size": 401
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/app.config.ts",
+      "type": "file",
+      "size": 1147
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/app.module.ts",
+      "type": "file",
+      "size": 1394
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/app.routes.ts",
+      "type": "file",
+      "size": 931
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/components",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/services",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/assets/.gitkeep",
+      "type": "file",
+      "size": 0
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/assets/FriendlyChatLogo.png",
+      "type": "file",
+      "size": 18167
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/assets/Google.png",
+      "type": "file",
+      "size": 2409
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/assets/WithFirebase.png",
+      "type": "file",
+      "size": 10561
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/assets/add.svg",
+      "type": "file",
+      "size": 771
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/assets/menu.svg",
+      "type": "file",
+      "size": 592
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/assets/send.svg",
+      "type": "file",
+      "size": 1202
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/environments/environment.ts",
+      "type": "file",
+      "size": 344
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/img/img1.png",
+      "type": "file",
+      "size": 357071
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/img/img2.png",
+      "type": "file",
+      "size": 140640
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/img/img3.png",
+      "type": "file",
+      "size": 76530
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/img/img4.png",
+      "type": "file",
+      "size": 115870
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/img/img5.png",
+      "type": "file",
+      "size": 1211809
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/img/img6.png",
+      "type": "file",
+      "size": 198783
+    },
+    {
+      "path": "codelabs/codelab-friendlyeats-web/vanilla-js/steps/img/img7.png",
+      "type": "file",
+      "size": 57283
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/components/header",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/chat-page",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/login-page",
+      "type": "dir",
+      "size": null
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/services/chat.service.spec.ts",
+      "type": "file",
+      "size": 347
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/services/chat.service.ts",
+      "type": "file",
+      "size": 2777
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/components/header/header.component.css",
+      "type": "file",
+      "size": 55
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/components/header/header.component.html",
+      "type": "file",
+      "size": 2670
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/components/header/header.component.spec.ts",
+      "type": "file",
+      "size": 559
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/components/header/header.component.ts",
+      "type": "file",
+      "size": 431
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/chat-page/chat-page.component.css",
+      "type": "file",
+      "size": 0
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/chat-page/chat-page.component.html",
+      "type": "file",
+      "size": 3936
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/chat-page/chat-page.component.spec.ts",
+      "type": "file",
+      "size": 574
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/chat-page/chat-page.component.ts",
+      "type": "file",
+      "size": 947
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/login-page/login-page.component.css",
+      "type": "file",
+      "size": 0
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/login-page/login-page.component.html",
+      "type": "file",
+      "size": 930
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/login-page/login-page.component.spec.ts",
+      "type": "file",
+      "size": 581
+    },
+    {
+      "path": "codelabs/codelab-friendlychat-web/steps/src/app/pages/login-page/login-page.component.ts",
+      "type": "file",
+      "size": 377
+    }
+  ],
+  "languages": {
+    "TypeScript": {
+      "bytes": 13154,
+      "percentage": 58.99
+    },
+    "HTML": {
+      "bytes": 7983,
+      "percentage": 35.8
+    },
+    "JavaScript": {
+      "bytes": 1046,
+      "percentage": 4.69
+    },
+    "CSS": {
+      "bytes": 114,
+      "percentage": 0.51
+    }
+  },
+  "signatures": [],
+  "test_examples": [],
+  "issues": [
+    {
+      "number": 38,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-10-03T08:07:32+00:00",
+      "updated_at": "2024-10-03T08:07:32+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/38",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 37,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-08-08T08:06:51+00:00",
+      "updated_at": "2024-08-08T08:06:51+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/37",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 36,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-08-01T08:06:46+00:00",
+      "updated_at": "2024-08-01T08:06:46+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/36",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 35,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-07-27T08:05:55+00:00",
+      "updated_at": "2024-07-27T08:05:55+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/35",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 34,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-07-26T08:06:28+00:00",
+      "updated_at": "2024-07-26T08:06:28+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/34",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 33,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-07-18T08:06:34+00:00",
+      "updated_at": "2024-07-18T08:06:34+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/33",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 31,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-06-06T08:06:49+00:00",
+      "updated_at": "2024-06-06T08:06:49+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/31",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 29,
+      "title": "headerBuilder - please add a note that this widget is only shown on narrow screens.",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-06-02T08:02:30+00:00",
+      "updated_at": "2024-06-02T08:24:08+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/29",
+      "body": "**Page URL**\r\n\r\nhttps://firebase.google.com/codelabs/firebase-auth-in-flutter-apps#4\r\n\r\n**Describe the problem**\r\n\r\nHi,\r\n\r\nWhen testing on a wide screen the headerBuilder widget is not displayed. Therefore the reader very probably will spend some time to debug the code in order to find the \"bug\" - which will be in vain as it is not a bug at all: the headerBuilder widget is only shown on narrow screens...\r\n\r\nThe sideBuilder widget has the opposite behaviour: it is only shown on wide screens. Howe"
+    },
+    {
+      "number": 30,
+      "title": "The \"Report a mistake\" link points to the flutter website issues tracker - but should point to firebase-docs issue tracer",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-06-02T08:13:44+00:00",
+      "updated_at": "2024-06-02T08:13:44+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/30",
+      "body": "**Page**\r\n\r\n  Add a user authentication flow to a Flutter app using FirebaseUI\r\n  https://firebase.google.com/codelabs/firebase-auth-in-flutter-apps\r\n\r\n**Description**\r\n\r\nThe \"Report a mistake\" link points to the flutter website issues tracker - but should point to firebase-docs issue tracer, resulting in issues posted on the page of the wrong support team.\r\n\r\nSee the discussion on page \r\n\r\n  headerBuilder - please add a note that this widget is only shown on narrow screens. #10691\r\n  https://gi"
+    },
+    {
+      "number": 28,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-05-31T08:06:34+00:00",
+      "updated_at": "2024-05-31T08:06:34+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/28",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 26,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-05-30T08:06:24+00:00",
+      "updated_at": "2024-05-30T08:06:24+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/26",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 25,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-05-15T08:06:10+00:00",
+      "updated_at": "2024-05-15T08:06:10+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/25",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 24,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-04-23T08:06:07+00:00",
+      "updated_at": "2024-04-23T08:06:07+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/24",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 23,
+      "title": "Clarify Android Setup for Apple Login in Flutter Docs",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2024-03-24T12:02:42+00:00",
+      "updated_at": "2024-03-24T12:02:42+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/23",
+      "body": "Hey Firebase Docs Team,\r\n\r\nI noticed a missing detail in the Flutter authentication documentation regarding Apple login setup on android.\r\n\r\nCurrently, the documentation doesn't mention that for Android, the launchMode needs to be set to either `singleTask` or `singleTop`, as specified in the [sign_in_with_apple Dart package page](https://pub.dev/packages/sign_in_with_apple).\r\n\r\nThis omission might confuse developers because if the launchMode is set to singleInstance, the authentication works bu"
+    },
+    {
+      "number": 22,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-03-22T08:06:35+00:00",
+      "updated_at": "2024-03-22T08:06:35+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/22",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 20,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2024-02-07T15:49:03+00:00",
+      "updated_at": "2024-02-07T15:49:03+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/20",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 19,
+      "title": "Docs Updated",
+      "state": "open",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2023-11-17T08:01:55+00:00",
+      "updated_at": "2023-11-17T08:01:55+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/19",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 12,
+      "title": "Docs Updated",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-09-12T08:02:05+00:00",
+      "updated_at": "2023-11-03T21:07:51+00:00",
+      "closed_at": "2023-11-03T21:07:51+00:00",
+      "url": "https://github.com/firebase/firebase-docs/issues/12",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 13,
+      "title": "Docs Updated",
+      "state": "closed",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2023-09-20T08:02:01+00:00",
+      "updated_at": "2023-11-03T21:07:49+00:00",
+      "closed_at": "2023-11-03T21:07:49+00:00",
+      "url": "https://github.com/firebase/firebase-docs/issues/13",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 14,
+      "title": "Docs Updated",
+      "state": "closed",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2023-10-03T08:01:59+00:00",
+      "updated_at": "2023-11-03T21:07:46+00:00",
+      "closed_at": "2023-11-03T21:07:46+00:00",
+      "url": "https://github.com/firebase/firebase-docs/issues/14",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 15,
+      "title": "Docs Updated",
+      "state": "closed",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2023-10-13T08:02:07+00:00",
+      "updated_at": "2023-11-03T21:07:41+00:00",
+      "closed_at": "2023-11-03T21:07:41+00:00",
+      "url": "https://github.com/firebase/firebase-docs/issues/15",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 16,
+      "title": "Docs Updated",
+      "state": "closed",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2023-10-14T08:01:48+00:00",
+      "updated_at": "2023-11-03T21:07:38+00:00",
+      "closed_at": "2023-11-03T21:07:38+00:00",
+      "url": "https://github.com/firebase/firebase-docs/issues/16",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 17,
+      "title": "Docs Updated",
+      "state": "closed",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2023-11-01T08:02:02+00:00",
+      "updated_at": "2023-11-03T21:07:36+00:00",
+      "closed_at": "2023-11-03T21:07:36+00:00",
+      "url": "https://github.com/firebase/firebase-docs/issues/17",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 18,
+      "title": "Docs Updated",
+      "state": "closed",
+      "labels": [
+        "type: process",
+        "priority: p3"
+      ],
+      "milestone": null,
+      "created_at": "2023-11-03T20:23:43+00:00",
+      "updated_at": "2023-11-03T21:07:32+00:00",
+      "closed_at": "2023-11-03T21:07:32+00:00",
+      "url": "https://github.com/firebase/firebase-docs/issues/18",
+      "body": "New changes pulled into monorepo."
+    },
+    {
+      "number": 5,
+      "title": "Android 13 Dynamic Links Update",
+      "state": "open",
+      "labels": [],
+      "milestone": null,
+      "created_at": "2022-12-01T15:47:21+00:00",
+      "updated_at": "2022-12-01T15:47:21+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/5",
+      "body": "As evidenced in this [issue](https://github.com/firebase/firebase-android-sdk/issues/4198), there are breaking API changes for how dynamic link hosts are used.\r\n\r\nProposed Change: an update to the example [here](https://github.com/firebase/firebase-docs/blob/d2d4b364294ab97f740a9a88ef898efed5e5335b/docs/flutter/dynamic-links/receive.mdx) and [here](https://firebase.google.com/docs/dynamic-links/android/receive#add-an-intent-filter-for-deep-links) (I can't find where this file is).\r\n\r\n\r\n```xml\r\n<"
+    },
+    {
+      "number": 2,
+      "title": "Security Policy violation SECURITY.md",
+      "state": "open",
+      "labels": [
+        "allstar"
+      ],
+      "milestone": null,
+      "created_at": "2022-01-24T22:51:57+00:00",
+      "updated_at": "2022-01-24T22:51:57+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/2",
+      "body": "Allstar has detected that this repository’s SECURITY.md security policy is out of compliance. Status:\nSecurity policy not enabled.\nA SECURITY.md file can give users information about what constitutes a vulnerability and how to report one securely so that information about a bug is not publicly visible. Examples of secure reporting methods include using an issue tracker with private issue support, or encrypted email with a published key.\n\nTo fix this, add a SECURITY.md file that explains how to h"
+    },
+    {
+      "number": 1,
+      "title": "Security Policy violation Outside Collaborators",
+      "state": "open",
+      "labels": [
+        "allstar"
+      ],
+      "milestone": null,
+      "created_at": "2022-01-24T22:51:53+00:00",
+      "updated_at": "2022-01-24T22:51:54+00:00",
+      "closed_at": null,
+      "url": "https://github.com/firebase/firebase-docs/issues/1",
+      "body": "Allstar has detected that this repository’s Outside Collaborators security policy is out of compliance. Status:\nDid not find any owners of this repository\nThis policy requires all repositories to have an organization member or team assigned as an administrator. Either there are no administrators, or all administrators are outside collaborators. A responsible party is required by organization policy to respond to security events and organization requests.\n\nTo add an administrator From the main pa"
+    }
+  ],
+  "changelog": "",
+  "releases": []
+}
