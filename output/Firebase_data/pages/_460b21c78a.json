@@ -1,0 +1,62 @@
+{
+  "url": "https://firebase.google.com/docs",
+  "title": "",
+  "content": "If you're already familiar with the suite of Firebase products, get started with the fundamentals of Firebase, like adding Firebase to your app!\n\nTry out Firebase Studio to rapidly prototype, build, and ship full-stack AI-infused apps quickly and efficiently, right from your browser\n\nUse Firebase and Gemini together to make development faster, easier, and better.\n\nBuild AI-powered experiences in your apps using our APIs, SDKs, and toolkits.\n\nGet to market quickly and securely with products that can scale globally.\n\nAccelerate your development with fully managed infrastructure, powered by Google Cloud, so you can focus on what matters most.\n\nRun your app with confidence and deliver the best experience for your users.\n\nLaunch, monitor, and iterate with AI-assistive tools that help you optimize your app's quality and experience.\n\nWhether you learn by reading or by doing, Firebase offers you many resources to become skillful with our products.\n\nDescriptive how-to content with both high-level introductions and step-by-step workflows for using Firebase products. Find Firebase guides under the Fundamentals, AI Build, and Run tabs at the top of the page.\n\nGuided tutorials with hands-on coding to develop practical experience and build working code and apps. Start a Firebase codelab for iOS, Android, or Web.\n\nFormal reference documentation for Firebase SDKs, Firebase REST APIs, and Firebase tools. Find Firebase reference docs under the Reference tab at the top of the page.\n\nFully working code to get started fast and see real-world integrations of Firebase features. Explore Firebase quickstarts and samples in the Samples tab at the top of the page.",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Firebase developer documentation",
+      "id": "firebase-developer-documentation"
+    },
+    {
+      "level": "h3",
+      "text": "Products to help you harness AI",
+      "id": "products-to-help-you-harness-ai"
+    },
+    {
+      "level": "h3",
+      "text": "Products to help you BUILD your app",
+      "id": "products-to-help-you-build-your-app"
+    },
+    {
+      "level": "h3",
+      "text": "Products to help you RUN your app",
+      "id": "products-to-help-you-run-your-app"
+    },
+    {
+      "level": "h2",
+      "text": "Documentation and learning content",
+      "id": "documentation-and-learning-content"
+    },
+    {
+      "level": "h3",
+      "text": "Guides",
+      "id": "guides"
+    },
+    {
+      "level": "h3",
+      "text": "Codelabs",
+      "id": "codelabs"
+    },
+    {
+      "level": "h3",
+      "text": "Reference documentation",
+      "id": "reference-documentation"
+    },
+    {
+      "level": "h3",
+      "text": "Quickstarts and samples",
+      "id": "quickstarts-and-samples"
+    }
+  ],
+  "code_samples": [],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

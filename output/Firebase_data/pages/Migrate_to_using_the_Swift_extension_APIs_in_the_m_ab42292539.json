@@ -1,0 +1,82 @@
+{
+  "url": "https://firebase.google.com/docs/ios/swift-migration",
+  "title": "Migrate to using the Swift extension APIs in the main modules Stay organized with collections Save and categorize content based on your preferences.",
+  "content": "We're merging our Swift extension SDKs into the main SDKs in order to make Swift-native APIs more broadly available and increase our ability to support new Swift language features in the future. The changes we're making and their expected impacts on your projects are documented below.\n\nStarting with Firebase for Apple SDK 10.17.0, the Swift extension SDKs have been merged into their corresponding main SDKs. For example, all of the APIs from the FirebaseFirestoreSwift module have been added to FirebaseFirestore, so you no longer have to import the FirebaseFirestoreSwift module to access those APIs.\n\nAs all Swift extensions now are part of the main modules, the extension SDKs are no longer required, and are deprecated. Including or using the Swift extension SDKs will raise a compiler warning and as early as February 2024, we'll stop releasing the Swift extensions entirely.\n\n★ Note: Any currently or previously released versions of the Swift extensions will still function. However, we recommend that you migrate your app to use Swift APIs from the main module to ensure you continue to receive fixes and can take advantage of changes and new features.\n\nThe Swift extension SDKs have been merged into the main SDKs and then deprecated in favor of the main SDKs. See the release notes for version 10.17.0 announcing this change.\n\nYou can now use the Swift extension SDK APIs directly from the main SDK modules. Usage of the extension SDKs will is still possible until the next major version release but will raise a deprecation warning when used.\n\nWe'll stop releasing new versions of the Swift extensions, and we'll remove the Swift extensions from Firebase's Package.swift. Older versions will continue to function but will not receive updates.\n\nIf you currently do not use the Swift extension SDKs, no action is necessary. If you do use a Swift extension SDK, make the following changes in your project.\n\nAfter updating Firebase to version 10.17.0+, navigate to the Frameworks, Libraries, and Embedded Content section in the General tab of your target's settings and remove the Swift extension SDK (such as FirebaseFirestoreSwift).\n\nAfter updating Firebase to version 10.17.0+, navigate to your Podfile and remove the line corresponding to your project's dependency on adding the frameworks section for your target and remove the Swift extension SDK (such as pod FirebaseFirestoreSwift). Then, re-run the pod install command.\n\nAfter updating Firebase to version 10.17.0+, remove any Swift extension xcframeworks within your project (such as FirebaseFirestoreSwift.xcframework).\n\nFor all of the Swift extension SDKs you previously used, take the following actions:",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Migrate to using the Swift extension APIs in the main modules Stay organized with collections Save and categorize content based on your preferences.",
+      "id": ""
+    },
+    {
+      "level": "h2",
+      "text": "What's changing?",
+      "id": "swift-ext-apis-to-main-whats-changing"
+    },
+    {
+      "level": "h2",
+      "text": "Important dates for this change",
+      "id": "swift-ext-apis-to-main-important-dates"
+    },
+    {
+      "level": "h3",
+      "text": "In October 2023",
+      "id": "swift-ext-apis-to-main-important-dates"
+    },
+    {
+      "level": "h3",
+      "text": "As early as February 2024",
+      "id": "swift-ext-apis-to-main-stop-releasing-date"
+    },
+    {
+      "level": "h2",
+      "text": "How to migrate to use Swift-native APIs from the main module",
+      "id": "swift-ext-apis-to-main-how-to-migrate"
+    },
+    {
+      "level": "h3",
+      "text": "Workspace changes",
+      "id": "swift-ext-apis-to-main-workspace-changes"
+    },
+    {
+      "level": "h4",
+      "text": "Swift Package Manager",
+      "id": "swift-ext-apis-to-main-swift-package-manager"
+    },
+    {
+      "level": "h4",
+      "text": "CocoaPods",
+      "id": "swift-ext-apis-to-main-cocoapods"
+    },
+    {
+      "level": "h4",
+      "text": "Zip distribution and Carthage",
+      "id": "swift-ext-apis-to-main-zip-and-carthage"
+    },
+    {
+      "level": "h3",
+      "text": "Source code changes",
+      "id": "swift-ext-apis-to-main-source-code-changes"
+    }
+  ],
+  "code_samples": [],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/ios/swift-migration",
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management",
+    "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary",
+    "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management",
+    "https://firebase.google.com/docs/ios/learn-more",
+    "https://firebase.google.com/docs/ios/installation-methods",
+    "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+    "https://firebase.google.com/docs/ios/app-store-data-collection",
+    "https://firebase.google.com/docs/ios/supporting-ios-14",
+    "https://firebase.google.com/docs/ios/troubleshooting-faq",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

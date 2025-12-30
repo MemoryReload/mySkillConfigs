@@ -1,0 +1,111 @@
+{
+  "url": "https://firebase.google.com/docs/ios/supporting-ios-14",
+  "title": "Supporting iOS 14 Stay organized with collections Save and categorize content based on your preferences.",
+  "content": "With iOS 14.5, Apple requires developers to receive the user’s permission through the App Tracking Transparency framework to track them or access their device’s advertising identifier (IDFA). See Apple's User Privacy and Data Use and Apple's App Tracking Transparency documentation for more details.\n\nFirebase SDKs do not access IDFA, though some have integrations with Google Analytics that may involve IDFA access.\n\nThe table below lists Firebase products that are available on Apple platforms and describes how the functionality of each product is impacted if IDFA is not accessible.\n\n1 Firebase AI Logic was formerly called \"Vertex AI in Firebase\".\n\nThe table below lists Firebase-integrated products that are affected if IDFA is not accessible.\n\nIf you would like your Apple application to be able to access IDFA, you can add Apple's App Tracking Transparency framework to your app and request permission to track or access your users' IDFA.\n\nMany applications choose to present a warm-up, or explainer, screen prior to asking for permission. The explainer screen allows you to give users more context on how your app uses IDFA prior to requesting access.\n\nIf you are an AdMob or Ad Manager app publisher, consider using Funding Choices, which handles obtaining consent for serving personalized advertisements as well as consent for tracking the user according to Apple's guidelines automatically. See the AdMob Consent with User Messaging page for more details.\n\nThe following guide provides a solution using Firebase In-App Messaging for creating and displaying an explainer screen prior to requesting tracking access via App Tracking Transparency.\n\nFollow the instructions to add In-App Messaging to your Apple application.\n\nFirst, avoid displaying the explainer screen on devices that cannot present the consent dialog, such as devices running iOS 13. Make sure this code executes immediately after FirebaseApp.configure().\n\nImplement the InAppMessagingDisplayDelegate protocol to handle events when the user dismisses the explainer screen. If the user taps OK, display the system prompt via the App Tracking Transparency framework.\n\nOnce the code is in place in your application, create an in-app message in the Firebase console.\n\nYou can customize the appearance of the explainer screen by following the instructions in the In-App Messaging documentation.\n\nIn-App Messaging has a built-in integration with Firebase A/B Testing, which you can use to experiment with different explainer screens.\n\nFirebase A/B Testing automatically creates experiment groups and helps you visualize how users interact with different variants of your application.\n\nIf you didn't log a Google Analytics event when handling the app tracking permissions response, you will need to in order to measure changes in the response rate when running an A/B experiment.\n\nIn the Analytics section of the Firebase console, navigate to the Conversions menu, then add a new conversion event with the same name as the event logged with the sample code above.\n\nIn the console's In-App Messaging menu, click New Experiment, then follow the instructions on the resulting screens.\n\nOnce you've published your experiment, it will need to collect data for some time before it can produce conclusive results.\n\nRead the Firebase A/B Testing documentation for information on how to monitor an experiment and roll out a successful variant.",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Supporting iOS 14 Stay organized with collections Save and categorize content based on your preferences.",
+      "id": ""
+    },
+    {
+      "level": "h2",
+      "text": "Affected Firebase products",
+      "id": "affected-firebase-products"
+    },
+    {
+      "level": "h2",
+      "text": "Affected Firebase integrations",
+      "id": "affected-firebase-integrations"
+    },
+    {
+      "level": "h2",
+      "text": "Requesting App Tracking Permission on iOS 14",
+      "id": "request-app-tracking-permission-ios-14"
+    },
+    {
+      "level": "h3",
+      "text": "Add In-App Messaging to your app",
+      "id": "add-in-app-messaging-to-app"
+    },
+    {
+      "level": "h3",
+      "text": "Handle in-app message dismissal",
+      "id": "handle-in-app-message-dismissal"
+    },
+    {
+      "level": "h3",
+      "text": "Swift",
+      "id": "swift"
+    },
+    {
+      "level": "h3",
+      "text": "Swift",
+      "id": "swift_1"
+    },
+    {
+      "level": "h3",
+      "text": "Create an In-App Messaging campaign",
+      "id": "create-in-app-messaging-campaign"
+    },
+    {
+      "level": "h2",
+      "text": "Optional: A/B Test different explainer screens",
+      "id": "ab-test-explainer-screens"
+    },
+    {
+      "level": "h3",
+      "text": "Record app tracking permissions",
+      "id": "record-app-tracking-permissions"
+    },
+    {
+      "level": "h3",
+      "text": "Swift",
+      "id": "swift_2"
+    },
+    {
+      "level": "h3",
+      "text": "Create a new conversion event",
+      "id": "create-new-conversion-event"
+    },
+    {
+      "level": "h3",
+      "text": "Create a new experiment",
+      "id": "create-new-experiment"
+    }
+  ],
+  "code_samples": [
+    {
+      "code": "if NSClassFromString(\"ATTrackingManager\") == nil {\n  // Avoid showing the App Tracking Transparency explainer if the\n  // framework is not linked.\n  InAppMessaging.inAppMessaging().messageDisplaySuppressed = true\n}",
+      "language": "unknown"
+    },
+    {
+      "code": "// The InAppMessaging delegate must be assigned before events can be handled.\nInAppMessaging.inAppMessaging().delegate = self\n\nfunc messageClicked(_ inAppMessage: InAppMessagingDisplayMessage,\n                    with action: InAppMessagingAction) {\n  switch action.actionText {\n  case \"OK\":\n    ATTrackingManager.requestTrackingAuthorization { status in\n      switch status {\n      case .authorized:\n        // Optionally, log an event when the user accepts.\n        Analytics.logEvent(\"tracking_authorized\", parameters: nil)\n      case _:\n        // Optionally, log an event here with the rejected value.\n      }\n    }\n  case _:\n    // do nothing\n  }\n}",
+      "language": "go"
+    },
+    {
+      "code": "ATTrackingManager.requestTrackingAuthorization { status in\n  switch status {\n  case .authorized:\n    // Optionally, log an event when the user accepts.\n    Analytics.logEvent(\"tracking_authorized\", parameters: nil)\n  case _:\n    // Optionally, log an event here with the rejected value.\n  }\n}",
+      "language": "css"
+    }
+  ],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/ios/supporting-ios-14",
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management",
+    "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary",
+    "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management",
+    "https://firebase.google.com/docs/ios/learn-more",
+    "https://firebase.google.com/docs/ios/installation-methods",
+    "https://firebase.google.com/docs/ios/swift-migration",
+    "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+    "https://firebase.google.com/docs/ios/app-store-data-collection",
+    "https://firebase.google.com/docs/ios/troubleshooting-faq",
+    "https://firebase.google.com/docs/reference/swift/firebaseinappmessagingdisplay/api/reference/Protocols/InAppMessagingDisplayDelegate",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

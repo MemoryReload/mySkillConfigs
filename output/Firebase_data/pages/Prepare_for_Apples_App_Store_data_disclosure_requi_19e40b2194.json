@@ -1,0 +1,303 @@
+{
+  "url": "https://firebase.google.com/docs/ios/app-store-data-collection",
+  "title": "Prepare for Apple's App Store data disclosure requirements Stay organized with collections Save and categorize content based on your preferences.",
+  "content": "Apple requires developers publishing apps on the App Store to disclose certain information regarding their apps’ data use.\n\nThis document contains Firebase Apple platform library behaviors that could require disclosure according to Apple's guidelines. When installing Firebase, take note of the build targets installed into your app by your dependency manager of choice. For each target that your dependency manager lists, review the corresponding section of this document to determine what data collection you must disclose. The number of Firebase build targets you have installed may be greater than the number you expected since some Firebase build targets have transient dependencies on others.\n\nIf you are using any optional product features that involve additional data or participating in any tests of new product features that involve additional data, be sure to check if those features or tests require additional data disclosures.\n\nTo ensure your app's disclosures are accurate, we recommend that you always use the latest version of each Firebase SDK.\n\nThe Firebase user agent is a bundle of information collected from most Firebase SDKs and includes the following: device, OS, app bundle ID, and developer platform. The user agent is never linked to a user or device identifier and is used by the Firebase team to determine platform and version adoption in order to better inform Firebase feature decisions.\n\nIncludes networking utilities which may be used by other SDKs to collect data.\n\nA/B Testing does not collect data.\n\nThe Firebase A/B Testing SDK sets and uses Google Analytics user properties in order to specify membership in experiment groups for Firebase Remote Config and Firebase In-App Messaging.\n\nFirebase AI Logic was formerly called \"Vertex AI in Firebase\" with the library FirebaseVertexAI. Also, Firebase AI Logic formerly had the library FirebaseAI.\n\nGoogle Analytics data collection information can be found in this support article.\n\nThe App Distribution SDK is intended for beta testing usage only. Do not include the App Distribution SDK in your application when submitting to the App Store.\n\nIf data collection is enabled:\n\nIf Dynamic Links is used together with Google Analytics:\n\nIf Cloud Messaging is used together with Google Analytics:\n\nIf Remote Config is used together with Google Analytics:\n\nIf Remote Config personalization is used:",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Prepare for Apple's App Store data disclosure requirements Stay organized with collections Save and categorize content based on your preferences.",
+      "id": ""
+    },
+    {
+      "level": "h2",
+      "text": "Firebase user agent",
+      "id": "firebase-user-agent"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseCore",
+      "id": "firebasecore"
+    },
+    {
+      "level": "h2",
+      "text": "GoogleUtilities",
+      "id": "googleutilities"
+    },
+    {
+      "level": "h2",
+      "text": "GoogleDataTransport",
+      "id": "googledatatransport"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "googledatatransport-always-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseABTesting",
+      "id": "firebaseabtesting"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseAILogic",
+      "id": "firebaseailogic"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebaseailogic-always-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebaseailogic-default-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Usage dependent",
+      "id": "firebaseailogic-usage-dependent"
+    },
+    {
+      "level": "h2",
+      "text": "Google Analytics",
+      "id": "analytics"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseAppCheck",
+      "id": "firebaseappcheck"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebaseappcheck-default-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Usage dependent",
+      "id": "firebaseappcheck-usage-dependent"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseAppDistribution",
+      "id": "firebaseappdistribution"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseAuthentication",
+      "id": "firebaseauthentication"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebaseauthentication-always-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebaseauthentication-default-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Usage dependent",
+      "id": "firebaseauthentication-usage-dependent"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseCrashlytics",
+      "id": "firebasecrashlytics"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebasecrashlytics-always-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Usage dependent",
+      "id": "firebasecrashlytics-usage-dependent"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseDatabase",
+      "id": "firebasedatabase"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebasedatabase-default-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseDataConnect",
+      "id": "firebasedataconnect"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebasedataconnect-default-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseDynamicLinks",
+      "id": "firebasedynamiclinks"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebasedynamiclinks-always-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebasedynamiclinks-default-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Usage dependent",
+      "id": "firebasedynamiclinks-usage-dependent"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseFirestore",
+      "id": "firebasefirestore"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebasefirestore-default-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseFunctions",
+      "id": "firebasefunctions"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebasefunctions-always-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseInAppMessaging",
+      "id": "firebaseinappmessaging"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebaseinappmessaging-always-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseInstallations",
+      "id": "firebaseinstallations"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebaseinstallations-default-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseMessaging",
+      "id": "firebasemessaging"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebasemessaging-always-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebasemessaging-default-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Usage dependent",
+      "id": "firebasemessaging-usage-dependent"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseMLModelDownloader",
+      "id": "firebasemlmodeldownloader"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "always_collected_9"
+    },
+    {
+      "level": "h2",
+      "text": "FirebasePerformance",
+      "id": "firebaseperformance"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebaseperformance-always-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseRemoteConfig",
+      "id": "firebaseremoteconfig"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebaseremoteconfig-always-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebaseremoteconfig-default-collected"
+    },
+    {
+      "level": "h3",
+      "text": "Usage dependent",
+      "id": "firebaseremoteconfig-usage-dependent"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseSessions",
+      "id": "firebasesessions"
+    },
+    {
+      "level": "h3",
+      "text": "Always collected",
+      "id": "firebasesessions-always-collected"
+    },
+    {
+      "level": "h2",
+      "text": "FirebaseStorage",
+      "id": "firebasestorage"
+    },
+    {
+      "level": "h3",
+      "text": "Collected by default",
+      "id": "firebasestorage-default-collected"
+    }
+  ],
+  "code_samples": [],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/ios/app-store-data-collection",
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management",
+    "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary",
+    "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management",
+    "https://firebase.google.com/docs/ios/learn-more",
+    "https://firebase.google.com/docs/ios/installation-methods",
+    "https://firebase.google.com/docs/ios/swift-migration",
+    "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+    "https://firebase.google.com/docs/ios/supporting-ios-14",
+    "https://firebase.google.com/docs/ios/troubleshooting-faq",
+    "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Classes/FirebaseApp",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "url": "https://firebase.google.com/docs/ios/learn-more",
+  "title": "Understand Firebase on Apple platforms Stay organized with collections Save and categorize content based on your preferences.",
+  "content": "As you're developing your Apple app using Firebase, you might discover concepts that are unfamiliar or specific to Firebase. This page aims to answer those questions or point you to resources to learn more.\n\nIf you have questions about a topic not covered on this page, feel free to visit one of our online communities. We'll also update this page with new topics periodically, so check back to see if we've added the topic you want to learn about!\n\nThe following table describes which Firebase libraries are compatible with which Apple platforms. For the time being, visionOS and watchOS are community-supported only. See the Firebase Apple platforms SDK GitHub repository for installation instructions and known issues.\n\n1 Firebase AI Logic was formerly called \"Vertex AI in Firebase\".\n\nMost Firebase libraries will build and run in an App Clip target, however, many are restricted as a result of underlying OS restrictions. Known issues include:\n\nSee the Firebase GitHub repository for a full list of known App Clip issues.\n\nAs part of adding Firebase to your Apple project, you need to add the GoogleService-Info.plist configuration file to your project. If you want to use multiple Firebase projects in a single app, visit the documentation for configuring multiple projects.\n\nSee the Swift reference documentation to learn about the Firebase app initialization process in more detail.\n\nLearn more about Swift Package Manager integration in our guide.\n\nFirebase Apple platform SDK Swift extensions were formerly small, open source add-ons to the existing Firebase Apple platform libraries that enable your code to use Swift language-specific features. These APIs have since been added directly to the main libraries and don't need to be included separately. If you formerly had a Swift extension SDK in your codebase, see the migration guide for upgrade instructions.\n\nFirebase fully supports SwiftUI, though the setup will be slightly different from UIKit apps in order for Firebase to function correctly in a fully SwiftUI environment. Take a look at this blog post by Peter Friese for more details.\n\nSwiftUI applications must disable swizzling due to a known issue. See the app delegate swizzling section for more details.\n\nFirebase swizzles some methods in your app's app delegate class to automatically connect certain Firebase services to OS callbacks, like FCM and the APNs token. You can disable swizzling in your app by adding the flag FirebaseAppDelegateProxyEnabled in the app’s Info.plist file and setting it to NO.\n\nFour Firebase products use App Delegate swizzling: Analytics, App Distribution, Authentication, and FCM. If you've disabled swizzling in your application and you use any of the following products, refer to the product-specific guide to learn about how to use the product without swizzling:\n\niOS 14 includes new changes to user permissions surrounding the user's advertising identifier. See the preparing for iOS 14 guide for more details on whether or not your app may be affected.\n\nTo ease maintenance of our Apple platforms documentation, Firebase has decided to concentrate on Swift snippets and code samples in our guides and other developer materials. Objective-C snippets will be removed from our guides starting January 1, 2024. We will continue to maintain up-to-date reference documentation for Objective-C for all Firebase products.\n\nFirebase supports open source development, and we encourage community contributions and feedback.\n\nAll Firebase SDKs for Apple platforms except Analytics are developed as open source libraries in our public Firebase GitHub repository.\n\nFirebaseUI is a set of utility libraries built on Firebase, including a drop-in UI flow for authentication and data utilities for Cloud Firestore and Realtime Database. See more details about FirebaseUI on our GitHub page.\n\nFirebase maintains a collection of quickstart samples for most Firebase APIs on iOS. Find these quickstarts in our public Firebase GitHub quickstart repository.\n\nYou can open each quickstart in Xcode, then run them on a mobile device or simulator. Or you can use these quickstarts as example code for using Firebase SDKs.",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Understand Firebase on Apple platforms Stay organized with collections Save and categorize content based on your preferences.",
+      "id": ""
+    },
+    {
+      "level": "h2",
+      "text": "Firebase library support by platform",
+      "id": "firebase_library_support_by_platform"
+    },
+    {
+      "level": "h3",
+      "text": "App Clips",
+      "id": "app_clips"
+    },
+    {
+      "level": "h2",
+      "text": "GoogleService-Info.plist",
+      "id": "googleservice-infoplist"
+    },
+    {
+      "level": "h2",
+      "text": "Swift Package Manager",
+      "id": "swift_package_manager"
+    },
+    {
+      "level": "h2",
+      "text": "Swift Extensions",
+      "id": "swift_extensions"
+    },
+    {
+      "level": "h2",
+      "text": "SwiftUI",
+      "id": "swiftui"
+    },
+    {
+      "level": "h2",
+      "text": "App delegate swizzling",
+      "id": "app_delegate_swizzling"
+    },
+    {
+      "level": "h2",
+      "text": "Supporting iOS 14",
+      "id": "supporting_ios_14"
+    },
+    {
+      "level": "h2",
+      "text": "Ongoing support for Objective-C",
+      "id": "ongoing_support_for_objective-c"
+    },
+    {
+      "level": "h2",
+      "text": "Open source resources for Firebase Apple platform SDKs",
+      "id": "open_source_resources_for_firebase_apple_platform_sdks"
+    },
+    {
+      "level": "h3",
+      "text": "Firebase Apple platform SDKs",
+      "id": "firebase_apple_platform_sdks"
+    },
+    {
+      "level": "h3",
+      "text": "FirebaseUI",
+      "id": "firebaseui"
+    },
+    {
+      "level": "h3",
+      "text": "Quickstart samples",
+      "id": "quickstart_samples"
+    }
+  ],
+  "code_samples": [],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/ios/learn-more",
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management",
+    "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary",
+    "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management",
+    "https://firebase.google.com/docs/ios/installation-methods",
+    "https://firebase.google.com/docs/ios/swift-migration",
+    "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+    "https://firebase.google.com/docs/ios/app-store-data-collection",
+    "https://firebase.google.com/docs/ios/supporting-ios-14",
+    "https://firebase.google.com/docs/ios/troubleshooting-faq",
+    "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Classes/FirebaseApp",
+    "https://firebase.google.com/docs/ios/swift-package-manager",
+    "https://firebase.google.com/docs/ios/docs/cloud-messaging/ios/client",
+    "https://firebase.google.com/docs/ios/prepare-for-ios-14",
+    "https://firebase.google.com/docs/reference/ios/modules",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "url": "https://firebase.google.com/docs/ios/installation-methods",
+  "title": "Options to install Firebase in your Apple app Stay organized with collections Save and categorize content based on your preferences.",
+  "content": "Firebase recommends Swift Package Manager for new projects.\n\nSwift Package Manager support requires 16.2 or higher.\n\nIf migrating from a CocoaPods-based project, run pod deintegrate to remove CocoaPods from your Xcode project. The CocoaPods-generated .xcworkspace file can safely be deleted afterward. If you're adding Firebase to a project for the first time, this step can be ignored.\n\nIn Xcode, install the Firebase libraries by navigating to File > Add Packages.\n\nIn the prompt that appears, select the Firebase GitHub repository:\n\nSelect the version of Firebase you want to use. For new projects, we recommend using the newest version of Firebase.\n\nChoose the Firebase libraries you want to include in your app.\n\nOnce you're finished, Xcode will begin resolving your package dependencies and downloading them in the background.\n\nTo integrate Firebase to a Swift package via a Package.swift manifest, you can add Firebase to the dependencies array of your package. For more details, see the Swift Package Manager documentation.\n\nThen in any target that depends on a Firebase product, add it to the dependencies array of that target.\n\nSome Firebase products require extra integration steps in order to function correctly.\n\nGoogle Analytics requires adding the -ObjC linker flag to your target's build settings if included transitively.\n\nCrashlytics requires you to upload debug symbols.\n\nYou can use a run script build phase for Xcode to automatically upload debug symbols post-build. Find the run script here:\n\nAnother option for uploading symbols is to use the upload-symbols script. Place the script in a subdirectory of your project file (for example scripts/upload-symbols), then make sure that the script is executable:\n\nThis script can be used to manually upload dSYM files. For usage notes and additional instructions for the script, run upload-symbols without any parameters.\n\nFirebase supports installation with CocoaPods in addition to Swift Package Manager.\n\nFirebase's CocoaPods distribution requires Xcode 16.2 and CocoaPods 1.12.0 or higher. Here's how to install Firebase using CocoaPods:\n\nCreate a Podfile if you don't already have one. From the root of your project directory, run the following command:\n\nTo your Podfile, add the Firebase pods that you want to use in your app.\n\nYou can add any of the supported Firebase products to your app.\n\nLearn more about IDFA, the device-level advertising identifier, in Apple's User Privacy and Data Use and App Tracking Transparency documentation.\n\nInstall the pods, then open your .xcworkspace file to see the project in Xcode:\n\nSome Firebase products require extra integration steps in order to function correctly.\n\nCrashlytics requires you to upload debug symbols.\n\nYou can use a run script build phase for Xcode to automatically upload debug symbols post-build. Find the run script here:\n\nCarthage support is experimental. See the instructions on GitHub for including Firebase in your app via Carthage.\n\nFirebase provides a pre-built binary XCFramework distribution for users who want to integrate Firebase without using a dependency manager. To install Firebase:\n\nDownload the framework SDK zip. This file contains architecture slices for all available target architectures for all Firebase SDKs and thus may take some time to download.\n\nUnzip the file, then review the README for the frameworks that you want to include in your app.\n\nAdd the -ObjC linker flag in your Other Linker Settings in your target's build settings.",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Options to install Firebase in your Apple app Stay organized with collections Save and categorize content based on your preferences.",
+      "id": ""
+    },
+    {
+      "level": "h2",
+      "text": "Swift Package Manager",
+      "id": "swift-package-manager"
+    },
+    {
+      "level": "h3",
+      "text": "Via Xcode",
+      "id": "via-xcode"
+    },
+    {
+      "level": "h3",
+      "text": "Via Package.swift",
+      "id": "via-package-dot-swift"
+    },
+    {
+      "level": "h3",
+      "text": "Product-specific considerations",
+      "id": "product-specific-considerations"
+    },
+    {
+      "level": "h4",
+      "text": "Google Analytics",
+      "id": "analytics"
+    },
+    {
+      "level": "h4",
+      "text": "Crashlytics",
+      "id": "crashlytics"
+    },
+    {
+      "level": "h2",
+      "text": "CocoaPods",
+      "id": "cocoapods"
+    },
+    {
+      "level": "h3",
+      "text": "Analytics enabled",
+      "id": "analytics-enabled"
+    },
+    {
+      "level": "h3",
+      "text": "Analytics not enabled",
+      "id": "analytics-not-enabled"
+    },
+    {
+      "level": "h3",
+      "text": "Product-specific considerations",
+      "id": "product-specific-considerations"
+    },
+    {
+      "level": "h4",
+      "text": "Crashlytics",
+      "id": "crashlytics"
+    },
+    {
+      "level": "h2",
+      "text": "Carthage",
+      "id": "carthage"
+    },
+    {
+      "level": "h2",
+      "text": "Integrate manually",
+      "id": "integrate-manually"
+    }
+  ],
+  "code_samples": [
+    {
+      "code": "https://github.com/firebase/firebase-ios-sdk.git",
+      "language": "yaml"
+    },
+    {
+      "code": "dependencies: [\n\n  .package(name: \"Firebase\",\n           url: \"https://github.com/firebase/firebase-ios-sdk.git\",\n           from: \"8.0\"),\n  // ...\n\n],",
+      "language": "yaml"
+    },
+    {
+      "code": ".target(\n  name: \"MyTargetName\",\n  dependencies: [\n    .product(name: \"FirebaseAuth\", package: \"Firebase\"),\n    // ...\n  ]\n),",
+      "language": "json"
+    },
+    {
+      "code": "${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run",
+      "language": "bash"
+    },
+    {
+      "code": "chmod +x scripts/upload-symbols",
+      "language": "unknown"
+    },
+    {
+      "code": "# Add the Firebase pod for Google Analytics\npod 'FirebaseAnalytics'\n\n# For Analytics without IDFA collection capability, use this pod instead\n# pod FirebaseAnalytics/Core\n\n# Add the pods for any other Firebase products you want to use in your app\n# For example, to use Firebase Authentication and Cloud Firestore\npod 'FirebaseAuth'\npod 'FirebaseFirestore'",
+      "language": "markdown"
+    },
+    {
+      "code": "# Add the pods for the Firebase products you want to use in your app\n# For example, to use Firebase Authentication and Cloud Firestore\npod 'FirebaseAuth'\npod 'FirebaseFirestore'",
+      "language": "markdown"
+    },
+    {
+      "code": "\"${PODS_ROOT}/FirebaseCrashlytics/run\"",
+      "language": "bash"
+    }
+  ],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/ios/installation-methods",
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management",
+    "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary",
+    "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management",
+    "https://firebase.google.com/docs/ios/learn-more",
+    "https://firebase.google.com/docs/ios/swift-migration",
+    "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+    "https://firebase.google.com/docs/ios/app-store-data-collection",
+    "https://firebase.google.com/docs/ios/supporting-ios-14",
+    "https://firebase.google.com/docs/ios/troubleshooting-faq",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

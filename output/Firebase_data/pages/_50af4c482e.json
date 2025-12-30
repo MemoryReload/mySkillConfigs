@@ -1,0 +1,73 @@
+{
+  "url": "https://firebase.google.com/docs/guides",
+  "title": "",
+  "content": "Get started with a Firebase project and adding Firebase to your app.\n\nExplore key concepts and best practices for managing your project, protecting user privacy, and launching your app.",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Learn Firebase fundamentals",
+      "id": "learn-firebase-fundamentals"
+    },
+    {
+      "level": "h3",
+      "text": "Add Firebase to your apps",
+      "id": "add-firebase-to-your-apps"
+    },
+    {
+      "level": "h3",
+      "text": "Manage Firebase projects",
+      "id": "manage-firebase-projects"
+    },
+    {
+      "level": "h3",
+      "text": "Protect user privacy",
+      "id": "protect-user-privacy"
+    },
+    {
+      "level": "h2",
+      "text": "Jump into Firebase on your platform",
+      "id": "jump-into-firebase-on-your-platform"
+    },
+    {
+      "level": "h2",
+      "text": "Learn Firebase concepts",
+      "id": "learn-firebase-concepts"
+    },
+    {
+      "level": "h3",
+      "text": "Key concepts",
+      "id": "key-concepts"
+    },
+    {
+      "level": "h3",
+      "text": "Advanced concepts",
+      "id": "advanced-concepts"
+    }
+  ],
+  "code_samples": [],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management",
+    "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary",
+    "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management",
+    "https://firebase.google.com/docs/ios/learn-more",
+    "https://firebase.google.com/docs/ios/installation-methods",
+    "https://firebase.google.com/docs/ios/swift-migration",
+    "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+    "https://firebase.google.com/docs/ios/app-store-data-collection",
+    "https://firebase.google.com/docs/ios/supporting-ios-14",
+    "https://firebase.google.com/docs/ios/troubleshooting-faq",
+    "https://firebase.google.com/docs/reference/ios",
+    "https://firebase.google.com/docs/reference/android/packages",
+    "https://firebase.google.com/docs/reference/js",
+    "https://firebase.google.com/docs/reference/cpp",
+    "https://firebase.google.com/docs/reference/unity",
+    "https://firebase.google.com/docs/reference/admin",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

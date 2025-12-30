@@ -1,0 +1,51 @@
+{
+  "url": "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+  "title": "Link Firebase dependencies statically or dynamically Stay organized with collections Save and categorize content based on your preferences.",
+  "content": "Beginning with CocoaPods 1.9.0 and Firebase 7, you can choose whether your Firebase dependencies are built as static or dynamic frameworks. We recommend using static frameworks unless you require certain dynamic library behaviors.\n\nNote that libraries developed outside of GitHub can only be linked statically even with CocoaPods 1.9.0 and later. Currently, this library list includes AdMob, Analytics, Firebase ML, and Performance Monitoring. All other distribution channels, including the zip file, Swift Package Manager, and Carthage provide statically linked libraries only.\n\nThis document assumes a working knowledge of dynamic and static linking on Apple platforms. If you're unfamiliar with these concepts, take a look at the following documentation:\n\nSince this document is concerned with the types of library linkage and not the loading of non-executable resource bundles, the terms library and framework are used interchangeably.\n\nStatically linked libraries are bundled into your application executable at build time. As a result, the object files in the static library will be present in your app when it launches and do not need to be resolved at app-launch time by the dynamic linker. Consequently, apps using static linking will launch faster. This comes at the expense of a slightly larger binary / app executable, although it should be noted that the larger executable size will be offset by the lack of bundled dynamic libraries.\n\nYou can force static linking of Firebase dependencies by explicitly specifying the linkage in your Podfile:\n\nDynamically linked libraries are stored in your app bundle separately from your app's main executable, and they must be loaded at app-launch time by the dynamic linker. Apple's frameworks are all linked dynamically to enable code-sharing between processes; similarly, you can use dynamic frameworks to share code between your app and extension targets. You cannot share dynamic frameworks between separate applications, even if they are both signed by the same developer.\n\nIf you want to use Firebase as a dependency of a dynamic framework target, you also need to link Firebase dynamically; otherwise you'll run into duplicate class definitions in your app's runtime. Dynamic linking is the default behavior with use_frameworks!, but you can still explicitly specify dynamic linkage in your Podfile:\n\nNote that dynamic linking may increase your app's launch time, especially if your app has a lot of dependencies.",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Link Firebase dependencies statically or dynamically Stay organized with collections Save and categorize content based on your preferences.",
+      "id": ""
+    },
+    {
+      "level": "h2",
+      "text": "Static linking",
+      "id": "static_linking"
+    },
+    {
+      "level": "h2",
+      "text": "Dynamic linking",
+      "id": "dynamic_linking"
+    }
+  ],
+  "code_samples": [
+    {
+      "code": "# cocoapods >= 1.9.0\nuse_frameworks! :linkage => :static",
+      "language": "typescript"
+    },
+    {
+      "code": "# cocoapods >= 1.9.0\nuse_frameworks! :linkage => :dynamic",
+      "language": "typescript"
+    }
+  ],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management",
+    "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary",
+    "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management",
+    "https://firebase.google.com/docs/ios/learn-more",
+    "https://firebase.google.com/docs/ios/installation-methods",
+    "https://firebase.google.com/docs/ios/swift-migration",
+    "https://firebase.google.com/docs/ios/app-store-data-collection",
+    "https://firebase.google.com/docs/ios/supporting-ios-14",
+    "https://firebase.google.com/docs/ios/troubleshooting-faq",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

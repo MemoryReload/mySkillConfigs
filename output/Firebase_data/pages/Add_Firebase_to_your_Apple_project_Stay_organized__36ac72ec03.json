@@ -1,0 +1,40 @@
+{
+  "url": "https://firebase.google.com/docs/ios/setup",
+  "title": "Add Firebase to your Apple project Stay organized with collections Save and categorize content based on your preferences.",
+  "content": "Install the following:\n\nMake sure that your project meets these requirements:\n\nSet up a physical Apple device or use a simulator to run your app.\n\nDo you want to use Cloud Messaging?\n\nDo you want to use Cloud Messaging?\n\nFor Cloud Messaging on Apple platforms, here are the prerequisites:",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Add Firebase to your Apple project Stay organized with collections Save and categorize content based on your preferences.",
+      "id": ""
+    },
+    {
+      "level": "h2",
+      "text": "Prerequisites",
+      "id": "prerequisites"
+    }
+  ],
+  "code_samples": [],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management",
+    "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary",
+    "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management",
+    "https://firebase.google.com/docs/ios/learn-more",
+    "https://firebase.google.com/docs/ios/installation-methods",
+    "https://firebase.google.com/docs/ios/swift-migration",
+    "https://firebase.google.com/docs/ios/link-firebase-static-dynamic",
+    "https://firebase.google.com/docs/ios/app-store-data-collection",
+    "https://firebase.google.com/docs/ios/supporting-ios-14",
+    "https://firebase.google.com/docs/ios/troubleshooting-faq",
+    "https://firebase.google.com/docs/reference/ios/modules",
+    "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Classes/FirebaseApp",
+    "https://firebase.google.com/docs/reference/swift/modules",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}

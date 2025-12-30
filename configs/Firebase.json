@@ -3,13 +3,25 @@
   "description": "Google's mobile and web application development platform.",
   "base_url": "https://firebase.google.com/docs",
   "selectors": {
-    "main_content": "article",
-    "title": "h1",
-    "code_blocks": "pre code"
+    "main_content": "article.devsite-article",
+    "title": "h1.devsite-page-title",
+    "code_blocks": "pre.devsite-click-to-copy"
   },
   "url_patterns": {
-    "include": [],
-    "exclude": []
+    "include": [
+      "/docs/ios/",
+      "/docs/swift/",
+      "/docs/guides",
+      "/docs/reference",
+      "/docs/samples"
+    ],
+    "exclude": [
+      "/docs/android/",
+      "/docs/web/",
+      "/docs/flutter/",
+      "/docs/unity/",
+      "/docs/games/"
+    ]
   },
   "categories": {},
   "rate_limit": 0.5,

@@ -1,0 +1,409 @@
+{
+  "name": "Firebase",
+  "total_pages": 100,
+  "base_url": "https://firebase.google.com/docs",
+  "llms_txt_detected": false,
+  "llms_txt_variant": null,
+  "pages": [
+    {
+      "title": "",
+      "url": "https://firebase.google.com/docs"
+    },
+    {
+      "title": "",
+      "url": "https://firebase.google.com/docs/guides"
+    },
+    {
+      "title": "Firebase API Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference"
+    },
+    {
+      "title": "",
+      "url": "https://firebase.google.com/docs/samples"
+    },
+    {
+      "title": "Add Firebase to your Apple project Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/ios/setup"
+    },
+    {
+      "title": "Firebase API Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/"
+    },
+    {
+      "title": "",
+      "url": "https://firebase.google.com/docs/samples/"
+    },
+    {
+      "title": "firebase-admin.project-management package Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/admin/node/firebase-admin.project-management"
+    },
+    {
+      "title": "com.google.firebase.projectmanagement Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/admin/java/reference/com/google/firebase/projectmanagement/package-summary"
+    },
+    {
+      "title": "firebase_admin.project_management module Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/admin/python/firebase_admin.project_management"
+    },
+    {
+      "title": "Understand Firebase on Apple platforms Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/ios/learn-more"
+    },
+    {
+      "title": "Options to install Firebase in your Apple app Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/ios/installation-methods"
+    },
+    {
+      "title": "Migrate to using the Swift extension APIs in the main modules Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/ios/swift-migration"
+    },
+    {
+      "title": "Link Firebase dependencies statically or dynamically Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/ios/link-firebase-static-dynamic"
+    },
+    {
+      "title": "Prepare for Apple's App Store data disclosure requirements Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/ios/app-store-data-collection"
+    },
+    {
+      "title": "Supporting iOS 14 Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/ios/supporting-ios-14"
+    },
+    {
+      "title": "Troubleshooting & FAQ for Apple platforms and Firebase Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/ios/troubleshooting-faq"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/ios"
+    },
+    {
+      "title": "Package index Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/android/packages"
+    },
+    {
+      "title": "API Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/js"
+    },
+    {
+      "title": "",
+      "url": "https://firebase.google.com/docs/reference/cpp"
+    },
+    {
+      "title": "",
+      "url": "https://firebase.google.com/docs/reference/unity"
+    },
+    {
+      "title": "Admin SDK Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/admin"
+    },
+    {
+      "title": "Cloud Firestore Index Definition Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/firestore/indexes"
+    },
+    {
+      "title": "Log Query Language for Emulator Suite UI Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/emulator-suite"
+    },
+    {
+      "title": "rules-unit-testing package Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/emulator-suite/rules-unit-testing/rules-unit-testing"
+    },
+    {
+      "title": "HostAndPort interface Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/emulator-suite/rules-unit-testing/rules-unit-testing.hostandport"
+    },
+    {
+      "title": "RulesTestContext interface Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/emulator-suite/rules-unit-testing/rules-unit-testing.rulestestcontext"
+    },
+    {
+      "title": "RulesTestEnvironment interface Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/emulator-suite/rules-unit-testing/rules-unit-testing.rulestestenvironment"
+    },
+    {
+      "title": "TestEnvironmentConfig interface Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/emulator-suite/rules-unit-testing/rules-unit-testing.testenvironmentconfig"
+    },
+    {
+      "title": "Module Index Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/modules"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Classes"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Classes/FirebaseApp"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Classes/FirebaseConfiguration"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Classes/FirebaseOptions"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Classes/Timestamp"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Enums"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Enums/FIRLoggerLevel"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Type-Definitions"
+    },
+    {
+      "title": "FirebaseCore Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebasecore/api/reference/Functions"
+    },
+    {
+      "title": "FirebaseABTesting Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseabtesting/api/reference/Classes"
+    },
+    {
+      "title": "FirebaseABTesting Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseabtesting/api/reference/Classes/ExperimentController"
+    },
+    {
+      "title": "FirebaseABTesting Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseabtesting/api/reference/Classes/LifecycleEvents"
+    },
+    {
+      "title": "FirebaseABTesting Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseabtesting/api/reference/Constants"
+    },
+    {
+      "title": "FirebaseABTesting Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseabtesting/api/reference/Enums"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/Chat"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/FirebaseAI"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/GenerativeModel"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/ImagenModel"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/LiveGenerativeModel"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/LiveSession"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/Schema"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/Schema/StringFormat"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/Schema/IntegerFormat"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/TemplateGenerativeModel"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Classes/TemplateImagenModel"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Enums"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Enums/GenerateContentError"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Enums/JSONValue"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Extensions"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Extensions/CGImage"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Extensions/CIImage"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Extensions/String"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Extensions/UIImage"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Protocols"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Protocols/Part"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Protocols/PartsRepresentable"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/AudioTranscriptionConfig"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/Backend"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/Candidate"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/Citation"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/CitationMetadata"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/CodeExecutionResultPart"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/CodeExecutionResultPart/Outcome"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/ContentModality"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/CountTokensResponse"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/ExecutableCodePart"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/ExecutableCodePart/Language"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/FileDataPart"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/FinishReason"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/FunctionCallPart"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/FunctionCallingConfig"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/FunctionDeclaration"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/FunctionResponsePart"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GenerateContentResponse"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GenerateContentResponse/UsageMetadata"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GenerationConfig"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GoogleSearch"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GroundingMetadata"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GroundingMetadata/SearchEntryPoint"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GroundingMetadata/GroundingChunk"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GroundingMetadata/WebGroundingChunk"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/GroundingMetadata/GroundingSupport"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/HarmCategory"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/ImagenAspectRatio"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/ImagenGenerationConfig"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/ImagenGenerationResponse"
+    },
+    {
+      "title": "FirebaseAILogic Framework Reference Stay organized with collections Save and categorize content based on your preferences.",
+      "url": "https://firebase.google.com/docs/reference/swift/firebaseailogic/api/reference/Structs/ImagenImageFormat"
+    }
+  ]
+}

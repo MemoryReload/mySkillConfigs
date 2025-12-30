@@ -1,0 +1,32 @@
+{
+  "url": "https://firebase.google.com/docs/samples",
+  "title": "",
+  "content": "",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Samples",
+      "id": "samples"
+    },
+    {
+      "level": "h2",
+      "text": "Multi-product samples",
+      "id": "multi-product-samples"
+    },
+    {
+      "level": "h2",
+      "text": "Codelabs",
+      "id": "codelabs"
+    }
+  ],
+  "code_samples": [],
+  "patterns": [],
+  "links": [
+    "https://firebase.google.com/docs/samples",
+    "https://firebase.google.com/docs/guides",
+    "https://firebase.google.com/docs/reference",
+    "https://firebase.google.com/docs/ios/setup",
+    "https://firebase.google.com/docs/reference/",
+    "https://firebase.google.com/docs/samples/"
+  ]
+}
