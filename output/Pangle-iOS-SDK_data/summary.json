@@ -1,0 +1,101 @@
+{
+  "name": "Pangle-iOS-SDK",
+  "total_pages": 23,
+  "base_url": "https://www.csjplatform.com",
+  "llms_txt_detected": false,
+  "llms_txt_variant": null,
+  "pages": [
+    {
+      "title": "SDK版本发布记录",
+      "url": "https://www.csjplatform.com/supportcenter/5373"
+    },
+    {
+      "title": "SDK集成",
+      "url": "https://www.csjplatform.com/supportcenter/5376"
+    },
+    {
+      "title": "Xcode配置",
+      "url": "https://www.csjplatform.com/supportcenter/5377"
+    },
+    {
+      "title": "SDK初始化及全局配置",
+      "url": "https://www.csjplatform.com/supportcenter/5378"
+    },
+    {
+      "title": "隐私数据获取说明",
+      "url": "https://www.csjplatform.com/supportcenter/5374"
+    },
+    {
+      "title": "iOS直播拉流",
+      "url": "https://www.csjplatform.com/supportcenter/28585"
+    },
+    {
+      "title": "开屏广告",
+      "url": "https://www.csjplatform.com/supportcenter/5379"
+    },
+    {
+      "title": "模板渲染激励视频广告",
+      "url": "https://www.csjplatform.com/supportcenter/5381"
+    },
+    {
+      "title": "模版渲染新插屏广告",
+      "url": "https://www.csjplatform.com/supportcenter/5383"
+    },
+    {
+      "title": "模板渲染信息流广告",
+      "url": "https://www.csjplatform.com/supportcenter/5384"
+    },
+    {
+      "title": "模版渲染Banner广告",
+      "url": "https://www.csjplatform.com/supportcenter/5386"
+    },
+    {
+      "title": "模板渲染Draw广告",
+      "url": "https://www.csjplatform.com/supportcenter/5385"
+    },
+    {
+      "title": "自渲染基础模块配置说明",
+      "url": "https://www.csjplatform.com/supportcenter/5388"
+    },
+    {
+      "title": "自渲染信息流广告",
+      "url": "https://www.csjplatform.com/supportcenter/5390"
+    },
+    {
+      "title": "自渲染Draw广告",
+      "url": "https://www.csjplatform.com/supportcenter/5391"
+    },
+    {
+      "title": "自渲染贴片广告",
+      "url": "https://www.csjplatform.com/supportcenter/5389"
+    },
+    {
+      "title": "支持微信小程序/小游戏跳转接入方案",
+      "url": "https://www.csjplatform.com/supportcenter/26768"
+    },
+    {
+      "title": "自渲染Banner广告",
+      "url": "https://www.csjplatform.com/supportcenter/5392"
+    },
+    {
+      "title": "模板渲染插屏广告",
+      "url": "https://www.csjplatform.com/supportcenter/5387"
+    },
+    {
+      "title": "模版渲染全屏视频广告",
+      "url": "https://www.csjplatform.com/supportcenter/5382"
+    },
+    {
+      "title": "自渲染插屏广告",
+      "url": "https://www.csjplatform.com/supportcenter/5393"
+    },
+    {
+      "title": "自渲染全屏视频广告",
+      "url": "https://www.csjplatform.com/supportcenter/27688"
+    },
+    {
+      "title": "自渲染激励视频广告",
+      "url": "https://www.csjplatform.com/supportcenter/27687"
+    }
+  ]
+}

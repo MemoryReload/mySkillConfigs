@@ -1,0 +1,43 @@
+{
+  "name": "Pangle-iOS-SDK",
+  "description": "Documentation for Pangle (穿山甲) iOS SDK.",
+  "base_url": "https://www.csjplatform.com",
+  "start_urls": [
+    "https://www.csjplatform.com/supportcenter/5373",
+    "https://www.csjplatform.com/supportcenter/5376",
+    "https://www.csjplatform.com/supportcenter/5377",
+    "https://www.csjplatform.com/supportcenter/5378",
+    "https://www.csjplatform.com/supportcenter/5374",
+    "https://www.csjplatform.com/supportcenter/28585",
+    "https://www.csjplatform.com/supportcenter/5379",
+    "https://www.csjplatform.com/supportcenter/5381",
+    "https://www.csjplatform.com/supportcenter/5383",
+    "https://www.csjplatform.com/supportcenter/5384",
+    "https://www.csjplatform.com/supportcenter/5386",
+    "https://www.csjplatform.com/supportcenter/5385",
+    "https://www.csjplatform.com/supportcenter/5388",
+    "https://www.csjplatform.com/supportcenter/5390",
+    "https://www.csjplatform.com/supportcenter/5391",
+    "https://www.csjplatform.com/supportcenter/5389",
+    "https://www.csjplatform.com/supportcenter/26768",
+    "https://www.csjplatform.com/supportcenter/5392",
+    "https://www.csjplatform.com/supportcenter/5387",
+    "https://www.csjplatform.com/supportcenter/5382",
+    "https://www.csjplatform.com/supportcenter/5393",
+    "https://www.csjplatform.com/supportcenter/27688",
+    "https://www.csjplatform.com/supportcenter/27687"
+  ],
+  "selectors": {
+    "title": "div[class*='detailName']",
+    "content": "div[class*='compilerContainer']",
+    "code": "pre"
+  },
+  "url_patterns": {
+    "include": [
+      "https://www.csjplatform.com/supportcenter/\\\\d+"
+    ],
+    "exclude": []
+  },
+  "rate_limit": 0.5,
+  "max_pages": 100
+}
