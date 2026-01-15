@@ -1,0 +1,17 @@
+{
+  "title": "With .parse() - can pass Pydantic model directly",
+  "content": "response = client.beta.messages.parse(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    betas=[\"structured-outputs-2025-11-13\"],\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": \"Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.\"\n        }\n    ],\n    output_format=ContactInfo,\n)\n\nprint(response.parsed_output)\ntypescript TypeScript\nimport Anthropic from '@anthropic-ai/sdk';\nimport { z } from 'zod';\nimport { betaZodOutputFormat } from '@anthropic-ai/sdk/helpers/beta/zod';\n\nconst ContactInfoSchema = z.object({\n  name: z.string(),\n  email: z.string(),\n  plan_interest: z.string(),\n  demo_requested: z.boolean(),\n});\n\nconst client = new Anthropic();\n\nconst response = await client.beta.messages.parse({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  betas: [\"structured-outputs-2025-11-13\"],\n  messages: [\n    {\n      role: \"user\",\n      content: \"Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.\"\n    }\n  ],\n  output_format: betaZodOutputFormat(ContactInfoSchema),\n});\n\n// Automatically parsed and validated\nconsole.log(response.parsed_output);\npython\nfrom pydantic import BaseModel\nimport anthropic\n\nclass ContactInfo(BaseModel):\n    name: str\n    email: str\n    plan_interest: str\n\nclient = anthropic.Anthropic()\n\nresponse = client.beta.messages.parse(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"structured-outputs-2025-11-13\"],\n    max_tokens=1024,\n    messages=[{\"role\": \"user\", \"content\": \"...\"}],\n    output_format=ContactInfo,\n)",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### SDK-specific methods\n\n**Python: `client.beta.messages.parse()` (Recommended)**\n\nThe `parse()` method automatically transforms your Pydantic model, validates the response, and returns a `parsed_output` attribute.\n\n<Note>\nThe `parse()` method is available on `client.beta.messages`, not `client.messages`.\n</Note>\n\n<section title=\"Example usage\">",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#with-.parse()---can-pass-pydantic-model-directly",
+  "links": []
+}

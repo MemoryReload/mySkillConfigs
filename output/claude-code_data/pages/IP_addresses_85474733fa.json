@@ -1,0 +1,24 @@
+{
+  "title": "IP addresses",
+  "content": "Anthropic services use fixed IP addresses for both inbound and outbound connections. You can use these addresses to configure your firewall rules for secure access to the Claude API and Console. These addresses will not change without notice.\n\n## Inbound IP addresses\n\nThese are the IP addresses where Anthropic services receive incoming connections.\n\n## Outbound IP addresses\n\nThese are the stable IP addresses that Anthropic uses for outbound requests (for example, when making MCP tool calls to external servers).\n\n*The following individual IP addresses are still in use, but will be phased out starting January 15, 2026.*",
+  "code_samples": [
+    {
+      "code": "34.162.46.92/32\n34.162.102.82/32\n34.162.136.91/32\n34.162.142.92/32\n34.162.183.95/32",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Inbound IP addresses",
+      "id": "inbound-ip-addresses"
+    },
+    {
+      "level": "h2",
+      "text": "Outbound IP addresses",
+      "id": "outbound-ip-addresses"
+    }
+  ],
+  "url": "llms-txt#ip-addresses",
+  "links": []
+}

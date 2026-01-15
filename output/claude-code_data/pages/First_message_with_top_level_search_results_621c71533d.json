@@ -1,0 +1,8 @@
+{
+  "title": "First message with top-level search results",
+  "content": "messages = [\n    MessageParam(\n        role=\"user\",\n        content=[\n            SearchResultBlockParam(\n                type=\"search_result\",\n                source=\"https://docs.company.com/overview\",\n                title=\"Product Overview\",\n                content=[\n                    TextBlockParam(type=\"text\", text=\"Our product helps teams collaborate...\")\n                ],\n                citations={\"enabled\": True}\n            ),\n            TextBlockParam(\n                type=\"text\",\n                text=\"Tell me about this product and search for pricing information\"\n            )\n        ]\n    )\n]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-message-with-top-level-search-results",
+  "links": []
+}

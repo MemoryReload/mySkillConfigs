@@ -1,0 +1,74 @@
+{
+  "title": "Beta",
+  "content": "- `AnthropicBeta = (string & {}) | \"message-batches-2024-09-24\" | \"prompt-caching-2024-07-31\" | \"computer-use-2024-10-22\" | 16 more`\n\n- `\"message-batches-2024-09-24\" | \"prompt-caching-2024-07-31\" | \"computer-use-2024-10-22\" | 16 more`\n\n- `\"message-batches-2024-09-24\"`\n\n- `\"prompt-caching-2024-07-31\"`\n\n- `\"computer-use-2024-10-22\"`\n\n- `\"computer-use-2025-01-24\"`\n\n- `\"pdfs-2024-09-25\"`\n\n- `\"token-counting-2024-11-01\"`\n\n- `\"token-efficient-tools-2025-02-19\"`\n\n- `\"output-128k-2025-02-19\"`\n\n- `\"files-api-2025-04-14\"`\n\n- `\"mcp-client-2025-04-04\"`\n\n- `\"mcp-client-2025-11-20\"`\n\n- `\"dev-full-thinking-2025-05-14\"`\n\n- `\"interleaved-thinking-2025-05-14\"`\n\n- `\"code-execution-2025-05-22\"`\n\n- `\"extended-cache-ttl-2025-04-11\"`\n\n- `\"context-1m-2025-08-07\"`\n\n- `\"context-management-2025-06-27\"`\n\n- `\"model-context-window-exceeded-2025-08-26\"`\n\n- `\"skills-2025-10-02\"`\n\n- `type: \"api_error\"`\n\n### Beta Authentication Error\n\n- `BetaAuthenticationError`\n\n- `type: \"authentication_error\"`\n\n- `\"authentication_error\"`\n\n### Beta Billing Error\n\n- `type: \"billing_error\"`\n\n- `BetaError = BetaInvalidRequestError | BetaAuthenticationError | BetaBillingError | 6 more`\n\n- `BetaInvalidRequestError`\n\n- `type: \"invalid_request_error\"`\n\n- `\"invalid_request_error\"`\n\n- `BetaAuthenticationError`\n\n- `type: \"authentication_error\"`\n\n- `\"authentication_error\"`\n\n- `type: \"billing_error\"`\n\n- `BetaPermissionError`\n\n- `type: \"permission_error\"`\n\n- `\"permission_error\"`\n\n- `BetaNotFoundError`\n\n- `type: \"not_found_error\"`\n\n- `\"not_found_error\"`\n\n- `BetaRateLimitError`\n\n- `type: \"rate_limit_error\"`\n\n- `\"rate_limit_error\"`\n\n- `BetaGatewayTimeoutError`\n\n- `type: \"timeout_error\"`\n\n- `type: \"api_error\"`\n\n- `BetaOverloadedError`\n\n- `type: \"overloaded_error\"`\n\n- `\"overloaded_error\"`\n\n### Beta Error Response\n\n- `BetaErrorResponse`\n\n- `BetaInvalidRequestError`\n\n- `type: \"invalid_request_error\"`\n\n- `\"invalid_request_error\"`\n\n- `BetaAuthenticationError`\n\n- `type: \"authentication_error\"`\n\n- `\"authentication_error\"`\n\n- `type: \"billing_error\"`\n\n- `BetaPermissionError`\n\n- `type: \"permission_error\"`\n\n- `\"permission_error\"`\n\n- `BetaNotFoundError`\n\n- `type: \"not_found_error\"`\n\n- `\"not_found_error\"`\n\n- `BetaRateLimitError`\n\n- `type: \"rate_limit_error\"`\n\n- `\"rate_limit_error\"`\n\n- `BetaGatewayTimeoutError`\n\n- `type: \"timeout_error\"`\n\n- `type: \"api_error\"`\n\n- `BetaOverloadedError`\n\n- `type: \"overloaded_error\"`\n\n- `\"overloaded_error\"`\n\n- `request_id: string | null`\n\n### Beta Gateway Timeout Error\n\n- `BetaGatewayTimeoutError`\n\n- `type: \"timeout_error\"`\n\n### Beta Invalid Request Error\n\n- `BetaInvalidRequestError`\n\n- `type: \"invalid_request_error\"`\n\n- `\"invalid_request_error\"`\n\n### Beta Not Found Error\n\n- `BetaNotFoundError`\n\n- `type: \"not_found_error\"`\n\n- `\"not_found_error\"`\n\n### Beta Overloaded Error\n\n- `BetaOverloadedError`\n\n- `type: \"overloaded_error\"`\n\n- `\"overloaded_error\"`\n\n### Beta Permission Error\n\n- `BetaPermissionError`\n\n- `type: \"permission_error\"`\n\n- `\"permission_error\"`\n\n### Beta Rate Limit Error\n\n- `BetaRateLimitError`\n\n- `type: \"rate_limit_error\"`\n\n- `\"rate_limit_error\"`",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Domain Types",
+      "id": "domain-types"
+    },
+    {
+      "level": "h3",
+      "text": "Anthropic Beta",
+      "id": "anthropic-beta"
+    },
+    {
+      "level": "h3",
+      "text": "Beta API Error",
+      "id": "beta-api-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Authentication Error",
+      "id": "beta-authentication-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Billing Error",
+      "id": "beta-billing-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Error",
+      "id": "beta-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Error Response",
+      "id": "beta-error-response"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Gateway Timeout Error",
+      "id": "beta-gateway-timeout-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Invalid Request Error",
+      "id": "beta-invalid-request-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Not Found Error",
+      "id": "beta-not-found-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Overloaded Error",
+      "id": "beta-overloaded-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Permission Error",
+      "id": "beta-permission-error"
+    },
+    {
+      "level": "h3",
+      "text": "Beta Rate Limit Error",
+      "id": "beta-rate-limit-error"
+    }
+  ],
+  "url": "llms-txt#beta",
+  "links": []
+}

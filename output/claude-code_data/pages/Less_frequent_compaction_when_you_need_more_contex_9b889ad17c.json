@@ -1,0 +1,57 @@
+{
+  "title": "Less frequent compaction when you need more context",
+  "content": "compaction_control={\n    \"enabled\": True,\n    \"context_token_threshold\": 150000\n}\ntypescript TypeScript\n// More frequent compaction for memory-constrained scenarios\ncompactionControl: {\n    enabled: true,\n    contextTokenThreshold: 50000\n}\n\n// Less frequent compaction when you need more context\ncompactionControl: {\n    enabled: true,\n    contextTokenThreshold: 150000\n}\npython Python\ncompaction_control={\n    \"enabled\": True,\n    \"context_token_threshold\": 100000,\n    \"model\": \"claude-haiku-4-5\"\n}\ntypescript TypeScript\ncompactionControl: {\n    enabled: true,\n    contextTokenThreshold: 100000,\n    model: 'claude-haiku-4-5'\n}\npython Python\ncompaction_control={\n    \"enabled\": True,\n    \"context_token_threshold\": 100000,\n    \"summary_prompt\": \"\"\"Summarize the research conducted so far, including:\n- Sources consulted and key findings\n- Questions answered and remaining unknowns\n- Recommended next steps\n\nWrap your summary in <summary></summary> tags.\"\"\"\n}\ntypescript TypeScript\ncompactionControl: {\n    enabled: true,\n    contextTokenThreshold: 100000,\n    summaryPrompt: `Summarize the research conducted so far, including:\n- Sources consulted and key findings\n- Questions answered and remaining unknowns\n- Recommended next steps\n\nWrap your summary in <summary></summary> tags.`\n}\n\nYou have been working on the task described above but have not yet completed it. Write a continuation summary that will allow you (or another instance of yourself) to resume work efficiently in a future context window where the conversation history will be replaced with this summary. Your summary should be structured, concise, and actionable. Include:\n\n1. Task Overview\nThe user's core request and success criteria\nAny clarifications or constraints they specified\n\n2. Current State\nWhat has been completed so far\nFiles created, modified, or analyzed (with paths if relevant)\nKey outputs or artifacts produced\n\n3. Important Discoveries\nTechnical constraints or requirements uncovered\nDecisions made and their rationale\nErrors encountered and how they were resolved\nWhat approaches were tried that didn't work (and why)\n\n4. Next Steps\nSpecific actions needed to complete the task\nAny blockers or open questions to resolve\nPriority order if multiple steps remain\n\n5. Context to Preserve\nUser preferences or style requirements\nDomain-specific details that aren't obvious\nAny promises made to the user\n\nBe concise but complete—err on the side of including information that would prevent duplicate work or repeated mistakes. Write in a way that enables immediate resumption of the task.\n\nWrap your summary in <summary></summary> tags.\njson\n{\n  \"usage\": {\n    \"input_tokens\": 63000,\n    \"cache_read_input_tokens\": 270000,\n    \"output_tokens\": 1400\n  }\n}\npython Python\nimport logging\n\nlogging.basicConfig(level=logging.INFO)\nlogging.getLogger(\"anthropic.lib.tools\").setLevel(logging.INFO)",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Using a different model for summaries\n\nYou can use a faster or cheaper model for generating summaries:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Custom summary prompts\n\nYou can provide a custom prompt for domain-specific needs. Your prompt should instruct Claude to wrap its summary in `<summary></summary>` tags.\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Default summary prompt\n\nThe built-in summary prompt instructs Claude to create a structured continuation summary including:\n\n1. **Task Overview**: The user's core request, success criteria, and constraints\n2. **Current State**: What has been completed, files modified, and artifacts produced\n3. **Important Discoveries**: Technical constraints, decisions made, errors resolved, and failed approaches\n4. **Next Steps**: Specific actions needed, blockers, and priority order\n5. **Context to Preserve**: User preferences, domain-specific details, and commitments made\n\nThis structure enables Claude to resume work efficiently without losing important context or repeating mistakes.\n\n<section title=\"View full default prompt\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n### Limitations\n\n#### Server-side tools\n\n<Warning>\nCompaction requires special consideration when using server-side tools such as [web search](/docs/en/agents-and-tools/tool-use/web-search-tool) or [web fetch](/docs/en/agents-and-tools/tool-use/web-fetch-tool).\n</Warning>\n\nWhen using server-side tools, the SDK may incorrectly calculate token usage, causing compaction to trigger at the wrong time.\n\nFor example, after a web search operation, the API response might show:",
+      "language": "unknown"
+    },
+    {
+      "code": "The SDK calculates total usage as 63,000 + 270,000 = 333,000 tokens. However, the `cache_read_input_tokens` value includes accumulated reads from multiple internal API calls made by the server-side tool, not your actual conversation context. Your real context length might only be the 63,000 `input_tokens`, but the SDK sees 333k and triggers compaction prematurely.\n\n**Workarounds:**\n\n- Use the [token counting](/docs/en/build-with-claude/token-counting) endpoint to get accurate context length\n- Avoid compaction when using server-side tools extensively\n\n#### Tool use edge cases\n\nWhen compaction is triggered while a tool use response is pending, the SDK removes the tool use block from the message history before generating the summary. Claude will re-issue the tool call after resuming from the summary if still needed.\n\n### Monitoring compaction\n\nEnable logging to track when compaction occurs:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Default summary prompt",
+      "id": "default-summary-prompt"
+    },
+    {
+      "level": "h3",
+      "text": "Limitations",
+      "id": "limitations"
+    },
+    {
+      "level": "h3",
+      "text": "Monitoring compaction",
+      "id": "monitoring-compaction"
+    }
+  ],
+  "url": "llms-txt#less-frequent-compaction-when-you-need-more-context",
+  "links": []
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Now Claude has access to your project guidelines from CLAUDE.md",
+  "content": "typescript TypeScript\nimport { writeFile, mkdir } from \"fs/promises\";\nimport { join } from \"path\";\nimport { homedir } from \"os\";\n\nasync function createOutputStyle(\n  name: string,\n  description: string,\n  prompt: string\n) {\n  // User-level: ~/.claude/output-styles\n  // Project-level: .claude/output-styles\n  const outputStylesDir = join(homedir(), \".claude\", \"output-styles\");\n\nawait mkdir(outputStylesDir, { recursive: true });\n\nconst content = `---\nname: ${name}\ndescription: ${description}\n---\n\nconst filePath = join(\n    outputStylesDir,\n    `${name.toLowerCase().replace(/\\s+/g, \"-\")}.md`\n  );\n  await writeFile(filePath, content, \"utf-8\");\n}\n\n// Example: Create a code review specialist\nawait createOutputStyle(\n  \"Code Reviewer\",\n  \"Thorough code review assistant\",\n  `You are an expert code reviewer.\n\nFor every code submission:\n1. Check for bugs and security issues\n2. Evaluate performance\n3. Suggest improvements\n4. Rate code quality (1-10)`\n);\npython Python\nfrom pathlib import Path\n\nasync def create_output_style(name: str, description: str, prompt: str):\n    # User-level: ~/.claude/output-styles\n    # Project-level: .claude/output-styles\n    output_styles_dir = Path.home() / '.claude' / 'output-styles'\n\noutput_styles_dir.mkdir(parents=True, exist_ok=True)\n\ncontent = f\"\"\"---\nname: {name}\ndescription: {description}\n---\n\nfile_name = name.lower().replace(' ', '-') + '.md'\n    file_path = output_styles_dir / file_name\n    file_path.write_text(content, encoding='utf-8')",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n#### When to use CLAUDE.md\n\n**Best for:**\n\n- **Team-shared context** - Guidelines everyone should follow\n- **Project conventions** - Coding standards, file structure, naming patterns\n- **Common commands** - Build, test, deploy commands specific to your project\n- **Long-term memory** - Context that should persist across all sessions\n- **Version-controlled instructions** - Commit to git so the team stays in sync\n\n**Key characteristics:**\n\n- ✅ Persistent across all sessions in a project\n- ✅ Shared with team via git\n- ✅ Automatic discovery (no code changes needed)\n- ⚠️ Requires loading settings via `settingSources`\n\n### Method 2: Output styles (persistent configurations)\n\nOutput styles are saved configurations that modify Claude's system prompt. They're stored as markdown files and can be reused across sessions and projects.\n\n#### Creating an output style\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Method 2: Output styles (persistent configurations)",
+      "id": "method-2:-output-styles-(persistent-configurations)"
+    }
+  ],
+  "url": "llms-txt#now-claude-has-access-to-your-project-guidelines-from-claude.md",
+  "links": []
+}

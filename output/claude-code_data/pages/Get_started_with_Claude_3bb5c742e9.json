@@ -1,0 +1,101 @@
+{
+  "title": "Get started with Claude",
+  "content": "Make your first API call to Claude and build a simple web search assistant\n\n- An Anthropic [Console account](/)\n- An [API key](/settings/keys)\n\n<Tabs>\n  <Tab title=\"cURL\">\n    <Steps>\n      <Step title=\"Set your API key\">\n        Get your API key at the [Claude Console](/settings/keys) and set it as an environment variable:\n\n<Step title=\"Make your first API call\">\n        Run this command to create a simple web search assistant:\n\n**Example output:**\n        \n      </Step>\n    </Steps>\n  </Tab>\n\n<Tab title=\"Python\">\n    <Steps>\n      <Step title=\"Set your API key\">\n        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:\n\n<Step title=\"Install the SDK\">\n        Install the Anthropic Python SDK:\n\n<Step title=\"Create your code\">\n        Save this as `quickstart.py`:\n\n<Step title=\"Run your code\">\n\n**Example output:**\n        \n      </Step>\n    </Steps>\n  </Tab>\n\n<Tab title=\"TypeScript\">\n    <Steps>\n      <Step title=\"Set your API key\">\n        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:\n\n<Step title=\"Install the SDK\">\n        Install the Anthropic TypeScript SDK:\n\n<Step title=\"Create your code\">\n        Save this as `quickstart.ts`:\n\n<Step title=\"Run your code\">\n\n**Example output:**\n        \n      </Step>\n    </Steps>\n  </Tab>\n\n<Tab title=\"Java\">\n    <Steps>\n      <Step title=\"Set your API key\">\n        Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:\n\n<Step title=\"Install the SDK\">\n        Add the Anthropic Java SDK to your project. First find the current version on [Maven Central](https://central.sonatype.com/artifact/com.anthropic/anthropic-java).\n\n**Maven:**\n        \n      </Step>\n\n<Step title=\"Create your code\">\n        Save this as `QuickStart.java`:\n\n<Step title=\"Run your code\">\n\n**Example output:**\n        \n      </Step>\n    </Steps>\n  </Tab>\n</Tabs>\n\nNow that you have made your first Claude API request, it's time to explore what else is possible:\n\n<CardGroup cols={3}>\n  <Card title=\"Working with Messages\" icon=\"messages\" href=\"/docs/en/build-with-claude/working-with-messages\">\n    Learn common patterns for the Messages API.\n  </Card>\n  <Card title=\"Features Overview\" icon=\"brain\" href=\"/docs/en/api/overview\">\n    Explore Claude's advanced features and capabilities.\n  </Card>\n  <Card title=\"Client SDKs\" icon=\"code-brackets\" href=\"/docs/en/api/client-sdks\">\n    Discover Anthropic client libraries.\n  </Card>\n  <Card title=\"Claude Cookbook\" icon=\"chef-hat\" href=\"https://platform.claude.com/cookbooks\">\n    Learn with interactive Jupyter notebooks.\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "export ANTHROPIC_API_KEY='your-api-key-here'",
+      "language": "bash"
+    },
+    {
+      "code": "curl https://api.anthropic.com/v1/messages \\\n          -H \"Content-Type: application/json\" \\\n          -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n          -H \"anthropic-version: 2023-06-01\" \\\n          -d '{\n            \"model\": \"claude-sonnet-4-5\",\n            \"max_tokens\": 1000,\n            \"messages\": [\n              {\n                \"role\": \"user\", \n                \"content\": \"What should I search for to find the latest developments in renewable energy?\"\n              }\n            ]\n          }'",
+      "language": "bash"
+    },
+    {
+      "code": "{\n          \"id\": \"msg_01HCDu5LRGeP2o7s2xGmxyx8\",\n          \"type\": \"message\", \n          \"role\": \"assistant\",\n          \"content\": [\n            {\n              \"type\": \"text\",\n              \"text\": \"Here are some effective search strategies to find the latest renewable energy developments:\\n\\n## Search Terms to Use:\\n- \\\"renewable energy news 2024\\\"\\n- \\\"clean energy breakthrough\\\"\\n- \\\"solar/wind/battery technology advances\\\"\\n- \\\"green energy innovations\\\"\\n- \\\"climate tech developments\\\"\\n- \\\"energy storage solutions\\\"\\n\\n## Best Sources to Check:\\n\\n**News & Industry Sites:**\\n- Renewable Energy World\\n- GreenTech Media (now Wood Mackenzie)\\n- Energy Storage News\\n- CleanTechnica\\n- PV Magazine (for solar)\\n- WindPower Engineering & Development...\"\n            }\n          ],\n          \"model\": \"claude-sonnet-4-5\",\n          \"stop_reason\": \"end_turn\",\n          \"usage\": {\n            \"input_tokens\": 21,\n            \"output_tokens\": 305\n          }\n        }",
+      "language": "json"
+    },
+    {
+      "code": "export ANTHROPIC_API_KEY='your-api-key-here'",
+      "language": "bash"
+    },
+    {
+      "code": "pip install anthropic",
+      "language": "bash"
+    },
+    {
+      "code": "import anthropic\n\n        client = anthropic.Anthropic()\n\n        message = client.messages.create(\n            model=\"claude-sonnet-4-5\",\n            max_tokens=1000,\n            messages=[\n                {\n                    \"role\": \"user\",\n                    \"content\": \"What should I search for to find the latest developments in renewable energy?\"\n                }\n            ]\n        )\n        print(message.content)",
+      "language": "python"
+    },
+    {
+      "code": "python quickstart.py",
+      "language": "bash"
+    },
+    {
+      "code": "[TextBlock(text='Here are some effective search strategies for finding the latest renewable energy developments:\\n\\n**Search Terms to Use:**\\n- \"renewable energy news 2024\"\\n- \"clean energy breakthroughs\"\\n- \"solar/wind/battery technology advances\"\\n- \"energy storage innovations\"\\n- \"green hydrogen developments\"\\n- \"renewable energy policy updates\"\\n\\n**Reliable Sources to Check:**\\n- **News & Analysis:** Reuters Energy, Bloomberg New Energy Finance, Greentech Media, Energy Storage News\\n- **Industry Publications:** Renewable Energy World, PV Magazine, Wind Power Engineering\\n- **Research Organizations:** International Energy Agency (IEA), National Renewable Energy Laboratory (NREL)\\n- **Government Sources:** Department of Energy websites, EPA clean energy updates\\n\\n**Specific Topics to Explore:**\\n- Perovskite and next-gen solar cells\\n- Offshore wind expansion\\n- Grid-scale battery storage\\n- Green hydrogen production\\n- Carbon capture technologies\\n- Smart grid innovations\\n- Energy policy changes and incentives...', type='text')]",
+      "language": "python"
+    },
+    {
+      "code": "export ANTHROPIC_API_KEY='your-api-key-here'",
+      "language": "bash"
+    },
+    {
+      "code": "npm install @anthropic-ai/sdk",
+      "language": "bash"
+    },
+    {
+      "code": "import Anthropic from \"@anthropic-ai/sdk\";\n\n        async function main() {\n          const anthropic = new Anthropic();\n\n          const msg = await anthropic.messages.create({\n            model: \"claude-sonnet-4-5\",\n            max_tokens: 1000,\n            messages: [\n              {\n                role: \"user\",\n                content: \"What should I search for to find the latest developments in renewable energy?\"\n              }\n            ]\n          });\n          console.log(msg);\n        }\n\n        main().catch(console.error);",
+      "language": "typescript"
+    },
+    {
+      "code": "npx tsx quickstart.ts",
+      "language": "bash"
+    },
+    {
+      "code": "{\n          id: 'msg_01ThFHzad6Bh4TpQ6cHux9t8',\n          type: 'message',\n          role: 'assistant',\n          model: 'claude-sonnet-4-5-20250929',\n          content: [\n            {\n              type: 'text',\n              text: 'Here are some effective search strategies to find the latest renewable energy developments:\\n\\n' +\n                '## Search Terms to Use:\\n' +\n                '- \"renewable energy news 2024\"\\n' +\n                '- \"clean energy breakthroughs\"\\n' +\n                '- \"solar wind technology advances\"\\n' +\n                '- \"energy storage innovations\"\\n' +\n                '- \"green hydrogen developments\"\\n' +\n                '- \"offshore wind projects\"\\n' +\n                '- \"battery technology renewable\"\\n\\n' +\n                '## Best Sources to Check:\\n\\n' +\n                '**News & Industry Sites:**\\n' +\n                '- Renewable Energy World\\n' +\n                '- CleanTechnica\\n' +\n                '- GreenTech Media (now Wood Mackenzie)\\n' +\n                '- Energy Storage News\\n' +\n                '- PV Magazine (for solar)...'\n            }\n          ],\n          stop_reason: 'end_turn',\n          usage: {\n            input_tokens: 21,\n            output_tokens: 302\n          }\n        }",
+      "language": "javascript"
+    },
+    {
+      "code": "export ANTHROPIC_API_KEY='your-api-key-here'",
+      "language": "bash"
+    },
+    {
+      "code": "implementation(\"com.anthropic:anthropic-java:1.0.0\")",
+      "language": "groovy"
+    },
+    {
+      "code": "<dependency>\n          <groupId>com.anthropic</groupId>\n          <artifactId>anthropic-java</artifactId>\n          <version>1.0.0</version>\n        </dependency>",
+      "language": "xml"
+    },
+    {
+      "code": "import com.anthropic.client.AnthropicClient;\n        import com.anthropic.client.okhttp.AnthropicOkHttpClient;\n        import com.anthropic.models.messages.Message;\n        import com.anthropic.models.messages.MessageCreateParams;\n\n        public class QuickStart {\n            public static void main(String[] args) {\n                AnthropicClient client = AnthropicOkHttpClient.fromEnv();\n\n                MessageCreateParams params = MessageCreateParams.builder()\n                        .model(\"claude-sonnet-4-5-20250929\")\n                        .maxTokens(1000)\n                        .addUserMessage(\"What should I search for to find the latest developments in renewable energy?\")\n                        .build();\n\n                Message message = client.messages().create(params);\n                System.out.println(message.content());\n            }\n        }",
+      "language": "java"
+    },
+    {
+      "code": "javac QuickStart.java\n        java QuickStart",
+      "language": "bash"
+    },
+    {
+      "code": "[ContentBlock{text=TextBlock{text=Here are some effective search strategies to find the latest renewable energy developments:\n\n        ## Search Terms to Use:\n        - \"renewable energy news 2024\"\n        - \"clean energy breakthroughs\"  \n        - \"solar/wind/battery technology advances\"\n        - \"energy storage innovations\"\n        - \"green hydrogen developments\"\n        - \"renewable energy policy updates\"\n\n        ## Best Sources to Check:\n        - **News & Analysis:** Reuters Energy, Bloomberg New Energy Finance, Greentech Media\n        - **Industry Publications:** Renewable Energy World, PV Magazine, Wind Power Engineering\n        - **Research Organizations:** International Energy Agency (IEA), National Renewable Energy Laboratory (NREL)\n        - **Government Sources:** Department of Energy websites, EPA clean energy updates\n\n        ## Specific Topics to Explore:\n        - Perovskite and next-gen solar cells\n        - Offshore wind expansion\n        - Grid-scale battery storage\n        - Green hydrogen production..., type=text}}]",
+      "language": "java"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Prerequisites",
+      "id": "prerequisites"
+    },
+    {
+      "level": "h2",
+      "text": "Call the API",
+      "id": "call-the-api"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#get-started-with-claude",
+  "links": []
+}

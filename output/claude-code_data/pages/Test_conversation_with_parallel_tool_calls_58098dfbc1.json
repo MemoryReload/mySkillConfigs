@@ -1,0 +1,8 @@
+{
+  "title": "Test conversation with parallel tool calls",
+  "content": "messages = [\n    {\n        \"role\": \"user\",\n        \"content\": \"What's the weather in SF and NYC, and what time is it there?\"\n    }\n]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#test-conversation-with-parallel-tool-calls",
+  "links": []
+}

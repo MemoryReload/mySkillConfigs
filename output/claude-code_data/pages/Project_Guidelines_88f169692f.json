@@ -1,0 +1,33 @@
+{
+  "title": "Project Guidelines",
+  "content": "- Use TypeScript strict mode\n- Prefer functional components in React\n- Always include JSDoc comments for public APIs\n\n- Run `npm test` before committing\n- Maintain >80% code coverage\n- Use jest for unit tests, playwright for E2E\n\n- Build: `npm run build`\n- Dev server: `npm run dev`\n- Type check: `npm run typecheck`\ntypescript TypeScript\nimport { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// IMPORTANT: You must specify settingSources to load CLAUDE.md\n// The claude_code preset alone does NOT load CLAUDE.md files\nconst messages = [];\n\nfor await (const message of query({\n  prompt: \"Add a new React component for user profiles\",\n  options: {\n    systemPrompt: {\n      type: \"preset\",\n      preset: \"claude_code\", // Use Claude Code's system prompt\n    },\n    settingSources: [\"project\"], // Required to load CLAUDE.md from project\n  },\n})) {\n  messages.push(message);\n}\n\n// Now Claude has access to your project guidelines from CLAUDE.md\npython Python\nfrom claude_agent_sdk import query, ClaudeAgentOptions",
+  "code_samples": [
+    {
+      "code": "#### Using CLAUDE.md with the SDK\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Code Style",
+      "id": "code-style"
+    },
+    {
+      "level": "h2",
+      "text": "Testing",
+      "id": "testing"
+    },
+    {
+      "level": "h2",
+      "text": "Commands",
+      "id": "commands"
+    }
+  ],
+  "url": "llms-txt#project-guidelines",
+  "links": []
+}

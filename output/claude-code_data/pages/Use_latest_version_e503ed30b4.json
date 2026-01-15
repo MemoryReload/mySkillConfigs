@@ -1,0 +1,39 @@
+{
+  "title": "Use latest version",
+  "content": "curl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5-20250929\",\n    \"max_tokens\": 4096,\n    \"container\": {\n      \"skills\": [{\n        \"type\": \"custom\",\n        \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n        \"version\": \"latest\"\n      }]\n    },\n    \"messages\": [{\"role\": \"user\", \"content\": \"Use latest Skill version\"}],\n    \"tools\": [{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]\n  }'\npython Python",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\nSee the [Create Skill Version API reference](/docs/en/api/skills/create-skill-version) for complete details.\n\n---\n\n## How Skills Are Loaded\n\nWhen you specify Skills in a container:\n\n1. **Metadata Discovery**: Claude sees metadata for each Skill (name, description) in the system prompt\n2. **File Loading**: Skill files are copied into the container at `/skills/{directory}/`\n3. **Automatic Use**: Claude automatically loads and uses Skills when relevant to your request\n4. **Composition**: Multiple Skills compose together for complex workflows\n\nThe progressive disclosure architecture ensures efficient context usage—Claude only loads full Skill instructions when needed.\n\n---\n\n## Use Cases\n\n### Organizational Skills\n\n**Brand & Communications**\n- Apply company-specific formatting (colors, fonts, layouts) to documents\n- Generate communications following organizational templates\n- Ensure consistent brand guidelines across all outputs\n\n**Project Management**\n- Structure notes with company-specific formats (OKRs, decision logs)\n- Generate tasks following team conventions\n- Create standardized meeting recaps and status updates\n\n**Business Operations**\n- Create company-standard reports, proposals, and analyses\n- Execute company-specific analytical procedures\n- Generate financial models following organizational templates\n\n### Personal Skills\n\n**Content Creation**\n- Custom document templates\n- Specialized formatting and styling\n- Domain-specific content generation\n\n**Data Analysis**\n- Custom data processing pipelines\n- Specialized visualization templates\n- Industry-specific analytical methods\n\n**Development & Automation**\n- Code generation templates\n- Testing frameworks\n- Deployment workflows\n\n### Example: Financial Modeling\n\nCombine Excel and custom DCF analysis Skills:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How Skills Are Loaded",
+      "id": "how-skills-are-loaded"
+    },
+    {
+      "level": "h2",
+      "text": "Use Cases",
+      "id": "use-cases"
+    },
+    {
+      "level": "h3",
+      "text": "Organizational Skills",
+      "id": "organizational-skills"
+    },
+    {
+      "level": "h3",
+      "text": "Personal Skills",
+      "id": "personal-skills"
+    },
+    {
+      "level": "h3",
+      "text": "Example: Financial Modeling",
+      "id": "example:-financial-modeling"
+    }
+  ],
+  "url": "llms-txt#use-latest-version",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Extract container ID from the response (using jq)",
+  "content": "CONTAINER_ID=$(jq -r '.container.id' response1.json)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#extract-container-id-from-the-response-(using-jq)",
+  "links": []
+}

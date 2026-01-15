@@ -1,0 +1,8 @@
+{
+  "title": "Extract the container ID from the first response",
+  "content": "container_id = response1.container.id",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#extract-the-container-id-from-the-first-response",
+  "links": []
+}

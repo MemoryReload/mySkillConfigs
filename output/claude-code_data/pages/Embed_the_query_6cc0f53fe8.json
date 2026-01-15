@@ -1,0 +1,8 @@
+{
+  "title": "Embed the query",
+  "content": "query_embd = vo.embed(\n    [query], model=\"voyage-3.5\", input_type=\"query\"\n).embeddings[0]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#embed-the-query",
+  "links": []
+}

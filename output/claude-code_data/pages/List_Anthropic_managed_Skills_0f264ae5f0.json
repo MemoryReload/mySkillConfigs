@@ -1,0 +1,27 @@
+{
+  "title": "List Anthropic-managed Skills",
+  "content": "skills = client.beta.skills.list(\n    source=\"anthropic\",\n    betas=[\"skills-2025-10-02\"]\n)\n\nfor skill in skills.data:\n    print(f\"{skill.id}: {skill.display_title}\")\ntypescript TypeScript\nimport Anthropic from '@anthropic-ai/sdk';\n\nconst client = new Anthropic();\n\n// List Anthropic-managed Skills\nconst skills = await client.beta.skills.list({\n  source: 'anthropic',\n  betas: ['skills-2025-10-02']\n});\n\nfor (const skill of skills.data) {\n  console.log(`${skill.id}: ${skill.display_title}`);\n}\nbash Shell\ncurl \"https://api.anthropic.com/v1/skills?source=anthropic\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: skills-2025-10-02\"\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nYou see the following Skills: `pptx`, `xlsx`, `docx`, and `pdf`.\n\nThis API returns each Skill's metadata: its name and description. Claude loads this metadata at startup to know what Skills are available. This is the first level of **progressive disclosure**, where Claude discovers Skills without loading their full instructions yet.\n\n## Step 2: Create a presentation\n\nNow we'll use the PowerPoint Skill to create a presentation about renewable energy. We specify Skills using the `container` parameter in the Messages API:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Step 2: Create a presentation",
+      "id": "step-2:-create-a-presentation"
+    }
+  ],
+  "url": "llms-txt#list-anthropic-managed-skills",
+  "links": []
+}

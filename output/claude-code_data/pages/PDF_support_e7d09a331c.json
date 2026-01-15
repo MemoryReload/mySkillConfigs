@@ -1,0 +1,72 @@
+{
+  "title": "PDF support",
+  "content": "Process PDFs with Claude. Extract text, analyze charts, and understand visual content from your documents.\n\nYou can now ask Claude about any text, pictures, charts, and tables in PDFs you provide. Some sample use cases:\n- Analyzing financial reports and understanding charts/tables\n- Extracting key information from legal documents\n- Translation assistance for documents\n- Converting document information into structured formats\n\n### Check PDF requirements\nClaude works with any standard PDF. However, you should ensure your request size meets these requirements when using PDF support:\n\n| Requirement | Limit |\n|------------|--------|\n| Maximum request size | 32MB |\n| Maximum pages per request | 100 |\n| Format | Standard PDF (no passwords/encryption) |\n\nPlease note that both limits are on the entire request payload, including any other content sent alongside PDFs.\n\nSince PDF support relies on Claude's vision capabilities, it is subject to the same [limitations and considerations](/docs/en/build-with-claude/vision#limitations) as other vision tasks.\n\n### Supported platforms and models\n\nPDF support is currently supported via direct API access and Google Vertex AI. All [active models](/docs/en/about-claude/models/overview) support PDF processing.\n\nPDF support is now available on Amazon Bedrock with the following considerations:\n\n### Amazon Bedrock PDF Support\n\nWhen using PDF support through Amazon Bedrock's Converse API, there are two distinct document processing modes:\n\n<Note>\n**Important**: To access Claude's full visual PDF understanding capabilities in the Converse API, you must enable citations. Without citations enabled, the API falls back to basic text extraction only. Learn more about [working with citations](/docs/en/build-with-claude/citations).\n</Note>\n\n#### Document Processing Modes\n\n1. **Converse Document Chat** (Original mode - Text extraction only)\n   - Provides basic text extraction from PDFs\n   - Cannot analyze images, charts, or visual layouts within PDFs\n   - Uses approximately 1,000 tokens for a 3-page PDF\n   - Automatically used when citations are not enabled\n\n2. **Claude PDF Chat** (New mode - Full visual understanding)\n   - Provides complete visual analysis of PDFs\n   - Can understand and analyze charts, graphs, images, and visual layouts\n   - Processes each page as both text and image for comprehensive understanding\n   - Uses approximately 7,000 tokens for a 3-page PDF\n   - **Requires citations to be enabled** in the Converse API\n\n- **Converse API**: Visual PDF analysis requires citations to be enabled. There is currently no option to use visual analysis without citations (unlike the InvokeModel API).\n- **InvokeModel API**: Provides full control over PDF processing without forced citations.\n\nIf customers report that Claude isn't seeing images or charts in their PDFs when using the Converse API, they likely need to enable the citations flag. Without it, Converse falls back to basic text extraction only.\n\n<Note>\nThis is a known constraint with the Converse API that we're working to address. For applications that require visual PDF analysis without citations, consider using the InvokeModel API instead.\n</Note>\n\n<Note>\nFor non-PDF files like .csv, .xlsx, .docx, .md, or .txt files, see [Working with other file formats](/docs/en/build-with-claude/files#working-with-other-file-formats).\n</Note>\n\n## Process PDFs with Claude\n\n### Send your first PDF request\nLet's start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:\n\n1. As a URL reference to a PDF hosted online\n2. As a base64-encoded PDF in `document` content blocks  \n3. By a `file_id` from the [Files API](/docs/en/build-with-claude/files)\n\n#### Option 1: URL-based PDF document\n\nThe simplest approach is to reference a PDF directly from a URL:\n\n<CodeGroup>\n   \n    \n    \n    \n</CodeGroup>\n\n#### Option 2: Base64-encoded PDF document\n\nIf you need to send PDFs from your local system or when a URL isn't available:\n\n#### Option 3: Files API\n\nFor PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files):\n\n<CodeGroup>\n```bash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Option 2: Base64-encoded PDF document\n\nIf you need to send PDFs from your local system or when a URL isn't available:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Option 3: Files API\n\nFor PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files): \n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Before you begin",
+      "id": "before-you-begin"
+    },
+    {
+      "level": "h3",
+      "text": "Check PDF requirements",
+      "id": "check-pdf-requirements"
+    },
+    {
+      "level": "h3",
+      "text": "Supported platforms and models",
+      "id": "supported-platforms-and-models"
+    },
+    {
+      "level": "h3",
+      "text": "Amazon Bedrock PDF Support",
+      "id": "amazon-bedrock-pdf-support"
+    },
+    {
+      "level": "h2",
+      "text": "Process PDFs with Claude",
+      "id": "process-pdfs-with-claude"
+    },
+    {
+      "level": "h3",
+      "text": "Send your first PDF request",
+      "id": "send-your-first-pdf-request"
+    }
+  ],
+  "url": "llms-txt#pdf-support",
+  "links": []
+}

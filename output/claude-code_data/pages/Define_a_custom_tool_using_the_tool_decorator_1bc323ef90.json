@@ -1,0 +1,8 @@
+{
+  "title": "Define a custom tool using the @tool decorator",
+  "content": "@tool(\"get_weather\", \"Get current temperature for a location using coordinates\", {\"latitude\": float, \"longitude\": float})\nasync def get_weather(args: dict[str, Any]) -> dict[str, Any]:\n    # Call weather API\n    async with aiohttp.ClientSession() as session:\n        async with session.get(\n            f\"https://api.open-meteo.com/v1/forecast?latitude={args['latitude']}&longitude={args['longitude']}&current=temperature_2m&temperature_unit=fahrenheit\"\n        ) as response:\n            data = await response.json()\n\nreturn {\n        \"content\": [{\n            \"type\": \"text\",\n            \"text\": f\"Temperature: {data['current']['temperature_2m']}°F\"\n        }]\n    }",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#define-a-custom-tool-using-the-@tool-decorator",
+  "links": []
+}

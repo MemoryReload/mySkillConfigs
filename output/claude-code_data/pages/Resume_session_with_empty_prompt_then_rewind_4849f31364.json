@@ -1,0 +1,19 @@
+{
+  "title": "Resume session with empty prompt, then rewind",
+  "content": "async with ClaudeSDKClient(ClaudeAgentOptions(\n    enable_file_checkpointing=True,\n    resume=session_id\n)) as client:\n    await client.query(\"\")\n    async for message in client.receive_response():\n        await client.rewind_files(checkpoint_id)\n        break\ntypescript TypeScript\n// Resume session with empty prompt, then rewind\nconst rewindQuery = query({\n  prompt: \"\",\n  options: { ...opts, resume: sessionId }\n});\n\nfor await (const msg of rewindQuery) {\n  await rewindQuery.rewindFiles(checkpointId);\n  break;\n}\n```\n\n- **[Sessions](/docs/en/agent-sdk/sessions)**: learn how to resume sessions, which is required for rewinding after the stream completes. Covers session IDs, resuming conversations, and session forking.\n- **[Permissions](/docs/en/agent-sdk/permissions)**: configure which tools Claude can use and how file modifications are approved. Useful if you want more control over when edits happen.\n- **[TypeScript SDK reference](/docs/en/agent-sdk/typescript)**: complete API reference including all options for `query()` and the `rewindFiles()` method.\n- **[Python SDK reference](/docs/en/agent-sdk/python)**: complete API reference including all options for `ClaudeAgentOptions` and the `rewind_files()` method.",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#resume-session-with-empty-prompt,-then-rewind",
+  "links": []
+}

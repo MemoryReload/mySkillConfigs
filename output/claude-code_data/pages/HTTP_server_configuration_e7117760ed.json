@@ -1,0 +1,28 @@
+{
+  "title": "HTTP server configuration",
+  "content": "{\n  \"mcpServers\": {\n    \"http-service\": {\n      \"type\": \"http\",\n      \"url\": \"https://api.example.com/mcp\",\n      \"headers\": {\n        \"X-API-Key\": \"${API_KEY}\"\n      }\n    }\n  }\n}\ntypescript TypeScript\nimport { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// List available resources\nfor await (const message of query({\n  prompt: \"What resources are available from the database server?\",\n  options: {\n    mcpServers: {\n      \"database\": {\n        command: \"npx\",\n        args: [\"@modelcontextprotocol/server-database\"]\n      }\n    },\n    allowedTools: [\"mcp__list_resources\", \"mcp__read_resource\"]\n  }\n})) {\n  if (message.type === \"result\") console.log(message.result);\n}\npython Python\nfrom claude_agent_sdk import query",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n### SDK MCP Servers\n\nIn-process servers running within your application. For detailed information on creating custom tools, see the [Custom Tools guide](/docs/en/agent-sdk/custom-tools):\n\n## Resource Management\n\nMCP servers can expose resources that Claude can list and read:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "SDK MCP Servers",
+      "id": "sdk-mcp-servers"
+    },
+    {
+      "level": "h2",
+      "text": "Resource Management",
+      "id": "resource-management"
+    }
+  ],
+  "url": "llms-txt#http-server-configuration",
+  "links": []
+}

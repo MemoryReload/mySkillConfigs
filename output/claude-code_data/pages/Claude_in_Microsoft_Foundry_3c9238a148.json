@@ -1,0 +1,79 @@
+{
+  "title": "Claude in Microsoft Foundry",
+  "content": "Access Claude models through Microsoft Foundry with Azure-native endpoints and authentication.\n\nThis guide will walk you through the process of setting up and making API calls to Claude in Foundry in Python, TypeScript, or using direct HTTP requests. When you can access Claude in Foundry, you will be billed for Claude usage in the Microsoft Marketplace with your Azure subscription, allowing you to access Claude's latest capabilities while managing costs through your Azure subscription.\n\nRegional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources (US DataZone coming soon). Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit the [pricing page](https://claude.com/pricing#api) for details.\n\nIn this preview platform integration, Claude models run on Anthropic's infrastructure. This is a commercial integration for billing and access through Azure. As an independent processor for Microsoft, customers using Claude through Microsoft Foundry are subject to Anthropic's data use terms. Anthropic continues to provide its industry-leading safety and data commitments, including zero data retention availability.\n\nBefore you begin, ensure you have:\n\n- An active Azure subscription\n- Access to [Foundry](https://ai.azure.com/)\n- The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) installed (optional, for resource management)\n\nAnthropic's [client SDKs](/docs/en/api/client-sdks) support Foundry through platform-specific packages.\n\n<Tabs>\n<Tab title=\"Python\">\n\n<Tab title=\"TypeScript\">\n\nFoundry uses a two-level hierarchy: **resources** contain your security and billing configuration, while **deployments** are the model instances you call via API. You'll first create a Foundry resource, then create one or more Claude deployments within it.\n\n### Provisioning Foundry resources\n\nCreate a Foundry resource, which is required to use and manage services in Azure. You can follow these instructions to create a [Foundry resource](https://learn.microsoft.com/en-us/azure/ai-services/multi-service-resource?pivots=azportal#create-a-new-azure-ai-foundry-resource). Alternatively, you can start by creating a [Foundry project](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/create-projects?tabs=ai-foundry), which involves creating a Foundry resource.\n\nTo provision your resource:\n\n1. Navigate to the [Foundry portal](https://ai.azure.com/)\n2. Create a new Foundry resource or select an existing one\n3. Configure access management using Azure-issued API keys or Entra ID for role-based access control\n4. Optionally configure the resource to be part of a private network (Azure Virtual Network) for enhanced security\n5. Note your resource name—you'll use this as `{resource}` in API endpoints (e.g., `https://{resource}.services.ai.azure.com/anthropic/v1/*`)\n\n### Creating Foundry deployments\n\nAfter creating your resource, deploy a Claude model to make it available for API calls:\n\n1. In the Foundry portal, navigate to your resource\n2. Go to **Models + endpoints** and select **+ Deploy model** > **Deploy base model**\n3. Search for and select a Claude model (e.g., `claude-sonnet-4-5`)\n4. Configure deployment settings:\n   - **Deployment name**: Defaults to the model ID, but you can customize it (e.g., `my-claude-deployment`). The deployment name cannot be changed after it has been created.\n   - **Deployment type**: Select Global Standard (recommended for Claude)\n5. Select **Deploy** and wait for provisioning to complete\n6. Once deployed, you can find your endpoint URL and keys under **Keys and Endpoint**\n\n<Note>\n  The deployment name you choose becomes the value you pass in the `model` parameter of your API requests. You can create multiple deployments of the same model with different names to manage separate configurations or rate limits.\n</Note>\n\nClaude on Foundry supports two authentication methods: API keys and Entra ID tokens. Both methods use Azure-hosted endpoints in the format `https://{resource}.services.ai.azure.com/anthropic/v1/*`.\n\n### API key authentication\n\nAfter provisioning your Foundry Claude resource, you can obtain an API key from the Foundry portal:\n\n1. Navigate to your resource in the Foundry portal\n2. Go to **Keys and Endpoint** section\n3. Copy one of the provided API keys\n4. Use either the `api-key` or `x-api-key` header in your requests, or provide it to the SDK\n\nThe Python and TypeScript SDKs require an API key and either a resource name or base URL. The SDKs will automatically read these from the following environment variables if they are defined:\n\n- `ANTHROPIC_FOUNDRY_API_KEY` - Your API key\n- `ANTHROPIC_FOUNDRY_RESOURCE` - Your resource name (e.g., `example-resource`)\n- `ANTHROPIC_FOUNDRY_BASE_URL` - Alternative to resource name; the full base URL (e.g., `https://example-resource.services.ai.azure.com/anthropic/`)\n\n<Note>\nThe `resource` and `base_url` parameters are mutually exclusive. Provide either the resource name (which the SDK uses to construct the URL as `https://{resource}.services.ai.azure.com/anthropic/`) or the full base URL directly.\n</Note>\n\n**Example using API key:**\n\n<Warning>\nKeep your API keys secure. Never commit them to version control or share them publicly. Anyone with access to your API key can make requests to Claude through your Foundry resource.\n</Warning>\n\n## Microsoft Entra authentication\n\nFor enhanced security and centralized access management, you can use Entra ID (formerly Azure Active Directory) tokens:\n\n1. Enable Entra authentication for your Foundry resource\n2. Obtain an access token from Entra ID\n3. Use the token in the `Authorization: Bearer {TOKEN}` header\n\n**Example using Entra ID:**\n\n<CodeGroup>\n```python Python\nimport os\nfrom anthropic import AnthropicFoundry\nfrom azure.identity import DefaultAzureCredential, get_bearer_token_provider",
+  "code_samples": [
+    {
+      "code": "pip install -U \"anthropic\"",
+      "language": "bash"
+    },
+    {
+      "code": "npm install @anthropic-ai/foundry-sdk",
+      "language": "bash"
+    },
+    {
+      "code": "dotnet add package Anthropic.Foundry",
+      "language": "bash"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n<Warning>\nKeep your API keys secure. Never commit them to version control or share them publicly. Anyone with access to your API key can make requests to Claude through your Foundry resource.\n</Warning>\n\n## Microsoft Entra authentication\n\nFor enhanced security and centralized access management, you can use Entra ID (formerly Azure Active Directory) tokens:\n\n1. Enable Entra authentication for your Foundry resource\n2. Obtain an access token from Entra ID\n3. Use the token in the `Authorization: Bearer {TOKEN}` header\n\n**Example using Entra ID:**\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Preview",
+      "id": "preview"
+    },
+    {
+      "level": "h2",
+      "text": "Prerequisites",
+      "id": "prerequisites"
+    },
+    {
+      "level": "h2",
+      "text": "Install an SDK",
+      "id": "install-an-sdk"
+    },
+    {
+      "level": "h2",
+      "text": "Provisioning",
+      "id": "provisioning"
+    },
+    {
+      "level": "h3",
+      "text": "Provisioning Foundry resources",
+      "id": "provisioning-foundry-resources"
+    },
+    {
+      "level": "h3",
+      "text": "Creating Foundry deployments",
+      "id": "creating-foundry-deployments"
+    },
+    {
+      "level": "h2",
+      "text": "Authentication",
+      "id": "authentication"
+    },
+    {
+      "level": "h3",
+      "text": "API key authentication",
+      "id": "api-key-authentication"
+    },
+    {
+      "level": "h2",
+      "text": "Microsoft Entra authentication",
+      "id": "microsoft-entra-authentication"
+    }
+  ],
+  "url": "llms-txt#claude-in-microsoft-foundry",
+  "links": []
+}

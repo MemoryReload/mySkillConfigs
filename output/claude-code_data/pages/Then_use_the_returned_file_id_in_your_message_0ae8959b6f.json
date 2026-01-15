@@ -1,0 +1,13 @@
+{
+  "title": "Then use the returned file_id in your message",
+  "content": "curl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"type\": \"image\",\n            \"source\": {\n              \"type\": \"file\",\n              \"file_id\": \"file_abc123\"\n            }\n          },\n          {\n            \"type\": \"text\",\n            \"text\": \"Describe this image.\"\n          }\n        ]\n      }\n    ]\n  }'\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#then-use-the-returned-file_id-in-your-message",
+  "links": []
+}

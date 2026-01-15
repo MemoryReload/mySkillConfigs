@@ -1,0 +1,29 @@
+{
+  "title": "Streaming refusals",
+  "content": "Starting with Claude 4 models, streaming responses from Claude's API return **`stop_reason`: `\"refusal\"`** when streaming classifiers intervene to handle potential policy violations. This new safety feature helps maintain content compliance during real-time streaming.\n\n<Tip>\nTo learn more about refusals triggered by API safety filters for Claude Sonnet 4.5, see [Understanding Sonnet 4.5's API Safety Filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).\n</Tip>\n\n## API response format\n\nWhen streaming classifiers detect content that violates our policies, the API returns this response:\n\n<Warning>\nNo additional refusal message is included. You must handle the response and provide appropriate user-facing messaging.\n</Warning>\n\n## Reset context after refusal\n\nWhen you receive **`stop_reason`: `refusal`**, you must reset the conversation context **by removing or updating the turn that was refused** before continuing. Attempting to continue without resetting will result in continued refusals.\n\n<Note>\nUsage metrics are still provided in the response for billing purposes, even when the response is refused.\n\nYou will be billed for output tokens up until the refusal.\n</Note>\n\n<Tip>\nIf you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Sonnet 4 (`claude-sonnet-4-20250514`), which has different usage restrictions.\n</Tip>\n\n## Implementation guide\n\nHere's how to detect and handle streaming refusals in your application:\n\n<CodeGroup>\n```bash Shell",
+  "code_samples": [
+    {
+      "code": "{\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"Hello..\"\n    }\n  ],\n  \"stop_reason\": \"refusal\"\n}",
+      "language": "json"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "API response format",
+      "id": "api-response-format"
+    },
+    {
+      "level": "h2",
+      "text": "Reset context after refusal",
+      "id": "reset-context-after-refusal"
+    },
+    {
+      "level": "h2",
+      "text": "Implementation guide",
+      "id": "implementation-guide"
+    }
+  ],
+  "url": "llms-txt#streaming-refusals",
+  "links": []
+}

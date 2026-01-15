@@ -1,0 +1,23 @@
+{
+  "title": "Download the created files",
+  "content": "for file_id in extract_file_ids(response):\n    file_metadata = client.beta.files.retrieve_metadata(file_id)\n    file_content = client.beta.files.download(file_id)\n    file_content.write_to_file(file_metadata.filename)\n    print(f\"Downloaded: {file_metadata.filename}\")\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\nimport { writeFileSync } from 'fs';\n\n// Initialize the client\nconst anthropic = new Anthropic();\n\nasync function main() {\n  // Request code execution that creates files\n  const response = await anthropic.beta.messages.create({\n    model: \"claude-sonnet-4-5\",\n    betas: [\"code-execution-2025-08-25\", \"files-api-2025-04-14\"],\n    max_tokens: 4096,\n    messages: [{\n      role: \"user\",\n      content: \"Create a matplotlib visualization and save it as output.png\"\n    }],\n    tools: [{\n      type: \"code_execution_20250825\",\n      name: \"code_execution\"\n    }]\n  });\n\n// Extract file IDs from the response\n  function extractFileIds(response: any): string[] {\n    const fileIds: string[] = [];\n    for (const item of response.content) {\n      if (item.type === 'bash_code_execution_tool_result') {\n        const contentItem = item.content;\n        if (contentItem.type === 'bash_code_execution_result' && contentItem.content) {\n          for (const file of contentItem.content) {\n            fileIds.push(file.file_id);\n          }\n        }\n      }\n    }\n    return fileIds;\n  }\n\n// Download the created files\n  const fileIds = extractFileIds(response);\n  for (const fileId of fileIds) {\n    const fileMetadata = await anthropic.beta.files.retrieveMetadata(fileId);\n    const fileContent = await anthropic.beta.files.download(fileId);\n\n// Convert ReadableStream to Buffer and save\n    const chunks: Uint8Array[] = [];\n    for await (const chunk of fileContent) {\n      chunks.push(chunk);\n    }\n    const buffer = Buffer.concat(chunks);\n    writeFileSync(fileMetadata.filename, buffer);\n    console.log(`Downloaded: ${fileMetadata.filename}`);\n  }\n}\n\nmain().catch(console.error);\nbash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Combine operations\n\nA complex workflow using all capabilities:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Combine operations",
+      "id": "combine-operations"
+    }
+  ],
+  "url": "llms-txt#download-the-created-files",
+  "links": []
+}

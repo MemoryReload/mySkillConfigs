@@ -1,0 +1,8 @@
+{
+  "title": "Simple type mapping - recommended for most cases",
+  "content": "@tool(\n    \"process_data\",\n    \"Process structured data with type safety\",\n    {\n        \"name\": str,\n        \"age\": int,\n        \"email\": str,\n        \"preferences\": list  # Optional parameters can be handled in the function\n    }\n)\nasync def process_data(args: dict[str, Any]) -> dict[str, Any]:\n    # Access arguments with type hints for IDE support\n    name = args[\"name\"]\n    age = args[\"age\"]\n    email = args[\"email\"]\n    preferences = args.get(\"preferences\", [])\n    \n    print(f\"Processing {name}'s data (age: {age})\")\n    \n    return {\n        \"content\": [{\n            \"type\": \"text\",\n            \"text\": f\"Processed data for {name}\"\n        }]\n    }",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#simple-type-mapping---recommended-for-most-cases",
+  "links": []
+}

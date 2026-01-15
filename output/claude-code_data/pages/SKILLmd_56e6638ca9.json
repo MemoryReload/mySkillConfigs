@@ -1,0 +1,19 @@
+{
+  "title": "SKILL.md",
+  "content": "**Basic usage**: [instructions in SKILL.md]\n**Advanced features**: See [advanced.md](advanced.md)\n**API reference**: See [reference.md](reference.md)\n**Examples**: See [examples.md](examples.md)\nmarkdown",
+  "code_samples": [
+    {
+      "code": "### Structure longer reference files with table of contents\n\nFor reference files longer than 100 lines, include a table of contents at the top. This ensures Claude can see the full scope of available information even when previewing with partial reads.\n\n**Example**:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Structure longer reference files with table of contents",
+      "id": "structure-longer-reference-files-with-table-of-contents"
+    }
+  ],
+  "url": "llms-txt#skill.md",
+  "links": []
+}

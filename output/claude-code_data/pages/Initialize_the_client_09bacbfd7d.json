@@ -1,0 +1,8 @@
+{
+  "title": "Initialize the client",
+  "content": "client = Anthropic(\n    api_key=os.getenv(\"ANTHROPIC_API_KEY\")\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#initialize-the-client",
+  "links": []
+}

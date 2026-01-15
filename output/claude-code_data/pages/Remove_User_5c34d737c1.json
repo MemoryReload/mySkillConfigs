@@ -1,0 +1,34 @@
+{
+  "title": "Remove User",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/users/delete\n\n**delete** `/v1/organizations/users/{user_id}`\n\n- `type: \"user_deleted\"`\n\nFor Users, this is always `\"user_deleted\"`.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/users/$USER_ID \\\n    -X DELETE \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Delete",
+      "id": "delete"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#remove-user",
+  "links": []
+}

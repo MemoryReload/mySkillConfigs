@@ -1,0 +1,8 @@
+{
+  "title": "The cache includes: user message, thinking_block_1, tool_use block 1, and tool_result_1",
+  "content": "Request 3:\nUser: [\"What's the weather in Paris?\"],\nAssistant: [thinking_block_1] + [tool_use block 1],\nUser: [tool_result_1, cache=True],\nAssistant: [thinking_block_2] + [text block 2],\nUser: [Text response, cache=True]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#the-cache-includes:-user-message,-thinking_block_1,-tool_use-block-1,-and-tool_result_1",
+  "links": []
+}

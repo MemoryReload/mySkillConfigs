@@ -1,0 +1,8 @@
+{
+  "title": "No system prompt - caching in messages instead",
+  "content": "MESSAGES = [\n    {\n        \"role\": \"user\",\n        \"content\": [\n            {\n                \"type\": \"text\",\n                \"text\": LARGE_TEXT,\n                \"cache_control\": {\"type\": \"ephemeral\"},\n            },\n            {\n                \"type\": \"text\",\n                \"text\": \"Analyze the tone of this passage.\"\n            }\n        ]\n    }\n]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#no-system-prompt---caching-in-messages-instead",
+  "links": []
+}

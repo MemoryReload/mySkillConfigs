@@ -1,0 +1,13 @@
+{
+  "title": "No filesystem dependencies - setting_sources defaults to None",
+  "content": "async for message in query(\n    prompt=\"Review this PR\",\n    options=ClaudeAgentOptions(\n        # setting_sources=None is the default, no need to specify\n        agents={ /* ... */ },\n        mcp_servers={ /* ... */ },\n        allowed_tools=[\"Read\", \"Grep\", \"Glob\"]\n    )\n):\n    print(message)\npython",
+  "code_samples": [
+    {
+      "code": "**Loading CLAUDE.md project instructions:**",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#no-filesystem-dependencies---setting_sources-defaults-to-none",
+  "links": []
+}

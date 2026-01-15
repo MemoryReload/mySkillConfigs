@@ -1,0 +1,28 @@
+{
+  "title": "When Claude calls the tool, provide the search results",
+  "content": "if response.content[0].type == \"tool_use\":\n    tool_result = search_knowledge_base(response.content[0].input[\"query\"])\n    \n    # Send the tool result back\n    final_response = client.messages.create(\n        model=\"claude-sonnet-4-5\",  # Works with all supported models\n        max_tokens=1024,\n        messages=[\n            MessageParam(role=\"user\", content=\"How do I configure the timeout settings?\"),\n            MessageParam(role=\"assistant\", content=response.content),\n            MessageParam(\n                role=\"user\",\n                content=[\n                    ToolResultBlockParam(\n                        type=\"tool_result\",\n                        tool_use_id=response.content[0].id,\n                        content=tool_result  # Search results go here\n                    )\n                ]\n            )\n        ]\n    )\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic();\n\n// Define a knowledge base search tool\nconst knowledgeBaseTool = {\n  name: \"search_knowledge_base\",\n  description: \"Search the company knowledge base for information\",\n  input_schema: {\n    type: \"object\",\n    properties: {\n      query: {\n        type: \"string\",\n        description: \"The search query\"\n      }\n    },\n    required: [\"query\"]\n  }\n};\n\n// Function to handle the tool call\nfunction searchKnowledgeBase(query: string) {\n  // Your search logic here\n  // Returns search results in the correct format\n  return [\n    {\n      type: \"search_result\" as const,\n      source: \"https://docs.company.com/product-guide\",\n      title: \"Product Configuration Guide\",\n      content: [\n        {\n          type: \"text\" as const,\n          text: \"To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs.\"\n        }\n      ],\n      citations: { enabled: true }\n    },\n    {\n      type: \"search_result\" as const,\n      source: \"https://docs.company.com/troubleshooting\",\n      title: \"Troubleshooting Guide\",\n      content: [\n        {\n          type: \"text\" as const,\n          text: \"If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values.\"\n        }\n      ],\n      citations: { enabled: true }\n    }\n  ];\n}\n\n// Create a message with the tool\nconst response = await anthropic.messages.create({\n  model: \"claude-sonnet-4-5\", // Works with all supported models\n  max_tokens: 1024,\n  tools: [knowledgeBaseTool],\n  messages: [\n    {\n      role: \"user\",\n      content: \"How do I configure the timeout settings?\"\n    }\n  ]\n});\n\n// Handle tool use and provide results\nif (response.content[0].type === \"tool_use\") {\n  const toolResult = searchKnowledgeBase(response.content[0].input.query);\n  \n  const finalResponse = await anthropic.messages.create({\n    model: \"claude-sonnet-4-5\", // Works with all supported models\n    max_tokens: 1024,\n      messages: [\n      { role: \"user\", content: \"How do I configure the timeout settings?\" },\n      { role: \"assistant\", content: response.content },\n      {\n        role: \"user\",\n        content: [\n          {\n            type: \"tool_result\" as const,\n            tool_use_id: response.content[0].id,\n            content: toolResult  // Search results go here\n          }\n        ]\n      }\n    ]\n  });\n}\npython Python\nfrom anthropic import Anthropic\nfrom anthropic.types import (\n    MessageParam,\n    TextBlockParam,\n    SearchResultBlockParam\n)",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Method 2: Search results as top-level content\n\nYou can also provide search results directly in user messages. This is useful for:\n- Pre-fetched content from your search infrastructure\n- Cached search results from previous queries\n- Content from external search services\n- Testing and development\n\n### Example: Direct search results\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Method 2: Search results as top-level content",
+      "id": "method-2:-search-results-as-top-level-content"
+    },
+    {
+      "level": "h3",
+      "text": "Example: Direct search results",
+      "id": "example:-direct-search-results"
+    }
+  ],
+  "url": "llms-txt#when-claude-calls-the-tool,-provide-the-search-results",
+  "links": []
+}

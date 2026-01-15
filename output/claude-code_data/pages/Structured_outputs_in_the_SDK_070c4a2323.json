@@ -1,0 +1,47 @@
+{
+  "title": "Structured outputs in the SDK",
+  "content": "Get validated JSON results from agent workflows\n\nGet structured, validated JSON from agent workflows. The Agent SDK supports structured outputs through JSON Schemas, ensuring your agents return data in exactly the format you need.\n\n<Note>\n**When to use structured outputs**\n\nUse structured outputs when you need validated JSON after an agent completes a multi-turn workflow with tools (file searches, command execution, web research, etc.).\n\nFor single API calls without tool use, see [API Structured Outputs](/docs/en/build-with-claude/structured-outputs).\n</Note>\n\n## Why use structured outputs\n\nStructured outputs provide reliable, type-safe integration with your applications:\n\n- **Validated structure**: Always receive valid JSON matching your schema\n- **Simplified integration**: No parsing or validation code needed\n- **Type safety**: Use with TypeScript or Python type hints for end-to-end safety\n- **Clean separation**: Define output requirements separately from task instructions\n- **Tool autonomy**: Agent chooses which tools to use while guaranteeing output format\n\n<Tabs>\n<Tab title=\"TypeScript\">\n\n## Defining schemas with Zod\n\nFor TypeScript projects, use Zod for type-safe schema definition and validation:\n\n**Benefits of Zod:**\n- Full TypeScript type inference\n- Runtime validation with `safeParse()`\n- Better error messages\n- Composable schemas\n\n</Tab>\n<Tab title=\"Python\">\n\n## Defining schemas with Pydantic\n\nFor Python projects, use Pydantic for type-safe schema definition and validation:\n\n```python\nfrom pydantic import BaseModel\nfrom claude_agent_sdk import query\n\nclass Issue(BaseModel):\n    severity: str  # 'low', 'medium', 'high'\n    description: str\n    file: str\n\nclass AnalysisResult(BaseModel):\n    summary: str\n    issues: list[Issue]\n    score: int",
+  "code_samples": [
+    {
+      "code": "import { query } from '@anthropic-ai/claude-agent-sdk'\n\nconst schema = {\n  type: 'object',\n  properties: {\n    company_name: { type: 'string' },\n    founded_year: { type: 'number' },\n    headquarters: { type: 'string' }\n  },\n  required: ['company_name']\n}\n\nfor await (const message of query({\n  prompt: 'Research Anthropic and provide key company information',\n  options: {\n    outputFormat: {\n      type: 'json_schema',\n      schema: schema\n    }\n  }\n})) {\n  if (message.type === 'result' && message.structured_output) {\n    console.log(message.structured_output)\n    // { company_name: \"Anthropic\", founded_year: 2021, headquarters: \"San Francisco, CA\" }\n  }\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "import { z } from 'zod'\nimport { zodToJsonSchema } from 'zod-to-json-schema'\n\n// Define schema with Zod\nconst AnalysisResult = z.object({\n  summary: z.string(),\n  issues: z.array(z.object({\n    severity: z.enum(['low', 'medium', 'high']),\n    description: z.string(),\n    file: z.string()\n  })),\n  score: z.number().min(0).max(100)\n})\n\ntype AnalysisResult = z.infer<typeof AnalysisResult>\n\n// Convert to JSON Schema\nconst schema = zodToJsonSchema(AnalysisResult, { $refStrategy: 'root' })\n\n// Use in query\nfor await (const message of query({\n  prompt: 'Analyze the codebase for security issues',\n  options: {\n    outputFormat: {\n      type: 'json_schema',\n      schema: schema\n    }\n  }\n})) {\n  if (message.type === 'result' && message.structured_output) {\n    // Validate and get fully typed result\n    const parsed = AnalysisResult.safeParse(message.structured_output)\n    if (parsed.success) {\n      const data: AnalysisResult = parsed.data\n      console.log(`Score: ${data.score}`)\n      console.log(`Found ${data.issues.length} issues`)\n      data.issues.forEach(issue => {\n        console.log(`[${issue.severity}] ${issue.file}: ${issue.description}`)\n      })\n    }\n  }\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "from claude_agent_sdk import query\n\nschema = {\n    \"type\": \"object\",\n    \"properties\": {\n        \"company_name\": {\"type\": \"string\"},\n        \"founded_year\": {\"type\": \"number\"},\n        \"headquarters\": {\"type\": \"string\"}\n    },\n    \"required\": [\"company_name\"]\n}\n\nasync for message in query(\n    prompt=\"Research Anthropic and provide key company information\",\n    options={\n        \"output_format\": {\n            \"type\": \"json_schema\",\n            \"schema\": schema\n        }\n    }\n):\n    if hasattr(message, 'structured_output'):\n        print(message.structured_output)\n        # {'company_name': 'Anthropic', 'founded_year': 2021, 'headquarters': 'San Francisco, CA'}",
+      "language": "python"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Why use structured outputs",
+      "id": "why-use-structured-outputs"
+    },
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h2",
+      "text": "Defining schemas with Zod",
+      "id": "defining-schemas-with-zod"
+    },
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h2",
+      "text": "Defining schemas with Pydantic",
+      "id": "defining-schemas-with-pydantic"
+    }
+  ],
+  "url": "llms-txt#structured-outputs-in-the-sdk",
+  "links": []
+}

@@ -1,0 +1,19 @@
+{
+  "title": "INFO: Compaction complete. New token usage: 2500",
+  "content": "typescript TypeScript\n// The SDK logs compaction events to the console\n// You'll see messages like:\n// Token usage 105000 has exceeded the threshold of 100000. Performing compaction.\n// Compaction complete. New token usage: 2500\n```\n\n### When to use compaction\n\n- Long-running agent tasks that process many files or data sources\n- Research workflows that accumulate large amounts of information\n- Multi-step tasks with clear, measurable progress\n- Tasks that produce artifacts (files, reports) that persist outside the conversation\n\n**Less ideal use cases:**\n\n- Tasks requiring precise recall of early conversation details\n- Workflows using server-side tools extensively\n- Tasks that need to maintain exact state across many variables",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "When to use compaction",
+      "id": "when-to-use-compaction"
+    }
+  ],
+  "url": "llms-txt#info:-compaction-complete.-new-token-usage:-2500",
+  "links": []
+}

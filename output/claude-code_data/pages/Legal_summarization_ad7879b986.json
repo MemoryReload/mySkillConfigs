@@ -1,0 +1,49 @@
+{
+  "title": "Legal summarization",
+  "content": "This guide walks through how to leverage Claude's advanced natural language processing capabilities to efficiently summarize legal documents, extracting key information and expediting legal research. With Claude, you can streamline the review of contracts, litigation prep, and regulatory work, saving time and ensuring accuracy in your legal processes.\n\n> Visit our [summarization cookbook](https://platform.claude.com/cookbook/capabilities-summarization-guide) to see an example legal summarization implementation using Claude.\n\n## Before building with Claude\n\n### Decide whether to use Claude for legal summarization\n\nHere are some key indicators that you should employ an LLM like Claude to summarize legal documents:\n\n<section title=\"You want to review a high volume of documents efficiently and affordably\">\nLarge-scale document review can be time-consuming and expensive when done manually. Claude can process and summarize vast amounts of legal documents rapidly, significantly reducing the time and cost associated with document review. This capability is particularly valuable for tasks like due diligence, contract analysis, or litigation discovery, where efficiency is crucial.\n</section>\n<section title=\"You require automated extraction of key metadata\">\nClaude can efficiently extract and categorize important metadata from legal documents, such as parties involved, dates, contract terms, or specific clauses. This automated extraction can help organize information, making it easier to search, analyze, and manage large document sets. It's especially useful for contract management, compliance checks, or creating searchable databases of legal information. \n</section>\n<section title=\"You want to generate clear, concise, and standardized summaries\">\nClaude can generate structured summaries that follow predetermined formats, making it easier for legal professionals to quickly grasp the key points of various documents. These standardized summaries can improve readability, facilitate comparison between documents, and enhance overall comprehension, especially when dealing with complex legal language or technical jargon.\n</section>\n<section title=\"You need precise citations for your summaries\">\nWhen creating legal summaries, proper attribution and citation are crucial to ensure credibility and compliance with legal standards. Claude can be prompted to include accurate citations for all referenced legal points, making it easier for legal professionals to review and verify the summarized information.\n</section>\n<section title=\"You want to streamline and expedite your legal research process\">\nClaude can assist in legal research by quickly analyzing large volumes of case law, statutes, and legal commentary. It can identify relevant precedents, extract key legal principles, and summarize complex legal arguments. This capability can significantly speed up the research process, allowing legal professionals to focus on higher-level analysis and strategy development.\n</section>\n\n### Determine the details you want the summarization to extract\nThere is no single correct summary for any given document. Without clear direction, it can be difficult for Claude to determine which details to include. To achieve optimal results, identify the specific information you want to include in the summary.\n\nFor instance, when summarizing a sublease agreement, you might wish to extract the following key points:\n\n### Establish success criteria\n\nEvaluating the quality of summaries is a notoriously challenging task. Unlike many other natural language processing tasks, evaluation of summaries often lacks clear-cut, objective metrics. The process can be highly subjective, with different readers valuing different aspects of a summary. Here are criteria you may wish to consider when assessing how well Claude performs legal summarization.\n\n<section title=\"Factual correctness\">\nThe summary should accurately represent the facts, legal concepts, and key points in the document.\n</section>\n<section title=\"Legal precision\">\nTerminology and references to statutes, case law, or regulations must be correct and aligned with legal standards.\n</section>\n<section title=\"Conciseness\">\n The summary should condense the legal document to its essential points without losing important details.\n</section>\n<section title=\"Consistency\">\nIf summarizing multiple documents, the LLM should maintain a consistent structure and approach to each summary.\n</section>\n<section title=\"Readability\">\nThe text should be clear and easy to understand. If the audience is not legal experts, the summarization should not include legal jargon that could confuse the audience.\n</section>\n<section title=\"Bias and fairness\">\nThe summary should present an unbiased and fair depiction of the legal arguments and positions.\n</section>\n\nSee our guide on [establishing success criteria](/docs/en/test-and-evaluate/define-success) for more information.\n\n## How to summarize legal documents using Claude\n\n### Select the right Claude model\n\nModel accuracy is extremely important when summarizing legal documents. Claude Sonnet 4.5 is an excellent choice for use cases such as this where high accuracy is required. If the size and quantity of your documents is large such that costs start to become a concern, you can also try using a smaller model like Claude Haiku 4.5.\n\nTo help estimate these costs, below is a comparison of the cost to summarize 1,000 sublease agreements using both Sonnet and Haiku:\n\n* **Content size**\n    * Number of agreements: 1,000\n    * Characters per agreement: 300,000\n    * Total characters: 300M\n\n* **Estimated tokens**\n    * Input tokens: 86M (assuming 1 token per 3.5 characters)\n    * Output tokens per summary: 350\n    * Total output tokens: 350,000\n \n* **Claude Sonnet 4.5 estimated cost**\n    * Input token cost: 86 MTok * \\$3.00/MTok = \\$258\n    * Output token cost: 0.35 MTok * \\$15.00/MTok = \\$5.25\n    * Total cost: \\$258.00 + \\$5.25 = \\$263.25\n\n* **Claude Haiku 3 estimated cost**\n    * Input token cost: 86 MTok * \\$0.25/MTok = \\$21.50\n    * Output token cost: 0.35 MTok * \\$1.25/MTok = \\$0.44\n    * Total cost: \\$21.50 + \\$0.44 = \\$21.96\n\n<Tip>Actual costs may differ from these estimates. These estimates are based on the example highlighted in the section on [prompting](#build-a-strong-prompt).</Tip>\n\n### Transform documents into a format that Claude can process\n\nBefore you begin summarizing documents, you need to prepare your data. This involves extracting text from PDFs, cleaning the text, and ensuring it's ready to be processed by Claude.\n\nHere is a demonstration of this process on a sample pdf:\n\n```python\nfrom io import BytesIO\nimport re\n\nimport pypdf\nimport requests\n\ndef get_llm_text(pdf_file):\n    reader = pypdf.PdfReader(pdf_file)\n    text = \"\\n\".join([page.extract_text() for page in reader.pages])\n\n# Remove extra whitespace\n    text = re.sub(r'\\s+', ' ', text)\n\n# Remove page numbers\n    text = re.sub(r'\\n\\s*\\d+\\s*\\n', '\\n', text)",
+  "code_samples": [
+    {
+      "code": "details_to_extract = [\n    'Parties involved (sublessor, sublessee, and original lessor)',\n    'Property details (address, description, and permitted use)', \n    'Term and rent (start date, end date, monthly rent, and security deposit)',\n    'Responsibilities (utilities, maintenance, and repairs)',\n    'Consent and notices (landlord\\'s consent, and notice requirements)',\n    'Special provisions (furniture, parking, and subletting restrictions)'\n]",
+      "language": "python"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Before building with Claude",
+      "id": "before-building-with-claude"
+    },
+    {
+      "level": "h3",
+      "text": "Decide whether to use Claude for legal summarization",
+      "id": "decide-whether-to-use-claude-for-legal-summarization"
+    },
+    {
+      "level": "h3",
+      "text": "Determine the details you want the summarization to extract",
+      "id": "determine-the-details-you-want-the-summarization-to-extract"
+    },
+    {
+      "level": "h3",
+      "text": "Establish success criteria",
+      "id": "establish-success-criteria"
+    },
+    {
+      "level": "h2",
+      "text": "How to summarize legal documents using Claude",
+      "id": "how-to-summarize-legal-documents-using-claude"
+    },
+    {
+      "level": "h3",
+      "text": "Select the right Claude model",
+      "id": "select-the-right-claude-model"
+    },
+    {
+      "level": "h3",
+      "text": "Transform documents into a format that Claude can process",
+      "id": "transform-documents-into-a-format-that-claude-can-process"
+    }
+  ],
+  "url": "llms-txt#legal-summarization",
+  "links": []
+}

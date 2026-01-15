@@ -1,0 +1,8 @@
+{
+  "title": "Upload a file",
+  "content": "file_object = client.beta.files.upload(\n    file=open(\"data.csv\", \"rb\"),\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#upload-a-file",
+  "links": []
+}

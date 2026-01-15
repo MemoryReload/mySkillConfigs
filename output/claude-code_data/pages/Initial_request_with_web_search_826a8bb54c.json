@@ -1,0 +1,8 @@
+{
+  "title": "Initial request with web search",
+  "content": "response = client.messages.create(\n    model=\"claude-3-7-sonnet-latest\",\n    max_tokens=1024,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": \"Search for comprehensive information about quantum computing breakthroughs in 2025\"\n        }\n    ],\n    tools=[{\n        \"type\": \"web_search_20250305\",\n        \"name\": \"web_search\",\n        \"max_uses\": 10\n    }]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#initial-request-with-web-search",
+  "links": []
+}

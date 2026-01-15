@@ -1,0 +1,17 @@
+{
+  "title": "Step 2: Delete the Skill",
+  "content": "client.beta.skills.delete(\n    skill_id=\"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n    betas=[\"skills-2025-10-02\"]\n)\ntypescript TypeScript\n// Step 1: Delete all versions\nconst versions = await client.beta.skills.versions.list(\n  'skill_01AbCdEfGhIjKlMnOpQrStUv',\n  { betas: ['skills-2025-10-02'] }\n);\n\nfor (const version of versions.data) {\n  await client.beta.skills.versions.delete(\n    'skill_01AbCdEfGhIjKlMnOpQrStUv',\n    version.version,\n    { betas: ['skills-2025-10-02'] }\n  );\n}\n\n// Step 2: Delete the Skill\nawait client.beta.skills.delete(\n  'skill_01AbCdEfGhIjKlMnOpQrStUv',\n  { betas: ['skills-2025-10-02'] }\n);\nbash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#step-2:-delete-the-skill",
+  "links": []
+}

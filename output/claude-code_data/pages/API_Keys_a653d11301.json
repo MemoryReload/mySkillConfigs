@@ -1,0 +1,87 @@
+{
+  "title": "API Keys",
+  "content": "**get** `/v1/organizations/api_keys/{api_key_id}`\n\n- `api_key_id: string`\n\n- `APIKey = object { id, created_at, created_by, 5 more }`\n\n- `created_at: string`\n\nRFC 3339 datetime string indicating when the API Key was created.\n\n- `created_by: object { id, type }`\n\nThe ID and type of the actor that created the API key.\n\nID of the actor that created the object.\n\nType of the actor that created the object.\n\n- `partial_key_hint: string`\n\nPartially redacted hint for the API key.\n\n- `status: \"active\" or \"inactive\" or \"archived\"`\n\nStatus of the API key.\n\nFor API Keys, this is always `\"api_key\"`.\n\n- `workspace_id: string`\n\nID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.\n\n**get** `/v1/organizations/api_keys`\n\n- `after_id: optional string`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.\n\n- `before_id: optional string`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.\n\n- `created_by_user_id: optional string`\n\nFilter by the ID of the User who created the object.\n\n- `limit: optional number`\n\nNumber of items to return per page.\n\nDefaults to `20`. Ranges from `1` to `1000`.\n\n- `status: optional \"active\" or \"inactive\" or \"archived\"`\n\nFilter by API key status.\n\n- `workspace_id: optional string`\n\nFilter by Workspace ID.\n\n- `data: array of APIKey`\n\n- `created_at: string`\n\nRFC 3339 datetime string indicating when the API Key was created.\n\n- `created_by: object { id, type }`\n\nThe ID and type of the actor that created the API key.\n\nID of the actor that created the object.\n\nType of the actor that created the object.\n\n- `partial_key_hint: string`\n\nPartially redacted hint for the API key.\n\n- `status: \"active\" or \"inactive\" or \"archived\"`\n\nStatus of the API key.\n\nFor API Keys, this is always `\"api_key\"`.\n\n- `workspace_id: string`\n\nID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.\n\nFirst ID in the `data` list. Can be used as the `before_id` for the previous page.\n\n- `has_more: boolean`\n\nIndicates if there are more results in the requested page direction.\n\nLast ID in the `data` list. Can be used as the `after_id` for the next page.\n\n**post** `/v1/organizations/api_keys/{api_key_id}`\n\n- `api_key_id: string`\n\n- `name: optional string`\n\n- `status: optional \"active\" or \"inactive\" or \"archived\"`\n\nStatus of the API key.\n\n- `APIKey = object { id, created_at, created_by, 5 more }`\n\n- `created_at: string`\n\nRFC 3339 datetime string indicating when the API Key was created.\n\n- `created_by: object { id, type }`\n\nThe ID and type of the actor that created the API key.\n\nID of the actor that created the object.\n\nType of the actor that created the object.\n\n- `partial_key_hint: string`\n\nPartially redacted hint for the API key.\n\n- `status: \"active\" or \"inactive\" or \"archived\"`\n\nStatus of the API key.\n\nFor API Keys, this is always `\"api_key\"`.\n\n- `workspace_id: string`\n\nID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    },
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/api_keys \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    },
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\" \\\n    -d '{}'",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Retrieve",
+      "id": "retrieve"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    },
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    },
+    {
+      "level": "h2",
+      "text": "Update",
+      "id": "update"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Body Parameters",
+      "id": "body-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#api-keys",
+  "links": []
+}

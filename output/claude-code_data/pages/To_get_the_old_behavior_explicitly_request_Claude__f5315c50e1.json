@@ -1,0 +1,8 @@
+{
+  "title": "To get the old behavior, explicitly request Claude Code's preset:",
+  "content": "from claude_agent_sdk import query, ClaudeAgentOptions\n\nasync for message in query(\n    prompt=\"Hello\",\n    options=ClaudeAgentOptions(\n        system_prompt={\"type\": \"preset\", \"preset\": \"claude_code\"}  # Use the preset\n    )\n):\n    print(message)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#to-get-the-old-behavior,-explicitly-request-claude-code's-preset:",
+  "links": []
+}

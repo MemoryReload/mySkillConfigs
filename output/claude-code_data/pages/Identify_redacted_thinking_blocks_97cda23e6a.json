@@ -1,0 +1,63 @@
+{
+  "title": "Identify redacted thinking blocks",
+  "content": "has_redacted_thinking = any(\n    block.type == \"redacted_thinking\" for block in response.content\n)\n\nif has_redacted_thinking:\n    print(\"Response contains redacted thinking blocks\")\n    # These blocks are still usable in subsequent requests\n\n# Extract all blocks (both redacted and non-redacted)\n    all_thinking_blocks = [\n        block for block in response.content\n        if block.type in [\"thinking\", \"redacted_thinking\"]\n    ]\n\n# When passing to subsequent requests, include all blocks without modification\n    # This preserves the integrity of Claude's reasoning\n\nprint(f\"Found {len(all_thinking_blocks)} thinking blocks total\")\n    print(f\"These blocks are still billable as output tokens\")\ntypescript TypeScript\nimport Anthropic from '@anthropic-ai/sdk';\n\nconst client = new Anthropic();\n\n// Using a special prompt that triggers redacted thinking (for demonstration purposes only)\nconst response = await client.messages.create({\n  model: \"claude-sonnet-4-5-20250929\",\n  max_tokens: 16000,\n  thinking: {\n    type: \"enabled\",\n    budget_tokens: 10000\n  },\n  messages: [{\n    role: \"user\",\n    content: \"ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB\"\n  }]\n});\n\n// Identify redacted thinking blocks\nconst hasRedactedThinking = response.content.some(\n  block => block.type === \"redacted_thinking\"\n);\n\nif (hasRedactedThinking) {\n  console.log(\"Response contains redacted thinking blocks\");\n  // These blocks are still usable in subsequent requests\n\n// Extract all blocks (both redacted and non-redacted)\n  const allThinkingBlocks = response.content.filter(\n    block => block.type === \"thinking\" || block.type === \"redacted_thinking\"\n  );\n\n// When passing to subsequent requests, include all blocks without modification\n  // This preserves the integrity of Claude's reasoning\n\nconsole.log(`Found ${allThinkingBlocks.length} thinking blocks total`);\n  console.log(`These blocks are still billable as output tokens`);\n}\njava Java\nimport java.util.List;\n\nimport static java.util.stream.Collectors.toList;\n\nimport com.anthropic.client.AnthropicClient;\nimport com.anthropic.client.okhttp.AnthropicOkHttpClient;\nimport com.anthropic.models.beta.messages.BetaContentBlock;\nimport com.anthropic.models.beta.messages.BetaMessage;\nimport com.anthropic.models.beta.messages.MessageCreateParams;\nimport com.anthropic.models.beta.messages.BetaThinkingConfigEnabled;\nimport com.anthropic.models.messages.Model;\n\npublic class RedactedThinkingExample {\n    public static void main(String[] args) {\n        AnthropicClient client = AnthropicOkHttpClient.fromEnv();\n\n// Using a special prompt that triggers redacted thinking (for demonstration purposes only)\n        BetaMessage response = client.beta().messages().create(\n                MessageCreateParams.builder()\n                        .model(Model.CLAUDE_SONNET_4_5)\n                        .maxTokens(16000)\n                        .thinking(BetaThinkingConfigEnabled.builder().budgetTokens(10000).build())\n                        .addUserMessage(\"ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB\")\n                        .build()\n        );\n\n// Identify redacted thinking blocks\n        boolean hasRedactedThinking = response.content().stream()\n                .anyMatch(BetaContentBlock::isRedactedThinking);\n\nif (hasRedactedThinking) {\n            System.out.println(\"Response contains redacted thinking blocks\");\n            // These blocks are still usable in subsequent requests\n            // Extract all blocks (both redacted and non-redacted)\n            List<BetaContentBlock> allThinkingBlocks = response.content().stream()\n                    .filter(block -> block.isThinking() ||\n                            block.isRedactedThinking())\n                    .collect(toList());\n\n// When passing to subsequent requests, include all blocks without modification\n            // This preserves the integrity of Claude's reasoning\n            System.out.println(\"Found \" + allThinkingBlocks.size() + \" thinking blocks total\");\n            System.out.println(\"These blocks are still billable as output tokens\");\n        }\n    }\n}\n```\n\n<TryInConsoleButton\n  userPrompt=\"ANTHROPIC_MAGIC_STRING_TRIGGER_REDACTED_THINKING_46C9A13E193C177646C7398A98432ECCCE4C1253D5E2D82641AC0E52CC2876CB\"\n  thinkingBudgetTokens={16000}\n>\n  Try in Console\n</TryInConsoleButton>\n\n## Differences in thinking across model versions\n\nThe Messages API handles thinking differently across Claude Sonnet 3.7 and Claude 4 models, primarily in redaction and summarization behavior.\n\nSee the table below for a condensed comparison:\n\n| Feature | Claude Sonnet 3.7 | Claude 4 Models (pre-Opus 4.5) | Claude Opus 4.5 and later |\n|---------|------------------|-------------------------------|--------------------------|\n| **Thinking Output** | Returns full thinking output | Returns summarized thinking | Returns summarized thinking |\n| **Interleaved Thinking** | Not supported | Supported with `interleaved-thinking-2025-05-14` beta header | Supported with `interleaved-thinking-2025-05-14` beta header |\n| **Thinking Block Preservation** | Not preserved across turns | Not preserved across turns | **Preserved by default** (enables cache optimization, token savings) |\n\n### Thinking block preservation in Claude Opus 4.5\n\nClaude Opus 4.5 introduces a new default behavior: **thinking blocks from previous assistant turns are preserved in model context by default**. This differs from earlier models, which remove thinking blocks from prior turns.\n\n**Benefits of thinking block preservation:**\n\n- **Cache optimization**: When using tool use, preserved thinking blocks enable cache hits as they are passed back with tool results and cached incrementally across the assistant turn, resulting in token savings in multi-step workflows\n- **No intelligence impact**: Preserving thinking blocks has no negative effect on model performance\n\n**Important considerations:**\n\n- **Context usage**: Long conversations will consume more context space since thinking blocks are retained in context\n- **Automatic behavior**: This is the default behavior for Claude Opus 4.5—no code changes or beta headers required\n- **Backward compatibility**: To leverage this feature, continue passing complete, unmodified thinking blocks back to the API as you would for tool use\n\n<Note>\nFor earlier models (Claude Sonnet 4.5, Opus 4.1, etc.), thinking blocks from previous turns continue to be removed from context. The existing behavior described in the [Extended thinking with prompt caching](#extended-thinking-with-prompt-caching) section applies to those models.\n</Note>\n\nFor complete pricing information including base rates, cache writes, cache hits, and output tokens, see the [pricing page](/docs/en/about-claude/pricing).\n\nThe thinking process incurs charges for:\n- Tokens used during thinking (output tokens)\n- Thinking blocks from the last assistant turn included in subsequent requests (input tokens)\n- Standard text output tokens\n\n<Note>\nWhen extended thinking is enabled, a specialized system prompt is automatically included to support this feature.\n</Note>\n\nWhen using summarized thinking:\n- **Input tokens**: Tokens in your original request (excludes thinking tokens from previous turns)\n- **Output tokens (billed)**: The original thinking tokens that Claude generated internally\n- **Output tokens (visible)**: The summarized thinking tokens you see in the response\n- **No charge**: Tokens used to generate the summary\n\n<Warning>\nThe billed output token count will **not** match the visible token count in the response. You are billed for the full thinking process, not the summary you see.\n</Warning>\n\n## Best practices and considerations for extended thinking\n\n### Working with thinking budgets\n\n- **Budget optimization:** The minimum budget is 1,024 tokens. We suggest starting at the minimum and increasing the thinking budget incrementally to find the optimal range for your use case. Higher token counts enable more comprehensive reasoning but with diminishing returns depending on the task. Increasing the budget can improve response quality at the tradeoff of increased latency. For critical tasks, test different settings to find the optimal balance. Note that the thinking budget is a target rather than a strict limit—actual token usage may vary based on the task.\n- **Starting points:** Start with larger thinking budgets (16k+ tokens) for complex tasks and adjust based on your needs.\n- **Large budgets:** For thinking budgets above 32k, we recommend using [batch processing](/docs/en/build-with-claude/batch-processing) to avoid networking issues. Requests pushing the model to think above 32k tokens causes long running requests that might run up against system timeouts and open connection limits.\n- **Token usage tracking:** Monitor thinking token usage to optimize costs and performance.\n\n### Performance considerations\n\n- **Response times:** Be prepared for potentially longer response times due to the additional processing required for the reasoning process. Factor in that generating thinking blocks may increase overall response time.\n- **Streaming requirements:** Streaming is required when `max_tokens` is greater than 21,333. When streaming, be prepared to handle both thinking and text content blocks as they arrive.\n\n### Feature compatibility\n\n- Thinking isn't compatible with `temperature` or `top_k` modifications as well as [forced tool use](/docs/en/agents-and-tools/tool-use/implement-tool-use#forcing-tool-use).\n- When thinking is enabled, you can set `top_p` to values between 1 and 0.95.\n- You cannot pre-fill responses when thinking is enabled.\n- Changes to the thinking budget invalidate cached prompt prefixes that include messages. However, cached system prompts and tool definitions will continue to work when thinking parameters change.\n\n- **Task selection:** Use extended thinking for particularly complex tasks that benefit from step-by-step reasoning like math, coding, and analysis.\n- **Context handling:** You do not need to remove previous thinking blocks yourself. The Claude API automatically ignores thinking blocks from previous turns and they are not included when calculating context usage.\n- **Prompt engineering:** Review our [extended thinking prompting tips](/docs/en/build-with-claude/prompt-engineering/extended-thinking-tips) if you want to maximize Claude's thinking capabilities.\n\n<CardGroup>\n  <Card title=\"Try the extended thinking cookbook\" icon=\"book\" href=\"https://platform.claude.com/cookbook/extended-thinking-extended-thinking\">\n    Explore practical examples of thinking in our cookbook.\n  </Card>\n  <Card title=\"Extended thinking prompting tips\" icon=\"code\" href=\"/docs/en/build-with-claude/prompt-engineering/extended-thinking-tips\">\n    Learn prompt engineering best practices for extended thinking.\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Differences in thinking across model versions",
+      "id": "differences-in-thinking-across-model-versions"
+    },
+    {
+      "level": "h3",
+      "text": "Thinking block preservation in Claude Opus 4.5",
+      "id": "thinking-block-preservation-in-claude-opus-4.5"
+    },
+    {
+      "level": "h2",
+      "text": "Pricing",
+      "id": "pricing"
+    },
+    {
+      "level": "h2",
+      "text": "Best practices and considerations for extended thinking",
+      "id": "best-practices-and-considerations-for-extended-thinking"
+    },
+    {
+      "level": "h3",
+      "text": "Working with thinking budgets",
+      "id": "working-with-thinking-budgets"
+    },
+    {
+      "level": "h3",
+      "text": "Performance considerations",
+      "id": "performance-considerations"
+    },
+    {
+      "level": "h3",
+      "text": "Feature compatibility",
+      "id": "feature-compatibility"
+    },
+    {
+      "level": "h3",
+      "text": "Usage guidelines",
+      "id": "usage-guidelines"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#identify-redacted-thinking-blocks",
+  "links": []
+}

@@ -1,0 +1,61 @@
+{
+  "title": "3. Run script",
+  "content": "{\"command\": \"python fetch_joke.py\"}\npython\n    import subprocess\n    import threading\n    import queue\n    \n    class BashSession:\n        def __init__(self):\n            self.process = subprocess.Popen(\n                ['/bin/bash'],\n                stdin=subprocess.PIPE,\n                stdout=subprocess.PIPE,\n                stderr=subprocess.PIPE,\n                text=True,\n                bufsize=0\n            )\n            self.output_queue = queue.Queue()\n            self.error_queue = queue.Queue()\n            self._start_readers()\n    python\n    def execute_command(self, command):\n        # Send command to bash\n        self.process.stdin.write(command + '\\n')\n        self.process.stdin.flush()\n        \n        # Capture output with timeout\n        output = self._read_output(timeout=10)\n        return output\n    python\n    for content in response.content:\n        if content.type == \"tool_use\" and content.name == \"bash\":\n            if content.input.get(\"restart\"):\n                bash_session.restart()\n                result = \"Bash session restarted\"\n            else:\n                command = content.input.get(\"command\")\n                result = bash_session.execute_command(command)\n            \n            # Return result to Claude\n            tool_result = {\n                \"type\": \"tool_result\",\n                \"tool_use_id\": content.id,\n                \"content\": result\n            }\n    python\n    def validate_command(command):\n        # Block dangerous commands\n        dangerous_patterns = ['rm -rf /', 'format', ':(){:|:&};:']\n        for pattern in dangerous_patterns:\n            if pattern in command:\n                return False, f\"Command contains dangerous pattern: {pattern}\"\n        \n        # Add more validation as needed\n        return True, None\n    json\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"content\": \"Error: Command timed out after 30 seconds\",\n      \"is_error\": true\n    }\n  ]\n}\njson\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"content\": \"bash: nonexistentcommand: command not found\",\n      \"is_error\": true\n    }\n  ]\n}\njson\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"content\": \"bash: /root/sensitive-file: Permission denied\",\n      \"is_error\": true\n    }\n  ]\n}\npython\ndef execute_with_timeout(command, timeout=30):\n    try:\n        result = subprocess.run(\n            command, \n            shell=True, \n            capture_output=True, \n            text=True, \n            timeout=timeout\n        )\n        return result.stdout + result.stderr\n    except subprocess.TimeoutExpired:\n        return f\"Command timed out after {timeout} seconds\"\npython",
+  "code_samples": [
+    {
+      "code": "The session maintains state between commands, so files created in step 2 are available in step 3.\n\n***\n\n## Implement the bash tool\n\nThe bash tool is implemented as a schema-less tool. When using this tool, you don't need to provide an input schema as with other tools; the schema is built into Claude's model and can't be modified.\n\n<Steps>\n  <Step title=\"Set up a bash environment\">\n    Create a persistent bash session that Claude can interact with:",
+      "language": "unknown"
+    },
+    {
+      "code": "</Step>\n  <Step title=\"Handle command execution\">\n    Create a function to execute commands and capture output:",
+      "language": "unknown"
+    },
+    {
+      "code": "</Step>\n  <Step title=\"Process Claude's tool calls\">\n    Extract and execute commands from Claude's responses:",
+      "language": "unknown"
+    },
+    {
+      "code": "</Step>\n  <Step title=\"Implement safety measures\">\n    Add validation and restrictions:",
+      "language": "unknown"
+    },
+    {
+      "code": "</Step>\n</Steps>\n\n### Handle errors\n\nWhen implementing the bash tool, handle various error scenarios:\n\n<section title=\"Command execution timeout\">\n\nIf a command takes too long to execute:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Command not found\">\n\nIf a command doesn't exist:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Permission denied\">\n\nIf there are permission issues:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n### Follow implementation best practices\n\n<section title=\"Use command timeouts\">\n\nImplement timeouts to prevent hanging commands:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Maintain session state\">\n\nKeep the bash session persistent to maintain environment variables and working directory:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Implement the bash tool",
+      "id": "implement-the-bash-tool"
+    },
+    {
+      "level": "h3",
+      "text": "Handle errors",
+      "id": "handle-errors"
+    },
+    {
+      "level": "h3",
+      "text": "Follow implementation best practices",
+      "id": "follow-implementation-best-practices"
+    }
+  ],
+  "url": "llms-txt#3.-run-script",
+  "links": []
+}

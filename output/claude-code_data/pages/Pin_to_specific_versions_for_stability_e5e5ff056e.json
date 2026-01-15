@@ -1,0 +1,13 @@
+{
+  "title": "Pin to specific versions for stability",
+  "content": "container={\n    \"skills\": [{\n        \"type\": \"custom\",\n        \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n        \"version\": \"1759178010641129\"  # Specific version\n    }]\n}\npython",
+  "code_samples": [
+    {
+      "code": "**For development:**",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#pin-to-specific-versions-for-stability",
+  "links": []
+}

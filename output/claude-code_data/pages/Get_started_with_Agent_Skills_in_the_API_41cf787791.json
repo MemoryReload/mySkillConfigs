@@ -1,0 +1,24 @@
+{
+  "title": "Get started with Agent Skills in the API",
+  "content": "Learn how to use Agent Skills to create documents with the Claude API in under 10 minutes.\n\nThis tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You'll learn how to enable Skills, make a simple request, and access the generated file.\n\n- [Anthropic API key](/settings/keys)\n- Python 3.7+ or curl installed\n- Basic familiarity with making API requests\n\n## What are Agent Skills?\n\nPre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks like creating documents, analyzing data, and processing files. Anthropic provides the following pre-built Agent Skills in the API:\n\n- **PowerPoint (pptx)**: Create and edit presentations\n- **Excel (xlsx)**: Create and analyze spreadsheets\n- **Word (docx)**: Create and edit documents\n- **PDF (pdf)**: Generate PDF documents\n\n<Note>\n**Want to create custom Skills?** See the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) for examples of building your own Skills with domain-specific expertise.\n</Note>\n\n## Step 1: List available Skills\n\nFirst, let's see what Skills are available. We'll use the Skills API to list all Anthropic-managed Skills:\n\n<CodeGroup>\n```python Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Prerequisites",
+      "id": "prerequisites"
+    },
+    {
+      "level": "h2",
+      "text": "What are Agent Skills?",
+      "id": "what-are-agent-skills?"
+    },
+    {
+      "level": "h2",
+      "text": "Step 1: List available Skills",
+      "id": "step-1:-list-available-skills"
+    }
+  ],
+  "url": "llms-txt#get-started-with-agent-skills-in-the-api",
+  "links": []
+}

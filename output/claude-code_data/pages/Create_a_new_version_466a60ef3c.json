@@ -1,0 +1,8 @@
+{
+  "title": "Create a new version",
+  "content": "NEW_VERSION=$(curl -X POST \"https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv/versions\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: skills-2025-10-02\" \\\n  -F \"files[]=@updated_skill/SKILL.md;filename=updated_skill/SKILL.md\")\n\nVERSION_NUMBER=$(echo \"$NEW_VERSION\" | jq -r '.version')",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#create-a-new-version",
+  "links": []
+}

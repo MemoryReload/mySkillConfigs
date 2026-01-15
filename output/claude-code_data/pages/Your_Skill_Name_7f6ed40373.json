@@ -1,0 +1,64 @@
+{
+  "title": "Your Skill Name",
+  "content": "## Instructions\n[Clear, step-by-step guidance for Claude to follow]\n\n## Examples\n[Concrete examples of using this Skill]\n```\n\n**Required fields**: `name` and `description`\n\n**Field requirements**:\n\n`name`:\n- Maximum 64 characters\n- Must contain only lowercase letters, numbers, and hyphens\n- Cannot contain XML tags\n- Cannot contain reserved words: \"anthropic\", \"claude\"\n\n`description`:\n- Must be non-empty\n- Maximum 1024 characters\n- Cannot contain XML tags\n\nThe `description` should include both what the Skill does and when Claude should use it. For complete authoring guidance, see the [best practices guide](/docs/en/agents-and-tools/agent-skills/best-practices).\n\n## Security considerations\n\nWe strongly recommend using Skills only from trusted sources: those you created yourself or obtained from Anthropic. Skills provide Claude with new capabilities through instructions and code, and while this makes them powerful, it also means a malicious Skill can direct Claude to invoke tools or execute code in ways that don't match the Skill's stated purpose.\n\n<Warning>\nIf you must use a Skill from an untrusted or unknown source, exercise extreme caution and thoroughly audit it before use. Depending on what access Claude has when executing the Skill, malicious Skills could lead to data exfiltration, unauthorized system access, or other security risks.\n</Warning>\n\n**Key security considerations**:\n- **Audit thoroughly**: Review all files bundled in the Skill: SKILL.md, scripts, images, and other resources. Look for unusual patterns like unexpected network calls, file access patterns, or operations that don't match the Skill's stated purpose\n- **External sources are risky**: Skills that fetch data from external URLs pose particular risk, as fetched content may contain malicious instructions. Even trustworthy Skills can be compromised if their external dependencies change over time\n- **Tool misuse**: Malicious Skills can invoke tools (file operations, bash commands, code execution) in harmful ways\n- **Data exposure**: Skills with access to sensitive data could be designed to leak information to external systems\n- **Treat like installing software**: Only use Skills from trusted sources. Be especially careful when integrating Skills into production systems with access to sensitive data or critical operations\n\n### Pre-built Agent Skills\n\nThe following pre-built Agent Skills are available for immediate use:\n\n- **PowerPoint (pptx)**: Create presentations, edit slides, analyze presentation content\n- **Excel (xlsx)**: Create spreadsheets, analyze data, generate reports with charts\n- **Word (docx)**: Create documents, edit content, format text\n- **PDF (pdf)**: Generate formatted PDF documents and reports\n\nThese Skills are available on the Claude API and claude.ai. See the [quickstart tutorial](/docs/en/agents-and-tools/agent-skills/quickstart) to start using them in the API.\n\n### Custom Skills examples\n\nFor complete examples of custom Skills, see the [Skills cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction).\n\n## Limitations and constraints\n\nUnderstanding these limitations helps you plan your Skills deployment effectively.\n\n### Cross-surface availability\n\n**Custom Skills do not sync across surfaces**. Skills uploaded to one surface are not automatically available on others:\n\n- Skills uploaded to Claude.ai must be separately uploaded to the API\n- Skills uploaded via the API are not available on Claude.ai\n- Claude Code Skills are filesystem-based and separate from both Claude.ai and API\n\nYou'll need to manage and upload Skills separately for each surface where you want to use them.\n\nSkills have different sharing models depending on where you use them:\n- **Claude.ai**: Individual user only; each team member must upload separately\n- **Claude API**: Workspace-wide; all workspace members can access uploaded Skills\n- **Claude Code**: Personal (`~/.claude/skills/`) or project-based (`.claude/skills/`); can also be shared via Claude Code Plugins\n\nClaude.ai does not currently support centralized admin management or org-wide distribution of custom Skills.\n\n### Runtime environment constraints\n\nThe exact runtime environment available to your skill depends on the product surface where you use it.\n\n- **Claude.ai**:\n    - **Varying network access**: Depending on user/admin settings, Skills may have full, partial, or no network access. For more details, see the [Create and Edit Files](https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude#h_6b7e833898) support article.\n- **Claude API**:\n    - **No network access**: Skills cannot make external API calls or access the internet\n    - **No runtime package installation**: Only pre-installed packages are available. You cannot install new packages during execution.\n    - **Pre-configured dependencies only**: Check the [code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool) for the list of available packages\n- **Claude Code**:\n    - **Full network access**: Skills have the same network access as any other program on the user's computer\n    - **Global package installation discouraged**: Skills should only install packages locally in order to avoid interfering with the user's computer\n\nPlan your Skills to work within these constraints.\n\n<CardGroup cols={2}>\n  <Card\n    title=\"Get started with Agent Skills\"\n    icon=\"graduation-cap\"\n    href=\"/docs/en/agents-and-tools/agent-skills/quickstart\"\n  >\n    Create your first Skill\n  </Card>\n  <Card\n    title=\"API Guide\"\n    icon=\"code\"\n    href=\"/docs/en/build-with-claude/skills-guide\"\n  >\n    Use Skills with the Claude API\n  </Card>\n  <Card\n    title=\"Use Skills in Claude Code\"\n    icon=\"terminal\"\n    href=\"https://code.claude.com/docs/en/skills\"\n  >\n    Create and manage custom Skills in Claude Code\n  </Card>\n  <Card\n    title=\"Use Skills in the Agent SDK\"\n    icon=\"cube\"\n    href=\"/docs/en/agent-sdk/skills\"\n  >\n    Use Skills programmatically in TypeScript and Python\n  </Card>\n  <Card\n    title=\"Authoring best practices\"\n    icon=\"lightbulb\"\n    href=\"/docs/en/agents-and-tools/agent-skills/best-practices\"\n  >\n    Write Skills that Claude can use effectively\n  </Card>\n</CardGroup>",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Instructions",
+      "id": "instructions"
+    },
+    {
+      "level": "h2",
+      "text": "Examples",
+      "id": "examples"
+    },
+    {
+      "level": "h2",
+      "text": "Security considerations",
+      "id": "security-considerations"
+    },
+    {
+      "level": "h2",
+      "text": "Available Skills",
+      "id": "available-skills"
+    },
+    {
+      "level": "h3",
+      "text": "Pre-built Agent Skills",
+      "id": "pre-built-agent-skills"
+    },
+    {
+      "level": "h3",
+      "text": "Custom Skills examples",
+      "id": "custom-skills-examples"
+    },
+    {
+      "level": "h2",
+      "text": "Limitations and constraints",
+      "id": "limitations-and-constraints"
+    },
+    {
+      "level": "h3",
+      "text": "Cross-surface availability",
+      "id": "cross-surface-availability"
+    },
+    {
+      "level": "h3",
+      "text": "Sharing scope",
+      "id": "sharing-scope"
+    },
+    {
+      "level": "h3",
+      "text": "Runtime environment constraints",
+      "id": "runtime-environment-constraints"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#your-skill-name",
+  "links": []
+}

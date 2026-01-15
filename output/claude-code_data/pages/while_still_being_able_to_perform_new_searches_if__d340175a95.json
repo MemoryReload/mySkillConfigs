@@ -1,0 +1,38 @@
+{
+  "title": "while still being able to perform new searches if needed",
+  "content": "print(f\"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}\")\njavascript\nevent: message_start\ndata: {\"type\": \"message_start\", \"message\": {\"id\": \"msg_abc123\", \"type\": \"message\"}}\n\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 0, \"content_block\": {\"type\": \"text\", \"text\": \"\"}}\n\n// Claude's decision to search\n\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 1, \"content_block\": {\"type\": \"server_tool_use\", \"id\": \"srvtoolu_xyz789\", \"name\": \"web_search\"}}\n\n// Search query streamed\nevent: content_block_delta\ndata: {\"type\": \"content_block_delta\", \"index\": 1, \"delta\": {\"type\": \"input_json_delta\", \"partial_json\": \"{\\\"query\\\":\\\"latest quantum computing breakthroughs 2025\\\"}\"}}\n\n// Pause while search executes\n\n// Search results streamed\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 2, \"content_block\": {\"type\": \"web_search_tool_result\", \"tool_use_id\": \"srvtoolu_xyz789\", \"content\": [{\"type\": \"web_search_result\", \"title\": \"Quantum Computing Breakthroughs in 2025\", \"url\": \"https://example.com\"}]}}\n\n// Claude's response with citations (omitted in this example)\njson\n\"usage\": {\n  \"input_tokens\": 105,\n  \"output_tokens\": 6039,\n  \"cache_read_input_tokens\": 7123,\n  \"cache_creation_input_tokens\": 7345,\n  \"server_tool_use\": {\n    \"web_search_requests\": 1\n  }\n}\n```\n\nWeb search is available on the Claude API for **$10 per 1,000 searches**, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations executed during a single turn and in subsequent conversation turns.\n\nEach web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n## Streaming\n\nWith streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search executes:",
+      "language": "unknown"
+    },
+    {
+      "code": "## Batch requests\n\nYou can include the web search tool in the [Messages Batches API](/docs/en/build-with-claude/batch-processing). Web search tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.\n\n## Usage and pricing\n\nWeb search usage is charged in addition to token usage:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Streaming",
+      "id": "streaming"
+    },
+    {
+      "level": "h2",
+      "text": "Batch requests",
+      "id": "batch-requests"
+    },
+    {
+      "level": "h2",
+      "text": "Usage and pricing",
+      "id": "usage-and-pricing"
+    },
+    {
+      "level": "h3",
+      "text": "Agent Skills",
+      "id": "agent-skills"
+    }
+  ],
+  "url": "llms-txt#while-still-being-able-to-perform-new-searches-if-needed",
+  "links": []
+}

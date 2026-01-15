@@ -1,0 +1,55 @@
+{
+  "title": "Beta headers",
+  "content": "Documentation for using beta headers with the Claude API\n\nBeta headers allow you to access experimental features and new model capabilities before they become part of the standard API.\n\nThese features are subject to change and may be modified or removed in future releases.\n\n<Info>\nBeta headers are often used in conjunction with the [beta namespace in the client SDKs](/docs/en/api/client-sdks#beta-namespace-in-client-sdks)\n</Info>\n\n## How to use beta headers\n\nTo access beta features, include the `anthropic-beta` header in your API requests:\n\nWhen using the SDK, you can specify beta headers in the request options:\n\n<Warning>\nBeta features are experimental and may:\n- Have breaking changes without notice\n- Be deprecated or removed\n- Have different rate limits or pricing\n- Not be available in all regions\n</Warning>\n\n### Multiple beta features\n\nTo use multiple beta features in a single request, include all feature names in the header separated by commas:\n\n### Version naming conventions\n\nBeta feature names typically follow the pattern: `feature-name-YYYY-MM-DD`, where the date indicates when the beta version was released. Always use the exact beta feature name as documented.\n\nIf you use an invalid or unavailable beta header, you'll receive an error response:\n\nFor questions about beta features:\n\n1. Check the documentation for the specific feature\n2. Review the [API changelog](/docs/en/api/versioning) for updates\n3. Contact support for assistance with production usage\n\nRemember that beta features are provided \"as-is\" and may not have the same SLA guarantees as stable API features.",
+  "code_samples": [
+    {
+      "code": "POST /v1/messages\nContent-Type: application/json\nX-API-Key: YOUR_API_KEY\nanthropic-beta: BETA_FEATURE_NAME",
+      "language": "http"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n<Warning>\nBeta features are experimental and may:\n- Have breaking changes without notice\n- Be deprecated or removed\n- Have different rate limits or pricing\n- Not be available in all regions\n</Warning>\n\n### Multiple beta features\n\nTo use multiple beta features in a single request, include all feature names in the header separated by commas:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Version naming conventions\n\nBeta feature names typically follow the pattern: `feature-name-YYYY-MM-DD`, where the date indicates when the beta version was released. Always use the exact beta feature name as documented.\n\n## Error handling\n\nIf you use an invalid or unavailable beta header, you'll receive an error response:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How to use beta headers",
+      "id": "how-to-use-beta-headers"
+    },
+    {
+      "level": "h3",
+      "text": "Multiple beta features",
+      "id": "multiple-beta-features"
+    },
+    {
+      "level": "h3",
+      "text": "Version naming conventions",
+      "id": "version-naming-conventions"
+    },
+    {
+      "level": "h2",
+      "text": "Error handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h2",
+      "text": "Getting help",
+      "id": "getting-help"
+    }
+  ],
+  "url": "llms-txt#beta-headers",
+  "links": []
+}

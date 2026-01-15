@@ -1,0 +1,8 @@
+{
+  "title": "Continue conversation with tool results",
+  "content": "messages.extend([\n    {\"role\": \"assistant\", \"content\": response.content},\n    {\"role\": \"user\", \"content\": tool_results}  # All results in one message!\n])",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#continue-conversation-with-tool-results",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Resize image to scaled dimensions before sending to Claude",
+  "content": "screenshot = capture_and_resize(scaled_width, scaled_height)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#resize-image-to-scaled-dimensions-before-sending-to-claude",
+  "links": []
+}

@@ -1,0 +1,60 @@
+{
+  "title": "Define custom tools with @tool decorator",
+  "content": "@tool(\"calculate\", \"Perform mathematical calculations\", {\"expression\": str})\nasync def calculate(args: dict[str, Any]) -> dict[str, Any]:\n    try:\n        result = eval(args[\"expression\"], {\"__builtins__\": {}})\n        return {\n            \"content\": [{\n                \"type\": \"text\",\n                \"text\": f\"Result: {result}\"\n            }]\n        }\n    except Exception as e:\n        return {\n            \"content\": [{\n                \"type\": \"text\",\n                \"text\": f\"Error: {str(e)}\"\n            }],\n            \"is_error\": True\n        }\n\n@tool(\"get_time\", \"Get current time\", {})\nasync def get_time(args: dict[str, Any]) -> dict[str, Any]:\n    from datetime import datetime\n    current_time = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    return {\n        \"content\": [{\n            \"type\": \"text\",\n            \"text\": f\"Current time: {current_time}\"\n        }]\n    }\n\nasync def main():\n    # Create SDK MCP server with custom tools\n    my_server = create_sdk_mcp_server(\n        name=\"utilities\",\n        version=\"1.0.0\",\n        tools=[calculate, get_time]\n    )\n\n# Configure options with the server\n    options = ClaudeAgentOptions(\n        mcp_servers={\"utils\": my_server},\n        allowed_tools=[\n            \"mcp__utils__calculate\",\n            \"mcp__utils__get_time\"\n        ]\n    )\n\n# Use ClaudeSDKClient for interactive tool usage\n    async with ClaudeSDKClient(options=options) as client:\n        await client.query(\"What's 123 * 456?\")\n\n# Process calculation response\n        async for message in client.receive_response():\n            if isinstance(message, AssistantMessage):\n                for block in message.content:\n                    if isinstance(block, TextBlock):\n                        print(f\"Calculation: {block.text}\")\n\n# Follow up with time query\n        await client.query(\"What time is it now?\")\n\nasync for message in client.receive_response():\n            if isinstance(message, AssistantMessage):\n                for block in message.content:\n                    if isinstance(block, TextBlock):\n                        print(f\"Time: {block.text}\")\n\nasyncio.run(main())\npython\nclass SandboxSettings(TypedDict, total=False):\n    enabled: bool\n    autoAllowBashIfSandboxed: bool\n    excludedCommands: list[str]\n    allowUnsandboxedCommands: bool\n    network: SandboxNetworkConfig\n    ignoreViolations: SandboxIgnoreViolations\n    enableWeakerNestedSandbox: bool\npython\nfrom claude_agent_sdk import query, ClaudeAgentOptions, SandboxSettings\n\nsandbox_settings: SandboxSettings = {\n    \"enabled\": True,\n    \"autoAllowBashIfSandboxed\": True,\n    \"excludedCommands\": [\"docker\"],\n    \"network\": {\n        \"allowLocalBinding\": True,\n        \"allowUnixSockets\": [\"/var/run/docker.sock\"]\n    }\n}\n\nasync for message in query(\n    prompt=\"Build and test my project\",\n    options=ClaudeAgentOptions(sandbox=sandbox_settings)\n):\n    print(message)\npython\nclass SandboxNetworkConfig(TypedDict, total=False):\n    allowLocalBinding: bool\n    allowUnixSockets: list[str]\n    allowAllUnixSockets: bool\n    httpProxyPort: int\n    socksProxyPort: int\npython\nclass SandboxIgnoreViolations(TypedDict, total=False):\n    file: list[str]\n    network: list[str]\npython\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\nasync def can_use_tool(tool: str, input: dict) -> bool:\n    # Check if the model is requesting to bypass the sandbox\n    if tool == \"Bash\" and input.get(\"dangerouslyDisableSandbox\"):\n        # The model wants to run this command outside the sandbox\n        print(f\"Unsandboxed command requested: {input.get('command')}\")\n\n# Return True to allow, False to deny\n        return is_command_authorized(input.get(\"command\"))\n    return True\n\nasync def main():\n    async for message in query(\n        prompt=\"Deploy my application\",\n        options=ClaudeAgentOptions(\n            sandbox={\n                \"enabled\": True,\n                \"allowUnsandboxedCommands\": True  # Model can request unsandboxed execution\n            },\n            permission_mode=\"default\",\n            can_use_tool=can_use_tool\n        )\n    ):\n        print(message)\n```\n\nThis pattern enables you to:\n\n- **Audit model requests**: Log when the model requests unsandboxed execution\n- **Implement allowlists**: Only permit specific commands to run unsandboxed\n- **Add approval workflows**: Require explicit authorization for privileged operations\n\n<Warning>\nCommands running with `dangerouslyDisableSandbox: True` have full system access. Ensure your `can_use_tool` handler validates these requests carefully.\n</Warning>\n\n- [Python SDK guide](/docs/en/agent-sdk/python) - Tutorial and examples\n- [SDK overview](/docs/en/agent-sdk/overview) - General SDK concepts\n- [TypeScript SDK reference](/docs/en/agent-sdk/typescript) - TypeScript SDK documentation\n- [CLI reference](https://code.claude.com/docs/en/cli-reference) - Command-line interface\n- [Common workflows](https://code.claude.com/docs/en/common-workflows) - Step-by-step guides",
+  "code_samples": [
+    {
+      "code": "## Sandbox Configuration\n\n### `SandboxSettings`\n\nConfiguration for sandbox behavior. Use this to enable command sandboxing and configure network restrictions programmatically.",
+      "language": "unknown"
+    },
+    {
+      "code": "| Property | Type | Default | Description |\n| :------- | :--- | :------ | :---------- |\n| `enabled` | `bool` | `False` | Enable sandbox mode for command execution |\n| `autoAllowBashIfSandboxed` | `bool` | `False` | Auto-approve bash commands when sandbox is enabled |\n| `excludedCommands` | `list[str]` | `[]` | Commands that always bypass sandbox restrictions (e.g., `[\"docker\"]`). These run unsandboxed automatically without model involvement |\n| `allowUnsandboxedCommands` | `bool` | `False` | Allow the model to request running commands outside the sandbox. When `True`, the model can set `dangerouslyDisableSandbox` in tool input, which falls back to the [permissions system](#permissions-fallback-for-unsandboxed-commands) |\n| `network` | [`SandboxNetworkConfig`](#sandboxnetworkconfig) | `None` | Network-specific sandbox configuration |\n| `ignoreViolations` | [`SandboxIgnoreViolations`](#sandboxignoreviolations) | `None` | Configure which sandbox violations to ignore |\n| `enableWeakerNestedSandbox` | `bool` | `False` | Enable a weaker nested sandbox for compatibility |\n\n<Note>\n**Filesystem and network access restrictions** are NOT configured via sandbox settings. Instead, they are derived from [permission rules](https://code.claude.com/docs/en/settings#permission-settings):\n\n- **Filesystem read restrictions**: Read deny rules\n- **Filesystem write restrictions**: Edit allow/deny rules\n- **Network restrictions**: WebFetch allow/deny rules\n\nUse sandbox settings for command execution sandboxing, and permission rules for filesystem and network access control.\n</Note>\n\n#### Example usage",
+      "language": "unknown"
+    },
+    {
+      "code": "### `SandboxNetworkConfig`\n\nNetwork-specific configuration for sandbox mode.",
+      "language": "unknown"
+    },
+    {
+      "code": "| Property | Type | Default | Description |\n| :------- | :--- | :------ | :---------- |\n| `allowLocalBinding` | `bool` | `False` | Allow processes to bind to local ports (e.g., for dev servers) |\n| `allowUnixSockets` | `list[str]` | `[]` | Unix socket paths that processes can access (e.g., Docker socket) |\n| `allowAllUnixSockets` | `bool` | `False` | Allow access to all Unix sockets |\n| `httpProxyPort` | `int` | `None` | HTTP proxy port for network requests |\n| `socksProxyPort` | `int` | `None` | SOCKS proxy port for network requests |\n\n### `SandboxIgnoreViolations`\n\nConfiguration for ignoring specific sandbox violations.",
+      "language": "unknown"
+    },
+    {
+      "code": "| Property | Type | Default | Description |\n| :------- | :--- | :------ | :---------- |\n| `file` | `list[str]` | `[]` | File path patterns to ignore violations for |\n| `network` | `list[str]` | `[]` | Network patterns to ignore violations for |\n\n### Permissions Fallback for Unsandboxed Commands\n\nWhen `allowUnsandboxedCommands` is enabled, the model can request to run commands outside the sandbox by setting `dangerouslyDisableSandbox: True` in the tool input. These requests fall back to the existing permissions system, meaning your `can_use_tool` handler will be invoked, allowing you to implement custom authorization logic.\n\n<Note>\n**`excludedCommands` vs `allowUnsandboxedCommands`:**\n- `excludedCommands`: A static list of commands that always bypass the sandbox automatically (e.g., `[\"docker\"]`). The model has no control over this.\n- `allowUnsandboxedCommands`: Lets the model decide at runtime whether to request unsandboxed execution by setting `dangerouslyDisableSandbox: True` in the tool input.\n</Note>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Sandbox Configuration",
+      "id": "sandbox-configuration"
+    },
+    {
+      "level": "h3",
+      "text": "`SandboxSettings`",
+      "id": "`sandboxsettings`"
+    },
+    {
+      "level": "h3",
+      "text": "`SandboxNetworkConfig`",
+      "id": "`sandboxnetworkconfig`"
+    },
+    {
+      "level": "h3",
+      "text": "`SandboxIgnoreViolations`",
+      "id": "`sandboxignoreviolations`"
+    },
+    {
+      "level": "h3",
+      "text": "Permissions Fallback for Unsandboxed Commands",
+      "id": "permissions-fallback-for-unsandboxed-commands"
+    },
+    {
+      "level": "h2",
+      "text": "See also",
+      "id": "see-also"
+    }
+  ],
+  "url": "llms-txt#define-custom-tools-with-@tool-decorator",
+  "links": []
+}

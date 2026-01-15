@@ -1,0 +1,8 @@
+{
+  "title": "Should be > 1.0 if parallel calls are working",
+  "content": "**4. Model-specific behavior**\n\n- Claude Opus 4.5, Opus 4.1, and Sonnet 4: Excel at parallel tool use with minimal prompting\n- Claude Sonnet 3.7: May need stronger prompting or the `token-efficient-tools-2025-02-19` [beta header](/docs/en/api/beta-headers). Consider [upgrading to Claude 4](/docs/en/about-claude/models/migrating-to-claude-4).\n- Claude Haiku: Less likely to use parallel tools without explicit prompting",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#should-be->-1.0-if-parallel-calls-are-working",
+  "links": []
+}

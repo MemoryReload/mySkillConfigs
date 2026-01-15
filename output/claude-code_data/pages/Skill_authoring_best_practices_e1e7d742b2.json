@@ -1,0 +1,135 @@
+{
+  "title": "Skill authoring best practices",
+  "content": "Learn how to write effective Skills that Claude can discover and use successfully.\n\nGood Skills are concise, well-structured, and tested with real usage. This guide provides practical authoring decisions to help you write Skills that Claude can discover and use effectively.\n\nFor conceptual background on how Skills work, see the [Skills overview](/docs/en/agents-and-tools/agent-skills/overview).\n\nThe [context window](/docs/en/build-with-claude/context-windows) is a public good. Your Skill shares the context window with everything else Claude needs to know, including:\n- The system prompt\n- Conversation history\n- Other Skills' metadata\n- Your actual request\n\nNot every token in your Skill has an immediate cost. At startup, only the metadata (name and description) from all Skills is pre-loaded. Claude reads SKILL.md only when the Skill becomes relevant, and reads additional files only as needed. However, being concise in SKILL.md still matters: once Claude loads it, every token competes with conversation history and other context.\n\n**Default assumption**: Claude is already very smart\n\nOnly add context Claude doesn't already have. Challenge each piece of information:\n- \"Does Claude really need this explanation?\"\n- \"Can I assume Claude knows this?\"\n- \"Does this paragraph justify its token cost?\"\n\n**Good example: Concise** (approximately 50 tokens):\npython\nimport pdfplumber\n\nwith pdfplumber.open(\"file.pdf\") as pdf:\n    text = pdf.pages[0].extract_text()\n`\n\n**Bad example: Too verbose** (approximately 150 tokens):\n\nThe concise version assumes Claude knows what PDFs are and how libraries work.\n\n### Set appropriate degrees of freedom\n\nMatch the level of specificity to the task's fragility and variability.\n\n**High freedom** (text-based instructions):\n\nUse when:\n- Multiple approaches are valid\n- Decisions depend on context\n- Heuristics guide the approach\n\n**Medium freedom** (pseudocode or scripts with parameters):\n\nUse when:\n- A preferred pattern exists\n- Some variation is acceptable\n- Configuration affects behavior\n\nExample:\npython\ndef generate_report(data, format=\"markdown\", include_charts=True):\n    # Process data\n    # Generate output in specified format\n    # Optionally include visualizations\n`\n\n**Low freedom** (specific scripts, few or no parameters):\n\nUse when:\n- Operations are fragile and error-prone\n- Consistency is critical\n- A specific sequence must be followed\n\nExample:\nbash\npython scripts/migrate.py --verify --backup\n`\n\n**Analogy**: Think of Claude as a robot exploring a path:\n- **Narrow bridge with cliffs on both sides**: There's only one safe way forward. Provide specific guardrails and exact instructions (low freedom). Example: database migrations that must run in exact sequence.\n- **Open field with no hazards**: Many paths lead to success. Give general direction and trust Claude to find the best route (high freedom). Example: code reviews where context determines the best approach.\n\n### Test with all models you plan to use\n\nSkills act as additions to models, so effectiveness depends on the underlying model. Test your Skill with all the models you plan to use it with.\n\n**Testing considerations by model**:\n- **Claude Haiku** (fast, economical): Does the Skill provide enough guidance?\n- **Claude Sonnet** (balanced): Is the Skill clear and efficient?\n- **Claude Opus** (powerful reasoning): Does the Skill avoid over-explaining?\n\nWhat works perfectly for Opus might need more detail for Haiku. If you plan to use your Skill across multiple models, aim for instructions that work well with all of them.\n\n<Note>\n**YAML Frontmatter**: The SKILL.md frontmatter requires two fields:\n\n`name`:\n- Maximum 64 characters\n- Must contain only lowercase letters, numbers, and hyphens\n- Cannot contain XML tags\n- Cannot contain reserved words: \"anthropic\", \"claude\"\n\n`description`:\n- Must be non-empty\n- Maximum 1024 characters\n- Cannot contain XML tags\n- Should describe what the Skill does and when to use it\n\nFor complete Skill structure details, see the [Skills overview](/docs/en/agents-and-tools/agent-skills/overview#skill-structure).\n</Note>\n\n### Naming conventions\n\nUse consistent naming patterns to make Skills easier to reference and discuss. We recommend using **gerund form** (verb + -ing) for Skill names, as this clearly describes the activity or capability the Skill provides.\n\nRemember that the `name` field must use lowercase letters, numbers, and hyphens only.\n\n**Good naming examples (gerund form)**:\n- `processing-pdfs`\n- `analyzing-spreadsheets`\n- `managing-databases`\n- `testing-code`\n- `writing-documentation`\n\n**Acceptable alternatives**:\n- Noun phrases: `pdf-processing`, `spreadsheet-analysis`\n- Action-oriented: `process-pdfs`, `analyze-spreadsheets`\n\n**Avoid**:\n- Vague names: `helper`, `utils`, `tools`\n- Overly generic: `documents`, `data`, `files`\n- Reserved words: `anthropic-helper`, `claude-tools`\n- Inconsistent patterns within your skill collection\n\nConsistent naming makes it easier to:\n- Reference Skills in documentation and conversations\n- Understand what a Skill does at a glance\n- Organize and search through multiple Skills\n- Maintain a professional, cohesive skill library\n\n### Writing effective descriptions\n\nThe `description` field enables Skill discovery and should include both what the Skill does and when to use it.\n\n<Warning>\n**Always write in third person**. The description is injected into the system prompt, and inconsistent point-of-view can cause discovery problems.\n\n- **Good:** \"Processes Excel files and generates reports\"\n- **Avoid:** \"I can help you process Excel files\"\n- **Avoid:** \"You can use this to process Excel files\"\n</Warning>\n\n**Be specific and include key terms**. Include both what the Skill does and specific triggers/contexts for when to use it.\n\nEach Skill has exactly one description field. The description is critical for skill selection: Claude uses it to choose the right Skill from potentially 100+ available Skills. Your description must provide enough detail for Claude to know when to select this Skill, while the rest of SKILL.md provides the implementation details.\n\n**PDF Processing skill:**\n\n**Excel Analysis skill:**\n\n**Git Commit Helper skill:**\n\nAvoid vague descriptions like these:\n\n### Progressive disclosure patterns\n\nSKILL.md serves as an overview that points Claude to detailed materials as needed, like a table of contents in an onboarding guide. For an explanation of how progressive disclosure works, see [How Skills work](/docs/en/agents-and-tools/agent-skills/overview#how-skills-work) in the overview.\n\n**Practical guidance:**\n- Keep SKILL.md body under 500 lines for optimal performance\n- Split content into separate files when approaching this limit\n- Use the patterns below to organize instructions, code, and resources effectively\n\n#### Visual overview: From simple to complex\n\nA basic Skill starts with just a SKILL.md file containing metadata and instructions:\n\n![Simple SKILL.md file showing YAML frontmatter and markdown body](/docs/images/agent-skills-simple-file.png)\n\nAs your Skill grows, you can bundle additional content that Claude loads only when needed:\n\n![Bundling additional reference files like reference.md and forms.md.](/docs/images/agent-skills-bundling-content.png)\n\nThe complete Skill directory structure might look like this:\n\n#### Pattern 1: High-level guide with references\n\n````markdown\n---\nname: pdf-processing\ndescription: Extracts text and tables from PDF files, fills forms, and merges documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.\n---",
+  "code_samples": [
+    {
+      "code": "## Extract PDF text\n\nUse pdfplumber for text extraction:",
+      "language": "markdown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "## Extract PDF text\n\nPDF (Portable Document Format) files are a common file format that contains\ntext, images, and other content. To extract text from a PDF, you'll need to\nuse a library. There are many libraries available for PDF processing, but we\nrecommend pdfplumber because it's easy to use and handles most cases well.\nFirst, you'll need to install it using pip. Then you can use the code below...",
+      "language": "markdown"
+    },
+    {
+      "code": "## Code review process\n\n1. Analyze the code structure and organization\n2. Check for potential bugs or edge cases\n3. Suggest improvements for readability and maintainability\n4. Verify adherence to project conventions",
+      "language": "markdown"
+    },
+    {
+      "code": "## Generate report\n\nUse this template and customize as needed:",
+      "language": "markdown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "## Database migration\n\nRun exactly this script:",
+      "language": "markdown"
+    },
+    {
+      "code": "Do not modify the command or add additional flags.",
+      "language": "unknown"
+    },
+    {
+      "code": "description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.",
+      "language": "yaml"
+    },
+    {
+      "code": "description: Analyze Excel spreadsheets, create pivot tables, generate charts. Use when analyzing Excel files, spreadsheets, tabular data, or .xlsx files.",
+      "language": "yaml"
+    },
+    {
+      "code": "description: Generate descriptive commit messages by analyzing git diffs. Use when the user asks for help writing commit messages or reviewing staged changes.",
+      "language": "yaml"
+    },
+    {
+      "code": "description: Helps with documents",
+      "language": "yaml"
+    },
+    {
+      "code": "description: Processes data",
+      "language": "yaml"
+    },
+    {
+      "code": "description: Does stuff with files",
+      "language": "yaml"
+    },
+    {
+      "code": "pdf/\n├── SKILL.md              # Main instructions (loaded when triggered)\n├── FORMS.md              # Form-filling guide (loaded as needed)\n├── reference.md          # API reference (loaded as needed)\n├── examples.md           # Usage examples (loaded as needed)\n└── scripts/\n    ├── analyze_form.py   # Utility script (executed, not loaded)\n    ├── fill_form.py      # Form filling script\n    └── validate.py       # Validation script",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Core principles",
+      "id": "core-principles"
+    },
+    {
+      "level": "h3",
+      "text": "Concise is key",
+      "id": "concise-is-key"
+    },
+    {
+      "level": "h2",
+      "text": "Extract PDF text",
+      "id": "extract-pdf-text"
+    },
+    {
+      "level": "h2",
+      "text": "Extract PDF text",
+      "id": "extract-pdf-text"
+    },
+    {
+      "level": "h3",
+      "text": "Set appropriate degrees of freedom",
+      "id": "set-appropriate-degrees-of-freedom"
+    },
+    {
+      "level": "h2",
+      "text": "Code review process",
+      "id": "code-review-process"
+    },
+    {
+      "level": "h2",
+      "text": "Generate report",
+      "id": "generate-report"
+    },
+    {
+      "level": "h2",
+      "text": "Database migration",
+      "id": "database-migration"
+    },
+    {
+      "level": "h3",
+      "text": "Test with all models you plan to use",
+      "id": "test-with-all-models-you-plan-to-use"
+    },
+    {
+      "level": "h2",
+      "text": "Skill structure",
+      "id": "skill-structure"
+    },
+    {
+      "level": "h3",
+      "text": "Naming conventions",
+      "id": "naming-conventions"
+    },
+    {
+      "level": "h3",
+      "text": "Writing effective descriptions",
+      "id": "writing-effective-descriptions"
+    },
+    {
+      "level": "h3",
+      "text": "Progressive disclosure patterns",
+      "id": "progressive-disclosure-patterns"
+    }
+  ],
+  "url": "llms-txt#skill-authoring-best-practices",
+  "links": []
+}

@@ -1,0 +1,39 @@
+{
+  "title": "List Skills (Beta)",
+  "content": "URL: https://platform.claude.com/docs/en/api/beta/skills/list\n\n- `limit: optional number`\n\nNumber of results to return per page.\n\nMaximum value is 100. Defaults to 20.\n\n- `page: optional string`\n\nPagination token for fetching a specific page of results.\n\nPass the value from a previous response's `next_page` field to get the next page of results.\n\n- `source: optional string`\n\nFilter skills by source.\n\nIf provided, only skills from the specified source will be returned:\n\n* `\"custom\"`: only return user-created skills\n  * `\"anthropic\"`: only return Anthropic-created skills\n\n### Header Parameters\n\n- `\"anthropic-beta\": optional array of AnthropicBeta`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `UnionMember0 = string`\n\n- `UnionMember1 = \"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 16 more`\n\n- `\"message-batches-2024-09-24\"`\n\n- `\"prompt-caching-2024-07-31\"`\n\n- `\"computer-use-2024-10-22\"`\n\n- `\"computer-use-2025-01-24\"`\n\n- `\"pdfs-2024-09-25\"`\n\n- `\"token-counting-2024-11-01\"`\n\n- `\"token-efficient-tools-2025-02-19\"`\n\n- `\"output-128k-2025-02-19\"`\n\n- `\"files-api-2025-04-14\"`\n\n- `\"mcp-client-2025-04-04\"`\n\n- `\"mcp-client-2025-11-20\"`\n\n- `\"dev-full-thinking-2025-05-14\"`\n\n- `\"interleaved-thinking-2025-05-14\"`\n\n- `\"code-execution-2025-05-22\"`\n\n- `\"extended-cache-ttl-2025-04-11\"`\n\n- `\"context-1m-2025-08-07\"`\n\n- `\"context-management-2025-06-27\"`\n\n- `\"model-context-window-exceeded-2025-08-26\"`\n\n- `\"skills-2025-10-02\"`\n\n- `data: array of object { id, created_at, display_title, 4 more }`\n\nUnique identifier for the skill.\n\nThe format and length of IDs may change over time.\n\n- `created_at: string`\n\nISO 8601 timestamp of when the skill was created.\n\n- `display_title: string`\n\nDisplay title for the skill.\n\nThis is a human-readable label that is not included in the prompt sent to the model.\n\n- `latest_version: string`\n\nThe latest version identifier for the skill.\n\nThis represents the most recent version of the skill that has been created.\n\nThis may be one of the following values:\n\n* `\"custom\"`: the skill was created by a user\n    * `\"anthropic\"`: the skill was created by Anthropic\n\nFor Skills, this is always `\"skill\"`.\n\n- `updated_at: string`\n\nISO 8601 timestamp of when the skill was last updated.\n\n- `has_more: boolean`\n\nWhether there are more results available.\n\nIf `true`, there are additional results that can be fetched using the `next_page` token.\n\n- `next_page: string`\n\nToken for fetching the next page of results.\n\nIf `null`, there are no more results available. Pass this value to the `page_token` parameter in the next request to get the next page.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/skills \\\n    -H 'anthropic-version: 2023-06-01' \\\n    -H 'anthropic-beta: skills-2025-10-02' \\\n    -H \"X-Api-Key: $ANTHROPIC_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Header Parameters",
+      "id": "header-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#list-skills-(beta)",
+  "links": []
+}

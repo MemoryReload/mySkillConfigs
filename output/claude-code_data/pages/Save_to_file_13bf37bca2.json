@@ -1,0 +1,48 @@
+{
+  "title": "Save to file",
+  "content": "with open(\"downloaded_file.txt\", \"w\") as f:\n    f.write(file_content.decode('utf-8'))\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\nimport fs from 'fs';\n\nconst anthropic = new Anthropic();\n\nconst fileContent = await anthropic.beta.files.download(\n  \"file_011CNha8iCJcU1wXNR6q4V8w\",\n  { betas: ['files-api-2025-04-14'] },\n);\n\n// Save to file\nfs.writeFileSync(\"downloaded_file.txt\", fileContent);\njson\n{\n  \"type\": \"error\",\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"message\": \"File not found: file_011CNha8iCJcU1wXNR6q4V8w\"\n  }\n}\n```\n\nFile API operations are **free**:\n- Uploading files\n- Downloading files\n- Listing files\n- Getting file metadata  \n- Deleting files\n\nFile content used in `Messages` requests are priced as input tokens. You can only download files created by [skills](/docs/en/build-with-claude/skills-guide) or the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool).\n\nDuring the beta period:\n- File-related API calls are limited to approximately 100 requests per minute\n- [Contact us](mailto:sales@anthropic.com) if you need higher limits for your use case",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n<Note>\nYou can only download files that were created by [skills](/docs/en/build-with-claude/skills-guide) or the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool). Files that you uploaded cannot be downloaded.\n</Note>\n\n---\n\n## File storage and limits\n\n### Storage limits\n\n- **Maximum file size:** 500 MB per file\n- **Total storage:** 100 GB per organization\n\n### File lifecycle\n\n- Files are scoped to the workspace of the API key. Other API keys can use files created by any other API key associated with the same workspace\n- Files persist until you delete them\n- Deleted files cannot be recovered\n- Files are inaccessible via the API shortly after deletion, but they may persist in active `Messages` API calls and associated tool uses\n- Files that users delete will be deleted in accordance with our [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).\n\n---\n\n## Error handling\n\nCommon errors when using the Files API include:\n\n- **File not found (404):** The specified `file_id` doesn't exist or you don't have access to it\n- **Invalid file type (400):** The file type doesn't match the content block type (e.g., using an image file in a document block)\n- **Exceeds context window size (400):** The file is larger than the context window size (e.g. using a 500 MB plaintext file in a `/v1/messages` request)\n- **Invalid filename (400):** Filename doesn't meet the length requirements (1-255 characters) or contains forbidden characters (`<`, `>`, `:`, `\"`, `|`, `?`, `*`, `\\`, `/`, or unicode characters 0-31)\n- **File too large (413):** File exceeds the 500 MB limit\n- **Storage limit exceeded (403):** Your organization has reached the 100 GB storage limit",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "File storage and limits",
+      "id": "file-storage-and-limits"
+    },
+    {
+      "level": "h3",
+      "text": "Storage limits",
+      "id": "storage-limits"
+    },
+    {
+      "level": "h3",
+      "text": "File lifecycle",
+      "id": "file-lifecycle"
+    },
+    {
+      "level": "h2",
+      "text": "Error handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h2",
+      "text": "Usage and billing",
+      "id": "usage-and-billing"
+    },
+    {
+      "level": "h3",
+      "text": "Rate limits",
+      "id": "rate-limits"
+    }
+  ],
+  "url": "llms-txt#save-to-file",
+  "links": []
+}

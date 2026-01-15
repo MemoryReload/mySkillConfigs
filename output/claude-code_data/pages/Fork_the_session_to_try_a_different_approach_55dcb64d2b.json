@@ -1,0 +1,8 @@
+{
+  "title": "Fork the session to try a different approach",
+  "content": "async for message in query(\n    prompt=\"Now let's redesign this as a GraphQL API instead\",\n    options=ClaudeAgentOptions(\n        resume=session_id,\n        fork_session=True,  # Creates a new session ID\n        model=\"claude-sonnet-4-5\"\n    )\n):\n    if hasattr(message, 'subtype') and message.subtype == 'init':\n        forked_id = message.data.get('session_id')\n        print(f\"Forked session: {forked_id}\")\n        # This will be a different session ID",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#fork-the-session-to-try-a-different-approach",
+  "links": []
+}

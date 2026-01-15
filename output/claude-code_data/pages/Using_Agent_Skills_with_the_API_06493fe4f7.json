@@ -1,0 +1,57 @@
+{
+  "title": "Using Agent Skills with the API",
+  "content": "Learn how to use Agent Skills to extend Claude's capabilities through the API.\n\nAgent Skills extend Claude's capabilities through organized folders of instructions, scripts, and resources. This guide shows you how to use both pre-built and custom Skills with the Claude API.\n\n<Note>\nFor complete API reference including request/response schemas and all parameters, see:\n- [Skill Management API Reference](/docs/en/api/skills/list-skills) - CRUD operations for Skills\n- [Skill Versions API Reference](/docs/en/api/skills/list-skill-versions) - Version management\n</Note>\n\n<CardGroup cols={2}>\n  <Card\n    title=\"Get started with Agent Skills\"\n    icon=\"rocket\"\n    href=\"/docs/en/agents-and-tools/agent-skills/quickstart\"\n  >\n    Create your first Skill\n  </Card>\n  <Card\n    title=\"Create Custom Skills\"\n    icon=\"hammer\"\n    href=\"/docs/en/agents-and-tools/agent-skills/best-practices\"\n  >\n    Best practices for authoring Skills\n  </Card>\n</CardGroup>\n\n<Note>\nFor a deep dive into the architecture and real-world applications of Agent Skills, read our engineering blog: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).\n</Note>\n\nSkills integrate with the Messages API through the code execution tool. Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical—both require code execution and use the same `container` structure.\n\nSkills integrate identically in the Messages API regardless of source. You specify Skills in the `container` parameter with a `skill_id`, `type`, and optional `version`, and they execute in the code execution environment.\n\n**You can use Skills from two sources:**\n\n| Aspect | Anthropic Skills | Custom Skills |\n|--------|------------------|---------------|\n| **Type value** | `anthropic` | `custom` |\n| **Skill IDs** | Short names: `pptx`, `xlsx`, `docx`, `pdf` | Generated: `skill_01AbCdEfGhIjKlMnOpQrStUv` |\n| **Version format** | Date-based: `20251013` or `latest` | Epoch timestamp: `1759178010641129` or `latest` |\n| **Management** | Pre-built and maintained by Anthropic | Upload and manage via [Skills API](/docs/en/api/skills/create-skill) |\n| **Availability** | Available to all users | Private to your workspace |\n\nBoth skill sources are returned by the [List Skills endpoint](/docs/en/api/skills/list-skills) (use the `source` parameter to filter). The integration shape and execution environment are identical—the only difference is where the Skills come from and how they're managed.\n\nTo use Skills, you need:\n\n1. **Anthropic API key** from the [Console](/settings/keys)\n2. **Beta headers**:\n   - `code-execution-2025-08-25` - Enables code execution (required for Skills)\n   - `skills-2025-10-02` - Enables Skills API\n   - `files-api-2025-04-14` - For uploading/downloading files to/from container\n3. **Code execution tool** enabled in your requests\n\n## Using Skills in Messages\n\n### Container Parameter\n\nSkills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills per request.\n\nThe structure is identical for both Anthropic and custom Skills—specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:\n\n### Downloading Generated Files\n\nWhen Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_id` attributes in the response. You must use the Files API to download these files.\n\n**How it works:**\n1. Skills create files during code execution\n2. Response includes `file_id` for each created file\n3. Use Files API to download the actual file content\n4. Save locally or process as needed\n\n**Example: Creating and downloading an Excel file**\n\n<CodeGroup>\n```python Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Downloading Generated Files\n\nWhen Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_id` attributes in the response. You must use the Files API to download these files.\n\n**How it works:**\n1. Skills create files during code execution\n2. Response includes `file_id` for each created file\n3. Use Files API to download the actual file content\n4. Save locally or process as needed\n\n**Example: Creating and downloading an Excel file**\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Quick Links",
+      "id": "quick-links"
+    },
+    {
+      "level": "h2",
+      "text": "Overview",
+      "id": "overview"
+    },
+    {
+      "level": "h3",
+      "text": "Using Skills",
+      "id": "using-skills"
+    },
+    {
+      "level": "h3",
+      "text": "Prerequisites",
+      "id": "prerequisites"
+    },
+    {
+      "level": "h2",
+      "text": "Using Skills in Messages",
+      "id": "using-skills-in-messages"
+    },
+    {
+      "level": "h3",
+      "text": "Container Parameter",
+      "id": "container-parameter"
+    },
+    {
+      "level": "h3",
+      "text": "Downloading Generated Files",
+      "id": "downloading-generated-files"
+    }
+  ],
+  "url": "llms-txt#using-agent-skills-with-the-api",
+  "links": []
+}

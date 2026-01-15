@@ -1,0 +1,39 @@
+{
+  "title": "Update User",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/users/update\n\n**post** `/v1/organizations/users/{user_id}`\n\n- `role: \"user\" or \"developer\" or \"billing\" or \"claude_code_user\"`\n\nNew role for the User. Cannot be \"admin\".\n\n- `\"claude_code_user\"`\n\n- `User = object { id, added_at, email, 3 more }`\n\nRFC 3339 datetime string indicating when the User joined the Organization.\n\n- `role: \"user\" or \"developer\" or \"billing\" or 2 more`\n\nOrganization role of the User.\n\n- `\"claude_code_user\"`\n\nFor Users, this is always `\"user\"`.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/users/$USER_ID \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\" \\\n    -d '{\n          \"role\": \"user\"\n        }'",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Update",
+      "id": "update"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Body Parameters",
+      "id": "body-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#update-user",
+  "links": []
+}

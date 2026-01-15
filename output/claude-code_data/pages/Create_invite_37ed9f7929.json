@@ -1,0 +1,34 @@
+{
+  "title": "Create Invite",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/invites/create\n\n**post** `/v1/organizations/invites`\n\n- `role: \"user\" or \"developer\" or \"billing\" or \"claude_code_user\"`\n\nRole for the invited User. Cannot be \"admin\".\n\n- `\"claude_code_user\"`\n\n- `Invite = object { id, email, expires_at, 4 more }`\n\nEmail of the User being invited.\n\n- `expires_at: string`\n\nRFC 3339 datetime string indicating when the Invite expires.\n\n- `invited_at: string`\n\nRFC 3339 datetime string indicating when the Invite was created.\n\n- `role: \"user\" or \"developer\" or \"billing\" or 2 more`\n\nOrganization role of the User.\n\n- `\"claude_code_user\"`\n\n- `status: \"accepted\" or \"expired\" or \"deleted\" or \"pending\"`\n\nStatus of the Invite.\n\nFor Invites, this is always `\"invite\"`.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/invites \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\" \\\n    -d '{\n          \"email\": \"user@emaildomain.com\",\n          \"role\": \"user\"\n        }'",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Create",
+      "id": "create"
+    },
+    {
+      "level": "h3",
+      "text": "Body Parameters",
+      "id": "body-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#create-invite",
+  "links": []
+}

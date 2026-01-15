@@ -1,0 +1,14 @@
+{
+  "title": "Add session-specific focus areas",
+  "content": "async for message in query(\n    prompt=\"Review this authentication module\",\n    options=ClaudeAgentOptions(\n        system_prompt={\n            \"type\": \"preset\",\n            \"preset\": \"claude_code\",\n            \"append\": \"\"\"\n            For this review, prioritize:\n            - OAuth 2.0 compliance\n            - Token storage security\n            - Session management\n            \"\"\"\n        }\n    )\n):\n    messages.append(message)\n```\n\n- [Output styles](https://code.claude.com/docs/en/output-styles) - Complete output styles documentation\n- [TypeScript SDK guide](/docs/en/agent-sdk/typescript) - Complete SDK usage guide\n- [Configuration guide](https://code.claude.com/docs/en/settings) - General configuration options",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "See also",
+      "id": "see-also"
+    }
+  ],
+  "url": "llms-txt#add-session-specific-focus-areas",
+  "links": []
+}

@@ -1,0 +1,70 @@
+{
+  "title": "async wrapper omitted for clarity",
+  "content": "logs = await fetch_logs(server_id)\nerrors = [log for log in logs if \"ERROR\" in log]\nprint(f\"Found {len(errors)} errors\")\nfor error in errors[-10:]:  # Only return last 10 errors\n    print(error)\njson\n{\n  \"type\": \"tool_use\",\n  \"id\": \"toolu_abc123\",\n  \"name\": \"query_database\",\n  \"input\": {\"sql\": \"<sql>\"},\n  \"caller\": {\n    \"type\": \"code_execution_20250825\",\n    \"tool_id\": \"srvtoolu_xyz789\"\n  }\n}\njson\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_abc123\",\n      \"content\": \"[{\\\"customer_id\\\": \\\"C1\\\", \\\"revenue\\\": 45000, \\\"orders\\\": 23}, {\\\"customer_id\\\": \\\"C2\\\", \\\"revenue\\\": 38000, \\\"orders\\\": 18}, ...]\"\n    }\n  ]\n}\njson\n{\n  \"type\": \"code_execution_tool_result\",\n  \"tool_use_id\": \"srvtoolu_xyz789\",\n  \"content\": {\n    \"type\": \"code_execution_result\",\n    \"stdout\": \"Analysis complete. Top 5 customers identified from 847 total records.\",\n    \"stderr\": \"\",\n    \"return_code\": 0,\n    \"content\": []\n  }\n}\njson\n{\n  \"type\": \"code_execution_tool_result\",\n  \"tool_use_id\": \"srvtoolu_abc123\",\n  \"content\": {\n    \"type\": \"code_execution_result\",\n    \"stdout\": \"\",\n    \"stderr\": \"TimeoutError: Calling tool ['query_database'] timed out.\",\n    \"return_code\": 0,\n    \"content\": []\n  }\n}\npython",
+  "code_samples": [
+    {
+      "code": "## Response format\n\n### Programmatic tool call\n\nWhen code execution calls a tool:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Tool result handling\n\nYour tool result is passed back to the running code:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Code execution completion\n\nWhen all tool calls are satisfied and code completes:",
+      "language": "unknown"
+    },
+    {
+      "code": "## Error handling\n\n### Common errors\n\n| Error | Description | Solution |\n|-------|-------------|----------|\n| `invalid_tool_input` | Tool input doesn't match schema | Validate your tool's input_schema |\n| `tool_not_allowed` | Tool doesn't allow the requested caller type | Check `allowed_callers` includes the right contexts |\n| `missing_beta_header` | PTC beta header not provided | Add both beta headers to your request |\n\n### Container expiration during tool call\n\nIf your tool takes too long to respond, the code execution will receive a `TimeoutError`. Claude sees this in stderr and will typically retry:",
+      "language": "unknown"
+    },
+    {
+      "code": "To prevent timeouts:\n- Monitor the `expires_at` field in responses\n- Implement timeouts for your tool execution\n- Consider breaking long operations into smaller chunks\n\n### Tool execution errors\n\nIf your tool returns an error:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Response format",
+      "id": "response-format"
+    },
+    {
+      "level": "h3",
+      "text": "Programmatic tool call",
+      "id": "programmatic-tool-call"
+    },
+    {
+      "level": "h3",
+      "text": "Tool result handling",
+      "id": "tool-result-handling"
+    },
+    {
+      "level": "h3",
+      "text": "Code execution completion",
+      "id": "code-execution-completion"
+    },
+    {
+      "level": "h2",
+      "text": "Error handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h3",
+      "text": "Common errors",
+      "id": "common-errors"
+    },
+    {
+      "level": "h3",
+      "text": "Container expiration during tool call",
+      "id": "container-expiration-during-tool-call"
+    },
+    {
+      "level": "h3",
+      "text": "Tool execution errors",
+      "id": "tool-execution-errors"
+    }
+  ],
+  "url": "llms-txt#async-wrapper-omitted-for-clarity",
+  "links": []
+}

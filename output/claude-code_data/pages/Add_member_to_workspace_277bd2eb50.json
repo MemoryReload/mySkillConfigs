@@ -1,0 +1,8 @@
+{
+  "title": "Add member to workspace",
+  "content": "curl --request POST \"https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ANTHROPIC_ADMIN_KEY\" \\\n  --data '{\n    \"user_id\": \"user_xxx\",\n    \"workspace_role\": \"workspace_developer\"\n  }'",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#add-member-to-workspace",
+  "links": []
+}

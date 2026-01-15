@@ -1,0 +1,33 @@
+{
+  "title": "Set environment variables",
+  "content": "import os\nos.environ[\"API_TOKEN\"] = \"your-token\"\nos.environ[\"API_KEY\"] = \"your-key\"\ntypescript TypeScript\nimport { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Process data\",\n  options: {\n    mcpServers: {\n      \"data-processor\": dataServer\n    }\n  }\n})) {\n  if (message.type === \"system\" && message.subtype === \"init\") {\n    // Check MCP server status\n    const failedServers = message.mcp_servers.filter(\n      s => s.status !== \"connected\"\n    );\n    \n    if (failedServers.length > 0) {\n      console.warn(\"Failed to connect:\", failedServers);\n    }\n  }\n  \n  if (message.type === \"result\" && message.subtype === \"error_during_execution\") {\n    console.error(\"Execution failed\");\n  }\n}\npython Python\nfrom claude_agent_sdk import query\n\nasync for message in query(\n    prompt=\"Process data\",\n    options={\n        \"mcpServers\": {\n            \"data-processor\": data_server\n        }\n    }\n):\n    if message[\"type\"] == \"system\" and message[\"subtype\"] == \"init\":\n        # Check MCP server status\n        failed_servers = [\n            s for s in message[\"mcp_servers\"]\n            if s[\"status\"] != \"connected\"\n        ]\n        \n        if failed_servers:\n            print(f\"Failed to connect: {failed_servers}\")\n    \n    if message[\"type\"] == \"result\" and message[\"subtype\"] == \"error_during_execution\":\n        print(\"Execution failed\")\n```\n\n- [Custom Tools Guide](/docs/en/agent-sdk/custom-tools) - Detailed guide on creating SDK MCP servers\n- [TypeScript SDK Reference](/docs/en/agent-sdk/typescript)\n- [Python SDK Reference](/docs/en/agent-sdk/python)\n- [SDK Permissions](/docs/en/agent-sdk/permissions)\n- [Common Workflows](https://code.claude.com/docs/en/common-workflows)",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n### OAuth2 Authentication\n\nOAuth2 MCP authentication in-client is not currently supported.\n\n## Error Handling\n\nHandle MCP connection failures gracefully:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "OAuth2 Authentication",
+      "id": "oauth2-authentication"
+    },
+    {
+      "level": "h2",
+      "text": "Error Handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h2",
+      "text": "Related Resources",
+      "id": "related-resources"
+    }
+  ],
+  "url": "llms-txt#set-environment-variables",
+  "links": []
+}

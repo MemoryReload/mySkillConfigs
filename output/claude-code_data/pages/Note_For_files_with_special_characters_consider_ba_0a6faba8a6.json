@@ -1,0 +1,13 @@
+{
+  "title": "Note: For files with special characters, consider base64 encoding",
+  "content": "TEXT_CONTENT=$(cat document.txt | jq -Rs .)\n\ncurl https://api.anthropic.com/v1/messages \\\n  -H \"content-type: application/json\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -d @- <<EOF\n{\n  \"model\": \"claude-sonnet-4-5\",\n  \"max_tokens\": 1024,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Here's the document content:\\n\\n${TEXT_CONTENT}\\n\\nPlease summarize this document.\"\n        }\n      ]\n    }\n  ]\n}\nEOF\npython Python\nimport pandas as pd\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#note:-for-files-with-special-characters,-consider-base64-encoding",
+  "links": []
+}

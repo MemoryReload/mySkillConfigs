@@ -1,0 +1,28 @@
+{
+  "title": "Portmanteau poet",
+  "content": "Blend two words together to create a new, meaningful portmanteau.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n|        | Content                                                                                                                                                                                                                                            |\n| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| System | You are an AI assistant with a knack for creating innovative portmanteaus. Your task is to help users blend two words together to form a new, meaningful word that captures the essence of both original words. Offer several options if possible. |\n| User   | How about blending the words \"music\" and \"therapy\" to create a new word that represents the idea of using music to promote healing and well-being?                                                                                                 |\n\nHere are some innovative portmanteau options that blend \"music\" and \"therapy\" to represent the concept of using music to promote healing and well-being:\n\n1.  Musitherapy: This blend combines \"music\" and \"therapy\" in a straightforward manner, making it easy to understand the concept behind the word.\n2.  Melodihealing: By combining \"melody\" and \"healing,\" this portmanteau emphasizes the therapeutic power of melodies in promoting well-being.\n3.  Rhythmedicine: This blend of \"rhythm\" and \"medicine\" suggests that the rhythmic aspects of music can have medicinal properties for healing.\n4.  Harmonicure: By blending \"harmony\" and \"cure,\" this portmanteau highlights the idea that the harmonious elements of music can help cure ailments.\n5.  Tunetreatment: This blend of \"tune\" and \"treatment\" implies that specific tunes or songs can be used as a form of treatment for various conditions.\n6.  Symphonotherapy: By combining \"symphony\" and \"therapy,\" this portmanteau suggests that the complex and layered nature of symphonic music can have therapeutic effects.\n7.  Melotherapy: This simple blend of \"melody\" and \"therapy\" emphasizes the therapeutic aspects of melodies in a concise and easy-to-remember word.\n8.  Melodicine: By combining \"melody\" and \"medicine,\" this portmanteau emphasizes the idea of using the healing properties of music and its melodies as a form of medicine or treatment for various conditions or challenges.\n\nChoose the portmanteau that best captures the essence of your idea, or use these as inspiration to create your own unique blend!\n\n<Tabs>\n<Tab title=\"Python\">\n\n</Tab>\n<Tab title=\"TypeScript\">\n\n</Tab>\n<Tab title=\"AWS Bedrock Python\">\n\nfrom anthropic import AnthropicBedrock",
+  "code_samples": [
+    {
+      "code": "import anthropic\n\nclient = anthropic.Anthropic(\n  # defaults to os.environ.get(\"ANTHROPIC_API_KEY\")\n  api_key=\"my_api_key\",\n)\nmessage = client.messages.create(\n  model=\"claude-sonnet-4-5\",\n  max_tokens=1000,\n  temperature=1,\n  system=\"You are an AI assistant with a knack for creating innovative portmanteaus. Your task is to help users blend two words together to form a new, meaningful word that captures the essence of both original words. Offer several options if possible.\",\n  messages=[\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"How about blending the words \\\"music\\\" and \\\"therapy\\\" to create a new word that represents the idea of using music to promote healing and well-being?\"\n        }\n      ]\n    }\n  ]\n)\nprint(message.content)",
+      "language": "python"
+    },
+    {
+      "code": "import Anthropic from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic({\napiKey: \"my_api_key\", // defaults to process.env[\"ANTHROPIC_API_KEY\"]\n});\n\nconst msg = await anthropic.messages.create({\nmodel: \"claude-sonnet-4-5\",\nmax_tokens: 1000,\ntemperature: 1,\nsystem: \"You are an AI assistant with a knack for creating innovative portmanteaus. Your task is to help users blend two words together to form a new, meaningful word that captures the essence of both original words. Offer several options if possible.\",\nmessages: [\n{\n\"role\": \"user\",\n\"content\": [\n{\n\"type\": \"text\",\n\"text\": \"How about blending the words \\\"music\\\" and \\\"therapy\\\" to create a new word that represents the idea of using music to promote healing and well-being?\"\n}\n]\n}\n]\n});\nconsole.log(msg);",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Example output",
+      "id": "example-output"
+    },
+    {
+      "level": "h2",
+      "text": "API request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#portmanteau-poet",
+  "links": []
+}

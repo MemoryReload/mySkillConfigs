@@ -1,0 +1,19 @@
+{
+  "title": "Using US regional endpoint (CRIS)",
+  "content": "message = client.messages.create(\n    model=\"anthropic.claude-sonnet-4-5-20250929-v1:0\",  # No global. prefix\n    max_tokens=256,\n    messages=[{\"role\": \"user\", \"content\": \"Hello, world\"}]\n)\ntypescript TypeScript\nimport AnthropicBedrock from '@anthropic-ai/bedrock-sdk';\n\nconst client = new AnthropicBedrock({\n  awsRegion: 'us-west-2',\n});\n\n// Using US regional endpoint (CRIS)\nconst message = await client.messages.create({\n  model: 'anthropic.claude-sonnet-4-5-20250929-v1:0',  // No global. prefix\n  max_tokens: 256,\n  messages: [{role: \"user\", content: \"Hello, world\"}]\n});\n```\n</CodeGroup>\n\n### Additional resources\n\n- **AWS Bedrock pricing:** [aws.amazon.com/bedrock/pricing](https://aws.amazon.com/bedrock/pricing/)\n- **AWS pricing documentation:** [Bedrock pricing guide](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-pricing.html)\n- **AWS blog post:** [Introducing Claude Sonnet 4.5 in Amazon Bedrock](https://aws.amazon.com/blogs/aws/introducing-claude-sonnet-4-5-in-amazon-bedrock-anthropics-most-intelligent-model-best-for-coding-and-complex-agents/)\n- **Anthropic pricing details:** [Pricing documentation](/docs/en/about-claude/pricing#third-party-platform-pricing)",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Additional resources",
+      "id": "additional-resources"
+    }
+  ],
+  "url": "llms-txt#using-us-regional-endpoint-(cris)",
+  "links": []
+}

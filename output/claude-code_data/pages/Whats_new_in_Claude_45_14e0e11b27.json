@@ -1,0 +1,206 @@
+{
+  "title": "What's new in Claude 4.5",
+  "content": "Claude 4.5 introduces three models designed for different use cases:\n\n- **Claude Opus 4.5**: Our most intelligent model combining maximum capability with practical performance. Features a more accessible price point than previous Opus models. Available with a 200k token context window.\n- **Claude Sonnet 4.5**: Our best model for complex agents and coding, with the highest intelligence across most tasks. Available with a 200k and 1M (beta) token context window.\n- **Claude Haiku 4.5**: Our fastest and most intelligent Haiku model with near-frontier performance. Available with a 200k token context window.\n\n## Key improvements in Opus 4.5 over Opus 4.1\n\n### Maximum intelligence\n\nClaude Opus 4.5 represents our most intelligent model, combining maximum capability with practical performance. It delivers step-change improvements across reasoning, coding, and complex problem-solving tasks while maintaining the high-quality outputs expected from the Opus family.\n\nClaude Opus 4.5 is the only model that supports the [effort parameter](/docs/en/build-with-claude/effort), allowing you to control how many tokens Claude uses when responding. This gives you the ability to trade off between response thoroughness and token efficiency with a single model.\n\nThe effort parameter affects all tokens in the response, including text responses, tool calls, and extended thinking. You can choose between:\n- **High effort**: Maximum thoroughness for complex analysis and detailed explanations\n- **Medium effort**: Balanced approach for most production use cases\n- **Low effort**: Most token-efficient responses for high-volume automation\n\n### Computer use excellence\n\nClaude Opus 4.5 introduces [enhanced computer use capabilities](/docs/en/agents-and-tools/tool-use/computer-use-tool) with a new zoom action that enables detailed inspection of specific screen regions at full resolution. This allows Claude to examine fine-grained UI elements, small text, and detailed visual information that might be unclear in standard screenshots.\n\nThe zoom capability is particularly valuable for:\n- Inspecting small UI elements and controls\n- Reading fine print or detailed text\n- Analyzing complex interfaces with dense information\n- Verifying precise visual details before taking actions\n\n### Practical performance\n\nClaude Opus 4.5 delivers flagship intelligence at a [more accessible price point](/docs/en/about-claude/pricing) than previous Opus models, making advanced AI capabilities available for a broader range of applications and use cases.\n\n### Thinking block preservation\n\nClaude Opus 4.5 [automatically preserves all previous thinking blocks](/docs/en/build-with-claude/extended-thinking#thinking-block-preservation-in-claude-opus-4-5) throughout conversations, maintaining reasoning continuity across extended multi-turn interactions and tool use sessions. This ensures Claude can effectively leverage its full reasoning history when working on complex, long-running tasks.\n\n## Key improvements in Sonnet 4.5 over Sonnet 4\n\n### Coding excellence\n\nClaude Sonnet 4.5 is our best coding model to date, with significant improvements across the entire development lifecycle:\n\n- **SWE-bench Verified performance**: Advanced state-of-the-art on coding benchmarks\n- **Enhanced planning and system design**: Better architectural decisions and code organization\n- **Improved security engineering**: More robust security practices and vulnerability detection\n- **Better instruction following**: More precise adherence to coding specifications and requirements\n\n<Note>\nClaude Sonnet 4.5 performs significantly better on coding tasks when [extended thinking](/docs/en/build-with-claude/extended-thinking) is enabled. Extended thinking is disabled by default, but we recommend enabling it for complex coding work. Be aware that extended thinking impacts [prompt caching efficiency](/docs/en/build-with-claude/prompt-caching#caching-with-thinking-blocks). See the [migration guide](/docs/en/about-claude/models/migrating-to-claude-4#extended-thinking-recommendations) for configuration details.\n</Note>\n\n### Agent capabilities\n\nClaude Sonnet 4.5 introduces major advances in agent capabilities:\n\n- **Extended autonomous operation**: Sonnet 4.5 can work independently for hours while maintaining clarity and focus on incremental progress. The model makes steady advances on a few tasks at a time rather than attempting everything at once. It provides fact-based progress updates that accurately reflect what has been accomplished.\n- **Context awareness**: Claude now tracks its token usage throughout conversations, receiving updates after each tool call. This awareness helps prevent premature task abandonment and enables more effective execution on long-running tasks. See [Context awareness](/docs/en/build-with-claude/context-windows#context-awareness-in-claude-sonnet-4-5) for technical details and [prompting guidance](/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices#context-awareness-and-multi-window-workflows).\n- **Enhanced tool usage**: The model more effectively uses parallel tool calls, firing off multiple speculative searches simultaneously during research and reading several files at once to build context faster. Improved coordination across multiple tools and information sources enables the model to effectively leverage a wide range of capabilities in agentic search and coding workflows.\n- **Advanced context management**: Sonnet 4.5 maintains exceptional state tracking in external files, preserving goal-orientation across sessions. Combined with more effective context window usage and our new context management API features, the model optimally handles information across extended sessions to maintain coherence over time.\n\n<Note>Context awareness is available in Claude Sonnet 4, Sonnet 4.5, Haiku 4.5, Opus 4, Opus 4.1, and Opus 4.5.</Note>\n\n### Communication and interaction style\n\nClaude Sonnet 4.5 has a refined communication approach that is concise, direct, and natural. It provides fact-based progress updates and may skip verbose summaries after tool calls to maintain workflow momentum (though this can be adjusted with prompting).\n\nFor detailed guidance on working with this communication style, see [Claude 4 best practices](/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices).\n\n### Creative content generation\n\nClaude Sonnet 4.5 excels at creative content tasks:\n\n- **Presentations and animations**: Matches or exceeds Claude Opus 4.1 and Opus 4.5 for creating slides and visual content\n- **Creative flair**: Produces polished, professional output with strong instruction following\n- **First-try quality**: Generates usable, well-designed content in initial attempts\n\n## Key improvements in Haiku 4.5 over Haiku 3.5\n\nClaude Haiku 4.5 represents a transformative leap for the Haiku model family, bringing frontier capabilities to our fastest model class:\n\n### Near-frontier intelligence with blazing speed\n\nClaude Haiku 4.5 delivers near-frontier performance matching Sonnet 4 at significantly lower cost and faster speed:\n\n- **Near-frontier intelligence**: Matches Sonnet 4 performance across reasoning, coding, and complex tasks\n- **Enhanced speed**: More than twice the speed of Sonnet 4, with optimizations for output tokens per second (OTPS)\n- **Optimal cost-performance**: Near-frontier intelligence at one-third the cost, ideal for high-volume deployments\n\n### Extended thinking capabilities\n\nClaude Haiku 4.5 is the **first Haiku model** to support extended thinking, bringing advanced reasoning capabilities to the Haiku family:\n\n- **Reasoning at speed**: Access to Claude's internal reasoning process for complex problem-solving\n- **Thinking Summarization**: Summarized thinking output for production-ready deployments\n- **Interleaved thinking**: Think between tool calls for more sophisticated multi-step workflows\n- **Budget control**: Configure thinking token budgets to balance reasoning depth with speed\n\nExtended thinking must be enabled explicitly by adding a `thinking` parameter to your API requests. See the [Extended thinking documentation](/docs/en/build-with-claude/extended-thinking) for implementation details.\n\n<Note>\nClaude Haiku 4.5 performs significantly better on coding and reasoning tasks when [extended thinking](/docs/en/build-with-claude/extended-thinking) is enabled. Extended thinking is disabled by default, but we recommend enabling it for complex problem-solving, coding work, and multi-step reasoning. Be aware that extended thinking impacts [prompt caching efficiency](/docs/en/build-with-claude/prompt-caching#caching-with-thinking-blocks). See the [migration guide](/docs/en/about-claude/models/migrating-to-claude-4#extended-thinking-recommendations) for configuration details.\n</Note>\n\n<Note>Available in Claude Sonnet 3.7, Sonnet 4, Sonnet 4.5, Haiku 4.5, Opus 4, Opus 4.1, and Opus 4.5.</Note>\n\n### Context awareness\n\nClaude Haiku 4.5 features **context awareness**, enabling the model to track its remaining context window throughout a conversation:\n\n- **Token budget tracking**: Claude receives real-time updates on remaining context capacity after each tool call\n- **Better task persistence**: The model can execute tasks more effectively by understanding available working space\n- **Multi-context-window workflows**: Improved handling of state transitions across extended sessions\n\nThis is the first Haiku model with native context awareness capabilities. For prompting guidance, see [Claude 4 best practices](/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices#context-awareness-and-multi-window-workflows).\n\n<Note>Available in Claude Sonnet 4, Sonnet 4.5, Haiku 4.5, Opus 4, Opus 4.1, and Opus 4.5.</Note>\n\n### Strong coding and tool use\n\nClaude Haiku 4.5 delivers robust coding capabilities expected from modern Claude models:\n\n- **Coding proficiency**: Strong performance across code generation, debugging, and refactoring tasks\n- **Full tool support**: Compatible with all Claude 4 tools including bash, code execution, text editor, web search, and computer use\n- **Enhanced computer use**: Optimized for autonomous desktop interaction and browser automation workflows\n- **Parallel tool execution**: Efficient coordination across multiple tools for complex workflows\n\nHaiku 4.5 is designed for use cases that demand both intelligence and efficiency:\n\n- **Real-time applications**: Fast response times for interactive user experiences\n- **High-volume processing**: Cost-effective intelligence for large-scale deployments\n- **Free tier implementations**: Premium model quality at accessible pricing\n- **Sub-agent architectures**: Fast, intelligent agents for multi-agent systems\n- **Computer use at scale**: Cost-effective autonomous desktop and browser automation\n\n### Programmatic tool calling (Beta)\n\n[Programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) allows Claude to write code that calls your tools programmatically within a code execution container, rather than requiring round trips through the model for each tool invocation. This significantly reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window.\n\nKey benefits:\n- **Reduced latency**: Eliminate model round-trips between tool calls\n- **Token efficiency**: Process and filter tool results programmatically before returning to Claude\n- **Complex workflows**: Support loops, conditional logic, and batch processing\n\n<Note>Available in Claude Opus 4.5 and Claude Sonnet 4.5. Requires [beta header](/docs/en/api/beta-headers): `advanced-tool-use-2025-11-20`</Note>\n\n### Tool search tool (Beta)\n\nThe [tool search tool](/docs/en/agents-and-tools/tool-use/tool-search-tool) enables Claude to work with hundreds or thousands of tools by dynamically discovering and loading them on-demand. Instead of loading all tool definitions into the context window upfront, Claude searches your tool catalog and loads only the tools it needs.\n\nTwo search variants are available:\n- **Regex** (`tool_search_tool_regex_20251119`): Claude constructs regex patterns to search tool names, descriptions, and arguments\n- **BM25** (`tool_search_tool_bm25_20251119`): Claude uses natural language queries to search for tools\n\nThis approach solves two critical challenges:\n- **Context efficiency**: Save 10-20K tokens by not loading all tool definitions upfront\n- **Tool selection accuracy**: Maintain high accuracy even with 100+ available tools\n\n<Note>Available in Claude Opus 4.5 and Claude Sonnet 4.5. Requires [beta header](/docs/en/api/beta-headers): `advanced-tool-use-2025-11-20`</Note>\n\n### Effort parameter (Beta)\n\nThe [effort parameter](/docs/en/build-with-claude/effort) allows you to control how many tokens Claude uses when responding, trading off between response thoroughness and token efficiency:\n\nThe effort parameter affects all tokens in the response, including text responses, tool calls, and extended thinking. Lower effort levels produce more concise responses with minimal explanations, while higher effort provides detailed reasoning and comprehensive answers.\n\n<Note>Available exclusively in Claude Opus 4.5. Requires [beta header](/docs/en/api/beta-headers): `effort-2025-11-24`</Note>\n\n### Tool use examples (Beta)\n\n[Tool use examples](/docs/en/agents-and-tools/tool-use/implement-tool-use#providing-tool-use-examples) allow you to provide concrete examples of valid tool inputs to help Claude understand how to use your tools more effectively. This is particularly useful for complex tools with nested objects, optional parameters, or format-sensitive inputs.\n\nExamples are included in the prompt alongside your tool schema, showing Claude concrete patterns for well-formed tool calls. Each example must be valid according to the tool's `input_schema`.\n\n<Note>Available in Claude Sonnet 4.5, Haiku 4.5, Opus 4.5, Opus 4.1, and Opus 4. Requires [beta header](/docs/en/api/beta-headers): `advanced-tool-use-2025-11-20`.</Note>\n\n### Memory tool (Beta)\n\nThe new [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool) enables Claude to store and retrieve information outside the context window:\n\nThis allows for:\n- Building knowledge bases over time\n- Maintaining project state across sessions\n- Preserving effectively unlimited context through file-based storage\n\n<Note>Available in Claude Sonnet 4, Sonnet 4.5, Haiku 4.5, Opus 4, Opus 4.1, and Opus 4.5. Requires [beta header](/docs/en/api/beta-headers): `context-management-2025-06-27`</Note>\n\nUse [context editing](/docs/en/build-with-claude/context-editing) for intelligent context management through automatic tool call clearing:\n\nThis feature automatically removes older tool calls and results when approaching token limits, helping manage context in long-running agent sessions.\n\n<Note>Available in Claude Sonnet 4, Sonnet 4.5, Haiku 4.5, Opus 4, Opus 4.1, and Opus 4.5. Requires [beta header](/docs/en/api/beta-headers): `context-management-2025-06-27`</Note>\n\n### Enhanced stop reasons\n\nClaude 4.5 models introduce a new `model_context_window_exceeded` stop reason that explicitly indicates when generation stopped due to hitting the context window limit, rather than the requested `max_tokens` limit. This makes it easier to handle context window limits in your application logic.\n\n### Improved tool parameter handling\n\nClaude 4.5 models include a bug fix that preserves intentional formatting in tool call string parameters. Previously, trailing newlines in string parameters were sometimes incorrectly stripped. This fix ensures that tools requiring precise formatting (like text editors) receive parameters exactly as intended.\n\n<Note>\nThis is a behind-the-scenes improvement with no API changes required. However, tools with string parameters may now receive values with trailing newlines that were previously stripped.\n</Note>\n\n### Token count optimizations\n\nClaude 4.5 models include automatic optimizations to improve model performance. These optimizations may add small amounts of tokens to requests, but **you are not billed for these system-added tokens**.\n\n## Features introduced in Claude 4\n\nThe following features were introduced in Claude 4 and are available across Claude 4 models, including Claude Sonnet 4.5 and Claude Haiku 4.5.\n\n### New refusal stop reason\n\nClaude 4 models introduce a new `refusal` stop reason for content that the model declines to generate for safety reasons:\n\nWhen using Claude 4 models, you should update your application to [handle `refusal` stop reasons](/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals).\n\n### Summarized thinking\n\nWith extended thinking enabled, the Messages API for Claude 4 models returns a summary of Claude's full thinking process. Summarized thinking provides the full intelligence benefits of extended thinking, while preventing misuse.\n\nWhile the API is consistent across Claude 3.7 and 4 models, streaming responses for extended thinking might return in a \"chunky\" delivery pattern, with possible delays between streaming events.\n\n<Note>\nSummarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.\n</Note>\n\nFor more information, see the [Extended thinking documentation](/docs/en/build-with-claude/extended-thinking#summarized-thinking).\n\n### Interleaved thinking\n\nClaude 4 models support interleaving tool use with extended thinking, allowing for more natural conversations where tool uses and responses can be mixed with regular messages.\n\n<Note>\nInterleaved thinking is in beta. To enable interleaved thinking, add [the beta header](/docs/en/api/beta-headers) `interleaved-thinking-2025-05-14` to your API request.\n</Note>\n\nFor more information, see the [Extended thinking documentation](/docs/en/build-with-claude/extended-thinking#interleaved-thinking).\n\n### Behavioral differences\n\nClaude 4 models have notable behavioral changes that may affect how you structure prompts:\n\n#### Communication style changes\n\n- **More concise and direct**: Claude 4 models communicate more efficiently, with less verbose explanations\n- **More natural tone**: Responses are slightly more conversational and less machine-like\n- **Efficiency-focused**: May skip detailed summaries after completing actions to maintain workflow momentum (you can prompt for more detail if needed)\n\n#### Instruction following\n\nClaude 4 models are trained for precise instruction following and require more explicit direction:\n\n- **Be explicit about actions**: Use direct language like \"Make these changes\" or \"Implement this feature\" rather than \"Can you suggest changes\" if you want Claude to take action\n- **State desired behaviors clearly**: Claude will follow instructions precisely, so being specific about what you want helps achieve better results\n\nFor comprehensive guidance on working with these models, see [Claude 4 prompt engineering best practices](/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices).\n\n### Updated text editor tool\n\nThe text editor tool has been updated for Claude 4 models with the following changes:\n\n- **Tool type**: `text_editor_20250728`\n- **Tool name**: `str_replace_based_edit_tool`\n- The `undo_edit` command is no longer supported\n\n<Note>\nThe `str_replace_editor` text editor tool remains the same for Claude Sonnet 3.7.\n</Note>\n\nIf you're migrating from Claude Sonnet 3.7 and using the text editor tool:",
+  "code_samples": [
+    {
+      "code": "tools=[\n    {\n        \"type\": \"code_execution_20250825\",\n        \"name\": \"code_execution\"\n    },\n    {\n        \"name\": \"query_database\",\n        \"description\": \"Execute a SQL query against the sales database. Returns a list of rows as JSON objects.\",\n        \"input_schema\": {...},\n        \"allowed_callers\": [\"code_execution_20250825\"]  # Enable programmatic calling\n    }\n]",
+      "language": "python"
+    },
+    {
+      "code": "tools=[\n    {\n        \"type\": \"tool_search_tool_regex_20251119\",\n        \"name\": \"tool_search_tool_regex\"\n    },\n    {\n        \"name\": \"get_weather\",\n        \"description\": \"Get the weather at a specific location\",\n        \"input_schema\": {...},\n        \"defer_loading\": True  # Load on-demand via search\n    }\n]",
+      "language": "python"
+    },
+    {
+      "code": "response = client.beta.messages.create(\n    model=\"claude-opus-4-5-20251101\",\n    betas=[\"effort-2025-11-24\"],\n    max_tokens=4096,\n    messages=[{\"role\": \"user\", \"content\": \"...\"}],\n    output_config={\n        \"effort\": \"medium\"  # \"low\", \"medium\", or \"high\"\n    }\n)",
+      "language": "python"
+    },
+    {
+      "code": "tools=[\n    {\n        \"name\": \"get_weather\",\n        \"description\": \"Get the current weather in a given location\",\n        \"input_schema\": {...},\n        \"input_examples\": [\n            {\n                \"location\": \"San Francisco, CA\",\n                \"unit\": \"fahrenheit\"\n            },\n            {\n                \"location\": \"Tokyo, Japan\",\n                \"unit\": \"celsius\"\n            },\n            {\n                \"location\": \"New York, NY\"  # Demonstrates optional 'unit' parameter\n            }\n        ]\n    }\n]",
+      "language": "python"
+    },
+    {
+      "code": "tools=[\n    {\n        \"type\": \"memory_20250818\",\n        \"name\": \"memory\"\n    }\n]",
+      "language": "python"
+    },
+    {
+      "code": "response = client.beta.messages.create(\n    betas=[\"context-management-2025-06-27\"],\n    model=\"claude-sonnet-4-5\",  # or claude-haiku-4-5\n    max_tokens=4096,\n    messages=[{\"role\": \"user\", \"content\": \"...\"}],\n    context_management={\n        \"edits\": [\n            {\n                \"type\": \"clear_tool_uses_20250919\",\n                \"trigger\": {\"type\": \"input_tokens\", \"value\": 500},\n                \"keep\": {\"type\": \"tool_uses\", \"value\": 2},\n                \"clear_at_least\": {\"type\": \"input_tokens\", \"value\": 100}\n            }\n        ]\n    },\n    tools=[...]\n)",
+      "language": "python"
+    },
+    {
+      "code": "{\n  \"stop_reason\": \"model_context_window_exceeded\",\n  \"usage\": {\n    \"input_tokens\": 150000,\n    \"output_tokens\": 49950\n  }\n}",
+      "language": "json"
+    },
+    {
+      "code": "// Before: Final newline accidentally stripped\n{\n  \"type\": \"tool_use\",\n  \"id\": \"toolu_01A09q90qw90lq917835lq9\",\n  \"name\": \"edit_todo\",\n  \"input\": {\n    \"file\": \"todo.txt\",\n    \"contents\": \"1. Chop onions.\\n2. ???\\n3. Profit\"\n  }\n}\n\n// After: Trailing newline preserved as intended\n{\n  \"type\": \"tool_use\",\n  \"id\": \"toolu_01A09q90qw90lq917835lq9\",\n  \"name\": \"edit_todo\",\n  \"input\": {\n    \"file\": \"todo.txt\",\n    \"contents\": \"1. Chop onions.\\n2. ???\\n3. Profit\\n\"\n  }\n}",
+      "language": "json"
+    },
+    {
+      "code": "{\n  \"id\": \"msg_014XEDjypDjFzgKVWdFUXxZP\",\n  \"type\": \"message\",\n  \"role\": \"assistant\",\n  \"model\": \"claude-sonnet-4-5\",\n  \"content\": [{\"type\": \"text\", \"text\": \"I would be happy to assist you. You can \"}],\n  \"stop_reason\": \"refusal\",\n  \"stop_sequence\": null,\n  \"usage\": {\n    \"input_tokens\": 564,\n    \"cache_creation_input_tokens\": 0,\n    \"cache_read_input_tokens\": 0,\n    \"output_tokens\": 22\n  }\n}",
+      "language": "json"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Key improvements in Opus 4.5 over Opus 4.1",
+      "id": "key-improvements-in-opus-4.5-over-opus-4.1"
+    },
+    {
+      "level": "h3",
+      "text": "Maximum intelligence",
+      "id": "maximum-intelligence"
+    },
+    {
+      "level": "h3",
+      "text": "Effort parameter",
+      "id": "effort-parameter"
+    },
+    {
+      "level": "h3",
+      "text": "Computer use excellence",
+      "id": "computer-use-excellence"
+    },
+    {
+      "level": "h3",
+      "text": "Practical performance",
+      "id": "practical-performance"
+    },
+    {
+      "level": "h3",
+      "text": "Thinking block preservation",
+      "id": "thinking-block-preservation"
+    },
+    {
+      "level": "h2",
+      "text": "Key improvements in Sonnet 4.5 over Sonnet 4",
+      "id": "key-improvements-in-sonnet-4.5-over-sonnet-4"
+    },
+    {
+      "level": "h3",
+      "text": "Coding excellence",
+      "id": "coding-excellence"
+    },
+    {
+      "level": "h3",
+      "text": "Agent capabilities",
+      "id": "agent-capabilities"
+    },
+    {
+      "level": "h3",
+      "text": "Communication and interaction style",
+      "id": "communication-and-interaction-style"
+    },
+    {
+      "level": "h3",
+      "text": "Creative content generation",
+      "id": "creative-content-generation"
+    },
+    {
+      "level": "h2",
+      "text": "Key improvements in Haiku 4.5 over Haiku 3.5",
+      "id": "key-improvements-in-haiku-4.5-over-haiku-3.5"
+    },
+    {
+      "level": "h3",
+      "text": "Near-frontier intelligence with blazing speed",
+      "id": "near-frontier-intelligence-with-blazing-speed"
+    },
+    {
+      "level": "h3",
+      "text": "Extended thinking capabilities",
+      "id": "extended-thinking-capabilities"
+    },
+    {
+      "level": "h3",
+      "text": "Context awareness",
+      "id": "context-awareness"
+    },
+    {
+      "level": "h3",
+      "text": "Strong coding and tool use",
+      "id": "strong-coding-and-tool-use"
+    },
+    {
+      "level": "h2",
+      "text": "New API features",
+      "id": "new-api-features"
+    },
+    {
+      "level": "h3",
+      "text": "Programmatic tool calling (Beta)",
+      "id": "programmatic-tool-calling-(beta)"
+    },
+    {
+      "level": "h3",
+      "text": "Tool search tool (Beta)",
+      "id": "tool-search-tool-(beta)"
+    },
+    {
+      "level": "h3",
+      "text": "Effort parameter (Beta)",
+      "id": "effort-parameter-(beta)"
+    },
+    {
+      "level": "h3",
+      "text": "Tool use examples (Beta)",
+      "id": "tool-use-examples-(beta)"
+    },
+    {
+      "level": "h3",
+      "text": "Memory tool (Beta)",
+      "id": "memory-tool-(beta)"
+    },
+    {
+      "level": "h3",
+      "text": "Context editing",
+      "id": "context-editing"
+    },
+    {
+      "level": "h3",
+      "text": "Enhanced stop reasons",
+      "id": "enhanced-stop-reasons"
+    },
+    {
+      "level": "h3",
+      "text": "Improved tool parameter handling",
+      "id": "improved-tool-parameter-handling"
+    },
+    {
+      "level": "h3",
+      "text": "Token count optimizations",
+      "id": "token-count-optimizations"
+    },
+    {
+      "level": "h2",
+      "text": "Features introduced in Claude 4",
+      "id": "features-introduced-in-claude-4"
+    },
+    {
+      "level": "h3",
+      "text": "New refusal stop reason",
+      "id": "new-refusal-stop-reason"
+    },
+    {
+      "level": "h3",
+      "text": "Summarized thinking",
+      "id": "summarized-thinking"
+    },
+    {
+      "level": "h3",
+      "text": "Interleaved thinking",
+      "id": "interleaved-thinking"
+    },
+    {
+      "level": "h3",
+      "text": "Behavioral differences",
+      "id": "behavioral-differences"
+    },
+    {
+      "level": "h3",
+      "text": "Updated text editor tool",
+      "id": "updated-text-editor-tool"
+    }
+  ],
+  "url": "llms-txt#what's-new-in-claude-4.5",
+  "links": []
+}

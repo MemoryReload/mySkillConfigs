@@ -1,0 +1,19 @@
+{
+  "title": "Process each comment and print the results",
+  "content": "for comment in user_comments:\n    print(f\"\\nComment: {comment}\")\n    violation, violated_categories, explanation = moderate_message_with_definitions(comment, unsafe_category_definitions)\n    \n    if violation:\n        print(f\"Violated Categories: {', '.join(violated_categories)}\")\n        print(f\"Explanation: {explanation}\")\n    else:\n        print(\"No issues detected.\")\npython\nimport anthropic\nimport json",
+  "code_samples": [
+    {
+      "code": "The `moderate_message_with_definitions` function expands upon the earlier `moderate_message` function by allowing each unsafe category to be paired with a detailed definition. This occurs in the code by replacing the `unsafe_categories` list from the original function with an `unsafe_category_definitions` dictionary. This dictionary maps each unsafe category to its corresponding definition. Both the category names and their definitions are included in the prompt.\n\nNotably, the definition for the `Specialized Advice` category now specifies the types of financial advice that should be prohibited. As a result, the comment `It's a great time to invest in gold!`, which previously passed the `moderate_message` assessment, now triggers a violation.\n\n### Consider batch processing\n\nTo reduce costs in situations where real-time moderation isn't necessary, consider moderating messages in batches. Include multiple messages within the prompt's context, and ask Claude to assess which messages should be moderated.",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Consider batch processing",
+      "id": "consider-batch-processing"
+    }
+  ],
+  "url": "llms-txt#process-each-comment-and-print-the-results",
+  "links": []
+}

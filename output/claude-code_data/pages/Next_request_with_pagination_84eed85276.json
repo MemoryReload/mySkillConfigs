@@ -1,0 +1,59 @@
+{
+  "title": "Next request with pagination",
+  "content": "curl \"https://api.anthropic.com/v1/organizations/usage_report/messages?\\\nstarting_at=2025-01-01T00:00:00Z&\\\nending_at=2025-01-31T00:00:00Z&\\\nlimit=7&\\\npage=page_xyz...\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ADMIN_API_KEY\"\n```\n\nExplore detailed implementations in [Claude Cookbook](https://platform.claude.com/cookbooks):\n\n- **Daily usage reports**: Track token consumption trends\n- **Cost attribution**: Allocate expenses by workspace for chargebacks\n- **Cache efficiency**: Measure and optimize prompt caching\n- **Budget monitoring**: Set up alerts for spending thresholds\n- **CSV export**: Generate reports for finance teams\n\n## Frequently asked questions\n\n### How fresh is the data?\nUsage and cost data typically appears within 5 minutes of API request completion, though delays may occasionally be longer.\n\n### What's the recommended polling frequency?\nThe API supports polling once per minute for sustained use. For short bursts (e.g., downloading paginated data), more frequent polling is acceptable. Cache results for dashboards that need frequent updates.\n\n### How do I track code execution usage?\nCode execution costs appear in the cost endpoint grouped under `Code Execution Usage` in the description field. Code execution is not included in the usage endpoint.\n\n### How do I track Priority Tier usage?\nFilter or group by `service_tier` in the usage endpoint and look for the `priority` value. Priority Tier costs are not available in the cost endpoint.\n\n### What happens with Workbench usage?\nAPI usage from the Workbench is not associated with an API key, so `api_key_id` will be `null` even when grouping by that dimension.\n\n### How is the default workspace represented?\nUsage and costs attributed to the default workspace have a `null` value for `workspace_id`.\n\n### How do I get per-user cost breakdowns for Claude Code?\n\nUse the [Claude Code Analytics API](/docs/en/build-with-claude/claude-code-analytics-api), which provides per-user estimated costs and productivity metrics without the performance limitations of breaking down costs by many API keys. For general API usage with many keys, use the [Usage API](#usage-api) to track token consumption as a cost proxy.\n\n## See also\nThe Usage and Cost APIs can be used to help you deliver a better experience for your users, help you manage costs, and preserve your rate limit. Learn more about some of these other features:\n\n- [Admin API overview](/docs/en/build-with-claude/administration-api)\n- [Admin API reference](/docs/en/api/admin)\n- [Pricing](/docs/en/about-claude/pricing)\n- [Prompt caching](/docs/en/build-with-claude/prompt-caching) - Optimize costs with caching\n- [Batch processing](/docs/en/build-with-claude/batch-processing) - 50% discount on batch requests\n- [Rate limits](/docs/en/api/rate-limits) - Understand usage tiers",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Common use cases",
+      "id": "common-use-cases"
+    },
+    {
+      "level": "h2",
+      "text": "Frequently asked questions",
+      "id": "frequently-asked-questions"
+    },
+    {
+      "level": "h3",
+      "text": "How fresh is the data?",
+      "id": "how-fresh-is-the-data?"
+    },
+    {
+      "level": "h3",
+      "text": "What's the recommended polling frequency?",
+      "id": "what's-the-recommended-polling-frequency?"
+    },
+    {
+      "level": "h3",
+      "text": "How do I track code execution usage?",
+      "id": "how-do-i-track-code-execution-usage?"
+    },
+    {
+      "level": "h3",
+      "text": "How do I track Priority Tier usage?",
+      "id": "how-do-i-track-priority-tier-usage?"
+    },
+    {
+      "level": "h3",
+      "text": "What happens with Workbench usage?",
+      "id": "what-happens-with-workbench-usage?"
+    },
+    {
+      "level": "h3",
+      "text": "How is the default workspace represented?",
+      "id": "how-is-the-default-workspace-represented?"
+    },
+    {
+      "level": "h3",
+      "text": "How do I get per-user cost breakdowns for Claude Code?",
+      "id": "how-do-i-get-per-user-cost-breakdowns-for-claude-code?"
+    },
+    {
+      "level": "h2",
+      "text": "See also",
+      "id": "see-also"
+    }
+  ],
+  "url": "llms-txt#next-request-with-pagination",
+  "links": []
+}

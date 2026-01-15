@@ -1,0 +1,24 @@
+{
+  "title": "Remote MCP servers",
+  "content": "Several companies have deployed remote MCP servers that developers can connect to via the Anthropic MCP connector API. These servers expand the capabilities available to developers and end users by providing remote access to various services and tools through the MCP protocol.\n\n<Note>\n    The remote MCP servers listed below are third-party services designed to work with the Claude API. These servers\n    are not owned, operated, or endorsed by Anthropic. Users should only connect to remote MCP servers they trust and\n    should review each server's security practices and terms before connecting.\n</Note>\n\n## Connecting to remote MCP servers\n\nTo connect to a remote MCP server:\n\n1. Review the documentation for the specific server you want to use.\n2. Ensure you have the necessary authentication credentials.\n3. Follow the server-specific connection instructions provided by each company.\n\nFor more information about using remote MCP servers with the Claude API, see the [MCP connector docs](/docs/en/agents-and-tools/mcp-connector).\n\n## Remote MCP server examples\n\n<MCPServersTable platform=\"mcpConnector\" />\n\n<Note>\n**Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).\n</Note>\n\n### Claude on 3rd-party platforms",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Connecting to remote MCP servers",
+      "id": "connecting-to-remote-mcp-servers"
+    },
+    {
+      "level": "h2",
+      "text": "Remote MCP server examples",
+      "id": "remote-mcp-server-examples"
+    },
+    {
+      "level": "h3",
+      "text": "Claude on 3rd-party platforms",
+      "id": "claude-on-3rd-party-platforms"
+    }
+  ],
+  "url": "llms-txt#remote-mcp-servers",
+  "links": []
+}

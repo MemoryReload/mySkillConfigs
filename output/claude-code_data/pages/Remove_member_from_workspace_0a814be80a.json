@@ -1,0 +1,19 @@
+{
+  "title": "Remove member from workspace",
+  "content": "curl --request DELETE \"https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ANTHROPIC_ADMIN_KEY\"\nbash Shell",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n### API Keys\n\nMonitor and manage [API keys](/docs/en/api/admin-api/apikeys/get-api-key):\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "API Keys",
+      "id": "api-keys"
+    }
+  ],
+  "url": "llms-txt#remove-member-from-workspace",
+  "links": []
+}

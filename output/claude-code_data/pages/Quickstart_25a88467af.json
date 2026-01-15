@@ -1,0 +1,127 @@
+{
+  "title": "Quickstart",
+  "content": "Get started with the Python or TypeScript Agent SDK to build AI agents that work autonomously\n\nUse the Agent SDK to build an AI agent that reads your code, finds bugs, and fixes them, all without manual intervention.\n\n**What you'll do:**\n1. Set up a project with the Agent SDK\n2. Create a file with some buggy code\n3. Run an agent that finds and fixes the bugs automatically\n\n- **Node.js 18+** or **Python 3.10+**\n- An **Anthropic account** ([sign up here](https://platform.claude.com/))\n\n<Steps>\n  <Step title=\"Install Claude Code\">\n    The Agent SDK uses Claude Code as its runtime. Install it for your platform:\n\n<Tabs>\n      <Tab title=\"macOS/Linux/WSL\">\n        \n      </Tab>\n      <Tab title=\"Homebrew\">\n        \n      </Tab>\n      <Tab title=\"WinGet\">\n        \n      </Tab>\n    </Tabs>\n\nAfter installing Claude Code onto your machine, run `claude` in your terminal and follow the prompts to authenticate. The SDK will use this authentication automatically.\n\n<Tip>\n    For more information on Claude Code installation, see [Claude Code setup](https://code.claude.com/docs/en/setup).\n    </Tip>\n  </Step>\n\n<Step title=\"Create a project folder\">\n    Create a new directory for this quickstart:\n\nFor your own projects, you can run the SDK from any folder; it will have access to files in that directory and its subdirectories by default.\n  </Step>\n\n<Step title=\"Install the SDK\">\n    Install the Agent SDK package for your language:\n\n<Tabs>\n      <Tab title=\"TypeScript\">\n        \n      </Tab>\n      <Tab title=\"Python (uv)\">\n        [uv Python package manager](https://docs.astral.sh/uv/) is a fast Python package manager that handles virtual environments automatically:\n        \n      </Tab>\n      <Tab title=\"Python (pip)\">\n        Create a virtual environment first, then install:\n        \n      </Tab>\n    </Tabs>\n  </Step>\n\n<Step title=\"Set your API key\">\n    If you've already authenticated Claude Code (by running `claude` in your terminal), the SDK uses that authentication automatically.\n\nOtherwise, you need an API key, which you can get from the [Claude Console](https://platform.claude.com/).\n\nCreate a `.env` file in your project directory and store the API key there:\n\n<Note>\n    **Using Amazon Bedrock, Google Vertex AI, or Microsoft Azure?** See the setup guides for [Bedrock](https://code.claude.com/docs/en/amazon-bedrock), [Vertex AI](https://code.claude.com/docs/en/google-vertex-ai), or [Azure AI Foundry](https://code.claude.com/docs/en/azure-ai-foundry).\n\nUnless previously approved, Anthropic does not allow third party developers to offer claude.ai login or rate limits for their products, including agents built on the Claude Agent SDK. Please use the API key authentication methods described in this document instead.\n    </Note>\n  </Step>\n</Steps>\n\n## Create a buggy file\n\nThis quickstart walks you through building an agent that can find and fix bugs in code. First, you need a file with some intentional bugs for the agent to fix. Create `utils.py` in the `my-agent` directory and paste the following code:\n\nThis code has two bugs:\n1. `calculate_average([])` crashes with division by zero\n2. `get_user_name(None)` crashes with a TypeError\n\n## Build an agent that finds and fixes bugs\n\nCreate `agent.py` if you're using the Python SDK, or `agent.ts` for TypeScript:\n\nThis code has three main parts:\n\n1. **`query`**: the main entry point that creates the agentic loop. It returns an async iterator, so you use `async for` to stream messages as Claude works. See the full API in the [Python](/docs/en/agent-sdk/python#query) or [TypeScript](/docs/en/agent-sdk/typescript#query) SDK reference.\n\n2. **`prompt`**: what you want Claude to do. Claude figures out which tools to use based on the task.\n\n3. **`options`**: configuration for the agent. This example uses `allowedTools` to restrict Claude to `Read`, `Edit`, and `Glob`, and `permissionMode: \"acceptEdits\"` to auto-approve file changes. Other options include `systemPrompt`, `mcpServers`, and more. See all options for [Python](/docs/en/agent-sdk/python#claudeagentoptions) or [TypeScript](/docs/en/agent-sdk/typescript#claudeagentoptions).\n\nThe `async for` loop keeps running as Claude thinks, calls tools, observes results, and decides what to do next. Each iteration yields a message: Claude's reasoning, a tool call, a tool result, or the final outcome. The SDK handles the orchestration (tool execution, context management, retries) so you just consume the stream. The loop ends when Claude finishes the task or hits an error.\n\nThe message handling inside the loop filters for human-readable output. Without filtering, you'd see raw message objects including system initialization and internal state, which is useful for debugging but noisy otherwise.\n\n<Note>\nThis example uses streaming to show progress in real-time. If you don't need live output (e.g., for background jobs or CI pipelines), you can collect all messages at once. See [Streaming vs. single-turn mode](/docs/en/agent-sdk/streaming-vs-single-mode) for details.\n</Note>\n\nYour agent is ready. Run it with the following command:\n\n<Tabs>\n  <Tab title=\"Python\">\n    \n  </Tab>\n  <Tab title=\"TypeScript\">\n    \n  </Tab>\n</Tabs>\n\nAfter running, check `utils.py`. You'll see defensive code handling empty lists and null users. Your agent autonomously:\n\n1. **Read** `utils.py` to understand the code\n2. **Analyzed** the logic and identified edge cases that would crash\n3. **Edited** the file to add proper error handling\n\nThis is what makes the Agent SDK different: Claude executes tools directly instead of asking you to implement them.\n\n<Note>\nIf you see \"Claude Code not found\", [install Claude Code](#install-claude-code) and restart your terminal. For \"API key not found\", [set your API key](#set-your-api-key). See the [full troubleshooting guide](https://code.claude.com/docs/en/troubleshooting) for more help.\n</Note>\n\n### Try other prompts\n\nNow that your agent is set up, try some different prompts:\n\n- `\"Add docstrings to all functions in utils.py\"`\n- `\"Add type hints to all functions in utils.py\"`\n- `\"Create a README.md documenting the functions in utils.py\"`\n\n### Customize your agent\n\nYou can modify your agent's behavior by changing the options. Here are a few examples:\n\n**Add web search capability:**\n\n**Give Claude a custom system prompt:**\n\n**Run commands in the terminal:**\n\nWith `Bash` enabled, try: `\"Write unit tests for utils.py, run them, and fix any failures\"`\n\n**Tools** control what your agent can do:\n\n| Tools | What the agent can do |\n|-------|----------------------|\n| `Read`, `Glob`, `Grep` | Read-only analysis |\n| `Read`, `Edit`, `Glob` | Analyze and modify code |\n| `Read`, `Edit`, `Bash`, `Glob`, `Grep` | Full automation |\n\n**Permission modes** control how much human oversight you want:\n\n| Mode | Behavior | Use case |\n|------|----------|----------|\n| `acceptEdits` | Auto-approves file edits, asks for other actions | Trusted development workflows |\n| `bypassPermissions` | Runs without prompts | CI/CD pipelines, automation |\n| `default` | Requires a `canUseTool` callback to handle approval | Custom approval flows |\n\nThe example above uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](/docs/en/agent-sdk/user-input) that collects user input. For more control, see [Permissions](/docs/en/agent-sdk/permissions).\n\nNow that you've created your first agent, learn how to extend its capabilities and tailor it to your use case:\n\n- **[Permissions](/docs/en/agent-sdk/permissions)**: control what your agent can do and when it needs approval\n- **[Hooks](/docs/en/agent-sdk/hooks)**: run custom code before or after tool calls\n- **[Sessions](/docs/en/agent-sdk/sessions)**: build multi-turn agents that maintain context\n- **[MCP servers](/docs/en/agent-sdk/mcp)**: connect to databases, browsers, APIs, and other external systems\n- **[Hosting](/docs/en/agent-sdk/hosting)**: deploy agents to Docker, cloud, and CI/CD\n- **[Example agents](https://github.com/anthropics/claude-agent-sdk-demos)**: see complete examples: email assistant, research agent, and more",
+  "code_samples": [
+    {
+      "code": "curl -fsSL https://claude.ai/install.sh | bash",
+      "language": "bash"
+    },
+    {
+      "code": "brew install --cask claude-code",
+      "language": "bash"
+    },
+    {
+      "code": "winget install Anthropic.ClaudeCode",
+      "language": "powershell"
+    },
+    {
+      "code": "mkdir my-agent && cd my-agent",
+      "language": "bash"
+    },
+    {
+      "code": "npm install @anthropic-ai/claude-agent-sdk",
+      "language": "bash"
+    },
+    {
+      "code": "uv init && uv add claude-agent-sdk",
+      "language": "bash"
+    },
+    {
+      "code": "python3 -m venv .venv && source .venv/bin/activate\n        pip3 install claude-agent-sdk",
+      "language": "bash"
+    },
+    {
+      "code": "ANTHROPIC_API_KEY=your-api-key",
+      "language": "bash"
+    },
+    {
+      "code": "def calculate_average(numbers):\n    total = 0\n    for num in numbers:\n        total += num\n    return total / len(numbers)\n\ndef get_user_name(user):\n    return user[\"name\"].upper()",
+      "language": "python"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nThis code has three main parts:\n\n1. **`query`**: the main entry point that creates the agentic loop. It returns an async iterator, so you use `async for` to stream messages as Claude works. See the full API in the [Python](/docs/en/agent-sdk/python#query) or [TypeScript](/docs/en/agent-sdk/typescript#query) SDK reference.\n\n2. **`prompt`**: what you want Claude to do. Claude figures out which tools to use based on the task.\n\n3. **`options`**: configuration for the agent. This example uses `allowedTools` to restrict Claude to `Read`, `Edit`, and `Glob`, and `permissionMode: \"acceptEdits\"` to auto-approve file changes. Other options include `systemPrompt`, `mcpServers`, and more. See all options for [Python](/docs/en/agent-sdk/python#claudeagentoptions) or [TypeScript](/docs/en/agent-sdk/typescript#claudeagentoptions).\n\nThe `async for` loop keeps running as Claude thinks, calls tools, observes results, and decides what to do next. Each iteration yields a message: Claude's reasoning, a tool call, a tool result, or the final outcome. The SDK handles the orchestration (tool execution, context management, retries) so you just consume the stream. The loop ends when Claude finishes the task or hits an error.\n\nThe message handling inside the loop filters for human-readable output. Without filtering, you'd see raw message objects including system initialization and internal state, which is useful for debugging but noisy otherwise.\n\n<Note>\nThis example uses streaming to show progress in real-time. If you don't need live output (e.g., for background jobs or CI pipelines), you can collect all messages at once. See [Streaming vs. single-turn mode](/docs/en/agent-sdk/streaming-vs-single-mode) for details.\n</Note>\n\n### Run your agent\n\nYour agent is ready. Run it with the following command:\n\n<Tabs>\n  <Tab title=\"Python\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n  <Tab title=\"TypeScript\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n</Tabs>\n\nAfter running, check `utils.py`. You'll see defensive code handling empty lists and null users. Your agent autonomously:\n\n1. **Read** `utils.py` to understand the code\n2. **Analyzed** the logic and identified edge cases that would crash\n3. **Edited** the file to add proper error handling\n\nThis is what makes the Agent SDK different: Claude executes tools directly instead of asking you to implement them.\n\n<Note>\nIf you see \"Claude Code not found\", [install Claude Code](#install-claude-code) and restart your terminal. For \"API key not found\", [set your API key](#set-your-api-key). See the [full troubleshooting guide](https://code.claude.com/docs/en/troubleshooting) for more help.\n</Note>\n\n### Try other prompts\n\nNow that your agent is set up, try some different prompts:\n\n- `\"Add docstrings to all functions in utils.py\"`\n- `\"Add type hints to all functions in utils.py\"`\n- `\"Create a README.md documenting the functions in utils.py\"`\n\n### Customize your agent\n\nYou can modify your agent's behavior by changing the options. Here are a few examples:\n\n**Add web search capability:**\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n**Give Claude a custom system prompt:**\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n**Run commands in the terminal:**\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Prerequisites",
+      "id": "prerequisites"
+    },
+    {
+      "level": "h2",
+      "text": "Setup",
+      "id": "setup"
+    },
+    {
+      "level": "h2",
+      "text": "Create a buggy file",
+      "id": "create-a-buggy-file"
+    },
+    {
+      "level": "h2",
+      "text": "Build an agent that finds and fixes bugs",
+      "id": "build-an-agent-that-finds-and-fixes-bugs"
+    },
+    {
+      "level": "h3",
+      "text": "Run your agent",
+      "id": "run-your-agent"
+    },
+    {
+      "level": "h3",
+      "text": "Try other prompts",
+      "id": "try-other-prompts"
+    },
+    {
+      "level": "h3",
+      "text": "Customize your agent",
+      "id": "customize-your-agent"
+    },
+    {
+      "level": "h2",
+      "text": "Key concepts",
+      "id": "key-concepts"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#quickstart",
+  "links": []
+}

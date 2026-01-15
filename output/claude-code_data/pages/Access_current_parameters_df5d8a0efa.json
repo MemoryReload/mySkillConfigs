@@ -1,0 +1,13 @@
+{
+  "title": "Access current parameters",
+  "content": "puts runner.params\nbash",
+  "code_samples": [
+    {
+      "code": "</Tab>\n</Tabs>\n\n#### Debugging tool execution\n\nWhen a tool throws an exception, the tool runner catches it and returns the error to Claude as a tool result with `is_error: true`. By default, only the exception message is included, not the full stack trace.\n\nTo view full stack traces and debug information, set the `ANTHROPIC_LOG` environment variable:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#access-current-parameters",
+  "links": []
+}

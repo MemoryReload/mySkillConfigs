@@ -1,0 +1,8 @@
+{
+  "title": "View info-level logs including tool errors",
+  "content": "export ANTHROPIC_LOG=info",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#view-info-level-logs-including-tool-errors",
+  "links": []
+}

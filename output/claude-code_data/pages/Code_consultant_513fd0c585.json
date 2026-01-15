@@ -1,0 +1,32 @@
+{
+  "title": "Code consultant",
+  "content": "Suggest improvements to optimize Python code performance.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n|        | Content                                                                                                                                                                                                                                                                                                                                                                                                                                                              |\n| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| System | Your task is to analyze the provided Python code snippet and suggest improvements to optimize its performance. Identify areas where the code can be made more efficient, faster, or less resource-intensive. Provide specific suggestions for optimization, along with explanations of how these changes can enhance the code's performance. The optimized code should maintain the same functionality as the original code while demonstrating improved efficiency. |\n| User   | def fibonacci(n): <br/> if n \\<= 0: <br/> return [] <br/> elif n \\== 1: <br/> return [0] <br/> elif n \\== 2: <br/> return [0, 1] <br/> else: <br/> fib = [0, 1] <br/> for i in range(2, n): <br/> fib.append(fib[i-1] + fib[i-2]) <br/> return fib                                                                                                                                                                                                                   |\n\nExplanation: Using a generator function with yield is more memory-efficient for generating the Fibonacci sequence. It avoids creating and storing the entire sequence in a list. Instead, it generates each number on-the-fly as needed.\n\n<Tabs>\n<Tab title=\"Python\">\n`\n</Tab>\n<Tab title=\"TypeScript\">\n\n</Tab>\n<Tab title=\"AWS Bedrock Python\">\n\n```python\nfrom anthropic import AnthropicBedrock",
+  "code_samples": [
+    {
+      "code": "Explanation: Using a generator function with yield is more memory-efficient for generating the Fibonacci sequence. It avoids creating and storing the entire sequence in a list. Instead, it generates each number on-the-fly as needed.\n\n---\n\n## API Request\n\n<Tabs>\n<Tab title=\"Python\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"TypeScript\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"AWS Bedrock Python\">",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Example Output",
+      "id": "example-output"
+    },
+    {
+      "level": "h2",
+      "text": "API Request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#code-consultant",
+  "links": []
+}

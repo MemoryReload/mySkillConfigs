@@ -1,0 +1,44 @@
+{
+  "title": "Use the tool runner",
+  "content": "runner = client.beta.messages.tool_runner(\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  tools: [GetWeather.new, CalculateSum.new],\n  messages: [\n    {role: \"user\", content: \"What's the weather like in Paris? Also, what's 15 + 27?\"}\n  ]\n)\n\nrunner.each_message do |message|\n  message.content.each do |block|\n    puts block.text if block.respond_to?(:text)\n  end\nend\npython\nrunner = client.beta.messages.tool_runner(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    tools=[get_weather, calculate_sum],\n    messages=[\n        {\"role\": \"user\", \"content\": \"What's the weather like in Paris? Also, what's 15 + 27?\"}\n    ]\n)\nfinal_message = runner.until_done()\nprint(final_message.content[0].text)\ntypescript\nconst runner = anthropic.beta.messages.toolRunner({\n  model: 'claude-sonnet-4-5',\n  max_tokens: 1024,\n  tools: [getWeatherTool],\n  messages: [{ role: 'user', content: \"What's the weather like in Paris?\" }]\n});\n\nconst finalMessage = await runner;\nconsole.log(finalMessage.content[0].text);\nruby\nrunner = client.beta.messages.tool_runner(\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  tools: [GetWeather.new, CalculateSum.new],\n  messages: [\n    {role: \"user\", content: \"What's the weather like in Paris? Also, what's 15 + 27?\"}\n  ]\n)\n\nall_messages = runner.run_until_finished\nall_messages.each { |msg| puts msg.content }\npython\nrunner = client.beta.messages.tool_runner(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    tools=[get_weather],\n    messages=[{\"role\": \"user\", \"content\": \"What's the weather in San Francisco?\"}]\n)\nfor message in runner:\n    # Optional: inspect the tool response (automatically appended by the runner)\n    tool_response = runner.generate_tool_call_response()\n    if tool_response:\n        print(f\"Tool result: {tool_response}\")\n\n# Customize the next request\n    runner.set_messages_params(lambda params: {\n        **params,\n        \"max_tokens\": 2048  # Increase tokens for next request\n    })\n\n# Or add additional messages\n    runner.append_messages(\n        {\"role\": \"user\", \"content\": \"Please be concise in your response.\"}\n    )\ntypescript\nconst runner = anthropic.beta.messages.toolRunner({\n  model: 'claude-sonnet-4-5',\n  max_tokens: 1024,\n  tools: [getWeatherTool],\n  messages: [{ role: 'user', content: \"What's the weather in San Francisco?\" }]\n});\n\nfor await (const message of runner) {\n  // Optional: inspect the tool result message (automatically appended by the runner)\n  const toolResultMessage = await runner.generateToolResponse();\n  if (toolResultMessage) {\n    console.log('Tool result:', toolResultMessage);\n  }\n\n// Customize the next request\n  runner.setMessagesParams(params => ({\n    ...params,\n    max_tokens: 2048  // Increase tokens for next request\n  }));\n\n// Or add additional messages\n  runner.pushMessages(\n    { role: 'user', content: 'Please be concise in your response.' }\n  );\n}\nruby\nrunner = client.beta.messages.tool_runner(\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  tools: [GetWeather.new],\n  messages: [{role: \"user\", content: \"What's the weather in San Francisco?\"}]\n)",
+  "code_samples": [
+    {
+      "code": "The `Anthropic::BaseTool` class uses the `doc` method for the tool description and `input_schema` to define the expected parameters. The SDK automatically converts this to the appropriate JSON schema format.\n\n</Tab>\n</Tabs>\n\nThe tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings will be converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, booleans, or other non-string primitives must also be converted to strings.\n\n### Iterating over the tool runner\n\nThe tool runner is an iterable that yields messages from Claude. This is often referred to as a \"tool call loop\". Each iteration, the runner checks if Claude requested a tool use. If so, it calls the tool and sends the result back to Claude automatically, then yields the next message from Claude to continue your loop.\n\nYou can end the loop at any iteration with a `break` statement. The runner will loop until Claude returns a message without a tool use.\n\nIf you don't need intermediate messages, you can get the final message directly:\n\n<Tabs>\n<Tab title=\"Python\">\n\nUse `runner.until_done()` to get the final message.",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"TypeScript\">\n\nSimply `await` the runner to get the final message.",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"Ruby\">\n\nUse `runner.run_until_finished` to get all messages.",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n</Tabs>\n\n### Advanced usage\n\nWithin the loop, you can fully customize the tool runner's next request to the Messages API. The runner automatically appends tool results to the message history, so you don't need to manually manage them. You can optionally inspect the tool result for logging or debugging, and modify the request parameters before the next API call.\n\n<Tabs>\n<Tab title=\"Python\">\n\nUse `generate_tool_call_response()` to optionally inspect the tool result (the runner appends it automatically). Use `set_messages_params()` and `append_messages()` to modify the request.",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"TypeScript\">\n\nUse `generateToolResponse()` to optionally inspect the tool result (the runner appends it automatically). Use `setMessagesParams()` and `pushMessages()` to modify the request.",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"Ruby\">\n\nUse `next_message` for step-by-step control. Use `feed_messages` to inject messages and `params` to access parameters.",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Iterating over the tool runner",
+      "id": "iterating-over-the-tool-runner"
+    },
+    {
+      "level": "h3",
+      "text": "Advanced usage",
+      "id": "advanced-usage"
+    }
+  ],
+  "url": "llms-txt#use-the-tool-runner",
+  "links": []
+}

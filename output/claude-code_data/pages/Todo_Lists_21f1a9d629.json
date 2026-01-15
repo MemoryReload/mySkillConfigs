@@ -1,0 +1,47 @@
+{
+  "title": "Todo Lists",
+  "content": "Track and display todos using the Claude Agent SDK for organized task management\n\nTodo tracking provides a structured way to manage tasks and display progress to users. The Claude Agent SDK includes built-in todo functionality that helps organize complex workflows and keep users informed about task progression.\n\nTodos follow a predictable lifecycle:\n1. **Created** as `pending` when tasks are identified\n2. **Activated** to `in_progress` when work begins\n3. **Completed** when the task finishes successfully\n4. **Removed** when all tasks in a group are completed\n\n### When Todos Are Used\n\nThe SDK automatically creates todos for:\n- **Complex multi-step tasks** requiring 3 or more distinct actions\n- **User-provided task lists** when multiple items are mentioned\n- **Non-trivial operations** that benefit from progress tracking\n- **Explicit requests** when users ask for todo organization\n\n### Monitoring Todo Changes\n\n### Real-time Progress Display\n\n```python Python\nfrom claude_agent_sdk import query, AssistantMessage, ToolUseBlock\nfrom typing import List, Dict\n\nclass TodoTracker:\n    def __init__(self):\n        self.todos: List[Dict] = []\n    \n    def display_progress(self):\n        if not self.todos:\n            return\n        \n        completed = len([t for t in self.todos if t[\"status\"] == \"completed\"])\n        in_progress = len([t for t in self.todos if t[\"status\"] == \"in_progress\"])\n        total = len(self.todos)\n        \n        print(f\"\\nProgress: {completed}/{total} completed\")\n        print(f\"Currently working on: {in_progress} task(s)\\n\")\n        \n        for i, todo in enumerate(self.todos):\n            icon = \"✅\" if todo[\"status\"] == \"completed\" else \\\n                  \"🔧\" if todo[\"status\"] == \"in_progress\" else \"❌\"\n            text = todo[\"activeForm\"] if todo[\"status\"] == \"in_progress\" else todo[\"content\"]\n            print(f\"{i + 1}. {icon} {text}\")\n    \n    async def track_query(self, prompt: str):\n        async for message in query(\n            prompt=prompt,\n            options={\"max_turns\": 20}\n        ):\n            if isinstance(message, AssistantMessage):\n                for block in message.content:\n                    if isinstance(block, ToolUseBlock) and block.name == \"TodoWrite\":\n                        self.todos = block.input[\"todos\"]\n                        self.display_progress()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Real-time Progress Display\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Todo Lifecycle",
+      "id": "todo-lifecycle"
+    },
+    {
+      "level": "h3",
+      "text": "When Todos Are Used",
+      "id": "when-todos-are-used"
+    },
+    {
+      "level": "h2",
+      "text": "Examples",
+      "id": "examples"
+    },
+    {
+      "level": "h3",
+      "text": "Monitoring Todo Changes",
+      "id": "monitoring-todo-changes"
+    },
+    {
+      "level": "h3",
+      "text": "Real-time Progress Display",
+      "id": "real-time-progress-display"
+    }
+  ],
+  "url": "llms-txt#todo-lists",
+  "links": []
+}

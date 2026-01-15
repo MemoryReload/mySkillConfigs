@@ -1,0 +1,19 @@
+{
+  "title": "Anthropic Developer Documentation - Full Content",
+  "content": "This file provides comprehensive documentation with full rendered content.\n\nClaude Developer Platform Console (Requires login)\n\nhttps://platform.claude.com\n\n## Available Languages on Website\n\nThe full documentation is available in the following languages on https://platform.claude.com/docs:\n\n- English (en) - 532 pages - ✓ Full content included below\n- German (Deutsch) (de) - 181 pages - Visit website for content\n- Spanish (Español) (es) - 181 pages - Visit website for content\n- French (Français) (fr) - 181 pages - Visit website for content\n- Italian (Italiano) (it) - 181 pages - Visit website for content\n- Japanese (日本語) (ja) - 181 pages - Visit website for content\n- Korean (한국어) (ko) - 181 pages - Visit website for content\n- Portuguese (Português) (pt-BR) - 181 pages - Visit website for content\n- Russian (Русский) (ru) - 181 pages - Visit website for content\n- Chinese Simplified (简体中文) (zh-CN) - 181 pages - Visit website for content\n- Chinese Traditional (繁體中文) (zh-TW) - 181 pages - Visit website for content\n- Indonesian (Bahasa Indonesia) (id) - 181 pages - Visit website for content",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Root URL",
+      "id": "root-url"
+    },
+    {
+      "level": "h2",
+      "text": "Available Languages on Website",
+      "id": "available-languages-on-website"
+    }
+  ],
+  "url": "llms-txt#anthropic-developer-documentation---full-content",
+  "links": []
+}

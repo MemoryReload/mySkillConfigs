@@ -1,0 +1,8 @@
+{
+  "title": "Fetch the content of the article",
+  "content": "book_url = \"https://www.gutenberg.org/cache/epub/1342/pg1342.txt\"\nbook_content = fetch_article_content(book_url)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#fetch-the-content-of-the-article",
+  "links": []
+}

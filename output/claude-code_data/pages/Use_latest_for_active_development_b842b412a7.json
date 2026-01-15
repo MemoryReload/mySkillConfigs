@@ -1,0 +1,19 @@
+{
+  "title": "Use latest for active development",
+  "content": "container={\n    \"skills\": [{\n        \"type\": \"custom\",\n        \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n        \"version\": \"latest\"  # Always get newest\n    }]\n}\npython Python",
+  "code_samples": [
+    {
+      "code": "### Prompt Caching Considerations\n\nWhen using prompt caching, note that changing the Skills list in your container will break the cache:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Prompt Caching Considerations",
+      "id": "prompt-caching-considerations"
+    }
+  ],
+  "url": "llms-txt#use-latest-for-active-development",
+  "links": []
+}

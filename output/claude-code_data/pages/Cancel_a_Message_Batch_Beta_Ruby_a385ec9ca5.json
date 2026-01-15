@@ -1,0 +1,34 @@
+{
+  "title": "Cancel a Message Batch (Beta) (Ruby)",
+  "content": "URL: https://platform.claude.com/docs/en/api/ruby/beta/messages/batches/cancel\n\n`beta.messages.batches.cancel(message_batch_id, **kwargs) -> BetaMessageBatch`\n\n**post** `/v1/messages/batches/{message_batch_id}/cancel`\n\nBatches may be canceled any time before processing ends. Once cancellation is initiated, the batch enters a `canceling` state, at which time the system may complete any in-progress, non-interruptible requests before finalizing cancellation.\n\nThe number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.\n\nLearn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)\n\n- `message_batch_id: String`\n\nID of the Message Batch.\n\n- `anthropic_beta: Array[AnthropicBeta]`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `:\"message-batches-2024-09-24\" | :\"prompt-caching-2024-07-31\" | :\"computer-use-2024-10-22\" | 16 more`\n\n- `:\"message-batches-2024-09-24\"`\n\n- `:\"prompt-caching-2024-07-31\"`\n\n- `:\"computer-use-2024-10-22\"`\n\n- `:\"computer-use-2025-01-24\"`\n\n- `:\"pdfs-2024-09-25\"`\n\n- `:\"token-counting-2024-11-01\"`\n\n- `:\"token-efficient-tools-2025-02-19\"`\n\n- `:\"output-128k-2025-02-19\"`\n\n- `:\"files-api-2025-04-14\"`\n\n- `:\"mcp-client-2025-04-04\"`\n\n- `:\"mcp-client-2025-11-20\"`\n\n- `:\"dev-full-thinking-2025-05-14\"`\n\n- `:\"interleaved-thinking-2025-05-14\"`\n\n- `:\"code-execution-2025-05-22\"`\n\n- `:\"extended-cache-ttl-2025-04-11\"`\n\n- `:\"context-1m-2025-08-07\"`\n\n- `:\"context-management-2025-06-27\"`\n\n- `:\"model-context-window-exceeded-2025-08-26\"`\n\n- `:\"skills-2025-10-02\"`\n\n- `class BetaMessageBatch`\n\nUnique object identifier.\n\nThe format and length of IDs may change over time.\n\n- `archived_at: Time`\n\nRFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.\n\n- `cancel_initiated_at: Time`\n\nRFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.\n\nRFC 3339 datetime string representing the time at which the Message Batch was created.\n\nRFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.\n\nProcessing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.\n\nRFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.\n\n- `processing_status: :in_progress | :canceling | :ended`\n\nProcessing status of the Message Batch.\n\n- `request_counts: BetaMessageBatchRequestCounts`\n\nTallies requests within the Message Batch, categorized by their status.\n\nRequests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.\n\n- `canceled: Integer`\n\nNumber of requests in the Message Batch that have been canceled.\n\nThis is zero until processing of the entire Message Batch has ended.\n\nNumber of requests in the Message Batch that encountered an error.\n\nThis is zero until processing of the entire Message Batch has ended.\n\nNumber of requests in the Message Batch that have expired.\n\nThis is zero until processing of the entire Message Batch has ended.\n\n- `processing: Integer`\n\nNumber of requests in the Message Batch that are processing.\n\n- `succeeded: Integer`\n\nNumber of requests in the Message Batch that have completed successfully.\n\nThis is zero until processing of the entire Message Batch has ended.\n\n- `results_url: String`\n\nURL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.\n\nResults in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.\n\n- `type: :message_batch`\n\nFor Message Batches, this is always `\"message_batch\"`.",
+  "code_samples": [
+    {
+      "code": "require \"anthropic\"\n\nanthropic = Anthropic::Client.new(api_key: \"my-anthropic-api-key\")\n\nbeta_message_batch = anthropic.beta.messages.batches.cancel(\"message_batch_id\")\n\nputs(beta_message_batch)",
+      "language": "ruby"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Cancel",
+      "id": "cancel"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#cancel-a-message-batch-(beta)-(ruby)",
+  "links": []
+}

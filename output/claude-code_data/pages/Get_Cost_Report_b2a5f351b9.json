@@ -1,0 +1,34 @@
+{
+  "title": "Get Cost Report",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/cost_report/retrieve\n\n**get** `/v1/organizations/cost_report`\n\n- `starting_at: string`\n\nTime buckets that start on or after this RFC 3339 timestamp will be returned.\n  Each time bucket will be snapped to the start of the minute/hour/day in UTC.\n\n- `bucket_width: optional \"1d\"`\n\nTime granularity of the response data.\n\n- `ending_at: optional string`\n\nTime buckets that end before this RFC 3339 timestamp will be returned.\n\n- `group_by: optional array of \"workspace_id\" or \"description\"`\n\nGroup by any subset of the available options.\n\n- `limit: optional number`\n\nMaximum number of time buckets to return in the response.\n\n- `page: optional string`\n\nOptionally set to the `next_page` token from the previous response.\n\n- `CostReport = object { data, has_more, next_page }`\n\n- `data: array of object { ending_at, results, starting_at }`\n\n- `ending_at: string`\n\nEnd of the time bucket (exclusive) in RFC 3339 format.\n\n- `results: array of object { amount, context_window, cost_type, 6 more }`\n\nList of cost items for this time bucket. There may be multiple items if one or more `group_by[]` parameters are specified.\n\nCost amount in lowest currency units (e.g. cents) as a decimal string. For example, `\"123.45\"` in `\"USD\"` represents `$1.23`.\n\n- `context_window: \"0-200k\" or \"200k-1M\"`\n\nInput context window used. Null if not grouping by description or for non-token costs.\n\n- `cost_type: \"tokens\" or \"web_search\" or \"code_execution\"`\n\nType of cost. Null if not grouping by description.\n\nCurrency code for the cost amount. Currently always `\"USD\"`.\n\n- `description: string`\n\nDescription of the cost item. Null if not grouping by description.\n\nModel name used. Null if not grouping by description or for non-token costs.\n\n- `service_tier: \"standard\" or \"batch\"`\n\nService tier used. Null if not grouping by description or for non-token costs.\n\n- `token_type: \"uncached_input_tokens\" or \"output_tokens\" or \"cache_read_input_tokens\" or 2 more`\n\nType of token. Null if not grouping by description or for non-token costs.\n\n- `\"uncached_input_tokens\"`\n\n- `\"cache_read_input_tokens\"`\n\n- `\"cache_creation.ephemeral_1h_input_tokens\"`\n\n- `\"cache_creation.ephemeral_5m_input_tokens\"`\n\n- `workspace_id: string`\n\nID of the Workspace this cost is associated with. Null if not grouping by workspace or for the default workspace.\n\n- `starting_at: string`\n\nStart of the time bucket (inclusive) in RFC 3339 format.\n\n- `has_more: boolean`\n\nIndicates if there are more results.\n\n- `next_page: string`\n\nToken to provide in as `page` in the subsequent request to retrieve the next page of data.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/cost_report \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Retrieve",
+      "id": "retrieve"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#get-cost-report",
+  "links": []
+}

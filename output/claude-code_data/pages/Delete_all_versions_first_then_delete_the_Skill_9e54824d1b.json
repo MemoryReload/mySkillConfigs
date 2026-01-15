@@ -1,0 +1,19 @@
+{
+  "title": "Delete all versions first, then delete the Skill",
+  "content": "curl -X DELETE \"https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: skills-2025-10-02\"\npython Python",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\nAttempting to delete a Skill with existing versions will return a 400 error.\n\n### Versioning\n\nSkills support versioning to manage updates safely:\n\n**Anthropic-Managed Skills**:\n- Versions use date format: `20251013`\n- New versions released as updates are made\n- Specify exact versions for stability\n\n**Custom Skills**:\n- Auto-generated epoch timestamps: `1759178010641129`\n- Use `\"latest\"` to always get the most recent version\n- Create new versions when updating Skill files\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Versioning",
+      "id": "versioning"
+    }
+  ],
+  "url": "llms-txt#delete-all-versions-first,-then-delete-the-skill",
+  "links": []
+}

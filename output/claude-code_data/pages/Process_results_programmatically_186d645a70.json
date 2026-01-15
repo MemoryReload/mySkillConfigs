@@ -1,0 +1,19 @@
+{
+  "title": "Process results programmatically",
+  "content": "top_region = max(results.items(), key=lambda x: x[1])\nprint(f\"Top region: {top_region[0]} with ${top_region[1]:,} in revenue\")\npython",
+  "code_samples": [
+    {
+      "code": "This pattern:\n- Reduces model round-trips from N (one per region) to 1\n- Processes large result sets programmatically before returning to Claude\n- Saves tokens by only returning aggregated conclusions instead of raw data\n\n### Early termination\n\nClaude can stop processing as soon as success criteria are met:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Early termination",
+      "id": "early-termination"
+    }
+  ],
+  "url": "llms-txt#process-results-programmatically",
+  "links": []
+}

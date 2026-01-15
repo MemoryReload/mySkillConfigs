@@ -1,0 +1,27 @@
+{
+  "title": "Option 3: Using file tuples (filename, file_content, mime_type)",
+  "content": "skill = client.beta.skills.create(\n    display_title=\"Financial Analysis\",\n    files=[\n        (\"financial_skill/SKILL.md\", open(\"financial_skill/SKILL.md\", \"rb\"), \"text/markdown\"),\n        (\"financial_skill/analyze.py\", open(\"financial_skill/analyze.py\", \"rb\"), \"text/x-python\"),\n    ],\n    betas=[\"skills-2025-10-02\"]\n)\n\nprint(f\"Created skill: {skill.id}\")\nprint(f\"Latest version: {skill.latest_version}\")\ntypescript TypeScript\nimport Anthropic, { toFile } from '@anthropic-ai/sdk';\nimport fs from 'fs';\n\nconst client = new Anthropic();\n\n// Option 1: Using a zip file\nconst skill = await client.beta.skills.create({\n  displayTitle: 'Financial Analysis',\n  files: [\n    await toFile(\n      fs.createReadStream('financial_analysis_skill.zip'),\n      'skill.zip'\n    )\n  ],\n  betas: ['skills-2025-10-02']\n});\n\n// Option 2: Using individual file objects\nconst skill = await client.beta.skills.create({\n  displayTitle: 'Financial Analysis',\n  files: [\n    await toFile(\n      fs.createReadStream('financial_skill/SKILL.md'),\n      'financial_skill/SKILL.md',\n      { type: 'text/markdown' }\n    ),\n    await toFile(\n      fs.createReadStream('financial_skill/analyze.py'),\n      'financial_skill/analyze.py',\n      { type: 'text/x-python' }\n    ),\n  ],\n  betas: ['skills-2025-10-02']\n});\n\nconsole.log(`Created skill: ${skill.id}`);\nconsole.log(`Latest version: ${skill.latest_version}`);\nbash Shell\ncurl -X POST \"https://api.anthropic.com/v1/skills\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: skills-2025-10-02\" \\\n  -F \"display_title=Financial Analysis\" \\\n  -F \"files[]=@financial_skill/SKILL.md;filename=financial_skill/SKILL.md\" \\\n  -F \"files[]=@financial_skill/analyze.py;filename=financial_skill/analyze.py\"\npython Python",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n**Requirements:**\n- Must include a SKILL.md file at the top level\n- All files must specify a common root directory in their paths\n- Total upload size must be under 8MB\n- YAML frontmatter requirements:\n  - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words (\"anthropic\", \"claude\")\n  - `description`: Maximum 1024 characters, non-empty, no XML tags\n\nFor complete request/response schemas, see the [Create Skill API reference](/docs/en/api/skills/create-skill).\n\n### Listing Skills\n\nRetrieve all Skills available to your workspace, including both Anthropic pre-built Skills and your custom Skills. Use the `source` parameter to filter by skill type:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Listing Skills",
+      "id": "listing-skills"
+    }
+  ],
+  "url": "llms-txt#option-3:-using-file-tuples-(filename,-file_content,-mime_type)",
+  "links": []
+}

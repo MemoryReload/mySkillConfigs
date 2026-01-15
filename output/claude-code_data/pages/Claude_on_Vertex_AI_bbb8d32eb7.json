@@ -1,0 +1,97 @@
+{
+  "title": "Claude on Vertex AI",
+  "content": "Anthropic's Claude models are now generally available through [Vertex AI](https://cloud.google.com/vertex-ai).\n\nThe Vertex API for accessing Claude is nearly-identical to the [Messages API](/docs/en/api/messages) and supports all of the same options, with two key differences:\n\n* In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.\n* In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.\n\nVertex is also supported by Anthropic's official [client SDKs](/docs/en/api/client-sdks). This guide will walk you through the process of making a request to Claude on Vertex AI in either Python or TypeScript.\n\nNote that this guide assumes you have already have a GCP project that is able to use Vertex AI. See [using the Claude 3 models from Anthropic](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for more information on the setup required, as well as a full walkthrough.\n\n## Install an SDK for accessing Vertex AI\n\nFirst, install Anthropic's [client SDK](/docs/en/api/client-sdks) for your language of choice.\n\n## Accessing Vertex AI\n\n### Model Availability\n\nNote that Anthropic model availability varies by region. Search for \"Claude\" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Use Claude 3](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.\n\n| Model                          | Vertex AI API model ID |\n| ------------------------------ | ------------------------ |\n| Claude Sonnet 4.5              | claude-sonnet-4-5@20250929 |\n| Claude Sonnet 4                | claude-sonnet-4@20250514 |\n| Claude Sonnet 3.7 <Tooltip tooltipContent=\"Deprecated as of October 28, 2025.\">⚠️</Tooltip> | claude-3-7-sonnet@20250219 |\n| Claude Opus 4.5                | claude-opus-4-5@20251101 |\n| Claude Opus 4.1                | claude-opus-4-1@20250805 |\n| Claude Opus 4                  | claude-opus-4@20250514   |\n| Claude Haiku 4.5               | claude-haiku-4-5@20251001 |\n| Claude Haiku 3.5 <Tooltip tooltipContent=\"Deprecated as of December 19, 2025.\">⚠️</Tooltip> | claude-3-5-haiku@20241022 |\n| Claude Haiku 3                 | claude-3-haiku@20240307  |\n\nBefore running requests you may need to run `gcloud auth application-default login` to authenticate with GCP.\n\nThe following examples shows how to generate text from Claude on Vertex AI:\n<CodeGroup>\n\nSee our [client SDKs](/docs/en/api/client-sdks) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.\n\nVertex provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage.\n\nAnthropic recommends that you log your activity on at least a 30-day rolling basis in order to understand your activity and investigate any potential misuse.\n\n<Note>\nTurning on this service does not give Google or Anthropic any access to your content.\n</Note>\n\n## Feature support\nYou can find all the features currently supported on Vertex [here](/docs/en/api/overview).\n\n## Global vs regional endpoints\n\nStarting with **Claude Sonnet 4.5 and all future models**, Google Vertex AI offers two endpoint types:\n\n- **Global endpoints**: Dynamic routing for maximum availability\n- **Regional endpoints**: Guaranteed data routing through specific geographic regions\n\nRegional endpoints include a 10% pricing premium over global endpoints.\n\n<Note>\nThis applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4, Opus 4, and earlier) maintain their existing pricing structures.\n</Note>\n\n### When to use each option\n\n**Global endpoints (recommended):**\n- Provide maximum availability and uptime\n- Dynamically route requests to regions with available capacity\n- No pricing premium\n- Best for applications where data residency is flexible\n- Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)\n\n**Regional endpoints:**\n- Route traffic through specific geographic regions\n- Required for data residency and compliance requirements\n- Support both pay-as-you-go and provisioned throughput\n- 10% pricing premium reflects infrastructure costs for dedicated regional capacity\n\n**Using global endpoints (recommended):**\n\nSet the `region` parameter to `\"global\"` when initializing the client:\n\n**Using regional endpoints:**\n\nSpecify a specific region like `\"us-east1\"` or `\"europe-west1\"`:\n\n### Additional resources\n\n- **Google Vertex AI pricing:** [cloud.google.com/vertex-ai/generative-ai/pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing)\n- **Claude models documentation:** [Claude on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude)\n- **Google blog post:** [Global endpoint for Claude models](https://cloud.google.com/blog/products/ai-machine-learning/global-endpoint-for-claude-models-generally-available-on-vertex-ai)\n- **Anthropic pricing details:** [Pricing documentation](/docs/en/about-claude/pricing#third-party-platform-pricing)\n\n### Prompt engineering",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Accessing Vertex AI\n\n### Model Availability\n\nNote that Anthropic model availability varies by region. Search for \"Claude\" in the [Vertex AI Model Garden](https://cloud.google.com/model-garden) or go to [Use Claude 3](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) for the latest information.\n\n#### API model IDs\n\n| Model                          | Vertex AI API model ID |\n| ------------------------------ | ------------------------ |\n| Claude Sonnet 4.5              | claude-sonnet-4-5@20250929 |\n| Claude Sonnet 4                | claude-sonnet-4@20250514 |\n| Claude Sonnet 3.7 <Tooltip tooltipContent=\"Deprecated as of October 28, 2025.\">⚠️</Tooltip> | claude-3-7-sonnet@20250219 |\n| Claude Opus 4.5                | claude-opus-4-5@20251101 |\n| Claude Opus 4.1                | claude-opus-4-1@20250805 |\n| Claude Opus 4                  | claude-opus-4@20250514   |\n| Claude Haiku 4.5               | claude-haiku-4-5@20251001 |\n| Claude Haiku 3.5 <Tooltip tooltipContent=\"Deprecated as of December 19, 2025.\">⚠️</Tooltip> | claude-3-5-haiku@20241022 |\n| Claude Haiku 3                 | claude-3-haiku@20240307  |\n\n### Making requests\n\nBefore running requests you may need to run `gcloud auth application-default login` to authenticate with GCP.\n\nThe following examples shows how to generate text from Claude on Vertex AI:\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nSee our [client SDKs](/docs/en/api/client-sdks) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.\n\n## Activity logging\n\nVertex provides a [request-response logging service](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) that allows customers to log the prompts and completions associated with your usage. \n\nAnthropic recommends that you log your activity on at least a 30-day rolling basis in order to understand your activity and investigate any potential misuse. \n\n<Note>\nTurning on this service does not give Google or Anthropic any access to your content.\n</Note>\n\n## Feature support\nYou can find all the features currently supported on Vertex [here](/docs/en/api/overview).\n\n## Global vs regional endpoints\n\nStarting with **Claude Sonnet 4.5 and all future models**, Google Vertex AI offers two endpoint types:\n\n- **Global endpoints**: Dynamic routing for maximum availability\n- **Regional endpoints**: Guaranteed data routing through specific geographic regions\n\nRegional endpoints include a 10% pricing premium over global endpoints.\n\n<Note>\nThis applies to Claude Sonnet 4.5 and future models only. Older models (Claude Sonnet 4, Opus 4, and earlier) maintain their existing pricing structures.\n</Note>\n\n### When to use each option\n\n**Global endpoints (recommended):**\n- Provide maximum availability and uptime\n- Dynamically route requests to regions with available capacity\n- No pricing premium\n- Best for applications where data residency is flexible\n- Only supports pay-as-you-go traffic (provisioned throughput requires regional endpoints)\n\n**Regional endpoints:**\n- Route traffic through specific geographic regions\n- Required for data residency and compliance requirements\n- Support both pay-as-you-go and provisioned throughput\n- 10% pricing premium reflects infrastructure costs for dedicated regional capacity\n\n### Implementation\n\n**Using global endpoints (recommended):**\n\nSet the `region` parameter to `\"global\"` when initializing the client:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n**Using regional endpoints:**\n\nSpecify a specific region like `\"us-east1\"` or `\"europe-west1\"`:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Install an SDK for accessing Vertex AI",
+      "id": "install-an-sdk-for-accessing-vertex-ai"
+    },
+    {
+      "level": "h2",
+      "text": "Accessing Vertex AI",
+      "id": "accessing-vertex-ai"
+    },
+    {
+      "level": "h3",
+      "text": "Model Availability",
+      "id": "model-availability"
+    },
+    {
+      "level": "h3",
+      "text": "Making requests",
+      "id": "making-requests"
+    },
+    {
+      "level": "h2",
+      "text": "Activity logging",
+      "id": "activity-logging"
+    },
+    {
+      "level": "h2",
+      "text": "Feature support",
+      "id": "feature-support"
+    },
+    {
+      "level": "h2",
+      "text": "Global vs regional endpoints",
+      "id": "global-vs-regional-endpoints"
+    },
+    {
+      "level": "h3",
+      "text": "When to use each option",
+      "id": "when-to-use-each-option"
+    },
+    {
+      "level": "h3",
+      "text": "Implementation",
+      "id": "implementation"
+    },
+    {
+      "level": "h3",
+      "text": "Additional resources",
+      "id": "additional-resources"
+    },
+    {
+      "level": "h3",
+      "text": "Prompt engineering",
+      "id": "prompt-engineering"
+    }
+  ],
+  "url": "llms-txt#claude-on-vertex-ai",
+  "links": []
+}

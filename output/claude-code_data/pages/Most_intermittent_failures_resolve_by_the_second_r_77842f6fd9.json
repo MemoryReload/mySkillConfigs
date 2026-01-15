@@ -1,0 +1,36 @@
+{
+  "title": "Most intermittent failures resolve by the second retry",
+  "content": "MAX_RETRIES = 3\npython\nTIMEOUT = 47  # Why 47?\nRETRIES = 5   # Why 5?\n`markdown\n## Utility scripts\n\n**analyze_form.py**: Extract all form fields from PDF\n\n**validate_boxes.py**: Check for overlapping bounding boxes\n\n```bash\npython scripts/validate_boxes.py fields.json",
+  "code_samples": [
+    {
+      "code": "**Bad example: Magic numbers**:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Provide utility scripts\n\nEven if Claude could write a script, pre-made scripts offer advantages:\n\n**Benefits of utility scripts**:\n- More reliable than generated code\n- Save tokens (no need to include code in context)\n- Save time (no code generation required)\n- Ensure consistency across uses\n\n![Bundling executable scripts alongside instruction files](/docs/images/agent-skills-executable-scripts.png)\n\nThe diagram above shows how executable scripts work alongside instruction files. The instruction file (forms.md) references the script, and Claude can execute it without loading its contents into context.\n\n**Important distinction**: Make clear in your instructions whether Claude should:\n- **Execute the script** (most common): \"Run `analyze_form.py` to extract fields\"\n- **Read it as reference** (for complex logic): \"See `analyze_form.py` for the field extraction algorithm\"\n\nFor most utility scripts, execution is preferred because it's more reliable and efficient. See the [Runtime environment](#runtime-environment) section below for details on how script execution works.\n\n**Example**:",
+      "language": "unknown"
+    },
+    {
+      "code": "python scripts/analyze_form.py input.pdf > fields.json",
+      "language": "bash"
+    },
+    {
+      "code": "{\n  \"field_name\": {\"type\": \"text\", \"x\": 100, \"y\": 200},\n  \"signature\": {\"type\": \"sig\", \"x\": 150, \"y\": 500}\n}",
+      "language": "json"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Provide utility scripts",
+      "id": "provide-utility-scripts"
+    },
+    {
+      "level": "h2",
+      "text": "Utility scripts",
+      "id": "utility-scripts"
+    }
+  ],
+  "url": "llms-txt#most-intermittent-failures-resolve-by-the-second-retry",
+  "links": []
+}

@@ -1,0 +1,34 @@
+{
+  "title": "Create Skill Version (Beta) (Java)",
+  "content": "URL: https://platform.claude.com/docs/en/api/java/beta/skills/versions/create\n\n`VersionCreateResponse beta().skills().versions().create(VersionCreateParamsparams = VersionCreateParams.none(), RequestOptionsrequestOptions = RequestOptions.none())`\n\n**post** `/v1/skills/{skill_id}/versions`\n\n- `VersionCreateParams params`\n\n- `Optional<String> skillId`\n\nUnique identifier for the skill.\n\nThe format and length of IDs may change over time.\n\n- `Optional<List<AnthropicBeta>> betas`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `MESSAGE_BATCHES_2024_09_24(\"message-batches-2024-09-24\")`\n\n- `PROMPT_CACHING_2024_07_31(\"prompt-caching-2024-07-31\")`\n\n- `COMPUTER_USE_2024_10_22(\"computer-use-2024-10-22\")`\n\n- `COMPUTER_USE_2025_01_24(\"computer-use-2025-01-24\")`\n\n- `PDFS_2024_09_25(\"pdfs-2024-09-25\")`\n\n- `TOKEN_COUNTING_2024_11_01(\"token-counting-2024-11-01\")`\n\n- `TOKEN_EFFICIENT_TOOLS_2025_02_19(\"token-efficient-tools-2025-02-19\")`\n\n- `OUTPUT_128K_2025_02_19(\"output-128k-2025-02-19\")`\n\n- `FILES_API_2025_04_14(\"files-api-2025-04-14\")`\n\n- `MCP_CLIENT_2025_04_04(\"mcp-client-2025-04-04\")`\n\n- `MCP_CLIENT_2025_11_20(\"mcp-client-2025-11-20\")`\n\n- `DEV_FULL_THINKING_2025_05_14(\"dev-full-thinking-2025-05-14\")`\n\n- `INTERLEAVED_THINKING_2025_05_14(\"interleaved-thinking-2025-05-14\")`\n\n- `CODE_EXECUTION_2025_05_22(\"code-execution-2025-05-22\")`\n\n- `EXTENDED_CACHE_TTL_2025_04_11(\"extended-cache-ttl-2025-04-11\")`\n\n- `CONTEXT_1M_2025_08_07(\"context-1m-2025-08-07\")`\n\n- `CONTEXT_MANAGEMENT_2025_06_27(\"context-management-2025-06-27\")`\n\n- `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26(\"model-context-window-exceeded-2025-08-26\")`\n\n- `SKILLS_2025_10_02(\"skills-2025-10-02\")`\n\n- `Optional<List<String>> files`\n\nFiles to upload for the skill.\n\nAll files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.\n\n- `class VersionCreateResponse:`\n\nUnique identifier for the skill version.\n\nThe format and length of IDs may change over time.\n\nISO 8601 timestamp of when the skill version was created.\n\n- `String description`\n\nDescription of the skill version.\n\nThis is extracted from the SKILL.md file in the skill upload.\n\nDirectory name of the skill version.\n\nThis is the top-level directory name that was extracted from the uploaded files.\n\nHuman-readable name of the skill version.\n\nThis is extracted from the SKILL.md file in the skill upload.\n\nIdentifier for the skill that this version belongs to.\n\nFor Skill Versions, this is always `\"skill_version\"`.\n\nVersion identifier for the skill.\n\nEach version is identified by a Unix epoch timestamp (e.g., \"1759178010641129\").",
+  "code_samples": [
+    {
+      "code": "package com.anthropic.example;\n\nimport com.anthropic.client.AnthropicClient;\nimport com.anthropic.client.okhttp.AnthropicOkHttpClient;\nimport com.anthropic.models.beta.skills.versions.VersionCreateParams;\nimport com.anthropic.models.beta.skills.versions.VersionCreateResponse;\n\npublic final class Main {\n    private Main() {}\n\n    public static void main(String[] args) {\n        AnthropicClient client = AnthropicOkHttpClient.fromEnv();\n\n        VersionCreateResponse version = client.beta().skills().versions().create(\"skill_id\");\n    }\n}",
+      "language": "java"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Create",
+      "id": "create"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#create-skill-version-(beta)-(java)",
+  "links": []
+}

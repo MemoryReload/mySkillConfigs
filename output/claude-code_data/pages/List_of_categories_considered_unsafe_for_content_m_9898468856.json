@@ -1,0 +1,29 @@
+{
+  "title": "List of categories considered unsafe for content moderation",
+  "content": "unsafe_categories = [\n    'Child Exploitation',\n    'Conspiracy Theories',\n    'Hate',\n    'Indiscriminate Weapons', \n    'Intellectual Property',\n    'Non-Violent Crimes', \n    'Privacy',\n    'Self-Harm',\n    'Sex Crimes',\n    'Sexual Content',\n    'Specialized Advice',\n    'Violent Crimes'\n]\npython\nimport anthropic\nimport json",
+  "code_samples": [
+    {
+      "code": "Effectively moderating these examples requires a nuanced understanding of language. In the comment, `This movie was great, I really enjoyed it. The main actor really killed it!`, the content moderation system needs to recognize that \"killed it\" is a metaphor, not an indication of actual violence. Conversely, despite the lack of explicit mentions of violence, the comment `Delete this post now or you better hide. I am coming after you and your family.` should be flagged by the content moderation system.\n\nThe `unsafe_categories` list can be customized to fit your specific needs. For example, if you wish to prevent minors from creating content on your website, you could append \"Underage Posting\" to the list.\n\n___\n\n## How to moderate content using Claude\n\n### Select the right Claude model\nWhen selecting a model, it’s important to consider the size of your data. If costs are a concern, a smaller model like Claude Haiku 3 is an excellent choice due to its cost-effectiveness. Below is an estimate of the cost to moderate text for a social media platform that receives one billion posts per month:\n\n* **Content size**\n    * Posts per month: 1bn\n    * Characters per post: 100\n    * Total characters: 100bn\n\n* **Estimated tokens**\n    * Input tokens: 28.6bn (assuming 1 token per 3.5 characters)\n    * Percentage of messages flagged: 3%\n    * Output tokens per flagged message: 50\n    * Total output tokens: 1.5bn\n\n* **Claude Haiku 3 estimated cost**\n    * Input token cost: 2,860 MTok * \\$0.25/MTok = \\$715\n    * Output token cost: 1,500 MTok * \\$1.25/MTok = \\$1,875\n    * Monthly cost: \\$715 + \\$1,875 = \\$2,590\n\n* **Claude Sonnet 4.5 estimated cost**\n    * Input token cost: 2,860 MTok * \\$3.00/MTok = \\$8,580\n    * Output token cost: 1,500 MTok * \\$15.00/MTok = \\$22,500\n    * Monthly cost: \\$8,580 + \\$22,500 = \\$31,080\n\n<Tip>Actual costs may differ from these estimates. These estimates are based on the prompt highlighted in the section on [batch processing](#consider-batch-processing). Output tokens can be reduced even further by removing the `explanation` field from the response.</Tip>  \n\n### Build a strong prompt\n\nIn order to use Claude for content moderation, Claude must understand the moderation requirements of your application. Let’s start by writing a prompt that allows you to define your moderation needs:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How to moderate content using Claude",
+      "id": "how-to-moderate-content-using-claude"
+    },
+    {
+      "level": "h3",
+      "text": "Select the right Claude model",
+      "id": "select-the-right-claude-model"
+    },
+    {
+      "level": "h3",
+      "text": "Build a strong prompt",
+      "id": "build-a-strong-prompt"
+    }
+  ],
+  "url": "llms-txt#list-of-categories-considered-unsafe-for-content-moderation",
+  "links": []
+}

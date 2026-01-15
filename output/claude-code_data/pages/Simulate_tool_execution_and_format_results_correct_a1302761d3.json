@@ -1,0 +1,8 @@
+{
+  "title": "Simulate tool execution and format results correctly",
+  "content": "tool_results = []\nfor tool_use in tool_uses:\n    if tool_use.name == \"get_weather\":\n        if \"San Francisco\" in str(tool_use.input):\n            result = \"San Francisco: 68°F, partly cloudy\"\n        else:\n            result = \"New York: 45°F, clear skies\"\n    else:  # get_time\n        if \"Los_Angeles\" in str(tool_use.input):\n            result = \"2:30 PM PST\"\n        else:\n            result = \"5:30 PM EST\"\n\ntool_results.append({\n        \"type\": \"tool_result\",\n        \"tool_use_id\": tool_use.id,\n        \"content\": result\n    })",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#simulate-tool-execution-and-format-results-correctly",
+  "links": []
+}

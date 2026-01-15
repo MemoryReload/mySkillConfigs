@@ -1,0 +1,13 @@
+{
+  "title": "details.md",
+  "content": "Here's the actual information...\nmarkdown",
+  "code_samples": [
+    {
+      "code": "**Good example: One level deep**:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#details.md",
+  "links": []
+}

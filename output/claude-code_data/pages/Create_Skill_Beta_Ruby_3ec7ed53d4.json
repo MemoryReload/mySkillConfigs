@@ -1,0 +1,34 @@
+{
+  "title": "Create Skill (Beta) (Ruby)",
+  "content": "URL: https://platform.claude.com/docs/en/api/ruby/beta/skills/create\n\n`beta.skills.create(**kwargs) -> SkillCreateResponse`\n\n**post** `/v1/skills`\n\n- `display_title: String`\n\nDisplay title for the skill.\n\nThis is a human-readable label that is not included in the prompt sent to the model.\n\n- `files: Array[String]`\n\nFiles to upload for the skill.\n\nAll files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.\n\n- `anthropic_beta: Array[AnthropicBeta]`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `:\"message-batches-2024-09-24\" | :\"prompt-caching-2024-07-31\" | :\"computer-use-2024-10-22\" | 16 more`\n\n- `:\"message-batches-2024-09-24\"`\n\n- `:\"prompt-caching-2024-07-31\"`\n\n- `:\"computer-use-2024-10-22\"`\n\n- `:\"computer-use-2025-01-24\"`\n\n- `:\"pdfs-2024-09-25\"`\n\n- `:\"token-counting-2024-11-01\"`\n\n- `:\"token-efficient-tools-2025-02-19\"`\n\n- `:\"output-128k-2025-02-19\"`\n\n- `:\"files-api-2025-04-14\"`\n\n- `:\"mcp-client-2025-04-04\"`\n\n- `:\"mcp-client-2025-11-20\"`\n\n- `:\"dev-full-thinking-2025-05-14\"`\n\n- `:\"interleaved-thinking-2025-05-14\"`\n\n- `:\"code-execution-2025-05-22\"`\n\n- `:\"extended-cache-ttl-2025-04-11\"`\n\n- `:\"context-1m-2025-08-07\"`\n\n- `:\"context-management-2025-06-27\"`\n\n- `:\"model-context-window-exceeded-2025-08-26\"`\n\n- `:\"skills-2025-10-02\"`\n\n- `class SkillCreateResponse`\n\nUnique identifier for the skill.\n\nThe format and length of IDs may change over time.\n\n- `created_at: String`\n\nISO 8601 timestamp of when the skill was created.\n\n- `display_title: String`\n\nDisplay title for the skill.\n\nThis is a human-readable label that is not included in the prompt sent to the model.\n\n- `latest_version: String`\n\nThe latest version identifier for the skill.\n\nThis represents the most recent version of the skill that has been created.\n\nThis may be one of the following values:\n\n* `\"custom\"`: the skill was created by a user\n    * `\"anthropic\"`: the skill was created by Anthropic\n\nFor Skills, this is always `\"skill\"`.\n\n- `updated_at: String`\n\nISO 8601 timestamp of when the skill was last updated.",
+  "code_samples": [
+    {
+      "code": "require \"anthropic\"\n\nanthropic = Anthropic::Client.new(api_key: \"my-anthropic-api-key\")\n\nskill = anthropic.beta.skills.create\n\nputs(skill)",
+      "language": "ruby"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Create",
+      "id": "create"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#create-skill-(beta)-(ruby)",
+  "links": []
+}

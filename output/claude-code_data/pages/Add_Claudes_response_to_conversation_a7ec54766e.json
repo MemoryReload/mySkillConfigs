@@ -1,0 +1,8 @@
+{
+  "title": "Add Claude's response to conversation",
+  "content": "messages.append({\n    \"role\": \"assistant\",\n    \"content\": response1.content\n})",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#add-claude's-response-to-conversation",
+  "links": []
+}

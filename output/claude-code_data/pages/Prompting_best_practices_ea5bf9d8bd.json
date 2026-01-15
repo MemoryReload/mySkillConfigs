@@ -1,0 +1,252 @@
+{
+  "title": "Prompting best practices",
+  "content": "This guide provides specific prompt engineering techniques for Claude 4.x models, with specific guidance for Sonnet 4.5, Haiku 4.5, and Opus 4.5. These models have been trained for more precise instruction following than previous generations of Claude models.\n<Tip>\n  For an overview of Claude 4.5's new capabilities, see [What's new in Claude 4.5](/docs/en/about-claude/models/whats-new-claude-4-5). For migration guidance from previous models, see [Migrating to Claude 4.5](/docs/en/about-claude/models/migrating-to-claude-4).\n</Tip>\n\n## General principles\n\n### Be explicit with your instructions\n\nClaude 4.x models respond well to clear, explicit instructions. Being specific about your desired output can help enhance results. Customers who desire the \"above and beyond\" behavior from previous Claude models might need to more explicitly request these behaviors with newer models.\n\n<section title=\"Example: Creating an analytics dashboard\">\n\n### Add context to improve performance\n\nProviding context or motivation behind your instructions, such as explaining to Claude why such behavior is important, can help Claude 4.x models better understand your goals and deliver more targeted responses.\n\n<section title=\"Example: Formatting preferences\">\n\nClaude is smart enough to generalize from the explanation.\n\n### Be vigilant with examples & details\n\nClaude 4.x models pay close attention to details and examples as part of their precise instruction following capabilities. Ensure that your examples align with the behaviors you want to encourage and minimize behaviors you want to avoid.\n\n### Long-horizon reasoning and state tracking\n\nClaude 4.5 models excel at long-horizon reasoning tasks with exceptional state tracking capabilities. It maintains orientation across extended sessions by focusing on incremental progress—making steady advances on a few things at a time rather than attempting everything at once. This capability especially emerges over multiple context windows or task iterations, where Claude can work on a complex task, save the state, and continue with a fresh context window.\n\n#### Context awareness and multi-window workflows\n\nClaude 4.5 models feature [context awareness](/docs/en/build-with-claude/context-windows#context-awareness-in-claude-sonnet-4-5), enabling the model to track its remaining context window (i.e. \"token budget\") throughout a conversation. This enables Claude to execute tasks and manage context more effectively by understanding how much space it has to work.\n\n**Managing context limits:**\n\nIf you are using Claude in an agent harness that compacts context or allows saving context to external files (like in Claude Code), we suggest adding this information to your prompt so Claude can behave accordingly. Otherwise, Claude may sometimes naturally try to wrap up work as it approaches the context limit. Below is an example prompt:\n\nThe [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool) pairs naturally with context awareness for seamless context transitions.\n\n#### Multi-context window workflows\n\nFor tasks spanning multiple context windows:\n\n1. **Use a different prompt for the very first context window**: Use the first context window to set up a framework (write tests, create setup scripts), then use future context windows to iterate on a todo-list.\n\n2. **Have the model write tests in a structured format**: Ask Claude to create tests before starting work and keep track of them in a structured format (e.g., `tests.json`). This leads to better long-term ability to iterate. Remind Claude of the importance of tests: \"It is unacceptable to remove or edit tests because this could lead to missing or buggy functionality.\"\n\n3. **Set up quality of life tools**: Encourage Claude to create setup scripts (e.g., `init.sh`) to gracefully start servers, run test suites, and linters. This prevents repeated work when continuing from a fresh context window.\n\n4. **Starting fresh vs compacting**: When a context window is cleared, consider starting with a brand new context window rather than using compaction. Claude 4.5 models are extremely effective at discovering state from the local filesystem. In some cases, you may want to take advantage of this over compaction. Be prescriptive about how it should start:\n   - \"Call pwd; you can only read and write files in this directory.\"\n   - \"Review progress.txt, tests.json, and the git logs.\"\n   - \"Manually run through a fundamental integration test before moving on to implementing new features.\"\n\n5. **Provide verification tools**: As the length of autonomous tasks grows, Claude needs to verify correctness without continuous human feedback. Tools like Playwright MCP server or computer use capabilities for testing UIs are helpful.\n\n6. **Encourage complete usage of context**: Prompt Claude to efficiently complete components before moving on:\n\n#### State management best practices\n\n- **Use structured formats for state data**: When tracking structured information (like test results or task status), use JSON or other structured formats to help Claude understand schema requirements\n- **Use unstructured text for progress notes**: Freeform progress notes work well for tracking general progress and context\n- **Use git for state tracking**: Git provides a log of what's been done and checkpoints that can be restored. Claude 4.5 models perform especially well in using git to track state across multiple sessions.\n- **Emphasize incremental progress**: Explicitly ask Claude to keep track of its progress and focus on incremental work\n\n<section title=\"Example: State tracking\">\n\n### Communication style\n\nClaude 4.5 models have a more concise and natural communication style compared to previous models:\n\n- **More direct and grounded**: Provides fact-based progress reports rather than self-celebratory updates\n- **More conversational**: Slightly more fluent and colloquial, less machine-like\n- **Less verbose**: May skip detailed summaries for efficiency unless prompted otherwise\n\nThis communication style accurately reflects what has been accomplished without unnecessary elaboration.\n\n## Guidance for specific situations\n\n### Balance verbosity\n\nClaude 4.5 models tend toward efficiency and may skip verbal summaries after tool calls, jumping directly to the next action. While this creates a streamlined workflow, you may prefer more visibility into its reasoning process.\n\nIf you want Claude to provide updates as it works:\n\n### Tool usage patterns\n\nClaude 4.5 models are trained for precise instruction following and benefits from explicit direction to use specific tools. If you say \"can you suggest some changes,\" it will sometimes provide suggestions rather than implementing them—even if making changes might be what you intended.\n\nFor Claude to take action, be more explicit:\n\n<section title=\"Example: Explicit instructions\">\n\n**Less effective (Claude will only suggest):**\n\n**More effective (Claude will make the changes):**\n\nTo make Claude more proactive about taking action by default, you can add this to your system prompt:\n\nOn the other hand, if you want the model to be more hesitant by default, less prone to jumping straight into implementations, and only take action if requested, you can steer this behavior with a prompt like the below:\n\n### Tool usage and triggering\n\nClaude Opus 4.5 is more responsive to the system prompt than previous models. If your prompts were designed to reduce undertriggering on tools or skills, Claude Opus 4.5 may now overtrigger. The fix is to dial back any aggressive language. Where you might have said \"CRITICAL: You MUST use this tool when...\", you can use more normal prompting like \"Use this tool when...\".\n\n### Control the format of responses\n\nThere are a few ways that we have found to be particularly effective in steering output formatting in Claude 4.x models:\n\n1. **Tell Claude what to do instead of what not to do**\n\n- Instead of: \"Do not use markdown in your response\"\n   - Try: \"Your response should be composed of smoothly flowing prose paragraphs.\"\n\n2. **Use XML format indicators**\n\n- Try: \"Write the prose sections of your response in \\<smoothly_flowing_prose_paragraphs\\> tags.\"\n\n3. **Match your prompt style to the desired output**\n\nThe formatting style used in your prompt may influence Claude's response style. If you are still experiencing steerability issues with output formatting, we recommend as best as you can matching your prompt style to your desired output style. For example, removing markdown from your prompt can reduce the volume of markdown in the output.\n\n4. **Use detailed prompts for specific formatting preferences**\n\nFor more control over markdown and formatting usage, provide explicit guidance:\n\n### Research and information gathering\n\nClaude 4.5 models demonstrate exceptional agentic search capabilities and can find and synthesize information from multiple sources effectively. For optimal research results:\n\n1. **Provide clear success criteria**: Define what constitutes a successful answer to your research question\n\n2. **Encourage source verification**: Ask Claude to verify information across multiple sources\n\n3. **For complex research tasks, use a structured approach**:\n\nThis structured approach allows Claude to find and synthesize virtually any piece of information and iteratively critique its findings, no matter the size of the corpus.\n\n### Subagent orchestration\n\nClaude 4.5 models demonstrate significantly improved native subagent orchestration capabilities. These models can recognize when tasks would benefit from delegating work to specialized subagents and do so proactively without requiring explicit instruction.\n\nTo take advantage of this behavior:\n\n1. **Ensure well-defined subagent tools**: Have subagent tools available and described in tool definitions\n2. **Let Claude orchestrate naturally**: Claude will delegate appropriately without explicit instruction\n3. **Adjust conservativeness if needed**:\n\n### Model self-knowledge\n\nIf you would like Claude to identify itself correctly in your application or use specific API strings:\n\nFor LLM-powered apps that need to specify model strings:\n\n### Thinking sensitivity\n\nWhen extended thinking is disabled, Claude Opus 4.5 is particularly sensitive to the word \"think\" and its variants. We recommend replacing \"think\" with alternative words that convey similar meaning, such as \"consider,\" \"believe,\" and \"evaluate.\"\n\n### Leverage thinking & interleaved thinking capabilities\n\nClaude 4.x models offer thinking capabilities that can be especially helpful for tasks involving reflection after tool use or complex multi-step reasoning. You can guide its initial or interleaved thinking for better results.\n\n<Info>\n  For more information on thinking capabilities, see [Extended thinking](/docs/en/build-with-claude/extended-thinking).\n</Info>\n\n### Document creation\n\nClaude 4.5 models excel at creating presentations, animations, and visual documents. These models match or exceed Claude Opus 4.1 in this domain, with impressive creative flair and stronger instruction following. The models produce polished, usable output on the first try in most cases.\n\nFor best results with document creation:\n\n### Improved vision capabilities\n\nClaude Opus 4.5 has improved vision capabilities compared to previous Claude models. It performs better on image processing and data extraction tasks, particularly when there are multiple images present in context. These improvements carry over to computer use, where the model can more reliably interpret screenshots and UI elements. You can also use Claude Opus 4.5 to analyze videos by breaking them up into frames.\n\nOne technique we've found effective to further boost performance is to give Claude Opus 4.5 a crop tool or [skill](/docs/en/agents-and-tools/agent-skills/overview). We've seen consistent uplift on image evaluations when Claude is able to \"zoom\" in on relevant regions of an image. We've put together a cookbook for the crop tool [here](https://platform.claude.com/cookbook/multimodal-crop-tool).\n\n### Optimize parallel tool calling\n\nClaude 4.x models excel at parallel tool execution, with Sonnet 4.5 being particularly aggressive in firing off multiple operations simultaneously. Claude 4.x models will:\n\n- Run multiple speculative searches during research\n- Read several files at once to build context faster\n- Execute bash commands in parallel (which can even bottleneck system performance)\n\nThis behavior is easily steerable. While the model has a high success rate in parallel tool calling without prompting, you can boost this to ~100% or adjust the aggression level:\n\n### Reduce file creation in agentic coding\n\nClaude 4.x models may sometimes create new files for testing and iteration purposes, particularly when working with code. This approach allows Claude to use files, especially python scripts, as a 'temporary scratchpad' before saving its final output. Using temporary files can improve outcomes particularly for agentic coding use cases.\n\nIf you'd prefer to minimize net new file creation, you can instruct Claude to clean up after itself:\n\n### Overeagerness and file creation\n\nClaude Opus 4.5 has a tendency to overengineer by creating extra files, adding unnecessary abstractions, or building in flexibility that wasn't requested. If you're seeing this undesired behavior, add explicit prompting to keep solutions minimal.\n\nClaude 4.x models, particularly Opus 4.5, excel at building complex, real-world web applications with strong frontend design. However, without guidance, models can default to generic patterns that create what users call the \"AI slop\" aesthetic. To create distinctive, creative frontends that surprise and delight:\n\n<Tip>\nFor a detailed guide on improving frontend design, see our blog post on [improving frontend design through skills](https://www.claude.com/blog/improving-frontend-design-through-skills).\n</Tip>\n\nHere's a system prompt snippet you can use to encourage better frontend design:\n\nYou can also refer to the full skill [here](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md).\n\n### Avoid focusing on passing tests and hard-coding\n\nClaude 4.x models can sometimes focus too heavily on making tests pass at the expense of more general solutions, or may use workarounds like helper scripts for complex refactoring instead of using standard tools directly. To prevent this behavior and ensure robust, generalizable solutions:\n\n### Encouraging code exploration\n\nClaude Opus 4.5 is highly capable but can be overly conservative when exploring code. If you notice the model proposing solutions without looking at the code or making assumptions about code it hasn't read, the best solution is to add explicit instructions to the prompt. Claude Opus 4.5 is our most steerable model to date and responds reliably to direct guidance.\n\n### Minimizing hallucinations in agentic coding\n\nClaude 4.x models are less prone to hallucinations and give more accurate, grounded, intelligent answers based on the code. To encourage this behavior even more and minimize hallucinations:\n\n## Migration considerations\n\nWhen migrating to Claude 4.5 models:\n\n1. **Be specific about desired behavior**: Consider describing exactly what you'd like to see in the output.\n\n2. **Frame your instructions with modifiers**: Adding modifiers that encourage Claude to increase the quality and detail of its output can help better shape Claude's performance. For example, instead of \"Create an analytics dashboard\", use \"Create an analytics dashboard. Include as many relevant features and interactions as possible. Go beyond the basics to create a fully-featured implementation.\"\n\n3. **Request specific features explicitly**: Animations and interactive elements should be requested explicitly when desired.",
+  "code_samples": [
+    {
+      "code": "Create an analytics dashboard",
+      "language": "text"
+    },
+    {
+      "code": "Create an analytics dashboard. Include as many relevant features and interactions as possible. Go beyond the basics to create a fully-featured implementation.",
+      "language": "text"
+    },
+    {
+      "code": "NEVER use ellipses",
+      "language": "text"
+    },
+    {
+      "code": "Your response will be read aloud by a text-to-speech engine, so never use ellipses since the text-to-speech engine will not know how to pronounce them.",
+      "language": "text"
+    },
+    {
+      "code": "The [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool) pairs naturally with context awareness for seamless context transitions.\n\n#### Multi-context window workflows\n\nFor tasks spanning multiple context windows:\n\n1. **Use a different prompt for the very first context window**: Use the first context window to set up a framework (write tests, create setup scripts), then use future context windows to iterate on a todo-list.\n\n2. **Have the model write tests in a structured format**: Ask Claude to create tests before starting work and keep track of them in a structured format (e.g., `tests.json`). This leads to better long-term ability to iterate. Remind Claude of the importance of tests: \"It is unacceptable to remove or edit tests because this could lead to missing or buggy functionality.\"\n\n3. **Set up quality of life tools**: Encourage Claude to create setup scripts (e.g., `init.sh`) to gracefully start servers, run test suites, and linters. This prevents repeated work when continuing from a fresh context window.\n\n4. **Starting fresh vs compacting**: When a context window is cleared, consider starting with a brand new context window rather than using compaction. Claude 4.5 models are extremely effective at discovering state from the local filesystem. In some cases, you may want to take advantage of this over compaction. Be prescriptive about how it should start:\n   - \"Call pwd; you can only read and write files in this directory.\"\n   - \"Review progress.txt, tests.json, and the git logs.\"\n   - \"Manually run through a fundamental integration test before moving on to implementing new features.\"\n\n5. **Provide verification tools**: As the length of autonomous tasks grows, Claude needs to verify correctness without continuous human feedback. Tools like Playwright MCP server or computer use capabilities for testing UIs are helpful.\n\n6. **Encourage complete usage of context**: Prompt Claude to efficiently complete components before moving on:",
+      "language": "unknown"
+    },
+    {
+      "code": "#### State management best practices\n\n- **Use structured formats for state data**: When tracking structured information (like test results or task status), use JSON or other structured formats to help Claude understand schema requirements\n- **Use unstructured text for progress notes**: Freeform progress notes work well for tracking general progress and context\n- **Use git for state tracking**: Git provides a log of what's been done and checkpoints that can be restored. Claude 4.5 models perform especially well in using git to track state across multiple sessions.\n- **Emphasize incremental progress**: Explicitly ask Claude to keep track of its progress and focus on incremental work\n\n<section title=\"Example: State tracking\">",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n### Communication style\n\nClaude 4.5 models have a more concise and natural communication style compared to previous models:\n\n- **More direct and grounded**: Provides fact-based progress reports rather than self-celebratory updates\n- **More conversational**: Slightly more fluent and colloquial, less machine-like\n- **Less verbose**: May skip detailed summaries for efficiency unless prompted otherwise\n\nThis communication style accurately reflects what has been accomplished without unnecessary elaboration.\n\n## Guidance for specific situations\n\n### Balance verbosity\n\nClaude 4.5 models tend toward efficiency and may skip verbal summaries after tool calls, jumping directly to the next action. While this creates a streamlined workflow, you may prefer more visibility into its reasoning process.\n\nIf you want Claude to provide updates as it works:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Tool usage patterns\n\nClaude 4.5 models are trained for precise instruction following and benefits from explicit direction to use specific tools. If you say \"can you suggest some changes,\" it will sometimes provide suggestions rather than implementing them—even if making changes might be what you intended.\n\nFor Claude to take action, be more explicit:\n\n<section title=\"Example: Explicit instructions\">\n\n**Less effective (Claude will only suggest):**",
+      "language": "unknown"
+    },
+    {
+      "code": "**More effective (Claude will make the changes):**",
+      "language": "unknown"
+    },
+    {
+      "code": "Or:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\nTo make Claude more proactive about taking action by default, you can add this to your system prompt:",
+      "language": "unknown"
+    },
+    {
+      "code": "On the other hand, if you want the model to be more hesitant by default, less prone to jumping straight into implementations, and only take action if requested, you can steer this behavior with a prompt like the below:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Tool usage and triggering\n\nClaude Opus 4.5 is more responsive to the system prompt than previous models. If your prompts were designed to reduce undertriggering on tools or skills, Claude Opus 4.5 may now overtrigger. The fix is to dial back any aggressive language. Where you might have said \"CRITICAL: You MUST use this tool when...\", you can use more normal prompting like \"Use this tool when...\".\n\n### Control the format of responses\n\nThere are a few ways that we have found to be particularly effective in steering output formatting in Claude 4.x models:\n\n1. **Tell Claude what to do instead of what not to do**\n\n   - Instead of: \"Do not use markdown in your response\"\n   - Try: \"Your response should be composed of smoothly flowing prose paragraphs.\"\n\n2. **Use XML format indicators**\n\n   - Try: \"Write the prose sections of your response in \\<smoothly_flowing_prose_paragraphs\\> tags.\"\n\n3. **Match your prompt style to the desired output**\n\n   The formatting style used in your prompt may influence Claude's response style. If you are still experiencing steerability issues with output formatting, we recommend as best as you can matching your prompt style to your desired output style. For example, removing markdown from your prompt can reduce the volume of markdown in the output.\n\n4. **Use detailed prompts for specific formatting preferences**\n\n   For more control over markdown and formatting usage, provide explicit guidance:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Research and information gathering\n\nClaude 4.5 models demonstrate exceptional agentic search capabilities and can find and synthesize information from multiple sources effectively. For optimal research results:\n\n1. **Provide clear success criteria**: Define what constitutes a successful answer to your research question\n\n2. **Encourage source verification**: Ask Claude to verify information across multiple sources\n\n3. **For complex research tasks, use a structured approach**:",
+      "language": "unknown"
+    },
+    {
+      "code": "This structured approach allows Claude to find and synthesize virtually any piece of information and iteratively critique its findings, no matter the size of the corpus.\n\n### Subagent orchestration\n\nClaude 4.5 models demonstrate significantly improved native subagent orchestration capabilities. These models can recognize when tasks would benefit from delegating work to specialized subagents and do so proactively without requiring explicit instruction.\n\nTo take advantage of this behavior:\n\n1. **Ensure well-defined subagent tools**: Have subagent tools available and described in tool definitions\n2. **Let Claude orchestrate naturally**: Claude will delegate appropriately without explicit instruction\n3. **Adjust conservativeness if needed**:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Model self-knowledge\n\nIf you would like Claude to identify itself correctly in your application or use specific API strings:",
+      "language": "unknown"
+    },
+    {
+      "code": "For LLM-powered apps that need to specify model strings:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Thinking sensitivity\n\nWhen extended thinking is disabled, Claude Opus 4.5 is particularly sensitive to the word \"think\" and its variants. We recommend replacing \"think\" with alternative words that convey similar meaning, such as \"consider,\" \"believe,\" and \"evaluate.\"\n\n### Leverage thinking & interleaved thinking capabilities\n\nClaude 4.x models offer thinking capabilities that can be especially helpful for tasks involving reflection after tool use or complex multi-step reasoning. You can guide its initial or interleaved thinking for better results.",
+      "language": "unknown"
+    },
+    {
+      "code": "<Info>\n  For more information on thinking capabilities, see [Extended thinking](/docs/en/build-with-claude/extended-thinking).\n</Info>\n\n### Document creation\n\nClaude 4.5 models excel at creating presentations, animations, and visual documents. These models match or exceed Claude Opus 4.1 in this domain, with impressive creative flair and stronger instruction following. The models produce polished, usable output on the first try in most cases.\n\nFor best results with document creation:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Improved vision capabilities\n\nClaude Opus 4.5 has improved vision capabilities compared to previous Claude models. It performs better on image processing and data extraction tasks, particularly when there are multiple images present in context. These improvements carry over to computer use, where the model can more reliably interpret screenshots and UI elements. You can also use Claude Opus 4.5 to analyze videos by breaking them up into frames.\n\nOne technique we've found effective to further boost performance is to give Claude Opus 4.5 a crop tool or [skill](/docs/en/agents-and-tools/agent-skills/overview). We've seen consistent uplift on image evaluations when Claude is able to \"zoom\" in on relevant regions of an image. We've put together a cookbook for the crop tool [here](https://platform.claude.com/cookbook/multimodal-crop-tool).\n\n### Optimize parallel tool calling\n\nClaude 4.x models excel at parallel tool execution, with Sonnet 4.5 being particularly aggressive in firing off multiple operations simultaneously. Claude 4.x models will:\n\n- Run multiple speculative searches during research\n- Read several files at once to build context faster\n- Execute bash commands in parallel (which can even bottleneck system performance)\n\nThis behavior is easily steerable. While the model has a high success rate in parallel tool calling without prompting, you can boost this to ~100% or adjust the aggression level:",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "### Reduce file creation in agentic coding\n\nClaude 4.x models may sometimes create new files for testing and iteration purposes, particularly when working with code. This approach allows Claude to use files, especially python scripts, as a 'temporary scratchpad' before saving its final output. Using temporary files can improve outcomes particularly for agentic coding use cases.\n\nIf you'd prefer to minimize net new file creation, you can instruct Claude to clean up after itself:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Overeagerness and file creation\n\nClaude Opus 4.5 has a tendency to overengineer by creating extra files, adding unnecessary abstractions, or building in flexibility that wasn't requested. If you're seeing this undesired behavior, add explicit prompting to keep solutions minimal.\n\nFor example:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Frontend design\n\nClaude 4.x models, particularly Opus 4.5, excel at building complex, real-world web applications with strong frontend design. However, without guidance, models can default to generic patterns that create what users call the \"AI slop\" aesthetic. To create distinctive, creative frontends that surprise and delight:\n\n<Tip>\nFor a detailed guide on improving frontend design, see our blog post on [improving frontend design through skills](https://www.claude.com/blog/improving-frontend-design-through-skills).\n</Tip>\n\nHere's a system prompt snippet you can use to encourage better frontend design:",
+      "language": "unknown"
+    },
+    {
+      "code": "You can also refer to the full skill [here](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md).\n\n### Avoid focusing on passing tests and hard-coding\n\nClaude 4.x models can sometimes focus too heavily on making tests pass at the expense of more general solutions, or may use workarounds like helper scripts for complex refactoring instead of using standard tools directly. To prevent this behavior and ensure robust, generalizable solutions:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Encouraging code exploration\n\nClaude Opus 4.5 is highly capable but can be overly conservative when exploring code. If you notice the model proposing solutions without looking at the code or making assumptions about code it hasn't read, the best solution is to add explicit instructions to the prompt. Claude Opus 4.5 is our most steerable model to date and responds reliably to direct guidance.\n\nFor example:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Minimizing hallucinations in agentic coding\n\nClaude 4.x models are less prone to hallucinations and give more accurate, grounded, intelligent answers based on the code. To encourage this behavior even more and minimize hallucinations:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "General principles",
+      "id": "general-principles"
+    },
+    {
+      "level": "h3",
+      "text": "Be explicit with your instructions",
+      "id": "be-explicit-with-your-instructions"
+    },
+    {
+      "level": "h3",
+      "text": "Add context to improve performance",
+      "id": "add-context-to-improve-performance"
+    },
+    {
+      "level": "h3",
+      "text": "Be vigilant with examples & details",
+      "id": "be-vigilant-with-examples-&-details"
+    },
+    {
+      "level": "h3",
+      "text": "Long-horizon reasoning and state tracking",
+      "id": "long-horizon-reasoning-and-state-tracking"
+    },
+    {
+      "level": "h3",
+      "text": "Communication style",
+      "id": "communication-style"
+    },
+    {
+      "level": "h2",
+      "text": "Guidance for specific situations",
+      "id": "guidance-for-specific-situations"
+    },
+    {
+      "level": "h3",
+      "text": "Balance verbosity",
+      "id": "balance-verbosity"
+    },
+    {
+      "level": "h3",
+      "text": "Tool usage patterns",
+      "id": "tool-usage-patterns"
+    },
+    {
+      "level": "h3",
+      "text": "Tool usage and triggering",
+      "id": "tool-usage-and-triggering"
+    },
+    {
+      "level": "h3",
+      "text": "Control the format of responses",
+      "id": "control-the-format-of-responses"
+    },
+    {
+      "level": "h3",
+      "text": "Research and information gathering",
+      "id": "research-and-information-gathering"
+    },
+    {
+      "level": "h3",
+      "text": "Subagent orchestration",
+      "id": "subagent-orchestration"
+    },
+    {
+      "level": "h3",
+      "text": "Model self-knowledge",
+      "id": "model-self-knowledge"
+    },
+    {
+      "level": "h3",
+      "text": "Thinking sensitivity",
+      "id": "thinking-sensitivity"
+    },
+    {
+      "level": "h3",
+      "text": "Leverage thinking & interleaved thinking capabilities",
+      "id": "leverage-thinking-&-interleaved-thinking-capabilities"
+    },
+    {
+      "level": "h3",
+      "text": "Document creation",
+      "id": "document-creation"
+    },
+    {
+      "level": "h3",
+      "text": "Improved vision capabilities",
+      "id": "improved-vision-capabilities"
+    },
+    {
+      "level": "h3",
+      "text": "Optimize parallel tool calling",
+      "id": "optimize-parallel-tool-calling"
+    },
+    {
+      "level": "h3",
+      "text": "Reduce file creation in agentic coding",
+      "id": "reduce-file-creation-in-agentic-coding"
+    },
+    {
+      "level": "h3",
+      "text": "Overeagerness and file creation",
+      "id": "overeagerness-and-file-creation"
+    },
+    {
+      "level": "h3",
+      "text": "Frontend design",
+      "id": "frontend-design"
+    },
+    {
+      "level": "h3",
+      "text": "Avoid focusing on passing tests and hard-coding",
+      "id": "avoid-focusing-on-passing-tests-and-hard-coding"
+    },
+    {
+      "level": "h3",
+      "text": "Encouraging code exploration",
+      "id": "encouraging-code-exploration"
+    },
+    {
+      "level": "h3",
+      "text": "Minimizing hallucinations in agentic coding",
+      "id": "minimizing-hallucinations-in-agentic-coding"
+    },
+    {
+      "level": "h2",
+      "text": "Migration considerations",
+      "id": "migration-considerations"
+    }
+  ],
+  "url": "llms-txt#prompting-best-practices",
+  "links": []
+}

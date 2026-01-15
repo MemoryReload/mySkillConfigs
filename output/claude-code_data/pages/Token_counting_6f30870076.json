@@ -1,0 +1,151 @@
+{
+  "title": "Token counting",
+  "content": "Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. With token counting, you can\n- Proactively manage rate limits and costs\n- Make smart model routing decisions\n- Optimize prompts to be a specific length\n---\n\n## How to count message tokens\n\nThe [token counting](/docs/en/api/messages-count-tokens) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](/docs/en/agents-and-tools/tool-use/overview), [images](/docs/en/build-with-claude/vision), and [PDFs](/docs/en/build-with-claude/pdf-support). The response contains the total number of input tokens.\n\n<Note>\nThe token count should be considered an **estimate**. In some cases, the actual number of input tokens used when creating a message may differ by a small amount.\n\nToken counts may include tokens added automatically by Anthropic for system optimizations. **You are not billed for system-added tokens**. Billing reflects only your content.\n</Note>\n\n### Supported models\nAll [active models](/docs/en/about-claude/models/overview) support token counting.\n\n### Count tokens in basic messages\n\n### Count tokens in messages with tools\n\n<Note>\n[Server tool](/docs/en/agents-and-tools/tool-use/overview#server-tools) token counts only apply to the first sampling call.\n</Note>\n\n### Count tokens in messages with images\n\n### Count tokens in messages with extended thinking\n\n<Note>\nSee [here](/docs/en/build-with-claude/extended-thinking#how-context-window-is-calculated-with-extended-thinking) for more details about how the context window is calculated with extended thinking\n- Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens\n- **Current** assistant turn thinking **does** count toward your input tokens\n</Note>\n\n### Count tokens in messages with PDFs\n\n<Note>\nToken counting supports PDFs with the same [limitations](/docs/en/build-with-claude/pdf-support#pdf-support-limitations) as the Messages API.\n</Note>\n\n## Pricing and rate limits\n\nToken counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](/docs/en/api/rate-limits#rate-limits). If you need higher limits, contact sales through the [Claude Console](/settings/limits).\n\n| Usage tier | Requests per minute (RPM) |\n|------------|---------------------------|\n| 1          | 100                       |\n| 2          | 2,000                     |\n| 3          | 4,000                     |\n| 4          | 8,000                     |\n\n<Note>\n  Token counting and message creation have separate and independent rate limits -- usage of one does not count against the limits of the other.\n</Note>\n\n<section title=\"Does token counting use prompt caching?\">\n\nNo, token counting provides an estimate without using caching logic. While you may provide `cache_control` blocks in your token counting request, prompt caching only occurs during actual message creation.\n  \n</section>",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "### Count tokens in messages with tools\n\n<Note>\n[Server tool](/docs/en/agents-and-tools/tool-use/overview#server-tools) token counts only apply to the first sampling call.\n</Note>\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "### Count tokens in messages with images\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "### Count tokens in messages with extended thinking\n\n<Note>\nSee [here](/docs/en/build-with-claude/extended-thinking#how-context-window-is-calculated-with-extended-thinking) for more details about how the context window is calculated with extended thinking\n- Thinking blocks from **previous** assistant turns are ignored and **do not** count toward your input tokens\n- **Current** assistant turn thinking **does** count toward your input tokens\n</Note>\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "### Count tokens in messages with PDFs\n\n<Note>\nToken counting supports PDFs with the same [limitations](/docs/en/build-with-claude/pdf-support#pdf-support-limitations) as the Messages API.\n</Note> \n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How to count message tokens",
+      "id": "how-to-count-message-tokens"
+    },
+    {
+      "level": "h3",
+      "text": "Supported models",
+      "id": "supported-models"
+    },
+    {
+      "level": "h3",
+      "text": "Count tokens in basic messages",
+      "id": "count-tokens-in-basic-messages"
+    },
+    {
+      "level": "h3",
+      "text": "Count tokens in messages with tools",
+      "id": "count-tokens-in-messages-with-tools"
+    },
+    {
+      "level": "h3",
+      "text": "Count tokens in messages with images",
+      "id": "count-tokens-in-messages-with-images"
+    },
+    {
+      "level": "h3",
+      "text": "Count tokens in messages with extended thinking",
+      "id": "count-tokens-in-messages-with-extended-thinking"
+    },
+    {
+      "level": "h3",
+      "text": "Count tokens in messages with PDFs",
+      "id": "count-tokens-in-messages-with-pdfs"
+    },
+    {
+      "level": "h2",
+      "text": "Pricing and rate limits",
+      "id": "pricing-and-rate-limits"
+    },
+    {
+      "level": "h2",
+      "text": "FAQ",
+      "id": "faq"
+    }
+  ],
+  "url": "llms-txt#token-counting",
+  "links": []
+}

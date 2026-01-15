@@ -1,0 +1,70 @@
+{
+  "title": "This pattern lets you customize agents based on runtime conditions",
+  "content": "def create_security_agent(security_level: str) -> AgentDefinition:\n    is_strict = security_level == \"strict\"\n    return AgentDefinition(\n        description=\"Security code reviewer\",\n        # Customize the prompt based on strictness level\n        prompt=f\"You are a {'strict' if is_strict else 'balanced'} security reviewer...\",\n        tools=[\"Read\", \"Grep\", \"Glob\"],\n        # Key insight: use a more capable model for high-stakes reviews\n        model=\"opus\" if is_strict else \"sonnet\"\n    )\n\nasync def main():\n    # The agent is created at query time, so each request can use different settings\n    async for message in query(\n        prompt=\"Review this PR for security issues\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Task\"],\n            agents={\n                # Call the factory with your desired configuration\n                \"security-reviewer\": create_security_agent(\"strict\")\n            }\n        )\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\nasyncio.run(main())\ntypescript TypeScript\nimport { query, type AgentDefinition } from '@anthropic-ai/claude-agent-sdk';\n\n// Factory function that returns an AgentDefinition\n// This pattern lets you customize agents based on runtime conditions\nfunction createSecurityAgent(securityLevel: 'basic' | 'strict'): AgentDefinition {\n  const isStrict = securityLevel === 'strict';\n  return {\n    description: 'Security code reviewer',\n    // Customize the prompt based on strictness level\n    prompt: `You are a ${isStrict ? 'strict' : 'balanced'} security reviewer...`,\n    tools: ['Read', 'Grep', 'Glob'],\n    // Key insight: use a more capable model for high-stakes reviews\n    model: isStrict ? 'opus' : 'sonnet'\n  };\n}\n\n// The agent is created at query time, so each request can use different settings\nfor await (const message of query({\n  prompt: \"Review this PR for security issues\",\n  options: {\n    allowedTools: ['Read', 'Grep', 'Glob', 'Task'],\n    agents: {\n      // Call the factory with your desired configuration\n      'security-reviewer': createSecurityAgent('strict')\n    }\n  }\n})) {\n  if ('result' in message) console.log(message.result);\n}\npython Python\nimport asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\nasync def main():\n    async for message in query(\n        prompt=\"Use the code-reviewer agent to review this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Glob\", \"Grep\", \"Task\"],\n            agents={\n                \"code-reviewer\": AgentDefinition(\n                    description=\"Expert code reviewer.\",\n                    prompt=\"Analyze code quality and suggest improvements.\",\n                    tools=[\"Read\", \"Glob\", \"Grep\"]\n                )\n            }\n        )\n    ):\n        # Check for subagent invocation in message content\n        if hasattr(message, 'content') and message.content:\n            for block in message.content:\n                if getattr(block, 'type', None) == 'tool_use' and block.name == 'Task':\n                    print(f\"Subagent invoked: {block.input.get('subagent_type')}\")\n\n# Check if this message is from within a subagent's context\n        if hasattr(message, 'parent_tool_use_id') and message.parent_tool_use_id:\n            print(\"  (running inside subagent)\")\n\nif hasattr(message, \"result\"):\n            print(message.result)\n\nasyncio.run(main())\ntypescript TypeScript\nimport { query } from \"@anthropic-ai/claude-agent-sdk\";\n\nfor await (const message of query({\n  prompt: \"Use the code-reviewer agent to review this codebase\",\n  options: {\n    allowedTools: [\"Read\", \"Glob\", \"Grep\", \"Task\"],\n    agents: {\n      \"code-reviewer\": {\n        description: \"Expert code reviewer.\",\n        prompt: \"Analyze code quality and suggest improvements.\",\n        tools: [\"Read\", \"Glob\", \"Grep\"]\n      }\n    }\n  }\n})) {\n  const msg = message as any;\n\n// Check for subagent invocation in message content\n  for (const block of msg.message?.content ?? []) {\n    if (block.type === \"tool_use\" && block.name === \"Task\") {\n      console.log(`Subagent invoked: ${block.input.subagent_type}`);\n    }\n  }\n\n// Check if this message is from within a subagent's context\n  if (msg.parent_tool_use_id) {\n    console.log(\"  (running inside subagent)\");\n  }\n\nif (\"result\" in message) {\n    console.log(message.result);\n  }\n}\npython Python\nimport asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition\n\nasync def main():\n    async for message in query(\n        prompt=\"Analyze the architecture of this codebase\",\n        options=ClaudeAgentOptions(\n            allowed_tools=[\"Read\", \"Grep\", \"Glob\", \"Task\"],\n            agents={\n                \"code-analyzer\": AgentDefinition(\n                    description=\"Static code analysis and architecture review\",\n                    prompt=\"\"\"You are a code architecture analyst. Analyze code structure,\nidentify patterns, and suggest improvements without making changes.\"\"\",\n                    # Read-only tools: no Edit, Write, or Bash access\n                    tools=[\"Read\", \"Grep\", \"Glob\"]\n                )\n            }\n        )\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\nasyncio.run(main())\ntypescript TypeScript\nimport { query } from '@anthropic-ai/claude-agent-sdk';\n\nfor await (const message of query({\n  prompt: \"Analyze the architecture of this codebase\",\n  options: {\n    allowedTools: ['Read', 'Grep', 'Glob', 'Task'],\n    agents: {\n      'code-analyzer': {\n        description: 'Static code analysis and architecture review',\n        prompt: `You are a code architecture analyst. Analyze code structure,\nidentify patterns, and suggest improvements without making changes.`,\n        // Read-only tools: no Edit, Write, or Bash access\n        tools: ['Read', 'Grep', 'Glob']\n      }\n    }\n  }\n})) {\n  if ('result' in message) console.log(message.result);\n}\n```\n</CodeGroup>\n\n### Common tool combinations\n\n| Use case | Tools | Description |\n|:---------|:------|:------------|\n| Read-only analysis | `Read`, `Grep`, `Glob` | Can examine code but not modify or execute |\n| Test execution | `Bash`, `Read`, `Grep` | Can run commands and analyze output |\n| Code modification | `Read`, `Edit`, `Write`, `Grep`, `Glob` | Full read/write access without command execution |\n| Full access | All tools | Inherits all tools from parent (omit `tools` field) |\n\n### Claude not delegating to subagents\n\nIf Claude completes tasks directly instead of delegating to your subagent:\n\n1. **Include the Task tool**: subagents are invoked via the Task tool, so it must be in `allowedTools`\n2. **Use explicit prompting**: mention the subagent by name in your prompt (e.g., \"Use the code-reviewer agent to...\")\n3. **Write a clear description**: explain exactly when the subagent should be used so Claude can match tasks appropriately\n\n### Filesystem-based agents not loading\n\nAgents defined in `.claude/agents/` are loaded at startup only. If you create a new agent file while Claude Code is running, restart the session to load it.\n\n### Windows: long prompt failures\n\nOn Windows, subagents with very long prompts may fail due to command line length limits (8191 chars). Keep prompts concise or use filesystem-based agents for complex instructions.\n\n## Related documentation\n\n- [Claude Code subagents](https://code.claude.com/docs/en/sub-agents): comprehensive subagent documentation including filesystem-based definitions\n- [SDK overview](/docs/en/agent-sdk/overview): getting started with the Claude Agent SDK",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Detecting subagent invocation\n\nSubagents are invoked via the Task tool. To detect when a subagent is invoked, check for `tool_use` blocks with `name: \"Task\"`. Messages from within a subagent's context include a `parent_tool_use_id` field.\n\nThis example iterates through streamed messages, logging when a subagent is invoked and when subsequent messages originate from within that subagent's execution context.\n\n<Note>\nThe message structure differs between SDKs. In Python, content blocks are accessed directly via `message.content`. In TypeScript, `SDKAssistantMessage` wraps the Anthropic API message, so content is accessed via `message.message.content`.\n</Note>\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Tool restrictions\n\nSubagents can have restricted tool access via the `tools` field:\n\n- **Omit the field**: agent inherits all available tools (default)\n- **Specify tools**: agent can only use listed tools\n\nThis example creates a read-only analysis agent that can examine code but cannot modify files or run commands.\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Detecting subagent invocation",
+      "id": "detecting-subagent-invocation"
+    },
+    {
+      "level": "h2",
+      "text": "Tool restrictions",
+      "id": "tool-restrictions"
+    },
+    {
+      "level": "h3",
+      "text": "Common tool combinations",
+      "id": "common-tool-combinations"
+    },
+    {
+      "level": "h2",
+      "text": "Troubleshooting",
+      "id": "troubleshooting"
+    },
+    {
+      "level": "h3",
+      "text": "Claude not delegating to subagents",
+      "id": "claude-not-delegating-to-subagents"
+    },
+    {
+      "level": "h3",
+      "text": "Filesystem-based agents not loading",
+      "id": "filesystem-based-agents-not-loading"
+    },
+    {
+      "level": "h3",
+      "text": "Windows: long prompt failures",
+      "id": "windows:-long-prompt-failures"
+    },
+    {
+      "level": "h2",
+      "text": "Related documentation",
+      "id": "related-documentation"
+    }
+  ],
+  "url": "llms-txt#this-pattern-lets-you-customize-agents-based-on-runtime-conditions",
+  "links": []
+}

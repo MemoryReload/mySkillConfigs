@@ -1,0 +1,8 @@
+{
+  "title": "Process the batch of comments and get the response",
+  "content": "response_obj = batch_moderate_messages(user_comments, unsafe_categories)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#process-the-batch-of-comments-and-get-the-response",
+  "links": []
+}

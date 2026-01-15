@@ -1,0 +1,49 @@
+{
+  "title": "Search results",
+  "content": "Enable natural citations for RAG applications by providing search results with source attribution\n\nSearch result content blocks enable natural citations with proper source attribution, bringing web search-quality citations to your custom applications. This feature is particularly powerful for RAG (Retrieval-Augmented Generation) applications where you need Claude to cite sources accurately.\n\nThe search results feature is available on the following models:\n\n- Claude Opus 4.5 (`claude-opus-4-5-20251101`)\n- Claude Opus 4.1 (`claude-opus-4-1-20250805`)\n- Claude Opus 4 (`claude-opus-4-20250514`)\n- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)\n- Claude Sonnet 4 (`claude-sonnet-4-20250514`)\n- Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-7-sonnet-20250219`)\n- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)\n- Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-5-haiku-20241022`)\n\n- **Natural citations** - Achieve the same citation quality as web search for any content\n- **Flexible integration** - Use in tool returns for dynamic RAG or as top-level content for pre-fetched data\n- **Proper source attribution** - Each result includes source and title information for clear attribution\n- **No document workarounds needed** - Eliminates the need for document-based workarounds\n- **Consistent citation format** - Matches the citation quality and format of Claude's web search functionality\n\nSearch results can be provided in two ways:\n\n1. **From tool calls** - Your custom tools return search results, enabling dynamic RAG applications\n2. **As top-level content** - You provide search results directly in user messages for pre-fetched or cached content\n\nIn both cases, Claude can automatically cite information from the search results with proper source attribution.\n\n### Search result schema\n\nSearch results use the following structure:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `type` | string | Must be `\"search_result\"` |\n| `source` | string | The source URL or identifier for the content |\n| `title` | string | A descriptive title for the search result |\n| `content` | array | An array of text blocks containing the actual content |\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `citations` | object | Citation configuration with `enabled` boolean field |\n| `cache_control` | object | Cache control settings (e.g., `{\"type\": \"ephemeral\"}`) |\n\nEach item in the `content` array must be a text block with:\n- `type`: Must be `\"text\"`\n- `text`: The actual text content (non-empty string)\n\n## Method 1: Search results from tool calls\n\nThe most powerful use case is returning search results from your custom tools. This enables dynamic RAG applications where tools fetch and return relevant content with automatic citations.\n\n### Example: Knowledge base tool\n\n<CodeGroup>\n```python Python\nfrom anthropic import Anthropic\nfrom anthropic.types import (\n    MessageParam,\n    TextBlockParam,\n    SearchResultBlockParam,\n    ToolResultBlockParam\n)",
+  "code_samples": [
+    {
+      "code": "{\n  \"type\": \"search_result\",\n  \"source\": \"https://example.com/article\",  // Required: Source URL or identifier\n  \"title\": \"Article Title\",                  // Required: Title of the result\n  \"content\": [                               // Required: Array of text blocks\n    {\n      \"type\": \"text\",\n      \"text\": \"The actual content of the search result...\"\n    }\n  ],\n  \"citations\": {                             // Optional: Citation configuration\n    \"enabled\": true                          // Enable/disable citations for this result\n  }\n}",
+      "language": "json"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Key benefits",
+      "id": "key-benefits"
+    },
+    {
+      "level": "h2",
+      "text": "How it works",
+      "id": "how-it-works"
+    },
+    {
+      "level": "h3",
+      "text": "Search result schema",
+      "id": "search-result-schema"
+    },
+    {
+      "level": "h3",
+      "text": "Required fields",
+      "id": "required-fields"
+    },
+    {
+      "level": "h3",
+      "text": "Optional fields",
+      "id": "optional-fields"
+    },
+    {
+      "level": "h2",
+      "text": "Method 1: Search results from tool calls",
+      "id": "method-1:-search-results-from-tool-calls"
+    },
+    {
+      "level": "h3",
+      "text": "Example: Knowledge base tool",
+      "id": "example:-knowledge-base-tool"
+    }
+  ],
+  "url": "llms-txt#search-results",
+  "links": []
+}

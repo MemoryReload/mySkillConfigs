@@ -1,0 +1,41 @@
+{
+  "title": "Check stop_reason and handle pause_turn in a loop",
+  "content": "STOP_REASON=$(echo \"$RESPONSE\" | jq -r '.stop_reason')\nCONTAINER_ID=$(echo \"$RESPONSE\" | jq -r '.container.id')\n\nwhile [ \"$STOP_REASON\" = \"pause_turn\" ]; do\n  # Continue with same container\n  RESPONSE=$(curl https://api.anthropic.com/v1/messages \\\n    -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n    -H \"anthropic-version: 2023-06-01\" \\\n    -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02\" \\\n    -H \"content-type: application/json\" \\\n    -d \"{\n      \\\"model\\\": \\\"claude-sonnet-4-5-20250929\\\",\n      \\\"max_tokens\\\": 4096,\n      \\\"container\\\": {\n        \\\"id\\\": \\\"$CONTAINER_ID\\\",\n        \\\"skills\\\": [{\n          \\\"type\\\": \\\"custom\\\",\n          \\\"skill_id\\\": \\\"skill_01AbCdEfGhIjKlMnOpQrStUv\\\",\n          \\\"version\\\": \\\"latest\\\"\n        }]\n      },\n      \\\"messages\\\": [/* include conversation history */],\n      \\\"tools\\\": [{\n        \\\"type\\\": \\\"code_execution_20250825\\\",\n        \\\"name\\\": \\\"code_execution\\\"\n      }]\n    }\")\n\nSTOP_REASON=$(echo \"$RESPONSE\" | jq -r '.stop_reason')\ndone\npython Python\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    max_tokens=4096,\n    betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n    container={\n        \"skills\": [\n            {\n                \"type\": \"anthropic\",\n                \"skill_id\": \"xlsx\",\n                \"version\": \"latest\"\n            },\n            {\n                \"type\": \"anthropic\",\n                \"skill_id\": \"pptx\",\n                \"version\": \"latest\"\n            },\n            {\n                \"type\": \"custom\",\n                \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n                \"version\": \"latest\"\n            }\n        ]\n    },\n    messages=[{\n        \"role\": \"user\",\n        \"content\": \"Analyze sales data and create a presentation\"\n    }],\n    tools=[{\n        \"type\": \"code_execution_20250825\",\n        \"name\": \"code_execution\"\n    }]\n)\ntypescript TypeScript\nconst response = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    skills: [\n      {\n        type: 'anthropic',\n        skill_id: 'xlsx',\n        version: 'latest'\n      },\n      {\n        type: 'anthropic',\n        skill_id: 'pptx',\n        version: 'latest'\n      },\n      {\n        type: 'custom',\n        skill_id: 'skill_01AbCdEfGhIjKlMnOpQrStUv',\n        version: 'latest'\n      }\n    ]\n  },\n  messages: [{\n    role: 'user',\n    content: 'Analyze sales data and create a presentation'\n  }],\n  tools: [{\n    type: 'code_execution_20250825',\n    name: 'code_execution'\n  }]\n});\nbash Shell\ncurl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5-20250929\",\n    \"max_tokens\": 4096,\n    \"container\": {\n      \"skills\": [\n        {\n          \"type\": \"anthropic\",\n          \"skill_id\": \"xlsx\",\n          \"version\": \"latest\"\n        },\n        {\n          \"type\": \"anthropic\",\n          \"skill_id\": \"pptx\",\n          \"version\": \"latest\"\n        },\n        {\n          \"type\": \"custom\",\n          \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n          \"version\": \"latest\"\n        }\n      ]\n    },\n    \"messages\": [{\n      \"role\": \"user\",\n      \"content\": \"Analyze sales data and create a presentation\"\n    }],\n    \"tools\": [{\n      \"type\": \"code_execution_20250825\",\n      \"name\": \"code_execution\"\n    }]\n  }'\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n<Note>\nThe response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation and provide additional guidance.\n</Note>\n\n### Using Multiple Skills\n\nCombine multiple Skills in a single request to handle complex workflows:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n---\n\n## Managing Custom Skills\n\n### Creating a Skill\n\nUpload your custom Skill to make it available in your workspace. You can upload using either a directory path or individual file objects.\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Using Multiple Skills",
+      "id": "using-multiple-skills"
+    },
+    {
+      "level": "h2",
+      "text": "Managing Custom Skills",
+      "id": "managing-custom-skills"
+    },
+    {
+      "level": "h3",
+      "text": "Creating a Skill",
+      "id": "creating-a-skill"
+    }
+  ],
+  "url": "llms-txt#check-stop_reason-and-handle-pause_turn-in-a-loop",
+  "links": []
+}

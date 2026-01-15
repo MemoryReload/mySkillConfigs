@@ -1,0 +1,23 @@
+{
+  "title": "Allow only specific tools with streaming input",
+  "content": "async def message_generator():\n    yield {\n        \"type\": \"user\",\n        \"message\": {\n            \"role\": \"user\",\n            \"content\": \"Calculate 5 + 3 and translate 'hello' to Spanish\"\n        }\n    }\n\nasync for message in query(\n    prompt=message_generator(),  # Use async generator for streaming input\n    options=ClaudeAgentOptions(\n        mcp_servers={\"utilities\": multi_tool_server},\n        allowed_tools=[\n            \"mcp__utilities__calculate\",   # Allow calculator\n            \"mcp__utilities__translate\",   # Allow translator\n            # \"mcp__utilities__search_web\" is NOT allowed\n        ]\n    )\n):\n    if hasattr(message, 'result'):\n        print(message.result)\ntypescript TypeScript\nimport { z } from \"zod\";\n\ntool(\n  \"process_data\",\n  \"Process structured data with type safety\",\n  {\n    // Zod schema defines both runtime validation and TypeScript types\n    data: z.object({\n      name: z.string(),\n      age: z.number().min(0).max(150),\n      email: z.string().email(),\n      preferences: z.array(z.string()).optional()\n    }),\n    format: z.enum([\"json\", \"csv\", \"xml\"]).default(\"json\")\n  },\n  async (args) => {\n    // args is fully typed based on the schema\n    // TypeScript knows: args.data.name is string, args.data.age is number, etc.\n    console.log(`Processing ${args.data.name}'s data as ${args.format}`);\n    \n    // Your processing logic here\n    return {\n      content: [{\n        type: \"text\",\n        text: `Processed data for ${args.data.name}`\n      }]\n    };\n  }\n)\npython Python\nfrom typing import Any",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n## Type Safety with Python\n\nThe `@tool` decorator supports various schema definition approaches for type safety:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Type Safety with Python",
+      "id": "type-safety-with-python"
+    }
+  ],
+  "url": "llms-txt#allow-only-specific-tools-with-streaming-input",
+  "links": []
+}

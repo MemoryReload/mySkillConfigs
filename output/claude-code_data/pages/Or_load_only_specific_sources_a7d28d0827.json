@@ -1,0 +1,24 @@
+{
+  "title": "Or load only specific sources:",
+  "content": "async for message in query(\n    prompt=\"Hello\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"project\"]  # Only project settings\n    )\n):\n    print(message)\n```\n\n**Why this changed:** Ensures SDK applications have predictable behavior independent of local filesystem configurations. This is especially important for:\n- **CI/CD environments** - Consistent behavior without local customizations\n- **Deployed applications** - No dependency on filesystem settings\n- **Testing** - Isolated test environments\n- **Multi-tenant systems** - Prevent settings leakage between users\n\n<Note>\n**Backward compatibility:** If your application relied on filesystem settings (custom slash commands, CLAUDE.md instructions, etc.), add `settingSources: ['user', 'project', 'local']` to your options.\n</Note>\n\nThe Claude Code SDK was originally designed for coding tasks, but it has evolved into a powerful framework for building all types of AI agents. The new name \"Claude Agent SDK\" better reflects its capabilities:\n\n- Building business agents (legal assistants, finance advisors, customer support)\n- Creating specialized coding agents (SRE bots, security reviewers, code review agents)\n- Developing custom agents for any domain with tool use, MCP integration, and more\n\nIf you encounter any issues during migration:\n\n**For TypeScript/JavaScript:**\n\n1. Check that all imports are updated to use `@anthropic-ai/claude-agent-sdk`\n2. Verify your package.json has the new package name\n3. Run `npm install` to ensure dependencies are updated\n\n1. Check that all imports are updated to use `claude_agent_sdk`\n2. Verify your requirements.txt or pyproject.toml has the new package name\n3. Run `pip install claude-agent-sdk` to ensure the package is installed\n\n- Explore the [Agent SDK Overview](/docs/en/agent-sdk/overview) to learn about available features\n- Check out the [TypeScript SDK Reference](/docs/en/agent-sdk/typescript) for detailed API documentation\n- Review the [Python SDK Reference](/docs/en/agent-sdk/python) for Python-specific documentation\n- Learn about [Custom Tools](/docs/en/agent-sdk/custom-tools) and [MCP Integration](/docs/en/agent-sdk/mcp)",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Why the Rename?",
+      "id": "why-the-rename?"
+    },
+    {
+      "level": "h2",
+      "text": "Getting Help",
+      "id": "getting-help"
+    },
+    {
+      "level": "h2",
+      "text": "Next Steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#or-load-only-specific-sources:",
+  "links": []
+}

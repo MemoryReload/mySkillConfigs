@@ -1,0 +1,8 @@
+{
+  "title": "Define tools using the decorator",
+  "content": "@beta_tool\ndef get_weather(location: str, unit: str = \"fahrenheit\") -> str:\n    \"\"\"Get the current weather in a given location.\n\nArgs:\n        location: The city and state, e.g. San Francisco, CA\n        unit: Temperature unit, either 'celsius' or 'fahrenheit'\n    \"\"\"\n    # In a full implementation, you'd call a weather API here\n    return json.dumps({\"temperature\": \"20°C\", \"condition\": \"Sunny\"})\n\n@beta_tool\ndef calculate_sum(a: int, b: int) -> str:\n    \"\"\"Add two numbers together.\n\nArgs:\n        a: First number\n        b: Second number\n    \"\"\"\n    return str(a + b)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#define-tools-using-the-decorator",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Define input schema",
+  "content": "class GetWeatherInput < Anthropic::BaseModel\n  required :location, String, doc: \"The city and state, e.g. San Francisco, CA\"\n  optional :unit, Anthropic::InputSchema::EnumOf[\"celsius\", \"fahrenheit\"],\n           doc: \"Temperature unit\"\nend",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#define-input-schema",
+  "links": []
+}

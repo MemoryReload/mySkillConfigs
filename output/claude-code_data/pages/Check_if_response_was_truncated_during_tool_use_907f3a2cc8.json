@@ -1,0 +1,17 @@
+{
+  "title": "Check if response was truncated during tool use",
+  "content": "if response.stop_reason == \"max_tokens\":\n    # Check if the last content block is an incomplete tool_use\n    last_block = response.content[-1]\n    if last_block.type == \"tool_use\":\n        # Send the request with higher max_tokens\n        response = client.messages.create(\n            model=\"claude-sonnet-4-5\",\n            max_tokens=4096,  # Increased limit\n            messages=messages,\n            tools=tools\n        )\ntypescript TypeScript\n// Check if response was truncated during tool use\nif (response.stop_reason === \"max_tokens\") {\n  // Check if the last content block is an incomplete tool_use\n  const lastBlock = response.content[response.content.length - 1];\n  if (lastBlock.type === \"tool_use\") {\n    // Send the request with higher max_tokens\n    response = await anthropic.messages.create({\n      model: \"claude-sonnet-4-5\",\n      max_tokens: 4096, // Increased limit\n      messages: messages,\n      tools: tools\n    });\n  }\n}\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Handling the `pause_turn` stop reason\n\nWhen using server tools like web search, the API may return a `pause_turn` stop reason, indicating that the API has paused a long-running turn.\n\nHere's how to handle the `pause_turn` stop reason:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#check-if-response-was-truncated-during-tool-use",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Extract thinking block and tool use block",
+  "content": "thinking_block = next((block for block in response.content\n                      if block.type == 'thinking'), None)\ntool_use_block = next((block for block in response.content\n                      if block.type == 'tool_use'), None)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#extract-thinking-block-and-tool-use-block",
+  "links": []
+}

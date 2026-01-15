@@ -1,0 +1,8 @@
+{
+  "title": "The original session remains unchanged and can still be resumed",
+  "content": "async for message in query(\n    prompt=\"Add authentication to the REST API\",\n    options=ClaudeAgentOptions(\n        resume=session_id,\n        fork_session=False,  # Continue original session (default)\n        model=\"claude-sonnet-4-5\"\n    )\n):\n    print(message)\n```",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#the-original-session-remains-unchanged-and-can-still-be-resumed",
+  "links": []
+}

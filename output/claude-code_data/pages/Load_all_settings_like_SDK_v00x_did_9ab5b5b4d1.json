@@ -1,0 +1,13 @@
+{
+  "title": "Load all settings like SDK v0.0.x did",
+  "content": "from claude_agent_sdk import query, ClaudeAgentOptions\n\nasync for message in query(\n    prompt=\"Analyze this code\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\", \"local\"]  # Load all settings\n    )\n):\n    print(message)\npython",
+  "code_samples": [
+    {
+      "code": "**Load only specific setting sources:**",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#load-all-settings-like-sdk-v0.0.x-did",
+  "links": []
+}

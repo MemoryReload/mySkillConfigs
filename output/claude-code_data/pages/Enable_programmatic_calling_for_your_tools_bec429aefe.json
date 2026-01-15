@@ -1,0 +1,14 @@
+{
+  "title": "Enable programmatic calling for your tools",
+  "content": "response = client.beta.messages.create(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"advanced-tool-use-2025-11-20\"],\n    max_tokens=4096,\n    messages=[{\n        \"role\": \"user\",\n        \"content\": \"Get weather for 5 cities and find the warmest\"\n    }],\n    tools=[\n        {\n            \"type\": \"code_execution_20250825\",\n            \"name\": \"code_execution\"\n        },\n        {\n            \"name\": \"get_weather\",\n            \"description\": \"Get weather for a city\",\n            \"input_schema\": {...},\n            \"allowed_callers\": [\"code_execution_20250825\"]  # Enable programmatic calling\n        }\n    ]\n)\n```\n</CodeGroup>\n\nLearn more in the [Programmatic tool calling documentation](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling).\n\n## Using code execution with Agent Skills\n\nThe code execution tool enables Claude to use [Agent Skills](/docs/en/agents-and-tools/agent-skills/overview). Skills are modular capabilities consisting of instructions, scripts, and resources that extend Claude's functionality.\n\nLearn more in the [Agent Skills documentation](/docs/en/agents-and-tools/agent-skills/overview) and [Agent Skills API guide](/docs/en/build-with-claude/skills-guide).",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Using code execution with Agent Skills",
+      "id": "using-code-execution-with-agent-skills"
+    }
+  ],
+  "url": "llms-txt#enable-programmatic-calling-for-your-tools",
+  "links": []
+}

@@ -1,0 +1,23 @@
+{
+  "title": ".mcp.json configuration",
+  "content": "{\n  \"mcpServers\": {\n    \"my-tool\": {\n      \"command\": \"python\",\n      \"args\": [\"./my_mcp_server.py\"],\n      \"env\": {\n        \"DEBUG\": \"${DEBUG:-false}\"\n      }\n    }\n  }\n}\ntypescript TypeScript\n// SSE server configuration\n{\n  \"mcpServers\": {\n    \"remote-api\": {\n      \"type\": \"sse\",\n      \"url\": \"https://api.example.com/mcp/sse\",\n      \"headers\": {\n        \"Authorization\": \"Bearer ${API_TOKEN}\"\n      }\n    }\n  }\n}\n\n// HTTP server configuration\n{\n  \"mcpServers\": {\n    \"http-service\": {\n      \"type\": \"http\",\n      \"url\": \"https://api.example.com/mcp\",\n      \"headers\": {\n        \"X-API-Key\": \"${API_KEY}\"\n      }\n    }\n  }\n}\npython Python",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n### HTTP/SSE Servers\n\nRemote servers with network communication:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "HTTP/SSE Servers",
+      "id": "http/sse-servers"
+    }
+  ],
+  "url": "llms-txt#.mcp.json-configuration",
+  "links": []
+}

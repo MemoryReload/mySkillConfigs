@@ -1,0 +1,79 @@
+{
+  "title": "How to implement tool use",
+  "content": "We recommend using the latest Claude Sonnet (4.5) or Claude Opus (4.5) model for complex tools and ambiguous queries; they handle multiple tools better and seek clarification when needed.\n\nUse Claude Haiku models for straightforward tools, but note they may infer missing parameters.\n\n<Tip>\nIf using Claude with tool use and extended thinking, refer to our guide [here](/docs/en/build-with-claude/extended-thinking) for more information.\n</Tip>\n\n## Specifying client tools\n\nClient tools (both Anthropic-defined and user-defined) are specified in the `tools` top-level parameter of the API request. Each tool definition includes:\n\n| Parameter      | Description                                                                                         |\n| :------------- | :-------------------------------------------------------------------------------------------------- |\n| `name`         | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,64}$`.                                 |\n| `description`  | A detailed plaintext description of what the tool does, when it should be used, and how it behaves. |\n| `input_schema` | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool.     |\n| `input_examples` | (Optional, beta) An array of example input objects to help Claude understand how to use the tool. See [Providing tool use examples](#providing-tool-use-examples). |\n\n<section title=\"Example simple tool definition\">\n\nThis tool, named `get_weather`, expects an input object with a required `location` string and an optional `unit` string that must be either \"celsius\" or \"fahrenheit\".\n\n### Tool use system prompt\n\nWhen you call the Claude API with the `tools` parameter, we construct a special system prompt from the tool definitions, tool configuration, and any user-specified system prompt. The constructed prompt is designed to instruct the model to use the specified tool(s) and provide the necessary context for the tool to operate properly:\n\n### Best practices for tool definitions\n\nTo get the best performance out of Claude when using tools, follow these guidelines:\n\n- **Provide extremely detailed descriptions.** This is by far the most important factor in tool performance. Your descriptions should explain every detail about the tool, including:\n  - What the tool does\n  - When it should be used (and when it shouldn't)\n  - What each parameter means and how it affects the tool's behavior\n  - Any important caveats or limitations, such as what information the tool does not return if the tool name is unclear. The more context you can give Claude about your tools, the better it will be at deciding when and how to use them. Aim for at least 3-4 sentences per tool description, more if the tool is complex.\n- **Prioritize descriptions, but consider using `input_examples` for complex tools.** Clear descriptions are most important, but for tools with complex inputs, nested objects, or format-sensitive parameters, you can use the `input_examples` field (beta) to provide schema-validated examples. See [Providing tool use examples](#providing-tool-use-examples) for details.\n\n<section title=\"Example of a good tool description\">\n\n<section title=\"Example poor tool description\">\n\nThe good description clearly explains what the tool does, when to use it, what data it returns, and what the `ticker` parameter means. The poor description is too brief and leaves Claude with many open questions about the tool's behavior and usage.\n\n## Providing tool use examples\n\nYou can provide concrete examples of valid tool inputs to help Claude understand how to use your tools more effectively. This is particularly useful for complex tools with nested objects, optional parameters, or format-sensitive inputs.\n\n<Info>\nTool use examples is a beta feature. Include the appropriate [beta header](/docs/en/api/beta-headers) for your provider:\n\n| Provider | Beta header | Supported models |\n|----------|-------------|------------------|\n| Claude API,<br/>Microsoft Foundry | `advanced-tool-use-2025-11-20` | All models |\n| Vertex AI,<br/>Amazon Bedrock | `tool-examples-2025-10-29` | Claude Opus 4.5 only |\n</Info>\n\nAdd an optional `input_examples` field to your tool definition with an array of example input objects. Each example must be valid according to the tool's `input_schema`:\n\nExamples are included in the prompt alongside your tool schema, showing Claude concrete patterns for well-formed tool calls. This helps Claude understand when to include optional parameters, what formats to use, and how to structure complex inputs.\n\n### Requirements and limitations\n\n- **Schema validation** - Each example must be valid according to the tool's `input_schema`. Invalid examples return a 400 error\n- **Not supported for server-side tools** - Only user-defined tools can have input examples\n- **Token cost** - Examples add to prompt tokens: ~20-50 tokens for simple examples, ~100-200 tokens for complex nested objects\n\n## Tool runner (beta)\n\nThe tool runner provides an out-of-the-box solution for executing tools with Claude. Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:\n\n- Executes tools when Claude calls them\n- Handles the request/response cycle\n- Manages conversation state\n- Provides type safety and validation\n\nWe recommend that you use the tool runner for most tool use implementations.\n\n<Note>\nThe tool runner is currently in beta and available in the [Python](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), and [Ruby](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta) SDKs.\n</Note>\n\n<Tip>\n**Automatic context management with compaction**\n\nThe tool runner supports automatic [compaction](/docs/en/build-with-claude/context-editing#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold. This allows long-running agentic tasks to continue beyond context window limits.\n</Tip>\n\nDefine tools using the SDK helpers, then use the tool runner to execute them.\n\n<Tabs>\n<Tab title=\"Python\">\n\nUse the `@beta_tool` decorator to define tools with type hints and docstrings.\n\n<Note>\nIf you're using the async client, replace `@beta_tool` with `@beta_async_tool` and define the function with `async def`.\n</Note>\n\n```python\nimport anthropic\nimport json\nfrom anthropic import beta_tool",
+  "code_samples": [
+    {
+      "code": "This tool, named `get_weather`, expects an input object with a required `location` string and an optional `unit` string that must be either \"celsius\" or \"fahrenheit\".\n\n</section>\n\n### Tool use system prompt\n\nWhen you call the Claude API with the `tools` parameter, we construct a special system prompt from the tool definitions, tool configuration, and any user-specified system prompt. The constructed prompt is designed to instruct the model to use the specified tool(s) and provide the necessary context for the tool to operate properly:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Best practices for tool definitions\n\nTo get the best performance out of Claude when using tools, follow these guidelines:\n\n- **Provide extremely detailed descriptions.** This is by far the most important factor in tool performance. Your descriptions should explain every detail about the tool, including:\n  - What the tool does\n  - When it should be used (and when it shouldn't)\n  - What each parameter means and how it affects the tool's behavior\n  - Any important caveats or limitations, such as what information the tool does not return if the tool name is unclear. The more context you can give Claude about your tools, the better it will be at deciding when and how to use them. Aim for at least 3-4 sentences per tool description, more if the tool is complex.\n- **Prioritize descriptions, but consider using `input_examples` for complex tools.** Clear descriptions are most important, but for tools with complex inputs, nested objects, or format-sensitive parameters, you can use the `input_examples` field (beta) to provide schema-validated examples. See [Providing tool use examples](#providing-tool-use-examples) for details.\n\n<section title=\"Example of a good tool description\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Example poor tool description\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\nThe good description clearly explains what the tool does, when to use it, what data it returns, and what the `ticker` parameter means. The poor description is too brief and leaves Claude with many open questions about the tool's behavior and usage.\n\n## Providing tool use examples\n\nYou can provide concrete examples of valid tool inputs to help Claude understand how to use your tools more effectively. This is particularly useful for complex tools with nested objects, optional parameters, or format-sensitive inputs.\n\n<Info>\nTool use examples is a beta feature. Include the appropriate [beta header](/docs/en/api/beta-headers) for your provider:\n\n| Provider | Beta header | Supported models |\n|----------|-------------|------------------|\n| Claude API,<br/>Microsoft Foundry | `advanced-tool-use-2025-11-20` | All models |\n| Vertex AI,<br/>Amazon Bedrock | `tool-examples-2025-10-29` | Claude Opus 4.5 only |\n</Info>\n\n### Basic usage\n\nAdd an optional `input_examples` field to your tool definition with an array of example input objects. Each example must be valid according to the tool's `input_schema`:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nExamples are included in the prompt alongside your tool schema, showing Claude concrete patterns for well-formed tool calls. This helps Claude understand when to include optional parameters, what formats to use, and how to structure complex inputs.\n\n### Requirements and limitations\n\n- **Schema validation** - Each example must be valid according to the tool's `input_schema`. Invalid examples return a 400 error\n- **Not supported for server-side tools** - Only user-defined tools can have input examples\n- **Token cost** - Examples add to prompt tokens: ~20-50 tokens for simple examples, ~100-200 tokens for complex nested objects\n\n## Tool runner (beta)\n\nThe tool runner provides an out-of-the-box solution for executing tools with Claude. Instead of manually handling tool calls, tool results, and conversation management, the tool runner automatically:\n\n- Executes tools when Claude calls them\n- Handles the request/response cycle\n- Manages conversation state\n- Provides type safety and validation\n\nWe recommend that you use the tool runner for most tool use implementations.\n\n<Note>\nThe tool runner is currently in beta and available in the [Python](https://github.com/anthropics/anthropic-sdk-python/blob/main/tools.md), [TypeScript](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/helpers.md#tool-helpers), and [Ruby](https://github.com/anthropics/anthropic-sdk-ruby/blob/main/helpers.md#3-auto-looping-tool-runner-beta) SDKs.\n</Note>\n\n<Tip>\n**Automatic context management with compaction**\n\nThe tool runner supports automatic [compaction](/docs/en/build-with-claude/context-editing#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold. This allows long-running agentic tasks to continue beyond context window limits.\n</Tip>\n\n### Basic usage\n\nDefine tools using the SDK helpers, then use the tool runner to execute them.\n\n<Tabs>\n<Tab title=\"Python\">\n\nUse the `@beta_tool` decorator to define tools with type hints and docstrings.\n\n<Note>\nIf you're using the async client, replace `@beta_tool` with `@beta_async_tool` and define the function with `async def`.\n</Note>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Choosing a model",
+      "id": "choosing-a-model"
+    },
+    {
+      "level": "h2",
+      "text": "Specifying client tools",
+      "id": "specifying-client-tools"
+    },
+    {
+      "level": "h3",
+      "text": "Tool use system prompt",
+      "id": "tool-use-system-prompt"
+    },
+    {
+      "level": "h3",
+      "text": "Best practices for tool definitions",
+      "id": "best-practices-for-tool-definitions"
+    },
+    {
+      "level": "h2",
+      "text": "Providing tool use examples",
+      "id": "providing-tool-use-examples"
+    },
+    {
+      "level": "h3",
+      "text": "Basic usage",
+      "id": "basic-usage"
+    },
+    {
+      "level": "h3",
+      "text": "Requirements and limitations",
+      "id": "requirements-and-limitations"
+    },
+    {
+      "level": "h2",
+      "text": "Tool runner (beta)",
+      "id": "tool-runner-(beta)"
+    },
+    {
+      "level": "h3",
+      "text": "Basic usage",
+      "id": "basic-usage"
+    }
+  ],
+  "url": "llms-txt#how-to-implement-tool-use",
+  "links": []
+}

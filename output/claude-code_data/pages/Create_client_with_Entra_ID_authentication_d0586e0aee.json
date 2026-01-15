@@ -1,0 +1,8 @@
+{
+  "title": "Create client with Entra ID authentication",
+  "content": "client = AnthropicFoundry(\n    resource='example-resource', # your resource name\n    azure_ad_token_provider=token_provider  # Use token provider for Entra ID auth\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#create-client-with-entra-id-authentication",
+  "links": []
+}

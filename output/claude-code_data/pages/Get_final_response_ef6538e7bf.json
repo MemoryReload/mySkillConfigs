@@ -1,0 +1,8 @@
+{
+  "title": "Get final response",
+  "content": "print(\"\\nGetting final response...\")\nfinal_response = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=messages,\n    tools=tools\n)\n\nprint(f\"\\nClaude's response:\\n{final_response.content[0].text}\")",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#get-final-response",
+  "links": []
+}

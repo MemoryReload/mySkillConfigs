@@ -1,0 +1,34 @@
+{
+  "title": "List Models (Beta) (Go)",
+  "content": "URL: https://platform.claude.com/docs/en/api/go/beta/models/list\n\n`client.Beta.Models.List(ctx, params) (*Page[BetaModelInfo], error)`\n\nList available models.\n\nThe Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.\n\n- `params BetaModelListParams`\n\n- `AfterID param.Field[string]`\n\nQuery param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.\n\n- `BeforeID param.Field[string]`\n\nQuery param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.\n\n- `Limit param.Field[int64]`\n\nQuery param: Number of items to return per page.\n\nDefaults to `20`. Ranges from `1` to `1000`.\n\n- `Betas param.Field[[]AnthropicBeta]`\n\nHeader param: Optional header to specify the beta version(s) you want to use.\n\n- `type AnthropicBeta string`\n\n- `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = \"message-batches-2024-09-24\"`\n\n- `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = \"prompt-caching-2024-07-31\"`\n\n- `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = \"computer-use-2024-10-22\"`\n\n- `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = \"computer-use-2025-01-24\"`\n\n- `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = \"pdfs-2024-09-25\"`\n\n- `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = \"token-counting-2024-11-01\"`\n\n- `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = \"token-efficient-tools-2025-02-19\"`\n\n- `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = \"output-128k-2025-02-19\"`\n\n- `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = \"files-api-2025-04-14\"`\n\n- `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = \"mcp-client-2025-04-04\"`\n\n- `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = \"mcp-client-2025-11-20\"`\n\n- `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = \"dev-full-thinking-2025-05-14\"`\n\n- `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = \"interleaved-thinking-2025-05-14\"`\n\n- `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = \"code-execution-2025-05-22\"`\n\n- `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = \"extended-cache-ttl-2025-04-11\"`\n\n- `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = \"context-1m-2025-08-07\"`\n\n- `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = \"context-management-2025-06-27\"`\n\n- `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = \"model-context-window-exceeded-2025-08-26\"`\n\n- `const AnthropicBetaSkills2025_10_02 AnthropicBeta = \"skills-2025-10-02\"`\n\n- `type BetaModelInfo struct{…}`\n\nUnique model identifier.\n\nRFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.\n\n- `DisplayName string`\n\nA human-readable name for the model.\n\nFor Models, this is always `\"model\"`.\n\n- `const ModelModel Model = \"model\"`",
+  "code_samples": [
+    {
+      "code": "package main\n\nimport (\n  \"context\"\n  \"fmt\"\n\n  \"github.com/anthropics/anthropic-sdk-go\"\n  \"github.com/anthropics/anthropic-sdk-go/option\"\n)\n\nfunc main() {\n  client := anthropic.NewClient(\n    option.WithAPIKey(\"my-anthropic-api-key\"),\n  )\n  page, err := client.Beta.Models.List(context.TODO(), anthropic.BetaModelListParams{\n\n  })\n  if err != nil {\n    panic(err.Error())\n  }\n  fmt.Printf(\"%+v\\n\", page)\n}",
+      "language": "go"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#list-models-(beta)-(go)",
+  "links": []
+}

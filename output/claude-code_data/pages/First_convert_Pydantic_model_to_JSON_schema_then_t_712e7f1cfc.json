@@ -1,0 +1,8 @@
+{
+  "title": "First convert Pydantic model to JSON schema, then transform",
+  "content": "schema = TypeAdapter(ContactInfo).json_schema()\nschema = transform_schema(schema)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-convert-pydantic-model-to-json-schema,-then-transform",
+  "links": []
+}

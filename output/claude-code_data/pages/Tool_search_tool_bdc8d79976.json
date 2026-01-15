@@ -1,0 +1,139 @@
+{
+  "title": "Tool search tool",
+  "content": "The tool search tool enables Claude to work with hundreds or thousands of tools by dynamically discovering and loading them on-demand. Instead of loading all tool definitions into the context window upfront, Claude searches your tool catalog—including tool names, descriptions, argument names, and argument descriptions—and loads only the tools it needs.\n\nThis approach solves two critical challenges as tool libraries scale:\n\n- **Context efficiency**: Tool definitions can consume massive portions of your context window (50 tools ≈ 10-20K tokens), leaving less room for actual work\n- **Tool selection accuracy**: Claude's ability to correctly select tools degrades significantly with more than 30-50 conventionally-available tools\n\nAlthough this is provided as a server-side tool, you can also implement your own client-side tool search functionality. See [Custom tool search implementation](#custom-tool-search-implementation) for details.\n\n<Note>\nThe tool search tool is currently in public beta. Include the appropriate [beta header](/docs/en/api/beta-headers) for your provider:\n\n| Provider                 | Beta header                    | Supported models                       |\n| ------------------------ | ------------------------------ | -------------------------------------- |\n| Claude API<br/>Microsoft Foundry  | `advanced-tool-use-2025-11-20` | Claude Opus 4.5<br />Claude Sonnet 4.5 |\n| Google Cloud's Vertex AI | `tool-search-tool-2025-10-19`  | Claude Opus 4.5<br />Claude Sonnet 4.5 |\n| Amazon Bedrock           | `tool-search-tool-2025-10-19`  | Claude Opus 4.5                        |\n\nPlease reach out through our [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA) to share your feedback on this feature.\n</Note>\n\n<Warning>\n  On Amazon Bedrock, server-side tool search is available only via the [invoke\n  API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html),\n  not the converse API.\n</Warning>\n\nYou can also implement [client-side tool search](#custom-tool-search-implementation) by returning `tool_reference` blocks from your own search implementation.\n\n## How tool search works\n\nThere are two tool search variants:\n\n- **Regex** (`tool_search_tool_regex_20251119`): Claude constructs regex patterns to search for tools\n- **BM25** (`tool_search_tool_bm25_20251119`): Claude uses natural language queries to search for tools\n\nWhen you enable the tool search tool:\n\n1. You include a tool search tool (e.g., `tool_search_tool_regex_20251119` or `tool_search_tool_bm25_20251119`) in your tools list\n2. You provide all tool definitions with `defer_loading: true` for tools that shouldn't be loaded immediately\n3. Claude sees only the tool search tool and any non-deferred tools initially\n4. When Claude needs additional tools, it searches using a tool search tool\n5. The API returns 3-5 most relevant `tool_reference` blocks\n6. These references are automatically expanded into full tool definitions\n7. Claude selects from the discovered tools and invokes them\n\nThis keeps your context window efficient while maintaining high tool selection accuracy.\n\nHere's a simple example with deferred tools:\n\nThe tool search tool has two variants:\n\n<Warning>\n**Regex variant query format: Python regex, NOT natural language**\n\nWhen using `tool_search_tool_regex_20251119`, Claude constructs regex patterns using Python's `re.search()` syntax, not natural language queries. Common patterns:\n\n- `\"weather\"` - matches tool names/descriptions containing \"weather\"\n- `\"get_.*_data\"` - matches tools like `get_user_data`, `get_weather_data`\n- `\"database.*query|query.*database\"` - OR patterns for flexibility\n- `\"(?i)slack\"` - case-insensitive search\n\nMaximum query length: 200 characters\n\n<Note>\n**BM25 variant query format: Natural language**\n\nWhen using `tool_search_tool_bm25_20251119`, Claude uses natural language queries to search for tools.\n\n### Deferred tool loading\n\nMark tools for on-demand loading by adding `defer_loading: true`:\n\n- Tools without `defer_loading` are loaded into context immediately\n- Tools with `defer_loading: true` are only loaded when Claude discovers them via search\n- The tool search tool itself should **never** have `defer_loading: true`\n- Keep your 3-5 most frequently used tools as non-deferred for optimal performance\n\nBoth tool search variants (`regex` and `bm25`) search tool names, descriptions, argument names, and argument descriptions.\n\nWhen Claude uses the tool search tool, the response includes new block types:\n\n### Understanding the response\n\n- **`server_tool_use`**: Indicates Claude is invoking the tool search tool\n- **`tool_search_tool_result`**: Contains the search results with a nested `tool_search_tool_search_result` object\n- **`tool_references`**: Array of `tool_reference` objects pointing to discovered tools\n- **`tool_use`**: Claude invoking the discovered tool\n\nThe `tool_reference` blocks are automatically expanded into full tool definitions before being shown to Claude. You don't need to handle this expansion yourself. It happens automatically in the API as long as you provide all matching tool definitions in the `tools` parameter.\n\nThe tool search tool works with [MCP servers](/docs/en/agents-and-tools/mcp-connector). Add the `\"mcp-client-2025-11-20\"` [beta header](/docs/en/api/beta-headers) to your API request, and then use `mcp_toolset` with `default_config` to defer loading MCP tools:\n\n**MCP configuration options:**\n\n- `default_config.defer_loading`: Set default for all tools from the MCP server\n- `configs`: Override defaults for specific tools by name\n- Combine multiple MCP servers with tool search for massive tool libraries\n\n## Custom tool search implementation\n\nYou can implement your own tool search logic (e.g., using embeddings or semantic search) by returning `tool_reference` blocks from a custom tool. When Claude calls your custom search tool, return a standard `tool_result` with `tool_reference` blocks in the content array:\n\nEvery tool referenced must have a corresponding tool definition in the top-level `tools` parameter with `defer_loading: true`. This approach lets you use more sophisticated search algorithms while maintaining compatibility with the tool search system.\n\n<Note>\nThe `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown above.\n</Note>\n\nFor a complete example using embeddings, see our [tool search with embeddings cookbook](https://platform.claude.com/cookbooks).\n\n<Note>\n  The tool search tool is not compatible with [tool use\n  examples](/docs/en/agents-and-tools/tool-use/implement-tool-use#providing-tool-use-examples).\n  If you need to provide examples of tool usage, use standard tool calling\n  without tool search.\n</Note>\n\n### HTTP errors (400 status)\n\nThese errors prevent the request from being processed:\n\n**All tools deferred:**\n\n**Missing tool definition:**\n\n### Tool result errors (200 status)\n\nErrors during tool execution return a 200 response with error information in the body:\n\n- `too_many_requests`: Rate limit exceeded for tool search operations\n- `invalid_pattern`: Malformed regex pattern\n- `pattern_too_long`: Pattern exceeds 200 character limit\n- `unavailable`: Tool search service temporarily unavailable\n\n<section title=\"400 Error: All tools are deferred\">\n\n**Cause**: You set `defer_loading: true` on ALL tools including the search tool\n\n**Fix**: Remove `defer_loading` from the tool search tool:\n\n<section title=\"400 Error: Missing tool definition\">\n\n**Cause**: A `tool_reference` points to a tool not in your `tools` array\n\n**Fix**: Ensure every tool that could be discovered has a complete definition:\n\n<section title=\"Claude doesn't find expected tools\">\n\n**Cause**: Tool names or descriptions don't match the regex pattern\n\n1. Check tool name and description—Claude searches BOTH fields\n2. Test your pattern: `import re; re.search(r\"your_pattern\", \"tool_name\")`\n3. Remember searches are case-sensitive by default (use `(?i)` for case-insensitive)\n4. Claude uses broad patterns like `\".*weather.*\"` not exact matches\n\n**Tip**: Add common keywords to tool descriptions to improve discoverability\n\nTool search works with [prompt caching](/docs/en/build-with-claude/prompt-caching). Add `cache_control` breakpoints to optimize multi-turn conversations:\n\n<CodeGroup>\n```python Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Tool definition\n\nThe tool search tool has two variants:",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "<Warning>\n**Regex variant query format: Python regex, NOT natural language**\n\nWhen using `tool_search_tool_regex_20251119`, Claude constructs regex patterns using Python's `re.search()` syntax, not natural language queries. Common patterns:\n\n- `\"weather\"` - matches tool names/descriptions containing \"weather\"\n- `\"get_.*_data\"` - matches tools like `get_user_data`, `get_weather_data`\n- `\"database.*query|query.*database\"` - OR patterns for flexibility\n- `\"(?i)slack\"` - case-insensitive search\n\nMaximum query length: 200 characters\n\n</Warning>\n\n<Note>\n**BM25 variant query format: Natural language**\n\nWhen using `tool_search_tool_bm25_20251119`, Claude uses natural language queries to search for tools.\n\n</Note>\n\n### Deferred tool loading\n\nMark tools for on-demand loading by adding `defer_loading: true`:",
+      "language": "unknown"
+    },
+    {
+      "code": "**Key points:**\n\n- Tools without `defer_loading` are loaded into context immediately\n- Tools with `defer_loading: true` are only loaded when Claude discovers them via search\n- The tool search tool itself should **never** have `defer_loading: true`\n- Keep your 3-5 most frequently used tools as non-deferred for optimal performance\n\nBoth tool search variants (`regex` and `bm25`) search tool names, descriptions, argument names, and argument descriptions.\n\n## Response format\n\nWhen Claude uses the tool search tool, the response includes new block types:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Understanding the response\n\n- **`server_tool_use`**: Indicates Claude is invoking the tool search tool\n- **`tool_search_tool_result`**: Contains the search results with a nested `tool_search_tool_search_result` object\n- **`tool_references`**: Array of `tool_reference` objects pointing to discovered tools\n- **`tool_use`**: Claude invoking the discovered tool\n\nThe `tool_reference` blocks are automatically expanded into full tool definitions before being shown to Claude. You don't need to handle this expansion yourself. It happens automatically in the API as long as you provide all matching tool definitions in the `tools` parameter.\n\n## MCP integration\n\nThe tool search tool works with [MCP servers](/docs/en/agents-and-tools/mcp-connector). Add the `\"mcp-client-2025-11-20\"` [beta header](/docs/en/api/beta-headers) to your API request, and then use `mcp_toolset` with `default_config` to defer loading MCP tools:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n**MCP configuration options:**\n\n- `default_config.defer_loading`: Set default for all tools from the MCP server\n- `configs`: Override defaults for specific tools by name\n- Combine multiple MCP servers with tool search for massive tool libraries\n\n## Custom tool search implementation\n\nYou can implement your own tool search logic (e.g., using embeddings or semantic search) by returning `tool_reference` blocks from a custom tool. When Claude calls your custom search tool, return a standard `tool_result` with `tool_reference` blocks in the content array:",
+      "language": "unknown"
+    },
+    {
+      "code": "Every tool referenced must have a corresponding tool definition in the top-level `tools` parameter with `defer_loading: true`. This approach lets you use more sophisticated search algorithms while maintaining compatibility with the tool search system.\n\n<Note>\nThe `tool_search_tool_result` format shown in the [Response format](#response-format) section is the server-side format used internally by Anthropic's built-in tool search. For custom client-side implementations, always use the standard `tool_result` format with `tool_reference` content blocks as shown above.\n</Note>\n\nFor a complete example using embeddings, see our [tool search with embeddings cookbook](https://platform.claude.com/cookbooks).\n\n## Error handling\n\n<Note>\n  The tool search tool is not compatible with [tool use\n  examples](/docs/en/agents-and-tools/tool-use/implement-tool-use#providing-tool-use-examples).\n  If you need to provide examples of tool usage, use standard tool calling\n  without tool search.\n</Note>\n\n### HTTP errors (400 status)\n\nThese errors prevent the request from being processed:\n\n**All tools deferred:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Missing tool definition:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Tool result errors (200 status)\n\nErrors during tool execution return a 200 response with error information in the body:",
+      "language": "unknown"
+    },
+    {
+      "code": "**Error codes:**\n\n- `too_many_requests`: Rate limit exceeded for tool search operations\n- `invalid_pattern`: Malformed regex pattern\n- `pattern_too_long`: Pattern exceeds 200 character limit\n- `unavailable`: Tool search service temporarily unavailable\n\n### Common mistakes\n\n<section title=\"400 Error: All tools are deferred\">\n\n**Cause**: You set `defer_loading: true` on ALL tools including the search tool\n\n**Fix**: Remove `defer_loading` from the tool search tool:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"400 Error: Missing tool definition\">\n\n**Cause**: A `tool_reference` points to a tool not in your `tools` array\n\n**Fix**: Ensure every tool that could be discovered has a complete definition:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Claude doesn't find expected tools\">\n\n**Cause**: Tool names or descriptions don't match the regex pattern\n\n**Debugging steps:**\n\n1. Check tool name and description—Claude searches BOTH fields\n2. Test your pattern: `import re; re.search(r\"your_pattern\", \"tool_name\")`\n3. Remember searches are case-sensitive by default (use `(?i)` for case-insensitive)\n4. Claude uses broad patterns like `\".*weather.*\"` not exact matches\n\n**Tip**: Add common keywords to tool descriptions to improve discoverability\n\n</section>\n\n## Prompt caching\n\nTool search works with [prompt caching](/docs/en/build-with-claude/prompt-caching). Add `cache_control` breakpoints to optimize multi-turn conversations:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How tool search works",
+      "id": "how-tool-search-works"
+    },
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h2",
+      "text": "Tool definition",
+      "id": "tool-definition"
+    },
+    {
+      "level": "h3",
+      "text": "Deferred tool loading",
+      "id": "deferred-tool-loading"
+    },
+    {
+      "level": "h2",
+      "text": "Response format",
+      "id": "response-format"
+    },
+    {
+      "level": "h3",
+      "text": "Understanding the response",
+      "id": "understanding-the-response"
+    },
+    {
+      "level": "h2",
+      "text": "MCP integration",
+      "id": "mcp-integration"
+    },
+    {
+      "level": "h2",
+      "text": "Custom tool search implementation",
+      "id": "custom-tool-search-implementation"
+    },
+    {
+      "level": "h2",
+      "text": "Error handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h3",
+      "text": "HTTP errors (400 status)",
+      "id": "http-errors-(400-status)"
+    },
+    {
+      "level": "h3",
+      "text": "Tool result errors (200 status)",
+      "id": "tool-result-errors-(200-status)"
+    },
+    {
+      "level": "h3",
+      "text": "Common mistakes",
+      "id": "common-mistakes"
+    },
+    {
+      "level": "h2",
+      "text": "Prompt caching",
+      "id": "prompt-caching"
+    }
+  ],
+  "url": "llms-txt#tool-search-tool",
+  "links": []
+}

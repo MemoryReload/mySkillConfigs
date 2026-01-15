@@ -1,0 +1,41 @@
+{
+  "title": "When handling Claude's coordinates, scale them back up",
+  "content": "def execute_click(x, y):\n    screen_x = x / scale\n    screen_y = y / scale\n    perform_click(screen_x, screen_y)\ntypescript TypeScript\nconst MAX_LONG_EDGE = 1568;\nconst MAX_PIXELS = 1_150_000;\n\nfunction getScaleFactor(width: number, height: number): number {\n  const longEdge = Math.max(width, height);\n  const totalPixels = width * height;\n\nconst longEdgeScale = MAX_LONG_EDGE / longEdge;\n  const totalPixelsScale = Math.sqrt(MAX_PIXELS / totalPixels);\n\nreturn Math.min(1.0, longEdgeScale, totalPixelsScale);\n}\n\n// When capturing screenshot\nconst scale = getScaleFactor(screenWidth, screenHeight);\nconst scaledWidth = Math.floor(screenWidth * scale);\nconst scaledHeight = Math.floor(screenHeight * scale);\n\n// Resize image to scaled dimensions before sending to Claude\nconst screenshot = captureAndResize(scaledWidth, scaledHeight);\n\n// When handling Claude's coordinates, scale them back up\nfunction executeClick(x: number, y: number): void {\n  const screenX = x / scale;\n  const screenY = y / scale;\n  performClick(screenX, screenY);\n}\npython\ndef click_and_wait(x, y, wait_time=0.5):\n    click_at(x, y)\n    time.sleep(wait_time)  # Allow UI to update\npython\ndef validate_action(action_type, params):\n    if action_type == \"left_click\":\n        x, y = params.get(\"coordinate\", (0, 0))\n        if not (0 <= x < display_width and 0 <= y < display_height):\n            return False, \"Coordinates out of bounds\"\n    return True, None\npython\nimport logging\n\ndef log_action(action_type, params, result):\n    logging.info(f\"Action: {action_type}, Params: {params}, Result: {result}\")\n```\n\n## Understand computer use limitations\n\nThe computer use functionality is in beta. While Claude's capabilities are cutting edge, developers should be aware of its limitations:\n\n1. **Latency**: the current computer use latency for human-AI interactions may be too slow compared to regular human-directed computer actions. We recommend focusing on use cases where speed isn't critical (e.g., background information gathering, automated software testing) in trusted environments.\n2. **Computer vision accuracy and reliability**: Claude may make mistakes or hallucinate when outputting specific coordinates while generating actions. Claude Sonnet 3.7 introduces the thinking capability that can help you understand the model's reasoning and identify potential issues.\n3. **Tool selection accuracy and reliability**: Claude may make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability may be lower when interacting with niche applications or multiple applications at once. We recommend that users prompt the model carefully when requesting complex tasks.\n4. **Scrolling reliability**: Claude Sonnet 3.7 introduced dedicated scroll actions with direction control that improves reliability. The model can now explicitly scroll in any direction (up/down/left/right) by a specified amount.\n5. **Spreadsheet interaction**: Mouse clicks for spreadsheet interaction have improved in Claude Sonnet 3.7 with the addition of more precise mouse control actions like `left_mouse_down`, `left_mouse_up`, and new modifier key support. Cell selection can be more reliable by using these fine-grained controls and combining modifier keys with clicks.\n6. **Account creation and content generation on social and communications platforms**: While Claude will visit websites, we are limiting its ability to create accounts or generate and share content or otherwise engage in human impersonation across social media websites and platforms. We may update this capability in the future.\n7. **Vulnerabilities**: Vulnerabilities like jailbreaking or prompt injection may persist across frontier AI systems, including the beta computer use API. In some circumstances, Claude will follow commands found in content, sometimes even in conflict with the user's instructions. For example, Claude instructions on webpages or contained in images may override instructions or cause Claude to make mistakes. We recommend:\n   a. Limiting computer use to trusted environments such as virtual machines or containers with minimal privileges\n   b. Avoiding giving computer use access to sensitive accounts or data without strict oversight\n   c. Informing end users of relevant risks and obtaining their consent before enabling or requesting permissions necessary for computer use features in your applications\n8. **Inappropriate or illegal actions**: Per Anthropic's terms of service, you must not employ computer use to violate any laws or our Acceptable Use Policy.\n\nAlways carefully review and verify Claude's computer use actions and logs. Do not use Claude for tasks requiring perfect precision or sensitive user information without human oversight.\n\nComputer use follows the standard [tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing). When using the computer use tool:\n\n**System prompt overhead**: The computer use beta adds 466-499 tokens to the system prompt\n\n**Computer use tool token usage**:\n| Model | Input tokens per tool definition |\n| ----- | -------------------------------- |\n| Claude 4.x models | 735 tokens |\n| Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | 735 tokens |\n\n**Additional token consumption**:\n- Screenshot images (see [Vision pricing](/docs/en/build-with-claude/vision))\n- Tool execution results returned to Claude\n\n<Note>\nIf you're also using bash or text editor tools alongside computer use, those tools have their own token costs as documented in their respective pages.\n</Note>\n\n<CardGroup cols={2}>\n  <Card\n    title=\"Reference implementation\"\n    icon=\"github-logo\"\n    href=\"https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo\"\n  >\n    Get started quickly with our complete Docker-based implementation\n  </Card>\n  <Card\n    title=\"Tool documentation\"\n    icon=\"tool\"\n    href=\"/docs/en/agents-and-tools/tool-use/overview\"\n  >\n    Learn more about tool use and creating custom tools\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Follow implementation best practices\n\n<section title=\"Use appropriate display resolution\">\n\nSet display dimensions that match your use case while staying within recommended limits:\n- For general desktop tasks: 1024x768 or 1280x720\n- For web applications: 1280x800 or 1366x768\n- Avoid resolutions above 1920x1080 to prevent performance issues\n\n</section>\n\n<section title=\"Implement proper screenshot handling\">\n\nWhen returning screenshots to Claude:\n- Encode screenshots as base64 PNG or JPEG\n- Consider compressing large screenshots to improve performance\n- Include relevant metadata like timestamp or display state\n- If using higher resolutions, ensure coordinates are accurately scaled\n\n</section>\n\n<section title=\"Add action delays\">\n\nSome applications need time to respond to actions:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Validate actions before execution\">\n\nCheck that requested actions are safe and valid:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Log actions for debugging\">\n\nKeep a log of all actions for troubleshooting:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Understand computer use limitations",
+      "id": "understand-computer-use-limitations"
+    },
+    {
+      "level": "h2",
+      "text": "Pricing",
+      "id": "pricing"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#when-handling-claude's-coordinates,-scale-them-back-up",
+  "links": []
+}

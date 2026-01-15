@@ -1,0 +1,73 @@
+{
+  "title": "Usage Report",
+  "content": "**get** `/v1/organizations/usage_report/messages`\n\nGet Messages Usage Report\n\n- `starting_at: string`\n\nTime buckets that start on or after this RFC 3339 timestamp will be returned.\n  Each time bucket will be snapped to the start of the minute/hour/day in UTC.\n\n- `api_key_ids: optional array of string`\n\nRestrict usage returned to the specified API key ID(s).\n\n- `bucket_width: optional \"1d\" or \"1m\" or \"1h\"`\n\nTime granularity of the response data.\n\n- `context_window: optional array of \"0-200k\" or \"200k-1M\"`\n\nRestrict usage returned to the specified context window(s).\n\n- `ending_at: optional string`\n\nTime buckets that end before this RFC 3339 timestamp will be returned.\n\n- `group_by: optional array of \"api_key_id\" or \"workspace_id\" or \"model\" or 2 more`\n\nGroup by any subset of the available options.\n\n- `limit: optional number`\n\nMaximum number of time buckets to return in the response.\n\nThe default and max limits depend on `bucket_width`:\n  • `\"1d\"`: Default of 7 days, maximum of 31 days\n  • `\"1h\"`: Default of 24 hours, maximum of 168 hours\n  • `\"1m\"`: Default of 60 minutes, maximum of 1440 minutes\n\n- `models: optional array of string`\n\nRestrict usage returned to the specified model(s).\n\n- `page: optional string`\n\nOptionally set to the `next_page` token from the previous response.\n\n- `service_tiers: optional array of \"standard\" or \"batch\" or \"priority\" or 3 more`\n\nRestrict usage returned to the specified service tier(s).\n\n- `\"priority_on_demand\"`\n\n- `workspace_ids: optional array of string`\n\nRestrict usage returned to the specified workspace ID(s).\n\n- `MessagesUsageReport = object { data, has_more, next_page }`\n\n- `data: array of object { ending_at, results, starting_at }`\n\n- `ending_at: string`\n\nEnd of the time bucket (exclusive) in RFC 3339 format.\n\n- `results: array of object { api_key_id, cache_creation, cache_read_input_tokens, 7 more }`\n\nList of usage items for this time bucket.  There may be multiple items if one or more `group_by[]` parameters are specified.\n\n- `api_key_id: string`\n\nID of the API key used. Null if not grouping by API key or for usage in the Anthropic Console.\n\n- `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`\n\nThe number of input tokens for cache creation.\n\n- `ephemeral_1h_input_tokens: number`\n\nThe number of input tokens used to create the 1 hour cache entry.\n\n- `ephemeral_5m_input_tokens: number`\n\nThe number of input tokens used to create the 5 minute cache entry.\n\n- `cache_read_input_tokens: number`\n\nThe number of input tokens read from the cache.\n\n- `context_window: \"0-200k\" or \"200k-1M\"`\n\nContext window used. Null if not grouping by context window.\n\nModel used. Null if not grouping by model.\n\n- `output_tokens: number`\n\nThe number of output tokens generated.\n\n- `server_tool_use: object { web_search_requests }`\n\nServer-side tool usage metrics.\n\n- `web_search_requests: number`\n\nThe number of web search requests made.\n\n- `service_tier: \"standard\" or \"batch\" or \"priority\" or 3 more`\n\nService tier used. Null if not grouping by service tier.\n\n- `\"priority_on_demand\"`\n\n- `uncached_input_tokens: number`\n\nThe number of uncached input tokens processed.\n\n- `workspace_id: string`\n\nID of the Workspace used. Null if not grouping by workspace or for the default workspace.\n\n- `starting_at: string`\n\nStart of the time bucket (inclusive) in RFC 3339 format.\n\n- `has_more: boolean`\n\nIndicates if there are more results.\n\n- `next_page: string`\n\nToken to provide in as `page` in the subsequent request to retrieve the next page of data.\n\n## Retrieve Claude Code\n\n**get** `/v1/organizations/usage_report/claude_code`\n\nRetrieve daily aggregated usage metrics for Claude Code users.\nEnables organizations to analyze developer productivity and build custom dashboards.\n\n- `starting_at: string`\n\nUTC date in YYYY-MM-DD format. Returns metrics for this single day only.\n\n- `limit: optional number`\n\nNumber of records per page (default: 20, max: 1000).\n\n- `page: optional string`\n\nOpaque cursor token from previous response's `next_page` field.\n\n- `ClaudeCodeUsageReport = object { data, has_more, next_page }`\n\n- `data: array of object { actor, core_metrics, customer_type, 6 more }`\n\nList of Claude Code usage records for the requested date.\n\n- `actor: object { email_address, type }  or object { api_key_name, type }`\n\nThe user or API key that performed the Claude Code actions.\n\n- `UserActor = object { email_address, type }`\n\n- `email_address: string`\n\nEmail address of the user who performed Claude Code actions.\n\n- `type: \"user_actor\"`\n\n- `APIActor = object { api_key_name, type }`\n\n- `api_key_name: string`\n\nName of the API key used to perform Claude Code actions.\n\n- `type: \"api_actor\"`\n\n- `core_metrics: object { commits_by_claude_code, lines_of_code, num_sessions, pull_requests_by_claude_code }`\n\nCore productivity metrics measuring Claude Code usage and impact.\n\n- `commits_by_claude_code: number`\n\nNumber of git commits created through Claude Code's commit functionality.\n\n- `lines_of_code: object { added, removed }`\n\nStatistics on code changes made through Claude Code.\n\nTotal number of lines of code added across all files by Claude Code.\n\nTotal number of lines of code removed across all files by Claude Code.\n\n- `num_sessions: number`\n\nNumber of distinct Claude Code sessions initiated by this actor.\n\n- `pull_requests_by_claude_code: number`\n\nNumber of pull requests created through Claude Code's PR functionality.\n\n- `customer_type: \"api\" or \"subscription\"`\n\nType of customer account (api for API customers, subscription for Pro/Team customers).\n\nUTC date for the usage metrics in YYYY-MM-DD format.\n\n- `model_breakdown: array of object { estimated_cost, model, tokens }`\n\nToken usage and cost breakdown by AI model used.\n\n- `estimated_cost: object { amount, currency }`\n\nEstimated cost for using this model\n\nEstimated cost amount in minor currency units (e.g., cents for USD).\n\nCurrency code for the estimated cost (e.g., 'USD').\n\nName of the AI model used for Claude Code interactions.\n\n- `tokens: object { cache_creation, cache_read, input, output }`\n\nToken usage breakdown for this model\n\n- `cache_creation: number`\n\nNumber of cache creation tokens consumed by this model.\n\n- `cache_read: number`\n\nNumber of cache read tokens consumed by this model.\n\nNumber of input tokens consumed by this model.\n\nNumber of output tokens generated by this model.\n\n- `organization_id: string`\n\nID of the organization that owns the Claude Code usage.\n\n- `terminal_type: string`\n\nType of terminal or environment where Claude Code was used.\n\n- `tool_actions: map[object { accepted, rejected } ]`\n\nBreakdown of tool action acceptance and rejection rates by tool type.\n\nNumber of tool action proposals that the user accepted.\n\nNumber of tool action proposals that the user rejected.\n\n- `subscription_type: optional \"enterprise\" or \"team\"`\n\nSubscription tier for subscription customers. Null for API customers.\n\n- `has_more: boolean`\n\nTrue if there are more records available beyond the current page.\n\n- `next_page: string`\n\nOpaque cursor token for fetching the next page of results, or null if no more pages are available.\n\n### Claude Code Usage Report\n\n- `ClaudeCodeUsageReport = object { data, has_more, next_page }`\n\n- `data: array of object { actor, core_metrics, customer_type, 6 more }`\n\nList of Claude Code usage records for the requested date.\n\n- `actor: object { email_address, type }  or object { api_key_name, type }`\n\nThe user or API key that performed the Claude Code actions.\n\n- `UserActor = object { email_address, type }`\n\n- `email_address: string`\n\nEmail address of the user who performed Claude Code actions.\n\n- `type: \"user_actor\"`\n\n- `APIActor = object { api_key_name, type }`\n\n- `api_key_name: string`\n\nName of the API key used to perform Claude Code actions.\n\n- `type: \"api_actor\"`\n\n- `core_metrics: object { commits_by_claude_code, lines_of_code, num_sessions, pull_requests_by_claude_code }`\n\nCore productivity metrics measuring Claude Code usage and impact.\n\n- `commits_by_claude_code: number`\n\nNumber of git commits created through Claude Code's commit functionality.\n\n- `lines_of_code: object { added, removed }`\n\nStatistics on code changes made through Claude Code.\n\nTotal number of lines of code added across all files by Claude Code.\n\nTotal number of lines of code removed across all files by Claude Code.\n\n- `num_sessions: number`\n\nNumber of distinct Claude Code sessions initiated by this actor.\n\n- `pull_requests_by_claude_code: number`\n\nNumber of pull requests created through Claude Code's PR functionality.\n\n- `customer_type: \"api\" or \"subscription\"`\n\nType of customer account (api for API customers, subscription for Pro/Team customers).\n\nUTC date for the usage metrics in YYYY-MM-DD format.\n\n- `model_breakdown: array of object { estimated_cost, model, tokens }`\n\nToken usage and cost breakdown by AI model used.\n\n- `estimated_cost: object { amount, currency }`\n\nEstimated cost for using this model\n\nEstimated cost amount in minor currency units (e.g., cents for USD).\n\nCurrency code for the estimated cost (e.g., 'USD').\n\nName of the AI model used for Claude Code interactions.\n\n- `tokens: object { cache_creation, cache_read, input, output }`\n\nToken usage breakdown for this model\n\n- `cache_creation: number`\n\nNumber of cache creation tokens consumed by this model.\n\n- `cache_read: number`\n\nNumber of cache read tokens consumed by this model.\n\nNumber of input tokens consumed by this model.\n\nNumber of output tokens generated by this model.\n\n- `organization_id: string`\n\nID of the organization that owns the Claude Code usage.\n\n- `terminal_type: string`\n\nType of terminal or environment where Claude Code was used.\n\n- `tool_actions: map[object { accepted, rejected } ]`\n\nBreakdown of tool action acceptance and rejection rates by tool type.\n\nNumber of tool action proposals that the user accepted.\n\nNumber of tool action proposals that the user rejected.\n\n- `subscription_type: optional \"enterprise\" or \"team\"`\n\nSubscription tier for subscription customers. Null for API customers.\n\n- `has_more: boolean`\n\nTrue if there are more records available beyond the current page.\n\n- `next_page: string`\n\nOpaque cursor token for fetching the next page of results, or null if no more pages are available.\n\n### Messages Usage Report\n\n- `MessagesUsageReport = object { data, has_more, next_page }`\n\n- `data: array of object { ending_at, results, starting_at }`\n\n- `ending_at: string`\n\nEnd of the time bucket (exclusive) in RFC 3339 format.\n\n- `results: array of object { api_key_id, cache_creation, cache_read_input_tokens, 7 more }`\n\nList of usage items for this time bucket.  There may be multiple items if one or more `group_by[]` parameters are specified.\n\n- `api_key_id: string`\n\nID of the API key used. Null if not grouping by API key or for usage in the Anthropic Console.\n\n- `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`\n\nThe number of input tokens for cache creation.\n\n- `ephemeral_1h_input_tokens: number`\n\nThe number of input tokens used to create the 1 hour cache entry.\n\n- `ephemeral_5m_input_tokens: number`\n\nThe number of input tokens used to create the 5 minute cache entry.\n\n- `cache_read_input_tokens: number`\n\nThe number of input tokens read from the cache.\n\n- `context_window: \"0-200k\" or \"200k-1M\"`\n\nContext window used. Null if not grouping by context window.\n\nModel used. Null if not grouping by model.\n\n- `output_tokens: number`\n\nThe number of output tokens generated.\n\n- `server_tool_use: object { web_search_requests }`\n\nServer-side tool usage metrics.\n\n- `web_search_requests: number`\n\nThe number of web search requests made.\n\n- `service_tier: \"standard\" or \"batch\" or \"priority\" or 3 more`\n\nService tier used. Null if not grouping by service tier.\n\n- `\"priority_on_demand\"`\n\n- `uncached_input_tokens: number`\n\nThe number of uncached input tokens processed.\n\n- `workspace_id: string`\n\nID of the Workspace used. Null if not grouping by workspace or for the default workspace.\n\n- `starting_at: string`\n\nStart of the time bucket (inclusive) in RFC 3339 format.\n\n- `has_more: boolean`\n\nIndicates if there are more results.\n\n- `next_page: string`\n\nToken to provide in as `page` in the subsequent request to retrieve the next page of data.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/usage_report/messages \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    },
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Retrieve Messages",
+      "id": "retrieve-messages"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    },
+    {
+      "level": "h2",
+      "text": "Retrieve Claude Code",
+      "id": "retrieve-claude-code"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    },
+    {
+      "level": "h2",
+      "text": "Domain Types",
+      "id": "domain-types"
+    },
+    {
+      "level": "h3",
+      "text": "Claude Code Usage Report",
+      "id": "claude-code-usage-report"
+    },
+    {
+      "level": "h3",
+      "text": "Messages Usage Report",
+      "id": "messages-usage-report"
+    }
+  ],
+  "url": "llms-txt#usage-report",
+  "links": []
+}

@@ -1,0 +1,86 @@
+{
+  "title": "Client SDKs",
+  "content": "We provide client libraries in a number of popular languages that make it easier to work with the Claude API.\n\nThis page includes brief installation instructions and links to the open-source GitHub repositories for Anthropic's Client SDKs. For basic usage instructions, see the [API reference](/docs/en/api/overview) For detailed usage instructions, refer to each SDK's GitHub repository.\n\n<Note>\nAdditional configuration is needed to use Anthropic's Client SDKs through a partner platform. If you are using Amazon Bedrock, see [this guide](/docs/en/build-with-claude/claude-on-amazon-bedrock); if you are using Google Cloud Vertex AI, see [this guide](/docs/en/build-with-claude/claude-on-vertex-ai); if you are using Microsoft Foundry, see [this guide](/docs/en/build-with-claude/claude-in-microsoft-foundry).\n</Note>\n\n[Python library GitHub repo](https://github.com/anthropics/anthropic-sdk-python)\n\n**Requirements:** Python 3.8+\n\n[TypeScript library GitHub repo](https://github.com/anthropics/anthropic-sdk-typescript)\n\n<Info>\nWhile this library is in TypeScript, it can also be used in JavaScript libraries.\n</Info>\n\n[Java library GitHub repo](https://github.com/anthropics/anthropic-sdk-java)\n\n**Requirements:** Java 8 or later\n\n[Go library GitHub repo](https://github.com/anthropics/anthropic-sdk-go)\n\n**Requirements:** Go 1.22+\n\n[C# library GitHub repo](https://github.com/anthropics/anthropic-sdk-csharp)\n\n<Info>\nThe C# SDK is currently in beta.\n</Info>\n\n**Requirements:** .NET 8 or later\n\n[Ruby library GitHub repo](https://github.com/anthropics/anthropic-sdk-ruby)\n\n**Requirements:** Ruby 3.2.0 or later\n\n[PHP library GitHub repo](https://github.com/anthropics/anthropic-sdk-php)\n\n<Info>\nThe PHP SDK is currently in beta.\n</Info>\n\n**Requirements:** PHP 8.1.0 or higher\n\n## Beta namespace in client SDKs\n\nEvery SDK has a `beta` namespace that is available for accessing new features that Anthropic releases in beta versions. Use this in conjunction with [beta headers](/docs/en/api/beta-headers) to access these features. Refer to each SDK's GitHub repository for specific usage examples.",
+  "code_samples": [
+    {
+      "code": "pip install anthropic",
+      "language": "bash"
+    },
+    {
+      "code": "npm install @anthropic-ai/sdk",
+      "language": "bash"
+    },
+    {
+      "code": "implementation(\"com.anthropic:anthropic-java:2.10.0\")",
+      "language": "groovy"
+    },
+    {
+      "code": "<dependency>\n    <groupId>com.anthropic</groupId>\n    <artifactId>anthropic-java</artifactId>\n    <version>2.10.0</version>\n</dependency>",
+      "language": "xml"
+    },
+    {
+      "code": "go get -u 'github.com/anthropics/anthropic-sdk-go@v1.17.0'",
+      "language": "bash"
+    },
+    {
+      "code": "dotnet add package Anthropic",
+      "language": "bash"
+    },
+    {
+      "code": "gem \"anthropic\", \"~> 1.13.0\"",
+      "language": "ruby"
+    },
+    {
+      "code": "bundle install",
+      "language": "bash"
+    },
+    {
+      "code": "composer require \"anthropic-ai/sdk 0.3.0\"",
+      "language": "bash"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Python",
+      "id": "python"
+    },
+    {
+      "level": "h2",
+      "text": "TypeScript",
+      "id": "typescript"
+    },
+    {
+      "level": "h2",
+      "text": "Java",
+      "id": "java"
+    },
+    {
+      "level": "h2",
+      "text": "Go",
+      "id": "go"
+    },
+    {
+      "level": "h2",
+      "text": "C#",
+      "id": "c#"
+    },
+    {
+      "level": "h2",
+      "text": "Ruby",
+      "id": "ruby"
+    },
+    {
+      "level": "h2",
+      "text": "PHP",
+      "id": "php"
+    },
+    {
+      "level": "h2",
+      "text": "Beta namespace in client SDKs",
+      "id": "beta-namespace-in-client-sdks"
+    }
+  ],
+  "url": "llms-txt#client-sdks",
+  "links": []
+}

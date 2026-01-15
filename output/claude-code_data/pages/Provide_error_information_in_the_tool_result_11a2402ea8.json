@@ -1,0 +1,119 @@
+{
+  "title": "Provide error information in the tool result",
+  "content": "{\n    \"type\": \"tool_result\",\n    \"tool_use_id\": \"toolu_abc123\",\n    \"content\": \"Error: Query timeout - table lock exceeded 30 seconds\"\n}\njson\n// ❌ INVALID - Cannot include text when responding to programmatic tool calls\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\"type\": \"tool_result\", \"tool_use_id\": \"toolu_01\", \"content\": \"[{\\\"customer_id\\\": \\\"C1\\\", \\\"revenue\\\": 45000}]\"},\n    {\"type\": \"text\", \"text\": \"What should I do next?\"}  // This will cause an error\n  ]\n}\n\n// ✅ VALID - Only tool results when responding to programmatic tool calls\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\"type\": \"tool_result\", \"tool_use_id\": \"toolu_01\", \"content\": \"[{\\\"customer_id\\\": \\\"C1\\\", \\\"revenue\\\": 45000}]\"}\n  ]\n}\n```\n\nThis restriction only applies when responding to programmatic (code execution) tool calls. For regular client-side tool calls, you can include text content after tool results.\n\nProgrammatic tool calls are subject to the same rate limits as regular tool calls. Each tool call from code execution counts as a separate invocation.\n\n### Validate tool results before use\n\nWhen implementing custom tools that will be called programmatically:\n\n- **Tool results are returned as strings**: They can contain any content, including code snippets or executable commands that may be processed by the execution environment.\n- **Validate external tool results**: If your tool returns data from external sources or accepts user input, be aware of code injection risks if the output will be interpreted or executed as code.\n\nProgrammatic tool calling can significantly reduce token consumption:\n\n- **Tool results from programmatic calls are not added to Claude's context** - only the final code output is\n- **Intermediate processing happens in code** - filtering, aggregation, etc. don't consume model tokens\n- **Multiple tool calls in one code execution** - reduces overhead compared to separate model turns\n\nFor example, calling 10 tools directly uses ~10x the tokens of calling them programmatically and returning a summary.\n\nProgrammatic tool calling uses the same pricing as code execution. See the [code execution pricing](/docs/en/agents-and-tools/tool-use/code-execution-tool#usage-and-pricing) for details.\n\n<Note>\nToken counting for programmatic tool calls: Tool results from programmatic invocations do not count toward your input/output token usage. Only the final code execution result and Claude's response count.\n</Note>\n\n- **Provide detailed output descriptions**: Since Claude deserializes tool results in code, clearly document the format (JSON structure, field types, etc.)\n- **Return structured data**: JSON or other easily parseable formats work best for programmatic processing\n- **Keep responses concise**: Return only necessary data to minimize processing overhead\n\n### When to use programmatic calling\n\n**Good use cases:**\n- Processing large datasets where you only need aggregates or summaries\n- Multi-step workflows with 3+ dependent tool calls\n- Operations requiring filtering, sorting, or transformation of tool results\n- Tasks where intermediate data shouldn't influence Claude's reasoning\n- Parallel operations across many items (e.g., checking 50 endpoints)\n\n**Less ideal use cases:**\n- Single tool calls with simple responses\n- Tools that need immediate user feedback\n- Very fast operations where code execution overhead would outweigh the benefit\n\n### Performance optimization\n\n- **Reuse containers** when making multiple related requests to maintain state\n- **Batch similar operations** in a single code execution when possible\n\n**\"Tool not allowed\" error**\n- Verify your tool definition includes `\"allowed_callers\": [\"code_execution_20250825\"]`\n- Check that you're using the correct beta headers\n\n**Container expiration**\n- Ensure you respond to tool calls within the container's lifetime (~4.5 minutes)\n- Monitor the `expires_at` field in responses\n- Consider implementing faster tool execution\n\n**Beta header issues**\n- You need the header: `\"advanced-tool-use-2025-11-20\"`\n\n**Tool result not parsed correctly**\n- Ensure your tool returns string data that Claude can deserialize\n- Provide clear output format documentation in your tool description\n\n1. **Log all tool calls and results** to track the flow\n2. **Check the `caller` field** to confirm programmatic invocation\n3. **Monitor container IDs** to ensure proper reuse\n4. **Test tools independently** before enabling programmatic calling\n\n## Why programmatic tool calling works\n\nClaude's training includes extensive exposure to code, making it effective at reasoning through and chaining function calls. When tools are presented as callable functions within a code execution environment, Claude can leverage this strength to:\n\n- **Reason naturally about tool composition**: Chain operations and handle dependencies as naturally as writing any Python code\n- **Process large results efficiently**: Filter down large tool outputs, extract only relevant data, or write intermediate results to files before returning summaries to the context window\n- **Reduce latency significantly**: Eliminate the overhead of re-sampling Claude between each tool call in multi-step workflows\n\nThis approach enables workflows that would be impractical with traditional tool use—such as processing files over 1M tokens—by allowing Claude to work with data programmatically rather than loading everything into the conversation context.\n\n## Alternative implementations\n\nProgrammatic tool calling is a generalizable pattern that can be implemented outside of Anthropic's managed code execution. Here's an overview of the approaches:\n\n### Client-side direct execution\n\nProvide Claude with a code execution tool and describe what functions are available in that environment. When Claude invokes the tool with code, your application executes it locally where those functions are defined.\n\n**Advantages:**\n- Simple to implement with minimal re-architecting\n- Full control over the environment and instructions\n\n**Disadvantages:**\n- Executes untrusted code outside of a sandbox\n- Tool invocations can be vectors for code injection\n\n**Use when:** Your application can safely execute arbitrary code, you want a simple solution, and Anthropic's managed offering doesn't fit your needs.\n\n### Self-managed sandboxed execution\n\nSame approach from Claude's perspective, but code runs in a sandboxed container with security restrictions (e.g., no network egress). If your tools require external resources, you'll need a protocol for executing tool calls outside the sandbox.\n\n**Advantages:**\n- Safe programmatic tool calling on your own infrastructure\n- Full control over the execution environment\n\n**Disadvantages:**\n- Complex to build and maintain\n- Requires managing both infrastructure and inter-process communication\n\n**Use when:** Security is critical and Anthropic's managed solution doesn't fit your requirements.\n\n### Anthropic-managed execution\n\nAnthropic's programmatic tool calling is a managed version of sandboxed execution with an opinionated Python environment tuned for Claude. Anthropic handles container management, code execution, and secure tool invocation communication.\n\n**Advantages:**\n- Safe and secure by default\n- Easy to enable with minimal configuration\n- Environment and instructions optimized for Claude\n\nWe recommend using Anthropic's managed solution if you're using the Claude API.\n\n<CardGroup cols={2}>\n  <Card title=\"Code Execution Tool\" icon=\"code\" href=\"/docs/en/agents-and-tools/tool-use/code-execution-tool\">\n    Learn about the underlying code execution capability that powers programmatic tool calling.\n  </Card>\n  <Card title=\"Tool Use Overview\" icon=\"wrench\" href=\"/docs/en/agents-and-tools/tool-use/overview\">\n    Understand the fundamentals of tool use with Claude.\n  </Card>\n  <Card title=\"Implement Tool Use\" icon=\"hammer\" href=\"/docs/en/agents-and-tools/tool-use/implement-tool-use\">\n    Step-by-step guide for implementing tools.\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "Claude's code will receive this error and can handle it appropriately.\n\n## Constraints and limitations\n\n### Feature incompatibilities\n\n- **Structured outputs**: Tools with `strict: true` are not supported with programmatic calling\n- **Tool choice**: You cannot force programmatic calling of a specific tool via `tool_choice`\n- **Parallel tool use**: `disable_parallel_tool_use: true` is not supported with programmatic calling\n\n### Tool restrictions\n\nThe following tools cannot currently be called programmatically, but support may be added in future releases:\n\n- Web search\n- Web fetch\n- Tools provided by an [MCP connector](/docs/en/agents-and-tools/mcp-connector)\n\n### Message formatting restrictions\n\nWhen responding to programmatic tool calls, there are strict formatting requirements:\n\n**Tool result only responses**: If there are pending programmatic tool calls waiting for results, your response message must contain **only** `tool_result` blocks. You cannot include any text content, even after the tool results.",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Constraints and limitations",
+      "id": "constraints-and-limitations"
+    },
+    {
+      "level": "h3",
+      "text": "Feature incompatibilities",
+      "id": "feature-incompatibilities"
+    },
+    {
+      "level": "h3",
+      "text": "Tool restrictions",
+      "id": "tool-restrictions"
+    },
+    {
+      "level": "h3",
+      "text": "Message formatting restrictions",
+      "id": "message-formatting-restrictions"
+    },
+    {
+      "level": "h3",
+      "text": "Rate limits",
+      "id": "rate-limits"
+    },
+    {
+      "level": "h3",
+      "text": "Validate tool results before use",
+      "id": "validate-tool-results-before-use"
+    },
+    {
+      "level": "h2",
+      "text": "Token efficiency",
+      "id": "token-efficiency"
+    },
+    {
+      "level": "h2",
+      "text": "Usage and pricing",
+      "id": "usage-and-pricing"
+    },
+    {
+      "level": "h2",
+      "text": "Best practices",
+      "id": "best-practices"
+    },
+    {
+      "level": "h3",
+      "text": "Tool design",
+      "id": "tool-design"
+    },
+    {
+      "level": "h3",
+      "text": "When to use programmatic calling",
+      "id": "when-to-use-programmatic-calling"
+    },
+    {
+      "level": "h3",
+      "text": "Performance optimization",
+      "id": "performance-optimization"
+    },
+    {
+      "level": "h2",
+      "text": "Troubleshooting",
+      "id": "troubleshooting"
+    },
+    {
+      "level": "h3",
+      "text": "Common issues",
+      "id": "common-issues"
+    },
+    {
+      "level": "h3",
+      "text": "Debugging tips",
+      "id": "debugging-tips"
+    },
+    {
+      "level": "h2",
+      "text": "Why programmatic tool calling works",
+      "id": "why-programmatic-tool-calling-works"
+    },
+    {
+      "level": "h2",
+      "text": "Alternative implementations",
+      "id": "alternative-implementations"
+    },
+    {
+      "level": "h3",
+      "text": "Client-side direct execution",
+      "id": "client-side-direct-execution"
+    },
+    {
+      "level": "h3",
+      "text": "Self-managed sandboxed execution",
+      "id": "self-managed-sandboxed-execution"
+    },
+    {
+      "level": "h3",
+      "text": "Anthropic-managed execution",
+      "id": "anthropic-managed-execution"
+    },
+    {
+      "level": "h2",
+      "text": "Related features",
+      "id": "related-features"
+    }
+  ],
+  "url": "llms-txt#provide-error-information-in-the-tool-result",
+  "links": []
+}

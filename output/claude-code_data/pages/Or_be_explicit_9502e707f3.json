@@ -1,0 +1,62 @@
+{
+  "title": "Or be explicit:",
+  "content": "\"Please use parallel tool calls to get the weather for Paris, London, and Tokyo at the same time.\"\njson JSON\n{\n  \"id\": \"msg_01Aq9w938a90dw8q\",\n  \"model\": \"claude-sonnet-4-5\",\n  \"stop_reason\": \"tool_use\",\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"I'll check the current weather in San Francisco for you.\"\n    },\n    {\n      \"type\": \"tool_use\",\n      \"id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"name\": \"get_weather\",\n      \"input\": {\"location\": \"San Francisco, CA\", \"unit\": \"celsius\"}\n    }\n  ]\n}\njson\n{\"role\": \"user\", \"content\": [\n  {\"type\": \"text\", \"text\": \"Here are the results:\"},  // ❌ Text before tool_result\n  {\"type\": \"tool_result\", \"tool_use_id\": \"toolu_01\", ...}\n]}\njson\n{\"role\": \"user\", \"content\": [\n  {\"type\": \"tool_result\", \"tool_use_id\": \"toolu_01\", ...},\n  {\"type\": \"text\", \"text\": \"What should I do next?\"}  // ✅ Text after tool_result\n]}\njson JSON\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"content\": \"15 degrees\"\n    }\n  ]\n}\njson JSON\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"content\": [\n        {\"type\": \"text\", \"text\": \"15 degrees\"},\n        {\n          \"type\": \"image\",\n          \"source\": {\n            \"type\": \"base64\",\n            \"media_type\": \"image/jpeg\",\n            \"data\": \"/9j/4AAQSkZJRg...\",\n          }\n        }\n      ]\n    }\n  ]\n}\njson JSON\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n    }\n  ]\n}\njson JSON\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"content\": [\n        {\"type\": \"text\", \"text\": \"The weather is\"},\n        {\n          \"type\": \"document\",\n          \"source\": {\n            \"type\": \"text\",\n            \"media_type\": \"text/plain\",\n            \"data\": \"15 degrees\"\n          }\n        }\n      ]\n    }\n  ]\n}\npython Python",
+  "code_samples": [
+    {
+      "code": "</section>\n\n<Warning>\n**Parallel tool use with Claude Sonnet 3.7**\n\nClaude Sonnet 3.7 may be less likely to make make parallel tool calls in a response, even when you have not set `disable_parallel_tool_use`. We recommend [upgrading to Claude 4 models](/docs/en/about-claude/models/migrating-to-claude-4), which have built-in token-efficient tool use and improved parallel tool calling.\n\nIf you're still using Claude Sonnet 3.7, you can enable the `token-efficient-tools-2025-02-19` [beta header](/docs/en/api/beta-headers), which helps encourage Claude to use parallel tools. You can also introduce a \"batch tool\" that can act as a meta-tool to wrap invocations to other tools simultaneously.\n\nSee [this example](https://platform.claude.com/cookbook/tool-use-parallel-tools) in our cookbook for how to use this workaround.\n\n</Warning>\n\n## Handling tool use and tool result content blocks\n\n<Note>\n**Simpler with Tool runner**: The manual tool handling described in this section is automatically managed by [tool runner](#tool-runner-beta). Use this section when you need custom control over tool execution.\n</Note>\n\nClaude's response differs based on whether it uses a client or server tool.\n\n### Handling results from client tools\n\nThe response will have a `stop_reason` of `tool_use` and one or more `tool_use` content blocks that include:\n\n- `id`: A unique identifier for this particular tool use block. This will be used to match up the tool results later.\n- `name`: The name of the tool being used.\n- `input`: An object containing the input being passed to the tool, conforming to the tool's `input_schema`.\n\n<section title=\"Example API response with a `tool_use` content block\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\nWhen you receive a tool use response for a client tool, you should:\n\n1. Extract the `name`, `id`, and `input` from the `tool_use` block.\n2. Run the actual tool in your codebase corresponding to that tool name, passing in the tool `input`.\n3. Continue the conversation by sending a new message with the `role` of `user`, and a `content` block containing the `tool_result` type and the following information:\n   - `tool_use_id`: The `id` of the tool use request this is a result for.\n   - `content`: The result of the tool, as a string (e.g. `\"content\": \"15 degrees\"`), a list of nested content blocks (e.g. `\"content\": [{\"type\": \"text\", \"text\": \"15 degrees\"}]`), or a list of document blocks (e.g. `\"content\": [\"type\": \"document\", \"source\": {\"type\": \"text\", \"media_type\": \"text/plain\", \"data\": \"15 degrees\"}]`). These content blocks can use the `text`, `image`, or `document` types.\n   - `is_error` (optional): Set to `true` if the tool execution resulted in an error.\n\n<Note>\n**Important formatting requirements**:\n- Tool result blocks must immediately follow their corresponding tool use blocks in the message history. You cannot include any messages between the assistant's tool use message and the user's tool result message.\n- In the user message containing tool results, the tool_result blocks must come FIRST in the content array. Any text must come AFTER all tool results.\n\nFor example, this will cause a 400 error:",
+      "language": "unknown"
+    },
+    {
+      "code": "This is correct:",
+      "language": "unknown"
+    },
+    {
+      "code": "If you receive an error like \"tool_use ids were found without tool_result blocks immediately after\", check that your tool results are formatted correctly.\n</Note>\n\n<section title=\"Example of successful tool result\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Example of tool result with images\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n<section title=\"Example of empty tool result\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Example of tool result with documents\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\nAfter receiving the tool result, Claude will use that information to continue generating a response to the original user prompt.\n\n### Handling results from server tools\n\nClaude executes the tool internally and incorporates the results directly into its response without requiring additional user interaction.\n\n<Tip>\n  **Differences from other APIs**\n\nUnlike APIs that separate tool use or use special roles like `tool` or `function`, the Claude API integrates tools directly into the `user` and `assistant` message structure.\n\nMessages contain arrays of `text`, `image`, `tool_use`, and `tool_result` blocks. `user` messages include client content and `tool_result`, while `assistant` messages contain AI-generated content and `tool_use`.\n\n</Tip>\n\n### Handling the `max_tokens` stop reason\n\nIf Claude's [response is cut off due to hitting the `max_tokens` limit](/docs/en/build-with-claude/handling-stop-reasons#max-tokens), and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Handling tool use and tool result content blocks",
+      "id": "handling-tool-use-and-tool-result-content-blocks"
+    },
+    {
+      "level": "h3",
+      "text": "Handling results from client tools",
+      "id": "handling-results-from-client-tools"
+    },
+    {
+      "level": "h3",
+      "text": "Handling results from server tools",
+      "id": "handling-results-from-server-tools"
+    },
+    {
+      "level": "h3",
+      "text": "Handling the `max_tokens` stop reason",
+      "id": "handling-the-`max_tokens`-stop-reason"
+    }
+  ],
+  "url": "llms-txt#or-be-explicit:",
+  "links": []
+}

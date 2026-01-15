@@ -1,0 +1,45 @@
+{
+  "title": "Alternatively, you can use vo = voyageai.Client(api_key=\"<your secret key>\")",
+  "content": "texts = [\"Sample text 1\", \"Sample text 2\"]\n\nresult = vo.embed(texts, model=\"voyage-3.5\", input_type=\"document\")\nprint(result.embeddings[0])\nprint(result.embeddings[1])\n\n[-0.013131560757756233, 0.019828535616397858, ...]   # embedding for \"Sample text 1\"\n[-0.0069352793507277966, 0.020878976210951805, ...]  # embedding for \"Sample text 2\"\nbash\ncurl https://api.voyageai.com/v1/embeddings \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer $VOYAGE_API_KEY\" \\\n  -d '{\n    \"input\": [\"Sample text 1\", \"Sample text 2\"],\n    \"model\": \"voyage-3.5\"\n  }'\njson\n{\n  \"object\": \"list\",\n  \"data\": [\n    {\n      \"embedding\": [-0.013131560757756233, 0.019828535616397858, ...],\n      \"index\": 0\n    },\n    {\n      \"embedding\": [-0.0069352793507277966, 0.020878976210951805, ...],\n      \"index\": 1\n    }\n  ],\n  \"model\": \"voyage-3.5\",\n  \"usage\": {\n    \"total_tokens\": 10\n  }\n}\n\npython\ndocuments = [\n    \"The Mediterranean diet emphasizes fish, olive oil, and vegetables, believed to reduce chronic diseases.\",\n    \"Photosynthesis in plants converts light energy into glucose and produces essential oxygen.\",\n    \"20th-century innovations, from radios to smartphones, centered on electronic advancements.\",\n    \"Rivers provide water, irrigation, and habitat for aquatic species, vital for ecosystems.\",\n    \"Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.\",\n    \"Shakespeare's works, like 'Hamlet' and 'A Midsummer Night's Dream,' endure in literature.\"\n]\n\npython\nimport voyageai\n\nvo = voyageai.Client()",
+  "code_samples": [
+    {
+      "code": "`result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the above code, the two embeddings will be printed on the screen:",
+      "language": "unknown"
+    },
+    {
+      "code": "When creating the embeddings, you can specify a few other arguments to the `embed()` function. \n\nFor more information on the Voyage python package, see [the Voyage documentation](https://docs.voyageai.com/docs/embeddings#python-api).\n\n### Voyage HTTP API\n\nYou can also get embeddings by requesting Voyage HTTP API. For example, you can send an HTTP request through the `curl` command in a terminal:",
+      "language": "unknown"
+    },
+    {
+      "code": "The response you would get is a JSON object containing the embeddings and the token usage:",
+      "language": "unknown"
+    },
+    {
+      "code": "For more information on the Voyage HTTP API, see [the Voyage documentation](https://docs.voyageai.com/reference/embeddings-api).\n\n### AWS Marketplace\n\nVoyage embeddings are available on [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=seller-snt4gb6fd7ljg). Instructions for accessing Voyage on AWS are available [here](https://docs.voyageai.com/docs/aws-marketplace-model-package?ref=anthropic).\n\n## Quickstart example\n\nNow that we know how to get embeddings, let's see a brief example.\n\nSuppose we have a small corpus of six documents to retrieve from",
+      "language": "unknown"
+    },
+    {
+      "code": "We will first use Voyage to convert each of them into an embedding vector",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Voyage HTTP API",
+      "id": "voyage-http-api"
+    },
+    {
+      "level": "h3",
+      "text": "AWS Marketplace",
+      "id": "aws-marketplace"
+    },
+    {
+      "level": "h2",
+      "text": "Quickstart example",
+      "id": "quickstart-example"
+    }
+  ],
+  "url": "llms-txt#alternatively,-you-can-use-vo-=-voyageai.client(api_key=\"<your-secret-key>\")",
+  "links": []
+}

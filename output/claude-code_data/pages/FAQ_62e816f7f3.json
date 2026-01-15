@@ -1,0 +1,44 @@
+{
+  "title": "FAQ",
+  "content": "### How do I communicate with my sandboxes?\nWhen hosting in containers, expose ports to communicate with your SDK instances. Your application can expose HTTP/WebSocket endpoints for external clients while the SDK runs internally within the container.\n\n### What is the cost of hosting a container?\nWe have found that the dominant cost of serving agents is the tokens, containers vary based on what you provision but a minimum cost is roughly 5 cents per hour running.\n\n### When should I shut down idle containers vs. keeping them warm?\nThis is likely provider dependent, different sandbox providers will let you set different criteria for idle timeouts after which a sandbox might spin down.\nYou will want to tune this timeout based on how frequent you think user response might be.\n\n### How often should I update the Claude Code CLI?\nThe Claude Code CLI is versioned with semver, so any breaking changes will be versioned.\n\n### How do I monitor container health and agent performance?\nSince containers are just servers the same logging infrastructure you use for the backend will work for containers.\n\n### How long can an agent session run before timing out?\nAn agent session will not timeout, but we recommend setting a 'maxTurns' property to prevent Claude from getting stuck in a loop.\n\n- [Secure Deployment](/docs/en/agent-sdk/secure-deployment) - Network controls, credential management, and isolation hardening\n- [TypeScript SDK - Sandbox Settings](/docs/en/agent-sdk/typescript#sandbox-settings) - Configure sandbox programmatically\n- [Sessions Guide](/docs/en/agent-sdk/sessions) - Learn about session management\n- [Permissions](/docs/en/agent-sdk/permissions) - Configure tool permissions\n- [Cost Tracking](/docs/en/agent-sdk/cost-tracking) - Monitor API usage\n- [MCP Integration](/docs/en/agent-sdk/mcp) - Extend with custom tools",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "How do I communicate with my sandboxes?",
+      "id": "how-do-i-communicate-with-my-sandboxes?"
+    },
+    {
+      "level": "h3",
+      "text": "What is the cost of hosting a container?",
+      "id": "what-is-the-cost-of-hosting-a-container?"
+    },
+    {
+      "level": "h3",
+      "text": "When should I shut down idle containers vs. keeping them warm?",
+      "id": "when-should-i-shut-down-idle-containers-vs.-keeping-them-warm?"
+    },
+    {
+      "level": "h3",
+      "text": "How often should I update the Claude Code CLI?",
+      "id": "how-often-should-i-update-the-claude-code-cli?"
+    },
+    {
+      "level": "h3",
+      "text": "How do I monitor container health and agent performance?",
+      "id": "how-do-i-monitor-container-health-and-agent-performance?"
+    },
+    {
+      "level": "h3",
+      "text": "How long can an agent session run before timing out?",
+      "id": "how-long-can-an-agent-session-run-before-timing-out?"
+    },
+    {
+      "level": "h2",
+      "text": "Next Steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#faq",
+  "links": []
+}

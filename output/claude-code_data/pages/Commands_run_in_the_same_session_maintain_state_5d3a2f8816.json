@@ -1,0 +1,72 @@
+{
+  "title": "Commands run in the same session maintain state",
+  "content": "commands = [\n    \"cd /tmp\",\n    \"echo 'Hello' > test.txt\",\n    \"cat test.txt\"  # This works because we're still in /tmp\n]\npython\ndef truncate_output(output, max_lines=100):\n    lines = output.split('\\n')\n    if len(lines) > max_lines:\n        truncated = '\\n'.join(lines[:max_lines])\n        return f\"{truncated}\\n\\n... Output truncated ({len(lines)} total lines) ...\"\n    return output\npython\nimport logging\n\ndef log_command(command, output, user_id):\n    logging.info(f\"User {user_id} executed: {command}\")\n    logging.info(f\"Output: {output[:200]}...\")  # Log first 200 chars\npython\ndef sanitize_output(output):\n    # Remove potential secrets or credentials\n    import re\n    # Example: Remove AWS credentials\n    output = re.sub(r'aws_access_key_id\\s*=\\s*\\S+', 'aws_access_key_id=***', output)\n    output = re.sub(r'aws_secret_access_key\\s*=\\s*\\S+', 'aws_secret_access_key=***', output)\n    return output\n```\n\n<Warning>\nThe bash tool provides direct system access. Implement these essential safety measures:\n- Running in isolated environments (Docker/VM)\n- Implementing command filtering and allowlists\n- Setting resource limits (CPU, memory, disk)\n- Logging all executed commands\n</Warning>\n\n### Key recommendations\n- Use `ulimit` to set resource constraints\n- Filter dangerous commands (`sudo`, `rm -rf`, etc.)\n- Run with minimal user permissions\n- Monitor and log all command execution\n\nThe bash tool adds **245 input tokens** to your API calls.\n\nAdditional tokens are consumed by:\n- Command outputs (stdout/stderr)\n- Error messages\n- Large file contents\n\nSee [tool use pricing](/docs/en/agents-and-tools/tool-use/overview#pricing) for complete pricing details.\n\n### Development workflows\n- Running tests: `pytest && coverage report`\n- Building projects: `npm install && npm run build`\n- Git operations: `git status && git add . && git commit -m \"message\"`\n\n### File operations\n- Processing data: `wc -l *.csv && ls -lh *.csv`\n- Searching files: `find . -name \"*.py\" | xargs grep \"pattern\"`\n- Creating backups: `tar -czf backup.tar.gz ./data`\n\n### System tasks\n- Checking resources: `df -h && free -m`\n- Process management: `ps aux | grep python`\n- Environment setup: `export PATH=$PATH:/new/path && echo $PATH`\n\n- **No interactive commands**: Cannot handle `vim`, `less`, or password prompts\n- **No GUI applications**: Command-line only\n- **Session scope**: Persists within conversation, lost between API calls\n- **Output limits**: Large outputs may be truncated\n- **No streaming**: Results returned after completion\n\n## Combining with other tools\n\nThe bash tool is most powerful when combined with the [text editor](/docs/en/agents-and-tools/tool-use/text-editor-tool) and other tools.\n\n<CardGroup cols={2}>\n  <Card\n    title=\"Tool use overview\"\n    icon=\"tool\"\n    href=\"/docs/en/agents-and-tools/tool-use/overview\"\n  >\n    Learn about tool use with Claude\n  </Card>\n\n<Card\n    title=\"Text editor tool\"\n    icon=\"file\"\n    href=\"/docs/en/agents-and-tools/tool-use/text-editor-tool\"\n  >\n    View and edit text files with Claude\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "</section>\n\n<section title=\"Handle large outputs\">\n\nTruncate very large outputs to prevent token limit issues:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Log all commands\">\n\nKeep an audit trail of executed commands:",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n<section title=\"Sanitize outputs\">\n\nRemove sensitive information from command outputs:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Security",
+      "id": "security"
+    },
+    {
+      "level": "h3",
+      "text": "Key recommendations",
+      "id": "key-recommendations"
+    },
+    {
+      "level": "h2",
+      "text": "Pricing",
+      "id": "pricing"
+    },
+    {
+      "level": "h2",
+      "text": "Common patterns",
+      "id": "common-patterns"
+    },
+    {
+      "level": "h3",
+      "text": "Development workflows",
+      "id": "development-workflows"
+    },
+    {
+      "level": "h3",
+      "text": "File operations",
+      "id": "file-operations"
+    },
+    {
+      "level": "h3",
+      "text": "System tasks",
+      "id": "system-tasks"
+    },
+    {
+      "level": "h2",
+      "text": "Limitations",
+      "id": "limitations"
+    },
+    {
+      "level": "h2",
+      "text": "Combining with other tools",
+      "id": "combining-with-other-tools"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#commands-run-in-the-same-session-maintain-state",
+  "links": []
+}

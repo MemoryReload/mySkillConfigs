@@ -1,0 +1,57 @@
+{
+  "title": "In top-level content",
+  "content": "user_content = [\n    SearchResultBlockParam(\n        type=\"search_result\",\n        source=\"https://research.com/paper\",\n        title=\"Research Paper\",\n        content=[TextBlockParam(type=\"text\", text=\"Key findings...\")],\n        citations={\"enabled\": True}\n    ),\n    {\n        \"type\": \"image\",\n        \"source\": {\"type\": \"url\", \"url\": \"https://example.com/chart.png\"}\n    },\n    TextBlockParam(\n        type=\"text\",\n        text=\"How does the chart relate to the research findings?\"\n    )\n]\njson\n{\n  \"type\": \"search_result\",\n  \"source\": \"https://docs.company.com/guide\",\n  \"title\": \"User Guide\",\n  \"content\": [{\"type\": \"text\", \"text\": \"...\"}],\n  \"cache_control\": {\n    \"type\": \"ephemeral\"\n  }\n}\njson\n{\n  \"type\": \"search_result\",\n  \"source\": \"https://docs.company.com/guide\",\n  \"title\": \"User Guide\",\n  \"content\": [{\"type\": \"text\", \"text\": \"Important documentation...\"}],\n  \"citations\": {\n    \"enabled\": true  // Enable citations for this result\n  }\n}\npython\n   def search_with_fallback(query):\n       try:\n           results = perform_search(query)\n           if not results:\n               return {\"type\": \"text\", \"text\": \"No results found.\"}\n           return format_as_search_results(results)\n       except Exception as e:\n           return {\"type\": \"text\", \"text\": f\"Search error: {str(e)}\"}\n   ```\n\n- Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud's Vertex AI\n- Only text content is supported within search results (no images or other media)\n- The `content` array must contain at least one text block",
+  "code_samples": [
+    {
+      "code": "### Cache control\n\nAdd cache control for better performance:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Citation control\n\nBy default, citations are disabled for search results. You can enable citations by explicitly setting the `citations` configuration:",
+      "language": "unknown"
+    },
+    {
+      "code": "When `citations.enabled` is set to `true`, Claude will include citation references when using information from the search result. This enables:\n- Natural citations for your custom RAG applications\n- Source attribution when interfacing with proprietary knowledge bases\n- Web search-quality citations for any custom tool that returns search results\n\nIf the `citations` field is omitted, citations are disabled by default.\n\n<Warning>\nCitations are all-or-nothing: either all search results in a request must have citations enabled, or all must have them disabled. Mixing search results with different citation settings will result in an error. If you need to disable citations for some sources, you must disable them for all search results in that request.\n</Warning>\n\n## Best practices\n\n### For tool-based search (Method 1)\n\n- **Dynamic content**: Use for real-time searches and dynamic RAG applications\n- **Error handling**: Return appropriate messages when searches fail\n- **Result limits**: Return only the most relevant results to avoid context overflow\n\n### For top-level search (Method 2)\n\n- **Pre-fetched content**: Use when you already have search results\n- **Batch processing**: Ideal for processing multiple search results at once\n- **Testing**: Great for testing citation behavior with known content\n\n### General best practices\n\n1. **Structure results effectively**\n   - Use clear, permanent source URLs\n   - Provide descriptive titles\n   - Break long content into logical text blocks\n\n2. **Maintain consistency**\n   - Use consistent source formats across your application\n   - Ensure titles accurately reflect content\n   - Keep formatting consistent\n\n3. **Handle errors gracefully**",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Cache control",
+      "id": "cache-control"
+    },
+    {
+      "level": "h3",
+      "text": "Citation control",
+      "id": "citation-control"
+    },
+    {
+      "level": "h2",
+      "text": "Best practices",
+      "id": "best-practices"
+    },
+    {
+      "level": "h3",
+      "text": "For tool-based search (Method 1)",
+      "id": "for-tool-based-search-(method-1)"
+    },
+    {
+      "level": "h3",
+      "text": "For top-level search (Method 2)",
+      "id": "for-top-level-search-(method-2)"
+    },
+    {
+      "level": "h3",
+      "text": "General best practices",
+      "id": "general-best-practices"
+    },
+    {
+      "level": "h2",
+      "text": "Limitations",
+      "id": "limitations"
+    }
+  ],
+  "url": "llms-txt#in-top-level-content",
+  "links": []
+}

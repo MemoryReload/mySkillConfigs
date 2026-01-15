@@ -1,0 +1,8 @@
+{
+  "title": "Step 1: Delete all versions",
+  "content": "versions = client.beta.skills.versions.list(\n    skill_id=\"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n    betas=[\"skills-2025-10-02\"]\n)\n\nfor version in versions.data:\n    client.beta.skills.versions.delete(\n        skill_id=\"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n        version=version.version,\n        betas=[\"skills-2025-10-02\"]\n    )",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#step-1:-delete-all-versions",
+  "links": []
+}

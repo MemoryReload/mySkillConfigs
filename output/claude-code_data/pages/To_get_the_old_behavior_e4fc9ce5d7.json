@@ -1,0 +1,8 @@
+{
+  "title": "To get the old behavior:",
+  "content": "from claude_agent_sdk import query, ClaudeAgentOptions\n\nasync for message in query(\n    prompt=\"Hello\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"user\", \"project\", \"local\"]\n    )\n):\n    print(message)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#to-get-the-old-behavior:",
+  "links": []
+}

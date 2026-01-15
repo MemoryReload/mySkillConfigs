@@ -1,0 +1,19 @@
+{
+  "title": "Then you provide tool results with more search results",
+  "content": "",
+  "code_samples": [
+    {
+      "code": "### Combining with other content types\n\nBoth methods support mixing search results with other content:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Combining with other content types",
+      "id": "combining-with-other-content-types"
+    }
+  ],
+  "url": "llms-txt#then-you-provide-tool-results-with-more-search-results",
+  "links": []
+}

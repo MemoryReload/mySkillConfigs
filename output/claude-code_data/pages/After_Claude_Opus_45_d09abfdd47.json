@@ -1,0 +1,19 @@
+{
+  "title": "After (Claude Opus 4.5)",
+  "content": "model=\"claude-opus-4-5-20251101\"\n```\n\nClaude Opus 4.5 is our most intelligent model, combining maximum capability with practical performance. It features step-change improvements in vision, coding, and computer use at a more accessible price point than Opus 4.1. Ideal for complex specialized tasks and professional software engineering.\n\n<Note>\nFor codebases with many model references, a [Claude Code plugin](https://github.com/anthropics/claude-code/tree/main/plugins/claude-opus-4-5-migration) is available to automate migration to Opus 4.5.\n</Note>\n\n### Migrating between Claude 4.5 models\n\n**No breaking changes.** All API calls will work without modification.\n\nSimply update your model ID.\n\n- Check our [API documentation](/docs/en/api/overview) for detailed specifications\n- Review [model capabilities](/docs/en/about-claude/models/overview) for performance comparisons\n- Review [API release notes](/docs/en/release-notes/api) for API updates\n- Contact support if you encounter any issues during migration",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Migrating between Claude 4.5 models",
+      "id": "migrating-between-claude-4.5-models"
+    },
+    {
+      "level": "h2",
+      "text": "Need help?",
+      "id": "need-help?"
+    }
+  ],
+  "url": "llms-txt#after-(claude-opus-4.5)",
+  "links": []
+}

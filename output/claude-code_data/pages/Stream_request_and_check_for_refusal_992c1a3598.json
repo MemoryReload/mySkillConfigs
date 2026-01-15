@@ -1,0 +1,8 @@
+{
+  "title": "Stream request and check for refusal",
+  "content": "response=$(curl -N https://api.anthropic.com/v1/messages \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"content-type: application/json\" \\\n  --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  --data '{\n    \"model\": \"claude-sonnet-4-5\",\n    \"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}],\n    \"max_tokens\": 256,\n    \"stream\": true\n  }')",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#stream-request-and-check-for-refusal",
+  "links": []
+}

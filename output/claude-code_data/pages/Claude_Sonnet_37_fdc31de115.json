@@ -1,0 +1,8 @@
+{
+  "title": "Claude Sonnet 3.7",
+  "content": "tools=[\n    {\n        \"type\": \"text_editor_20250124\",\n        \"name\": \"str_replace_editor\"\n    }\n]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#claude-sonnet-3.7",
+  "links": []
+}

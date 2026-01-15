@@ -1,0 +1,76 @@
+{
+  "title": "Send as plain text in the message",
+  "content": "response = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": f\"Here's the CSV data:\\n\\n{csv_content}\\n\\nPlease analyze this data.\"\n                }\n            ]\n        }\n    ]\n)\n\nprint(response.content[0].text)\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\nimport fs from 'fs';\n\nconst anthropic = new Anthropic();\n\nasync function analyzeDocument() {\n  // Example: Reading a text file\n  const textContent = fs.readFileSync('document.txt', 'utf-8');\n\n// Send as plain text in the message\n  const response = await anthropic.messages.create({\n    model: 'claude-sonnet-4-5',\n    max_tokens: 1024,\n    messages: [\n      {\n        role: 'user',\n        content: [\n          {\n            type: 'text',\n            text: `Here's the document content:\\n\\n${textContent}\\n\\nPlease summarize this document.`\n          }\n        ]\n      }\n    ]\n  });\n\nconsole.log(response.content[0].text);\n}\n\nanalyzeDocument();\njson\n{\n  \"type\": \"document\",\n  \"source\": {\n    \"type\": \"file\",\n    \"file_id\": \"file_011CNha8iCJcU1wXNR6q4V8w\"\n  },\n  \"title\": \"Document Title\", // Optional\n  \"context\": \"Context about the document\", // Optional  \n  \"citations\": {\"enabled\": true} // Optional, enables citations\n}\njson\n{\n  \"type\": \"image\",\n  \"source\": {\n    \"type\": \"file\",\n    \"file_id\": \"file_011CPMxVD3fHLUhvTqtsQA5w\"\n  }\n}\nbash Shell\ncurl https://api.anthropic.com/v1/files \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\"\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()\nfiles = client.beta.files.list()\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic();\nconst files = await anthropic.beta.files.list({\n  betas: ['files-api-2025-04-14'],\n});\nbash Shell\ncurl https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\"\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()\nfile = client.beta.files.retrieve_metadata(\"file_011CNha8iCJcU1wXNR6q4V8w\")\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic();\nconst file = await anthropic.beta.files.retrieveMetadata(\n  \"file_011CNha8iCJcU1wXNR6q4V8w\",\n  { betas: ['files-api-2025-04-14'] },\n);\nbash Shell\ncurl -X DELETE https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\"\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()\nresult = client.beta.files.delete(\"file_011CNha8iCJcU1wXNR6q4V8w\")\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic();\nconst result = await anthropic.beta.files.delete(\n  \"file_011CNha8iCJcU1wXNR6q4V8w\",\n  { betas: ['files-api-2025-04-14'] },\n);\nbash Shell\ncurl -X GET \"https://api.anthropic.com/v1/files/file_011CNha8iCJcU1wXNR6q4V8w/content\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\" \\\n  --output downloaded_file.txt\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()\nfile_content = client.beta.files.download(\"file_011CNha8iCJcU1wXNR6q4V8w\")",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n<Note>\nFor .docx files containing images, convert them to PDF format first, then use [PDF support](/docs/en/build-with-claude/pdf-support) to take advantage of the built-in image parsing. This allows using citations from the PDF document.\n</Note>\n\n#### Document blocks\n\nFor PDFs and text files, use the `document` content block:",
+      "language": "unknown"
+    },
+    {
+      "code": "#### Image blocks\n\nFor images, use the `image` content block:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Managing files\n\n#### List files\n\nRetrieve a list of your uploaded files:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Get file metadata\n\nRetrieve information about a specific file:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Delete a file\n\nRemove a file from your workspace:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Downloading a file\n\nDownload files that have been created by skills or the code execution tool:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Managing files",
+      "id": "managing-files"
+    },
+    {
+      "level": "h3",
+      "text": "Downloading a file",
+      "id": "downloading-a-file"
+    }
+  ],
+  "url": "llms-txt#send-as-plain-text-in-the-message",
+  "links": []
+}

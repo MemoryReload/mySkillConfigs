@@ -1,0 +1,8 @@
+{
+  "title": "First request with web fetch",
+  "content": "messages = [\n    {\n        \"role\": \"user\",\n        \"content\": \"Analyze this research paper: https://arxiv.org/abs/2024.12345\"\n    }\n]\n\nresponse1 = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=messages,\n    tools=[{\n        \"type\": \"web_fetch_20250910\",\n        \"name\": \"web_fetch\"\n    }],\n    extra_headers={\n        \"anthropic-beta\": \"web-fetch-2025-09-10\"\n    }\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-request-with-web-fetch",
+  "links": []
+}

@@ -1,0 +1,34 @@
+{
+  "title": "Check personal Skills",
+  "content": "ls ~/.claude/skills/*/SKILL.md\n```\n\n### Skill Not Being Used\n\n**Check the Skill tool is enabled**: Confirm `\"Skill\"` is in your `allowedTools`.\n\n**Check the description**: Ensure it's specific and includes relevant keywords. See [Agent Skills Best Practices](/docs/en/agents-and-tools/agent-skills/best-practices#writing-effective-descriptions) for guidance on writing effective descriptions.\n\n### Additional Troubleshooting\n\nFor general Skills troubleshooting (YAML syntax, debugging, etc.), see the [Claude Code Skills troubleshooting section](https://code.claude.com/docs/en/skills#troubleshooting).\n\n## Related Documentation\n\n### Skills Guides\n- [Agent Skills in Claude Code](https://code.claude.com/docs/en/skills): Complete Skills guide with creation, examples, and troubleshooting\n- [Agent Skills Overview](/docs/en/agents-and-tools/agent-skills/overview): Conceptual overview, benefits, and architecture\n- [Agent Skills Best Practices](/docs/en/agents-and-tools/agent-skills/best-practices): Authoring guidelines for effective Skills\n- [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction): Example Skills and templates\n\n### SDK Resources\n- [Subagents in the SDK](/docs/en/agent-sdk/subagents): Similar filesystem-based agents with programmatic options\n- [Slash Commands in the SDK](/docs/en/agent-sdk/slash-commands): User-invoked commands\n- [SDK Overview](/docs/en/agent-sdk/overview): General SDK concepts\n- [TypeScript SDK Reference](/docs/en/agent-sdk/typescript): Complete API documentation\n- [Python SDK Reference](/docs/en/agent-sdk/python): Complete API documentation",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Skill Not Being Used",
+      "id": "skill-not-being-used"
+    },
+    {
+      "level": "h3",
+      "text": "Additional Troubleshooting",
+      "id": "additional-troubleshooting"
+    },
+    {
+      "level": "h2",
+      "text": "Related Documentation",
+      "id": "related-documentation"
+    },
+    {
+      "level": "h3",
+      "text": "Skills Guides",
+      "id": "skills-guides"
+    },
+    {
+      "level": "h3",
+      "text": "SDK Resources",
+      "id": "sdk-resources"
+    }
+  ],
+  "url": "llms-txt#check-personal-skills",
+  "links": []
+}

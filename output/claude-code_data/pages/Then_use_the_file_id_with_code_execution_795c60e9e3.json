@@ -1,0 +1,13 @@
+{
+  "title": "Then use the file_id with code execution",
+  "content": "curl https://api.anthropic.com/v1/messages \\\n    --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n    --header \"anthropic-version: 2023-06-01\" \\\n    --header \"anthropic-beta: code-execution-2025-08-25,files-api-2025-04-14\" \\\n    --header \"content-type: application/json\" \\\n    --data '{\n        \"model\": \"claude-sonnet-4-5\",\n        \"max_tokens\": 4096,\n        \"messages\": [{\n            \"role\": \"user\",\n            \"content\": [\n                {\"type\": \"text\", \"text\": \"Analyze this CSV data\"},\n                {\"type\": \"container_upload\", \"file_id\": \"file_abc123\"}\n            ]\n        }],\n        \"tools\": [{\n            \"type\": \"code_execution_20250825\",\n            \"name\": \"code_execution\"\n        }]\n    }'\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#then-use-the-file_id-with-code-execution",
+  "links": []
+}

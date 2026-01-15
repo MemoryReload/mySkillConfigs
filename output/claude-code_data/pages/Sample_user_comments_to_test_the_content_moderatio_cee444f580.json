@@ -1,0 +1,8 @@
+{
+  "title": "Sample user comments to test the content moderation",
+  "content": "user_comments = allowed_user_comments + disallowed_user_comments",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#sample-user-comments-to-test-the-content-moderation",
+  "links": []
+}

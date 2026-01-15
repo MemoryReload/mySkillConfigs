@@ -1,0 +1,113 @@
+{
+  "title": "Returns: \"OK\" or lists conflicts",
+  "content": "bash\npython scripts/fill_form.py input.pdf fields.json output.pdf\n`\n\n### Use visual analysis\n\nWhen inputs can be rendered as images, have Claude analyze them:\n\nbash\n   python scripts/pdf_to_images.py form.pdf\n   `\n\n<Note>\nIn this example, you'd need to write the `pdf_to_images.py` script.\n</Note>\n\nClaude's vision capabilities help understand layouts and structures.\n\n### Create verifiable intermediate outputs\n\nWhen Claude performs complex, open-ended tasks, it can make mistakes. The \"plan-validate-execute\" pattern catches errors early by having Claude first create a plan in a structured format, then validate that plan with a script before executing it.\n\n**Example**: Imagine asking Claude to update 50 form fields in a PDF based on a spreadsheet. Without validation, Claude might reference non-existent fields, create conflicting values, miss required fields, or apply updates incorrectly.\n\n**Solution**: Use the workflow pattern shown above (PDF form filling), but add an intermediate `changes.json` file that gets validated before applying changes. The workflow becomes: analyze → **create plan file** → **validate plan** → execute → verify.\n\n**Why this pattern works:**\n- **Catches errors early**: Validation finds problems before changes are applied\n- **Machine-verifiable**: Scripts provide objective verification\n- **Reversible planning**: Claude can iterate on the plan without touching originals\n- **Clear debugging**: Error messages point to specific problems\n\n**When to use**: Batch operations, destructive changes, complex validation rules, high-stakes operations.\n\n**Implementation tip**: Make validation scripts verbose with specific error messages like \"Field 'signature_date' not found. Available fields: customer_name, order_total, signature_date_signed\" to help Claude fix issues.\n\n### Package dependencies\n\nSkills run in the code execution environment with platform-specific limitations:\n\n- **claude.ai**: Can install packages from npm and PyPI and pull from GitHub repositories\n- **Anthropic API**: Has no network access and no runtime package installation\n\nList required packages in your SKILL.md and verify they're available in the [code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool).\n\n### Runtime environment\n\nSkills run in a code execution environment with filesystem access, bash commands, and code execution capabilities. For the conceptual explanation of this architecture, see [The Skills architecture](/docs/en/agents-and-tools/agent-skills/overview#the-skills-architecture) in the overview.\n\n**How this affects your authoring:**\n\n**How Claude accesses Skills:**\n\n1. **Metadata pre-loaded**: At startup, the name and description from all Skills' YAML frontmatter are loaded into the system prompt\n2. **Files read on-demand**: Claude uses bash Read tools to access SKILL.md and other files from the filesystem when needed\n3. **Scripts executed efficiently**: Utility scripts can be executed via bash without loading their full contents into context. Only the script's output consumes tokens\n4. **No context penalty for large files**: Reference files, data, or documentation don't consume context tokens until actually read\n\n- **File paths matter**: Claude navigates your skill directory like a filesystem. Use forward slashes (`reference/guide.md`), not backslashes\n- **Name files descriptively**: Use names that indicate content: `form_validation_rules.md`, not `doc2.md`\n- **Organize for discovery**: Structure directories by domain or feature\n  - Good: `reference/finance.md`, `reference/sales.md`\n  - Bad: `docs/file1.md`, `docs/file2.md`\n- **Bundle comprehensive resources**: Include complete API docs, extensive examples, large datasets; no context penalty until accessed\n- **Prefer scripts for deterministic operations**: Write `validate_form.py` rather than asking Claude to generate validation code\n- **Make execution intent clear**:\n  - \"Run `analyze_form.py` to extract fields\" (execute)\n  - \"See `analyze_form.py` for the extraction algorithm\" (read as reference)\n- **Test file access patterns**: Verify Claude can navigate your directory structure by testing with real requests\n\nWhen the user asks about revenue, Claude reads SKILL.md, sees the reference to `reference/finance.md`, and invokes bash to read just that file. The sales.md and product.md files remain on the filesystem, consuming zero context tokens until needed. This filesystem-based model is what enables progressive disclosure. Claude can navigate and selectively load exactly what each task requires.\n\nFor complete details on the technical architecture, see [How Skills work](/docs/en/agents-and-tools/agent-skills/overview#how-skills-work) in the Skills overview.\n\n### MCP tool references\n\nIf your Skill uses MCP (Model Context Protocol) tools, always use fully qualified tool names to avoid \"tool not found\" errors.\n\n**Format**: `ServerName:tool_name`\n\nWhere:\n- `BigQuery` and `GitHub` are MCP server names\n- `bigquery_schema` and `create_issue` are the tool names within those servers\n\nWithout the server prefix, Claude may fail to locate the tool, especially when multiple MCP servers are available.\n\n### Avoid assuming tools are installed\n\nDon't assume packages are available:\n\npython\nfrom pypdf import PdfReader\nreader = PdfReader(\"file.pdf\")\n`\n\n### YAML frontmatter requirements\n\nThe SKILL.md frontmatter requires `name` and `description` fields with specific validation rules:\n- `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words\n- `description`: Maximum 1024 characters, non-empty, no XML tags\n\nSee the [Skills overview](/docs/en/agents-and-tools/agent-skills/overview#skill-structure) for complete structure details.\n\nKeep SKILL.md body under 500 lines for optimal performance. If your content exceeds this, split it into separate files using the progressive disclosure patterns described earlier. For architectural details, see the [Skills overview](/docs/en/agents-and-tools/agent-skills/overview#how-skills-work).\n\n## Checklist for effective Skills\n\nBefore sharing a Skill, verify:\n\n### Core quality\n- [ ] Description is specific and includes key terms\n- [ ] Description includes both what the Skill does and when to use it\n- [ ] SKILL.md body is under 500 lines\n- [ ] Additional details are in separate files (if needed)\n- [ ] No time-sensitive information (or in \"old patterns\" section)\n- [ ] Consistent terminology throughout\n- [ ] Examples are concrete, not abstract\n- [ ] File references are one level deep\n- [ ] Progressive disclosure used appropriately\n- [ ] Workflows have clear steps\n\n### Code and scripts\n- [ ] Scripts solve problems rather than punt to Claude\n- [ ] Error handling is explicit and helpful\n- [ ] No \"voodoo constants\" (all values justified)\n- [ ] Required packages listed in instructions and verified as available\n- [ ] Scripts have clear documentation\n- [ ] No Windows-style paths (all forward slashes)\n- [ ] Validation/verification steps for critical operations\n- [ ] Feedback loops included for quality-critical tasks\n\n### Testing\n- [ ] At least three evaluations created\n- [ ] Tested with Haiku, Sonnet, and Opus\n- [ ] Tested with real usage scenarios\n- [ ] Team feedback incorporated (if applicable)\n\n<CardGroup cols={2}>\n  <Card\n    title=\"Get started with Agent Skills\"\n    icon=\"rocket\"\n    href=\"/docs/en/agents-and-tools/agent-skills/quickstart\"\n  >\n    Create your first Skill\n  </Card>\n  <Card\n    title=\"Use Skills in Claude Code\"\n    icon=\"terminal\"\n    href=\"https://code.claude.com/docs/en/skills\"\n  >\n    Create and manage Skills in Claude Code\n  </Card>\n  <Card\n    title=\"Use Skills in the Agent SDK\"\n    icon=\"cube\"\n    href=\"/docs/en/agent-sdk/skills\"\n  >\n    Use Skills programmatically in TypeScript and Python\n  </Card>\n  <Card\n    title=\"Use Skills with the API\"\n    icon=\"code\"\n    href=\"/docs/en/build-with-claude/skills-guide\"\n  >\n    Upload and use Skills programmatically\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "**fill_form.py**: Apply field values to PDF",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "## Form layout analysis\n\n1. Convert PDF to images:",
+      "language": "markdown"
+    },
+    {
+      "code": "2. Analyze each page image to identify form fields\n3. Claude can see field locations and types visually",
+      "language": "unknown"
+    },
+    {
+      "code": "bigquery-skill/\n├── SKILL.md (overview, points to reference files)\n└── reference/\n    ├── finance.md (revenue metrics)\n    ├── sales.md (pipeline data)\n    └── product.md (usage analytics)",
+      "language": "unknown"
+    },
+    {
+      "code": "Use the BigQuery:bigquery_schema tool to retrieve table schemas.\nUse the GitHub:create_issue tool to create issues.",
+      "language": "markdown"
+    },
+    {
+      "code": "**Bad example: Assumes installation**:\n\"Use the pdf library to process the file.\"\n\n**Good example: Explicit about dependencies**:\n\"Install required package: `pip install pypdf`\n\nThen use it:",
+      "language": "markdown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Use visual analysis",
+      "id": "use-visual-analysis"
+    },
+    {
+      "level": "h2",
+      "text": "Form layout analysis",
+      "id": "form-layout-analysis"
+    },
+    {
+      "level": "h3",
+      "text": "Create verifiable intermediate outputs",
+      "id": "create-verifiable-intermediate-outputs"
+    },
+    {
+      "level": "h3",
+      "text": "Package dependencies",
+      "id": "package-dependencies"
+    },
+    {
+      "level": "h3",
+      "text": "Runtime environment",
+      "id": "runtime-environment"
+    },
+    {
+      "level": "h3",
+      "text": "MCP tool references",
+      "id": "mcp-tool-references"
+    },
+    {
+      "level": "h3",
+      "text": "Avoid assuming tools are installed",
+      "id": "avoid-assuming-tools-are-installed"
+    },
+    {
+      "level": "h2",
+      "text": "Technical notes",
+      "id": "technical-notes"
+    },
+    {
+      "level": "h3",
+      "text": "YAML frontmatter requirements",
+      "id": "yaml-frontmatter-requirements"
+    },
+    {
+      "level": "h3",
+      "text": "Token budgets",
+      "id": "token-budgets"
+    },
+    {
+      "level": "h2",
+      "text": "Checklist for effective Skills",
+      "id": "checklist-for-effective-skills"
+    },
+    {
+      "level": "h3",
+      "text": "Core quality",
+      "id": "core-quality"
+    },
+    {
+      "level": "h3",
+      "text": "Code and scripts",
+      "id": "code-and-scripts"
+    },
+    {
+      "level": "h3",
+      "text": "Testing",
+      "id": "testing"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#returns:-\"ok\"-or-lists-conflicts",
+  "links": []
+}

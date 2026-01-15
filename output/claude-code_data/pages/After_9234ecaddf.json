@@ -1,0 +1,24 @@
+{
+  "title": "After",
+  "content": "from claude_agent_sdk import query, ClaudeAgentOptions\n\noptions = ClaudeAgentOptions(\n    model=\"claude-sonnet-4-5\"\n)\npython",
+  "code_samples": [
+    {
+      "code": "**5. Review [breaking changes](#breaking-changes)**\n\nMake any code changes needed to complete the migration.\n\n## Breaking changes\n\n<Warning>\nTo improve isolation and explicit configuration, Claude Agent SDK v0.1.0 introduces breaking changes for users migrating from Claude Code SDK. Review this section carefully before migrating.\n</Warning>\n\n### Python: ClaudeCodeOptions renamed to ClaudeAgentOptions\n\n**What changed:** The Python SDK type `ClaudeCodeOptions` has been renamed to `ClaudeAgentOptions`.\n\n**Migration:**",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Breaking changes",
+      "id": "breaking-changes"
+    },
+    {
+      "level": "h3",
+      "text": "Python: ClaudeCodeOptions renamed to ClaudeAgentOptions",
+      "id": "python:-claudecodeoptions-renamed-to-claudeagentoptions"
+    }
+  ],
+  "url": "llms-txt#after",
+  "links": []
+}

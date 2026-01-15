@@ -1,0 +1,8 @@
+{
+  "title": "Upload the image file",
+  "content": "with open(\"image.jpg\", \"rb\") as f:\n    file_upload = client.beta.files.upload(file=(\"image.jpg\", f, \"image/jpeg\"))",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#upload-the-image-file",
+  "links": []
+}

@@ -1,0 +1,34 @@
+{
+  "title": "List Users",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/users/list\n\n**get** `/v1/organizations/users`\n\n- `after_id: optional string`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.\n\n- `before_id: optional string`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.\n\n- `email: optional string`\n\nFilter by user email.\n\n- `limit: optional number`\n\nNumber of items to return per page.\n\nDefaults to `20`. Ranges from `1` to `1000`.\n\n- `data: array of User`\n\nRFC 3339 datetime string indicating when the User joined the Organization.\n\n- `role: \"user\" or \"developer\" or \"billing\" or 2 more`\n\nOrganization role of the User.\n\n- `\"claude_code_user\"`\n\nFor Users, this is always `\"user\"`.\n\nFirst ID in the `data` list. Can be used as the `before_id` for the previous page.\n\n- `has_more: boolean`\n\nIndicates if there are more results in the requested page direction.\n\nLast ID in the `data` list. Can be used as the `after_id` for the next page.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/users \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#list-users",
+  "links": []
+}

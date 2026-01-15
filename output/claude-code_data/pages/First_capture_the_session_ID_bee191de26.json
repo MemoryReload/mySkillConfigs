@@ -1,0 +1,8 @@
+{
+  "title": "First, capture the session ID",
+  "content": "async for message in query(\n    prompt=\"Help me design a REST API\",\n    options=ClaudeAgentOptions(model=\"claude-sonnet-4-5\")\n):\n    if hasattr(message, 'subtype') and message.subtype == 'init':\n        session_id = message.data.get('session_id')\n        print(f\"Original session: {session_id}\")",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first,-capture-the-session-id",
+  "links": []
+}

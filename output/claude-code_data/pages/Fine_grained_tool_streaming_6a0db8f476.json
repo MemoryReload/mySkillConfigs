@@ -1,0 +1,40 @@
+{
+  "title": "Fine-grained tool streaming",
+  "content": "Tool use now supports fine-grained [streaming](/docs/en/build-with-claude/streaming) for parameter values. This allows developers to stream tool use parameters without buffering / JSON validation, reducing the latency to begin receiving large parameters.\n\nFine-grained tool streaming is available via the Claude API, AWS Bedrock, Google Cloud's Vertex AI, and Microsoft Foundry.\n\n<Note>\nFine-grained tool streaming is a beta feature. Please make sure to evaluate your responses before using it in production.\n\nPlease use [this form](https://forms.gle/D4Fjr7GvQRzfTZT96) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation—we cannot wait to hear from you!\n</Note>\n\n<Warning>\nWhen using fine-grained tool streaming, you may potentially receive invalid or partial JSON inputs. Please make sure to account for these edge cases in your code.\n</Warning>\n## How to use fine-grained tool streaming\nTo use this beta feature, simply add the beta header `fine-grained-tool-streaming-2025-05-14` to a tool use request and turn on streaming.\n\nHere's an example of how to use fine-grained tool streaming with the API:\n\nIn this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.\n\n<Note>\nWith fine-grained tool streaming, tool use chunks start streaming faster, and are often longer and contain fewer word breaks. This is due to differences in chunking behavior.\n\nWithout fine-grained streaming (15s delay):\n\nWith fine-grained streaming (3s delay):\n\n<Warning>\nBecause fine-grained streaming sends parameters without buffering or JSON validation, there is no guarantee that the resulting stream will complete in a valid JSON string.\nParticularly, if the [stop reason](/docs/en/build-with-claude/handling-stop-reasons) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You will generally have to write specific support to handle when `max_tokens` is reached.\n</Warning>\n\n## Handling invalid JSON in tool responses\n\nWhen using fine-grained tool streaming, you may receive invalid or incomplete JSON from the model. If you need to pass this invalid JSON back to the model in an error response block, you may wrap it in a JSON object to ensure proper handling (with a reasonable key). For example:\n\nThis approach helps the model understand that the content is invalid JSON while preserving the original malformed data for debugging purposes.\n\n<Note>\nWhen wrapping invalid JSON, make sure to properly escape any quotes or special characters in the invalid JSON string to maintain valid JSON structure in the wrapper object.\n</Note>",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nIn this example, fine-grained tool streaming enables Claude to stream the lines of a long poem into the tool call `make_file` without buffering to validate if the `lines_of_text` parameter is valid JSON. This means you can see the parameter stream as it arrives, without having to wait for the entire parameter to buffer and validate.\n\n<Note>\nWith fine-grained tool streaming, tool use chunks start streaming faster, and are often longer and contain fewer word breaks. This is due to differences in chunking behavior.\n\nExample: \n\nWithout fine-grained streaming (15s delay):",
+      "language": "unknown"
+    },
+    {
+      "code": "With fine-grained streaming (3s delay):",
+      "language": "unknown"
+    },
+    {
+      "code": "</Note>\n\n<Warning>\nBecause fine-grained streaming sends parameters without buffering or JSON validation, there is no guarantee that the resulting stream will complete in a valid JSON string.\nParticularly, if the [stop reason](/docs/en/build-with-claude/handling-stop-reasons) `max_tokens` is reached, the stream may end midway through a parameter and may be incomplete. You will generally have to write specific support to handle when `max_tokens` is reached.\n</Warning>\n\n## Handling invalid JSON in tool responses\n\nWhen using fine-grained tool streaming, you may receive invalid or incomplete JSON from the model. If you need to pass this invalid JSON back to the model in an error response block, you may wrap it in a JSON object to ensure proper handling (with a reasonable key). For example:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How to use fine-grained tool streaming",
+      "id": "how-to-use-fine-grained-tool-streaming"
+    },
+    {
+      "level": "h2",
+      "text": "Handling invalid JSON in tool responses",
+      "id": "handling-invalid-json-in-tool-responses"
+    }
+  ],
+  "url": "llms-txt#fine-grained-tool-streaming",
+  "links": []
+}

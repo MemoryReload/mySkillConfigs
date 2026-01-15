@@ -1,0 +1,87 @@
+{
+  "title": "Agent SDK reference - Python",
+  "content": "Complete API reference for the Python Agent SDK, including all functions, types, and classes.\n\n## Choosing Between `query()` and `ClaudeSDKClient`\n\nThe Python SDK provides two ways to interact with Claude Code:\n\n| Feature             | `query()`                     | `ClaudeSDKClient`                  |\n| :------------------ | :---------------------------- | :--------------------------------- |\n| **Session**         | Creates new session each time | Reuses same session                |\n| **Conversation**    | Single exchange               | Multiple exchanges in same context |\n| **Connection**      | Managed automatically         | Manual control                     |\n| **Streaming Input** | ✅ Supported                  | ✅ Supported                       |\n| **Interrupts**      | ❌ Not supported              | ✅ Supported                       |\n| **Hooks**           | ❌ Not supported              | ✅ Supported                       |\n| **Custom Tools**    | ❌ Not supported              | ✅ Supported                       |\n| **Continue Chat**   | ❌ New session each time      | ✅ Maintains conversation          |\n| **Use Case**        | One-off tasks                 | Continuous conversations           |\n\n### When to Use `query()` (New Session Each Time)\n\n- One-off questions where you don't need conversation history\n- Independent tasks that don't require context from previous exchanges\n- Simple automation scripts\n- When you want a fresh start each time\n\n### When to Use `ClaudeSDKClient` (Continuous Conversation)\n\n- **Continuing conversations** - When you need Claude to remember context\n- **Follow-up questions** - Building on previous responses\n- **Interactive applications** - Chat interfaces, REPLs\n- **Response-driven logic** - When next action depends on Claude's response\n- **Session control** - Managing conversation lifecycle explicitly\n\nCreates a new session for each interaction with Claude Code. Returns an async iterator that yields messages as they arrive. Each call to `query()` starts fresh with no memory of previous interactions.\n\n| Parameter | Type                         | Description                                                                |\n| :-------- | :--------------------------- | :------------------------------------------------------------------------- |\n| `prompt`  | `str \\| AsyncIterable[dict]` | The input prompt as a string or async iterable for streaming mode          |\n| `options` | `ClaudeAgentOptions \\| None` | Optional configuration object (defaults to `ClaudeAgentOptions()` if None) |\n\nReturns an `AsyncIterator[Message]` that yields messages from the conversation.\n\n#### Example - With options\n\nDecorator for defining MCP tools with type safety.\n\n| Parameter      | Type                     | Description                                             |\n| :------------- | :----------------------- | :------------------------------------------------------ |\n| `name`         | `str`                    | Unique identifier for the tool                          |\n| `description`  | `str`                    | Human-readable description of what the tool does        |\n| `input_schema` | `type \\| dict[str, Any]` | Schema defining the tool's input parameters (see below) |\n\n#### Input Schema Options\n\n1. **Simple type mapping** (recommended):\n\n2. **JSON Schema format** (for complex validation):\n\nA decorator function that wraps the tool implementation and returns an `SdkMcpTool` instance.\n\n### `create_sdk_mcp_server()`\n\nCreate an in-process MCP server that runs within your Python application.\n\n| Parameter | Type                            | Default   | Description                                           |\n| :-------- | :------------------------------ | :-------- | :---------------------------------------------------- |\n| `name`    | `str`                           | -         | Unique identifier for the server                      |\n| `version` | `str`                           | `\"1.0.0\"` | Server version string                                 |\n| `tools`   | `list[SdkMcpTool[Any]] \\| None` | `None`    | List of tool functions created with `@tool` decorator |\n\nReturns an `McpSdkServerConfig` object that can be passed to `ClaudeAgentOptions.mcp_servers`.\n\n```python\nfrom claude_agent_sdk import tool, create_sdk_mcp_server\n\n@tool(\"add\", \"Add two numbers\", {\"a\": float, \"b\": float})\nasync def add(args):\n    return {\n        \"content\": [{\n            \"type\": \"text\",\n            \"text\": f\"Sum: {args['a'] + args['b']}\"\n        }]\n    }\n\n@tool(\"multiply\", \"Multiply two numbers\", {\"a\": float, \"b\": float})\nasync def multiply(args):\n    return {\n        \"content\": [{\n            \"type\": \"text\",\n            \"text\": f\"Product: {args['a'] * args['b']}\"\n        }]\n    }\n\ncalculator = create_sdk_mcp_server(\n    name=\"calculator\",\n    version=\"2.0.0\",\n    tools=[add, multiply]  # Pass decorated functions\n)",
+  "code_samples": [
+    {
+      "code": "pip install claude-agent-sdk",
+      "language": "bash"
+    },
+    {
+      "code": "async def query(\n    *,\n    prompt: str | AsyncIterable[dict[str, Any]],\n    options: ClaudeAgentOptions | None = None\n) -> AsyncIterator[Message]",
+      "language": "python"
+    },
+    {
+      "code": "import asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\nasync def main():\n    options = ClaudeAgentOptions(\n        system_prompt=\"You are an expert Python developer\",\n        permission_mode='acceptEdits',\n        cwd=\"/home/user/project\"\n    )\n\n    async for message in query(\n        prompt=\"Create a Python web server\",\n        options=options\n    ):\n        print(message)\n\n\nasyncio.run(main())",
+      "language": "python"
+    },
+    {
+      "code": "def tool(\n    name: str,\n    description: str,\n    input_schema: type | dict[str, Any]\n) -> Callable[[Callable[[Any], Awaitable[dict[str, Any]]]], SdkMcpTool[Any]]",
+      "language": "python"
+    },
+    {
+      "code": "{\"text\": str, \"count\": int, \"enabled\": bool}",
+      "language": "python"
+    },
+    {
+      "code": "{\n       \"type\": \"object\",\n       \"properties\": {\n           \"text\": {\"type\": \"string\"},\n           \"count\": {\"type\": \"integer\", \"minimum\": 0}\n       },\n       \"required\": [\"text\"]\n   }",
+      "language": "python"
+    },
+    {
+      "code": "from claude_agent_sdk import tool\nfrom typing import Any\n\n@tool(\"greet\", \"Greet a user\", {\"name\": str})\nasync def greet(args: dict[str, Any]) -> dict[str, Any]:\n    return {\n        \"content\": [{\n            \"type\": \"text\",\n            \"text\": f\"Hello, {args['name']}!\"\n        }]\n    }",
+      "language": "python"
+    },
+    {
+      "code": "def create_sdk_mcp_server(\n    name: str,\n    version: str = \"1.0.0\",\n    tools: list[SdkMcpTool[Any]] | None = None\n) -> McpSdkServerConfig",
+      "language": "python"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Installation",
+      "id": "installation"
+    },
+    {
+      "level": "h2",
+      "text": "Choosing Between `query()` and `ClaudeSDKClient`",
+      "id": "choosing-between-`query()`-and-`claudesdkclient`"
+    },
+    {
+      "level": "h3",
+      "text": "Quick Comparison",
+      "id": "quick-comparison"
+    },
+    {
+      "level": "h3",
+      "text": "When to Use `query()` (New Session Each Time)",
+      "id": "when-to-use-`query()`-(new-session-each-time)"
+    },
+    {
+      "level": "h3",
+      "text": "When to Use `ClaudeSDKClient` (Continuous Conversation)",
+      "id": "when-to-use-`claudesdkclient`-(continuous-conversation)"
+    },
+    {
+      "level": "h2",
+      "text": "Functions",
+      "id": "functions"
+    },
+    {
+      "level": "h3",
+      "text": "`query()`",
+      "id": "`query()`"
+    },
+    {
+      "level": "h3",
+      "text": "`tool()`",
+      "id": "`tool()`"
+    },
+    {
+      "level": "h3",
+      "text": "`create_sdk_mcp_server()`",
+      "id": "`create_sdk_mcp_server()`"
+    }
+  ],
+  "url": "llms-txt#agent-sdk-reference---python",
+  "links": []
+}

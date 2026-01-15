@@ -1,0 +1,8 @@
+{
+  "title": "Second request with cache breakpoint",
+  "content": "messages.append({\n    \"role\": \"user\",\n    \"content\": \"What methodology does the paper use?\",\n    \"cache_control\": {\"type\": \"ephemeral\"}\n})\n\nresponse2 = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=messages,\n    tools=[{\n        \"type\": \"web_fetch_20250910\",\n        \"name\": \"web_fetch\"\n    }],\n    extra_headers={\n        \"anthropic-beta\": \"web-fetch-2025-09-10\"\n    }\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#second-request-with-cache-breakpoint",
+  "links": []
+}

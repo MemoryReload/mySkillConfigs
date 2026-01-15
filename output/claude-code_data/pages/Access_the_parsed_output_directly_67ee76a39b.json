@@ -1,0 +1,13 @@
+{
+  "title": "Access the parsed output directly",
+  "content": "contact = response.parsed_output\nprint(contact.name, contact.email)\npython\nfrom anthropic import transform_schema\nfrom pydantic import TypeAdapter",
+  "code_samples": [
+    {
+      "code": "</section>\n\n**Python: `transform_schema()` helper**\n\nFor when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.beta.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.\n\n<section title=\"Example usage\">",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#access-the-parsed-output-directly",
+  "links": []
+}

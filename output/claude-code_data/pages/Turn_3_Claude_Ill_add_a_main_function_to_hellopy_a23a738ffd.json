@@ -1,0 +1,69 @@
+{
+  "title": "Turn 3 - Claude: \"I'll add a main function to hello.py...\" (knows which file!)",
+  "content": "asyncio.run(main())\npython\nfrom claude_agent_sdk import (\n    ClaudeSDKClient,\n    ClaudeAgentOptions,\n    HookMatcher,\n    HookContext\n)\nimport asyncio\nfrom typing import Any\n\nasync def pre_tool_logger(\n    input_data: dict[str, Any],\n    tool_use_id: str | None,\n    context: HookContext\n) -> dict[str, Any]:\n    \"\"\"Log all tool usage before execution.\"\"\"\n    tool_name = input_data.get('tool_name', 'unknown')\n    print(f\"[PRE-TOOL] About to use: {tool_name}\")\n\n# You can modify or block the tool execution here\n    if tool_name == \"Bash\" and \"rm -rf\" in str(input_data.get('tool_input', {})):\n        return {\n            'hookSpecificOutput': {\n                'hookEventName': 'PreToolUse',\n                'permissionDecision': 'deny',\n                'permissionDecisionReason': 'Dangerous command blocked'\n            }\n        }\n    return {}\n\nasync def post_tool_logger(\n    input_data: dict[str, Any],\n    tool_use_id: str | None,\n    context: HookContext\n) -> dict[str, Any]:\n    \"\"\"Log results after tool execution.\"\"\"\n    tool_name = input_data.get('tool_name', 'unknown')\n    print(f\"[POST-TOOL] Completed: {tool_name}\")\n    return {}\n\nasync def user_prompt_modifier(\n    input_data: dict[str, Any],\n    tool_use_id: str | None,\n    context: HookContext\n) -> dict[str, Any]:\n    \"\"\"Add context to user prompts.\"\"\"\n    original_prompt = input_data.get('prompt', '')\n\n# Add timestamp to all prompts\n    from datetime import datetime\n    timestamp = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n\nreturn {\n        'hookSpecificOutput': {\n            'hookEventName': 'UserPromptSubmit',\n            'updatedPrompt': f\"[{timestamp}] {original_prompt}\"\n        }\n    }\n\nasync def main():\n    options = ClaudeAgentOptions(\n        hooks={\n            'PreToolUse': [\n                HookMatcher(hooks=[pre_tool_logger]),\n                HookMatcher(matcher='Bash', hooks=[pre_tool_logger])\n            ],\n            'PostToolUse': [\n                HookMatcher(hooks=[post_tool_logger])\n            ],\n            'UserPromptSubmit': [\n                HookMatcher(hooks=[user_prompt_modifier])\n            ]\n        },\n        allowed_tools=[\"Read\", \"Write\", \"Bash\"]\n    )\n\nasync with ClaudeSDKClient(options=options) as client:\n        await client.query(\"List files in current directory\")\n\nasync for message in client.receive_response():\n            # Hooks will automatically log tool usage\n            pass\n\nasyncio.run(main())\npython\nfrom claude_agent_sdk import (\n    ClaudeSDKClient,\n    ClaudeAgentOptions,\n    AssistantMessage,\n    ToolUseBlock,\n    ToolResultBlock,\n    TextBlock\n)\nimport asyncio\n\nasync def monitor_progress():\n    options = ClaudeAgentOptions(\n        allowed_tools=[\"Write\", \"Bash\"],\n        permission_mode=\"acceptEdits\"\n    )\n\nasync with ClaudeSDKClient(options=options) as client:\n        await client.query(\n            \"Create 5 Python files with different sorting algorithms\"\n        )\n\n# Monitor progress in real-time\n        files_created = []\n        async for message in client.receive_messages():\n            if isinstance(message, AssistantMessage):\n                for block in message.content:\n                    if isinstance(block, ToolUseBlock):\n                        if block.name == \"Write\":\n                            file_path = block.input.get(\"file_path\", \"\")\n                            print(f\"🔨 Creating: {file_path}\")\n                    elif isinstance(block, ToolResultBlock):\n                        print(f\"✅ Completed tool execution\")\n                    elif isinstance(block, TextBlock):\n                        print(f\"💭 Claude says: {block.text[:100]}...\")\n\n# Check if we've received the final result\n            if hasattr(message, 'subtype') and message.subtype in ['success', 'error']:\n                print(f\"\\n🎯 Task completed!\")\n                break\n\nasyncio.run(monitor_progress())\npython\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, ToolUseBlock\nimport asyncio\n\nasync def create_project():\n    options = ClaudeAgentOptions(\n        allowed_tools=[\"Read\", \"Write\", \"Bash\"],\n        permission_mode='acceptEdits',\n        cwd=\"/home/user/project\"\n    )\n\nasync for message in query(\n        prompt=\"Create a Python project structure with setup.py\",\n        options=options\n    ):\n        if isinstance(message, AssistantMessage):\n            for block in message.content:\n                if isinstance(block, ToolUseBlock):\n                    print(f\"Using tool: {block.name}\")\n\nasyncio.run(create_project())\npython\nfrom claude_agent_sdk import (\n    query,\n    CLINotFoundError,\n    ProcessError,\n    CLIJSONDecodeError\n)\n\ntry:\n    async for message in query(prompt=\"Hello\"):\n        print(message)\nexcept CLINotFoundError:\n    print(\"Please install Claude Code: npm install -g @anthropic-ai/claude-code\")\nexcept ProcessError as e:\n    print(f\"Process failed with exit code: {e.exit_code}\")\nexcept CLIJSONDecodeError as e:\n    print(f\"Failed to parse response: {e}\")\npython\nfrom claude_agent_sdk import ClaudeSDKClient\nimport asyncio\n\nasync def interactive_session():\n    async with ClaudeSDKClient() as client:\n        # Send initial message\n        await client.query(\"What's the weather like?\")\n\n# Process responses\n        async for msg in client.receive_response():\n            print(msg)\n\n# Send follow-up\n        await client.query(\"Tell me more about that\")\n\n# Process follow-up response\n        async for msg in client.receive_response():\n            print(msg)\n\nasyncio.run(interactive_session())\npython\nfrom claude_agent_sdk import (\n    ClaudeSDKClient,\n    ClaudeAgentOptions,\n    tool,\n    create_sdk_mcp_server,\n    AssistantMessage,\n    TextBlock\n)\nimport asyncio\nfrom typing import Any",
+  "code_samples": [
+    {
+      "code": "### Using Hooks for Behavior Modification",
+      "language": "unknown"
+    },
+    {
+      "code": "### Real-time Progress Monitoring",
+      "language": "unknown"
+    },
+    {
+      "code": "## Example Usage\n\n### Basic file operations (using query)",
+      "language": "unknown"
+    },
+    {
+      "code": "### Error handling",
+      "language": "unknown"
+    },
+    {
+      "code": "### Streaming mode with client",
+      "language": "unknown"
+    },
+    {
+      "code": "### Using custom tools with ClaudeSDKClient",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Using Hooks for Behavior Modification",
+      "id": "using-hooks-for-behavior-modification"
+    },
+    {
+      "level": "h3",
+      "text": "Real-time Progress Monitoring",
+      "id": "real-time-progress-monitoring"
+    },
+    {
+      "level": "h2",
+      "text": "Example Usage",
+      "id": "example-usage"
+    },
+    {
+      "level": "h3",
+      "text": "Basic file operations (using query)",
+      "id": "basic-file-operations-(using-query)"
+    },
+    {
+      "level": "h3",
+      "text": "Error handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h3",
+      "text": "Streaming mode with client",
+      "id": "streaming-mode-with-client"
+    },
+    {
+      "level": "h3",
+      "text": "Using custom tools with ClaudeSDKClient",
+      "id": "using-custom-tools-with-claudesdkclient"
+    }
+  ],
+  "url": "llms-txt#turn-3---claude:-\"i'll-add-a-main-function-to-hello.py...\"-(knows-which-file!)",
+  "links": []
+}

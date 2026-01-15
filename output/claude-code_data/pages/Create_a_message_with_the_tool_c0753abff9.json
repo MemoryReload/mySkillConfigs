@@ -1,0 +1,8 @@
+{
+  "title": "Create a message with the tool",
+  "content": "response = client.messages.create(\n    model=\"claude-sonnet-4-5\",  # Works with all supported models\n    max_tokens=1024,\n    tools=[knowledge_base_tool],\n    messages=[\n        MessageParam(\n            role=\"user\",\n            content=\"How do I configure the timeout settings?\"\n        )\n    ]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#create-a-message-with-the-tool",
+  "links": []
+}

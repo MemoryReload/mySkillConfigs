@@ -1,0 +1,8 @@
+{
+  "title": "List all files",
+  "content": "curl \"https://api.anthropic.com/v1/files\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\"",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#list-all-files",
+  "links": []
+}

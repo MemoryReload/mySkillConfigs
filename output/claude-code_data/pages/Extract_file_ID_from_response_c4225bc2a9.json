@@ -1,0 +1,17 @@
+{
+  "title": "Extract file ID from response",
+  "content": "file_id = None\nfor block in response.content:\n    if block.type == 'tool_use' and block.name == 'code_execution':\n        # File ID is in the tool result\n        for result_block in block.content:\n            if hasattr(result_block, 'file_id'):\n                file_id = result_block.file_id\n                break\n\nif file_id:\n    # Download the file\n    file_content = client.beta.files.download(\n        file_id=file_id,\n        betas=[\"files-api-2025-04-14\"]\n    )\n\n# Save to disk\n    with open(\"renewable_energy.pptx\", \"wb\") as f:\n        file_content.write_to_file(f.name)\n\nprint(f\"Presentation saved to renewable_energy.pptx\")\ntypescript TypeScript\n// Extract file ID from response\nlet fileId: string | null = null;\nfor (const block of response.content) {\n  if (block.type === 'tool_use' && block.name === 'code_execution') {\n    // File ID is in the tool result\n    for (const resultBlock of block.content) {\n      if ('file_id' in resultBlock) {\n        fileId = resultBlock.file_id;\n        break;\n      }\n    }\n  }\n}\n\nif (fileId) {\n  // Download the file\n  const fileContent = await client.beta.files.download(fileId, {\n    betas: ['files-api-2025-04-14']\n  });\n\n// Save to disk\n  const fs = require('fs');\n  fs.writeFileSync('renewable_energy.pptx', Buffer.from(await fileContent.arrayBuffer()));\n\nconsole.log('Presentation saved to renewable_energy.pptx');\n}\nbash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#extract-file-id-from-response",
+  "links": []
+}

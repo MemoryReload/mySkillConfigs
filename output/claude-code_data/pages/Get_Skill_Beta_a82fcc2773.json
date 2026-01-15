@@ -1,0 +1,39 @@
+{
+  "title": "Get Skill (Beta)",
+  "content": "URL: https://platform.claude.com/docs/en/api/beta/skills/retrieve\n\n**get** `/v1/skills/{skill_id}`\n\nUnique identifier for the skill.\n\nThe format and length of IDs may change over time.\n\n### Header Parameters\n\n- `\"anthropic-beta\": optional array of AnthropicBeta`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `UnionMember0 = string`\n\n- `UnionMember1 = \"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 16 more`\n\n- `\"message-batches-2024-09-24\"`\n\n- `\"prompt-caching-2024-07-31\"`\n\n- `\"computer-use-2024-10-22\"`\n\n- `\"computer-use-2025-01-24\"`\n\n- `\"pdfs-2024-09-25\"`\n\n- `\"token-counting-2024-11-01\"`\n\n- `\"token-efficient-tools-2025-02-19\"`\n\n- `\"output-128k-2025-02-19\"`\n\n- `\"files-api-2025-04-14\"`\n\n- `\"mcp-client-2025-04-04\"`\n\n- `\"mcp-client-2025-11-20\"`\n\n- `\"dev-full-thinking-2025-05-14\"`\n\n- `\"interleaved-thinking-2025-05-14\"`\n\n- `\"code-execution-2025-05-22\"`\n\n- `\"extended-cache-ttl-2025-04-11\"`\n\n- `\"context-1m-2025-08-07\"`\n\n- `\"context-management-2025-06-27\"`\n\n- `\"model-context-window-exceeded-2025-08-26\"`\n\n- `\"skills-2025-10-02\"`\n\nUnique identifier for the skill.\n\nThe format and length of IDs may change over time.\n\n- `created_at: string`\n\nISO 8601 timestamp of when the skill was created.\n\n- `display_title: string`\n\nDisplay title for the skill.\n\nThis is a human-readable label that is not included in the prompt sent to the model.\n\n- `latest_version: string`\n\nThe latest version identifier for the skill.\n\nThis represents the most recent version of the skill that has been created.\n\nThis may be one of the following values:\n\n* `\"custom\"`: the skill was created by a user\n  * `\"anthropic\"`: the skill was created by Anthropic\n\nFor Skills, this is always `\"skill\"`.\n\n- `updated_at: string`\n\nISO 8601 timestamp of when the skill was last updated.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/skills/$SKILL_ID \\\n    -H 'anthropic-version: 2023-06-01' \\\n    -H 'anthropic-beta: skills-2025-10-02' \\\n    -H \"X-Api-Key: $ANTHROPIC_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Retrieve",
+      "id": "retrieve"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Header Parameters",
+      "id": "header-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#get-skill-(beta)",
+  "links": []
+}

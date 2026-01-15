@@ -1,0 +1,19 @@
+{
+  "title": "After (Claude Sonnet 4.5)",
+  "content": "model=\"claude-sonnet-4-5-20250929\"\npython",
+  "code_samples": [
+    {
+      "code": "Claude Sonnet 4.5 is our most intelligent model with best-in-class reasoning, coding, and long-running agent capabilities. It offers superior performance compared to Opus 4.1 for most use cases.\n\n### Migrating from Claude Opus 4.1 → Opus 4.5\n\n**No breaking changes.** All API calls will work without modification.\n\nSimply update your model ID:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Migrating from Claude Opus 4.1 → Opus 4.5",
+      "id": "migrating-from-claude-opus-4.1-→-opus-4.5"
+    }
+  ],
+  "url": "llms-txt#after-(claude-sonnet-4.5)",
+  "links": []
+}

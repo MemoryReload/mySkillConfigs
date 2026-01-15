@@ -1,0 +1,81 @@
+{
+  "title": "Code execution tool",
+  "content": "Claude can analyze data, create visualizations, perform complex calculations, run system commands, create and edit files, and process uploaded\nfiles directly within the API conversation.\nThe code execution tool allows Claude to run Bash commands and manipulate files, including writing code, in a secure, sandboxed environment.\n\n<Note>\nThe code execution tool is currently in public beta.\n\nTo use this feature, add the `\"code-execution-2025-08-25\"` [beta header](/docs/en/api/beta-headers) to your API requests.\n\nPlease reach out through our [feedback form](https://forms.gle/LTAU6Xn2puCJMi1n6) to share your feedback on this feature.\n</Note>\n\n## Model compatibility\n\nThe code execution tool is available on the following models:\n\n| Model | Tool Version |\n|-------|--------------|\n| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |\n| Claude Opus 4.1 (`claude-opus-4-1-20250805`) | `code_execution_20250825` |\n| Claude Opus 4 (`claude-opus-4-20250514`) | `code_execution_20250825` |\n| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |\n| Claude Sonnet 4 (`claude-sonnet-4-20250514`) | `code_execution_20250825` |\n| Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |\n| Claude Haiku 4.5 (`claude-haiku-4-5-20251001`) | `code_execution_20250825` |\n| Claude Haiku 3.5 (`claude-3-5-haiku-latest`) ([deprecated](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825` |\n\n<Note>\nThe current version `code_execution_20250825` supports Bash commands and file operations. A legacy version `code_execution_20250522` (Python only) is also available. See [Upgrade to latest tool version](#upgrade-to-latest-tool-version) for migration details.\n</Note>\n\n<Warning>\nOlder tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.\n</Warning>\n\nHere's a simple example that asks Claude to perform a calculation:\n\n## How code execution works\n\nWhen you add the code execution tool to your API request:\n\n1. Claude evaluates whether code execution would help answer your question\n2. The tool automatically provides Claude with the following capabilities:\n   - **Bash commands**: Execute shell commands for system operations and package management\n   - **File operations**: Create, view, and edit files directly, including writing code\n3. Claude can use any combination of these capabilities in a single request\n4. All operations run in a secure sandbox environment\n5. Claude provides results with any generated charts, calculations, or analysis\n\n## How to use the tool\n\n### Execute Bash commands\n\nAsk Claude to check system information and install packages:\n\n### Create and edit files directly\n\nClaude can create, view, and edit files directly in the sandbox using the file manipulation capabilities:\n\n### Upload and analyze your own files\n\nTo analyze your own data files (CSV, Excel, images, etc.), upload them via the Files API and reference them in your request:\n\n<Note>\nUsing the Files API with Code Execution requires two beta headers: `\"anthropic-beta\": \"code-execution-2025-08-25,files-api-2025-04-14\"`\n</Note>\n\nThe Python environment can process various file types uploaded via the Files API, including:\n\n- CSV\n- Excel (.xlsx, .xls)\n- JSON\n- XML\n- Images (JPEG, PNG, GIF, WebP)\n- Text files (.txt, .md, .py, etc)\n\n#### Upload and analyze files\n\n1. **Upload your file** using the [Files API](/docs/en/build-with-claude/files)\n2. **Reference the file** in your message using a `container_upload` content block\n3. **Include the code execution tool** in your API request\n\n<CodeGroup>\n```bash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## How code execution works\n\nWhen you add the code execution tool to your API request:\n\n1. Claude evaluates whether code execution would help answer your question\n2. The tool automatically provides Claude with the following capabilities:\n   - **Bash commands**: Execute shell commands for system operations and package management\n   - **File operations**: Create, view, and edit files directly, including writing code\n3. Claude can use any combination of these capabilities in a single request\n4. All operations run in a secure sandbox environment\n5. Claude provides results with any generated charts, calculations, or analysis\n\n## How to use the tool\n\n### Execute Bash commands\n\nAsk Claude to check system information and install packages:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Create and edit files directly\n\nClaude can create, view, and edit files directly in the sandbox using the file manipulation capabilities:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Upload and analyze your own files\n\nTo analyze your own data files (CSV, Excel, images, etc.), upload them via the Files API and reference them in your request:\n\n<Note>\nUsing the Files API with Code Execution requires two beta headers: `\"anthropic-beta\": \"code-execution-2025-08-25,files-api-2025-04-14\"`\n</Note>\n\nThe Python environment can process various file types uploaded via the Files API, including:\n\n- CSV\n- Excel (.xlsx, .xls)\n- JSON\n- XML\n- Images (JPEG, PNG, GIF, WebP)\n- Text files (.txt, .md, .py, etc)\n\n#### Upload and analyze files\n\n1. **Upload your file** using the [Files API](/docs/en/build-with-claude/files)\n2. **Reference the file** in your message using a `container_upload` content block\n3. **Include the code execution tool** in your API request\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Model compatibility",
+      "id": "model-compatibility"
+    },
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h2",
+      "text": "How code execution works",
+      "id": "how-code-execution-works"
+    },
+    {
+      "level": "h2",
+      "text": "How to use the tool",
+      "id": "how-to-use-the-tool"
+    },
+    {
+      "level": "h3",
+      "text": "Execute Bash commands",
+      "id": "execute-bash-commands"
+    },
+    {
+      "level": "h3",
+      "text": "Create and edit files directly",
+      "id": "create-and-edit-files-directly"
+    },
+    {
+      "level": "h3",
+      "text": "Upload and analyze your own files",
+      "id": "upload-and-analyze-your-own-files"
+    }
+  ],
+  "url": "llms-txt#code-execution-tool",
+  "links": []
+}

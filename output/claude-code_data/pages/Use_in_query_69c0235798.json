@@ -1,0 +1,33 @@
+{
+  "title": "Use in query",
+  "content": "async for message in query(\n    prompt=\"Analyze the codebase for security issues\",\n    options={\n        \"output_format\": {\n            \"type\": \"json_schema\",\n            \"schema\": AnalysisResult.model_json_schema()\n        }\n    }\n):\n    if hasattr(message, 'structured_output'):\n        # Validate and get fully typed result\n        result = AnalysisResult.model_validate(message.structured_output)\n        print(f\"Score: {result.score}\")\n        print(f\"Found {len(result.issues)} issues\")\n        for issue in result.issues:\n            print(f\"[{issue.severity}] {issue.file}: {issue.description}\")\ntypescript TypeScript\nimport { query } from '@anthropic-ai/claude-agent-sdk'\n\n// Define structure for TODO extraction\nconst todoSchema = {\n  type: 'object',\n  properties: {\n    todos: {\n      type: 'array',\n      items: {\n        type: 'object',\n        properties: {\n          text: { type: 'string' },\n          file: { type: 'string' },\n          line: { type: 'number' },\n          author: { type: 'string' },\n          date: { type: 'string' }\n        },\n        required: ['text', 'file', 'line']\n      }\n    },\n    total_count: { type: 'number' }\n  },\n  required: ['todos', 'total_count']\n}\n\n// Agent uses Grep to find TODOs, Bash to get git blame info\nfor await (const message of query({\n  prompt: 'Find all TODO comments in src/ and identify who added them',\n  options: {\n    outputFormat: {\n      type: 'json_schema',\n      schema: todoSchema\n    }\n  }\n})) {\n  if (message.type === 'result' && message.structured_output) {\n    const data = message.structured_output\n    console.log(`Found ${data.total_count} TODOs`)\n    data.todos.forEach(todo => {\n      console.log(`${todo.file}:${todo.line} - ${todo.text}`)\n      if (todo.author) {\n        console.log(`  Added by ${todo.author} on ${todo.date}`)\n      }\n    })\n  }\n}\npython Python\nfrom claude_agent_sdk import query",
+  "code_samples": [
+    {
+      "code": "**Benefits of Pydantic:**\n- Full Python type hints\n- Runtime validation with `model_validate()`\n- Better error messages\n- Data class functionality\n\n</Tab>\n</Tabs>\n\n## How structured outputs work\n\n<Steps>\n  <Step title=\"Define your JSON schema\">\n    Create a JSON Schema that describes the structure you want the agent to return. The schema uses standard JSON Schema format.\n  </Step>\n  <Step title=\"Add the outputFormat parameter\">\n    Include the `outputFormat` parameter in your query options with `type: \"json_schema\"` and your schema definition.\n  </Step>\n  <Step title=\"Run your query\">\n    The agent uses any tools it needs to complete the task (file operations, commands, web search, etc.).\n  </Step>\n  <Step title=\"Access validated output\">\n    The agent's final result will be valid JSON matching your schema, available in `message.structured_output`.\n  </Step>\n</Steps>\n\n## Supported JSON Schema features\n\nThe Agent SDK supports the same JSON Schema features and limitations as [API Structured Outputs](/docs/en/build-with-claude/structured-outputs#json-schema-limitations).\n\nKey supported features:\n- All basic types: object, array, string, integer, number, boolean, null\n- `enum`, `const`, `required`, `additionalProperties` (must be `false`)\n- String formats: `date-time`, `date`, `email`, `uri`, `uuid`, etc.\n- `$ref`, `$def`, and `definitions`\n\nFor complete details on supported features, limitations, and regex pattern support, see [JSON Schema limitations](/docs/en/build-with-claude/structured-outputs#json-schema-limitations) in the API documentation.\n\n## Example: TODO tracking agent\n\nHere's a complete example showing an agent that searches code for TODOs and extracts git blame information:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How structured outputs work",
+      "id": "how-structured-outputs-work"
+    },
+    {
+      "level": "h2",
+      "text": "Supported JSON Schema features",
+      "id": "supported-json-schema-features"
+    },
+    {
+      "level": "h2",
+      "text": "Example: TODO tracking agent",
+      "id": "example:-todo-tracking-agent"
+    }
+  ],
+  "url": "llms-txt#use-in-query",
+  "links": []
+}

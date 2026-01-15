@@ -1,0 +1,34 @@
+{
+  "title": "List Message Batches (Go)",
+  "content": "URL: https://platform.claude.com/docs/en/api/go/messages/batches/list\n\n`client.Messages.Batches.List(ctx, query) (*Page[MessageBatch], error)`\n\n**get** `/v1/messages/batches`\n\nList all Message Batches within a Workspace. Most recently created batches are returned first.\n\nLearn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)\n\n- `query MessageBatchListParams`\n\n- `AfterID param.Field[string]`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.\n\n- `BeforeID param.Field[string]`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.\n\n- `Limit param.Field[int64]`\n\nNumber of items to return per page.\n\nDefaults to `20`. Ranges from `1` to `1000`.\n\n- `type MessageBatch struct{…}`\n\nUnique object identifier.\n\nThe format and length of IDs may change over time.\n\nRFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.\n\n- `CancelInitiatedAt Time`\n\nRFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.\n\nRFC 3339 datetime string representing the time at which the Message Batch was created.\n\nRFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.\n\nProcessing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.\n\nRFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.\n\n- `ProcessingStatus MessageBatchProcessingStatus`\n\nProcessing status of the Message Batch.\n\n- `const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = \"in_progress\"`\n\n- `const MessageBatchProcessingStatusCanceling MessageBatchProcessingStatus = \"canceling\"`\n\n- `const MessageBatchProcessingStatusEnded MessageBatchProcessingStatus = \"ended\"`\n\n- `RequestCounts MessageBatchRequestCounts`\n\nTallies requests within the Message Batch, categorized by their status.\n\nRequests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.\n\nNumber of requests in the Message Batch that have been canceled.\n\nThis is zero until processing of the entire Message Batch has ended.\n\nNumber of requests in the Message Batch that encountered an error.\n\nThis is zero until processing of the entire Message Batch has ended.\n\nNumber of requests in the Message Batch that have expired.\n\nThis is zero until processing of the entire Message Batch has ended.\n\nNumber of requests in the Message Batch that are processing.\n\nNumber of requests in the Message Batch that have completed successfully.\n\nThis is zero until processing of the entire Message Batch has ended.\n\n- `ResultsURL string`\n\nURL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.\n\nResults in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.\n\n- `Type MessageBatch`\n\nFor Message Batches, this is always `\"message_batch\"`.\n\n- `const MessageBatchMessageBatch MessageBatch = \"message_batch\"`",
+  "code_samples": [
+    {
+      "code": "package main\n\nimport (\n  \"context\"\n  \"fmt\"\n\n  \"github.com/anthropics/anthropic-sdk-go\"\n  \"github.com/anthropics/anthropic-sdk-go/option\"\n)\n\nfunc main() {\n  client := anthropic.NewClient(\n    option.WithAPIKey(\"my-anthropic-api-key\"),\n  )\n  page, err := client.Messages.Batches.List(context.TODO(), anthropic.MessageBatchListParams{\n\n  })\n  if err != nil {\n    panic(err.Error())\n  }\n  fmt.Printf(\"%+v\\n\", page)\n}",
+      "language": "go"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#list-message-batches-(go)",
+  "links": []
+}

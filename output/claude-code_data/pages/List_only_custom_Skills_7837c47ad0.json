@@ -1,0 +1,36 @@
+{
+  "title": "List only custom Skills",
+  "content": "curl \"https://api.anthropic.com/v1/skills?source=custom\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: skills-2025-10-02\"\npython Python\nskill = client.beta.skills.retrieve(\n    skill_id=\"skill_01AbCdEfGhIjKlMnOpQrStUv\",\n    betas=[\"skills-2025-10-02\"]\n)\n\nprint(f\"Skill: {skill.display_title}\")\nprint(f\"Latest version: {skill.latest_version}\")\nprint(f\"Created: {skill.created_at}\")\ntypescript TypeScript\nconst skill = await client.beta.skills.retrieve(\n  'skill_01AbCdEfGhIjKlMnOpQrStUv',\n  { betas: ['skills-2025-10-02'] }\n);\n\nconsole.log(`Skill: ${skill.display_title}`);\nconsole.log(`Latest version: ${skill.latest_version}`);\nconsole.log(`Created: ${skill.created_at}`);\nbash Shell\ncurl \"https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: skills-2025-10-02\"\npython Python",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\nSee the [List Skills API reference](/docs/en/api/skills/list-skills) for pagination and filtering options.\n\n### Retrieving a Skill\n\nGet details about a specific Skill:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Deleting a Skill\n\nTo delete a Skill, you must first delete all its versions:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Retrieving a Skill",
+      "id": "retrieving-a-skill"
+    },
+    {
+      "level": "h3",
+      "text": "Deleting a Skill",
+      "id": "deleting-a-skill"
+    }
+  ],
+  "url": "llms-txt#list-only-custom-skills",
+  "links": []
+}

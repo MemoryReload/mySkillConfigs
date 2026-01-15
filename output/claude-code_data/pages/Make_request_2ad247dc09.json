@@ -1,0 +1,17 @@
+{
+  "title": "Make request",
+  "content": "message = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=[{\"role\": \"user\", \"content\": \"Hello!\"}]\n)\nprint(message.content)\ntypescript TypeScript\nimport AnthropicFoundry from \"@anthropic-ai/foundry-sdk\";\nimport {\n  DefaultAzureCredential,\n  getBearerTokenProvider,\n} from \"@azure/identity\";\n\n// Get Entra ID token using token provider pattern\nconst credential = new DefaultAzureCredential();\nconst tokenProvider = getBearerTokenProvider(\n  credential,\n  \"https://cognitiveservices.azure.com/.default\"\n);\n\n// Create client with Entra ID authentication\nconst client = new AnthropicFoundry({\n  resource: 'example-resource', // your resource name\n  azureADTokenProvider: tokenProvider, // Use token provider for Entra ID auth\n});\n\n// Make request\nconst message = await client.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  messages: [{ role: \"user\", content: \"Hello!\" }],\n});\nconsole.log(message.content);\nbash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#make-request",
+  "links": []
+}

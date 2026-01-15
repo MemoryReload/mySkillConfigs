@@ -1,0 +1,8 @@
+{
+  "title": "First request creates cache",
+  "content": "curl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5-20250929\",\n    \"max_tokens\": 4096,\n    \"container\": {\n      \"skills\": [\n        {\"type\": \"anthropic\", \"skill_id\": \"xlsx\", \"version\": \"latest\"}\n      ]\n    },\n    \"messages\": [{\"role\": \"user\", \"content\": \"Analyze sales data\"}],\n    \"tools\": [{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]\n  }'",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-request-creates-cache",
+  "links": []
+}

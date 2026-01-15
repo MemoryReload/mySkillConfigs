@@ -1,0 +1,8 @@
+{
+  "title": "Build the conversation with tool results",
+  "content": "messages = [\n    {\n        \"role\": \"user\",\n        \"content\": \"What's the weather in SF and NYC, and what time is it there?\"\n    },\n    {\n        \"role\": \"assistant\",\n        \"content\": response.content  # Contains multiple tool_use blocks\n    },\n    {\n        \"role\": \"user\",\n        \"content\": [\n            {\n                \"type\": \"tool_result\",\n                \"tool_use_id\": \"toolu_01\",  # Must match the ID from tool_use\n                \"content\": \"San Francisco: 68°F, partly cloudy\"\n            },\n            {\n                \"type\": \"tool_result\",\n                \"tool_use_id\": \"toolu_02\",\n                \"content\": \"New York: 45°F, clear skies\"\n            },\n            {\n                \"type\": \"tool_result\",\n                \"tool_use_id\": \"toolu_03\",\n                \"content\": \"San Francisco time: 2:30 PM PST\"\n            },\n            {\n                \"type\": \"tool_result\",\n                \"tool_use_id\": \"toolu_04\",\n                \"content\": \"New York time: 5:30 PM EST\"\n            }\n        ]\n    }\n]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#build-the-conversation-with-tool-results",
+  "links": []
+}

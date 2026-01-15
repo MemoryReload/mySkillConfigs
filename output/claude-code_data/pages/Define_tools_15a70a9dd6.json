@@ -1,0 +1,8 @@
+{
+  "title": "Define tools",
+  "content": "tools = [\n    {\n        \"name\": \"get_weather\",\n        \"description\": \"Get the current weather in a given location\",\n        \"input_schema\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"location\": {\n                    \"type\": \"string\",\n                    \"description\": \"The city and state, e.g. San Francisco, CA\"\n                }\n            },\n            \"required\": [\"location\"]\n        }\n    },\n    {\n        \"name\": \"get_time\",\n        \"description\": \"Get the current time in a given timezone\",\n        \"input_schema\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"timezone\": {\n                    \"type\": \"string\",\n                    \"description\": \"The timezone, e.g. America/New_York\"\n                }\n            },\n            \"required\": [\"timezone\"]\n        }\n    }\n]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#define-tools",
+  "links": []
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Long context prompting tips",
+  "content": "<Note>\nWhile these tips apply broadly to all Claude models, you can find prompting tips specific to extended thinking models [here](/docs/en/build-with-claude/prompt-engineering/extended-thinking-tips).\n</Note>\n\nClaude's extended context window (200K tokens for Claude 3 models) enables handling complex, data-rich tasks. This guide will help you leverage this power effectively.\n\n## Essential tips for long context prompts\n\n- **Put longform data at the top**: Place your long documents and inputs (~20K+ tokens) near the top of your prompt, above your query, instructions, and examples. This can significantly improve Claude's performance across all models.\n\n<Note>Queries at the end can improve response quality by up to 30% in tests, especially with complex, multi-document inputs.</Note>\n\n- **Structure document content and metadata with XML tags**: When using multiple documents, wrap each document in `<document>` tags with `<document_content>` and `<source>` (and other metadata) subtags for clarity.\n\n<section title=\"Example multi-document structure\">\n\n- **Ground responses in quotes**: For long document tasks, ask Claude to quote relevant parts of the documents first before carrying out its task. This helps Claude cut through the \"noise\" of the rest of the document's contents.\n\n<section title=\"Example quote extraction\">\n\n<CardGroup cols={3}>\n  <Card title=\"Prompt library\" icon=\"link\" href=\"/docs/en/resources/prompt-library/library\">\n    Get inspired by a curated selection of prompts for various tasks and use cases.\n  </Card>\n  <Card title=\"GitHub prompting tutorial\" icon=\"link\" href=\"https://github.com/anthropics/prompt-eng-interactive-tutorial\">\n    An example-filled tutorial that covers the prompt engineering concepts found in our docs.\n  </Card>\n  <Card title=\"Google Sheets prompting tutorial\" icon=\"link\" href=\"https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8\">\n    A lighter weight version of our prompt engineering tutorial via an interactive spreadsheet.\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "<documents>\n      <document index=\"1\">\n        <source>annual_report_2023.pdf</source>\n        <document_content>\n          {{ANNUAL_REPORT}}\n        </document_content>\n      </document>\n      <document index=\"2\">\n        <source>competitor_analysis_q2.xlsx</source>\n        <document_content>\n          {{COMPETITOR_ANALYSIS}}\n        </document_content>\n      </document>\n    </documents>\n\n    Analyze the annual report and competitor analysis. Identify strategic advantages and recommend Q3 focus areas.",
+      "language": "xml"
+    },
+    {
+      "code": "You are an AI physician's assistant. Your task is to help doctors diagnose possible patient illnesses.\n\n    <documents>\n      <document index=\"1\">\n        <source>patient_symptoms.txt</source>\n        <document_content>\n          {{PATIENT_SYMPTOMS}}\n        </document_content>\n      </document>\n      <document index=\"2\">\n        <source>patient_records.txt</source>\n        <document_content>\n          {{PATIENT_RECORDS}}\n        </document_content>\n      </document>\n      <document index=\"3\">\n        <source>patient01_appt_history.txt</source>\n        <document_content>\n          {{PATIENT01_APPOINTMENT_HISTORY}}\n        </document_content>\n      </document>\n    </documents>\n\n    Find quotes from the patient records and appointment history that are relevant to diagnosing the patient's reported symptoms. Place these in <quotes> tags. Then, based on these quotes, list all information that would help the doctor diagnose the patient's symptoms. Place your diagnostic information in <info> tags.",
+      "language": "xml"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Essential tips for long context prompts",
+      "id": "essential-tips-for-long-context-prompts"
+    }
+  ],
+  "url": "llms-txt#long-context-prompting-tips",
+  "links": []
+}

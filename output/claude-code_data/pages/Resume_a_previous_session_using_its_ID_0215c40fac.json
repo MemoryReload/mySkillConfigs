@@ -1,0 +1,8 @@
+{
+  "title": "Resume a previous session using its ID",
+  "content": "async for message in query(\n    prompt=\"Continue implementing the authentication system from where we left off\",\n    options=ClaudeAgentOptions(\n        resume=\"session-xyz\",  # Session ID from previous conversation\n        model=\"claude-sonnet-4-5\",\n        allowed_tools=[\"Read\", \"Edit\", \"Write\", \"Glob\", \"Grep\", \"Bash\"]\n    )\n):\n    print(message)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#resume-a-previous-session-using-its-id",
+  "links": []
+}

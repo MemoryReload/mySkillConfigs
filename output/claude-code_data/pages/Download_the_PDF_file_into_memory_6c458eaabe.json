@@ -1,0 +1,8 @@
+{
+  "title": "Download the PDF file into memory",
+  "content": "response = requests.get(url)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#download-the-pdf-file-into-memory",
+  "links": []
+}

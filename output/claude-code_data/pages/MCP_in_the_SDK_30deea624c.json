@@ -1,0 +1,60 @@
+{
+  "title": "MCP in the SDK",
+  "content": "Extend Claude Code with custom tools using Model Context Protocol servers\n\nModel Context Protocol (MCP) servers extend Claude Code with custom tools and capabilities. MCPs can run as external processes, connect via HTTP/SSE, or execute directly within your SDK application.\n\n### Basic Configuration\n\nConfigure MCP servers in `.mcp.json` at your project root:\n\n### Using MCP Servers in SDK\n\nExternal processes communicating via stdin/stdout:",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Using MCP Servers in SDK\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Transport Types\n\n### stdio Servers\n\nExternal processes communicating via stdin/stdout:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Overview",
+      "id": "overview"
+    },
+    {
+      "level": "h2",
+      "text": "Configuration",
+      "id": "configuration"
+    },
+    {
+      "level": "h3",
+      "text": "Basic Configuration",
+      "id": "basic-configuration"
+    },
+    {
+      "level": "h3",
+      "text": "Using MCP Servers in SDK",
+      "id": "using-mcp-servers-in-sdk"
+    },
+    {
+      "level": "h2",
+      "text": "Transport Types",
+      "id": "transport-types"
+    },
+    {
+      "level": "h3",
+      "text": "stdio Servers",
+      "id": "stdio-servers"
+    }
+  ],
+  "url": "llms-txt#mcp-in-the-sdk",
+  "links": []
+}

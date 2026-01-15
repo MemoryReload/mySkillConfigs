@@ -1,0 +1,8 @@
+{
+  "title": "Extract file IDs from the response",
+  "content": "def extract_file_ids(response):\n    file_ids = []\n    for item in response.content:\n        if item.type == 'bash_code_execution_tool_result':\n            content_item = item.content\n            if content_item.type == 'bash_code_execution_result':\n                for file in content_item.content:\n                    if hasattr(file, 'file_id'):\n                        file_ids.append(file.file_id)\n    return file_ids",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#extract-file-ids-from-the-response",
+  "links": []
+}

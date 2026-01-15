@@ -1,0 +1,8 @@
+{
+  "title": "First, upload your PDF to the Files API",
+  "content": "curl -X POST https://api.anthropic.com/v1/files \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\" \\\n  -F \"file=@document.pdf\"",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first,-upload-your-pdf-to-the-files-api",
+  "links": []
+}

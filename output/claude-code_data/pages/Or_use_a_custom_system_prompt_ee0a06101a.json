@@ -1,0 +1,23 @@
+{
+  "title": "Or use a custom system prompt:",
+  "content": "async for message in query(\n    prompt=\"Hello\",\n    options=ClaudeAgentOptions(\n        system_prompt=\"You are a helpful coding assistant\"\n    )\n):\n    print(message)\ntypescript TypeScript\n// BEFORE (v0.0.x) - Loaded all settings automatically\nconst result = query({ prompt: \"Hello\" });\n// Would read from:\n// - ~/.claude/settings.json (user)\n// - .claude/settings.json (project)\n// - .claude/settings.local.json (local)\n// - CLAUDE.md files\n// - Custom slash commands\n\n// AFTER (v0.1.0) - No settings loaded by default\n// To get the old behavior:\nconst result = query({\n  prompt: \"Hello\",\n  options: {\n    settingSources: [\"user\", \"project\", \"local\"]\n  }\n});\n\n// Or load only specific sources:\nconst result = query({\n  prompt: \"Hello\",\n  options: {\n    settingSources: [\"project\"]  // Only project settings\n  }\n});\npython Python",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n**Why this changed:** Provides better control and isolation for SDK applications. You can now build agents with custom behavior without inheriting Claude Code's CLI-focused instructions.\n\n### Settings Sources No Longer Loaded by Default\n\n**What changed:** The SDK no longer reads from filesystem settings (CLAUDE.md, settings.json, slash commands, etc.) by default.\n\n**Migration:**\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Settings Sources No Longer Loaded by Default",
+      "id": "settings-sources-no-longer-loaded-by-default"
+    }
+  ],
+  "url": "llms-txt#or-use-a-custom-system-prompt:",
+  "links": []
+}

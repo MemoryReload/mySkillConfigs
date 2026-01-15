@@ -1,0 +1,24 @@
+{
+  "title": "Session Management",
+  "content": "The Claude Agent SDK provides session management capabilities for handling conversation state and resumption. Sessions allow you to continue conversations across multiple interactions while maintaining full context.\n\nWhen you start a new query, the SDK automatically creates a session and returns a session ID in the initial system message. You can capture this ID to resume the session later.\n\n### Getting the Session ID\n\n```python Python\nfrom claude_agent_sdk import query, ClaudeAgentOptions\n\nasync for message in query(\n    prompt=\"Help me build a web application\",\n    options=ClaudeAgentOptions(\n        model=\"claude-sonnet-4-5\"\n    )\n):\n    # The first message is a system init message with the session ID\n    if hasattr(message, 'subtype') and message.subtype == 'init':\n        session_id = message.data.get('session_id')\n        print(f\"Session started with ID: {session_id}\")\n        # You can save this ID for later resumption\n\n# Process other messages...\n    print(message)",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How Sessions Work",
+      "id": "how-sessions-work"
+    },
+    {
+      "level": "h3",
+      "text": "Getting the Session ID",
+      "id": "getting-the-session-id"
+    }
+  ],
+  "url": "llms-txt#session-management",
+  "links": []
+}

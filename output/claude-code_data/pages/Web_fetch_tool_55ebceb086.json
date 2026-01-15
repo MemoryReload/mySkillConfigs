@@ -1,0 +1,82 @@
+{
+  "title": "Web fetch tool",
+  "content": "The web fetch tool allows Claude to retrieve full content from specified web pages and PDF documents.\n\n<Note>\nThe web fetch tool is currently in beta. To enable it, use the beta header `web-fetch-2025-09-10` in your API requests.\n\nPlease use [this form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.\n</Note>\n\n<Warning>\nEnabling the web fetch tool in environments where Claude processes untrusted input alongside sensitive data poses data exfiltration risks. We recommend only using this tool in trusted environments or when handling non-sensitive data.\n\nTo minimize exfiltration risks, Claude is not allowed to dynamically construct URLs. Claude can only fetch URLs that have been explicitly provided by the user or that come from previous web search or web fetch results. However, there is still residual risk that should be carefully considered when using this tool.\n\nIf data exfiltration is a concern, consider:\n- Disabling the web fetch tool entirely\n- Using the `max_uses` parameter to limit the number of requests\n- Using the `allowed_domains` parameter to restrict to known safe domains\n</Warning>\n\nWeb fetch is available on:\n\n- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)\n- Claude Sonnet 4 (`claude-sonnet-4-20250514`)\n- Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-7-sonnet-20250219`)\n- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)\n- Claude Haiku 3.5 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-3-5-haiku-latest`)\n- Claude Opus 4.5 (`claude-opus-4-5-20251101`)\n- Claude Opus 4.1 (`claude-opus-4-1-20250805`)\n- Claude Opus 4 (`claude-opus-4-20250514`)\n\n## How web fetch works\n\nWhen you add the web fetch tool to your API request:\n\n1. Claude decides when to fetch content based on the prompt and available URLs.\n2. The API retrieves the full text content from the specified URL.\n3. For PDFs, automatic text extraction is performed.\n4. Claude analyzes the fetched content and provides a response with optional citations.\n\n<Note>\nThe web fetch tool currently does not support web sites dynamically rendered via Javascript.\n</Note>\n\n## How to use web fetch\n\nProvide the web fetch tool in your API request:\n\nThe web fetch tool supports the following parameters:\n\nThe `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` will be an error with the `max_uses_exceeded` error code. There is currently no default limit.\n\n#### Domain filtering\n\nWhen using domain filters:\n\n- Domains should not include the HTTP/HTTPS scheme (use `example.com` instead of `https://example.com`)\n- Subdomains are automatically included (`example.com` covers `docs.example.com`)\n- Subpaths are supported (`example.com/blog`)\n- You can use either `allowed_domains` or `blocked_domains`, but not both in the same request.\n\n<Warning>\nBe aware that Unicode characters in domain names can create security vulnerabilities through homograph attacks, where visually similar characters from different scripts can bypass domain filters. For example, `аmazon.com` (using Cyrillic 'а') may appear identical to `amazon.com` but represents a different domain.\n\nWhen configuring domain allow/block lists:\n- Use ASCII-only domain names when possible\n- Consider that URL parsers may handle Unicode normalization differently\n- Test your domain filters with potential homograph variations\n- Regularly audit your domain configurations for suspicious Unicode characters\n</Warning>\n\nThe `max_content_tokens` parameter limits the amount of content that will be included in the context. If the fetched content exceeds this limit, it will be truncated. This helps control token usage when fetching large documents.\n\n<Note>\nThe `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.\n</Note>\n\nUnlike web search where citations are always enabled, citations are optional for web fetch. Set `\"citations\": {\"enabled\": true}` to enable Claude to cite specific passages from fetched documents.\n\n<Note>\nWhen displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.\n</Note>\n\nHere's an example response structure:\n\nFetch results include:\n\n- `url`: The URL that was fetched\n- `content`: A document block containing the fetched content\n- `retrieved_at`: Timestamp when the content was retrieved\n\n<Note>\nThe web fetch tool caches results to improve performance and reduce redundant requests. This means the content returned may not always be the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns.\n</Note>\n\nFor PDF documents, the content will be returned as base64-encoded data:\n\nWhen the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body:\n\nThese are the possible error codes:\n\n- `invalid_input`: Invalid URL format\n- `url_too_long`: URL exceeds maximum length (250 characters)\n- `url_not_allowed`: URL blocked by domain filtering rules and model restrictions\n- `url_not_accessible`: Failed to fetch content (HTTP error)\n- `too_many_requests`: Rate limit exceeded\n- `unsupported_content_type`: Content type not supported (only text and PDF)\n- `max_uses_exceeded`: Maximum web fetch tool uses exceeded\n- `unavailable`: An internal error occurred\n\nFor security reasons, the web fetch tool can only fetch URLs that have previously appeared in the conversation context. This includes:\n\n- URLs in user messages\n- URLs in client-side tool results\n- URLs from previous web search or web fetch results\n\nThe tool cannot fetch arbitrary URLs that Claude generates or URLs from container-based server tools (Code Execution, Bash, etc.).\n\n## Combined search and fetch\n\nWeb fetch works seamlessly with web search for comprehensive information gathering:\n\nIn this workflow, Claude will:\n1. Use web search to find relevant articles\n2. Select the most promising results\n3. Use web fetch to retrieve full content\n4. Provide detailed analysis with citations\n\nWeb fetch works with [prompt caching](/docs/en/build-with-claude/prompt-caching). To enable prompt caching, add `cache_control` breakpoints in your request. Cached fetch results can be reused across conversation turns.\n\n```python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Tool definition\n\nThe web fetch tool supports the following parameters:",
+      "language": "unknown"
+    },
+    {
+      "code": "#### Max uses\n\nThe `max_uses` parameter limits the number of web fetches performed. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` will be an error with the `max_uses_exceeded` error code. There is currently no default limit.\n\n#### Domain filtering\n\nWhen using domain filters:\n\n- Domains should not include the HTTP/HTTPS scheme (use `example.com` instead of `https://example.com`)\n- Subdomains are automatically included (`example.com` covers `docs.example.com`)\n- Subpaths are supported (`example.com/blog`)\n- You can use either `allowed_domains` or `blocked_domains`, but not both in the same request.\n\n<Warning>\nBe aware that Unicode characters in domain names can create security vulnerabilities through homograph attacks, where visually similar characters from different scripts can bypass domain filters. For example, `аmazon.com` (using Cyrillic 'а') may appear identical to `amazon.com` but represents a different domain. \n\nWhen configuring domain allow/block lists:\n- Use ASCII-only domain names when possible\n- Consider that URL parsers may handle Unicode normalization differently\n- Test your domain filters with potential homograph variations\n- Regularly audit your domain configurations for suspicious Unicode characters\n</Warning>\n\n#### Content limits\n\nThe `max_content_tokens` parameter limits the amount of content that will be included in the context. If the fetched content exceeds this limit, it will be truncated. This helps control token usage when fetching large documents.\n\n<Note>\nThe `max_content_tokens` parameter limit is approximate. The actual number of input tokens used can vary by a small amount.\n</Note>\n\n#### Citations\n\nUnlike web search where citations are always enabled, citations are optional for web fetch. Set `\"citations\": {\"enabled\": true}` to enable Claude to cite specific passages from fetched documents.\n\n<Note>\nWhen displaying API outputs directly to end users, citations must be included to the original source. If you are making modifications to API outputs, including by reprocessing and/or combining them with your own material before displaying them to end users, display citations as appropriate based on consultation with your legal team.\n</Note>\n\n### Response\n\nHere's an example response structure:",
+      "language": "unknown"
+    },
+    {
+      "code": "#### Fetch results\n\nFetch results include:\n\n- `url`: The URL that was fetched\n- `content`: A document block containing the fetched content\n- `retrieved_at`: Timestamp when the content was retrieved\n\n<Note>\nThe web fetch tool caches results to improve performance and reduce redundant requests. This means the content returned may not always be the latest version available at the URL. The cache behavior is managed automatically and may change over time to optimize for different content types and usage patterns.\n</Note>\n\nFor PDF documents, the content will be returned as base64-encoded data:",
+      "language": "unknown"
+    },
+    {
+      "code": "#### Errors\n\nWhen the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body:",
+      "language": "unknown"
+    },
+    {
+      "code": "These are the possible error codes:\n\n- `invalid_input`: Invalid URL format\n- `url_too_long`: URL exceeds maximum length (250 characters)\n- `url_not_allowed`: URL blocked by domain filtering rules and model restrictions\n- `url_not_accessible`: Failed to fetch content (HTTP error)\n- `too_many_requests`: Rate limit exceeded\n- `unsupported_content_type`: Content type not supported (only text and PDF)\n- `max_uses_exceeded`: Maximum web fetch tool uses exceeded\n- `unavailable`: An internal error occurred\n\n## URL validation\n\nFor security reasons, the web fetch tool can only fetch URLs that have previously appeared in the conversation context. This includes:\n\n- URLs in user messages\n- URLs in client-side tool results\n- URLs from previous web search or web fetch results\n\nThe tool cannot fetch arbitrary URLs that Claude generates or URLs from container-based server tools (Code Execution, Bash, etc.).\n\n## Combined search and fetch\n\nWeb fetch works seamlessly with web search for comprehensive information gathering:",
+      "language": "unknown"
+    },
+    {
+      "code": "In this workflow, Claude will:\n1. Use web search to find relevant articles\n2. Select the most promising results\n3. Use web fetch to retrieve full content\n4. Provide detailed analysis with citations\n\n## Prompt caching\n\nWeb fetch works with [prompt caching](/docs/en/build-with-claude/prompt-caching). To enable prompt caching, add `cache_control` breakpoints in your request. Cached fetch results can be reused across conversation turns.",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Supported models",
+      "id": "supported-models"
+    },
+    {
+      "level": "h2",
+      "text": "How web fetch works",
+      "id": "how-web-fetch-works"
+    },
+    {
+      "level": "h2",
+      "text": "How to use web fetch",
+      "id": "how-to-use-web-fetch"
+    },
+    {
+      "level": "h3",
+      "text": "Tool definition",
+      "id": "tool-definition"
+    },
+    {
+      "level": "h3",
+      "text": "Response",
+      "id": "response"
+    },
+    {
+      "level": "h2",
+      "text": "URL validation",
+      "id": "url-validation"
+    },
+    {
+      "level": "h2",
+      "text": "Combined search and fetch",
+      "id": "combined-search-and-fetch"
+    },
+    {
+      "level": "h2",
+      "text": "Prompt caching",
+      "id": "prompt-caching"
+    }
+  ],
+  "url": "llms-txt#web-fetch-tool",
+  "links": []
+}

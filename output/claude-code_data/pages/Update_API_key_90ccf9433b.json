@@ -1,0 +1,39 @@
+{
+  "title": "Update Api Key",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/api_keys/update\n\n**post** `/v1/organizations/api_keys/{api_key_id}`\n\n- `api_key_id: string`\n\n- `name: optional string`\n\n- `status: optional \"active\" or \"inactive\" or \"archived\"`\n\nStatus of the API key.\n\n- `APIKey = object { id, created_at, created_by, 5 more }`\n\n- `created_at: string`\n\nRFC 3339 datetime string indicating when the API Key was created.\n\n- `created_by: object { id, type }`\n\nThe ID and type of the actor that created the API key.\n\nID of the actor that created the object.\n\nType of the actor that created the object.\n\n- `partial_key_hint: string`\n\nPartially redacted hint for the API key.\n\n- `status: \"active\" or \"inactive\" or \"archived\"`\n\nStatus of the API key.\n\nFor API Keys, this is always `\"api_key\"`.\n\n- `workspace_id: string`\n\nID of the Workspace associated with the API key, or null if the API key belongs to the default Workspace.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\" \\\n    -d '{}'",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Update",
+      "id": "update"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Body Parameters",
+      "id": "body-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#update-api-key",
+  "links": []
+}

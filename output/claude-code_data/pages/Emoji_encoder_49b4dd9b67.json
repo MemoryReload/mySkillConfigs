@@ -1,0 +1,28 @@
+{
+  "title": "Emoji encoder",
+  "content": "Convert plain text into fun and expressive emoji messages.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n|        | Content                                                                                                                                                                                                                                                                                                                                                                                                 |\n| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| System | Your task is to take the plain text message provided and convert it into an expressive, emoji-rich message that conveys the same meaning and intent. Replace key words and phrases with relevant emojis where appropriate to add visual interest and emotion. Use emojis creatively but ensure the message remains clear and easy to understand. Do not change the core message or add new information. |\n| User   | All the world’s a stage, and all the men and women merely players. They have their exits and their entrances; And one man in his time plays many parts.                                                                                                                                                                                                                                                 |\n\nAll the 🌍's a 🎭, and all the 👨 and 👩 merely 🎭🎬. They have their 🚪🚶‍♂️ and their 🚶‍♀️🚪; And one 👨 in his ⌛ plays many 🎭.\n\n<Tabs>\n<Tab title=\"Python\">\n`\n</Tab>\n<Tab title=\"TypeScript\">\n\n</Tab>\n<Tab title=\"AWS Bedrock Python\">\n\n```python\nfrom anthropic import AnthropicBedrock",
+  "code_samples": [
+    {
+      "code": "import anthropic\n\nclient = anthropic.Anthropic(  # defaults to os.environ.get(\"ANTHROPIC_API_KEY\")\n    api_key=\"my_api_key\",\n)\nmessage = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1000,\n    temperature=0,\n    system=\"Your task is to take the plain text message provided and convert it into an expressive, emoji-rich message that conveys the same meaning and intent. Replace key words and phrases with relevant emojis where appropriate to add visual interest and emotion. Use emojis creatively but ensure the message remains clear and easy to understand. Do not change the core message or add new information.\",\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": \"All the world’s a stage, and all the men and women merely players. They have their exits and their entrances; And one man in his time plays many parts.\",\n                }\n            ],\n        }\n    ],\n)\nprint(message.content)",
+      "language": "python"
+    },
+    {
+      "code": "import Anthropic from \"@anthropic-ai/sdk\";\n\nconst anthropic = new Anthropic({\n  apiKey: \"my_api_key\", // defaults to process.env[\"ANTHROPIC_API_KEY\"]\n});\n\nconst msg = await anthropic.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1000,\n  temperature: 0,\n  system: \"Your task is to take the plain text message provided and convert it into an expressive, emoji-rich message that conveys the same meaning and intent. Replace key words and phrases with relevant emojis where appropriate to add visual interest and emotion. Use emojis creatively but ensure the message remains clear and easy to understand. Do not change the core message or add new information.\",\n  messages: [\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"All the world’s a stage, and all the men and women merely players. They have their exits and their entrances; And one man in his time plays many parts.\"\n        }\n      ]\n    }\n  ]\n});\nconsole.log(msg);",
+      "language": "typescript"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Example output",
+      "id": "example-output"
+    },
+    {
+      "level": "h2",
+      "text": "API Request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#emoji-encoder",
+  "links": []
+}

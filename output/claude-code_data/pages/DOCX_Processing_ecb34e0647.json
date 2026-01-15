@@ -1,0 +1,29 @@
+{
+  "title": "DOCX Processing",
+  "content": "## Creating documents\n\nUse docx-js for new documents. See [DOCX-JS.md](DOCX-JS.md).\n\nFor simple edits, modify the XML directly.\n\n**For tracked changes**: See [REDLINING.md](REDLINING.md)\n**For OOXML details**: See [OOXML.md](OOXML.md)\nmarkdown",
+  "code_samples": [
+    {
+      "code": "Claude reads REDLINING.md or OOXML.md only when the user needs those features.\n\n### Avoid deeply nested references\n\nClaude may partially read files when they're referenced from other referenced files. When encountering nested references, Claude might use commands like `head -100` to preview content rather than reading entire files, resulting in incomplete information.\n\n**Keep references one level deep from SKILL.md**. All reference files should link directly from SKILL.md to ensure Claude reads complete files when needed.\n\n**Bad example: Too deep**:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Creating documents",
+      "id": "creating-documents"
+    },
+    {
+      "level": "h2",
+      "text": "Editing documents",
+      "id": "editing-documents"
+    },
+    {
+      "level": "h3",
+      "text": "Avoid deeply nested references",
+      "id": "avoid-deeply-nested-references"
+    }
+  ],
+  "url": "llms-txt#docx-processing",
+  "links": []
+}

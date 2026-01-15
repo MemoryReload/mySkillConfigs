@@ -1,0 +1,39 @@
+{
+  "title": "List Workspace Members",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/workspaces/members/list\n\n**get** `/v1/organizations/workspaces/{workspace_id}/members`\n\nList Workspace Members\n\n- `workspace_id: string`\n\n- `after_id: optional string`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.\n\n- `before_id: optional string`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.\n\n- `limit: optional number`\n\nNumber of items to return per page.\n\nDefaults to `20`. Ranges from `1` to `1000`.\n\n- `data: array of WorkspaceMember`\n\n- `type: \"workspace_member\"`\n\nFor Workspace Members, this is always `\"workspace_member\"`.\n\n- `\"workspace_member\"`\n\n- `workspace_id: string`\n\n- `workspace_role: \"workspace_user\" or \"workspace_developer\" or \"workspace_admin\" or \"workspace_billing\"`\n\nRole of the Workspace Member.\n\n- `\"workspace_developer\"`\n\n- `\"workspace_admin\"`\n\n- `\"workspace_billing\"`\n\nFirst ID in the `data` list. Can be used as the `before_id` for the previous page.\n\n- `has_more: boolean`\n\nIndicates if there are more results in the requested page direction.\n\nLast ID in the `data` list. Can be used as the `after_id` for the next page.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#list-workspace-members",
+  "links": []
+}

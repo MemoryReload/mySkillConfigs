@@ -1,0 +1,39 @@
+{
+  "title": "Check if the response has pause_turn stop reason",
+  "content": "if response.stop_reason == \"pause_turn\":\n    # Continue the conversation with the paused content\n    messages = [\n        {\"role\": \"user\", \"content\": \"Search for comprehensive information about quantum computing breakthroughs in 2025\"},\n        {\"role\": \"assistant\", \"content\": response.content}\n    ]\n\n# Send the continuation request\n    continuation = client.messages.create(\n        model=\"claude-3-7-sonnet-latest\",\n        max_tokens=1024,\n        messages=messages,\n        tools=[{\n            \"type\": \"web_search_20250305\",\n            \"name\": \"web_search\",\n            \"max_uses\": 10\n        }]\n    )\n\nprint(continuation)\nelse:\n    print(response)\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic();\n\n// Initial request with web search\nconst response = await anthropic.messages.create({\n  model: \"claude-3-7-sonnet-latest\",\n  max_tokens: 1024,\n  messages: [\n    {\n      role: \"user\",\n      content: \"Search for comprehensive information about quantum computing breakthroughs in 2025\"\n    }\n  ],\n  tools: [{\n    type: \"web_search_20250305\",\n    name: \"web_search\",\n    max_uses: 10\n  }]\n});\n\n// Check if the response has pause_turn stop reason\nif (response.stop_reason === \"pause_turn\") {\n  // Continue the conversation with the paused content\n  const messages = [\n    { role: \"user\", content: \"Search for comprehensive information about quantum computing breakthroughs in 2025\" },\n    { role: \"assistant\", content: response.content }\n  ];\n\n// Send the continuation request\n  const continuation = await anthropic.messages.create({\n    model: \"claude-3-7-sonnet-latest\",\n    max_tokens: 1024,\n    messages: messages,\n    tools: [{\n      type: \"web_search_20250305\",\n      name: \"web_search\",\n      max_uses: 10\n    }]\n  });\n\nconsole.log(continuation);\n} else {\n  console.log(response);\n}\njson JSON\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"content\": \"ConnectionError: the weather service API is not available (HTTP 500)\",\n      \"is_error\": true\n    }\n  ]\n}\njson JSON\n{\n  \"role\": \"user\",\n  \"content\": [\n    {\n      \"type\": \"tool_result\",\n      \"tool_use_id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"content\": \"Error: Missing required 'location' parameter\",\n      \"is_error\": true\n    }\n  ]\n}\njson\n// ❌ This reduces parallel tool use\n[\n  {\"role\": \"assistant\", \"content\": [tool_use_1, tool_use_2]},\n  {\"role\": \"user\", \"content\": [tool_result_1]},\n  {\"role\": \"user\", \"content\": [tool_result_2]}  // Separate message\n]\n\n// ✅ This maintains parallel tool use\n[\n  {\"role\": \"assistant\", \"content\": [tool_use_1, tool_use_2]},\n  {\"role\": \"user\", \"content\": [tool_result_1, tool_result_2]}  // Single message\n]\ntext\n<use_parallel_tool_calls>\nFor maximum efficiency, whenever you perform multiple independent operations,\ninvoke all relevant tools simultaneously rather than sequentially.\nPrioritize calling tools in parallel whenever possible.\n</use_parallel_tool_calls>\npython",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nWhen handling `pause_turn`:\n- **Continue the conversation**: Pass the paused response back as-is in a subsequent request to let Claude continue its turn\n- **Modify if needed**: You can optionally modify the content before continuing if you want to interrupt or redirect the conversation\n- **Preserve tool state**: Include the same tools in the continuation request to maintain functionality\n\n## Troubleshooting errors\n\n<Note>\n**Built-in Error Handling**: [Tool runner](#tool-runner-beta) provide automatic error handling for most common scenarios. This section covers manual error handling for advanced use cases.\n</Note>\n\nThere are a few different types of errors that can occur when using tools with Claude:\n\n<section title=\"Tool execution error\">\n\nIf the tool itself throws an error during execution (e.g. a network error when fetching weather data), you can return the error message in the `content` along with `\"is_error\": true`:",
+      "language": "unknown"
+    },
+    {
+      "code": "Claude will then incorporate this error into its response to the user, e.g. \"I'm sorry, I was unable to retrieve the current weather because the weather service API is not available. Please try again later.\"\n\n</section>\n<section title=\"Invalid tool name\">\n\nIf Claude's attempted use of a tool is invalid (e.g. missing required parameters), it usually means that the there wasn't enough information for Claude to use the tool correctly. Your best bet during development is to try the request again with more-detailed `description` values in your tool definitions.\n\nHowever, you can also continue the conversation forward with a `tool_result` that indicates the error, and Claude will try to use the tool again with the missing information filled in:",
+      "language": "unknown"
+    },
+    {
+      "code": "If a tool request is invalid or missing parameters, Claude will retry 2-3 times with corrections before apologizing to the user.\n\n<Tip>\nTo eliminate invalid tool calls entirely, use [strict tool use](/docs/en/build-with-claude/structured-outputs) with `strict: true` on your tool definitions. This guarantees that tool inputs will always match your schema exactly, preventing missing parameters and type mismatches.\n</Tip>\n\n</section>\n<section title=\"<search_quality_reflection> tags\">\n\nTo prevent Claude from reflecting on search quality with \\<search_quality_reflection> tags, add \"Do not reflect on the quality of the returned search results in your response\" to your prompt.\n\n</section>\n<section title=\"Server tool errors\">\n\nWhen server tools encounter errors (e.g., network issues with Web Search), Claude will transparently handle these errors and attempt to provide an alternative response or explanation to the user. Unlike client tools, you do not need to handle `is_error` results for server tools.\n\nFor web search specifically, possible error codes include:\n- `too_many_requests`: Rate limit exceeded\n- `invalid_input`: Invalid search query parameter\n- `max_uses_exceeded`: Maximum web search tool uses exceeded\n- `query_too_long`: Query exceeds maximum length\n- `unavailable`: An internal error occurred\n\n</section>\n<section title=\"Parallel tool calls not working\">\n\nIf Claude isn't making parallel tool calls when expected, check these common issues:\n\n**1. Incorrect tool result formatting**\n\nThe most common issue is formatting tool results incorrectly in the conversation history. This \"teaches\" Claude to avoid parallel calls.\n\nSpecifically for parallel tool use:\n- ❌ **Wrong**: Sending separate user messages for each tool result\n- ✅ **Correct**: All tool results must be in a single user message",
+      "language": "unknown"
+    },
+    {
+      "code": "See the [general formatting requirements above](#handling-tool-use-and-tool-result-content-blocks) for other formatting rules.\n\n**2. Weak prompting**\n\nDefault prompting may not be sufficient. Use stronger language:",
+      "language": "unknown"
+    },
+    {
+      "code": "**3. Measuring parallel tool usage**\n\nTo verify parallel tool calls are working:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Troubleshooting errors",
+      "id": "troubleshooting-errors"
+    }
+  ],
+  "url": "llms-txt#check-if-the-response-has-pause_turn-stop-reason",
+  "links": []
+}

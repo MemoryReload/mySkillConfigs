@@ -1,0 +1,150 @@
+{
+  "title": "TypeScript SDK V2 interface (preview)",
+  "content": "Preview of the simplified V2 TypeScript Agent SDK, with session-based send/stream patterns for multi-turn conversations.\n\n<Warning>\nThe V2 interface is an **unstable preview**. APIs may change based on feedback before becoming stable. Some features like session forking are only available in the [V1 SDK](/docs/en/agent-sdk/typescript).\n</Warning>\n\nThe V2 Claude Agent TypeScript SDK removes the need for async generators and yield coordination. This makes multi-turn conversations simpler, instead of managing generator state across turns, each turn is a separate `send()`/`stream()` cycle. The API surface reduces to three concepts:\n\n- `createSession()` / `resumeSession()`: Start or continue a conversation\n- `session.send()`: Send a message\n- `session.stream()`: Get the response\n\nThe V2 interface is included in the existing SDK package:\n\nFor simple single-turn queries where you don't need to maintain a session, use `unstable_v2_prompt()`. This example sends a math question and logs the answer:\n\n<details>\n<summary>See the same operation in V1</summary>\n\nFor interactions beyond a single prompt, create a session. V2 separates sending and streaming into distinct steps:\n- `send()` dispatches your message\n- `stream()` streams back the response\n\nThis explicit separation makes it easier to add logic between turns (like processing responses before sending follow-ups).\n\nThe example below creates a session, sends \"Hello!\" to Claude, and prints the text response. It uses [`await using`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html#using-declarations-and-explicit-resource-management) (TypeScript 5.2+) to automatically close the session when the block exits. You can also call `session.close()` manually.\n\n<details>\n<summary>See the same operation in V1</summary>\n\nIn V1, both input and output flow through a single async generator. For a basic prompt this looks similar, but adding multi-turn logic requires restructuring to use an input generator.\n\n### Multi-turn conversation\n\nSessions persist context across multiple exchanges. To continue a conversation, call `send()` again on the same session. Claude remembers the previous turns.\n\nThis example asks a math question, then asks a follow-up that references the previous answer:\n\n<details>\n<summary>See the same operation in V1</summary>\n\nIf you have a session ID from a previous interaction, you can resume it later. This is useful for long-running workflows or when you need to persist conversations across application restarts.\n\nThis example creates a session, stores its ID, closes it, then resumes the conversation:\n\n<details>\n<summary>See the same operation in V1</summary>\n\nSessions can be closed manually or automatically using [`await using`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html#using-declarations-and-explicit-resource-management), a TypeScript 5.2+ feature for automatic resource cleanup. If you're using an older TypeScript version or encounter compatibility issues, use manual cleanup instead.\n\n**Automatic cleanup (TypeScript 5.2+):**\n\n### `unstable_v2_createSession()`\n\nCreates a new session for multi-turn conversations.\n\n### `unstable_v2_resumeSession()`\n\nResumes an existing session by ID.\n\n### `unstable_v2_prompt()`\n\nOne-shot convenience function for single-turn queries.\n\n### Session interface\n\n## Feature availability\n\nNot all V1 features are available in V2 yet. The following require using the [V1 SDK](/docs/en/agent-sdk/typescript):\n\n- Session forking (`forkSession` option)\n- Some advanced streaming input patterns\n\nShare your feedback on the V2 interface before it becomes stable. Report issues and suggestions through [GitHub Issues](https://github.com/anthropics/claude-code/issues).\n\n- [TypeScript SDK reference (V1)](/docs/en/agent-sdk/typescript) - Full V1 SDK documentation\n- [SDK overview](/docs/en/agent-sdk/overview) - General SDK concepts\n- [V2 examples on GitHub](https://github.com/anthropics/claude-agent-sdk-demos/tree/main/hello-world-v2) - Working code examples\n\n### Agent SDK > Guides",
+  "code_samples": [
+    {
+      "code": "npm install @anthropic-ai/claude-agent-sdk",
+      "language": "bash"
+    },
+    {
+      "code": "import { unstable_v2_prompt } from '@anthropic-ai/claude-agent-sdk'\n\nconst result = await unstable_v2_prompt('What is 2 + 2?', {\n  model: 'claude-sonnet-4-5-20250929'\n})\nconsole.log(result.result)",
+      "language": "typescript"
+    },
+    {
+      "code": "import { query } from '@anthropic-ai/claude-agent-sdk'\n\nconst q = query({\n  prompt: 'What is 2 + 2?',\n  options: { model: 'claude-sonnet-4-5-20250929' }\n})\n\nfor await (const msg of q) {\n  if (msg.type === 'result') {\n    console.log(msg.result)\n  }\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'\n\nawait using session = unstable_v2_createSession({\n  model: 'claude-sonnet-4-5-20250929'\n})\n\nawait session.send('Hello!')\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === 'assistant') {\n    const text = msg.message.content\n      .filter(block => block.type === 'text')\n      .map(block => block.text)\n      .join('')\n    console.log(text)\n  }\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "import { query } from '@anthropic-ai/claude-agent-sdk'\n\nconst q = query({\n  prompt: 'Hello!',\n  options: { model: 'claude-sonnet-4-5-20250929' }\n})\n\nfor await (const msg of q) {\n  if (msg.type === 'assistant') {\n    const text = msg.message.content\n      .filter(block => block.type === 'text')\n      .map(block => block.text)\n      .join('')\n    console.log(text)\n  }\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'\n\nawait using session = unstable_v2_createSession({\n  model: 'claude-sonnet-4-5-20250929'\n})\n\n// Turn 1\nawait session.send('What is 5 + 3?')\nfor await (const msg of session.stream()) {\n  // Filter for assistant messages to get human-readable output\n  if (msg.type === 'assistant') {\n    const text = msg.message.content\n      .filter(block => block.type === 'text')\n      .map(block => block.text)\n      .join('')\n    console.log(text)\n  }\n}\n\n// Turn 2\nawait session.send('Multiply that by 2')\nfor await (const msg of session.stream()) {\n  if (msg.type === 'assistant') {\n    const text = msg.message.content\n      .filter(block => block.type === 'text')\n      .map(block => block.text)\n      .join('')\n    console.log(text)\n  }\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "import { query } from '@anthropic-ai/claude-agent-sdk'\n\n// Must create an async iterable to feed messages\nasync function* createInputStream() {\n  yield {\n    type: 'user',\n    session_id: '',\n    message: { role: 'user', content: [{ type: 'text', text: 'What is 5 + 3?' }] },\n    parent_tool_use_id: null\n  }\n  // Must coordinate when to yield next message\n  yield {\n    type: 'user',\n    session_id: '',\n    message: { role: 'user', content: [{ type: 'text', text: 'Multiply by 2' }] },\n    parent_tool_use_id: null\n  }\n}\n\nconst q = query({\n  prompt: createInputStream(),\n  options: { model: 'claude-sonnet-4-5-20250929' }\n})\n\nfor await (const msg of q) {\n  if (msg.type === 'assistant') {\n    const text = msg.message.content\n      .filter(block => block.type === 'text')\n      .map(block => block.text)\n      .join('')\n    console.log(text)\n  }\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "import {\n  unstable_v2_createSession,\n  unstable_v2_resumeSession,\n  type SDKMessage\n} from '@anthropic-ai/claude-agent-sdk'\n\n// Helper to extract text from assistant messages\nfunction getAssistantText(msg: SDKMessage): string | null {\n  if (msg.type !== 'assistant') return null\n  return msg.message.content\n    .filter(block => block.type === 'text')\n    .map(block => block.text)\n    .join('')\n}\n\n// Create initial session and have a conversation\nconst session = unstable_v2_createSession({\n  model: 'claude-sonnet-4-5-20250929'\n})\n\nawait session.send('Remember this number: 42')\n\n// Get the session ID from any received message\nlet sessionId: string | undefined\nfor await (const msg of session.stream()) {\n  sessionId = msg.session_id\n  const text = getAssistantText(msg)\n  if (text) console.log('Initial response:', text)\n}\n\nconsole.log('Session ID:', sessionId)\nsession.close()\n\n// Later: resume the session using the stored ID\nawait using resumedSession = unstable_v2_resumeSession(sessionId!, {\n  model: 'claude-sonnet-4-5-20250929'\n})\n\nawait resumedSession.send('What number did I ask you to remember?')\nfor await (const msg of resumedSession.stream()) {\n  const text = getAssistantText(msg)\n  if (text) console.log('Resumed response:', text)\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "import { query } from '@anthropic-ai/claude-agent-sdk'\n\n// Create initial session\nconst initialQuery = query({\n  prompt: 'Remember this number: 42',\n  options: { model: 'claude-sonnet-4-5-20250929' }\n})\n\n// Get session ID from any message\nlet sessionId: string | undefined\nfor await (const msg of initialQuery) {\n  sessionId = msg.session_id\n  if (msg.type === 'assistant') {\n    const text = msg.message.content\n      .filter(block => block.type === 'text')\n      .map(block => block.text)\n      .join('')\n    console.log('Initial response:', text)\n  }\n}\n\nconsole.log('Session ID:', sessionId)\n\n// Later: resume the session\nconst resumedQuery = query({\n  prompt: 'What number did I ask you to remember?',\n  options: {\n    model: 'claude-sonnet-4-5-20250929',\n    resume: sessionId\n  }\n})\n\nfor await (const msg of resumedQuery) {\n  if (msg.type === 'assistant') {\n    const text = msg.message.content\n      .filter(block => block.type === 'text')\n      .map(block => block.text)\n      .join('')\n    console.log('Resumed response:', text)\n  }\n}",
+      "language": "typescript"
+    },
+    {
+      "code": "import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'\n\nawait using session = unstable_v2_createSession({\n  model: 'claude-sonnet-4-5-20250929'\n})\n// Session closes automatically when the block exits",
+      "language": "typescript"
+    },
+    {
+      "code": "import { unstable_v2_createSession } from '@anthropic-ai/claude-agent-sdk'\n\nconst session = unstable_v2_createSession({\n  model: 'claude-sonnet-4-5-20250929'\n})\n// ... use the session ...\nsession.close()",
+      "language": "typescript"
+    },
+    {
+      "code": "function unstable_v2_createSession(options: {\n  model: string;\n  // Additional options supported\n}): Session",
+      "language": "typescript"
+    },
+    {
+      "code": "function unstable_v2_resumeSession(\n  sessionId: string,\n  options: {\n    model: string;\n    // Additional options supported\n  }\n): Session",
+      "language": "typescript"
+    },
+    {
+      "code": "function unstable_v2_prompt(\n  prompt: string,\n  options: {\n    model: string;\n    // Additional options supported\n  }\n): Promise<Result>",
+      "language": "typescript"
+    },
+    {
+      "code": "interface Session {\n  send(message: string): Promise<void>;\n  stream(): AsyncGenerator<SDKMessage>;\n  close(): void;\n}",
+      "language": "typescript"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Installation",
+      "id": "installation"
+    },
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h3",
+      "text": "One-shot prompt",
+      "id": "one-shot-prompt"
+    },
+    {
+      "level": "h3",
+      "text": "Basic session",
+      "id": "basic-session"
+    },
+    {
+      "level": "h3",
+      "text": "Multi-turn conversation",
+      "id": "multi-turn-conversation"
+    },
+    {
+      "level": "h3",
+      "text": "Session resume",
+      "id": "session-resume"
+    },
+    {
+      "level": "h3",
+      "text": "Cleanup",
+      "id": "cleanup"
+    },
+    {
+      "level": "h2",
+      "text": "API reference",
+      "id": "api-reference"
+    },
+    {
+      "level": "h3",
+      "text": "`unstable_v2_createSession()`",
+      "id": "`unstable_v2_createsession()`"
+    },
+    {
+      "level": "h3",
+      "text": "`unstable_v2_resumeSession()`",
+      "id": "`unstable_v2_resumesession()`"
+    },
+    {
+      "level": "h3",
+      "text": "`unstable_v2_prompt()`",
+      "id": "`unstable_v2_prompt()`"
+    },
+    {
+      "level": "h3",
+      "text": "Session interface",
+      "id": "session-interface"
+    },
+    {
+      "level": "h2",
+      "text": "Feature availability",
+      "id": "feature-availability"
+    },
+    {
+      "level": "h2",
+      "text": "Feedback",
+      "id": "feedback"
+    },
+    {
+      "level": "h2",
+      "text": "See also",
+      "id": "see-also"
+    },
+    {
+      "level": "h3",
+      "text": "Agent SDK > Guides",
+      "id": "agent-sdk->-guides"
+    }
+  ],
+  "url": "llms-txt#typescript-sdk-v2-interface-(preview)",
+  "links": []
+}

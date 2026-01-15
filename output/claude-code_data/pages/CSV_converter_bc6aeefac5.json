@@ -1,0 +1,32 @@
+{
+  "title": "CSV converter",
+  "content": "Convert data from various formats (JSON, XML, etc.) into properly formatted CSV files.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n|        | Content                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |\n| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| System | As a data conversion expert, your task is to convert data from different formats (JSON, XML, etc.) into properly formatted CSV files. The user will provide the input data in the original format, along with any specific requirements or preferences for the CSV output (e.g., column order, delimiter, encoding). Ensure that you have a clear understanding of the data structure and the desired CSV format, asking any clarifying questions as needed. Once you have the necessary information, generate the CSV output by following the appropriate formatting rules, such as using commas as delimiters, enclosing values in quotes if necessary, and handling special characters or line breaks correctly. Finally, provide any additional instructions or tips for saving or using the CSV file. |\n| User   | Please convert the following JSON data into a CSV file: <br/> <br/> [ <br/> \\{ <br/> \"name\": \"John Doe\", <br/> \"age\": 30, <br/> \"city\": \"New York\", <br/> \"email\": \"john.doe@example.com\" <br/> }, <br/> \\{ <br/> \"name\": \"Jane Smith\", <br/> \"age\": 25, <br/> \"city\": \"London\", <br/> \"email\": \"jane.smith@example.com\" <br/> }, <br/> \\{ <br/> \"name\": \"Bob Johnson\", <br/> \"age\": 35, <br/> \"city\": \"Paris\", <br/> \"email\": \"bob.johnson@example.com\" <br/> } <br/> ] <br/> Requirements: <br/> - Columns in the CSV should be in the order: name, age, city, email <br/> - Use semicolons (;) as delimiters <br/> - Enclose all values in double quotes (\")                                                                                                                                            |\n\nBased on the provided JSON data and requirements, here's the converted CSV file:\n\n- The first line of the CSV file contains the column headers: \"name\", \"age\", \"city\", and \"email\", separated by semicolons (;) and enclosed in double quotes (\").\n    - Each subsequent line represents a row of data, with values separated by semicolons (;) and enclosed in double quotes (\").\n    - The order of the values in each row corresponds to the specified column order: name, age, city, and email.\n    - Special characters, if present in the values, are preserved within the double quotes.\n\nTo save the CSV file:\n\n1. Copy the CSV data provided above.\n    2. Open a text editor (e.g., Notepad, TextEdit, or any other plain text editor).\n    3. Paste the CSV data into the text editor.\n    4. Save the file with a .csv extension (e.g., data.csv).\n\nNote: When opening the CSV file in a spreadsheet application (e.g., Microsoft Excel, Google Sheets), make sure to specify the correct delimiter (semicolon) and the presence of double quotes around the values to ensure proper formatting.\n\n<Tabs>\n<Tab title=\"Python\">\n\n</Tab>\n<Tab title=\"TypeScript\">\n\n</Tab>\n<Tab title=\"AWS Bedrock Python\">\n```python\nfrom anthropic import AnthropicBedrock",
+  "code_samples": [
+    {
+      "code": "Explanation:\n\n    - The first line of the CSV file contains the column headers: \"name\", \"age\", \"city\", and \"email\", separated by semicolons (;) and enclosed in double quotes (\").\n    - Each subsequent line represents a row of data, with values separated by semicolons (;) and enclosed in double quotes (\").\n    - The order of the values in each row corresponds to the specified column order: name, age, city, and email.\n    - Special characters, if present in the values, are preserved within the double quotes.\n\nTo save the CSV file:\n\n    1. Copy the CSV data provided above.\n    2. Open a text editor (e.g., Notepad, TextEdit, or any other plain text editor).\n    3. Paste the CSV data into the text editor.\n    4. Save the file with a .csv extension (e.g., data.csv).\n\nNote: When opening the CSV file in a spreadsheet application (e.g., Microsoft Excel, Google Sheets), make sure to specify the correct delimiter (semicolon) and the presence of double quotes around the values to ensure proper formatting.\n\n---\n\n## API Request\n\n<Tabs>\n<Tab title=\"Python\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"TypeScript\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"AWS Bedrock Python\">",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Example Output",
+      "id": "example-output"
+    },
+    {
+      "level": "h2",
+      "text": "API Request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#csv-converter",
+  "links": []
+}

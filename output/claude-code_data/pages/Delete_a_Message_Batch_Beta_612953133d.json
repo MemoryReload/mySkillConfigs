@@ -1,0 +1,39 @@
+{
+  "title": "Delete a Message Batch (Beta)",
+  "content": "URL: https://platform.claude.com/docs/en/api/beta/messages/batches/delete\n\n**delete** `/v1/messages/batches/{message_batch_id}`\n\nDelete a Message Batch.\n\nMessage Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.\n\nLearn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)\n\n- `message_batch_id: string`\n\nID of the Message Batch.\n\n### Header Parameters\n\n- `\"anthropic-beta\": optional array of AnthropicBeta`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `UnionMember0 = string`\n\n- `UnionMember1 = \"message-batches-2024-09-24\" or \"prompt-caching-2024-07-31\" or \"computer-use-2024-10-22\" or 16 more`\n\n- `\"message-batches-2024-09-24\"`\n\n- `\"prompt-caching-2024-07-31\"`\n\n- `\"computer-use-2024-10-22\"`\n\n- `\"computer-use-2025-01-24\"`\n\n- `\"pdfs-2024-09-25\"`\n\n- `\"token-counting-2024-11-01\"`\n\n- `\"token-efficient-tools-2025-02-19\"`\n\n- `\"output-128k-2025-02-19\"`\n\n- `\"files-api-2025-04-14\"`\n\n- `\"mcp-client-2025-04-04\"`\n\n- `\"mcp-client-2025-11-20\"`\n\n- `\"dev-full-thinking-2025-05-14\"`\n\n- `\"interleaved-thinking-2025-05-14\"`\n\n- `\"code-execution-2025-05-22\"`\n\n- `\"extended-cache-ttl-2025-04-11\"`\n\n- `\"context-1m-2025-08-07\"`\n\n- `\"context-management-2025-06-27\"`\n\n- `\"model-context-window-exceeded-2025-08-26\"`\n\n- `\"skills-2025-10-02\"`\n\n- `BetaDeletedMessageBatch = object { id, type }`\n\nID of the Message Batch.\n\n- `type: \"message_batch_deleted\"`\n\nFor Message Batches, this is always `\"message_batch_deleted\"`.\n\n- `\"message_batch_deleted\"`",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \\\n    -X DELETE \\\n    -H 'anthropic-version: 2023-06-01' \\\n    -H 'anthropic-beta: message-batches-2024-09-24' \\\n    -H \"X-Api-Key: $ANTHROPIC_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Delete",
+      "id": "delete"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Header Parameters",
+      "id": "header-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#delete-a-message-batch-(beta)",
+  "links": []
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Polyglot superpowers",
+  "content": "Translate text from any language into any language.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n|        | Content                                                                                                                                                                                                                                                                                                                                                    |\n| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| System | You are a highly skilled translator with expertise in many languages. Your task is to identify the language of the text I provide and accurately translate it into the specified target language while preserving the meaning, tone, and nuance of the original text. Please maintain proper grammar, spelling, and punctuation in the translated version. |\n| User   | Das Wetter heute ist wunderschön, lass uns spazieren gehen. --> Italienisch                                                                                                                                                                                                                                                                                |\n\n> Il tempo oggi è bellissimo, andiamo a fare una passeggiata\n\n<CodeGroup>\n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n</CodeGroup>",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Example output",
+      "id": "example-output"
+    },
+    {
+      "level": "h3",
+      "text": "API request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#polyglot-superpowers",
+  "links": []
+}

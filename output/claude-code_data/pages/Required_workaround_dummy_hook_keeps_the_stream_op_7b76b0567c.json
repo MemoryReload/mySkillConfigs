@@ -1,0 +1,39 @@
+{
+  "title": "Required workaround: dummy hook keeps the stream open for can_use_tool",
+  "content": "async def dummy_hook(input_data, tool_use_id, context):\n    return {\"continue_\": True}\n\nasync def main():\n    async for message in query(\n        prompt=prompt_stream(),\n        options=ClaudeAgentOptions(\n            can_use_tool=can_use_tool,\n            hooks={\"PreToolUse\": [HookMatcher(matcher=None, hooks=[dummy_hook])]},\n        ),\n    ):\n        if hasattr(message, \"result\"):\n            print(message.result)\n\nasyncio.run(main())\ntypescript TypeScript\nimport { query } from \"@anthropic-ai/claude-agent-sdk\";\nimport * as readline from \"readline\";\n\n// Helper to prompt user for input in the terminal\nfunction prompt(question: string): Promise<string> {\n  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });\n  return new Promise((resolve) => rl.question(question, (answer) => { rl.close(); resolve(answer); }));\n}\n\n// Parse user input as option number(s) or free text\nfunction parseResponse(response: string, options: any[]): string {\n  const indices = response.split(\",\").map((s) => parseInt(s.trim()) - 1);\n  const labels = indices\n    .filter((i) => !isNaN(i) && i >= 0 && i < options.length)\n    .map((i) => options[i].label);\n  return labels.length > 0 ? labels.join(\", \") : response;\n}\n\n// Display Claude's questions and collect user answers\nasync function handleAskUserQuestion(input: any) {\n  const answers: Record<string, string> = {};\n\nfor (const q of input.questions) {\n    console.log(`\\n${q.header}: ${q.question}`);\n\nconst options = q.options;\n    options.forEach((opt: any, i: number) => {\n      console.log(`  ${i + 1}. ${opt.label} - ${opt.description}`);\n    });\n    if (q.multiSelect) {\n      console.log(\"  (Enter numbers separated by commas, or type your own answer)\");\n    } else {\n      console.log(\"  (Enter a number, or type your own answer)\");\n    }\n\nconst response = (await prompt(\"Your choice: \")).trim();\n    answers[q.question] = parseResponse(response, options);\n  }\n\n// Return the answers to Claude (must include original questions)\n  return {\n    behavior: \"allow\",\n    updatedInput: { questions: input.questions, answers },\n  };\n}\n\nasync function main() {\n  for await (const message of query({\n    prompt: \"Help me decide on the tech stack for a new mobile app\",\n    options: {\n      canUseTool: async (toolName, input) => {\n        // Route AskUserQuestion to our question handler\n        if (toolName === \"AskUserQuestion\") {\n          return handleAskUserQuestion(input);\n        }\n        // Auto-approve other tools for this example\n        return { behavior: \"allow\", updatedInput: input };\n      },\n    },\n  })) {\n    if (\"result\" in message) console.log(message.result);\n  }\n}\n\n- **60-second timeout**: `canUseTool` callbacks must return within 60 seconds or Claude will retry with a different approach\n- **Subagents**: `AskUserQuestion` is not currently available in subagents spawned via the Task tool\n- **Question limits**: each `AskUserQuestion` call supports 1-4 questions with 2-4 options each\n\n## Other ways to get user input\n\nThe `canUseTool` callback and `AskUserQuestion` tool cover most approval and clarification scenarios, but the SDK offers other ways to get input from users:\n\nUse [streaming input](/docs/en/agent-sdk/streaming-vs-single-mode) when you need to:\n\n- **Interrupt the agent mid-task**: send a cancel signal or change direction while Claude is working\n- **Provide additional context**: add information Claude needs without waiting for it to ask\n- **Build chat interfaces**: let users send follow-up messages during long-running operations\n\nStreaming input is ideal for conversational UIs where users interact with the agent throughout execution, not just at approval checkpoints.\n\nUse [custom tools](/docs/en/agent-sdk/custom-tools) when you need to:\n\n- **Collect structured input**: build forms, wizards, or multi-step workflows that go beyond `AskUserQuestion`'s multiple-choice format\n- **Integrate external approval systems**: connect to existing ticketing, workflow, or approval platforms\n- **Implement domain-specific interactions**: create tools tailored to your application's needs, like code review interfaces or deployment checklists\n\nCustom tools give you full control over the interaction, but require more implementation work than using the built-in `canUseTool` callback.\n\n- [Configure permissions](/docs/en/agent-sdk/permissions): set up permission modes and rules\n- [Control execution with hooks](/docs/en/agent-sdk/hooks): run custom code at key points in the agent lifecycle\n- [TypeScript SDK reference](/docs/en/agent-sdk/typescript#canusetool): full canUseTool API documentation",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Limitations",
+      "id": "limitations"
+    },
+    {
+      "level": "h2",
+      "text": "Other ways to get user input",
+      "id": "other-ways-to-get-user-input"
+    },
+    {
+      "level": "h3",
+      "text": "Streaming input",
+      "id": "streaming-input"
+    },
+    {
+      "level": "h3",
+      "text": "Custom tools",
+      "id": "custom-tools"
+    },
+    {
+      "level": "h2",
+      "text": "Related resources",
+      "id": "related-resources"
+    }
+  ],
+  "url": "llms-txt#required-workaround:-dummy-hook-keeps-the-stream-open-for-can_use_tool",
+  "links": []
+}

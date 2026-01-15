@@ -1,0 +1,71 @@
+{
+  "title": "Streaming Input",
+  "content": "Understanding the two input modes for Claude Agent SDK and when to use each\n\nThe Claude Agent SDK supports two distinct input modes for interacting with agents:\n\n- **Streaming Input Mode** (Default & Recommended) - A persistent, interactive session\n- **Single Message Input** - One-shot queries that use session state and resuming\n\nThis guide explains the differences, benefits, and use cases for each mode to help you choose the right approach for your application.\n\n## Streaming Input Mode (Recommended)\n\nStreaming input mode is the **preferred** way to use the Claude Agent SDK. It provides full access to the agent's capabilities and enables rich, interactive experiences.\n\nIt allows the agent to operate as a long lived process that takes in user input, handles interruptions, surfaces permission requests, and handles session management.\n\n<CardGroup cols={2}>\n  <Card title=\"Image Uploads\" icon=\"image\">\n    Attach images directly to messages for visual analysis and understanding\n  </Card>\n  <Card title=\"Queued Messages\" icon=\"stack\">\n    Send multiple messages that process sequentially, with ability to interrupt\n  </Card>\n  <Card title=\"Tool Integration\" icon=\"wrench\">\n    Full access to all tools and custom MCP servers during the session\n  </Card>\n  <Card title=\"Hooks Support\" icon=\"link\">\n    Use lifecycle hooks to customize behavior at various points\n  </Card>\n  <Card title=\"Real-time Feedback\" icon=\"lightning\">\n    See responses as they're generated, not just final results\n  </Card>\n  <Card title=\"Context Persistence\" icon=\"database\">\n    Maintain conversation context across multiple turns naturally\n  </Card>\n</CardGroup>\n\n### Implementation Example\n\n## Single Message Input\n\nSingle message input is simpler but more limited.\n\n### When to Use Single Message Input\n\nUse single message input when:\n\n- You need a one-shot response\n- You do not need image attachments, hooks, etc.\n- You need to operate in a stateless environment, such as a lambda function\n\n<Warning>\nSingle message input mode does **not** support:\n- Direct image attachments in messages\n- Dynamic message queueing\n- Real-time interruption\n- Hook integration\n- Natural multi-turn conversations\n</Warning>\n\n### Implementation Example",
+  "code_samples": [
+    {
+      "code": "sequenceDiagram\n    participant App as Your Application\n    participant Agent as Claude Agent\n    participant Tools as Tools/Hooks\n    participant FS as Environment/<br/>File System\n    \n    App->>Agent: Initialize with AsyncGenerator\n    activate Agent\n    \n    App->>Agent: Yield Message 1\n    Agent->>Tools: Execute tools\n    Tools->>FS: Read files\n    FS-->>Tools: File contents\n    Tools->>FS: Write/Edit files\n    FS-->>Tools: Success/Error\n    Agent-->>App: Stream partial response\n    Agent-->>App: Stream more content...\n    Agent->>App: Complete Message 1\n    \n    App->>Agent: Yield Message 2 + Image\n    Agent->>Tools: Process image & execute\n    Tools->>FS: Access filesystem\n    FS-->>Tools: Operation results\n    Agent-->>App: Stream response 2\n    \n    App->>Agent: Queue Message 3\n    App->>Agent: Interrupt/Cancel\n    Agent->>App: Handle interruption\n    \n    Note over App,Agent: Session stays alive\n    Note over Tools,FS: Persistent file system<br/>state maintained\n    \n    deactivate Agent",
+      "language": "mermaid"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Single Message Input\n\nSingle message input is simpler but more limited.\n\n### When to Use Single Message Input\n\nUse single message input when:\n\n- You need a one-shot response\n- You do not need image attachments, hooks, etc.\n- You need to operate in a stateless environment, such as a lambda function\n\n### Limitations\n\n<Warning>\nSingle message input mode does **not** support:\n- Direct image attachments in messages\n- Dynamic message queueing\n- Real-time interruption\n- Hook integration\n- Natural multi-turn conversations\n</Warning>\n\n### Implementation Example\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Overview",
+      "id": "overview"
+    },
+    {
+      "level": "h2",
+      "text": "Streaming Input Mode (Recommended)",
+      "id": "streaming-input-mode-(recommended)"
+    },
+    {
+      "level": "h3",
+      "text": "How It Works",
+      "id": "how-it-works"
+    },
+    {
+      "level": "h3",
+      "text": "Benefits",
+      "id": "benefits"
+    },
+    {
+      "level": "h3",
+      "text": "Implementation Example",
+      "id": "implementation-example"
+    },
+    {
+      "level": "h2",
+      "text": "Single Message Input",
+      "id": "single-message-input"
+    },
+    {
+      "level": "h3",
+      "text": "When to Use Single Message Input",
+      "id": "when-to-use-single-message-input"
+    },
+    {
+      "level": "h3",
+      "text": "Limitations",
+      "id": "limitations"
+    },
+    {
+      "level": "h3",
+      "text": "Implementation Example",
+      "id": "implementation-example"
+    }
+  ],
+  "url": "llms-txt#streaming-input",
+  "links": []
+}

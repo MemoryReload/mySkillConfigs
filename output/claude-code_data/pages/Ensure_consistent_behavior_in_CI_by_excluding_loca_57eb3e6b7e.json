@@ -1,0 +1,13 @@
+{
+  "title": "Ensure consistent behavior in CI by excluding local settings",
+  "content": "async for message in query(\n    prompt=\"Run tests\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"project\"],  # Only team-shared settings\n        permission_mode=\"bypassPermissions\"\n    )\n):\n    print(message)\npython",
+  "code_samples": [
+    {
+      "code": "**SDK-only applications:**",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#ensure-consistent-behavior-in-ci-by-excluding-local-settings",
+  "links": []
+}

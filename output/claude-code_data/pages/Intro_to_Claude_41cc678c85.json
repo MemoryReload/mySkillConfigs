@@ -1,0 +1,34 @@
+{
+  "title": "Intro to Claude",
+  "content": "Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthropic. Claude excels at tasks involving language, reasoning, analysis, coding, and more.\n\nThe latest generation of Claude models:\n\n**Claude Opus 4.5** - Most intelligent model, and an industry-leader for coding,\nagents, and computer use. [Learn more](https://www.anthropic.com/news/claude-opus-4-5).\n\n**Claude Sonnet 4.5** - Balanced performance and practicality for most uses,\nincluding coding and agents. [Learn\nmore](https://www.anthropic.com/news/claude-sonnet-4-5).\n\n**Claude Haiku 4.5** - Fastest model with near-frontier intelligence. [Learn more](https://www.anthropic.com/news/claude-haiku-4-5).\n\n<Note>\nLooking to chat with Claude? Visit [claude.ai](http://www.claude.ai)!\n</Note>\n\nIf you’re new to Claude, start here to learn the essentials and make your first API call.\n\n<CardGroup cols={3}>\n  <Card title=\"Get started\" icon=\"check\" href=\"/docs/en/get-started\">\n    Set up your development environment for building with Claude.\n  </Card>\n  <Card title=\"Learn about Claude\" icon=\"settings\" href=\"/docs/en/about-claude/models/overview\">\n    Learn about the family of Claude models.\n  </Card>\n  <Card title=\"Prompt Library\" icon=\"books\" href=\"/docs/en/resources/prompt-library/library\">\n    Explore example prompts for inspiration.\n  </Card>\n</CardGroup>\n\n## Develop with Claude\n\nAnthropic has best-in-class developer tools to build scalable applications with Claude.\n\n<CardGroup cols={3}>\n  <Card title=\"Developer Console\" icon=\"computer\" href=\"/\">\n    Enjoy easier, more powerful prompting in your browser with the Workbench and the prompt generator tool. \n  </Card>\n  <Card title=\"API Reference\" icon=\"code\" href=\"/docs/en/api/overview\">\n    Explore, implement, and scale with the Claude API and SDKs. \n  </Card>\n  <Card title=\"Claude Cookbook\" icon=\"chef-hat\" href=\"https://platform.claude.com/cookbooks\">\n    Learn with interactive Jupyter notebooks that demonstrate uploading PDFs, embeddings, and more.\n  </Card>\n</CardGroup>\n\nClaude can assist with many tasks that involve text, code, and images.\n\n<CardGroup cols={2}>\n  <Card title=\"Text and code generation\" icon=\"text-aa\" href=\"/docs/en/build-with-claude/text-generation\">\n    Summarize text, answer questions, extract data, translate text, and explain and generate code. \n  </Card>\n  <Card title=\"Vision\" icon=\"image\" href=\"/docs/en/build-with-claude/vision\">\n    Process and analyze visual input and generate text and code from images. \n  </Card>\n</CardGroup>\n\n<CardGroup cols={2}>\n  <Card title=\"Help Center\" icon=\"help\" href=\"https://support.claude.com/en/\">\n    Find answers to frequently asked account and billing questions.\n  </Card>\n\n<Card title=\"Service Status\" icon=\"chart\" href=\"https://status.claude.com\">\n    Check the status of Anthropic services.\n  </Card>\n</CardGroup>",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Get started",
+      "id": "get-started"
+    },
+    {
+      "level": "h2",
+      "text": "Develop with Claude",
+      "id": "develop-with-claude"
+    },
+    {
+      "level": "h2",
+      "text": "Key capabilities",
+      "id": "key-capabilities"
+    },
+    {
+      "level": "h2",
+      "text": "Support",
+      "id": "support"
+    },
+    {
+      "level": "h3",
+      "text": "Models & pricing",
+      "id": "models-&-pricing"
+    }
+  ],
+  "url": "llms-txt#intro-to-claude",
+  "links": []
+}

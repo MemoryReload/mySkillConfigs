@@ -1,0 +1,64 @@
+{
+  "title": "Make request with token. Replace {resource} with your resource name",
+  "content": "curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \\\n  -H \"content-type: application/json\" \\\n  -H \"Authorization: Bearer $ACCESS_TOKEN\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Hello!\"}\n    ]\n  }'\n```\n</CodeGroup>\n\n<Note>\nAzure Entra ID authentication allows you to manage access using Azure RBAC, integrate with your organization's identity management, and avoid managing API keys manually.\n</Note>\n\n## Correlation request IDs\n\nFoundry includes request identifiers in HTTP response headers for debugging and tracing. When contacting support, provide both the `request-id` and `apim-request-id` values to help teams quickly locate and investigate your request across both Anthropic and Azure systems.\n\n## Supported features\n\nClaude on Foundry supports most of Claude's powerful features. You can find all the features currently supported in the [overview documentation](/docs/en/build-with-claude/overview).\n\n### Features not supported\n\n- Admin API (`/v1/organizations/*` endpoints)\n- Models API (`/v1/models`)\n- Message Batch API (`/v1/messages/batches`)\n\nAPI responses from Claude on Foundry follow the standard [Claude API response format](/docs/en/api/messages). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (first-party API, Foundry, Amazon Bedrock, and Google Vertex AI).\n\nFor details on response headers specific to Foundry, see the [correlation request IDs section](#correlation-request-ids).\n\n## API model IDs and deployments\n\nThe following Claude models are available through Foundry. The latest generation models (Sonnet 4.5, Opus 4.1, and Haiku 4.5) offer the most advanced capabilities:\n\n| Model             | Default Deployment Name     |\n| :---------------- | :-------------------------- |\n| Claude Opus 4.5   | `claude-opus-4-5`  |\n| Claude Sonnet 4.5 | `claude-sonnet-4-5`         |\n| Claude Opus 4.1   | `claude-opus-4-1`           |\n| Claude Haiku 4.5  | `claude-haiku-4-5`          |\n\nBy default, deployment names match the model IDs shown above. However, you can create custom deployments with different names in the Foundry portal to manage different configurations, versions, or rate limits. Use the deployment name (not necessarily the model ID) in your API requests.\n\n## Monitoring and logging\n\nAzure provides comprehensive monitoring and logging capabilities for your Claude usage through standard Azure patterns:\n\n- **Azure Monitor**: Track API usage, latency, and error rates\n- **Azure Log Analytics**: Query and analyze request/response logs\n- **Cost Management**: Monitor and forecast costs associated with Claude usage\n\nAnthropic recommends logging your activity on at least a 30-day rolling basis to understand usage patterns and investigate any potential issues.\n\n<Note>\nAzure's logging services are configured within your Azure subscription. Enabling logging does not provide Microsoft or Anthropic access to your content beyond what's necessary for billing and service operation.\n</Note>\n\n### Authentication errors\n\n**Error**: `401 Unauthorized` or `Invalid API key`\n\n- **Solution**: Verify your API key is correct. You can obtain a new API key from the Azure portal under **Keys and Endpoint** for your Claude resource.\n- **Solution**: If using Azure Entra ID, ensure your access token is valid and hasn't expired. Tokens typically expire after 1 hour.\n\n**Error**: `403 Forbidden`\n\n- **Solution**: Your Azure account may lack the necessary permissions. Ensure you have the appropriate Azure RBAC role assigned (e.g., \"Cognitive Services OpenAI User\").\n\n**Error**: `429 Too Many Requests`\n\n- **Solution**: You've exceeded your rate limit. Implement exponential backoff and retry logic in your application.\n- **Solution**: Consider requesting rate limit increases through the Azure portal or Azure support.\n\n#### Rate limit headers\n\nFoundry does not include Anthropic's standard rate limit headers (`anthropic-ratelimit-tokens-limit`, `anthropic-ratelimit-tokens-remaining`, `anthropic-ratelimit-tokens-reset`, `anthropic-ratelimit-input-tokens-limit`, `anthropic-ratelimit-input-tokens-remaining`, `anthropic-ratelimit-input-tokens-reset`, `anthropic-ratelimit-output-tokens-limit`, `anthropic-ratelimit-output-tokens-remaining`, and `anthropic-ratelimit-output-tokens-reset`) in responses. Manage rate limiting through Azure's monitoring tools instead.\n\n### Model and deployment errors\n\n**Error**: `Model not found` or `Deployment not found`\n\n- **Solution**: Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (e.g., `claude-sonnet-4-5`).\n- **Solution**: Ensure the model/deployment is available in your Azure region.\n\n**Error**: `Invalid model parameter`\n\n- **Solution**: The model parameter should contain your deployment name, which can be customized in the Foundry portal. Verify the deployment exists and is properly configured.\n\n## Additional resources\n\n- **Foundry documentation**: [ai.azure.com/catalog](https://ai.azure.com/catalog/publishers/anthropic)\n- **Azure pricing**: [azure.microsoft.com/en-us/pricing](https://azure.microsoft.com/en-us/pricing/)\n- **Anthropic pricing details**: [Pricing documentation](/docs/en/about-claude/pricing#third-party-platform-pricing)\n- **Authentication guide**: See the [authentication section](#authentication) above\n- **Azure portal**: [portal.azure.com](https://portal.azure.com/)",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Correlation request IDs",
+      "id": "correlation-request-ids"
+    },
+    {
+      "level": "h2",
+      "text": "Supported features",
+      "id": "supported-features"
+    },
+    {
+      "level": "h3",
+      "text": "Features not supported",
+      "id": "features-not-supported"
+    },
+    {
+      "level": "h2",
+      "text": "API responses",
+      "id": "api-responses"
+    },
+    {
+      "level": "h2",
+      "text": "API model IDs and deployments",
+      "id": "api-model-ids-and-deployments"
+    },
+    {
+      "level": "h2",
+      "text": "Monitoring and logging",
+      "id": "monitoring-and-logging"
+    },
+    {
+      "level": "h2",
+      "text": "Troubleshooting",
+      "id": "troubleshooting"
+    },
+    {
+      "level": "h3",
+      "text": "Authentication errors",
+      "id": "authentication-errors"
+    },
+    {
+      "level": "h3",
+      "text": "Rate limiting",
+      "id": "rate-limiting"
+    },
+    {
+      "level": "h3",
+      "text": "Model and deployment errors",
+      "id": "model-and-deployment-errors"
+    },
+    {
+      "level": "h2",
+      "text": "Additional resources",
+      "id": "additional-resources"
+    }
+  ],
+  "url": "llms-txt#make-request-with-token.-replace-{resource}-with-your-resource-name",
+  "links": []
+}

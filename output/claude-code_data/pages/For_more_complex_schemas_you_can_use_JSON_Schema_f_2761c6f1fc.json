@@ -1,0 +1,54 @@
+{
+  "title": "For more complex schemas, you can use JSON Schema format",
+  "content": "@tool(\n    \"advanced_process\",\n    \"Process data with advanced validation\",\n    {\n        \"type\": \"object\",\n        \"properties\": {\n            \"name\": {\"type\": \"string\"},\n            \"age\": {\"type\": \"integer\", \"minimum\": 0, \"maximum\": 150},\n            \"email\": {\"type\": \"string\", \"format\": \"email\"},\n            \"format\": {\"type\": \"string\", \"enum\": [\"json\", \"csv\", \"xml\"], \"default\": \"json\"}\n        },\n        \"required\": [\"name\", \"age\", \"email\"]\n    }\n)\nasync def advanced_process(args: dict[str, Any]) -> dict[str, Any]:\n    # Process with advanced schema validation\n    return {\n        \"content\": [{\n            \"type\": \"text\",\n            \"text\": f\"Advanced processing for {args['name']}\"\n        }]\n    }\ntypescript TypeScript\ntool(\n  \"fetch_data\",\n  \"Fetch data from an API\",\n  {\n    endpoint: z.string().url().describe(\"API endpoint URL\")\n  },\n  async (args) => {\n    try {\n      const response = await fetch(args.endpoint);\n      \n      if (!response.ok) {\n        return {\n          content: [{\n            type: \"text\",\n            text: `API error: ${response.status} ${response.statusText}`\n          }]\n        };\n      }\n      \n      const data = await response.json();\n      return {\n        content: [{\n          type: \"text\",\n          text: JSON.stringify(data, null, 2)\n        }]\n      };\n    } catch (error) {\n      return {\n        content: [{\n          type: \"text\",\n          text: `Failed to fetch data: ${error.message}`\n        }]\n      };\n    }\n  }\n)\npython Python\nimport json\nimport aiohttp\nfrom typing import Any\n\n@tool(\n    \"fetch_data\",\n    \"Fetch data from an API\",\n    {\"endpoint\": str}  # Simple schema\n)\nasync def fetch_data(args: dict[str, Any]) -> dict[str, Any]:\n    try:\n        async with aiohttp.ClientSession() as session:\n            async with session.get(args[\"endpoint\"]) as response:\n                if response.status != 200:\n                    return {\n                        \"content\": [{\n                            \"type\": \"text\",\n                            \"text\": f\"API error: {response.status} {response.reason}\"\n                        }]\n                    }\n                \n                data = await response.json()\n                return {\n                    \"content\": [{\n                        \"type\": \"text\",\n                        \"text\": json.dumps(data, indent=2)\n                    }]\n                }\n    except Exception as e:\n        return {\n            \"content\": [{\n                \"type\": \"text\",\n                \"text\": f\"Failed to fetch data: {str(e)}\"\n            }]\n        }\ntypescript TypeScript\nconst databaseServer = createSdkMcpServer({\n  name: \"database-tools\",\n  version: \"1.0.0\",\n  tools: [\n    tool(\n      \"query_database\",\n      \"Execute a database query\",\n      {\n        query: z.string().describe(\"SQL query to execute\"),\n        params: z.array(z.any()).optional().describe(\"Query parameters\")\n      },\n      async (args) => {\n        const results = await db.query(args.query, args.params || []);\n        return {\n          content: [{\n            type: \"text\",\n            text: `Found ${results.length} rows:\\n${JSON.stringify(results, null, 2)}`\n          }]\n        };\n      }\n    )\n  ]\n});\npython Python\nfrom typing import Any\nimport json\n\n@tool(\n    \"query_database\",\n    \"Execute a database query\",\n    {\"query\": str, \"params\": list}  # Simple schema with list type\n)\nasync def query_database(args: dict[str, Any]) -> dict[str, Any]:\n    results = await db.query(args[\"query\"], args.get(\"params\", []))\n    return {\n        \"content\": [{\n            \"type\": \"text\",\n            \"text\": f\"Found {len(results)} rows:\\n{json.dumps(results, indent=2)}\"\n        }]\n    }\n\ndatabase_server = create_sdk_mcp_server(\n    name=\"database-tools\",\n    version=\"1.0.0\",\n    tools=[query_database]  # Pass the decorated function\n)\ntypescript TypeScript\nconst apiGatewayServer = createSdkMcpServer({\n  name: \"api-gateway\",\n  version: \"1.0.0\",\n  tools: [\n    tool(\n      \"api_request\",\n      \"Make authenticated API requests to external services\",\n      {\n        service: z.enum([\"stripe\", \"github\", \"openai\", \"slack\"]).describe(\"Service to call\"),\n        endpoint: z.string().describe(\"API endpoint path\"),\n        method: z.enum([\"GET\", \"POST\", \"PUT\", \"DELETE\"]).describe(\"HTTP method\"),\n        body: z.record(z.any()).optional().describe(\"Request body\"),\n        query: z.record(z.string()).optional().describe(\"Query parameters\")\n      },\n      async (args) => {\n        const config = {\n          stripe: { baseUrl: \"https://api.stripe.com/v1\", key: process.env.STRIPE_KEY },\n          github: { baseUrl: \"https://api.github.com\", key: process.env.GITHUB_TOKEN },\n          openai: { baseUrl: \"https://api.openai.com/v1\", key: process.env.OPENAI_KEY },\n          slack: { baseUrl: \"https://slack.com/api\", key: process.env.SLACK_TOKEN }\n        };\n        \n        const { baseUrl, key } = config[args.service];\n        const url = new URL(`${baseUrl}${args.endpoint}`);\n        \n        if (args.query) {\n          Object.entries(args.query).forEach(([k, v]) => url.searchParams.set(k, v));\n        }\n        \n        const response = await fetch(url, {\n          method: args.method,\n          headers: { Authorization: `Bearer ${key}`, \"Content-Type\": \"application/json\" },\n          body: args.body ? JSON.stringify(args.body) : undefined\n        });\n        \n        const data = await response.json();\n        return {\n          content: [{\n            type: \"text\",\n            text: JSON.stringify(data, null, 2)\n          }]\n        };\n      }\n    )\n  ]\n});\npython Python\nimport os\nimport json\nimport aiohttp\nfrom typing import Any",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n## Error Handling\n\nHandle errors gracefully to provide meaningful feedback:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Example Tools\n\n### Database Query Tool\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### API Gateway Tool\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Error Handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h2",
+      "text": "Example Tools",
+      "id": "example-tools"
+    },
+    {
+      "level": "h3",
+      "text": "Database Query Tool",
+      "id": "database-query-tool"
+    },
+    {
+      "level": "h3",
+      "text": "API Gateway Tool",
+      "id": "api-gateway-tool"
+    }
+  ],
+  "url": "llms-txt#for-more-complex-schemas,-you-can-use-json-schema-format",
+  "links": []
+}

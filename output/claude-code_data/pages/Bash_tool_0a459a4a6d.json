@@ -1,0 +1,57 @@
+{
+  "title": "Bash tool",
+  "content": "The bash tool enables Claude to execute shell commands in a persistent bash session, allowing system operations, script execution, and command-line automation.\n\nThe bash tool provides Claude with:\n- Persistent bash session that maintains state\n- Ability to run any shell command\n- Access to environment variables and working directory\n- Command chaining and scripting capabilities\n\n## Model compatibility\n\n| Model | Tool Version |\n|-------|--------------|\n| Claude 4 models and Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | `bash_20250124` |\n\n<Warning>\nOlder tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.\n</Warning>\n\n- **Development workflows**: Run build commands, tests, and development tools\n- **System automation**: Execute scripts, manage files, automate tasks\n- **Data processing**: Process files, run analysis scripts, manage datasets\n- **Environment setup**: Install packages, configure environments\n\nThe bash tool maintains a persistent session:\n\n1. Claude determines what command to run\n2. You execute the command in a bash shell\n3. Return the output (stdout and stderr) to Claude\n4. Session state persists between commands (environment variables, working directory)\n\n| Parameter | Required | Description |\n|-----------|----------|-------------|\n| `command` | Yes* | The bash command to run |\n| `restart` | No | Set to `true` to restart the bash session |\n\n*Required unless using `restart`\n\n<section title=\"Example usage\">\n\n## Example: Multi-step automation\n\nClaude can chain commands to complete complex tasks:",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## How it works\n\nThe bash tool maintains a persistent session:\n\n1. Claude determines what command to run\n2. You execute the command in a bash shell\n3. Return the output (stdout and stderr) to Claude\n4. Session state persists between commands (environment variables, working directory)\n\n## Parameters\n\n| Parameter | Required | Description |\n|-----------|----------|-------------|\n| `command` | Yes* | The bash command to run |\n| `restart` | No | Set to `true` to restart the bash session |\n\n*Required unless using `restart`\n\n<section title=\"Example usage\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n## Example: Multi-step automation\n\nClaude can chain commands to complete complex tasks:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Overview",
+      "id": "overview"
+    },
+    {
+      "level": "h2",
+      "text": "Model compatibility",
+      "id": "model-compatibility"
+    },
+    {
+      "level": "h2",
+      "text": "Use cases",
+      "id": "use-cases"
+    },
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h2",
+      "text": "How it works",
+      "id": "how-it-works"
+    },
+    {
+      "level": "h2",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h2",
+      "text": "Example: Multi-step automation",
+      "id": "example:-multi-step-automation"
+    }
+  ],
+  "url": "llms-txt#bash-tool",
+  "links": []
+}

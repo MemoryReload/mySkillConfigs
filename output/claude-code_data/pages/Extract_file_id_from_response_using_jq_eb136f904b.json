@@ -1,0 +1,8 @@
+{
+  "title": "Extract file_id from response (using jq)",
+  "content": "FILE_ID=$(echo \"$RESPONSE\" | jq -r '.content[] | select(.type==\"tool_use\" and .name==\"code_execution\") | .content[] | select(.file_id) | .file_id')",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#extract-file_id-from-response-(using-jq)",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "More frequent compaction for memory-constrained scenarios",
+  "content": "compaction_control={\n    \"enabled\": True,\n    \"context_token_threshold\": 50000\n}",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#more-frequent-compaction-for-memory-constrained-scenarios",
+  "links": []
+}

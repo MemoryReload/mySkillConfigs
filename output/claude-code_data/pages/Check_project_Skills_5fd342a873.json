@@ -1,0 +1,8 @@
+{
+  "title": "Check project Skills",
+  "content": "ls .claude/skills/*/SKILL.md",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#check-project-skills",
+  "links": []
+}

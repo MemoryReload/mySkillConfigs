@@ -1,0 +1,33 @@
+{
+  "title": "The second response benefits from cached fetch results",
+  "content": "print(f\"Cache read tokens: {response2.usage.get('cache_read_input_tokens', 0)}\")\njavascript\nevent: message_start\ndata: {\"type\": \"message_start\", \"message\": {\"id\": \"msg_abc123\", \"type\": \"message\"}}\n\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 0, \"content_block\": {\"type\": \"text\", \"text\": \"\"}}\n\n// Claude's decision to fetch\n\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 1, \"content_block\": {\"type\": \"server_tool_use\", \"id\": \"srvtoolu_xyz789\", \"name\": \"web_fetch\"}}\n\n// Fetch URL streamed\nevent: content_block_delta\ndata: {\"type\": \"content_block_delta\", \"index\": 1, \"delta\": {\"type\": \"input_json_delta\", \"partial_json\": \"{\\\"url\\\":\\\"https://example.com/article\\\"}\"}}\n\n// Pause while fetch executes\n\n// Fetch results streamed\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 2, \"content_block\": {\"type\": \"web_fetch_tool_result\", \"tool_use_id\": \"srvtoolu_xyz789\", \"content\": {\"type\": \"web_fetch_result\", \"url\": \"https://example.com/article\", \"content\": {\"type\": \"document\", \"source\": {\"type\": \"text\", \"media_type\": \"text/plain\", \"data\": \"Article content...\"}}}}}\n\n// Claude's response continues...\njson\n\"usage\": {\n  \"input_tokens\": 25039,\n  \"output_tokens\": 931,\n  \"cache_read_input_tokens\": 0,\n  \"cache_creation_input_tokens\": 0,\n  \"server_tool_use\": {\n    \"web_fetch_requests\": 1\n  }\n}\n```\n\nThe web fetch tool is available on the Claude API at **no additional cost**. You only pay standard token costs for the fetched content that becomes part of your conversation context.\n\nTo protect against inadvertently fetching large content that would consume excessive tokens, use the `max_content_tokens` parameter to set appropriate limits based on your use case and budget considerations.\n\nExample token usage for typical content:\n- Average web page (10KB): ~2,500 tokens\n- Large documentation page (100KB): ~25,000 tokens  \n- Research paper PDF (500KB): ~125,000 tokens",
+  "code_samples": [
+    {
+      "code": "## Streaming\n\nWith streaming enabled, fetch events are part of the stream with a pause during content retrieval:",
+      "language": "unknown"
+    },
+    {
+      "code": "## Batch requests\n\nYou can include the web fetch tool in the [Messages Batches API](/docs/en/build-with-claude/batch-processing). Web fetch tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.\n\n## Usage and pricing\n\nWeb fetch usage has **no additional charges** beyond standard token costs:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Streaming",
+      "id": "streaming"
+    },
+    {
+      "level": "h2",
+      "text": "Batch requests",
+      "id": "batch-requests"
+    },
+    {
+      "level": "h2",
+      "text": "Usage and pricing",
+      "id": "usage-and-pricing"
+    }
+  ],
+  "url": "llms-txt#the-second-response-benefits-from-cached-fetch-results",
+  "links": []
+}

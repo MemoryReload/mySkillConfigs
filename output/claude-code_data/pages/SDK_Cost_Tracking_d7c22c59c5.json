@@ -1,0 +1,34 @@
+{
+  "title": "SDK Cost Tracking",
+  "content": "The Claude Agent SDK provides detailed token usage information for each interaction with Claude. This guide explains how to properly track costs and understand usage reporting, especially when dealing with parallel tool uses and multi-step conversations.\n\nFor complete API documentation, see the [TypeScript SDK reference](/docs/en/agent-sdk/typescript).\n\n## Understanding Token Usage\n\nWhen Claude processes requests, it reports token usage at the message level. This usage data is essential for tracking costs and billing users appropriately.\n\n1. **Steps**: A step is a single request/response pair between your application and Claude\n2. **Messages**: Individual messages within a step (text, tool uses, tool results)\n3. **Usage**: Token consumption data attached to assistant messages\n\n## Usage Reporting Structure\n\n### Single vs Parallel Tool Use\n\nWhen Claude executes tools, the usage reporting differs based on whether tools are executed sequentially or in parallel:\n\n```python Python\nfrom claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage\nimport asyncio",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Understanding Token Usage",
+      "id": "understanding-token-usage"
+    },
+    {
+      "level": "h3",
+      "text": "Key Concepts",
+      "id": "key-concepts"
+    },
+    {
+      "level": "h2",
+      "text": "Usage Reporting Structure",
+      "id": "usage-reporting-structure"
+    },
+    {
+      "level": "h3",
+      "text": "Single vs Parallel Tool Use",
+      "id": "single-vs-parallel-tool-use"
+    }
+  ],
+  "url": "llms-txt#sdk-cost-tracking",
+  "links": []
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Use the custom tools with Claude",
+  "content": "options = ClaudeAgentOptions(\n    mcp_servers={\"my-custom-tools\": custom_server},\n    allowed_tools=[\n        \"mcp__my-custom-tools__get_weather\",  # Allow the weather tool\n        # Add other tools as needed\n    ]\n)\n\nasync def main():\n    async with ClaudeSDKClient(options=options) as client:\n        await client.query(\"What's the weather in San Francisco?\")\n\n# Extract and print response\n        async for msg in client.receive_response():\n            print(msg)\n\nasyncio.run(main())\ntypescript TypeScript\nconst multiToolServer = createSdkMcpServer({\n  name: \"utilities\",\n  version: \"1.0.0\",\n  tools: [\n    tool(\"calculate\", \"Perform calculations\", { /* ... */ }, async (args) => { /* ... */ }),\n    tool(\"translate\", \"Translate text\", { /* ... */ }, async (args) => { /* ... */ }),\n    tool(\"search_web\", \"Search the web\", { /* ... */ }, async (args) => { /* ... */ })\n  ]\n});\n\n// Allow only specific tools with streaming input\nasync function* generateMessages() {\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: \"Calculate 5 + 3 and translate 'hello' to Spanish\"\n    }\n  };\n}\n\nfor await (const message of query({\n  prompt: generateMessages(),  // Use async generator for streaming input\n  options: {\n    mcpServers: {\n      utilities: multiToolServer\n    },\n    allowedTools: [\n      \"mcp__utilities__calculate\",   // Allow calculator\n      \"mcp__utilities__translate\",   // Allow translator\n      // \"mcp__utilities__search_web\" is NOT allowed\n    ]\n  }\n})) {\n  // Process messages\n}\npython Python\nfrom claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, tool, create_sdk_mcp_server\nfrom typing import Any\nimport asyncio",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n### Multiple Tools Example\n\nWhen your MCP server has multiple tools, you can selectively allow them:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Multiple Tools Example",
+      "id": "multiple-tools-example"
+    }
+  ],
+  "url": "llms-txt#use-the-custom-tools-with-claude",
+  "links": []
+}

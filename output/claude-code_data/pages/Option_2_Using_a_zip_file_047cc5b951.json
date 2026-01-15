@@ -1,0 +1,8 @@
+{
+  "title": "Option 2: Using a zip file",
+  "content": "skill = client.beta.skills.create(\n    display_title=\"Financial Analysis\",\n    files=[(\"skill.zip\", open(\"financial_analysis_skill.zip\", \"rb\"))],\n    betas=[\"skills-2025-10-02\"]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#option-2:-using-a-zip-file",
+  "links": []
+}

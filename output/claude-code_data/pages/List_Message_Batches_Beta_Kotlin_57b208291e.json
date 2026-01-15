@@ -1,0 +1,34 @@
+{
+  "title": "List Message Batches (Beta) (Kotlin)",
+  "content": "URL: https://platform.claude.com/docs/en/api/kotlin/beta/messages/batches/list\n\n`beta().messages().batches().list(BatchListParamsparams = BatchListParams.none(), RequestOptionsrequestOptions = RequestOptions.none()) : BatchListPage`\n\n**get** `/v1/messages/batches`\n\nList all Message Batches within a Workspace. Most recently created batches are returned first.\n\nLearn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)\n\n- `params: BatchListParams`\n\n- `afterId: Optional<String>`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.\n\n- `beforeId: Optional<String>`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.\n\n- `limit: Optional<Long>`\n\nNumber of items to return per page.\n\nDefaults to `20`. Ranges from `1` to `1000`.\n\n- `betas: Optional<List<AnthropicBeta>>`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `MESSAGE_BATCHES_2024_09_24(\"message-batches-2024-09-24\")`\n\n- `PROMPT_CACHING_2024_07_31(\"prompt-caching-2024-07-31\")`\n\n- `COMPUTER_USE_2024_10_22(\"computer-use-2024-10-22\")`\n\n- `COMPUTER_USE_2025_01_24(\"computer-use-2025-01-24\")`\n\n- `PDFS_2024_09_25(\"pdfs-2024-09-25\")`\n\n- `TOKEN_COUNTING_2024_11_01(\"token-counting-2024-11-01\")`\n\n- `TOKEN_EFFICIENT_TOOLS_2025_02_19(\"token-efficient-tools-2025-02-19\")`\n\n- `OUTPUT_128K_2025_02_19(\"output-128k-2025-02-19\")`\n\n- `FILES_API_2025_04_14(\"files-api-2025-04-14\")`\n\n- `MCP_CLIENT_2025_04_04(\"mcp-client-2025-04-04\")`\n\n- `MCP_CLIENT_2025_11_20(\"mcp-client-2025-11-20\")`\n\n- `DEV_FULL_THINKING_2025_05_14(\"dev-full-thinking-2025-05-14\")`\n\n- `INTERLEAVED_THINKING_2025_05_14(\"interleaved-thinking-2025-05-14\")`\n\n- `CODE_EXECUTION_2025_05_22(\"code-execution-2025-05-22\")`\n\n- `EXTENDED_CACHE_TTL_2025_04_11(\"extended-cache-ttl-2025-04-11\")`\n\n- `CONTEXT_1M_2025_08_07(\"context-1m-2025-08-07\")`\n\n- `CONTEXT_MANAGEMENT_2025_06_27(\"context-management-2025-06-27\")`\n\n- `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26(\"model-context-window-exceeded-2025-08-26\")`\n\n- `SKILLS_2025_10_02(\"skills-2025-10-02\")`\n\n- `class BetaMessageBatch:`\n\nUnique object identifier.\n\nThe format and length of IDs may change over time.\n\n- `archivedAt: Optional<LocalDateTime>`\n\nRFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.\n\n- `cancelInitiatedAt: Optional<LocalDateTime>`\n\nRFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.\n\n- `createdAt: LocalDateTime`\n\nRFC 3339 datetime string representing the time at which the Message Batch was created.\n\n- `endedAt: Optional<LocalDateTime>`\n\nRFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.\n\nProcessing ends when every request in a Message Batch has either succeeded, errored, canceled, or expired.\n\n- `expiresAt: LocalDateTime`\n\nRFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.\n\n- `processingStatus: ProcessingStatus`\n\nProcessing status of the Message Batch.\n\n- `IN_PROGRESS(\"in_progress\")`\n\n- `CANCELING(\"canceling\")`\n\n- `requestCounts: BetaMessageBatchRequestCounts`\n\nTallies requests within the Message Batch, categorized by their status.\n\nRequests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.\n\nNumber of requests in the Message Batch that have been canceled.\n\nThis is zero until processing of the entire Message Batch has ended.\n\nNumber of requests in the Message Batch that encountered an error.\n\nThis is zero until processing of the entire Message Batch has ended.\n\nNumber of requests in the Message Batch that have expired.\n\nThis is zero until processing of the entire Message Batch has ended.\n\nNumber of requests in the Message Batch that are processing.\n\nNumber of requests in the Message Batch that have completed successfully.\n\nThis is zero until processing of the entire Message Batch has ended.\n\n- `resultsUrl: Optional<String>`\n\nURL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.\n\nResults in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.\n\n- `type: JsonValue; \"message_batch\"constant`\n\nFor Message Batches, this is always `\"message_batch\"`.\n\n- `MESSAGE_BATCH(\"message_batch\")`",
+  "code_samples": [
+    {
+      "code": "package com.anthropic.example\n\nimport com.anthropic.client.AnthropicClient\nimport com.anthropic.client.okhttp.AnthropicOkHttpClient\nimport com.anthropic.models.beta.messages.batches.BatchListPage\nimport com.anthropic.models.beta.messages.batches.BatchListParams\n\nfun main() {\n    val client: AnthropicClient = AnthropicOkHttpClient.fromEnv()\n\n    val page: BatchListPage = client.beta().messages().batches().list()\n}",
+      "language": "kotlin"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#list-message-batches-(beta)-(kotlin)",
+  "links": []
+}

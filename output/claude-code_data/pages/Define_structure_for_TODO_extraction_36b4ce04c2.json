@@ -1,0 +1,8 @@
+{
+  "title": "Define structure for TODO extraction",
+  "content": "todo_schema = {\n    \"type\": \"object\",\n    \"properties\": {\n        \"todos\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"text\": {\"type\": \"string\"},\n                    \"file\": {\"type\": \"string\"},\n                    \"line\": {\"type\": \"number\"},\n                    \"author\": {\"type\": \"string\"},\n                    \"date\": {\"type\": \"string\"}\n                },\n                \"required\": [\"text\", \"file\", \"line\"]\n            }\n        },\n        \"total_count\": {\"type\": \"number\"}\n    },\n    \"required\": [\"todos\", \"total_count\"]\n}",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#define-structure-for-todo-extraction",
+  "links": []
+}

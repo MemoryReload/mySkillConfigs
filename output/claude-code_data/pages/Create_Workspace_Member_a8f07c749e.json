@@ -1,0 +1,39 @@
+{
+  "title": "Create Workspace Member",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/workspaces/members/create\n\n**post** `/v1/organizations/workspaces/{workspace_id}/members`\n\nCreate Workspace Member\n\n- `workspace_id: string`\n\n- `workspace_role: \"workspace_user\" or \"workspace_developer\" or \"workspace_admin\"`\n\nRole of the new Workspace Member. Cannot be \"workspace_billing\".\n\n- `\"workspace_developer\"`\n\n- `\"workspace_admin\"`\n\n- `WorkspaceMember = object { type, user_id, workspace_id, workspace_role }`\n\n- `type: \"workspace_member\"`\n\nFor Workspace Members, this is always `\"workspace_member\"`.\n\n- `\"workspace_member\"`\n\n- `workspace_id: string`\n\n- `workspace_role: \"workspace_user\" or \"workspace_developer\" or \"workspace_admin\" or \"workspace_billing\"`\n\nRole of the Workspace Member.\n\n- `\"workspace_developer\"`\n\n- `\"workspace_admin\"`\n\n- `\"workspace_billing\"`",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \\\n    -H 'Content-Type: application/json' \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\" \\\n    -d '{\n          \"user_id\": \"user_01WCz1FkmYMm4gnmykNKUu3Q\",\n          \"workspace_role\": \"workspace_user\"\n        }'",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Create",
+      "id": "create"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Body Parameters",
+      "id": "body-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#create-workspace-member",
+  "links": []
+}

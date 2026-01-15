@@ -1,0 +1,8 @@
+{
+  "title": "The claude_code preset alone does NOT load CLAUDE.md files",
+  "content": "async for message in query(\n    prompt=\"Add a new React component for user profiles\",\n    options=ClaudeAgentOptions(\n        system_prompt={\n            \"type\": \"preset\",\n            \"preset\": \"claude_code\"  # Use Claude Code's system prompt\n        },\n        setting_sources=[\"project\"]  # Required to load CLAUDE.md from project\n    )\n):\n    messages.append(message)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#the-claude_code-preset-alone-does-not-load-claude.md-files",
+  "links": []
+}

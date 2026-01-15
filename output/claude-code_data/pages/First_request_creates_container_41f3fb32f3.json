@@ -1,0 +1,8 @@
+{
+  "title": "First request creates container",
+  "content": "response1 = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    max_tokens=4096,\n    betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n    container={\n        \"skills\": [\n            {\"type\": \"anthropic\", \"skill_id\": \"xlsx\", \"version\": \"latest\"}\n        ]\n    },\n    messages=[{\"role\": \"user\", \"content\": \"Analyze this sales data\"}],\n    tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-request-creates-container",
+  "links": []
+}

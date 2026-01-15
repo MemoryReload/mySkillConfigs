@@ -1,0 +1,8 @@
+{
+  "title": "With .create() - requires transform_schema()",
+  "content": "response = client.beta.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    betas=[\"structured-outputs-2025-11-13\"],\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": \"Extract the key information from this email: John Smith (john@example.com) is interested in our Enterprise plan and wants to schedule a demo for next Tuesday at 2pm.\"\n        }\n    ],\n    output_format={\n        \"type\": \"json_schema\",\n        \"schema\": transform_schema(ContactInfo),\n    }\n)\n\nprint(response.content[0].text)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#with-.create()---requires-transform_schema()",
+  "links": []
+}

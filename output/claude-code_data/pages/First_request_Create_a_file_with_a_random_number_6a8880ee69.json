@@ -1,0 +1,8 @@
+{
+  "title": "First request: Create a file with a random number",
+  "content": "curl https://api.anthropic.com/v1/messages \\\n    --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n    --header \"anthropic-version: 2023-06-01\" \\\n    --header \"anthropic-beta: code-execution-2025-08-25\" \\\n    --header \"content-type: application/json\" \\\n    --data '{\n        \"model\": \"claude-sonnet-4-5\",\n        \"max_tokens\": 4096,\n        \"messages\": [{\n            \"role\": \"user\",\n            \"content\": \"Write a file with a random number and save it to \\\"/tmp/number.txt\\\"\"\n        }],\n        \"tools\": [{\n            \"type\": \"code_execution_20250825\",\n            \"name\": \"code_execution\"\n        }]\n    }' > response1.json",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-request:-create-a-file-with-a-random-number",
+  "links": []
+}

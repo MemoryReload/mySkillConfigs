@@ -1,0 +1,34 @@
+{
+  "title": "List Models (Ruby)",
+  "content": "URL: https://platform.claude.com/docs/en/api/ruby/models/list\n\n`models.list(**kwargs) -> Page<ModelInfo>`\n\nList available models.\n\nThe Models API response can be used to determine which models are available for use in the API. More recently released models are listed first.\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.\n\n- `before_id: String`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.\n\nNumber of items to return per page.\n\nDefaults to `20`. Ranges from `1` to `1000`.\n\n- `anthropic_beta: Array[AnthropicBeta]`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `:\"message-batches-2024-09-24\" | :\"prompt-caching-2024-07-31\" | :\"computer-use-2024-10-22\" | 16 more`\n\n- `:\"message-batches-2024-09-24\"`\n\n- `:\"prompt-caching-2024-07-31\"`\n\n- `:\"computer-use-2024-10-22\"`\n\n- `:\"computer-use-2025-01-24\"`\n\n- `:\"pdfs-2024-09-25\"`\n\n- `:\"token-counting-2024-11-01\"`\n\n- `:\"token-efficient-tools-2025-02-19\"`\n\n- `:\"output-128k-2025-02-19\"`\n\n- `:\"files-api-2025-04-14\"`\n\n- `:\"mcp-client-2025-04-04\"`\n\n- `:\"mcp-client-2025-11-20\"`\n\n- `:\"dev-full-thinking-2025-05-14\"`\n\n- `:\"interleaved-thinking-2025-05-14\"`\n\n- `:\"code-execution-2025-05-22\"`\n\n- `:\"extended-cache-ttl-2025-04-11\"`\n\n- `:\"context-1m-2025-08-07\"`\n\n- `:\"context-management-2025-06-27\"`\n\n- `:\"model-context-window-exceeded-2025-08-26\"`\n\n- `:\"skills-2025-10-02\"`\n\nUnique model identifier.\n\nRFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.\n\n- `display_name: String`\n\nA human-readable name for the model.\n\nFor Models, this is always `\"model\"`.",
+  "code_samples": [
+    {
+      "code": "require \"anthropic\"\n\nanthropic = Anthropic::Client.new(api_key: \"my-anthropic-api-key\")\n\npage = anthropic.models.list\n\nputs(page)",
+      "language": "ruby"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#list-models-(ruby)",
+  "links": []
+}

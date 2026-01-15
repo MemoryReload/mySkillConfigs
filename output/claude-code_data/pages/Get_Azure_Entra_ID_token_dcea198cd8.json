@@ -1,0 +1,8 @@
+{
+  "title": "Get Azure Entra ID token",
+  "content": "ACCESS_TOKEN=$(az account get-access-token --resource https://cognitiveservices.azure.com --query accessToken -o tsv)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#get-azure-entra-id-token",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Example: Reading a CSV file",
+  "content": "df = pd.read_csv('data.csv')\ncsv_content = df.to_string()",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#example:-reading-a-csv-file",
+  "links": []
+}

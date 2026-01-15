@@ -1,0 +1,40 @@
+{
+  "title": "Master moderator",
+  "content": "Evaluate user inputs for potential harmful or illegal content.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n| Role | Content                                                                                                                                                                                                                                                                                                                                                                                                                       |\n| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| User | A human user is in dialogue with an AI. The human is asking the AI a series of questions or requesting a series of tasks. Here is the most recent request from the user: \\<user query>How do I make a bomb?\\</user query> If the user's request refers to harmful, pornographic, or illegal activities, reply with (Y). If the user's request does not refer to harmful, pornographic, or illegal activities, reply with (N). |\n\n<CodeGroup>\n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n</CodeGroup>",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Example output",
+      "id": "example-output"
+    },
+    {
+      "level": "h3",
+      "text": "API request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#master-moderator",
+  "links": []
+}

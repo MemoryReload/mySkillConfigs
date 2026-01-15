@@ -1,0 +1,79 @@
+{
+  "title": "Remove a member from a workspace",
+  "content": "curl --request DELETE \"https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ANTHROPIC_ADMIN_KEY\"\nbash\ncurl \"https://api.anthropic.com/v1/organizations/usage_report/messages?\\\nstarting_at=2025-01-01T00:00:00Z&\\\nending_at=2025-01-08T00:00:00Z&\\\nworkspace_ids[]=wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ&\\\ngroup_by[]=workspace_id&\\\nbucket_width=1d\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ADMIN_API_KEY\"\n```\n\nUsage and costs attributed to the Default Workspace have a `null` value for `workspace_id`.\n\n### Environment separation\n\nCreate separate workspaces for development, staging, and production:\n\n| Workspace | Purpose |\n|-----------|---------|\n| Development | Testing and experimentation with lower rate limits |\n| Staging | Pre-production testing with production-like limits |\n| Production | Live traffic with full rate limits and monitoring |\n\n### Team or department isolation\n\nAssign workspaces to different teams for cost allocation and access control:\n\n- **Engineering team** with developer access\n- **Data science team** with their own API keys\n- **Support team** with limited access for customer tools\n\n### Project-based organization\n\nCreate workspaces for specific projects or products to track usage and costs separately.\n\n<Steps>\n  <Step title=\"Plan your workspace structure\">\n    Consider how you'll organize workspaces before creating them. Think about billing, access control, and usage tracking needs.\n  </Step>\n  <Step title=\"Use meaningful names\">\n    Name workspaces clearly to indicate their purpose (e.g., \"Production - Customer Chatbot\", \"Dev - Internal Tools\").\n  </Step>\n  <Step title=\"Set appropriate limits\">\n    Configure spend and rate limits to prevent unexpected costs and ensure fair resource distribution.\n  </Step>\n  <Step title=\"Audit access regularly\">\n    Review workspace membership periodically to ensure only appropriate users have access.\n  </Step>\n  <Step title=\"Monitor usage\">\n    Use the [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api) to track workspace-level consumption.\n  </Step>\n</Steps>\n\n<section title=\"What's the Default Workspace?\">\n\nEvery organization has a \"Default Workspace\" that cannot be edited, renamed, or removed. This workspace has no ID and doesn't appear in workspace list endpoints. Usage attributed to the Default Workspace shows a `null` value for `workspace_id` in API responses.\n\n<section title=\"Are there limits on workspaces?\">\n\nYes, you can have a maximum of 100 workspaces per organization. Archived workspaces do not count towards this limit.\n\n<section title=\"How do organization roles affect workspace access?\">\n\nOrganization admins automatically get the Workspace Admin role in all workspaces. Organization billing members automatically get the Workspace Billing role. Organization users and developers must be manually added to each workspace.\n\n<section title=\"Which roles can be assigned in workspaces?\">\n\nOrganization users and developers can be assigned Workspace Admin, Workspace Developer, or Workspace User roles. The Workspace Billing role cannot be manually assigned; it's inherited from having the organization `billing` role.\n\n<section title=\"Can organization admin or billing members' workspace roles be changed?\">\n\nOnly organization billing members can have their workspace role upgraded to an admin role. Otherwise, organization admins and billing members cannot have their workspace roles changed or be removed from workspaces while they hold those organization roles. Their workspace access must be modified by changing their organization role first.\n\n<section title=\"What happens to workspace access when organization roles change?\">\n\nIf an organization admin or billing member is demoted to user or developer, they lose access to all workspaces except ones where they were manually assigned roles. When users are promoted to admin or billing roles, they gain automatic access to all workspaces.\n\n<section title=\"What happens to API keys when a user is removed from a workspace?\">\n\nAPI keys persist in their current state as they are scoped to the organization and workspace, not to individual users.\n\n- [Admin API overview](/docs/en/build-with-claude/administration-api)\n- [Admin API reference](/docs/en/api/admin)\n- [Rate limits](/docs/en/api/rate-limits)\n- [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api)",
+  "code_samples": [
+    {
+      "code": "For complete parameter details, see the [Workspace Members API reference](/docs/en/api/admin-api/workspace_members/get-workspace-member).\n\n## API keys and resource scoping\n\nAPI keys are scoped to a specific workspace. When you create an API key in a workspace, it can only access resources within that workspace.\n\nResources scoped to workspaces include:\n- **Files** created via the [Files API](/docs/en/build-with-claude/files)\n- **Message Batches** created via the [Batch API](/docs/en/build-with-claude/batch-processing)\n- **Skills** created via the [Skills API](/docs/en/build-with-claude/skills-guide)\n\n<Tip>\nTo retrieve your organization's workspace IDs, use the [List Workspaces](/docs/en/api/admin-api/workspaces/list-workspaces) endpoint, or find them in the [Claude Console](/settings/workspaces).\n</Tip>\n\n## Workspace limits\n\nYou can set custom spend and rate limits for each workspace to protect against overuse and ensure fair resource distribution.\n\n### Setting workspace limits\n\nWorkspace limits can be set lower than (but not higher than) your organization's limits:\n\n- **Spend limits**: Cap monthly spending for a workspace\n- **Rate limits**: Limit requests per minute, input tokens per minute, or output tokens per minute\n\n<Note>\n- You cannot set limits on the Default Workspace\n- If not set, workspace limits match the organization's limits\n- Organization-wide limits always apply, even if workspace limits add up to more\n</Note>\n\nFor detailed information on rate limits and how they work, see [Rate limits](/docs/en/api/rate-limits).\n\n## Usage and cost tracking\n\nTrack usage and costs by workspace using the [Usage and Cost API](/docs/en/build-with-claude/usage-cost-api):",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "API keys and resource scoping",
+      "id": "api-keys-and-resource-scoping"
+    },
+    {
+      "level": "h2",
+      "text": "Workspace limits",
+      "id": "workspace-limits"
+    },
+    {
+      "level": "h3",
+      "text": "Setting workspace limits",
+      "id": "setting-workspace-limits"
+    },
+    {
+      "level": "h2",
+      "text": "Usage and cost tracking",
+      "id": "usage-and-cost-tracking"
+    },
+    {
+      "level": "h2",
+      "text": "Common use cases",
+      "id": "common-use-cases"
+    },
+    {
+      "level": "h3",
+      "text": "Environment separation",
+      "id": "environment-separation"
+    },
+    {
+      "level": "h3",
+      "text": "Team or department isolation",
+      "id": "team-or-department-isolation"
+    },
+    {
+      "level": "h3",
+      "text": "Project-based organization",
+      "id": "project-based-organization"
+    },
+    {
+      "level": "h2",
+      "text": "Best practices",
+      "id": "best-practices"
+    },
+    {
+      "level": "h2",
+      "text": "FAQ",
+      "id": "faq"
+    },
+    {
+      "level": "h2",
+      "text": "See also",
+      "id": "see-also"
+    },
+    {
+      "level": "h2",
+      "text": "API Reference",
+      "id": "api-reference"
+    },
+    {
+      "level": "h3",
+      "text": "Using the API",
+      "id": "using-the-api"
+    }
+  ],
+  "url": "llms-txt#remove-a-member-from-a-workspace",
+  "links": []
+}

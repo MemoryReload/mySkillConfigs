@@ -1,0 +1,33 @@
+{
+  "title": "Building with extended thinking",
+  "content": "Extended thinking gives Claude enhanced reasoning capabilities for complex tasks, while providing varying levels of transparency into its step-by-step thought process before it delivers its final answer.\n\nExtended thinking is supported in the following models:\n\n- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)\n- Claude Sonnet 4 (`claude-sonnet-4-20250514`)\n- Claude Sonnet 3.7 (`claude-3-7-sonnet-20250219`) ([deprecated](/docs/en/about-claude/model-deprecations))\n- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)\n- Claude Opus 4.5 (`claude-opus-4-5-20251101`)\n- Claude Opus 4.1 (`claude-opus-4-1-20250805`)\n- Claude Opus 4 (`claude-opus-4-20250514`)\n\n<Note>\nAPI behavior differs across Claude Sonnet 3.7 and Claude 4 models, but the API shapes remain exactly the same.\n\nFor more information, see [Differences in thinking across model versions](#differences-in-thinking-across-model-versions).\n</Note>\n\n## How extended thinking works\n\nWhen extended thinking is turned on, Claude creates `thinking` content blocks where it outputs its internal reasoning. Claude incorporates insights from this reasoning before crafting a final response.\n\nThe API response will include `thinking` content blocks, followed by `text` content blocks.\n\nHere's an example of the default response format:\n\nFor more information about the response format of extended thinking, see the [Messages API Reference](/docs/en/api/messages).\n\n## How to use extended thinking\n\nHere is an example of using extended thinking in the Messages API:\n\n```python Python\nimport anthropic\n\nclient = anthropic.Anthropic()\n\nresponse = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=16000,\n    thinking={\n        \"type\": \"enabled\",\n        \"budget_tokens\": 10000\n    },\n    messages=[{\n        \"role\": \"user\",\n        \"content\": \"Are there an infinite number of prime numbers such that n mod 4 == 3?\"\n    }]\n)",
+  "code_samples": [
+    {
+      "code": "{\n  \"content\": [\n    {\n      \"type\": \"thinking\",\n      \"thinking\": \"Let me analyze this step by step...\",\n      \"signature\": \"WaUjzkypQ2mUEVM36O2TxuC06KN8xyfbJwyem2dw3URve/op91XWHOEBLLqIOMfFG/UvLEczmEsUjavL....\"\n    },\n    {\n      \"type\": \"text\",\n      \"text\": \"Based on my analysis...\"\n    }\n  ]\n}",
+      "language": "json"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Supported models",
+      "id": "supported-models"
+    },
+    {
+      "level": "h2",
+      "text": "How extended thinking works",
+      "id": "how-extended-thinking-works"
+    },
+    {
+      "level": "h2",
+      "text": "How to use extended thinking",
+      "id": "how-to-use-extended-thinking"
+    }
+  ],
+  "url": "llms-txt#building-with-extended-thinking",
+  "links": []
+}

@@ -1,0 +1,32 @@
+{
+  "title": "PDF Processing",
+  "content": "Extract text with pdfplumber:\n\n**Form filling**: See [FORMS.md](FORMS.md) for complete guide\n**API reference**: See [REFERENCE.md](REFERENCE.md) for all methods\n**Examples**: See [EXAMPLES.md](EXAMPLES.md) for common patterns\n\nbigquery-skill/\n├── SKILL.md (overview and navigation)\n└── reference/\n    ├── finance.md (revenue, billing metrics)\n    ├── sales.md (opportunities, pipeline)\n    ├── product.md (API usage, features)\n    └── marketing.md (campaigns, attribution)\n`markdown SKILL.md",
+  "code_samples": [
+    {
+      "code": "import pdfplumber\nwith pdfplumber.open(\"file.pdf\") as pdf:\n    text = pdf.pages[0].extract_text()",
+      "language": "python"
+    },
+    {
+      "code": "Claude loads FORMS.md, REFERENCE.md, or EXAMPLES.md only when needed.\n\n#### Pattern 2: Domain-specific organization\n\nFor Skills with multiple domains, organize content by domain to avoid loading irrelevant context. When a user asks about sales metrics, Claude only needs to read sales-related schemas, not finance or marketing data. This keeps token usage low and context focused.",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h2",
+      "text": "Advanced features",
+      "id": "advanced-features"
+    }
+  ],
+  "url": "llms-txt#pdf-processing",
+  "links": []
+}

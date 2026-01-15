@@ -1,0 +1,8 @@
+{
+  "title": "Claude's response with parallel tool calls",
+  "content": "print(\"Claude wants to use tools:\", response.stop_reason == \"tool_use\")\nprint(\"Number of tool calls:\", len([c for c in response.content if c.type == \"tool_use\"]))",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#claude's-response-with-parallel-tool-calls",
+  "links": []
+}

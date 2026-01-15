@@ -1,0 +1,23 @@
+{
+  "title": "Continue conversation with same container",
+  "content": "messages = [\n    {\"role\": \"user\", \"content\": \"Analyze this sales data\"},\n    {\"role\": \"assistant\", \"content\": response1.content},\n    {\"role\": \"user\", \"content\": \"What was the total revenue?\"}\n]\n\nresponse2 = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    max_tokens=4096,\n    betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n    container={\n        \"id\": response1.container.id,  # Reuse container\n        \"skills\": [\n            {\"type\": \"anthropic\", \"skill_id\": \"xlsx\", \"version\": \"latest\"}\n        ]\n    },\n    messages=messages,\n    tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]\n)\ntypescript TypeScript\n// First request creates container\nconst response1 = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    skills: [\n      {type: 'anthropic', skill_id: 'xlsx', version: 'latest'}\n    ]\n  },\n  messages: [{role: 'user', content: 'Analyze this sales data'}],\n  tools: [{type: 'code_execution_20250825', name: 'code_execution'}]\n});\n\n// Continue conversation with same container\nconst messages = [\n  {role: 'user', content: 'Analyze this sales data'},\n  {role: 'assistant', content: response1.content},\n  {role: 'user', content: 'What was the total revenue?'}\n];\n\nconst response2 = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    id: response1.container.id,  // Reuse container\n    skills: [\n      {type: 'anthropic', skill_id: 'xlsx', version: 'latest'}\n    ]\n  },\n  messages,\n  tools: [{type: 'code_execution_20250825', name: 'code_execution'}]\n});\npython Python\nmessages = [{\"role\": \"user\", \"content\": \"Process this large dataset\"}]\nmax_retries = 10\n\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    max_tokens=4096,\n    betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n    container={\n        \"skills\": [\n            {\"type\": \"custom\", \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\", \"version\": \"latest\"}\n        ]\n    },\n    messages=messages,\n    tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]\n)",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Long-Running Operations\n\nSkills may perform operations that require multiple turns. Handle `pause_turn` stop reasons:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Long-Running Operations",
+      "id": "long-running-operations"
+    }
+  ],
+  "url": "llms-txt#continue-conversation-with-same-container",
+  "links": []
+}

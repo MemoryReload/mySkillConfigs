@@ -1,0 +1,8 @@
+{
+  "title": "1. Install package",
+  "content": "{\"command\": \"pip install requests\"}",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#1.-install-package",
+  "links": []
+}

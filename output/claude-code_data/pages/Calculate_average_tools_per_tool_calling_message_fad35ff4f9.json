@@ -1,0 +1,8 @@
+{
+  "title": "Calculate average tools per tool-calling message",
+  "content": "tool_call_messages = [msg for msg in messages if any(\n    block.type == \"tool_use\" for block in msg.content\n)]\ntotal_tool_calls = sum(\n    len([b for b in msg.content if b.type == \"tool_use\"])\n    for msg in tool_call_messages\n)\navg_tools_per_message = total_tool_calls / len(tool_call_messages)\nprint(f\"Average tools per message: {avg_tools_per_message}\")",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#calculate-average-tools-per-tool-calling-message",
+  "links": []
+}

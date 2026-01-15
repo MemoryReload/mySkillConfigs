@@ -1,0 +1,8 @@
+{
+  "title": "First request with web search and cache breakpoint",
+  "content": "messages = [\n    {\n        \"role\": \"user\",\n        \"content\": \"What's the current weather in San Francisco today?\"\n    }\n]\n\nresponse1 = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=messages,\n    tools=[{\n        \"type\": \"web_search_20250305\",\n        \"name\": \"web_search\",\n        \"user_location\": {\n            \"type\": \"approximate\",\n            \"city\": \"San Francisco\",\n            \"region\": \"California\",\n            \"country\": \"US\",\n            \"timezone\": \"America/Los_Angeles\"\n        }\n    }]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-request-with-web-search-and-cache-breakpoint",
+  "links": []
+}

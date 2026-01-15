@@ -1,0 +1,14 @@
+{
+  "title": "Example usage",
+  "content": "eval_data = [\n    {\"question\": \"Is 42 the answer to life, the universe, and everything?\", \"golden_answer\": \"Yes, according to 'The Hitchhiker's Guide to the Galaxy'.\"},\n    {\"question\": \"What is the capital of France?\", \"golden_answer\": \"The capital of France is Paris.\"}\n]\n\ndef get_completion(prompt: str):\n    message = client.messages.create(\n        model=\"claude-sonnet-4-5\",\n        max_tokens=1024,\n        messages=[\n        {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    return message.content[0].text\n\noutputs = [get_completion(q[\"question\"]) for q in eval_data]\ngrades = [grade_completion(output, a[\"golden_answer\"]) for output, a in zip(outputs, eval_data)]\nprint(f\"Score: {grades.count('correct') / len(grades) * 100}%\")\n```\n\n<CardGroup cols={2}>\n  <Card title=\"Brainstorm evaluations\" icon=\"link\" href=\"/docs/en/build-with-claude/prompt-engineering/overview\">\n    Learn how to craft prompts that maximize your eval scores.\n  </Card>\n  <Card title=\"Evals cookbook\" icon=\"link\" href=\"https://platform.claude.com/cookbook/misc-building-evals\">\n    More code examples of human-, code-, and LLM-graded evals.\n  </Card>\n</CardGroup>",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#example-usage",
+  "links": []
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Later, you can use the saved session_id to resume",
+  "content": "if session_id:\n    async for message in query(\n        prompt=\"Continue where we left off\",\n        options=ClaudeAgentOptions(\n            resume=session_id\n        )\n    ):\n        print(message)\ntypescript TypeScript\nimport { query } from \"@anthropic-ai/claude-agent-sdk\"\n\n// Resume a previous session using its ID\nconst response = query({\n  prompt: \"Continue implementing the authentication system from where we left off\",\n  options: {\n    resume: \"session-xyz\", // Session ID from previous conversation\n    model: \"claude-sonnet-4-5\",\n    allowedTools: [\"Read\", \"Edit\", \"Write\", \"Glob\", \"Grep\", \"Bash\"]\n  }\n})\n\n// The conversation continues with full context from the previous session\nfor await (const message of response) {\n  console.log(message)\n}\npython Python\nfrom claude_agent_sdk import query, ClaudeAgentOptions",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n## Resuming Sessions\n\nThe SDK supports resuming sessions from previous conversation states, enabling continuous development workflows. Use the `resume` option with a session ID to continue a previous conversation.\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Resuming Sessions",
+      "id": "resuming-sessions"
+    }
+  ],
+  "url": "llms-txt#later,-you-can-use-the-saved-session_id-to-resume",
+  "links": []
+}

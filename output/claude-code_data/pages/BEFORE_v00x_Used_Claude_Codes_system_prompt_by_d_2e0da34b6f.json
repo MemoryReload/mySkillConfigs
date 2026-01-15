@@ -1,0 +1,8 @@
+{
+  "title": "BEFORE (v0.0.x) - Used Claude Code's system prompt by default",
+  "content": "async for message in query(prompt=\"Hello\"):\n    print(message)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#before-(v0.0.x)---used-claude-code's-system-prompt-by-default",
+  "links": []
+}

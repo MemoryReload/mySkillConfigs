@@ -1,0 +1,28 @@
+{
+  "title": "Mood colorizer",
+  "content": "Transform text descriptions of moods into corresponding HEX codes.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n|        | Content                                                                                                                                                                                                                                                                                                                                                                                                                                                    |\n| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| System | Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \"Unable to determine a HEX color code for the given mood.\" |\n| User   | A passionate, intense, and fiery emotion, full of love and desire.                                                                                                                                                                                                                                                                                                                                                                                         |\n\nThis HEX color code represents a vivid, bold shade of red. Red is commonly associated with passion, intensity, love, and desire. The specific shade chosen here is a fiery, energetic red that captures the heat and fervor of the described emotion. Red is known to stimulate feelings of excitement and passion, making it an appropriate choice for representing this mood.\n\n<Tabs>\n<Tab title=\"Python\">\n\n</Tab>\n<Tab title=\"TypeScript\">\n\n</Tab>\n<Tab title=\"AWS Bedrock Python\">\n\n```python\nfrom anthropic import AnthropicBedrock",
+  "code_samples": [
+    {
+      "code": "import anthropic\n\nclient = anthropic.Anthropic(\n  # defaults to os.environ.get(\"ANTHROPIC_API_KEY\")\n  api_key=\"my_api_key\",\n)\nmessage = client.messages.create(\n  model=\"claude-sonnet-4-5\",\n  max_tokens=500,\n  temperature=0.5,\n  system=\"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \\\"Unable to determine a HEX color code for the given mood.\\\"\",\n  messages=[\n    {\n    \"role\": \"user\",\n    \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"A passionate, intense, and fiery emotion, full of love and desire.\"\n        }\n      ]\n    }\n  ]\n)\nprint(message.content)",
+      "language": "python"
+    },
+    {
+      "code": "import Anthropic from \"@anthropic-ai/sdk\";\n\nconst anthropic = new Anthropic({\n  apiKey: \"my_api_key\", // defaults to process.env[\"ANTHROPIC_API_KEY\"]\n});\n\nconst msg = await anthropic.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 500,\n  temperature: 0.5,\n  system: \"Your task is to take the provided text description of a mood or emotion and generate a HEX color code that visually represents that mood. Use color psychology principles and common associations to determine the most appropriate color for the given mood. If the text description is unclear, ambiguous, or does not provide enough information to determine a suitable color, respond with \\\"Unable to determine a HEX color code for the given mood.\\\"\",\n  messages: [\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"A passionate, intense, and fiery emotion, full of love and desire.\"\n        }\n      ]\n    }\n  ]\n});\nconsole.log(msg);",
+      "language": "typescript"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Example Output",
+      "id": "example-output"
+    },
+    {
+      "level": "h2",
+      "text": "API Request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#mood-colorizer",
+  "links": []
+}

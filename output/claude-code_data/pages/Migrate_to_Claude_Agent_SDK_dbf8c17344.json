@@ -1,0 +1,59 @@
+{
+  "title": "Migrate to Claude Agent SDK",
+  "content": "Guide for migrating the Claude Code TypeScript and Python SDKs to the Claude Agent SDK\n\nThe Claude Code SDK has been renamed to the **Claude Agent SDK** and its documentation has been reorganized. This change reflects the SDK's broader capabilities for building AI agents beyond just coding tasks.\n\n| Aspect                   | Old                         | New                              |\n| :----------------------- | :-------------------------- | :------------------------------- |\n| **Package Name (TS/JS)** | `@anthropic-ai/claude-code` | `@anthropic-ai/claude-agent-sdk` |\n| **Python Package**       | `claude-code-sdk`           | `claude-agent-sdk`               |\n| **Documentation Location** | Claude Code docs | API Guide → Agent SDK section |\n\n<Note>\n**Documentation Changes:** The Agent SDK documentation has moved from the Claude Code docs to the API Guide under a dedicated [Agent SDK](/docs/en/agent-sdk/overview) section. The Claude Code docs now focus on the CLI tool and automation features.\n</Note>\n\n### For TypeScript/JavaScript Projects\n\n**1. Uninstall the old package:**\n\n**2. Install the new package:**\n\n**3. Update your imports:**\n\nChange all imports from `@anthropic-ai/claude-code` to `@anthropic-ai/claude-agent-sdk`:\n\n**4. Update package.json dependencies:**\n\nIf you have the package listed in your `package.json`, update it:\n\nThat's it! No other code changes are required.\n\n### For Python Projects\n\n**1. Uninstall the old package:**\n\n**2. Install the new package:**\n\n**3. Update your imports:**\n\nChange all imports from `claude_code_sdk` to `claude_agent_sdk`:",
+  "code_samples": [
+    {
+      "code": "npm uninstall @anthropic-ai/claude-code",
+      "language": "bash"
+    },
+    {
+      "code": "npm install @anthropic-ai/claude-agent-sdk",
+      "language": "bash"
+    },
+    {
+      "code": "// Before\nimport { query, tool, createSdkMcpServer } from \"@anthropic-ai/claude-code\";\n\n// After\nimport {\n  query,\n  tool,\n  createSdkMcpServer,\n} from \"@anthropic-ai/claude-agent-sdk\";",
+      "language": "typescript"
+    },
+    {
+      "code": "// Before\n{\n  \"dependencies\": {\n    \"@anthropic-ai/claude-code\": \"^1.0.0\"\n  }\n}\n\n// After\n{\n  \"dependencies\": {\n    \"@anthropic-ai/claude-agent-sdk\": \"^0.1.0\"\n  }\n}",
+      "language": "json"
+    },
+    {
+      "code": "pip uninstall claude-code-sdk",
+      "language": "bash"
+    },
+    {
+      "code": "pip install claude-agent-sdk",
+      "language": "bash"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Overview",
+      "id": "overview"
+    },
+    {
+      "level": "h2",
+      "text": "What's Changed",
+      "id": "what's-changed"
+    },
+    {
+      "level": "h2",
+      "text": "Migration Steps",
+      "id": "migration-steps"
+    },
+    {
+      "level": "h3",
+      "text": "For TypeScript/JavaScript Projects",
+      "id": "for-typescript/javascript-projects"
+    },
+    {
+      "level": "h3",
+      "text": "For Python Projects",
+      "id": "for-python-projects"
+    }
+  ],
+  "url": "llms-txt#migrate-to-claude-agent-sdk",
+  "links": []
+}

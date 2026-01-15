@@ -1,0 +1,17 @@
+{
+  "title": "Embed the documents",
+  "content": "doc_embds = vo.embed(\n    documents, model=\"voyage-3.5\", input_type=\"document\"\n).embeddings\npython\nquery = \"When is Apple's conference call scheduled?\"\npython\nimport numpy as np",
+  "code_samples": [
+    {
+      "code": "The embeddings will allow us to do semantic search / retrieval in the vector space. Given an example query,",
+      "language": "unknown"
+    },
+    {
+      "code": "we convert it into an embedding, and conduct a nearest neighbor search to find the most relevant document based on the distance in the embedding space.",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#embed-the-documents",
+  "links": []
+}

@@ -1,0 +1,48 @@
+{
+  "title": "Efficiency estimator",
+  "content": "Calculate the time complexity of functions and algorithms.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n|        | Content                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |\n| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| System | Your task is to analyze the provided function or algorithm and calculate its time complexity using Big O notation. Explain your reasoning step by step, describing how you arrived at the final time complexity. Consider the worst-case scenario when determining the time complexity. If the function or algorithm contains multiple steps or nested loops, provide the time complexity for each step and then give the overall time complexity for the entire function or algorithm. Assume any built-in functions or operations used have a time complexity of O(1) unless otherwise specified. |\n| User   | def example_function(n): for i in range(n): print(i) for j in range(n): for k in range(n): print(j, k)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |\n\n> To analyze the time complexity of the given function `example_function(n)`, we'll break it down into steps and consider the worst-case scenario.\n>\n> Step 1: Analyzing the first loop\n>\n>\n\n> This loop iterates `n` times and performs a constant-time operation (`print(i)`) in each iteration. Therefore, the time complexity of this step is O(n).\n>\n> Step 2: Analyzing the nested loops\n>\n> \n>\n> The outer loop iterates `n` times, and for each iteration, the inner loop also iterates `n` times. In each iteration of the inner loop, a constant-time operation (`print(j, k)`) is performed. Therefore, the time complexity of the nested loops is O(n \\* n) = O(n^2).\n>\n> Step 3: Combining the time complexities  \n> The function `example_function(n)` consists of two steps: the first loop and the nested loops. The overall time complexity is the sum of the time complexities of each step.\n>\n> Time complexity of the first loop: O(n)  \n> Time complexity of the nested loops: O(n^2)\n>\n> To determine the overall time complexity, we consider the dominant term, which is the term with the highest order of growth. In this case, O(n^2) dominates O(n).\n>\n> Therefore, the overall time complexity of the function `example_function(n)` is O(n^2).\n>\n> In the worst-case scenario, when `n` is large, the nested loops will dominate the execution time, and the function will have a quadratic time complexity.\n\n<CodeGroup>\n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n</CodeGroup>",
+  "code_samples": [
+    {
+      "code": "> for i in range(n):\n>    print(i)\n>\n>",
+      "language": "unknown"
+    },
+    {
+      "code": "> for j in range(n):\n>     for k in range(n):\n>         print(j, k)\n>\n>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Example output",
+      "id": "example-output"
+    },
+    {
+      "level": "h3",
+      "text": "API request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#efficiency-estimator",
+  "links": []
+}

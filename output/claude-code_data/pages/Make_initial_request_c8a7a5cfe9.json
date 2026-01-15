@@ -1,0 +1,8 @@
+{
+  "title": "Make initial request",
+  "content": "print(\"Requesting parallel tool calls...\")\nresponse = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=messages,\n    tools=tools\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#make-initial-request",
+  "links": []
+}

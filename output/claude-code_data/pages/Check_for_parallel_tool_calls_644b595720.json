@@ -1,0 +1,8 @@
+{
+  "title": "Check for parallel tool calls",
+  "content": "tool_uses = [block for block in response.content if block.type == \"tool_use\"]\nprint(f\"\\n✓ Claude made {len(tool_uses)} tool calls\")\n\nif len(tool_uses) > 1:\n    print(\"✓ Parallel tool calls detected!\")\n    for tool in tool_uses:\n        print(f\"  - {tool.name}: {tool.input}\")\nelse:\n    print(\"✗ No parallel tool calls detected\")",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#check-for-parallel-tool-calls",
+  "links": []
+}

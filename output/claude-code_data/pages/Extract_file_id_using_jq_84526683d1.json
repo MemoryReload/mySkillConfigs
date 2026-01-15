@@ -1,0 +1,8 @@
+{
+  "title": "Extract file_id (using jq)",
+  "content": "FILE_ID=$(jq -r '.id' file_response.json)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#extract-file_id-(using-jq)",
+  "links": []
+}

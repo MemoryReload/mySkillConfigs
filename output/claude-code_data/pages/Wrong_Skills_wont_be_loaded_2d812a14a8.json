@@ -1,0 +1,8 @@
+{
+  "title": "Wrong - Skills won't be loaded",
+  "content": "options = ClaudeAgentOptions(\n    allowed_tools=[\"Skill\"]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#wrong---skills-won't-be-loaded",
+  "links": []
+}

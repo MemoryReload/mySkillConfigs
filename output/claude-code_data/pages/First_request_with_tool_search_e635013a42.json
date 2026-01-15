@@ -1,0 +1,8 @@
+{
+  "title": "First request with tool search",
+  "content": "messages = [\n    {\n        \"role\": \"user\",\n        \"content\": \"What's the weather in Seattle?\"\n    }\n]\n\nresponse1 = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    betas=[\"advanced-tool-use-2025-11-20\"],\n    max_tokens=2048,\n    messages=messages,\n    tools=[\n        {\n            \"type\": \"tool_search_tool_regex_20251119\",\n            \"name\": \"tool_search_tool_regex\"\n        },\n        {\n            \"name\": \"get_weather\",\n            \"description\": \"Get weather for a location\",\n            \"input_schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"location\": {\"type\": \"string\"}\n                },\n                \"required\": [\"location\"]\n            },\n            \"defer_loading\": True\n        }\n    ]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-request-with-tool-search",
+  "links": []
+}

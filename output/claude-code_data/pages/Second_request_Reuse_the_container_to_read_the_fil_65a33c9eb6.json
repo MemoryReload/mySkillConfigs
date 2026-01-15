@@ -1,0 +1,66 @@
+{
+  "title": "Second request: Reuse the container to read the file",
+  "content": "curl https://api.anthropic.com/v1/messages \\\n    --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n    --header \"anthropic-version: 2023-06-01\" \\\n    --header \"anthropic-beta: code-execution-2025-08-25\" \\\n    --header \"content-type: application/json\" \\\n    --data '{\n        \"container\": \"'$CONTAINER_ID'\",\n        \"model\": \"claude-sonnet-4-5\",\n        \"max_tokens\": 4096,\n        \"messages\": [{\n            \"role\": \"user\",\n            \"content\": \"Read the number from \\\"/tmp/number.txt\\\" and calculate its square\"\n        }],\n        \"tools\": [{\n            \"type\": \"code_execution_20250825\",\n            \"name\": \"code_execution\"\n        }]\n    }'\njavascript\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 1, \"content_block\": {\"type\": \"server_tool_use\", \"id\": \"srvtoolu_xyz789\", \"name\": \"code_execution\"}}\n\n// Code execution streamed\nevent: content_block_delta\ndata: {\"type\": \"content_block_delta\", \"index\": 1, \"delta\": {\"type\": \"input_json_delta\", \"partial_json\": \"{\\\"code\\\":\\\"import pandas as pd\\\\ndf = pd.read_csv('data.csv')\\\\nprint(df.head())\\\"}\"}}\n\n// Pause while code executes\n\n// Execution results streamed\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 2, \"content_block\": {\"type\": \"code_execution_tool_result\", \"tool_use_id\": \"srvtoolu_xyz789\", \"content\": {\"stdout\": \"   A  B  C\\n0  1  2  3\\n1  4  5  6\", \"stderr\": \"\"}}}\ndiff\n   - \"anthropic-beta\": \"code-execution-2025-05-22\"\n   + \"anthropic-beta\": \"code-execution-2025-08-25\"\n   diff\n   - \"type\": \"code_execution_20250522\"\n   + \"type\": \"code_execution_20250825\"\n   python Python",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n## Streaming\n\nWith streaming enabled, you'll receive code execution events as they occur:",
+      "language": "unknown"
+    },
+    {
+      "code": "## Batch requests\n\nYou can include the code execution tool in the [Messages Batches API](/docs/en/build-with-claude/batch-processing). Code execution tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.\n\n## Usage and pricing\n\nCode execution tool usage is tracked separately from token usage. Execution time has a minimum of 5 minutes.\nIf files are included in the request, execution time is billed even if the tool is not used due to files being preloaded onto the container.\n\nEach organization receives 1,550 free hours of usage with the code execution tool per month. Additional usage beyond the first 1,550 hours is billed at $0.05 per hour, per container.\n\n## Upgrade to latest tool version\n\nBy upgrading to `code-execution-2025-08-25`, you get access to file manipulation and Bash capabilities, including code in multiple languages. There is no price difference.\n\n### What's changed\n\n| Component | Legacy | Current |\n|-----------|------------------|----------------------------|\n| Beta header | `code-execution-2025-05-22` | `code-execution-2025-08-25` |\n| Tool type | `code_execution_20250522` | `code_execution_20250825` |\n| Capabilities | Python only | Bash commands, file operations |\n| Response types | `code_execution_result` | `bash_code_execution_result`, `text_editor_code_execution_result` |\n\n### Backward compatibility\n\n- All existing Python code execution continues to work exactly as before\n- No changes required to existing Python-only workflows\n\n### Upgrade steps\n\nTo upgrade, you need to make the following changes in your API requests:\n\n1. **Update the beta header**:",
+      "language": "unknown"
+    },
+    {
+      "code": "2. **Update the tool type**:",
+      "language": "unknown"
+    },
+    {
+      "code": "3. **Review response handling** (if parsing responses programmatically):\n   - The previous blocks for Python execution responses will no longer be sent\n   - Instead, new response types for Bash and file operations will be sent (see Response Format section)\n\n## Programmatic tool calling\n\nThe code execution tool powers [programmatic tool calling](/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), which allows Claude to write code that calls your custom tools programmatically within the execution container. This enables efficient multi-tool workflows, data filtering before reaching Claude's context, and complex conditional logic.\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Streaming",
+      "id": "streaming"
+    },
+    {
+      "level": "h2",
+      "text": "Batch requests",
+      "id": "batch-requests"
+    },
+    {
+      "level": "h2",
+      "text": "Usage and pricing",
+      "id": "usage-and-pricing"
+    },
+    {
+      "level": "h2",
+      "text": "Upgrade to latest tool version",
+      "id": "upgrade-to-latest-tool-version"
+    },
+    {
+      "level": "h3",
+      "text": "What's changed",
+      "id": "what's-changed"
+    },
+    {
+      "level": "h3",
+      "text": "Backward compatibility",
+      "id": "backward-compatibility"
+    },
+    {
+      "level": "h3",
+      "text": "Upgrade steps",
+      "id": "upgrade-steps"
+    },
+    {
+      "level": "h2",
+      "text": "Programmatic tool calling",
+      "id": "programmatic-tool-calling"
+    }
+  ],
+  "url": "llms-txt#second-request:-reuse-the-container-to-read-the-file",
+  "links": []
+}

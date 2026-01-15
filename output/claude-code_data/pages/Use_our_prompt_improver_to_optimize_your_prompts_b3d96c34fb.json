@@ -1,0 +1,63 @@
+{
+  "title": "Use our prompt improver to optimize your prompts",
+  "content": "<Note>\nOur prompt improver is compatible with all Claude models, including those with extended thinking capabilities. For prompting tips specific to extended thinking models, see [here](/docs/en/build-with-claude/extended-thinking).\n</Note>\n\nThe prompt improver helps you quickly iterate and improve your prompts through automated analysis and enhancement. It excels at making prompts more robust for complex tasks that require high accuracy.\n\n<Frame>\n  ![Image](/docs/images/prompt_improver.png)\n</Frame>\n\nYou'll need:\n- A [prompt template](/docs/en/build-with-claude/prompt-engineering/prompt-templates-and-variables) to improve\n- Feedback on current issues with Claude's outputs (optional but recommended)\n- Example inputs and ideal outputs (optional but recommended)\n\n## How the prompt improver works\n\nThe prompt improver enhances your prompts in 4 steps:\n\n1. **Example identification**: Locates and extracts examples from your prompt template\n2. **Initial draft**: Creates a structured template with clear sections and XML tags\n3. **Chain of thought refinement**: Adds and refines detailed reasoning instructions\n4. **Example enhancement**: Updates examples to demonstrate the new reasoning process\n\nYou can watch these steps happen in real-time in the improvement modal.\n\nThe prompt improver generates templates with:\n- Detailed chain-of-thought instructions that guide Claude's reasoning process and typically improve its performance\n- Clear organization using XML tags to separate different components\n- Standardized example formatting that demonstrates step-by-step reasoning from input to output\n- Strategic prefills that guide Claude's initial responses\n\n<Note>\nWhile examples appear separately in the Workbench UI, they're included at the start of the first user message in the actual API call. View the raw format by clicking \"**\\<\\/\\> Get Code**\" or insert examples as raw text via the Examples box.\n</Note>\n\n## How to use the prompt improver\n\n1. Submit your prompt template\n2. Add any feedback about issues with Claude's current outputs (e.g., \"summaries are too basic for expert audiences\")\n3. Include example inputs and ideal outputs\n4. Review the improved prompt\n\n## Generate test examples\n\nDon't have examples yet? Use our [Test Case Generator](/docs/en/test-and-evaluate/eval-tool#creating-test-cases) to:\n1. Generate sample inputs\n2. Get Claude's responses\n3. Edit the responses to match your ideal outputs\n4. Add the polished examples to your prompt\n\n## When to use the prompt improver\n\nThe prompt improver works best for:\n- Complex tasks requiring detailed reasoning\n- Situations where accuracy is more important than speed\n- Problems where Claude's current outputs need significant improvement\n\n<Note>\nFor latency or cost-sensitive applications, consider using simpler prompts. The prompt improver creates templates that produce longer, more thorough, but slower responses.\n</Note>\n\n## Example improvement\n\nHere's how the prompt improver enhances a basic classification prompt:\n\n<section title=\"Original prompt\">\n\n<section title=\"Improved prompt\">\n\nNotice how the improved prompt:\n- Adds clear step-by-step reasoning instructions\n- Uses XML tags to organize content\n- Provides explicit output formatting requirements\n- Guides Claude through the analysis process\n\nCommon issues and solutions:\n\n- **Examples not appearing in output**: Check that examples are properly formatted with XML tags and appear at the start of the first user message\n- **Chain of thought too verbose**: Add specific instructions about desired output length and level of detail\n- **Reasoning steps don't match your needs**: Modify the steps section to match your specific use case\n\n<CardGroup cols={3}>\n  <Card title=\"Prompt library\" icon=\"link\" href=\"/docs/en/resources/prompt-library/library\">\n    Get inspired by example prompts for various tasks.\n  </Card>\n  <Card title=\"GitHub prompting tutorial\" icon=\"link\" href=\"https://github.com/anthropics/prompt-eng-interactive-tutorial\">\n    Learn prompting best practices with our interactive tutorial.\n  </Card>\n  <Card title=\"Test your prompts\" icon=\"link\" href=\"/docs/en/test-and-evaluate/eval-tool\">\n    Use our evaluation tool to test your improved prompts.\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "From the following list of Wikipedia article titles, identify which article this sentence came from.\nRespond with just the article title and nothing else.\n\nArticle titles:\n{{titles}}\n\nSentence to classify:\n{{sentence}}",
+      "language": "unknown"
+    },
+    {
+      "code": "You are an intelligent text classification system specialized in matching sentences to Wikipedia article titles. Your task is to identify which Wikipedia article a given sentence most likely belongs to, based on a provided list of article titles.\n\nFirst, review the following list of Wikipedia article titles:\n<article_titles>\n{{titles}}\n</article_titles>\n\nNow, consider this sentence that needs to be classified:\n<sentence_to_classify>\n{{sentence}}\n</sentence_to_classify>\n\nYour goal is to determine which article title from the provided list best matches the given sentence. Follow these steps:\n\n1. List the key concepts from the sentence\n2. Compare each key concept with the article titles\n3. Rank the top 3 most relevant titles and explain why they are relevant\n4. Select the most appropriate article title that best encompasses or relates to the sentence's content\n\nWrap your analysis in <analysis> tags. Include the following:\n- List of key concepts from the sentence\n- Comparison of each key concept with the article titles\n- Ranking of top 3 most relevant titles with explanations\n- Your final choice and reasoning\n\nAfter your analysis, provide your final answer: the single most appropriate Wikipedia article title from the list.\n\nOutput only the chosen article title, without any additional text or explanation.",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Before you begin",
+      "id": "before-you-begin"
+    },
+    {
+      "level": "h2",
+      "text": "How the prompt improver works",
+      "id": "how-the-prompt-improver-works"
+    },
+    {
+      "level": "h2",
+      "text": "What you get",
+      "id": "what-you-get"
+    },
+    {
+      "level": "h2",
+      "text": "How to use the prompt improver",
+      "id": "how-to-use-the-prompt-improver"
+    },
+    {
+      "level": "h2",
+      "text": "Generate test examples",
+      "id": "generate-test-examples"
+    },
+    {
+      "level": "h2",
+      "text": "When to use the prompt improver",
+      "id": "when-to-use-the-prompt-improver"
+    },
+    {
+      "level": "h2",
+      "text": "Example improvement",
+      "id": "example-improvement"
+    },
+    {
+      "level": "h2",
+      "text": "Troubleshooting",
+      "id": "troubleshooting"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#use-our-prompt-improver-to-optimize-your-prompts",
+  "links": []
+}

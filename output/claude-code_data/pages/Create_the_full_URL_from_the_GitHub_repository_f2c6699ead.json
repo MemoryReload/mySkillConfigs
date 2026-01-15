@@ -1,0 +1,8 @@
+{
+  "title": "Create the full URL from the GitHub repository",
+  "content": "url = \"https://raw.githubusercontent.com/anthropics/anthropic-cookbook/main/skills/summarization/data/Sample Sublease Agreement.pdf\"\nurl = url.replace(\" \", \"%20\")",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#create-the-full-url-from-the-github-repository",
+  "links": []
+}

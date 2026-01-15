@@ -1,0 +1,19 @@
+{
+  "title": "Custom Tools",
+  "content": "Build and integrate custom tools to extend Claude Agent SDK functionality\n\nCustom tools allow you to extend Claude Code's capabilities with your own functionality through in-process MCP servers, enabling Claude to interact with external services, APIs, or perform specialized operations.\n\n## Creating Custom Tools\n\nUse the `createSdkMcpServer` and `tool` helper functions to define type-safe custom tools:\n\n```python Python\nfrom claude_agent_sdk import tool, create_sdk_mcp_server, ClaudeSDKClient, ClaudeAgentOptions\nfrom typing import Any\nimport aiohttp",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Creating Custom Tools",
+      "id": "creating-custom-tools"
+    }
+  ],
+  "url": "llms-txt#custom-tools",
+  "links": []
+}

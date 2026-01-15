@@ -1,0 +1,107 @@
+{
+  "title": "5. Use bash to organize files into a report directory",
+  "content": "typescript TypeScript\n// Upload a file\nconst fileObject = await anthropic.beta.files.create({\n  file: createReadStream(\"data.csv\"),\n});\n\n// Use it with code execution\nconst response = await anthropic.beta.messages.create({\n  model: \"claude-sonnet-4-5\",\n  betas: [\"code-execution-2025-08-25\", \"files-api-2025-04-14\"],\n  max_tokens: 4096,\n  messages: [{\n    role: \"user\",\n    content: [\n      {type: \"text\", text: \"Analyze this CSV data: create a summary report, save visualizations, and create a README with the findings\"},\n      {type: \"container_upload\", file_id: fileObject.id}\n    ]\n  }],\n  tools: [{\n    type: \"code_execution_20250825\",\n    name: \"code_execution\"\n  }]\n});\n\n// Claude might:\n// 1. Use bash to check file size and preview data\n// 2. Use text_editor to write Python code to analyze the CSV and create visualizations\n// 3. Use bash to run the Python code\n// 4. Use text_editor to create a README.md with findings\n// 5. Use bash to organize files into a report directory\njson JSON\n{\n  \"type\": \"code_execution_20250825\",\n  \"name\": \"code_execution\"\n}\njson\n{\n  \"type\": \"server_tool_use\",\n  \"id\": \"srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3\",\n  \"name\": \"bash_code_execution\",\n  \"input\": {\n    \"command\": \"ls -la | head -5\"\n  }\n},\n{\n  \"type\": \"bash_code_execution_tool_result\",\n  \"tool_use_id\": \"srvtoolu_01B3C4D5E6F7G8H9I0J1K2L3\",\n  \"content\": {\n    \"type\": \"bash_code_execution_result\",\n    \"stdout\": \"total 24\\ndrwxr-xr-x 2 user user 4096 Jan 1 12:00 .\\ndrwxr-xr-x 3 user user 4096 Jan 1 11:00 ..\\n-rw-r--r-- 1 user user  220 Jan 1 12:00 data.csv\\n-rw-r--r-- 1 user user  180 Jan 1 12:00 config.json\",\n    \"stderr\": \"\",\n    \"return_code\": 0\n  }\n}\njson\n{\n  \"type\": \"server_tool_use\",\n  \"id\": \"srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4\",\n  \"name\": \"text_editor_code_execution\",\n  \"input\": {\n    \"command\": \"view\",\n    \"path\": \"config.json\"\n  }\n},\n{\n  \"type\": \"text_editor_code_execution_tool_result\",\n  \"tool_use_id\": \"srvtoolu_01C4D5E6F7G8H9I0J1K2L3M4\",\n  \"content\": {\n    \"type\": \"text_editor_code_execution_result\",\n    \"file_type\": \"text\",\n    \"content\": \"{\\n  \\\"setting\\\": \\\"value\\\",\\n  \\\"debug\\\": true\\n}\",\n    \"numLines\": 4,\n    \"startLine\": 1,\n    \"totalLines\": 4\n  }\n}\njson\n{\n  \"type\": \"server_tool_use\",\n  \"id\": \"srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5\",\n  \"name\": \"text_editor_code_execution\",\n  \"input\": {\n    \"command\": \"create\",\n    \"path\": \"new_file.txt\",\n    \"file_text\": \"Hello, World!\"\n  }\n},\n{\n  \"type\": \"text_editor_code_execution_tool_result\",\n  \"tool_use_id\": \"srvtoolu_01D5E6F7G8H9I0J1K2L3M4N5\",\n  \"content\": {\n    \"type\": \"text_editor_code_execution_result\",\n    \"is_file_update\": false\n  }\n}\njson\n{\n  \"type\": \"server_tool_use\",\n  \"id\": \"srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6\",\n  \"name\": \"text_editor_code_execution\",\n  \"input\": {\n    \"command\": \"str_replace\",\n    \"path\": \"config.json\",\n    \"old_str\": \"\\\"debug\\\": true\",\n    \"new_str\": \"\\\"debug\\\": false\"\n  }\n},\n{\n  \"type\": \"text_editor_code_execution_tool_result\",\n  \"tool_use_id\": \"srvtoolu_01E6F7G8H9I0J1K2L3M4N5O6\",\n  \"content\": {\n    \"type\": \"text_editor_code_execution_result\",\n    \"oldStart\": 3,\n    \"oldLines\": 1,\n    \"newStart\": 3,\n    \"newLines\": 1,\n    \"lines\": [\"-  \\\"debug\\\": true\", \"+  \\\"debug\\\": false\"]\n  }\n}\njson\n{\n  \"type\": \"bash_code_execution_tool_result\",\n  \"tool_use_id\": \"srvtoolu_01VfmxgZ46TiHbmXgy928hQR\",\n  \"content\": {\n    \"type\": \"bash_code_execution_tool_result_error\",\n    \"error_code\": \"unavailable\"\n  }\n}\npython Python\nimport os\nfrom anthropic import Anthropic",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Tool definition\n\nThe code execution tool requires no additional parameters:",
+      "language": "unknown"
+    },
+    {
+      "code": "When this tool is provided, Claude automatically gains access to two sub-tools:\n- `bash_code_execution`: Run shell commands\n- `text_editor_code_execution`: View, create, and edit files, including writing code\n\n## Response format\n\nThe code execution tool can return two types of results depending on the operation:\n\n### Bash command response",
+      "language": "unknown"
+    },
+    {
+      "code": "### File operation responses\n\n**View file:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Create file:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Edit file (str_replace):**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Results\n\nAll execution results include:\n- `stdout`: Output from successful execution\n- `stderr`: Error messages if execution fails\n- `return_code`: 0 for success, non-zero for failure\n\nAdditional fields for file operations:\n- **View**: `file_type`, `content`, `numLines`, `startLine`, `totalLines`\n- **Create**: `is_file_update` (whether file already existed)\n- **Edit**: `oldStart`, `oldLines`, `newStart`, `newLines`, `lines` (diff format)\n\n### Errors\n\nEach tool type can return specific errors:\n\n**Common errors (all tools):**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Error codes by tool type:**\n\n| Tool | Error Code | Description |\n|------|-----------|-------------|\n| All tools | `unavailable` | The tool is temporarily unavailable |\n| All tools | `execution_time_exceeded` | Execution exceeded maximum time limit |\n| All tools | `container_expired` | Container expired and is no longer available |\n| All tools | `invalid_tool_input` | Invalid parameters provided to the tool |\n| All tools | `too_many_requests` | Rate limit exceeded for tool usage |\n| text_editor | `file_not_found` | File doesn't exist (for view/edit operations) |\n| text_editor | `string_not_found` | The `old_str` not found in file (for str_replace) |\n\n#### `pause_turn` stop reason\n\nThe response may include a `pause_turn` stop reason, which indicates that the API paused a long-running turn. You may\nprovide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you\nwish to interrupt the conversation.\n\n## Containers\n\nThe code execution tool runs in a secure, containerized environment designed specifically for code execution, with a higher focus on Python.\n\n### Runtime environment\n- **Python version**: 3.11.12\n- **Operating system**: Linux-based container\n- **Architecture**: x86_64 (AMD64)\n\n### Resource limits\n- **Memory**: 5GiB RAM\n- **Disk space**: 5GiB workspace storage\n- **CPU**: 1 CPU\n\n### Networking and security\n- **Internet access**: Completely disabled for security\n- **External connections**: No outbound network requests permitted\n- **Sandbox isolation**: Full isolation from host system and other containers\n- **File access**: Limited to workspace directory only\n- **Workspace scoping**: Like [Files](/docs/en/build-with-claude/files), containers are scoped to the workspace of the API key\n- **Expiration**: Containers expire 30 days after creation\n\n### Pre-installed libraries\nThe sandboxed Python environment includes these commonly used libraries:\n- **Data Science**: pandas, numpy, scipy, scikit-learn, statsmodels\n- **Visualization**: matplotlib, seaborn\n- **File Processing**: pyarrow, openpyxl, xlsxwriter, xlrd, pillow, python-pptx, python-docx, pypdf, pdfplumber, pypdfium2, pdf2image, pdfkit, tabula-py, reportlab[pycairo], Img2pdf\n- **Math & Computing**: sympy, mpmath\n- **Utilities**: tqdm, python-dateutil, pytz, joblib, unzip, unrar, 7zip, bc, rg (ripgrep), fd, sqlite\n\n## Container reuse\n\nYou can reuse an existing container across multiple API requests by providing the container ID from a previous response.\nThis allows you to maintain created files between requests.\n\n### Example\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Tool definition",
+      "id": "tool-definition"
+    },
+    {
+      "level": "h2",
+      "text": "Response format",
+      "id": "response-format"
+    },
+    {
+      "level": "h3",
+      "text": "Bash command response",
+      "id": "bash-command-response"
+    },
+    {
+      "level": "h3",
+      "text": "File operation responses",
+      "id": "file-operation-responses"
+    },
+    {
+      "level": "h3",
+      "text": "Results",
+      "id": "results"
+    },
+    {
+      "level": "h3",
+      "text": "Errors",
+      "id": "errors"
+    },
+    {
+      "level": "h2",
+      "text": "Containers",
+      "id": "containers"
+    },
+    {
+      "level": "h3",
+      "text": "Runtime environment",
+      "id": "runtime-environment"
+    },
+    {
+      "level": "h3",
+      "text": "Resource limits",
+      "id": "resource-limits"
+    },
+    {
+      "level": "h3",
+      "text": "Networking and security",
+      "id": "networking-and-security"
+    },
+    {
+      "level": "h3",
+      "text": "Pre-installed libraries",
+      "id": "pre-installed-libraries"
+    },
+    {
+      "level": "h2",
+      "text": "Container reuse",
+      "id": "container-reuse"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#5.-use-bash-to-organize-files-into-a-report-directory",
+  "links": []
+}

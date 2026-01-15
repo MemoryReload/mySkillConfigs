@@ -1,0 +1,13 @@
+{
+  "title": "Load only project settings, ignore user and local",
+  "content": "async for message in query(\n    prompt=\"Run CI checks\",\n    options=ClaudeAgentOptions(\n        setting_sources=[\"project\"]  # Only .claude/settings.json\n    )\n):\n    print(message)\npython",
+  "code_samples": [
+    {
+      "code": "**Testing and CI environments:**",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#load-only-project-settings,-ignore-user-and-local",
+  "links": []
+}

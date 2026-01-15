@@ -1,0 +1,19 @@
+{
+  "title": "Delete a file",
+  "content": "curl -X DELETE \"https://api.anthropic.com/v1/files/$FILE_ID\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\"\npython Python",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n<Note>\nFor complete details on the Files API, see the [Files API documentation](/docs/en/api/files-content).\n</Note>\n\n### Multi-Turn Conversations\n\nReuse the same container across multiple messages by specifying the container ID:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Multi-Turn Conversations",
+      "id": "multi-turn-conversations"
+    }
+  ],
+  "url": "llms-txt#delete-a-file",
+  "links": []
+}

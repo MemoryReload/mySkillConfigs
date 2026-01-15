@@ -1,0 +1,34 @@
+{
+  "title": "List Workspaces",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/workspaces/list\n\n**get** `/v1/organizations/workspaces`\n\n- `after_id: optional string`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.\n\n- `before_id: optional string`\n\nID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.\n\n- `include_archived: optional boolean`\n\nWhether to include Workspaces that have been archived in the response\n\n- `limit: optional number`\n\nNumber of items to return per page.\n\nDefaults to `20`. Ranges from `1` to `1000`.\n\n- `data: array of Workspace`\n\n- `archived_at: string`\n\nRFC 3339 datetime string indicating when the Workspace was archived, or null if the Workspace is not archived.\n\n- `created_at: string`\n\nRFC 3339 datetime string indicating when the Workspace was created.\n\n- `display_color: string`\n\nHex color code representing the Workspace in the Anthropic Console.\n\nName of the Workspace.\n\n- `type: \"workspace\"`\n\nFor Workspaces, this is always `\"workspace\"`.\n\nFirst ID in the `data` list. Can be used as the `before_id` for the previous page.\n\n- `has_more: boolean`\n\nIndicates if there are more results in the requested page direction.\n\nLast ID in the `data` list. Can be used as the `after_id` for the next page.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/workspaces \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "List",
+      "id": "list"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#list-workspaces",
+  "links": []
+}

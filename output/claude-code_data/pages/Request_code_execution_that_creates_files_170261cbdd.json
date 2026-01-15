@@ -1,0 +1,8 @@
+{
+  "title": "Request code execution that creates files",
+  "content": "response = client.beta.messages.create(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"code-execution-2025-08-25\", \"files-api-2025-04-14\"],\n    max_tokens=4096,\n    messages=[{\n        \"role\": \"user\",\n        \"content\": \"Create a matplotlib visualization and save it as output.png\"\n    }],\n    tools=[{\n        \"type\": \"code_execution_20250825\",\n        \"name\": \"code_execution\"\n    }]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#request-code-execution-that-creates-files",
+  "links": []
+}

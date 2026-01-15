@@ -1,0 +1,8 @@
+{
+  "title": "For base64-encoded images",
+  "content": "image1_url = \"https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg\"\nimage1_media_type = \"image/jpeg\"\nimage1_data = base64.standard_b64encode(httpx.get(image1_url).content).decode(\"utf-8\")\n\nimage2_url = \"https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg\"\nimage2_media_type = \"image/jpeg\"\nimage2_data = base64.standard_b64encode(httpx.get(image2_url).content).decode(\"utf-8\")",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#for-base64-encoded-images",
+  "links": []
+}

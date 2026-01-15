@@ -1,0 +1,93 @@
+{
+  "title": "Long document content (e.g., technical documentation)",
+  "content": "long_document = \"This is a very long document with thousands of words...\" + \" ... \" * 1000  # Minimum cacheable length\n\nresponse = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\n                    \"type\": \"document\",\n                    \"source\": {\n                        \"type\": \"text\",\n                        \"media_type\": \"text/plain\",\n                        \"data\": long_document\n                    },\n                    \"citations\": {\"enabled\": True},\n                    \"cache_control\": {\"type\": \"ephemeral\"}  # Cache the document content\n                },\n                {\n                    \"type\": \"text\",\n                    \"text\": \"What does this document say about API features?\"\n                }\n            ]\n        }\n    ]\n)\ntypescript TypeScript\nimport Anthropic from '@anthropic-ai/sdk';\n\nconst client = new Anthropic();\n\n// Long document content (e.g., technical documentation)\nconst longDocument = \"This is a very long document with thousands of words...\" + \" ... \".repeat(1000);  // Minimum cacheable length\n\nconst response = await client.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  messages: [\n    {\n      role: \"user\",\n      content: [\n        {\n          type: \"document\",\n          source: {\n            type: \"text\",\n            media_type: \"text/plain\",\n            data: longDocument\n          },\n          citations: { enabled: true },\n          cache_control: { type: \"ephemeral\" }  // Cache the document content\n        },\n        {\n          type: \"text\",\n          text: \"What does this document say about API features?\"\n        }\n      ]\n    }\n  ]\n});\nbash Shell\ncurl https://api.anthropic.com/v1/messages \\\n     --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n     --header \"anthropic-version: 2023-06-01\" \\\n     --header \"content-type: application/json\" \\\n     --data '{\n    \"model\": \"claude-sonnet-4-5\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\n                    \"type\": \"document\",\n                    \"source\": {\n                        \"type\": \"text\",\n                        \"media_type\": \"text/plain\",\n                        \"data\": \"This is a very long document with thousands of words...\"\n                    },\n                    \"citations\": {\"enabled\": true},\n                    \"cache_control\": {\"type\": \"ephemeral\"}\n                },\n                {\n                    \"type\": \"text\",\n                    \"text\": \"What does this document say about API features?\"\n                }\n            ]\n        }\n    ]\n}'\npython\n{\n    \"type\": \"document\",\n    \"source\": {\n        \"type\": \"text\",\n        \"media_type\": \"text/plain\",\n        \"data\": \"Plain text content...\"\n    },\n    \"title\": \"Document Title\", # optional\n    \"context\": \"Context about the document that will not be cited from\", # optional\n    \"citations\": {\"enabled\": True}\n}\npython\n{\n    \"type\": \"document\",\n    \"source\": {\n        \"type\": \"file\",\n        \"file_id\": \"file_011CNvxoj286tYUAZFiZMf1U\"\n    },\n    \"title\": \"Document Title\", # optional\n    \"context\": \"Context about the document that will not be cited from\", # optional\n    \"citations\": {\"enabled\": True}\n}\npython\n{\n    \"type\": \"char_location\",\n    \"cited_text\": \"The exact text being cited\", # not counted towards output tokens\n    \"document_index\": 0,\n    \"document_title\": \"Document Title\",\n    \"start_char_index\": 0,    # 0-indexed\n    \"end_char_index\": 50      # exclusive\n}\npython\n{\n    \"type\": \"document\",\n    \"source\": {\n        \"type\": \"base64\",\n        \"media_type\": \"application/pdf\",\n        \"data\": base64_encoded_pdf_data\n    },\n    \"title\": \"Document Title\", # optional\n    \"context\": \"Context about the document that will not be cited from\", # optional\n    \"citations\": {\"enabled\": True}\n}\npython\n{\n    \"type\": \"document\",\n    \"source\": {\n        \"type\": \"file\",\n        \"file_id\": \"file_011CNvxoj286tYUAZFiZMf1U\"\n    },\n    \"title\": \"Document Title\", # optional\n    \"context\": \"Context about the document that will not be cited from\", # optional\n    \"citations\": {\"enabled\": True}\n}\npython\n{\n    \"type\": \"page_location\",\n    \"cited_text\": \"The exact text being cited\", # not counted towards output tokens\n    \"document_index\": 0,     \n    \"document_title\": \"Document Title\", \n    \"start_page_number\": 1,  # 1-indexed\n    \"end_page_number\": 2     # exclusive\n}\npython\n{\n    \"type\": \"document\",\n    \"source\": {\n        \"type\": \"content\",\n        \"content\": [\n            {\"type\": \"text\", \"text\": \"First chunk\"},\n            {\"type\": \"text\", \"text\": \"Second chunk\"}\n        ]\n    },\n    \"title\": \"Document Title\", # optional\n    \"context\": \"Context about the document that will not be cited from\", # optional\n    \"citations\": {\"enabled\": True}\n}\npython\n{\n    \"type\": \"content_block_location\",\n    \"cited_text\": \"The exact text being cited\", # not counted towards output tokens\n    \"document_index\": 0,\n    \"document_title\": \"Document Title\",\n    \"start_block_index\": 0,   # 0-indexed\n    \"end_block_index\": 1      # exclusive\n}\npython\n{\n    \"content\": [\n        {\n            \"type\": \"text\",\n            \"text\": \"According to the document, \"\n        },\n        {\n            \"type\": \"text\",\n            \"text\": \"the grass is green\",\n            \"citations\": [{\n                \"type\": \"char_location\",\n                \"cited_text\": \"The grass is green.\",\n                \"document_index\": 0,\n                \"document_title\": \"Example Document\",\n                \"start_char_index\": 0,\n                \"end_char_index\": 20\n            }]\n        },\n        {\n            \"type\": \"text\",\n            \"text\": \" and \"\n        },\n        {\n            \"type\": \"text\",\n            \"text\": \"the sky is blue\",\n            \"citations\": [{\n                \"type\": \"char_location\",\n                \"cited_text\": \"The sky is blue.\",\n                \"document_index\": 0,\n                \"document_title\": \"Example Document\",\n                \"start_char_index\": 20,\n                \"end_char_index\": 36\n            }]\n        },\n        {\n            \"type\": \"text\",\n            \"text\": \". Information from page 5 states that \",\n        },\n        {\n            \"type\": \"text\",\n            \"text\": \"water is essential\",\n            \"citations\": [{\n                \"type\": \"page_location\",\n                \"cited_text\": \"Water is essential for life.\",\n                \"document_index\": 1,\n                \"document_title\": \"PDF Document\",\n                \"start_page_number\": 5,\n                \"end_page_number\": 6\n            }]\n        },\n        {\n            \"type\": \"text\",\n            \"text\": \". The custom document mentions \",\n        },\n        {\n            \"type\": \"text\",\n            \"text\": \"important findings\",\n            \"citations\": [{\n                \"type\": \"content_block_location\",\n                \"cited_text\": \"These are important findings.\",\n                \"document_index\": 2,\n                \"document_title\": \"Custom Content Document\",\n                \"start_block_index\": 0,\n                \"end_block_index\": 1\n            }]\n        }\n    ]\n}\npython\nevent: message_start\ndata: {\"type\": \"message_start\", ...}\n\nevent: content_block_start\ndata: {\"type\": \"content_block_start\", \"index\": 0, ...}\n\nevent: content_block_delta\ndata: {\"type\": \"content_block_delta\", \"index\": 0, \n       \"delta\": {\"type\": \"text_delta\", \"text\": \"According to...\"}}\n\nevent: content_block_delta\ndata: {\"type\": \"content_block_delta\", \"index\": 0,\n       \"delta\": {\"type\": \"citations_delta\", \n                 \"citation\": {\n                     \"type\": \"char_location\",\n                     \"cited_text\": \"...\",\n                     \"document_index\": 0,\n                     ...\n                 }}}\n\nevent: content_block_stop\ndata: {\"type\": \"content_block_stop\", \"index\": 0}\n\nevent: message_stop\ndata: {\"type\": \"message_stop\"}\n```",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nIn this example:\n- The document content is cached using `cache_control` on the document block\n- Citations are enabled on the document\n- Claude can generate responses with citations while benefiting from cached document content\n- Subsequent requests using the same document will benefit from the cached content\n\n## Document Types\n\n### Choosing a document type\n\nWe support three document types for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded via the [Files API](/docs/en/build-with-claude/files) and referenced by `file_id`:\n\n| Type | Best for | Chunking | Citation format |\n| :--- | :--- | :--- | :--- |\n| Plain text | Simple text documents, prose | Sentence | Character indices (0-indexed) |\n| PDF | PDF files with text content | Sentence | Page numbers (1-indexed) |\n| Custom content | Lists, transcripts, special formatting, more granular citations | No additional chunking | Block indices (0-indexed) |\n\n<Note>\n.csv, .xlsx, .docx, .md, and .txt files are not supported as document blocks. Convert these to plain text and include directly in message content. See [Working with other file formats](/docs/en/build-with-claude/files#working-with-other-file-formats).\n</Note>\n\n### Plain text documents\n\nPlain text documents are automatically chunked into sentences. You can provide them inline or by reference with their `file_id`:\n\n<Tabs>\n<Tab title=\"Inline text\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"Files API\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n</Tabs>\n\n<section title=\"Example plain text citation\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n### PDF documents \n\nPDF documents can be provided as base64-encoded data or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text will not be citable.\n\n<Tabs>\n<Tab title=\"Base64\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"Files API\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n</Tabs>\n\n<section title=\"Example PDF citation\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n### Custom content documents\n\nCustom content documents give you control over citation granularity. No additional chunking is done and chunks are provided to the model according to the content blocks provided.",
+      "language": "unknown"
+    },
+    {
+      "code": "<section title=\"Example citation\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</section>\n\n---\n\n## Response Structure\n\nWhen citations are enabled, responses include multiple text blocks with citations:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Streaming Support\n\nFor streaming responses, we've added a `citations_delta` type that contains a single citation to be added to the `citations` list on the current `text` content block.\n\n<section title=\"Example streaming events\">",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Document Types",
+      "id": "document-types"
+    },
+    {
+      "level": "h3",
+      "text": "Choosing a document type",
+      "id": "choosing-a-document-type"
+    },
+    {
+      "level": "h3",
+      "text": "Plain text documents",
+      "id": "plain-text-documents"
+    },
+    {
+      "level": "h3",
+      "text": "PDF documents",
+      "id": "pdf-documents-"
+    },
+    {
+      "level": "h3",
+      "text": "Custom content documents",
+      "id": "custom-content-documents"
+    },
+    {
+      "level": "h2",
+      "text": "Response Structure",
+      "id": "response-structure"
+    },
+    {
+      "level": "h3",
+      "text": "Streaming Support",
+      "id": "streaming-support"
+    }
+  ],
+  "url": "llms-txt#long-document-content-(e.g.,-technical-documentation)",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Define tool",
+  "content": "class GetWeather < Anthropic::BaseTool\n  doc \"Get the current weather in a given location\"\n  input_schema GetWeatherInput\n\ndef call(input)\n    # In a full implementation, you'd call a weather API here\n    JSON.generate({temperature: \"20°C\", condition: \"Sunny\"})\n  end\nend\n\nclass CalculateSumInput < Anthropic::BaseModel\n  required :a, Integer, doc: \"First number\"\n  required :b, Integer, doc: \"Second number\"\nend\n\nclass CalculateSum < Anthropic::BaseTool\n  doc \"Add two numbers together\"\n  input_schema CalculateSumInput\n\ndef call(input)\n    (input.a + input.b).to_s\n  end\nend",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#define-tool",
+  "links": []
+}

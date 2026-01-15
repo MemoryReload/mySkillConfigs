@@ -1,0 +1,34 @@
+{
+  "title": "Upload File (Beta) (Kotlin)",
+  "content": "URL: https://platform.claude.com/docs/en/api/kotlin/beta/files/upload\n\n`beta().files().upload(FileUploadParamsparams, RequestOptionsrequestOptions = RequestOptions.none()) : FileMetadata`\n\n- `params: FileUploadParams`\n\n- `betas: Optional<List<AnthropicBeta>>`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `MESSAGE_BATCHES_2024_09_24(\"message-batches-2024-09-24\")`\n\n- `PROMPT_CACHING_2024_07_31(\"prompt-caching-2024-07-31\")`\n\n- `COMPUTER_USE_2024_10_22(\"computer-use-2024-10-22\")`\n\n- `COMPUTER_USE_2025_01_24(\"computer-use-2025-01-24\")`\n\n- `PDFS_2024_09_25(\"pdfs-2024-09-25\")`\n\n- `TOKEN_COUNTING_2024_11_01(\"token-counting-2024-11-01\")`\n\n- `TOKEN_EFFICIENT_TOOLS_2025_02_19(\"token-efficient-tools-2025-02-19\")`\n\n- `OUTPUT_128K_2025_02_19(\"output-128k-2025-02-19\")`\n\n- `FILES_API_2025_04_14(\"files-api-2025-04-14\")`\n\n- `MCP_CLIENT_2025_04_04(\"mcp-client-2025-04-04\")`\n\n- `MCP_CLIENT_2025_11_20(\"mcp-client-2025-11-20\")`\n\n- `DEV_FULL_THINKING_2025_05_14(\"dev-full-thinking-2025-05-14\")`\n\n- `INTERLEAVED_THINKING_2025_05_14(\"interleaved-thinking-2025-05-14\")`\n\n- `CODE_EXECUTION_2025_05_22(\"code-execution-2025-05-22\")`\n\n- `EXTENDED_CACHE_TTL_2025_04_11(\"extended-cache-ttl-2025-04-11\")`\n\n- `CONTEXT_1M_2025_08_07(\"context-1m-2025-08-07\")`\n\n- `CONTEXT_MANAGEMENT_2025_06_27(\"context-management-2025-06-27\")`\n\n- `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26(\"model-context-window-exceeded-2025-08-26\")`\n\n- `SKILLS_2025_10_02(\"skills-2025-10-02\")`\n\n- `class FileMetadata:`\n\nUnique object identifier.\n\nThe format and length of IDs may change over time.\n\n- `createdAt: LocalDateTime`\n\nRFC 3339 datetime string representing when the file was created.\n\nOriginal filename of the uploaded file.\n\nMIME type of the file.\n\nSize of the file in bytes.\n\n- `type: JsonValue; \"file\"constant`\n\nFor files, this is always `\"file\"`.\n\n- `downloadable: Optional<Boolean>`\n\nWhether the file can be downloaded.",
+  "code_samples": [
+    {
+      "code": "package com.anthropic.example\n\nimport com.anthropic.client.AnthropicClient\nimport com.anthropic.client.okhttp.AnthropicOkHttpClient\nimport com.anthropic.models.beta.files.FileMetadata\nimport com.anthropic.models.beta.files.FileUploadParams\nimport java.io.ByteArrayInputStream\n\nfun main() {\n    val client: AnthropicClient = AnthropicOkHttpClient.fromEnv()\n\n    val params: FileUploadParams = FileUploadParams.builder()\n        .file(\"some content\".byteInputStream())\n        .build()\n    val fileMetadata: FileMetadata = client.beta().files().upload(params)\n}",
+      "language": "kotlin"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Upload",
+      "id": "upload"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#upload-file-(beta)-(kotlin)",
+  "links": []
+}

@@ -1,0 +1,69 @@
+{
+  "title": "For URL-based images, you can use the URLs directly in your requests",
+  "content": "typescript TypeScript\nimport axios from 'axios';\n\n// For base64-encoded images\nasync function getBase64Image(url: string): Promise<string> {\n  const response = await axios.get(url, { responseType: 'arraybuffer' });\n  return Buffer.from(response.data, 'binary').toString('base64');\n}\n\n// Usage\nasync function prepareImages() {\n  const imageData = await getBase64Image('https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg');\n  // Now you can use imageData in your API calls\n}\n\n// For URL-based images, you can use the URLs directly in your requests\njava Java\nimport java.io.IOException;\nimport java.util.Base64;\nimport java.io.InputStream;\nimport java.net.URL;\n\npublic class ImageHandlingExample {\n\npublic static void main(String[] args) throws IOException, InterruptedException {\n        // For base64-encoded images\n        String image1Url = \"https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg\";\n        String image1MediaType = \"image/jpeg\";\n        String image1Data = downloadAndEncodeImage(image1Url);\n\nString image2Url = \"https://upload.wikimedia.org/wikipedia/commons/b/b5/Iridescent.green.sweat.bee1.jpg\";\n        String image2MediaType = \"image/jpeg\";\n        String image2Data = downloadAndEncodeImage(image2Url);\n\n// For URL-based images, you can use the URLs directly in your requests\n    }\n\nprivate static String downloadAndEncodeImage(String imageUrl) throws IOException {\n        try (InputStream inputStream = new URL(imageUrl).openStream()) {\n            return Base64.getEncoder().encodeToString(inputStream.readAllBytes());\n        }\n    }\n\n}\nbash Shell\n    curl https://api.anthropic.com/v1/messages \\\n      -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n      -H \"anthropic-version: 2023-06-01\" \\\n      -H \"content-type: application/json\" \\\n      -d '{\n        \"model\": \"claude-sonnet-4-5\",\n        \"max_tokens\": 1024,\n        \"messages\": [\n          {\n            \"role\": \"user\",\n            \"content\": [\n              {\n                \"type\": \"image\",\n                \"source\": {\n                  \"type\": \"base64\",\n                  \"media_type\": \"image/jpeg\",\n                  \"data\": \"'\"$BASE64_IMAGE_DATA\"'\"\n                }\n              },\n              {\n                \"type\": \"text\",\n                \"text\": \"Describe this image.\"\n              }\n            ]\n          }\n        ]\n      }'\n    python Python\n    import anthropic\n\nclient = anthropic.Anthropic()\n    message = client.messages.create(\n        model=\"claude-sonnet-4-5\",\n        max_tokens=1024,\n        messages=[\n            {\n                \"role\": \"user\",\n                \"content\": [\n                    {\n                        \"type\": \"image\",\n                        \"source\": {\n                            \"type\": \"base64\",\n                            \"media_type\": image1_media_type,\n                            \"data\": image1_data,\n                        },\n                    },\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"Describe this image.\"\n                    }\n                ],\n            }\n        ],\n    )\n    print(message)\n    typescript TypeScript\n    import Anthropic from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic({\n      apiKey: process.env.ANTHROPIC_API_KEY,\n    });\n\nasync function main() {\n      const message = await anthropic.messages.create({\n        model: \"claude-sonnet-4-5\",\n        max_tokens: 1024,\n        messages: [\n          {\n            role: \"user\",\n            content: [\n              {\n                type: \"image\",\n                source: {\n                  type: \"base64\",\n                  media_type: \"image/jpeg\",\n                  data: imageData, // Base64-encoded image data as string\n                }\n              },\n              {\n                type: \"text\",\n                text: \"Describe this image.\"\n              }\n            ]\n          }\n        ]\n      });\n      \n      console.log(message);\n    }\n\nmain();\n    java Java\n    import java.io.IOException;\n    import java.util.List;\n\nimport com.anthropic.client.AnthropicClient;\n    import com.anthropic.client.okhttp.AnthropicOkHttpClient;\n    import com.anthropic.models.messages.*;\n\npublic class VisionExample {\n        public static void main(String[] args) throws IOException, InterruptedException {\n            AnthropicClient client = AnthropicOkHttpClient.fromEnv();\n            String imageData = \"\"; // // Base64-encoded image data as string\n\nList<ContentBlockParam> contentBlockParams = List.of(\n                    ContentBlockParam.ofImage(\n                            ImageBlockParam.builder()\n                                    .source(Base64ImageSource.builder()\n                                            .data(imageData)\n                                            .build())\n                                    .build()\n                    ),\n                    ContentBlockParam.ofText(TextBlockParam.builder()\n                            .text(\"Describe this image.\")\n                            .build())\n            );\n            Message message = client.messages().create(\n                    MessageCreateParams.builder()\n                            .model(Model.CLAUDE_SONNET_4_5_LATEST)\n                            .maxTokens(1024)\n                            .addUserMessageOfBlockParams(contentBlockParams)\n                            .build()\n            );\n\nSystem.out.println(message);\n        }\n    }\n    bash Shell\n    curl https://api.anthropic.com/v1/messages \\\n      -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n      -H \"anthropic-version: 2023-06-01\" \\\n      -H \"content-type: application/json\" \\\n      -d '{\n        \"model\": \"claude-sonnet-4-5\",\n        \"max_tokens\": 1024,\n        \"messages\": [\n          {\n            \"role\": \"user\",\n            \"content\": [\n              {\n                \"type\": \"image\",\n                \"source\": {\n                  \"type\": \"url\",\n                  \"url\": \"https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg\"\n                }\n              },\n              {\n                \"type\": \"text\",\n                \"text\": \"Describe this image.\"\n              }\n            ]\n          }\n        ]\n      }'\n    python Python\n    import anthropic\n\nclient = anthropic.Anthropic()\n    message = client.messages.create(\n        model=\"claude-sonnet-4-5\",\n        max_tokens=1024,\n        messages=[\n            {\n                \"role\": \"user\",\n                \"content\": [\n                    {\n                        \"type\": \"image\",\n                        \"source\": {\n                            \"type\": \"url\",\n                            \"url\": \"https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg\",\n                        },\n                    },\n                    {\n                        \"type\": \"text\",\n                        \"text\": \"Describe this image.\"\n                    }\n                ],\n            }\n        ],\n    )\n    print(message)\n    typescript TypeScript\n    import Anthropic from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic({\n      apiKey: process.env.ANTHROPIC_API_KEY,\n    });\n\nasync function main() {\n      const message = await anthropic.messages.create({\n        model: \"claude-sonnet-4-5\",\n        max_tokens: 1024,\n        messages: [\n          {\n            role: \"user\",\n            content: [\n              {\n                type: \"image\",\n                source: {\n                  type: \"url\",\n                  url: \"https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg\"\n                }\n              },\n              {\n                type: \"text\",\n                text: \"Describe this image.\"\n              }\n            ]\n          }\n        ]\n      });\n      \n      console.log(message);\n    }\n\nmain();\n    java Java\n    import java.io.IOException;\n    import java.util.List;\n\nimport com.anthropic.client.AnthropicClient;\n    import com.anthropic.client.okhttp.AnthropicOkHttpClient;\n    import com.anthropic.models.messages.*;\n\npublic class VisionExample {\n\npublic static void main(String[] args) throws IOException, InterruptedException {\n            AnthropicClient client = AnthropicOkHttpClient.fromEnv();\n\nList<ContentBlockParam> contentBlockParams = List.of(\n                    ContentBlockParam.ofImage(\n                            ImageBlockParam.builder()\n                                    .source(UrlImageSource.builder()\n                                            .url(\"https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg\")\n                                            .build())\n                                    .build()\n                    ),\n                    ContentBlockParam.ofText(TextBlockParam.builder()\n                            .text(\"Describe this image.\")\n                            .build())\n            );\n            Message message = client.messages().create(\n                    MessageCreateParams.builder()\n                            .model(Model.CLAUDE_SONNET_4_5_LATEST)\n                            .maxTokens(1024)\n                            .addUserMessageOfBlockParams(contentBlockParams)\n                            .build()\n            );\n            System.out.println(message);\n        }\n    }\n    bash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nBelow are examples of how to include images in a Messages API request using base64-encoded images and URL references:\n\n### Base64-encoded image example\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### URL-based image example\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Files API image example\n\nFor images you'll use repeatedly or when you want to avoid encoding overhead, use the [Files API](/docs/en/build-with-claude/files):\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Base64-encoded image example",
+      "id": "base64-encoded-image-example"
+    },
+    {
+      "level": "h3",
+      "text": "URL-based image example",
+      "id": "url-based-image-example"
+    },
+    {
+      "level": "h3",
+      "text": "Files API image example",
+      "id": "files-api-image-example"
+    }
+  ],
+  "url": "llms-txt#for-url-based-images,-you-can-use-the-urls-directly-in-your-requests",
+  "links": []
+}

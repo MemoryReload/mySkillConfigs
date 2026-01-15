@@ -1,0 +1,34 @@
+{
+  "title": "Delete Invite",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/invites/delete\n\n**delete** `/v1/organizations/invites/{invite_id}`\n\n- `invite_id: string`\n\n- `type: \"invite_deleted\"`\n\nFor Invites, this is always `\"invite_deleted\"`.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \\\n    -X DELETE \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Delete",
+      "id": "delete"
+    },
+    {
+      "level": "h3",
+      "text": "Path Parameters",
+      "id": "path-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#delete-invite",
+  "links": []
+}

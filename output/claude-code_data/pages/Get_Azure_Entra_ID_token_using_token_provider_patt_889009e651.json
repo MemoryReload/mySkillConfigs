@@ -1,0 +1,8 @@
+{
+  "title": "Get Azure Entra ID token using token provider pattern",
+  "content": "token_provider = get_bearer_token_provider(\n    DefaultAzureCredential(),\n    \"https://cognitiveservices.azure.com/.default\"\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#get-azure-entra-id-token-using-token-provider-pattern",
+  "links": []
+}

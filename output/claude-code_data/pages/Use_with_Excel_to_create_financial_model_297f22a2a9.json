@@ -1,0 +1,44 @@
+{
+  "title": "Use with Excel to create financial model",
+  "content": "curl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02\" \\\n  -H \"content-type: application/json\" \\\n  -d \"{\n    \\\"model\\\": \\\"claude-sonnet-4-5-20250929\\\",\n    \\\"max_tokens\\\": 4096,\n    \\\"container\\\": {\n      \\\"skills\\\": [\n        {\n          \\\"type\\\": \\\"anthropic\\\",\n          \\\"skill_id\\\": \\\"xlsx\\\",\n          \\\"version\\\": \\\"latest\\\"\n        },\n        {\n          \\\"type\\\": \\\"custom\\\",\n          \\\"skill_id\\\": \\\"$DCF_SKILL_ID\\\",\n          \\\"version\\\": \\\"latest\\\"\n        }\n      ]\n    },\n    \\\"messages\\\": [{\n      \\\"role\\\": \\\"user\\\",\n      \\\"content\\\": \\\"Build a DCF valuation model for a SaaS company with the attached financials\\\"\n    }],\n    \\\"tools\\\": [{\n      \\\"type\\\": \\\"code_execution_20250825\\\",\n      \\\"name\\\": \\\"code_execution\\\"\n    }]\n  }\"\npython",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n---\n\n## Limits and Constraints\n\n### Request Limits\n- **Maximum Skills per request**: 8\n- **Maximum Skill upload size**: 8MB (all files combined)\n- **YAML frontmatter requirements**:\n  - `name`: Maximum 64 characters, lowercase letters/numbers/hyphens only, no XML tags, no reserved words\n  - `description`: Maximum 1024 characters, non-empty, no XML tags\n\n### Environment Constraints\nSkills run in the code execution container with these limitations:\n- **No network access** - Cannot make external API calls\n- **No runtime package installation** - Only pre-installed packages available\n- **Isolated environment** - Each request gets a fresh container\n\nSee the [code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool) for available packages.\n\n---\n\n## Best Practices\n\n### When to Use Multiple Skills\n\nCombine Skills when tasks involve multiple document types or domains:\n\n**Good use cases:**\n- Data analysis (Excel) + presentation creation (PowerPoint)\n- Report generation (Word) + export to PDF\n- Custom domain logic + document generation\n\n**Avoid:**\n- Including unused Skills (impacts performance)\n\n### Version Management Strategy\n\n**For production:**",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Limits and Constraints",
+      "id": "limits-and-constraints"
+    },
+    {
+      "level": "h3",
+      "text": "Request Limits",
+      "id": "request-limits"
+    },
+    {
+      "level": "h3",
+      "text": "Environment Constraints",
+      "id": "environment-constraints"
+    },
+    {
+      "level": "h2",
+      "text": "Best Practices",
+      "id": "best-practices"
+    },
+    {
+      "level": "h3",
+      "text": "When to Use Multiple Skills",
+      "id": "when-to-use-multiple-skills"
+    },
+    {
+      "level": "h3",
+      "text": "Version Management Strategy",
+      "id": "version-management-strategy"
+    }
+  ],
+  "url": "llms-txt#use-with-excel-to-create-financial-model",
+  "links": []
+}

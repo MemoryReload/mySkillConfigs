@@ -1,0 +1,17 @@
+{
+  "title": "Correct - Skills will be loaded",
+  "content": "options = ClaudeAgentOptions(\n    setting_sources=[\"user\", \"project\"],  # Required to load Skills\n    allowed_tools=[\"Skill\"]\n)\ntypescript TypeScript\n// Wrong - Skills won't be loaded\nconst options = {\n  allowedTools: [\"Skill\"]\n};\n\n// Correct - Skills will be loaded\nconst options = {\n  settingSources: [\"user\", \"project\"],  // Required to load Skills\n  allowedTools: [\"Skill\"]\n};\npython Python",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nFor more details on `settingSources`/`setting_sources`, see the [TypeScript SDK reference](/docs/en/agent-sdk/typescript#settingsource) or [Python SDK reference](/docs/en/agent-sdk/python#settingsource).\n\n**Check working directory**: The SDK loads Skills relative to the `cwd` option. Ensure it points to a directory containing `.claude/skills/`:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#correct---skills-will-be-loaded",
+  "links": []
+}

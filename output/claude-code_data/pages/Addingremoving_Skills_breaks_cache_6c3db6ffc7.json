@@ -1,0 +1,33 @@
+{
+  "title": "Adding/removing Skills breaks cache",
+  "content": "curl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02,prompt-caching-2024-07-31\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5-20250929\",\n    \"max_tokens\": 4096,\n    \"container\": {\n      \"skills\": [\n        {\"type\": \"anthropic\", \"skill_id\": \"xlsx\", \"version\": \"latest\"},\n        {\"type\": \"anthropic\", \"skill_id\": \"pptx\", \"version\": \"latest\"}\n      ]\n    },\n    \"messages\": [{\"role\": \"user\", \"content\": \"Create a presentation\"}],\n    \"tools\": [{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]\n  }'\npython Python\ntry:\n    response = client.beta.messages.create(\n        model=\"claude-sonnet-4-5-20250929\",\n        max_tokens=4096,\n        betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n        container={\n            \"skills\": [\n                {\"type\": \"custom\", \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\", \"version\": \"latest\"}\n            ]\n        },\n        messages=[{\"role\": \"user\", \"content\": \"Process data\"}],\n        tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]\n    )\nexcept anthropic.BadRequestError as e:\n    if \"skill\" in str(e):\n        print(f\"Skill error: {e}\")\n        # Handle skill-specific errors\n    else:\n        raise\ntypescript TypeScript\ntry {\n  const response = await client.beta.messages.create({\n    model: 'claude-sonnet-4-5-20250929',\n    max_tokens: 4096,\n    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n    container: {\n      skills: [\n        {type: 'custom', skill_id: 'skill_01AbCdEfGhIjKlMnOpQrStUv', version: 'latest'}\n      ]\n    },\n    messages: [{role: 'user', content: 'Process data'}],\n    tools: [{type: 'code_execution_20250825', name: 'code_execution'}]\n  });\n} catch (error) {\n  if (error instanceof Anthropic.BadRequestError && error.message.includes('skill')) {\n    console.error(`Skill error: ${error.message}`);\n    // Handle skill-specific errors\n  } else {\n    throw error;\n  }\n}\n```\n</CodeGroup>\n\n<CardGroup cols={2}>\n  <Card\n    title=\"API Reference\"\n    icon=\"book\"\n    href=\"/docs/en/api/skills/create-skill\"\n  >\n    Complete API reference with all endpoints\n  </Card>\n  <Card\n    title=\"Authoring Guide\"\n    icon=\"edit\"\n    href=\"/docs/en/agents-and-tools/agent-skills/best-practices\"\n  >\n    Best practices for writing effective Skills\n  </Card>\n  <Card\n    title=\"Code Execution Tool\"\n    icon=\"terminal\"\n    href=\"/docs/en/agents-and-tools/tool-use/code-execution-tool\"\n  >\n    Learn about the code execution environment\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\nFor best caching performance, keep your Skills list consistent across requests.\n\n### Error Handling\n\nHandle Skill-related errors gracefully:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Error Handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h2",
+      "text": "Next Steps",
+      "id": "next-steps"
+    },
+    {
+      "level": "h3",
+      "text": "Agent SDK",
+      "id": "agent-sdk"
+    }
+  ],
+  "url": "llms-txt#adding/removing-skills-breaks-cache",
+  "links": []
+}

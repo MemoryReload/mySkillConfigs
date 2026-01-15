@@ -1,0 +1,8 @@
+{
+  "title": "SSE server configuration",
+  "content": "{\n  \"mcpServers\": {\n    \"remote-api\": {\n      \"type\": \"sse\",\n      \"url\": \"https://api.example.com/mcp/sse\",\n      \"headers\": {\n        \"Authorization\": \"Bearer ${API_TOKEN}\"\n      }\n    }\n  }\n}",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#sse-server-configuration",
+  "links": []
+}

@@ -1,0 +1,87 @@
+{
+  "title": "Message Batches API",
+  "content": "The Message Batches API is a powerful, cost-effective way to asynchronously process large volumes of [Messages](/docs/en/api/messages) requests. This approach is well-suited to tasks that do not require immediate responses, with most batches finishing in less than 1 hour while reducing costs by 50% and increasing throughput.\n\nYou can [explore the API reference directly](/docs/en/api/creating-message-batches), in addition to this guide.\n\n## How the Message Batches API works\n\nWhen you send a request to the Message Batches API:\n\n1. The system creates a new Message Batch with the provided Messages requests.\n2. The batch is then processed asynchronously, with each request handled independently.\n3. You can poll for the status of the batch and retrieve results when processing has ended for all requests.\n\nThis is especially useful for bulk operations that don't require immediate results, such as:\n- Large-scale evaluations: Process thousands of test cases efficiently.\n- Content moderation: Analyze large volumes of user-generated content asynchronously.\n- Data analysis: Generate insights or summaries for large datasets.\n- Bulk content generation: Create large amounts of text for various purposes (e.g., product descriptions, article summaries).\n\n### Batch limitations\n- A Message Batch is limited to either 100,000 Message requests or 256 MB in size, whichever is reached first.\n- We process each batch as fast as possible, with most batches completing within 1 hour. You will be able to access batch results when all messages have completed or after 24 hours, whichever comes first. Batches will expire if processing does not complete within 24 hours.\n- Batch results are available for 29 days after creation. After that, you may still view the Batch, but its results will no longer be available for download.\n- Batches are scoped to a [Workspace](/settings/workspaces). You may view all batches—and their results—that were created within the Workspace that your API key belongs to.\n- Rate limits apply to both Batches API HTTP requests and the number of requests within a batch waiting to be processed. See [Message Batches API rate limits](/docs/en/api/rate-limits#message-batches-api). Additionally, we may slow down processing based on current demand and your request volume. In that case, you may see more requests expiring after 24 hours.\n- Due to high throughput and concurrent processing, batches may go slightly over your Workspace's configured [spend limit](/settings/limits).\n\nAll [active models](/docs/en/about-claude/models/overview) support the Message Batches API.\n\n### What can be batched\nAny request that you can make to the Messages API can be included in a batch. This includes:\n\n- Vision\n- Tool use\n- System messages\n- Multi-turn conversations\n- Any beta features\n\nSince each request in the batch is processed independently, you can mix different types of requests within a single batch.\n\n<Tip>\nSince batches can take longer than 5 minutes to process, consider using the [1-hour cache duration](/docs/en/build-with-claude/prompt-caching#1-hour-cache-duration) with prompt caching for better cache hit rates when processing batches with shared context.\n</Tip>\n\nThe Batches API offers significant cost savings. All usage is charged at 50% of the standard API prices.\n\n| Model             | Batch input      | Batch output    |\n|-------------------|------------------|-----------------|\n| Claude Opus 4.5     | $2.50 / MTok     | $12.50 / MTok   |\n| Claude Opus 4.1     | $7.50 / MTok     | $37.50 / MTok   |\n| Claude Opus 4     | $7.50 / MTok     | $37.50 / MTok   |\n| Claude Sonnet 4.5   | $1.50 / MTok     | $7.50 / MTok    |\n| Claude Sonnet 4   | $1.50 / MTok     | $7.50 / MTok    |\n| Claude Sonnet 3.7 ([deprecated](/docs/en/about-claude/model-deprecations)) | $1.50 / MTok     | $7.50 / MTok    |\n| Claude Haiku 4.5  | $0.50 / MTok     | $2.50 / MTok    |\n| Claude Haiku 3.5  | $0.40 / MTok     | $2 / MTok       |\n| Claude Opus 3 ([deprecated](/docs/en/about-claude/model-deprecations))  | $7.50 / MTok     | $37.50 / MTok   |\n| Claude Haiku 3    | $0.125 / MTok    | $0.625 / MTok   |\n\n---\n## How to use the Message Batches API\n\n### Prepare and create your batch\n\nA Message Batch is composed of a list of requests to create a Message. The shape of an individual request is comprised of:\n- A unique `custom_id` for identifying the Messages request\n- A `params` object with the standard [Messages API](/docs/en/api/messages) parameters\n\nYou can [create a batch](/docs/en/api/creating-message-batches) by passing this list into the `requests` parameter:\n\nIn this example, two separate requests are batched together for asynchronous processing. Each request has a unique `custom_id` and contains the standard parameters you'd use for a Messages API call.\n\n<Tip>\n  **Test your batch requests with the Messages API**\n\nValidation of the `params` object for each message request is performed asynchronously, and validation errors are returned when processing of the entire batch has ended. You can ensure that you are building your input correctly by verifying your request shape with the [Messages API](/docs/en/api/messages) first.\n</Tip>\n\nWhen a batch is first created, the response will have a processing status of `in_progress`.\n\n### Tracking your batch\n\nThe Message Batch's `processing_status` field indicates the stage of processing the batch is in. It starts as `in_progress`, then updates to `ended` once all the requests in the batch have finished processing, and results are ready. You can monitor the state of your batch by visiting the [Console](/settings/workspaces/default/batches), or using the [retrieval endpoint](/docs/en/api/retrieving-message-batches).\n\n#### Polling for Message Batch completion\n\nTo poll a Message Batch, you'll need its `id`, which is provided in the response when creating a batch or by listing batches. You can implement a polling loop that checks the batch status periodically until processing has ended:\n\n### Listing all Message Batches\n\nYou can list all Message Batches in your Workspace using the [list endpoint](/docs/en/api/listing-message-batches). The API supports pagination, automatically fetching additional pages as needed:\n\n<CodeGroup>\n```python Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nIn this example, two separate requests are batched together for asynchronous processing. Each request has a unique `custom_id` and contains the standard parameters you'd use for a Messages API call.\n\n<Tip>\n  **Test your batch requests with the Messages API**\n\nValidation of the `params` object for each message request is performed asynchronously, and validation errors are returned when processing of the entire batch has ended. You can ensure that you are building your input correctly by verifying your request shape with the [Messages API](/docs/en/api/messages) first.\n</Tip>\n\nWhen a batch is first created, the response will have a processing status of `in_progress`.",
+      "language": "unknown"
+    },
+    {
+      "code": "### Tracking your batch\n\nThe Message Batch's `processing_status` field indicates the stage of processing the batch is in. It starts as `in_progress`, then updates to `ended` once all the requests in the batch have finished processing, and results are ready. You can monitor the state of your batch by visiting the [Console](/settings/workspaces/default/batches), or using the [retrieval endpoint](/docs/en/api/retrieving-message-batches).\n\n#### Polling for Message Batch completion\n\nTo poll a Message Batch, you'll need its `id`, which is provided in the response when creating a batch or by listing batches. You can implement a polling loop that checks the batch status periodically until processing has ended:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Listing all Message Batches\n\nYou can list all Message Batches in your Workspace using the [list endpoint](/docs/en/api/listing-message-batches). The API supports pagination, automatically fetching additional pages as needed:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How the Message Batches API works",
+      "id": "how-the-message-batches-api-works"
+    },
+    {
+      "level": "h3",
+      "text": "Batch limitations",
+      "id": "batch-limitations"
+    },
+    {
+      "level": "h3",
+      "text": "Supported models",
+      "id": "supported-models"
+    },
+    {
+      "level": "h3",
+      "text": "What can be batched",
+      "id": "what-can-be-batched"
+    },
+    {
+      "level": "h2",
+      "text": "Pricing",
+      "id": "pricing"
+    },
+    {
+      "level": "h2",
+      "text": "How to use the Message Batches API",
+      "id": "how-to-use-the-message-batches-api"
+    },
+    {
+      "level": "h3",
+      "text": "Prepare and create your batch",
+      "id": "prepare-and-create-your-batch"
+    },
+    {
+      "level": "h3",
+      "text": "Tracking your batch",
+      "id": "tracking-your-batch"
+    },
+    {
+      "level": "h3",
+      "text": "Listing all Message Batches",
+      "id": "listing-all-message-batches"
+    }
+  ],
+  "url": "llms-txt#message-batches-api",
+  "links": []
+}

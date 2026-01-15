@@ -1,0 +1,144 @@
+{
+  "title": "Modify schema if needed",
+  "content": "schema[\"properties\"][\"custom_field\"] = {\"type\": \"string\"}\n\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"structured-outputs-2025-11-13\"],\n    max_tokens=1024,\n    output_format=schema,\n    messages=[{\"role\": \"user\", \"content\": \"...\"}],\n)\npython Python\nfrom pydantic import BaseModel\nfrom typing import List\n\nclass Invoice(BaseModel):\n    invoice_number: str\n    date: str\n    total_amount: float\n    line_items: List[dict]\n    customer_name: str\n\nresponse = client.beta.messages.parse(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"structured-outputs-2025-11-13\"],\n    output_format=Invoice,\n    messages=[{\"role\": \"user\", \"content\": f\"Extract invoice data from: {invoice_text}\"}]\n)\ntypescript TypeScript\nimport { z } from 'zod';\n\nconst InvoiceSchema = z.object({\n  invoice_number: z.string(),\n  date: z.string(),\n  total_amount: z.number(),\n  line_items: z.array(z.record(z.any())),\n  customer_name: z.string(),\n});\n\nconst response = await client.beta.messages.parse({\n  model: \"claude-sonnet-4-5\",\n  betas: [\"structured-outputs-2025-11-13\"],\n  output_format: InvoiceSchema,\n  messages: [{\"role\": \"user\", \"content\": `Extract invoice data from: ${invoiceText}`}]\n});\npython Python\nfrom pydantic import BaseModel\nfrom typing import List\n\nclass Classification(BaseModel):\n    category: str\n    confidence: float\n    tags: List[str]\n    sentiment: str\n\nresponse = client.beta.messages.parse(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"structured-outputs-2025-11-13\"],\n    output_format=Classification,\n    messages=[{\"role\": \"user\", \"content\": f\"Classify this feedback: {feedback_text}\"}]\n)\ntypescript TypeScript\nimport { z } from 'zod';\n\nconst ClassificationSchema = z.object({\n  category: z.string(),\n  confidence: z.number(),\n  tags: z.array(z.string()),\n  sentiment: z.string(),\n});\n\nconst response = await client.beta.messages.parse({\n  model: \"claude-sonnet-4-5\",\n  betas: [\"structured-outputs-2025-11-13\"],\n  output_format: ClassificationSchema,\n  messages: [{\"role\": \"user\", \"content\": `Classify this feedback: ${feedbackText}`}]\n});\npython Python\nfrom pydantic import BaseModel\nfrom typing import List, Optional\n\nclass APIResponse(BaseModel):\n    status: str\n    data: dict\n    errors: Optional[List[dict]]\n    metadata: dict\n\nresponse = client.beta.messages.parse(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"structured-outputs-2025-11-13\"],\n    output_format=APIResponse,\n    messages=[{\"role\": \"user\", \"content\": \"Process this request: ...\"}]\n)\ntypescript TypeScript\nimport { z } from 'zod';\n\nconst APIResponseSchema = z.object({\n  status: z.string(),\n  data: z.record(z.any()),\n  errors: z.array(z.record(z.any())).optional(),\n  metadata: z.record(z.any()),\n});\n\nconst response = await client.beta.messages.parse({\n  model: \"claude-sonnet-4-5\",\n  betas: [\"structured-outputs-2025-11-13\"],\n  output_format: APIResponseSchema,\n  messages: [{\"role\": \"user\", \"content\": \"Process this request: ...\"}]\n});\nbash Shell\ncurl https://api.anthropic.com/v1/messages \\\n  -H \"content-type: application/json\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: structured-outputs-2025-11-13\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"What is the weather in San Francisco?\"}\n    ],\n    \"tools\": [{\n      \"name\": \"get_weather\",\n      \"description\": \"Get the current weather in a given location\",\n      \"strict\": true,\n      \"input_schema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"location\": {\n            \"type\": \"string\",\n            \"description\": \"The city and state, e.g. San Francisco, CA\"\n          },\n          \"unit\": {\n            \"type\": \"string\",\n            \"enum\": [\"celsius\", \"fahrenheit\"]\n          }\n        },\n        \"required\": [\"location\"],\n        \"additionalProperties\": false\n      }\n    }]\n  }'\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()\n\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    betas=[\"structured-outputs-2025-11-13\"],\n    messages=[\n        {\"role\": \"user\", \"content\": \"What's the weather like in San Francisco?\"}\n    ],\n    tools=[\n        {\n            \"name\": \"get_weather\",\n            \"description\": \"Get the current weather in a given location\",\n            \"strict\": True,  # Enable strict mode\n            \"input_schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"location\": {\n                        \"type\": \"string\",\n                        \"description\": \"The city and state, e.g. San Francisco, CA\"\n                    },\n                    \"unit\": {\n                        \"type\": \"string\",\n                        \"enum\": [\"celsius\", \"fahrenheit\"],\n                        \"description\": \"The unit of temperature, either 'celsius' or 'fahrenheit'\"\n                    }\n                },\n                \"required\": [\"location\"],\n                \"additionalProperties\": False\n            }\n        }\n    ]\n)\nprint(response.content)\ntypescript TypeScript\nimport Anthropic from '@anthropic-ai/sdk';\n\nconst client = new Anthropic({\n  apiKey: process.env.ANTHROPIC_API_KEY\n});\n\nconst response = await client.beta.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  betas: [\"structured-outputs-2025-11-13\"],\n  messages: [\n    {\n      role: \"user\",\n      content: \"What's the weather like in San Francisco?\"\n    }\n  ],\n  tools: [{\n    name: \"get_weather\",\n    description: \"Get the current weather in a given location\",\n    strict: true,  // Enable strict mode\n    input_schema: {\n      type: \"object\",\n      properties: {\n        location: {\n          type: \"string\",\n          description: \"The city and state, e.g. San Francisco, CA\"\n        },\n        unit: {\n          type: \"string\",\n          enum: [\"celsius\", \"fahrenheit\"]\n        }\n      },\n      required: [\"location\"],\n      additionalProperties: false\n    }\n  }]\n});\nconsole.log(response.content);\njson\n{\n  \"type\": \"tool_use\",\n  \"name\": \"get_weather\",\n  \"input\": {\n    \"location\": \"San Francisco, CA\"\n  }\n}\npython Python\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"structured-outputs-2025-11-13\"],\n    messages=[{\"role\": \"user\", \"content\": \"Search for flights to Tokyo\"}],\n    tools=[{\n        \"name\": \"search_flights\",\n        \"strict\": True,\n        \"input_schema\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"destination\": {\"type\": \"string\"},\n                \"departure_date\": {\"type\": \"string\", \"format\": \"date\"},\n                \"passengers\": {\"type\": \"integer\", \"enum\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}\n            },\n            \"required\": [\"destination\", \"departure_date\"],\n            \"additionalProperties\": False\n        }\n    }]\n)\ntypescript TypeScript\nconst response = await client.beta.messages.create({\n  model: \"claude-sonnet-4-5\",\n  betas: [\"structured-outputs-2025-11-13\"],\n  messages: [{\"role\": \"user\", \"content\": \"Search for flights to Tokyo\"}],\n  tools: [{\n    name: \"search_flights\",\n    strict: true,\n    input_schema: {\n      type: \"object\",\n      properties: {\n        destination: {type: \"string\"},\n        departure_date: {type: \"string\", format: \"date\"},\n        passengers: {type: \"integer\", enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}\n      },\n      required: [\"destination\", \"departure_date\"],\n      additionalProperties: false\n    }\n  }]\n});\npython Python\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"structured-outputs-2025-11-13\"],\n    messages=[{\"role\": \"user\", \"content\": \"Help me plan a trip to Paris for 2 people\"}],\n    tools=[\n        {\n            \"name\": \"search_flights\",\n            \"strict\": True,\n            \"input_schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"origin\": {\"type\": \"string\"},\n                    \"destination\": {\"type\": \"string\"},\n                    \"departure_date\": {\"type\": \"string\", \"format\": \"date\"},\n                    \"travelers\": {\"type\": \"integer\", \"enum\": [1, 2, 3, 4, 5, 6]}\n                },\n                \"required\": [\"origin\", \"destination\", \"departure_date\"],\n                \"additionalProperties\": False\n            }\n        },\n        {\n            \"name\": \"search_hotels\",\n            \"strict\": True,\n            \"input_schema\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"city\": {\"type\": \"string\"},\n                    \"check_in\": {\"type\": \"string\", \"format\": \"date\"},\n                    \"guests\": {\"type\": \"integer\", \"enum\": [1, 2, 3, 4]}\n                },\n                \"required\": [\"city\", \"check_in\"],\n                \"additionalProperties\": False\n            }\n        }\n    ]\n)\ntypescript TypeScript\nconst response = await client.beta.messages.create({\n  model: \"claude-sonnet-4-5\",\n  betas: [\"structured-outputs-2025-11-13\"],\n  messages: [{\"role\": \"user\", \"content\": \"Help me plan a trip to Paris for 2 people\"}],\n  tools: [\n    {\n      name: \"search_flights\",\n      strict: true,\n      input_schema: {\n        type: \"object\",\n        properties: {\n          origin: {type: \"string\"},\n          destination: {type: \"string\"},\n          departure_date: {type: \"string\", format: \"date\"},\n          travelers: {type: \"integer\", enum: [1, 2, 3, 4, 5, 6]}\n        },\n        required: [\"origin\", \"destination\", \"departure_date\"],\n        additionalProperties: false\n      }\n    },\n    {\n      name: \"search_hotels\",\n      strict: true,\n      input_schema: {\n        type: \"object\",\n        properties: {\n          city: {type: \"string\"},\n          check_in: {type: \"string\", format: \"date\"},\n          guests: {type: \"integer\", enum: [1, 2, 3, 4]}\n        },\n        required: [\"city\", \"check_in\"],\n        additionalProperties: false\n      }\n    }\n  ]\n});\npython Python\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5\",\n    betas=[\"structured-outputs-2025-11-13\"],\n    max_tokens=1024,\n    messages=[{\"role\": \"user\", \"content\": \"Help me plan a trip to Paris for next month\"}],\n    # JSON outputs: structured response format\n    output_format={\n        \"type\": \"json_schema\",\n        \"schema\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"summary\": {\"type\": \"string\"},\n                \"next_steps\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}\n            },\n            \"required\": [\"summary\", \"next_steps\"],\n            \"additionalProperties\": False\n        }\n    },\n    # Strict tool use: guaranteed tool parameters\n    tools=[{\n        \"name\": \"search_flights\",\n        \"strict\": True,\n        \"input_schema\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"destination\": {\"type\": \"string\"},\n                \"date\": {\"type\": \"string\", \"format\": \"date\"}\n            },\n            \"required\": [\"destination\", \"date\"],\n            \"additionalProperties\": False\n        }\n    }]\n)\ntypescript TypeScript\nconst response = await client.beta.messages.create({\n  model: \"claude-sonnet-4-5\",\n  betas: [\"structured-outputs-2025-11-13\"],\n  max_tokens: 1024,\n  messages: [{ role: \"user\", content: \"Help me plan a trip to Paris for next month\" }],\n  // JSON outputs: structured response format\n  output_format: {\n    type: \"json_schema\",\n    schema: {\n      type: \"object\",\n      properties: {\n        summary: { type: \"string\" },\n        next_steps: { type: \"array\", items: { type: \"string\" } }\n      },\n      required: [\"summary\", \"next_steps\"],\n      additionalProperties: false\n    }\n  },\n  // Strict tool use: guaranteed tool parameters\n  tools: [{\n    name: \"search_flights\",\n    strict: true,\n    input_schema: {\n      type: \"object\",\n      properties: {\n        destination: { type: \"string\" },\n        date: { type: \"string\", format: \"date\" }\n      },\n      required: [\"destination\", \"date\"],\n      additionalProperties: false\n    }\n  }]\n});\n```\n\n## Important considerations\n\n### Grammar compilation and caching\n\nStructured outputs use constrained sampling with compiled grammar artifacts. This introduces some performance characteristics to be aware of:\n\n- **First request latency**: The first time you use a specific schema, there will be additional latency while the grammar is compiled\n- **Automatic caching**: Compiled grammars are cached for 24 hours from last use, making subsequent requests much faster\n- **Cache invalidation**: The cache is invalidated if you change:\n  - The JSON schema structure\n  - The set of tools in your request (when using both structured outputs and tool use)\n  - Changing only `name` or `description` fields does not invalidate the cache\n\n### Prompt modification and token costs\n\nWhen using structured outputs, Claude automatically receives an additional system prompt explaining the expected output format. This means:\n\n- Your input token count will be slightly higher\n- The injected prompt costs you tokens like any other system prompt\n- Changing the `output_format` parameter will invalidate any [prompt cache](/docs/en/build-with-claude/prompt-caching) for that conversation thread\n\n### JSON Schema limitations\n\nStructured outputs support standard JSON Schema with some limitations. Both JSON outputs and strict tool use share these limitations.\n\n<section title=\"Supported features\">\n\n- All basic types: object, array, string, integer, number, boolean, null\n- `enum` (strings, numbers, bools, or nulls only - no complex types)\n- `const`\n- `anyOf` and `allOf` (with limitations - `allOf` with `$ref` not supported)\n- `$ref`, `$def`, and `definitions` (external `$ref` not supported)\n- `default` property for all supported types\n- `required` and `additionalProperties` (must be set to `false` for objects)\n- String formats: `date-time`, `time`, `date`, `duration`, `email`, `hostname`, `uri`, `ipv4`, `ipv6`, `uuid`\n- Array `minItems` (only values 0 and 1 supported)\n\n<section title=\"Not supported\">\n\n- Recursive schemas\n- Complex types within enums\n- External `$ref` (e.g., `'$ref': 'http://...'`)\n- Numerical constraints (`minimum`, `maximum`, `multipleOf`, etc.)\n- String constraints (`minLength`, `maxLength`)\n- Array constraints beyond `minItems` of 0 or 1\n- `additionalProperties` set to anything other than `false`\n\nIf you use an unsupported feature, you'll receive a 400 error with details.\n\n<section title=\"Pattern support (regex)\">\n\n**Supported regex features:**\n- Full matching (`^...$`) and partial matching\n- Quantifiers: `*`, `+`, `?`, simple `{n,m}` cases\n- Character classes: `[]`, `.`, `\\d`, `\\w`, `\\s`\n- Groups: `(...)`\n\n**NOT supported:**\n- Backreferences to groups (e.g., `\\1`, `\\2`)\n- Lookahead/lookbehind assertions (e.g., `(?=...)`, `(?!...)`)\n- Word boundaries: `\\b`, `\\B`\n- Complex `{n,m}` quantifiers with large ranges\n\nSimple regex patterns work well. Complex patterns may result in 400 errors.\n\n<Tip>\nThe Python and TypeScript SDKs can automatically transform schemas with unsupported features by removing them and adding constraints to field descriptions. See [SDK-specific methods](#sdk-specific-methods) for details.\n</Tip>\n\nWhile structured outputs guarantee schema compliance in most cases, there are scenarios where the output may not match your schema:\n\n**Refusals** (`stop_reason: \"refusal\"`)\n\nClaude maintains its safety and helpfulness properties even when using structured outputs. If Claude refuses a request for safety reasons:\n\n- The response will have `stop_reason: \"refusal\"`\n- You'll receive a 200 status code\n- You'll be billed for the tokens generated\n- The output may not match your schema because the refusal message takes precedence over schema constraints\n\n**Token limit reached** (`stop_reason: \"max_tokens\"`)\n\nIf the response is cut off due to reaching the `max_tokens` limit:\n\n- The response will have `stop_reason: \"max_tokens\"`\n- The output may be incomplete and not match your schema\n- Retry with a higher `max_tokens` value to get the complete structured output\n\n### Schema validation errors\n\nIf your schema uses unsupported features or is too complex, you'll receive a 400 error:\n\n**\"Too many recursive definitions in schema\"**\n- Cause: Schema has excessive or cyclic recursive definitions\n- Solution: Simplify schema structure, reduce nesting depth\n\n**\"Schema is too complex\"**\n- Cause: Schema exceeds complexity limits\n- Solution: Break into smaller schemas, simplify structure, or reduce the number of tools marked as `strict: true`\n\nFor persistent issues with valid schemas, [contact support](https://support.claude.com/en/articles/9015913-how-to-get-support) with your schema definition.\n\n## Feature compatibility\n\n**Works with:**\n- **[Batch processing](/docs/en/build-with-claude/batch-processing)**: Process structured outputs at scale with 50% discount\n- **[Token counting](/docs/en/build-with-claude/token-counting)**: Count tokens without compilation\n- **[Streaming](/docs/en/build-with-claude/streaming)**: Stream structured outputs like normal responses\n- **Combined usage**: Use JSON outputs (`output_format`) and strict tool use (`strict: true`) together in the same request\n\n**Incompatible with:**\n- **[Citations](/docs/en/build-with-claude/citations)**: Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_format`.\n- **[Message Prefilling](/docs/en/build-with-claude/prompt-engineering/prefill-claudes-response)**: Incompatible with JSON outputs\n\n<Tip>\n**Grammar scope**: Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [Extended Thinking](/docs/en/build-with-claude/extended-thinking)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.\n</Tip>",
+  "code_samples": [
+    {
+      "code": "</section>\n\n#### How SDK transformation works\n\nBoth Python and TypeScript SDKs automatically transform schemas with unsupported features:\n\n1. **Remove unsupported constraints** (e.g., `minimum`, `maximum`, `minLength`, `maxLength`)\n2. **Update descriptions** with constraint info (e.g., \"Must be at least 100\"), when the constraint is not directly supported with structured outputs\n3. **Add `additionalProperties: false`** to all objects\n4. **Filter string formats** to supported list only\n5. **Validate responses** against your original schema (with all constraints)\n\nThis means Claude receives a simplified schema, but your code still enforces all constraints through validation.\n\n**Example:** A Pydantic field with `minimum: 100` becomes a plain integer in the sent schema, but the description is updated to \"Must be at least 100\", and the SDK validates the response against the original constraint.\n\n### Common use cases\n\n<section title=\"Data extraction\">\n\nExtract structured data from unstructured text:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n</section>\n\n<section title=\"Classification\">\n\nClassify content with structured categories:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n</section>\n\n<section title=\"API response formatting\">\n\nGenerate API-ready responses:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n</section>\n\n## Strict tool use\n\nStrict tool use validates tool parameters, ensuring Claude calls your functions with correctly-typed arguments. Use strict tool use when you need to:\n\n- Validate tool parameters\n- Build agentic workflows\n- Ensure type-safe function calls\n- Handle complex tools with nested properties\n\n### Why strict tool use matters for agents\n\nBuilding reliable agentic systems requires guaranteed schema conformance. Without strict mode, Claude might return incompatible types (`\"2\"` instead of `2`) or missing required fields, breaking your functions and causing runtime errors.\n\nStrict tool use guarantees type-safe parameters:\n- Functions receive correctly-typed arguments every time\n- No need to validate and retry tool calls\n- Production-ready agents that work consistently at scale\n\nFor example, suppose a booking system needs `passengers: int`. Without strict mode, Claude might provide `passengers: \"two\"` or `passengers: \"2\"`. With `strict: true`, the response will always contain `passengers: 2`.\n\n### Quick start\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n**Response format:** Tool use blocks with validated inputs in `response.content[x].input`",
+      "language": "unknown"
+    },
+    {
+      "code": "**Guarantees:**\n- Tool `input` strictly follows the `input_schema`\n- Tool `name` is always valid (from provided tools or server tools)\n\n### How it works\n\n<Steps>\n  <Step title=\"Define your tool schema\">\n    Create a JSON schema for your tool's `input_schema`. The schema uses standard JSON Schema format with some limitations (see [JSON Schema limitations](#json-schema-limitations)).\n  </Step>\n  <Step title=\"Add strict: true\">\n    Set `\"strict\": true` as a top-level property in your tool definition, alongside `name`, `description`, and `input_schema`.\n  </Step>\n  <Step title=\"Include the beta header\">\n    Add the `anthropic-beta: structured-outputs-2025-11-13` header to your request.\n  </Step>\n  <Step title=\"Handle tool calls\">\n    When Claude uses the tool, the `input` field in the tool_use block will strictly follow your `input_schema`, and the `name` will always be valid.\n  </Step>\n</Steps>\n\n### Common use cases\n\n<section title=\"Validated tool inputs\">\n\nEnsure tool parameters exactly match your schema:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n</section>\n\n<section title=\"Agentic workflow with multiple validated tools\">\n\nBuild reliable multi-step agents with guaranteed tool parameters:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n</section>\n\n## Using both features together\n\nJSON outputs and strict tool use solve different problems and can be used together:\n\n- **JSON outputs** control Claude's response format (what Claude says)\n- **Strict tool use** validates tool parameters (how Claude calls your functions)\n\nWhen combined, Claude can call tools with guaranteed-valid parameters AND return structured JSON responses. This is useful for agentic workflows where you need both reliable tool calls and structured final outputs.\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Common use cases",
+      "id": "common-use-cases"
+    },
+    {
+      "level": "h2",
+      "text": "Strict tool use",
+      "id": "strict-tool-use"
+    },
+    {
+      "level": "h3",
+      "text": "Why strict tool use matters for agents",
+      "id": "why-strict-tool-use-matters-for-agents"
+    },
+    {
+      "level": "h3",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h3",
+      "text": "How it works",
+      "id": "how-it-works"
+    },
+    {
+      "level": "h3",
+      "text": "Common use cases",
+      "id": "common-use-cases"
+    },
+    {
+      "level": "h2",
+      "text": "Using both features together",
+      "id": "using-both-features-together"
+    },
+    {
+      "level": "h2",
+      "text": "Important considerations",
+      "id": "important-considerations"
+    },
+    {
+      "level": "h3",
+      "text": "Grammar compilation and caching",
+      "id": "grammar-compilation-and-caching"
+    },
+    {
+      "level": "h3",
+      "text": "Prompt modification and token costs",
+      "id": "prompt-modification-and-token-costs"
+    },
+    {
+      "level": "h3",
+      "text": "JSON Schema limitations",
+      "id": "json-schema-limitations"
+    },
+    {
+      "level": "h3",
+      "text": "Invalid outputs",
+      "id": "invalid-outputs"
+    },
+    {
+      "level": "h3",
+      "text": "Schema validation errors",
+      "id": "schema-validation-errors"
+    },
+    {
+      "level": "h2",
+      "text": "Feature compatibility",
+      "id": "feature-compatibility"
+    }
+  ],
+  "url": "llms-txt#modify-schema-if-needed",
+  "links": []
+}

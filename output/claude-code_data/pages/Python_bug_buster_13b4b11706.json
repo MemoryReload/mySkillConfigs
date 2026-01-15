@@ -1,0 +1,32 @@
+{
+  "title": "Python bug buster",
+  "content": "Detect and fix bugs in Python code.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n|        | Content                                                                                                                                                                                                                                                                                                                                                             |\n| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| System | Your task is to analyze the provided Python code snippet, identify any bugs or errors present, and provide a corrected version of the code that resolves these issues. Explain the problems you found in the original code and how your fixes address them. The corrected code should be functional, efficient, and adhere to best practices in Python programming. |\n| User   | def calculate_average(nums): <br/> sum = 0 <br/> for num in nums: <br/> sum += num <br/> average = sum / len(nums) <br/> return average <br/><br/> numbers = [10, 20, 30, 40, 50] <br/> result = calculate_average(numbers) <br/> print(\"The average is:\", results)                                                                                                 |\n\nCorrected Python code:\n\n1. Changed the variable name \"sum\" to \"total\" to avoid using the built-in Python function \"sum()\".\n    2. Fixed the typo in the print statement, changing \"results\" to \"result\" to correctly reference the variable.\n\n<Tabs>\n<Tab title=\"Python\">\n\n</Tab>\n<Tab title=\"TypeScript\">\n\n</Tab>\n  <Tab title=\"AWS Bedrock Python\">\n```python\nfrom anthropic import AnthropicBedrock",
+  "code_samples": [
+    {
+      "code": "Explanation:\n\n    1. Changed the variable name \"sum\" to \"total\" to avoid using the built-in Python function \"sum()\".\n    2. Fixed the typo in the print statement, changing \"results\" to \"result\" to correctly reference the variable.\n\n## API Request\n\n<Tabs>\n<Tab title=\"Python\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"TypeScript\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n  <Tab title=\"AWS Bedrock Python\">",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Example Output",
+      "id": "example-output"
+    },
+    {
+      "level": "h2",
+      "text": "API Request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#python-bug-buster",
+  "links": []
+}

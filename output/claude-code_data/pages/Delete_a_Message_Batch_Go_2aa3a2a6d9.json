@@ -1,0 +1,34 @@
+{
+  "title": "Delete a Message Batch (Go)",
+  "content": "URL: https://platform.claude.com/docs/en/api/go/messages/batches/delete\n\n`client.Messages.Batches.Delete(ctx, messageBatchID) (*DeletedMessageBatch, error)`\n\n**delete** `/v1/messages/batches/{message_batch_id}`\n\nDelete a Message Batch.\n\nMessage Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.\n\nLearn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)\n\n- `messageBatchID string`\n\nID of the Message Batch.\n\n- `type DeletedMessageBatch struct{…}`\n\nID of the Message Batch.\n\n- `Type MessageBatchDeleted`\n\nFor Message Batches, this is always `\"message_batch_deleted\"`.\n\n- `const MessageBatchDeletedMessageBatchDeleted MessageBatchDeleted = \"message_batch_deleted\"`",
+  "code_samples": [
+    {
+      "code": "package main\n\nimport (\n  \"context\"\n  \"fmt\"\n\n  \"github.com/anthropics/anthropic-sdk-go\"\n  \"github.com/anthropics/anthropic-sdk-go/option\"\n)\n\nfunc main() {\n  client := anthropic.NewClient(\n    option.WithAPIKey(\"my-anthropic-api-key\"),\n  )\n  deletedMessageBatch, err := client.Messages.Batches.Delete(context.TODO(), \"message_batch_id\")\n  if err != nil {\n    panic(err.Error())\n  }\n  fmt.Printf(\"%+v\\n\", deletedMessageBatch.ID)\n}",
+      "language": "go"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Delete",
+      "id": "delete"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#delete-a-message-batch-(go)",
+  "links": []
+}

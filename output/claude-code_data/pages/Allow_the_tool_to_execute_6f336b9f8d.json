@@ -1,0 +1,8 @@
+{
+  "title": "Allow the tool to execute",
+  "content": "return PermissionResultAllow(updated_input=input_data)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#allow-the-tool-to-execute",
+  "links": []
+}

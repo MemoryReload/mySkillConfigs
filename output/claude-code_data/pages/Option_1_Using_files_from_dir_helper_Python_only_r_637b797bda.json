@@ -1,0 +1,8 @@
+{
+  "title": "Option 1: Using files_from_dir helper (Python only, recommended)",
+  "content": "from anthropic.lib import files_from_dir\n\nskill = client.beta.skills.create(\n    display_title=\"Financial Analysis\",\n    files=files_from_dir(\"/path/to/financial_analysis_skill\"),\n    betas=[\"skills-2025-10-02\"]\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#option-1:-using-files_from_dir-helper-(python-only,-recommended)",
+  "links": []
+}

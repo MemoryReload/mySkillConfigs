@@ -1,0 +1,8 @@
+{
+  "title": "In tool results",
+  "content": "tool_result = [\n    SearchResultBlockParam(\n        type=\"search_result\",\n        source=\"https://docs.company.com/guide\",\n        title=\"User Guide\",\n        content=[TextBlockParam(type=\"text\", text=\"Configuration details...\")],\n        citations={\"enabled\": True}\n    ),\n    TextBlockParam(\n        type=\"text\",\n        text=\"Additional context: This applies to version 2.0 and later.\"\n    )\n]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#in-tool-results",
+  "links": []
+}

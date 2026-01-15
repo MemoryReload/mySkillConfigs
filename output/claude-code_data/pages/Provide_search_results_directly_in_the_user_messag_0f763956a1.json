@@ -1,0 +1,55 @@
+{
+  "title": "Provide search results directly in the user message",
+  "content": "response = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    messages=[\n        MessageParam(\n            role=\"user\",\n            content=[\n                SearchResultBlockParam(\n                    type=\"search_result\",\n                    source=\"https://docs.company.com/api-reference\",\n                    title=\"API Reference - Authentication\",\n                    content=[\n                        TextBlockParam(\n                            type=\"text\",\n                            text=\"All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.\"\n                        )\n                    ],\n                    citations={\"enabled\": True}\n                ),\n                SearchResultBlockParam(\n                    type=\"search_result\",\n                    source=\"https://docs.company.com/quickstart\",\n                    title=\"Getting Started Guide\",\n                    content=[\n                        TextBlockParam(\n                            type=\"text\",\n                            text=\"To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.\"\n                        )\n                    ],\n                    citations={\"enabled\": True}\n                ),\n                TextBlockParam(\n                    type=\"text\",\n                    text=\"Based on these search results, how do I authenticate API requests and what are the rate limits?\"\n                )\n            ]\n        )\n    ]\n)\n\nprint(response.model_dump_json(indent=2))\ntypescript TypeScript\nimport { Anthropic } from '@anthropic-ai/sdk';\n\nconst anthropic = new Anthropic();\n\n// Provide search results directly in the user message\nconst response = await anthropic.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  messages: [\n    {\n      role: \"user\",\n      content: [\n        {\n          type: \"search_result\" as const,\n          source: \"https://docs.company.com/api-reference\",\n          title: \"API Reference - Authentication\",\n          content: [\n            {\n              type: \"text\" as const,\n              text: \"All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.\"\n            }\n          ],\n          citations: { enabled: true }\n        },\n        {\n          type: \"search_result\" as const,\n          source: \"https://docs.company.com/quickstart\",\n          title: \"Getting Started Guide\",\n          content: [\n            {\n              type: \"text\" as const,\n              text: \"To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.\"\n            }\n          ],\n          citations: { enabled: true }\n        },\n        {\n          type: \"text\" as const,\n          text: \"Based on these search results, how do I authenticate API requests and what are the rate limits?\"\n        }\n      ]\n    }\n  ]\n});\n\nconsole.log(response);\nbash Shell\n#!/bin/sh\ncurl https://api.anthropic.com/v1/messages \\\n     --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n     --header \"anthropic-version: 2023-06-01\" \\\n     --header \"content-type: application/json\" \\\n     --data \\\n'{\n    \"model\": \"claude-sonnet-4-5\",\n    \"max_tokens\": 1024,\n    \"messages\": [\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\n                    \"type\": \"search_result\",\n                    \"source\": \"https://docs.company.com/api-reference\",\n                    \"title\": \"API Reference - Authentication\",\n                    \"content\": [\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.\"\n                        }\n                    ],\n                    \"citations\": {\n                        \"enabled\": true\n                    }\n                },\n                {\n                    \"type\": \"search_result\",\n                    \"source\": \"https://docs.company.com/quickstart\",\n                    \"title\": \"Getting Started Guide\",\n                    \"content\": [\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.\"\n                        }\n                    ],\n                    \"citations\": {\n                        \"enabled\": true\n                    }\n                },\n                {\n                    \"type\": \"text\",\n                    \"text\": \"Based on these search results, how do I authenticate API requests and what are the rate limits?\"\n                }\n            ]\n        }\n    ]\n}'\njson\n{\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"To authenticate API requests, you need to include an API key in the Authorization header\",\n      \"citations\": [\n        {\n          \"type\": \"search_result_location\",\n          \"source\": \"https://docs.company.com/api-reference\",\n          \"title\": \"API Reference - Authentication\",\n          \"cited_text\": \"All API requests must include an API key in the Authorization header\",\n          \"search_result_index\": 0,\n          \"start_block_index\": 0,\n          \"end_block_index\": 0\n        }\n      ]\n    },\n    {\n      \"type\": \"text\",\n      \"text\": \". You can generate API keys from your dashboard\",\n      \"citations\": [\n        {\n          \"type\": \"search_result_location\",\n          \"source\": \"https://docs.company.com/api-reference\",\n          \"title\": \"API Reference - Authentication\",\n          \"cited_text\": \"Keys can be generated from the dashboard\",\n          \"search_result_index\": 0,\n          \"start_block_index\": 0,\n          \"end_block_index\": 0\n        }\n      ]\n    },\n    {\n      \"type\": \"text\",\n      \"text\": \". The rate limits are 1,000 requests per hour for the standard tier and 10,000 requests per hour for the premium tier.\",\n      \"citations\": [\n        {\n          \"type\": \"search_result_location\",\n          \"source\": \"https://docs.company.com/api-reference\",\n          \"title\": \"API Reference - Authentication\",\n          \"cited_text\": \"Rate limits: 1000 requests per hour for standard tier, 10000 for premium\",\n          \"search_result_index\": 0,\n          \"start_block_index\": 0,\n          \"end_block_index\": 0\n        }\n      ]\n    }\n  ]\n}\njson\n{\n  \"type\": \"search_result\",\n  \"source\": \"https://docs.company.com/api-guide\",\n  \"title\": \"API Documentation\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"Authentication: All API requests require an API key.\"\n    },\n    {\n      \"type\": \"text\",\n      \"text\": \"Rate Limits: The API allows 1000 requests per hour per key.\"\n    },\n    {\n      \"type\": \"text\",\n      \"text\": \"Error Handling: The API returns standard HTTP status codes.\"\n    }\n  ]\n}\npython",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Claude's response with citations\n\nRegardless of how search results are provided, Claude automatically includes citations when using information from them:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Citation fields\n\nEach citation includes:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `type` | string | Always `\"search_result_location\"` for search result citations |\n| `source` | string | The source from the original search result |\n| `title` | string or null | The title from the original search result |\n| `cited_text` | string | The exact text being cited |\n| `search_result_index` | integer | Index of the search result (0-based) |\n| `start_block_index` | integer | Starting position in the content array |\n| `end_block_index` | integer | Ending position in the content array |\n\nNote: The `search_result_index` refers to the index of the search result content block (0-based), regardless of how the search results were provided (tool call or top-level content).\n\n## Multiple content blocks\n\nSearch results can contain multiple text blocks in the `content` array:",
+      "language": "unknown"
+    },
+    {
+      "code": "Claude can cite specific blocks using the `start_block_index` and `end_block_index` fields.\n\n## Advanced usage\n\n### Combining both methods\n\nYou can use both tool-based and top-level search results in the same conversation:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Claude's response with citations",
+      "id": "claude's-response-with-citations"
+    },
+    {
+      "level": "h3",
+      "text": "Citation fields",
+      "id": "citation-fields"
+    },
+    {
+      "level": "h2",
+      "text": "Multiple content blocks",
+      "id": "multiple-content-blocks"
+    },
+    {
+      "level": "h2",
+      "text": "Advanced usage",
+      "id": "advanced-usage"
+    },
+    {
+      "level": "h3",
+      "text": "Combining both methods",
+      "id": "combining-both-methods"
+    }
+  ],
+  "url": "llms-txt#provide-search-results-directly-in-the-user-message",
+  "links": []
+}

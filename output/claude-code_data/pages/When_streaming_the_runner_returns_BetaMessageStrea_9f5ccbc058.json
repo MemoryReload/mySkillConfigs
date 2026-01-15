@@ -1,0 +1,55 @@
+{
+  "title": "When streaming, the runner returns BetaMessageStream",
+  "content": "for message_stream in runner:\n    for event in message_stream:\n        print('event:', event)\n    print('message:', message_stream.get_final_message())\n\nprint(runner.until_done())\ntypescript\nconst runner = anthropic.beta.messages.toolRunner({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 1000,\n  messages: [{ role: 'user', content: 'What is the weather in San Francisco?' }],\n  tools: [getWeatherTool],\n  stream: true,\n});\n\n// When streaming, the runner returns BetaMessageStream\nfor await (const messageStream of runner) {\n  for await (const event of messageStream) {\n    console.log('event:', event);\n  }\n  console.log('message:', await messageStream.finalMessage());\n}\n\nconsole.log(await runner);\nruby\nrunner = client.beta.messages.tool_runner(\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  tools: [CalculateSum.new],\n  messages: [{role: \"user\", content: \"What is 15 + 27?\"}]\n)\n\nrunner.each_streaming do |event|\n  case event\n  when Anthropic::Streaming::TextEvent\n    print event.text\n  when Anthropic::Streaming::ToolUseEvent\n    puts \"\\nTool called: #{event.tool_name}\"\n  end\nend\n\ntool_choice = {\"type\": \"tool\", \"name\": \"get_weather\"}\njson JSON\n{\n  \"role\": \"assistant\",\n  \"content\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"I'll help you check the current weather and time in San Francisco.\"\n    },\n    {\n      \"type\": \"tool_use\",\n      \"id\": \"toolu_01A09q90qw90lq917835lq9\",\n      \"name\": \"get_weather\",\n      \"input\": {\"location\": \"San Francisco, CA\"}\n    }\n  ]\n}\npython Python\nimport anthropic\n\nclient = anthropic.Anthropic()",
+  "code_samples": [
+    {
+      "code": "</Tab>\n<Tab title=\"TypeScript\">\n\nSet `stream: true` and use `finalMessage()` to get the accumulated message.",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"Ruby\">\n\nUse `each_streaming` to iterate over streaming events.",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n</Tabs>\n\n<Note>\nThe SDK tool runner is in beta. The rest of this document covers manual tool implementation.\n</Note>\n\n## Controlling Claude's output\n\n### Forcing tool use\n\nIn some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude thinks it can provide an answer without using a tool. You can do this by specifying the tool in the `tool_choice` field like so:",
+      "language": "unknown"
+    },
+    {
+      "code": "When working with the tool_choice parameter, we have four possible options:\n\n- `auto` allows Claude to decide whether to call any provided tools or not. This is the default value when `tools` are provided.\n- `any` tells Claude that it must use one of the provided tools, but doesn't force a particular tool.\n- `tool` allows us to force Claude to always use a particular tool.\n- `none` prevents Claude from using any tools. This is the default value when no `tools` are provided.\n\n<Note>\nWhen using [prompt caching](/docs/en/build-with-claude/prompt-caching#what-invalidates-the-cache), changes to the `tool_choice` parameter will invalidate cached message blocks. Tool definitions and system prompts remain cached, but message content must be reprocessed.\n</Note>\n\nThis diagram illustrates how each option works:\n\n<Frame>\n  ![Image](/docs/images/tool_choice.png)\n</Frame>\n\nNote that when you have `tool_choice` as `any` or `tool`, we will prefill the assistant message to force a tool to be used. This means that the models will not emit a natural language response or explanation before `tool_use` content blocks, even if explicitly asked to do so.\n\n<Note>\nWhen using [extended thinking](/docs/en/build-with-claude/extended-thinking) with tool use, `tool_choice: {\"type\": \"any\"}` and `tool_choice: {\"type\": \"tool\", \"name\": \"...\"}` are not supported and will result in an error. Only `tool_choice: {\"type\": \"auto\"}` (the default) and `tool_choice: {\"type\": \"none\"}` are compatible with extended thinking.\n</Note>\n\nOur testing has shown that this should not reduce performance. If you would like the model to provide natural language context or explanations while still requesting that the model use a specific tool, you can use `{\"type\": \"auto\"}` for `tool_choice` (the default) and add explicit instructions in a `user` message. For example: `What's the weather like in London? Use the get_weather tool in your response.`\n\n<Tip>\n**Guaranteed tool calls with strict tools**\n\nCombine `tool_choice: {\"type\": \"any\"}` with [strict tool use](/docs/en/build-with-claude/structured-outputs) to guarantee both that one of your tools will be called AND that the tool inputs strictly follow your schema. Set `strict: true` on your tool definitions to enable schema validation.\n</Tip>\n\n### JSON output\n\nTools do not necessarily need to be client functions — you can use tools anytime you want the model to return JSON output that follows a provided schema. For example, you might use a `record_summary` tool with a particular schema. See [Tool use with Claude](/docs/en/agents-and-tools/tool-use/overview) for a full working example.\n\n### Model responses with tools\n\nWhen using tools, Claude will often comment on what it's doing or respond naturally to the user before invoking tools.\n\nFor example, given the prompt \"What's the weather like in San Francisco right now, and what time is it there?\", Claude might respond with:",
+      "language": "unknown"
+    },
+    {
+      "code": "This natural response style helps users understand what Claude is doing and creates a more conversational interaction. You can guide the style and content of these responses through your system prompts and by providing `<examples>` in your prompts.\n\nIt's important to note that Claude may use various phrasings and approaches when explaining its actions. Your code should treat these responses like any other assistant-generated text, and not rely on specific formatting conventions.\n\n### Parallel tool use\n\nBy default, Claude may use multiple tools to answer a user query. You can disable this behavior by:\n\n- Setting `disable_parallel_tool_use=true` when tool_choice type is `auto`, which ensures that Claude uses **at most one** tool\n- Setting `disable_parallel_tool_use=true` when tool_choice type is `any` or `tool`, which ensures that Claude uses **exactly one** tool\n\n<section title=\"Complete parallel tool use example\">\n\n<Note>\n**Simpler with Tool runner**: The example below shows manual parallel tool handling. For most use cases, [tool runner](#tool-runner-beta) automatically handle parallel tool execution with much less code.\n</Note>\n\nHere's a complete example showing how to properly format parallel tool calls in the message history:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Controlling Claude's output",
+      "id": "controlling-claude's-output"
+    },
+    {
+      "level": "h3",
+      "text": "Forcing tool use",
+      "id": "forcing-tool-use"
+    },
+    {
+      "level": "h3",
+      "text": "JSON output",
+      "id": "json-output"
+    },
+    {
+      "level": "h3",
+      "text": "Model responses with tools",
+      "id": "model-responses-with-tools"
+    },
+    {
+      "level": "h3",
+      "text": "Parallel tool use",
+      "id": "parallel-tool-use"
+    }
+  ],
+  "url": "llms-txt#when-streaming,-the-runner-returns-betamessagestream",
+  "links": []
+}

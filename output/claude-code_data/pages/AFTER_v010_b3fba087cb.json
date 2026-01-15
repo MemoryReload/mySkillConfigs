@@ -1,0 +1,23 @@
+{
+  "title": "AFTER (v0.1.0)",
+  "content": "from claude_agent_sdk import query, ClaudeAgentOptions\n\noptions = ClaudeAgentOptions(\n    model=\"claude-sonnet-4-5\",\n    permission_mode=\"acceptEdits\"\n)\ntypescript TypeScript\n// BEFORE (v0.0.x) - Used Claude Code's system prompt by default\nconst result = query({ prompt: \"Hello\" });\n\n// AFTER (v0.1.0) - Uses empty system prompt by default\n// To get the old behavior, explicitly request Claude Code's preset:\nconst result = query({\n  prompt: \"Hello\",\n  options: {\n    systemPrompt: { type: \"preset\", preset: \"claude_code\" }\n  }\n});\n\n// Or use a custom system prompt:\nconst result = query({\n  prompt: \"Hello\",\n  options: {\n    systemPrompt: \"You are a helpful coding assistant\"\n  }\n});\npython Python",
+  "code_samples": [
+    {
+      "code": "**Why this changed:** The type name now matches the \"Claude Agent SDK\" branding and provides consistency across the SDK's naming conventions.\n\n### System prompt no longer default\n\n**What changed:** The SDK no longer uses Claude Code's system prompt by default.\n\n**Migration:**\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "System prompt no longer default",
+      "id": "system-prompt-no-longer-default"
+    }
+  ],
+  "url": "llms-txt#after-(v0.1.0)",
+  "links": []
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Agent Skills",
+  "content": "Agent Skills are modular capabilities that extend Claude's functionality. Each Skill packages instructions, metadata, and optional resources (scripts, templates) that Claude uses automatically when relevant.\n\nSkills are reusable, filesystem-based resources that provide Claude with domain-specific expertise: workflows, context, and best practices that transform general-purpose agents into specialists. Unlike prompts (conversation-level instructions for one-off tasks), Skills load on-demand and eliminate the need to repeatedly provide the same guidance across multiple conversations.\n\n**Key benefits**:\n- **Specialize Claude**: Tailor capabilities for domain-specific tasks\n- **Reduce repetition**: Create once, use automatically\n- **Compose capabilities**: Combine Skills to build complex workflows\n\n<Note>\nFor a deep dive into the architecture and real-world applications of Agent Skills, read our engineering blog: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).\n</Note>\n\nAnthropic provides pre-built Agent Skills for common document tasks (PowerPoint, Excel, Word, PDF), and you can create your own custom Skills. Both work the same way. Claude automatically uses them when relevant to your request.\n\n**Pre-built Agent Skills** are available to all users on claude.ai and via the Claude API. See the [Available Skills](#available-skills) section below for the complete list.\n\n**Custom Skills** let you package domain expertise and organizational knowledge. They're available across Claude's products: create them in Claude Code, upload them via the API, or add them in claude.ai settings.\n\n<Note>\n**Get started:**\n- For pre-built Agent Skills: See the [quickstart tutorial](/docs/en/agents-and-tools/agent-skills/quickstart) to start using PowerPoint, Excel, Word, and PDF skills in the API\n- For custom Skills: See the [Agent Skills Cookbook](https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction) to learn how to create your own Skills\n</Note>\n\nSkills leverage Claude's VM environment to provide capabilities beyond what's possible with prompts alone. Claude operates in a virtual machine with filesystem access, allowing Skills to exist as directories containing instructions, executable code, and reference materials, organized like an onboarding guide you'd create for a new team member.\n\nThis filesystem-based architecture enables **progressive disclosure**: Claude loads information in stages as needed, rather than consuming context upfront.\n\n### Three types of Skill content, three levels of loading\n\nSkills can contain three types of content, each loaded at different times:\n\n### Level 1: Metadata (always loaded)\n\n**Content type: Instructions**. The Skill's YAML frontmatter provides discovery information:\n\nClaude loads this metadata at startup and includes it in the system prompt. This lightweight approach means you can install many Skills without context penalty; Claude only knows each Skill exists and when to use it.\n\n### Level 2: Instructions (loaded when triggered)\n\n**Content type: Instructions**. The main body of SKILL.md contains procedural knowledge: workflows, best practices, and guidance:",
+  "code_samples": [
+    {
+      "code": "---\nname: pdf-processing\ndescription: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.\n---",
+      "language": "yaml"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Why use Skills",
+      "id": "why-use-skills"
+    },
+    {
+      "level": "h2",
+      "text": "Using Skills",
+      "id": "using-skills"
+    },
+    {
+      "level": "h2",
+      "text": "How Skills work",
+      "id": "how-skills-work"
+    },
+    {
+      "level": "h3",
+      "text": "Three types of Skill content, three levels of loading",
+      "id": "three-types-of-skill-content,-three-levels-of-loading"
+    },
+    {
+      "level": "h3",
+      "text": "Level 1: Metadata (always loaded)",
+      "id": "level-1:-metadata-(always-loaded)"
+    },
+    {
+      "level": "h3",
+      "text": "Level 2: Instructions (loaded when triggered)",
+      "id": "level-2:-instructions-(loaded-when-triggered)"
+    }
+  ],
+  "url": "llms-txt#agent-skills",
+  "links": []
+}

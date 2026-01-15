@@ -1,0 +1,59 @@
+{
+  "title": "Hosting the Agent SDK",
+  "content": "Deploy and host Claude Agent SDK in production environments\n\nThe Claude Agent SDK differs from traditional stateless LLM APIs in that it maintains conversational state and executes commands in a persistent environment. This guide covers the architecture, hosting considerations, and best practices for deploying SDK-based agents in production.\n\n<Info>\nFor security hardening beyond basic sandboxing—including network controls, credential management, and isolation options—see [Secure Deployment](/docs/en/agent-sdk/secure-deployment).\n</Info>\n\n## Hosting Requirements\n\n### Container-Based Sandboxing\n\nFor security and isolation, the SDK should run inside a sandboxed container environment. This provides process isolation, resource limits, network control, and ephemeral filesystems.\n\nThe SDK also supports [programmatic sandbox configuration](/docs/en/agent-sdk/typescript#sandbox-settings) for command execution.\n\n### System Requirements\n\nEach SDK instance requires:\n\n- **Runtime dependencies**\n  - Python 3.10+ (for Python SDK) or Node.js 18+ (for TypeScript SDK)\n  - Node.js (required by Claude Code CLI)\n  - Claude Code CLI: `npm install -g @anthropic-ai/claude-code`\n\n- **Resource allocation**\n  - Recommended: 1GiB RAM, 5GiB of disk, and 1 CPU (vary this based on your task as needed)\n\n- **Network access**\n  - Outbound HTTPS to `api.anthropic.com`\n  - Optional: Access to MCP servers or external tools\n\n## Understanding the SDK Architecture\n\nUnlike stateless API calls, the Claude Agent SDK operates as a **long-running process** that:\n- **Executes commands** in a persistent shell environment\n- **Manages file operations** within a working directory\n- **Handles tool execution** with context from previous interactions\n\n## Sandbox Provider Options\n\nSeveral providers specialize in secure container environments for AI code execution:\n\n- **[Modal Sandbox](https://modal.com/docs/guide/sandbox)** - [demo implementation](https://modal.com/docs/examples/claude-slack-gif-creator)\n- **[Cloudflare Sandboxes](https://github.com/cloudflare/sandbox-sdk)**\n- **[Daytona](https://www.daytona.io/)**\n- **[E2B](https://e2b.dev/)**\n- **[Fly Machines](https://fly.io/docs/machines/)**\n- **[Vercel Sandbox](https://vercel.com/docs/functions/sandbox)**\n\nFor self-hosted options (Docker, gVisor, Firecracker) and detailed isolation configuration, see [Isolation Technologies](/docs/en/agent-sdk/secure-deployment#isolation-technologies).\n\n## Production Deployment Patterns\n\n### Pattern 1: Ephemeral Sessions\n\nCreate a new container for each user task, then destroy it when complete.\n\nBest for one-off tasks, the user may still interact with the AI while the task is completing, but once completed the container is destroyed.\n\n**Examples:**\n- Bug Investigation & Fix: Debug and resolve a specific issue with relevant context\n- Invoice Processing: Extract and structure data from receipts/invoices for accounting systems\n- Translation Tasks: Translate documents or content batches between languages\n- Image/Video Processing: Apply transformations, optimizations, or extract metadata from media files\n\n### Pattern 2: Long-Running Sessions\n\nMaintain persistent container instances for long running tasks. Often times running _multiple_ Claude Agent processes inside of the container based on demand.\n\nBest for proactive agents that take action without the users input, agents that serve content or agents that process high amounts of messages.\n\n**Examples:**\n- Email Agent: Monitors incoming emails and autonomously triages, responds, or takes actions based on content\n- Site Builder: Hosts custom websites per user with live editing capabilities served through container ports\n- High-Frequency Chat Bots: Handles continuous message streams from platforms like Slack where rapid response times are critical\n\n### Pattern 3: Hybrid Sessions\n\nEphemeral containers that are hydrated with history and state, possibly from a database or from the SDK's session resumption features.\n\nBest for containers with intermittent interaction from the user that kicks off work and spins down when the work is completed but can be continued.\n\n**Examples:**\n- Personal Project Manager: Helps manage ongoing projects with intermittent check-ins, maintains context of tasks, decisions, and progress\n- Deep Research: Conducts multi-hour research tasks, saves findings and resumes investigation when user returns\n- Customer Support Agent: Handles support tickets that span multiple interactions, loads ticket history and customer context\n\n### Pattern 4: Single Containers\n\nRun multiple Claude Agent SDK processes in one global container.\n\nBest for agents that must collaborate closely together. This is likely the least popular pattern because you will have to prevent agents from overwriting each other.\n\n**Examples:**\n- **Simulations**: Agents that interact with each other in simulations such as video games.",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Hosting Requirements",
+      "id": "hosting-requirements"
+    },
+    {
+      "level": "h3",
+      "text": "Container-Based Sandboxing",
+      "id": "container-based-sandboxing"
+    },
+    {
+      "level": "h3",
+      "text": "System Requirements",
+      "id": "system-requirements"
+    },
+    {
+      "level": "h2",
+      "text": "Understanding the SDK Architecture",
+      "id": "understanding-the-sdk-architecture"
+    },
+    {
+      "level": "h2",
+      "text": "Sandbox Provider Options",
+      "id": "sandbox-provider-options"
+    },
+    {
+      "level": "h2",
+      "text": "Production Deployment Patterns",
+      "id": "production-deployment-patterns"
+    },
+    {
+      "level": "h3",
+      "text": "Pattern 1: Ephemeral Sessions",
+      "id": "pattern-1:-ephemeral-sessions"
+    },
+    {
+      "level": "h3",
+      "text": "Pattern 2: Long-Running Sessions",
+      "id": "pattern-2:-long-running-sessions"
+    },
+    {
+      "level": "h3",
+      "text": "Pattern 3: Hybrid Sessions",
+      "id": "pattern-3:-hybrid-sessions"
+    },
+    {
+      "level": "h3",
+      "text": "Pattern 4: Single Containers",
+      "id": "pattern-4:-single-containers"
+    }
+  ],
+  "url": "llms-txt#hosting-the-agent-sdk",
+  "links": []
+}

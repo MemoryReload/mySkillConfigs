@@ -1,0 +1,34 @@
+{
+  "title": "Get Skill (Beta) (Go)",
+  "content": "URL: https://platform.claude.com/docs/en/api/go/beta/skills/retrieve\n\n`client.Beta.Skills.Get(ctx, skillID, query) (*BetaSkillGetResponse, error)`\n\n**get** `/v1/skills/{skill_id}`\n\nUnique identifier for the skill.\n\nThe format and length of IDs may change over time.\n\n- `query BetaSkillGetParams`\n\n- `Betas param.Field[[]AnthropicBeta]`\n\nOptional header to specify the beta version(s) you want to use.\n\n- `type AnthropicBeta string`\n\n- `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = \"message-batches-2024-09-24\"`\n\n- `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = \"prompt-caching-2024-07-31\"`\n\n- `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = \"computer-use-2024-10-22\"`\n\n- `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = \"computer-use-2025-01-24\"`\n\n- `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = \"pdfs-2024-09-25\"`\n\n- `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = \"token-counting-2024-11-01\"`\n\n- `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = \"token-efficient-tools-2025-02-19\"`\n\n- `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = \"output-128k-2025-02-19\"`\n\n- `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = \"files-api-2025-04-14\"`\n\n- `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = \"mcp-client-2025-04-04\"`\n\n- `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = \"mcp-client-2025-11-20\"`\n\n- `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = \"dev-full-thinking-2025-05-14\"`\n\n- `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = \"interleaved-thinking-2025-05-14\"`\n\n- `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = \"code-execution-2025-05-22\"`\n\n- `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = \"extended-cache-ttl-2025-04-11\"`\n\n- `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = \"context-1m-2025-08-07\"`\n\n- `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = \"context-management-2025-06-27\"`\n\n- `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = \"model-context-window-exceeded-2025-08-26\"`\n\n- `const AnthropicBetaSkills2025_10_02 AnthropicBeta = \"skills-2025-10-02\"`\n\n- `type BetaSkillGetResponse struct{…}`\n\nUnique identifier for the skill.\n\nThe format and length of IDs may change over time.\n\nISO 8601 timestamp of when the skill was created.\n\n- `DisplayTitle string`\n\nDisplay title for the skill.\n\nThis is a human-readable label that is not included in the prompt sent to the model.\n\n- `LatestVersion string`\n\nThe latest version identifier for the skill.\n\nThis represents the most recent version of the skill that has been created.\n\nThis may be one of the following values:\n\n* `\"custom\"`: the skill was created by a user\n    * `\"anthropic\"`: the skill was created by Anthropic\n\nFor Skills, this is always `\"skill\"`.\n\nISO 8601 timestamp of when the skill was last updated.",
+  "code_samples": [
+    {
+      "code": "package main\n\nimport (\n  \"context\"\n  \"fmt\"\n\n  \"github.com/anthropics/anthropic-sdk-go\"\n  \"github.com/anthropics/anthropic-sdk-go/option\"\n)\n\nfunc main() {\n  client := anthropic.NewClient(\n    option.WithAPIKey(\"my-anthropic-api-key\"),\n  )\n  skill, err := client.Beta.Skills.Get(\n    context.TODO(),\n    \"skill_id\",\n    anthropic.BetaSkillGetParams{\n\n    },\n  )\n  if err != nil {\n    panic(err.Error())\n  }\n  fmt.Printf(\"%+v\\n\", skill.ID)\n}",
+      "language": "go"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Retrieve",
+      "id": "retrieve"
+    },
+    {
+      "level": "h3",
+      "text": "Parameters",
+      "id": "parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#get-skill-(beta)-(go)",
+  "links": []
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Git gud",
+  "content": "Generate appropriate Git commands based on user-described version control actions.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n| Role | Content                                                                                                                       |\n| ---- | ----------------------------------------------------------------------------------------------------------------------------- |\n| User | I have made some changes to my local files and I want to save them in my local Git repository. What Git command should I use? |\n\nTo save the changes you've made to your local files in your local Git repository, you should use the following Git commands:\n\n1.  `git add .` or `git add <file>`\n\n- This command stages the changes you've made, preparing them to be committed. The `.` adds all changes in the current directory and its subdirectories. If you only want to stage specific files, replace `.` with the file name or path.\n\n2.  `git commit -m \"Your commit message\"`\n\n- This command commits the staged changes to your local Git repository. The `-m` flag allows you to provide a commit message describing the changes you've made. Replace `\"Your commit message\"` with a brief, descriptive summary of your changes.\n\nFor example, if you've made changes to a file named `example.txt`, you would run:\n\nThese commands will save your changes in your local Git repository, creating a new commit with the provided message. You can later push these changes to a remote repository or continue working on your local branch.\n\nRemember to run these commands from within your Git repository directory in your terminal or command prompt.\n\n<Tabs>\n<Tab title=\"Python\">\n`\n</Tab>\n<Tab title=\"TypeScript\">\n\n</Tab>\n<Tab title=\"AWS Bedrock Python\">\n\n```python\nfrom anthropic import AnthropicBedrock",
+  "code_samples": [
+    {
+      "code": "git add example.txt\ngit commit -m \"Update example.txt with new content\"",
+      "language": "unknown"
+    },
+    {
+      "code": "import anthropic\n\nclient = anthropic.Anthropic(  # defaults to os.environ.get(\"ANTHROPIC_API_KEY\")\n    api_key=\"my_api_key\",\n)\nmessage = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1000,\n    temperature=0,\n    messages=[\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": \"I have made some changes to my local files and I want to save them in my local Git repository. What Git command should I use?\",\n                }\n            ],\n        }\n    ],\n)\nprint(message.content)",
+      "language": "python"
+    },
+    {
+      "code": "import Anthropic from \"@anthropic-ai/sdk\";\n\nconst anthropic = new Anthropic({\n  apiKey: \"my_api_key\", // defaults to process.env[\"ANTHROPIC_API_KEY\"]\n});\n\nconst msg = await anthropic.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1000,\n  temperature: 0,\n  messages: [\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"I have made some changes to my local files and I want to save them in my local Git repository. What Git command should I use?\"\n        }\n      ]\n    }\n  ]\n});\nconsole.log(msg);",
+      "language": "typescript"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Example Output",
+      "id": "example-output"
+    },
+    {
+      "level": "h2",
+      "text": "API Request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#git-gud",
+  "links": []
+}

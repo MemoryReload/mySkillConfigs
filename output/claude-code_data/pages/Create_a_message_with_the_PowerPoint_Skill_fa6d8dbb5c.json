@@ -1,0 +1,27 @@
+{
+  "title": "Create a message with the PowerPoint Skill",
+  "content": "response = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    max_tokens=4096,\n    betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n    container={\n        \"skills\": [\n            {\n                \"type\": \"anthropic\",\n                \"skill_id\": \"pptx\",\n                \"version\": \"latest\"\n            }\n        ]\n    },\n    messages=[{\n        \"role\": \"user\",\n        \"content\": \"Create a presentation about renewable energy with 5 slides\"\n    }],\n    tools=[{\n        \"type\": \"code_execution_20250825\",\n        \"name\": \"code_execution\"\n    }]\n)\n\nprint(response.content)\ntypescript TypeScript\nimport Anthropic from '@anthropic-ai/sdk';\n\nconst client = new Anthropic();\n\n// Create a message with the PowerPoint Skill\nconst response = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    skills: [\n      {\n        type: 'anthropic',\n        skill_id: 'pptx',\n        version: 'latest'\n      }\n    ]\n  },\n  messages: [{\n    role: 'user',\n    content: 'Create a presentation about renewable energy with 5 slides'\n  }],\n  tools: [{\n    type: 'code_execution_20250825',\n    name: 'code_execution'\n  }]\n});\n\nconsole.log(response.content);\nbash Shell\ncurl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5-20250929\",\n    \"max_tokens\": 4096,\n    \"container\": {\n      \"skills\": [\n        {\n          \"type\": \"anthropic\",\n          \"skill_id\": \"pptx\",\n          \"version\": \"latest\"\n        }\n      ]\n    },\n    \"messages\": [{\n      \"role\": \"user\",\n      \"content\": \"Create a presentation about renewable energy with 5 slides\"\n    }],\n    \"tools\": [{\n      \"type\": \"code_execution_20250825\",\n      \"name\": \"code_execution\"\n    }]\n  }'\npython Python",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nLet's break down what each part does:\n\n- **`container.skills`**: Specifies which Skills Claude can use\n- **`type: \"anthropic\"`**: Indicates this is an Anthropic-managed Skill\n- **`skill_id: \"pptx\"`**: The PowerPoint Skill identifier\n- **`version: \"latest\"`**: The Skill version set to the most recently published\n- **`tools`**: Enables code execution (required for Skills)\n- **Beta headers**: `code-execution-2025-08-25` and `skills-2025-10-02`\n\nWhen you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.\n\n## Step 3: Download the created file\n\nThe presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Step 3: Download the created file",
+      "id": "step-3:-download-the-created-file"
+    }
+  ],
+  "url": "llms-txt#create-a-message-with-the-powerpoint-skill",
+  "links": []
+}

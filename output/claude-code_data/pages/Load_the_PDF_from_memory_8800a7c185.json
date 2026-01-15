@@ -1,0 +1,19 @@
+{
+  "title": "Load the PDF from memory",
+  "content": "pdf_file = BytesIO(response.content)\n\ndocument_text = get_llm_text(pdf_file) \nprint(document_text[:50000]) \npython\nimport anthropic",
+  "code_samples": [
+    {
+      "code": "In this example, we first download a pdf of a sample sublease agreement used in the [summarization cookbook](https://platform.claude.com/cookbook/capabilities-summarization-guide). This agreement was sourced from a publicly available sublease agreement from the [sec.gov website](https://www.sec.gov/Archives/edgar/data/1045425/000119312507044370/dex1032.htm).\n\nWe use the pypdf library to extract the contents of the pdf and convert it to text. The text data is then cleaned by removing extra whitespace and page numbers.\n\n### Build a strong prompt\n\nClaude can adapt to various summarization styles. You can change the details of the prompt to guide Claude to be more or less verbose, include more or less technical terminology, or provide a higher or lower level summary of the context at hand. \n\nHere’s an example of how to create a prompt that ensures the generated summaries follow a consistent structure when analyzing sublease agreements:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Build a strong prompt",
+      "id": "build-a-strong-prompt"
+    }
+  ],
+  "url": "llms-txt#load-the-pdf-from-memory",
+  "links": []
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Simile savant",
+  "content": "Generate similes from basic descriptions.\n\n> Copy this prompt into our developer [Console](/dashboard) to try it for yourself!\n\n| Role | Content                                                                                    |\n| ---- | ------------------------------------------------------------------------------------------ |\n| User | Help me create some similes to describe a person's laughter that is joyful and contagious? |\n\n1.  His laughter bubbled up like a freshly opened bottle of champagne, effervescent and full of life.\n2.  Their laughter was as warm and inviting as a cozy fireplace on a chilly evening, drawing people in to share in the merriment.\n\n<Tabs>\n<Tab title=\"Python\">\n\n</Tab>\n<Tab title=\"TypeScript\">\n\n</Tab>\n<Tab title=\"AWS Bedrock Python\">\n\n```python\nfrom anthropic import AnthropicBedrock",
+  "code_samples": [
+    {
+      "code": "import anthropic\n\nclient = anthropic.Anthropic(\n  # defaults to os.environ.get(\"ANTHROPIC_API_KEY\")\n  api_key=\"my_api_key\",\n)\nmessage = client.messages.create(\n  model=\"claude-sonnet-4-5\",\n  max_tokens=1000,\n  temperature=1,\n  messages=[\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Help me create some similes to describe a person's laughter that is joyful and contagious?\"\n        }\n      ]\n    }\n  ]\n)\nprint(message.content)",
+      "language": "python"
+    },
+    {
+      "code": "import Anthropic from \"@anthropic-ai/sdk\";\n\nconst anthropic = new Anthropic({\n  apiKey: \"my_api_key\", // defaults to process.env[\"ANTHROPIC_API_KEY\"]\n});\n\nconst msg = await anthropic.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1000,\n  temperature: 1,\n  messages: [\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Help me create some similes to describe a person's laughter that is joyful and contagious?\"\n        }\n      ]\n    }\n  ]\n});\nconsole.log(msg);",
+      "language": "typescript"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Example Output",
+      "id": "example-output"
+    },
+    {
+      "level": "h2",
+      "text": "API Request",
+      "id": "api-request"
+    }
+  ],
+  "url": "llms-txt#simile-savant",
+  "links": []
+}

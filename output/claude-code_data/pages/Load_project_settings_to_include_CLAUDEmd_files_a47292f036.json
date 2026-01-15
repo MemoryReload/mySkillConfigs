@@ -1,0 +1,519 @@
+{
+  "title": "Load project settings to include CLAUDE.md files",
+  "content": "async for message in query(\n    prompt=\"Add a new feature following project conventions\",\n    options=ClaudeAgentOptions(\n        system_prompt={\n            \"type\": \"preset\",\n            \"preset\": \"claude_code\"  # Use Claude Code's system prompt\n        },\n        setting_sources=[\"project\"],  # Required to load CLAUDE.md from project\n        allowed_tools=[\"Read\", \"Write\", \"Edit\"]\n    )\n):\n    print(message)\npython\n@dataclass\nclass AgentDefinition:\n    description: str\n    prompt: str\n    tools: list[str] | None = None\n    model: Literal[\"sonnet\", \"opus\", \"haiku\", \"inherit\"] | None = None\npython\nPermissionMode = Literal[\n    \"default\",           # Standard permission behavior\n    \"acceptEdits\",       # Auto-accept file edits\n    \"plan\",              # Planning mode - no execution\n    \"bypassPermissions\"  # Bypass all permission checks (use with caution)\n]\npython\nclass McpSdkServerConfig(TypedDict):\n    type: Literal[\"sdk\"]\n    name: str\n    instance: Any  # MCP Server instance\npython\nMcpServerConfig = McpStdioServerConfig | McpSSEServerConfig | McpHttpServerConfig | McpSdkServerConfig\npython\nclass McpStdioServerConfig(TypedDict):\n    type: NotRequired[Literal[\"stdio\"]]  # Optional for backwards compatibility\n    command: str\n    args: NotRequired[list[str]]\n    env: NotRequired[dict[str, str]]\npython\nclass McpSSEServerConfig(TypedDict):\n    type: Literal[\"sse\"]\n    url: str\n    headers: NotRequired[dict[str, str]]\npython\nclass McpHttpServerConfig(TypedDict):\n    type: Literal[\"http\"]\n    url: str\n    headers: NotRequired[dict[str, str]]\npython\nclass SdkPluginConfig(TypedDict):\n    type: Literal[\"local\"]\n    path: str\npython\nplugins=[\n    {\"type\": \"local\", \"path\": \"./my-plugin\"},\n    {\"type\": \"local\", \"path\": \"/absolute/path/to/plugin\"}\n]\npython\nMessage = UserMessage | AssistantMessage | SystemMessage | ResultMessage\npython\n@dataclass\nclass UserMessage:\n    content: str | list[ContentBlock]\npython\n@dataclass\nclass AssistantMessage:\n    content: list[ContentBlock]\n    model: str\npython\n@dataclass\nclass SystemMessage:\n    subtype: str\n    data: dict[str, Any]\npython\n@dataclass\nclass ResultMessage:\n    subtype: str\n    duration_ms: int\n    duration_api_ms: int\n    is_error: bool\n    num_turns: int\n    session_id: str\n    total_cost_usd: float | None = None\n    usage: dict[str, Any] | None = None\n    result: str | None = None\npython\nContentBlock = TextBlock | ThinkingBlock | ToolUseBlock | ToolResultBlock\npython\n@dataclass\nclass TextBlock:\n    text: str\npython\n@dataclass\nclass ThinkingBlock:\n    thinking: str\n    signature: str\npython\n@dataclass\nclass ToolUseBlock:\n    id: str\n    name: str\n    input: dict[str, Any]\npython\n@dataclass\nclass ToolResultBlock:\n    tool_use_id: str\n    content: str | list[dict[str, Any]] | None = None\n    is_error: bool | None = None\npython\nclass ClaudeSDKError(Exception):\n    \"\"\"Base error for Claude SDK.\"\"\"\npython\nclass CLINotFoundError(CLIConnectionError):\n    def __init__(self, message: str = \"Claude Code not found\", cli_path: str | None = None):\n        \"\"\"\n        Args:\n            message: Error message (default: \"Claude Code not found\")\n            cli_path: Optional path to the CLI that was not found\n        \"\"\"\npython\nclass CLIConnectionError(ClaudeSDKError):\n    \"\"\"Failed to connect to Claude Code.\"\"\"\npython\nclass ProcessError(ClaudeSDKError):\n    def __init__(self, message: str, exit_code: int | None = None, stderr: str | None = None):\n        self.exit_code = exit_code\n        self.stderr = stderr\npython\nclass CLIJSONDecodeError(ClaudeSDKError):\n    def __init__(self, line: str, original_error: Exception):\n        \"\"\"\n        Args:\n            line: The line that failed to parse\n            original_error: The original JSON decode exception\n        \"\"\"\n        self.line = line\n        self.original_error = original_error\npython\nHookEvent = Literal[\n    \"PreToolUse\",      # Called before tool execution\n    \"PostToolUse\",     # Called after tool execution\n    \"UserPromptSubmit\", # Called when user submits a prompt\n    \"Stop\",            # Called when stopping execution\n    \"SubagentStop\",    # Called when a subagent stops\n    \"PreCompact\"       # Called before message compaction\n]\npython\nHookCallback = Callable[\n    [dict[str, Any], str | None, HookContext],\n    Awaitable[dict[str, Any]]\n]\npython\n@dataclass\nclass HookContext:\n    signal: Any | None = None  # Future: abort signal support\npython\n@dataclass\nclass HookMatcher:\n    matcher: str | None = None        # Tool name or pattern to match (e.g., \"Bash\", \"Write|Edit\")\n    hooks: list[HookCallback] = field(default_factory=list)  # List of callbacks to execute\n    timeout: float | None = None        # Timeout in seconds for all hooks in this matcher (default: 60)\npython\nfrom claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher, HookContext\nfrom typing import Any\n\nasync def validate_bash_command(\n    input_data: dict[str, Any],\n    tool_use_id: str | None,\n    context: HookContext\n) -> dict[str, Any]:\n    \"\"\"Validate and potentially block dangerous bash commands.\"\"\"\n    if input_data['tool_name'] == 'Bash':\n        command = input_data['tool_input'].get('command', '')\n        if 'rm -rf /' in command:\n            return {\n                'hookSpecificOutput': {\n                    'hookEventName': 'PreToolUse',\n                    'permissionDecision': 'deny',\n                    'permissionDecisionReason': 'Dangerous command blocked'\n                }\n            }\n    return {}\n\nasync def log_tool_use(\n    input_data: dict[str, Any],\n    tool_use_id: str | None,\n    context: HookContext\n) -> dict[str, Any]:\n    \"\"\"Log all tool usage for auditing.\"\"\"\n    print(f\"Tool used: {input_data.get('tool_name')}\")\n    return {}\n\noptions = ClaudeAgentOptions(\n    hooks={\n        'PreToolUse': [\n            HookMatcher(matcher='Bash', hooks=[validate_bash_command], timeout=120),  # 2 min for validation\n            HookMatcher(hooks=[log_tool_use])  # Applies to all tools (default 60s timeout)\n        ],\n        'PostToolUse': [\n            HookMatcher(hooks=[log_tool_use])\n        ]\n    }\n)\n\nasync for message in query(\n    prompt=\"Analyze this codebase\",\n    options=options\n):\n    print(message)\npython\n{\n    \"description\": str,      # A short (3-5 word) description of the task\n    \"prompt\": str,           # The task for the agent to perform\n    \"subagent_type\": str     # The type of specialized agent to use\n}\npython\n{\n    \"result\": str,                    # Final result from the subagent\n    \"usage\": dict | None,             # Token usage statistics\n    \"total_cost_usd\": float | None,  # Total cost in USD\n    \"duration_ms\": int | None         # Execution duration in milliseconds\n}\npython\n{\n    \"questions\": [                    # Questions to ask the user (1-4 questions)\n        {\n            \"question\": str,          # The complete question to ask the user\n            \"header\": str,            # Very short label displayed as a chip/tag (max 12 chars)\n            \"options\": [              # The available choices (2-4 options)\n                {\n                    \"label\": str,         # Display text for this option (1-5 words)\n                    \"description\": str    # Explanation of what this option means\n                }\n            ],\n            \"multiSelect\": bool       # Set to true to allow multiple selections\n        }\n    ],\n    \"answers\": dict | None            # User answers populated by the permission system\n}\npython\n{\n    \"questions\": [                    # The questions that were asked\n        {\n            \"question\": str,\n            \"header\": str,\n            \"options\": [{\"label\": str, \"description\": str}],\n            \"multiSelect\": bool\n        }\n    ],\n    \"answers\": dict[str, str]         # Maps question text to answer string\n                                      # Multi-select answers are comma-separated\n}\npython\n{\n    \"command\": str,                  # The command to execute\n    \"timeout\": int | None,           # Optional timeout in milliseconds (max 600000)\n    \"description\": str | None,       # Clear, concise description (5-10 words)\n    \"run_in_background\": bool | None # Set to true to run in background\n}\npython\n{\n    \"output\": str,              # Combined stdout and stderr output\n    \"exitCode\": int,            # Exit code of the command\n    \"killed\": bool | None,      # Whether command was killed due to timeout\n    \"shellId\": str | None       # Shell ID for background processes\n}\npython\n{\n    \"file_path\": str,           # The absolute path to the file to modify\n    \"old_string\": str,          # The text to replace\n    \"new_string\": str,          # The text to replace it with\n    \"replace_all\": bool | None  # Replace all occurrences (default False)\n}\npython\n{\n    \"message\": str,      # Confirmation message\n    \"replacements\": int, # Number of replacements made\n    \"file_path\": str     # File path that was edited\n}\npython\n{\n    \"file_path\": str,       # The absolute path to the file to read\n    \"offset\": int | None,   # The line number to start reading from\n    \"limit\": int | None     # The number of lines to read\n}\npython\n{\n    \"content\": str,         # File contents with line numbers\n    \"total_lines\": int,     # Total number of lines in file\n    \"lines_returned\": int   # Lines actually returned\n}\npython\n{\n    \"image\": str,       # Base64 encoded image data\n    \"mime_type\": str,   # Image MIME type\n    \"file_size\": int    # File size in bytes\n}\npython\n{\n    \"file_path\": str,  # The absolute path to the file to write\n    \"content\": str     # The content to write to the file\n}\npython\n{\n    \"message\": str,        # Success message\n    \"bytes_written\": int,  # Number of bytes written\n    \"file_path\": str       # File path that was written\n}\npython\n{\n    \"pattern\": str,       # The glob pattern to match files against\n    \"path\": str | None    # The directory to search in (defaults to cwd)\n}\npython\n{\n    \"matches\": list[str],  # Array of matching file paths\n    \"count\": int,          # Number of matches found\n    \"search_path\": str     # Search directory used\n}\npython\n{\n    \"pattern\": str,                    # The regular expression pattern\n    \"path\": str | None,                # File or directory to search in\n    \"glob\": str | None,                # Glob pattern to filter files\n    \"type\": str | None,                # File type to search\n    \"output_mode\": str | None,         # \"content\", \"files_with_matches\", or \"count\"\n    \"-i\": bool | None,                 # Case insensitive search\n    \"-n\": bool | None,                 # Show line numbers\n    \"-B\": int | None,                  # Lines to show before each match\n    \"-A\": int | None,                  # Lines to show after each match\n    \"-C\": int | None,                  # Lines to show before and after\n    \"head_limit\": int | None,          # Limit output to first N lines/entries\n    \"multiline\": bool | None           # Enable multiline mode\n}\npython\n{\n    \"matches\": [\n        {\n            \"file\": str,\n            \"line_number\": int | None,\n            \"line\": str,\n            \"before_context\": list[str] | None,\n            \"after_context\": list[str] | None\n        }\n    ],\n    \"total_matches\": int\n}\npython\n{\n    \"files\": list[str],  # Files containing matches\n    \"count\": int         # Number of files with matches\n}\npython\n{\n    \"notebook_path\": str,                     # Absolute path to the Jupyter notebook\n    \"cell_id\": str | None,                    # The ID of the cell to edit\n    \"new_source\": str,                        # The new source for the cell\n    \"cell_type\": \"code\" | \"markdown\" | None,  # The type of the cell\n    \"edit_mode\": \"replace\" | \"insert\" | \"delete\" | None  # Edit operation type\n}\npython\n{\n    \"message\": str,                              # Success message\n    \"edit_type\": \"replaced\" | \"inserted\" | \"deleted\",  # Type of edit performed\n    \"cell_id\": str | None,                       # Cell ID that was affected\n    \"total_cells\": int                           # Total cells in notebook after edit\n}\npython\n{\n    \"url\": str,     # The URL to fetch content from\n    \"prompt\": str   # The prompt to run on the fetched content\n}\npython\n{\n    \"response\": str,           # AI model's response to the prompt\n    \"url\": str,                # URL that was fetched\n    \"final_url\": str | None,   # Final URL after redirects\n    \"status_code\": int | None  # HTTP status code\n}\npython\n{\n    \"query\": str,                        # The search query to use\n    \"allowed_domains\": list[str] | None, # Only include results from these domains\n    \"blocked_domains\": list[str] | None  # Never include results from these domains\n}\npython\n{\n    \"results\": [\n        {\n            \"title\": str,\n            \"url\": str,\n            \"snippet\": str,\n            \"metadata\": dict | None\n        }\n    ],\n    \"total_results\": int,\n    \"query\": str\n}\npython\n{\n    \"todos\": [\n        {\n            \"content\": str,                              # The task description\n            \"status\": \"pending\" | \"in_progress\" | \"completed\",  # Task status\n            \"activeForm\": str                            # Active form of the description\n        }\n    ]\n}\npython\n{\n    \"message\": str,  # Success message\n    \"stats\": {\n        \"total\": int,\n        \"pending\": int,\n        \"in_progress\": int,\n        \"completed\": int\n    }\n}\npython\n{\n    \"bash_id\": str,       # The ID of the background shell\n    \"filter\": str | None  # Optional regex to filter output lines\n}\npython\n{\n    \"output\": str,                                      # New output since last check\n    \"status\": \"running\" | \"completed\" | \"failed\",       # Current shell status\n    \"exitCode\": int | None                              # Exit code when completed\n}\npython\n{\n    \"shell_id\": str  # The ID of the background shell to kill\n}\npython\n{\n    \"message\": str,  # Success message\n    \"shell_id\": str  # ID of the killed shell\n}\npython\n{\n    \"plan\": str  # The plan to run by the user for approval\n}\npython\n{\n    \"message\": str,          # Confirmation message\n    \"approved\": bool | None  # Whether user approved the plan\n}\npython\n{\n    \"server\": str | None  # Optional server name to filter resources by\n}\npython\n{\n    \"resources\": [\n        {\n            \"uri\": str,\n            \"name\": str,\n            \"description\": str | None,\n            \"mimeType\": str | None,\n            \"server\": str\n        }\n    ],\n    \"total\": int\n}\npython\n{\n    \"server\": str,  # The MCP server name\n    \"uri\": str      # The resource URI to read\n}\npython\n{\n    \"contents\": [\n        {\n            \"uri\": str,\n            \"mimeType\": str | None,\n            \"text\": str | None,\n            \"blob\": str | None\n        }\n    ],\n    \"server\": str\n}\npython\nfrom claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, AssistantMessage, TextBlock\nimport asyncio\n\nclass ConversationSession:\n    \"\"\"Maintains a single conversation session with Claude.\"\"\"\n\ndef __init__(self, options: ClaudeAgentOptions = None):\n        self.client = ClaudeSDKClient(options)\n        self.turn_count = 0\n\nasync def start(self):\n        await self.client.connect()\n        print(\"Starting conversation session. Claude will remember context.\")\n        print(\"Commands: 'exit' to quit, 'interrupt' to stop current task, 'new' for new session\")\n\nwhile True:\n            user_input = input(f\"\\n[Turn {self.turn_count + 1}] You: \")\n\nif user_input.lower() == 'exit':\n                break\n            elif user_input.lower() == 'interrupt':\n                await self.client.interrupt()\n                print(\"Task interrupted!\")\n                continue\n            elif user_input.lower() == 'new':\n                # Disconnect and reconnect for a fresh session\n                await self.client.disconnect()\n                await self.client.connect()\n                self.turn_count = 0\n                print(\"Started new conversation session (previous context cleared)\")\n                continue\n\n# Send message - Claude remembers all previous messages in this session\n            await self.client.query(user_input)\n            self.turn_count += 1\n\n# Process response\n            print(f\"[Turn {self.turn_count}] Claude: \", end=\"\")\n            async for message in self.client.receive_response():\n                if isinstance(message, AssistantMessage):\n                    for block in message.content:\n                        if isinstance(block, TextBlock):\n                            print(block.text, end=\"\")\n            print()  # New line after response\n\nawait self.client.disconnect()\n        print(f\"Conversation ended after {self.turn_count} turns.\")\n\nasync def main():\n    options = ClaudeAgentOptions(\n        allowed_tools=[\"Read\", \"Write\", \"Bash\"],\n        permission_mode=\"acceptEdits\"\n    )\n    session = ConversationSession(options)\n    await session.start()",
+  "code_samples": [
+    {
+      "code": "#### Settings precedence\n\nWhen multiple sources are loaded, settings are merged with this precedence (highest to lowest):\n\n1. Local settings (`.claude/settings.local.json`)\n2. Project settings (`.claude/settings.json`)\n3. User settings (`~/.claude/settings.json`)\n\nProgrammatic options (like `agents`, `allowed_tools`) always override filesystem settings.\n\n### `AgentDefinition`\n\nConfiguration for a subagent defined programmatically.",
+      "language": "unknown"
+    },
+    {
+      "code": "| Field         | Required | Description                                                    |\n| :------------ | :------- | :------------------------------------------------------------- |\n| `description` | Yes      | Natural language description of when to use this agent         |\n| `tools`       | No       | Array of allowed tool names. If omitted, inherits all tools    |\n| `prompt`      | Yes      | The agent's system prompt                                      |\n| `model`       | No       | Model override for this agent. If omitted, uses the main model |\n\n### `PermissionMode`\n\nPermission modes for controlling tool execution.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `McpSdkServerConfig`\n\nConfiguration for SDK MCP servers created with `create_sdk_mcp_server()`.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `McpServerConfig`\n\nUnion type for MCP server configurations.",
+      "language": "unknown"
+    },
+    {
+      "code": "#### `McpStdioServerConfig`",
+      "language": "unknown"
+    },
+    {
+      "code": "#### `McpSSEServerConfig`",
+      "language": "unknown"
+    },
+    {
+      "code": "#### `McpHttpServerConfig`",
+      "language": "unknown"
+    },
+    {
+      "code": "### `SdkPluginConfig`\n\nConfiguration for loading plugins in the SDK.",
+      "language": "unknown"
+    },
+    {
+      "code": "| Field | Type | Description |\n|:------|:-----|:------------|\n| `type` | `Literal[\"local\"]` | Must be `\"local\"` (only local plugins currently supported) |\n| `path` | `str` | Absolute or relative path to the plugin directory |\n\n**Example:**",
+      "language": "unknown"
+    },
+    {
+      "code": "For complete information on creating and using plugins, see [Plugins](/docs/en/agent-sdk/plugins).\n\n## Message Types\n\n### `Message`\n\nUnion type of all possible messages.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `UserMessage`\n\nUser input message.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `AssistantMessage`\n\nAssistant response message with content blocks.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `SystemMessage`\n\nSystem message with metadata.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `ResultMessage`\n\nFinal result message with cost and usage information.",
+      "language": "unknown"
+    },
+    {
+      "code": "## Content Block Types\n\n### `ContentBlock`\n\nUnion type of all content blocks.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `TextBlock`\n\nText content block.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `ThinkingBlock`\n\nThinking content block (for models with thinking capability).",
+      "language": "unknown"
+    },
+    {
+      "code": "### `ToolUseBlock`\n\nTool use request block.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `ToolResultBlock`\n\nTool execution result block.",
+      "language": "unknown"
+    },
+    {
+      "code": "## Error Types\n\n### `ClaudeSDKError`\n\nBase exception class for all SDK errors.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `CLINotFoundError`\n\nRaised when Claude Code CLI is not installed or not found.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `CLIConnectionError`\n\nRaised when connection to Claude Code fails.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `ProcessError`\n\nRaised when the Claude Code process fails.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `CLIJSONDecodeError`\n\nRaised when JSON parsing fails.",
+      "language": "unknown"
+    },
+    {
+      "code": "## Hook Types\n\nFor a comprehensive guide on using hooks with examples and common patterns, see the [Hooks guide](/en/docs/agent-sdk/hooks).\n\n### `HookEvent`\n\nSupported hook event types. Note that due to setup limitations, the Python SDK does not support SessionStart, SessionEnd, and Notification hooks.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `HookCallback`\n\nType definition for hook callback functions.",
+      "language": "unknown"
+    },
+    {
+      "code": "Parameters:\n\n- `input_data`: Hook-specific input data (see [Hooks guide](/docs/en/agent-sdk/hooks#input-data))\n- `tool_use_id`: Optional tool use identifier (for tool-related hooks)\n- `context`: Hook context with additional information\n\nReturns a dictionary that may contain:\n\n- `decision`: `\"block\"` to block the action\n- `systemMessage`: System message to add to the transcript\n- `hookSpecificOutput`: Hook-specific output data\n\n### `HookContext`\n\nContext information passed to hook callbacks.",
+      "language": "unknown"
+    },
+    {
+      "code": "### `HookMatcher`\n\nConfiguration for matching hooks to specific events or tools.",
+      "language": "unknown"
+    },
+    {
+      "code": "### Hook Usage Example\n\nThis example registers two hooks: one that blocks dangerous bash commands like `rm -rf /`, and another that logs all tool usage for auditing. The security hook only runs on Bash commands (via the `matcher`), while the logging hook runs on all tools.",
+      "language": "unknown"
+    },
+    {
+      "code": "## Tool Input/Output Types\n\nDocumentation of input/output schemas for all built-in Claude Code tools. While the Python SDK doesn't export these as types, they represent the structure of tool inputs and outputs in messages.\n\n### Task\n\n**Tool name:** `Task`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### AskUserQuestion\n\n**Tool name:** `AskUserQuestion`\n\nAsks the user clarifying questions during execution. See [Handle approvals and user input](/docs/en/agent-sdk/user-input#handle-clarifying-questions) for usage details.\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Bash\n\n**Tool name:** `Bash`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Edit\n\n**Tool name:** `Edit`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Read\n\n**Tool name:** `Read`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output (Text files):**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output (Images):**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Write\n\n**Tool name:** `Write`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Glob\n\n**Tool name:** `Glob`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Grep\n\n**Tool name:** `Grep`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output (content mode):**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output (files_with_matches mode):**",
+      "language": "unknown"
+    },
+    {
+      "code": "### NotebookEdit\n\n**Tool name:** `NotebookEdit`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### WebFetch\n\n**Tool name:** `WebFetch`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### WebSearch\n\n**Tool name:** `WebSearch`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### TodoWrite\n\n**Tool name:** `TodoWrite`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### BashOutput\n\n**Tool name:** `BashOutput`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### KillBash\n\n**Tool name:** `KillBash`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### ExitPlanMode\n\n**Tool name:** `ExitPlanMode`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### ListMcpResources\n\n**Tool name:** `ListMcpResources`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### ReadMcpResource\n\n**Tool name:** `ReadMcpResource`\n\n**Input:**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Output:**",
+      "language": "unknown"
+    },
+    {
+      "code": "## Advanced Features with ClaudeSDKClient\n\n### Building a Continuous Conversation Interface",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "`AgentDefinition`",
+      "id": "`agentdefinition`"
+    },
+    {
+      "level": "h3",
+      "text": "`PermissionMode`",
+      "id": "`permissionmode`"
+    },
+    {
+      "level": "h3",
+      "text": "`McpSdkServerConfig`",
+      "id": "`mcpsdkserverconfig`"
+    },
+    {
+      "level": "h3",
+      "text": "`McpServerConfig`",
+      "id": "`mcpserverconfig`"
+    },
+    {
+      "level": "h3",
+      "text": "`SdkPluginConfig`",
+      "id": "`sdkpluginconfig`"
+    },
+    {
+      "level": "h2",
+      "text": "Message Types",
+      "id": "message-types"
+    },
+    {
+      "level": "h3",
+      "text": "`Message`",
+      "id": "`message`"
+    },
+    {
+      "level": "h3",
+      "text": "`UserMessage`",
+      "id": "`usermessage`"
+    },
+    {
+      "level": "h3",
+      "text": "`AssistantMessage`",
+      "id": "`assistantmessage`"
+    },
+    {
+      "level": "h3",
+      "text": "`SystemMessage`",
+      "id": "`systemmessage`"
+    },
+    {
+      "level": "h3",
+      "text": "`ResultMessage`",
+      "id": "`resultmessage`"
+    },
+    {
+      "level": "h2",
+      "text": "Content Block Types",
+      "id": "content-block-types"
+    },
+    {
+      "level": "h3",
+      "text": "`ContentBlock`",
+      "id": "`contentblock`"
+    },
+    {
+      "level": "h3",
+      "text": "`TextBlock`",
+      "id": "`textblock`"
+    },
+    {
+      "level": "h3",
+      "text": "`ThinkingBlock`",
+      "id": "`thinkingblock`"
+    },
+    {
+      "level": "h3",
+      "text": "`ToolUseBlock`",
+      "id": "`tooluseblock`"
+    },
+    {
+      "level": "h3",
+      "text": "`ToolResultBlock`",
+      "id": "`toolresultblock`"
+    },
+    {
+      "level": "h2",
+      "text": "Error Types",
+      "id": "error-types"
+    },
+    {
+      "level": "h3",
+      "text": "`ClaudeSDKError`",
+      "id": "`claudesdkerror`"
+    },
+    {
+      "level": "h3",
+      "text": "`CLINotFoundError`",
+      "id": "`clinotfounderror`"
+    },
+    {
+      "level": "h3",
+      "text": "`CLIConnectionError`",
+      "id": "`cliconnectionerror`"
+    },
+    {
+      "level": "h3",
+      "text": "`ProcessError`",
+      "id": "`processerror`"
+    },
+    {
+      "level": "h3",
+      "text": "`CLIJSONDecodeError`",
+      "id": "`clijsondecodeerror`"
+    },
+    {
+      "level": "h2",
+      "text": "Hook Types",
+      "id": "hook-types"
+    },
+    {
+      "level": "h3",
+      "text": "`HookEvent`",
+      "id": "`hookevent`"
+    },
+    {
+      "level": "h3",
+      "text": "`HookCallback`",
+      "id": "`hookcallback`"
+    },
+    {
+      "level": "h3",
+      "text": "`HookContext`",
+      "id": "`hookcontext`"
+    },
+    {
+      "level": "h3",
+      "text": "`HookMatcher`",
+      "id": "`hookmatcher`"
+    },
+    {
+      "level": "h3",
+      "text": "Hook Usage Example",
+      "id": "hook-usage-example"
+    },
+    {
+      "level": "h2",
+      "text": "Tool Input/Output Types",
+      "id": "tool-input/output-types"
+    },
+    {
+      "level": "h3",
+      "text": "Task",
+      "id": "task"
+    },
+    {
+      "level": "h3",
+      "text": "AskUserQuestion",
+      "id": "askuserquestion"
+    },
+    {
+      "level": "h3",
+      "text": "Bash",
+      "id": "bash"
+    },
+    {
+      "level": "h3",
+      "text": "Edit",
+      "id": "edit"
+    },
+    {
+      "level": "h3",
+      "text": "Read",
+      "id": "read"
+    },
+    {
+      "level": "h3",
+      "text": "Write",
+      "id": "write"
+    },
+    {
+      "level": "h3",
+      "text": "Glob",
+      "id": "glob"
+    },
+    {
+      "level": "h3",
+      "text": "Grep",
+      "id": "grep"
+    },
+    {
+      "level": "h3",
+      "text": "NotebookEdit",
+      "id": "notebookedit"
+    },
+    {
+      "level": "h3",
+      "text": "WebFetch",
+      "id": "webfetch"
+    },
+    {
+      "level": "h3",
+      "text": "WebSearch",
+      "id": "websearch"
+    },
+    {
+      "level": "h3",
+      "text": "TodoWrite",
+      "id": "todowrite"
+    },
+    {
+      "level": "h3",
+      "text": "BashOutput",
+      "id": "bashoutput"
+    },
+    {
+      "level": "h3",
+      "text": "KillBash",
+      "id": "killbash"
+    },
+    {
+      "level": "h3",
+      "text": "ExitPlanMode",
+      "id": "exitplanmode"
+    },
+    {
+      "level": "h3",
+      "text": "ListMcpResources",
+      "id": "listmcpresources"
+    },
+    {
+      "level": "h3",
+      "text": "ReadMcpResource",
+      "id": "readmcpresource"
+    },
+    {
+      "level": "h2",
+      "text": "Advanced Features with ClaudeSDKClient",
+      "id": "advanced-features-with-claudesdkclient"
+    },
+    {
+      "level": "h3",
+      "text": "Building a Continuous Conversation Interface",
+      "id": "building-a-continuous-conversation-interface"
+    }
+  ],
+  "url": "llms-txt#load-project-settings-to-include-claude.md-files",
+  "links": []
+}

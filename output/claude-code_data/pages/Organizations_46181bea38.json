@@ -1,0 +1,39 @@
+{
+  "title": "Organizations",
+  "content": "**get** `/v1/organizations/me`\n\nRetrieve information about the organization associated with the authenticated API key.\n\n- `Organization = object { id, name, type }`\n\nID of the Organization.\n\nName of the Organization.\n\n- `type: \"organization\"`\n\nFor Organizations, this is always `\"organization\"`.\n\n- `Organization = object { id, name, type }`\n\nID of the Organization.\n\nName of the Organization.\n\n- `type: \"organization\"`\n\nFor Organizations, this is always `\"organization\"`.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/me \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Me",
+      "id": "me"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    },
+    {
+      "level": "h2",
+      "text": "Domain Types",
+      "id": "domain-types"
+    },
+    {
+      "level": "h3",
+      "text": "Organization",
+      "id": "organization"
+    }
+  ],
+  "url": "llms-txt#organizations",
+  "links": []
+}

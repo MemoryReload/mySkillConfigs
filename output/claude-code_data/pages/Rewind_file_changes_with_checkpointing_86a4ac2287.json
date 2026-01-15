@@ -1,0 +1,91 @@
+{
+  "title": "Rewind file changes with checkpointing",
+  "content": "Track file changes during agent sessions and restore files to any previous state\n\nFile checkpointing tracks file modifications made through the Write, Edit, and NotebookEdit tools during an agent session, allowing you to rewind files to any previous state. Want to try it out? Jump to the [interactive example](#try-it-out).\n\nWith checkpointing, you can:\n\n- **Undo unwanted changes** by restoring files to a known good state\n- **Explore alternatives** by restoring to a checkpoint and trying a different approach\n- **Recover from errors** when the agent makes incorrect modifications\n\n<Warning>\nOnly changes made through the Write, Edit, and NotebookEdit tools are tracked. Changes made through Bash commands (like `echo > file.txt` or `sed -i`) are not captured by the checkpoint system.\n</Warning>\n\n## How checkpointing works\n\nWhen you enable file checkpointing, the SDK creates backups of files before modifying them through the Write, Edit, or NotebookEdit tools. User messages in the response stream include a checkpoint UUID that you can use as a restore point.\n\nCheckpoint works with these built-in tools that the agent uses to modify files:\n\n| Tool | Description |\n|------|-------------|\n| Write | Creates a new file or overwrites an existing file with new content |\n| Edit | Makes targeted edits to specific parts of an existing file |\n| NotebookEdit | Modifies cells in Jupyter notebooks (`.ipynb` files) |\n\n<Note>\nFile rewinding restores files on disk to a previous state. It does not rewind the conversation itself. The conversation history and context remain intact after calling `rewindFiles()` (TypeScript) or `rewind_files()` (Python).\n</Note>\n\nThe checkpoint system tracks:\n\n- Files created during the session\n- Files modified during the session\n- The original content of modified files\n\nWhen you rewind to a checkpoint, created files are deleted and modified files are restored to their content at that point.\n\n## Implement checkpointing\n\nTo use file checkpointing, enable it in your options, capture checkpoint UUIDs from the response stream, then call `rewindFiles()` (TypeScript) or `rewind_files()` (Python) when you need to restore.\n\nThe following example shows the complete flow: enable checkpointing, capture the checkpoint UUID and session ID from the response stream, then resume the session later to rewind files. Each step is explained in detail below.\n\n<Step title=\"Set the environment variable\">\n\nFile checkpointing requires the `CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING` environment variable. You can set it either via command line before running your script, or directly in the SDK options.\n\n**Option 1: Set via command line**\n\n**Option 2: Set in SDK options**\n\nPass the environment variable through the `env` option when configuring the SDK:\n\n<Step title=\"Enable checkpointing\">\n\nConfigure your SDK options to enable checkpointing and receive checkpoint UUIDs:\n\n| Option | Python | TypeScript | Description |\n|--------|--------|------------|-------------|\n| Enable checkpointing | `enable_file_checkpointing=True` | `enableFileCheckpointing: true` | Tracks file changes for rewinding |\n| Receive checkpoint UUIDs | `extra_args={\"replay-user-messages\": None}` | `extraArgs: { 'replay-user-messages': null }` | Required to get user message UUIDs in the stream |\n\n<Step title=\"Capture checkpoint UUID and session ID\">\n\nWith the `replay-user-messages` option set (shown above), each user message in the response stream has a UUID that serves as a checkpoint.\n\nFor most use cases, capture the first user message UUID (`message.uuid`); rewinding to it restores all files to their original state. To store multiple checkpoints and rewind to intermediate states, see [Multiple restore points](#multiple-restore-points).\n\nCapturing the session ID (`message.session_id`) is optional; you only need it if you want to rewind later, after the stream completes. If you're calling `rewindFiles()` immediately while still processing messages (as the example in [Checkpoint before risky operations](#checkpoint-before-risky-operations) does), you can skip capturing the session ID.\n\n<Step title=\"Rewind files\">\n\nTo rewind after the stream completes, resume the session with an empty prompt and call `rewind_files()` (Python) or `rewindFiles()` (TypeScript) with your checkpoint UUID. You can also rewind during the stream; see [Checkpoint before risky operations](#checkpoint-before-risky-operations) for that pattern.\n\nIf you capture the session ID and checkpoint ID, you can also rewind from the CLI:\n\nThese patterns show different ways to capture and use checkpoint UUIDs depending on your use case.\n\n### Checkpoint before risky operations\n\nThis pattern keeps only the most recent checkpoint UUID, updating it before each agent turn. If something goes wrong during processing, you can immediately rewind to the last safe state and break out of the loop.\n\n### Multiple restore points\n\nIf Claude makes changes across multiple turns, you might want to rewind to a specific point rather than all the way back. For example, if Claude refactors a file in turn one and adds tests in turn two, you might want to keep the refactor but undo the tests.\n\nThis pattern stores all checkpoint UUIDs in an array with metadata. After the session completes, you can rewind to any previous checkpoint:\n\n```python Python\nimport asyncio\nimport os\nfrom dataclasses import dataclass\nfrom datetime import datetime\nfrom claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, UserMessage, ResultMessage",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n<Steps>\n\n<Step title=\"Set the environment variable\">\n\nFile checkpointing requires the `CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING` environment variable. You can set it either via command line before running your script, or directly in the SDK options.\n\n**Option 1: Set via command line**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Option 2: Set in SDK options**\n\nPass the environment variable through the `env` option when configuring the SDK:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n</Step>\n\n<Step title=\"Enable checkpointing\">\n\nConfigure your SDK options to enable checkpointing and receive checkpoint UUIDs:\n\n| Option | Python | TypeScript | Description |\n|--------|--------|------------|-------------|\n| Enable checkpointing | `enable_file_checkpointing=True` | `enableFileCheckpointing: true` | Tracks file changes for rewinding |\n| Receive checkpoint UUIDs | `extra_args={\"replay-user-messages\": None}` | `extraArgs: { 'replay-user-messages': null }` | Required to get user message UUIDs in the stream |\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n</Step>\n\n<Step title=\"Capture checkpoint UUID and session ID\">\n\nWith the `replay-user-messages` option set (shown above), each user message in the response stream has a UUID that serves as a checkpoint.\n\nFor most use cases, capture the first user message UUID (`message.uuid`); rewinding to it restores all files to their original state. To store multiple checkpoints and rewind to intermediate states, see [Multiple restore points](#multiple-restore-points).\n\nCapturing the session ID (`message.session_id`) is optional; you only need it if you want to rewind later, after the stream completes. If you're calling `rewindFiles()` immediately while still processing messages (as the example in [Checkpoint before risky operations](#checkpoint-before-risky-operations) does), you can skip capturing the session ID.\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n</Step>\n\n<Step title=\"Rewind files\">\n\nTo rewind after the stream completes, resume the session with an empty prompt and call `rewind_files()` (Python) or `rewindFiles()` (TypeScript) with your checkpoint UUID. You can also rewind during the stream; see [Checkpoint before risky operations](#checkpoint-before-risky-operations) for that pattern.\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nIf you capture the session ID and checkpoint ID, you can also rewind from the CLI:",
+      "language": "unknown"
+    },
+    {
+      "code": "</Step>\n\n</Steps>\n\n## Common patterns\n\nThese patterns show different ways to capture and use checkpoint UUIDs depending on your use case.\n\n### Checkpoint before risky operations\n\nThis pattern keeps only the most recent checkpoint UUID, updating it before each agent turn. If something goes wrong during processing, you can immediately rewind to the last safe state and break out of the loop.\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Multiple restore points\n\nIf Claude makes changes across multiple turns, you might want to rewind to a specific point rather than all the way back. For example, if Claude refactors a file in turn one and adds tests in turn two, you might want to keep the refactor but undo the tests.\n\nThis pattern stores all checkpoint UUIDs in an array with metadata. After the session completes, you can rewind to any previous checkpoint:\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How checkpointing works",
+      "id": "how-checkpointing-works"
+    },
+    {
+      "level": "h2",
+      "text": "Implement checkpointing",
+      "id": "implement-checkpointing"
+    },
+    {
+      "level": "h2",
+      "text": "Common patterns",
+      "id": "common-patterns"
+    },
+    {
+      "level": "h3",
+      "text": "Checkpoint before risky operations",
+      "id": "checkpoint-before-risky-operations"
+    },
+    {
+      "level": "h3",
+      "text": "Multiple restore points",
+      "id": "multiple-restore-points"
+    }
+  ],
+  "url": "llms-txt#rewind-file-changes-with-checkpointing",
+  "links": []
+}

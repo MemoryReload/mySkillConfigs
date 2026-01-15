@@ -1,0 +1,43 @@
+{
+  "title": "View debug-level logs for more verbose output",
+  "content": "export ANTHROPIC_LOG=debug\npython\nimport json\n\nrunner = client.beta.messages.tool_runner(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    tools=[my_tool],\n    messages=[{\"role\": \"user\", \"content\": \"Run the tool\"}]\n)\n\nfor message in runner:\n    tool_response = runner.generate_tool_call_response()\n\nif tool_response:\n        # Check if any tool result has an error\n        for block in tool_response.content:\n            if block.is_error:\n                # Option 1: Raise an exception to stop the loop\n                raise RuntimeError(f\"Tool failed: {json.dumps(block.content)}\")\n\n# Option 2: Log and continue (let Claude handle it)\n                # logger.error(f\"Tool error: {json.dumps(block.content)}\")\n\n# Process the message normally\n    print(message.content)\ntypescript\nconst runner = anthropic.beta.messages.toolRunner({\n  model: 'claude-sonnet-4-5',\n  max_tokens: 1024,\n  tools: [myTool],\n  messages: [{ role: 'user', content: 'Run the tool' }]\n});\n\nfor await (const message of runner) {\n  const toolResultMessage = await runner.generateToolResponse();\n\nif (toolResultMessage) {\n    // Check if any tool result has an error\n    for (const block of toolResultMessage.content) {\n      if (block.type === 'tool_result' && block.is_error) {\n        // Option 1: Throw to stop the loop\n        throw new Error(`Tool failed: ${JSON.stringify(block.content)}`);\n\n// Option 2: Log and continue (let Claude handle it)\n        // console.error(`Tool error: ${JSON.stringify(block.content)}`);\n      }\n    }\n  }\n\n// Process the message normally\n  console.log(message.content);\n}\nruby\nrunner = client.beta.messages.tool_runner(\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  tools: [MyTool.new],\n  messages: [{role: \"user\", content: \"Run the tool\"}]\n)\n\nrunner.each_message do |message|\n  # Get the tool response to check for errors\n  # Note: The runner automatically handles tool execution and appends results\n  # This is just for error checking/logging purposes\n  tool_results = runner.params[:messages].last\n\nif tool_results && tool_results[:role] == \"user\"\n    tool_results[:content].each do |block|\n      if block[:type] == \"tool_result\" && block[:is_error]\n        # Option 1: Raise an exception to stop the loop\n        raise \"Tool failed: #{block[:content]}\"\n\n# Option 2: Log and continue (let Claude handle it)\n        # logger.error(\"Tool error: #{block[:content]}\")\n      end\n    end\n  end\n\nputs message.content\nend\npython\nrunner = client.beta.messages.tool_runner(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    tools=[search_documents],\n    messages=[{\"role\": \"user\", \"content\": \"Search for information about the climate of San Francisco\"}]\n)\n\nfor message in runner:\n    tool_response = runner.generate_tool_call_response()\n\nif tool_response:\n        # Modify the tool result to add cache control\n        for block in tool_response.content:\n            if block.type == \"tool_result\":\n                # Add cache_control to cache this tool result\n                block.cache_control = {\"type\": \"ephemeral\"}\n\n# Append the modified response (this prevents auto-append of original)\n        runner.append_messages(message, tool_response)\n\nprint(message.content)\ntypescript\nconst runner = anthropic.beta.messages.toolRunner({\n  model: 'claude-sonnet-4-5',\n  max_tokens: 1024,\n  tools: [searchDocuments],\n  messages: [{ role: 'user', content: 'Search for information about the climate of San Francisco' }]\n});\n\nfor await (const message of runner) {\n  const toolResultMessage = await runner.generateToolResponse();\n\nif (toolResultMessage) {\n    // Modify the tool result to add cache control\n    for (const block of toolResultMessage.content) {\n      if (block.type === 'tool_result') {\n        // Add cache_control to cache this tool result\n        block.cache_control = { type: 'ephemeral' };\n      }\n    }\n\n// Push the modified message (this prevents auto-append of original)\n    runner.pushMessages(message, toolResultMessage);\n  }\n\nconsole.log(message.content);\n}\nruby\nrunner = client.beta.messages.tool_runner(\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 1024,\n  tools: [SearchDocuments.new],\n  messages: [{role: \"user\", content: \"Search for information about the climate of San Francisco\"}]\n)\n\nloop do\n  message = runner.next_message\n  break unless message\n\n# Access the most recent tool results from the messages array\n  # The runner automatically adds tool results, but we can modify them\n  tool_results_message = runner.params[:messages].last\n\nif tool_results_message && tool_results_message[:role] == \"user\"\n    tool_results_message[:content].each do |block|\n      if block[:type] == \"tool_result\"\n        # Modify the tool result to add cache control\n        block[:cache_control] = {type: \"ephemeral\"}\n      end\n    end\n  end\n\nputs message.content\n  break if message.stop_reason != \"tool_use\"\nend\npython\nrunner = client.beta.messages.tool_runner(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=1024,\n    tools=[calculate_sum],\n    messages=[{\"role\": \"user\", \"content\": \"What is 15 + 27?\"}],\n    stream=True\n)",
+  "code_samples": [
+    {
+      "code": "When enabled, the SDK logs full exception details (using Python's `logging` module, the console in TypeScript, or Ruby's logger), including the complete stack trace when a tool fails.\n\n#### Intercepting tool errors\n\nBy default, tool errors are passed back to Claude, which can then respond appropriately. However, you may want to detect errors and handle them differently—for example, to stop execution early or implement custom error handling.\n\nUse the tool response method to intercept tool results and check for errors before they're sent to Claude:\n\n<Tabs>\n<Tab title=\"Python\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"TypeScript\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"Ruby\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n</Tabs>\n\n#### Modifying tool results\n\nYou can modify tool results before they're sent back to Claude. This is useful for adding metadata like `cache_control` to enable [prompt caching](/docs/en/build-with-claude/prompt-caching) on tool results, or for transforming the tool output.\n\nUse the tool response method to get the tool result, modify it, then add your modified version to the messages:\n\n<Tabs>\n<Tab title=\"Python\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"TypeScript\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n<Tab title=\"Ruby\">",
+      "language": "unknown"
+    },
+    {
+      "code": "</Tab>\n</Tabs>\n\n<Tip>\nAdding `cache_control` to tool results is particularly useful when tools return large amounts of data (like document search results) that you want to cache for subsequent API calls. See [Prompt caching](/docs/en/build-with-claude/prompt-caching) for more details on caching strategies.\n</Tip>\n\n### Streaming\n\nEnable streaming to receive events as they arrive. Each iteration yields a stream object that you can iterate for events.\n\n<Tabs>\n<Tab title=\"Python\">\n\nSet `stream=True` and use `get_final_message()` to get the accumulated message.",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h3",
+      "text": "Streaming",
+      "id": "streaming"
+    }
+  ],
+  "url": "llms-txt#view-debug-level-logs-for-more-verbose-output",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Use just enough text for caching (first few chapters)",
+  "content": "LARGE_TEXT = book_content[:5000]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#use-just-enough-text-for-caching-(first-few-chapters)",
+  "links": []
+}

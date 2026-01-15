@@ -1,0 +1,8 @@
+{
+  "title": "First request - establish cache",
+  "content": "print(\"First request - establishing cache\")\nresponse1 = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=20000,\n    thinking={\n        \"type\": \"enabled\",\n        \"budget_tokens\": 4000\n    },\n    messages=MESSAGES\n)\n\nprint(f\"First response usage: {response1.usage}\")\n\nMESSAGES.append({\n    \"role\": \"assistant\",\n    \"content\": response1.content\n})\nMESSAGES.append({\n    \"role\": \"user\",\n    \"content\": \"Analyze the characters in this passage.\"\n})",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#first-request---establish-cache",
+  "links": []
+}

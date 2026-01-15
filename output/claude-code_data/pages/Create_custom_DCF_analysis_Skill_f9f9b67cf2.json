@@ -1,0 +1,8 @@
+{
+  "title": "Create custom DCF analysis Skill",
+  "content": "DCF_SKILL=$(curl -X POST \"https://api.anthropic.com/v1/skills\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: skills-2025-10-02\" \\\n  -F \"display_title=DCF Analysis\" \\\n  -F \"files[]=@dcf_skill/SKILL.md;filename=dcf_skill/SKILL.md\")\n\nDCF_SKILL_ID=$(echo \"$DCF_SKILL\" | jq -r '.id')",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#create-custom-dcf-analysis-skill",
+  "links": []
+}

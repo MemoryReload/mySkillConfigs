@@ -1,0 +1,8 @@
+{
+  "title": ".mcp.json with environment variables",
+  "content": "{\n  \"mcpServers\": {\n    \"secure-api\": {\n      \"type\": \"sse\",\n      \"url\": \"https://api.example.com/mcp\",\n      \"headers\": {\n        \"Authorization\": \"Bearer ${API_TOKEN}\",\n        \"X-API-Key\": \"${API_KEY:-default-key}\"\n      }\n    }\n  }\n}",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#.mcp.json-with-environment-variables",
+  "links": []
+}

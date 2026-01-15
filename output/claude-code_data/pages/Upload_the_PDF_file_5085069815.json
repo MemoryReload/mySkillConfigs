@@ -1,0 +1,8 @@
+{
+  "title": "Upload the PDF file",
+  "content": "with open(\"document.pdf\", \"rb\") as f:\n    file_upload = client.beta.files.upload(file=(\"document.pdf\", f, \"application/pdf\"))",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#upload-the-pdf-file",
+  "links": []
+}

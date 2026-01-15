@@ -1,0 +1,28 @@
+{
+  "title": "BigQuery Data Analysis",
+  "content": "## Available datasets\n\n**Finance**: Revenue, ARR, billing → See [reference/finance.md](reference/finance.md)\n**Sales**: Opportunities, pipeline, accounts → See [reference/sales.md](reference/sales.md)\n**Product**: API usage, features, adoption → See [reference/product.md](reference/product.md)\n**Marketing**: Campaigns, attribution, email → See [reference/marketing.md](reference/marketing.md)\n\nFind specific metrics using grep:",
+  "code_samples": [
+    {
+      "code": "grep -i \"revenue\" reference/finance.md\ngrep -i \"pipeline\" reference/sales.md\ngrep -i \"api usage\" reference/product.md",
+      "language": "bash"
+    },
+    {
+      "code": "#### Pattern 3: Conditional details\n\nShow basic content, link to advanced content:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Available datasets",
+      "id": "available-datasets"
+    },
+    {
+      "level": "h2",
+      "text": "Quick search",
+      "id": "quick-search"
+    }
+  ],
+  "url": "llms-txt#bigquery-data-analysis",
+  "links": []
+}

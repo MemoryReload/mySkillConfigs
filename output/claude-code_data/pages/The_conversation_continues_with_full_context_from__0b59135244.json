@@ -1,0 +1,38 @@
+{
+  "title": "The conversation continues with full context from the previous session",
+  "content": "typescript TypeScript\nimport { query } from \"@anthropic-ai/claude-agent-sdk\"\n\n// First, capture the session ID\nlet sessionId: string | undefined\n\nconst response = query({\n  prompt: \"Help me design a REST API\",\n  options: { model: \"claude-sonnet-4-5\" }\n})\n\nfor await (const message of response) {\n  if (message.type === 'system' && message.subtype === 'init') {\n    sessionId = message.session_id\n    console.log(`Original session: ${sessionId}`)\n  }\n}\n\n// Fork the session to try a different approach\nconst forkedResponse = query({\n  prompt: \"Now let's redesign this as a GraphQL API instead\",\n  options: {\n    resume: sessionId,\n    forkSession: true,  // Creates a new session ID\n    model: \"claude-sonnet-4-5\"\n  }\n})\n\nfor await (const message of forkedResponse) {\n  if (message.type === 'system' && message.subtype === 'init') {\n    console.log(`Forked session: ${message.session_id}`)\n    // This will be a different session ID\n  }\n}\n\n// The original session remains unchanged and can still be resumed\nconst originalContinued = query({\n  prompt: \"Add authentication to the REST API\",\n  options: {\n    resume: sessionId,\n    forkSession: false,  // Continue original session (default)\n    model: \"claude-sonnet-4-5\"\n  }\n})\npython Python\nfrom claude_agent_sdk import query, ClaudeAgentOptions",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\nThe SDK automatically handles loading the conversation history and context when you resume a session, allowing Claude to continue exactly where it left off.\n\n<Tip>\nTo track and revert file changes across sessions, see [File Checkpointing](/docs/en/agent-sdk/file-checkpointing).\n</Tip>\n\n## Forking Sessions\n\nWhen resuming a session, you can choose to either continue the original session or fork it into a new branch. By default, resuming continues the original session. Use the `forkSession` option (TypeScript) or `fork_session` option (Python) to create a new session ID that starts from the resumed state.\n\n### When to Fork a Session\n\nForking is useful when you want to:\n- Explore different approaches from the same starting point\n- Create multiple conversation branches without modifying the original\n- Test changes without affecting the original session history\n- Maintain separate conversation paths for different experiments\n\n### Forking vs Continuing\n\n| Behavior | `forkSession: false` (default) | `forkSession: true` |\n|----------|-------------------------------|---------------------|\n| **Session ID** | Same as original | New session ID generated |\n| **History** | Appends to original session | Creates new branch from resume point |\n| **Original Session** | Modified | Preserved unchanged |\n| **Use Case** | Continue linear conversation | Branch to explore alternatives |\n\n### Example: Forking a Session\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Forking Sessions",
+      "id": "forking-sessions"
+    },
+    {
+      "level": "h3",
+      "text": "When to Fork a Session",
+      "id": "when-to-fork-a-session"
+    },
+    {
+      "level": "h3",
+      "text": "Forking vs Continuing",
+      "id": "forking-vs-continuing"
+    },
+    {
+      "level": "h3",
+      "text": "Example: Forking a Session",
+      "id": "example:-forking-a-session"
+    }
+  ],
+  "url": "llms-txt#the-conversation-continues-with-full-context-from-the-previous-session",
+  "links": []
+}

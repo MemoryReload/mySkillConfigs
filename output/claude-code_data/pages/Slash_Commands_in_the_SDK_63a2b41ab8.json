@@ -1,0 +1,184 @@
+{
+  "title": "Slash Commands in the SDK",
+  "content": "Learn how to use slash commands to control Claude Code sessions through the SDK\n\nSlash commands provide a way to control Claude Code sessions with special commands that start with `/`. These commands can be sent through the SDK to perform actions like clearing conversation history, compacting messages, or getting help.\n\n## Discovering Available Slash Commands\n\nThe Claude Agent SDK provides information about available slash commands in the system initialization message. Access this information when your session starts:\n\n## Sending Slash Commands\n\nSend slash commands by including them in your prompt string, just like regular text:\n\n## Common Slash Commands\n\n### `/compact` - Compact Conversation History\n\nThe `/compact` command reduces the size of your conversation history by summarizing older messages while preserving important context:\n\n### `/clear` - Clear Conversation\n\nThe `/clear` command starts a fresh conversation by clearing all previous history:\n\n## Creating Custom Slash Commands\n\nIn addition to using built-in slash commands, you can create your own custom commands that are available through the SDK. Custom commands are defined as markdown files in specific directories, similar to how subagents are configured.\n\nCustom slash commands are stored in designated directories based on their scope:\n\n- **Project commands**: `.claude/commands/` - Available only in the current project\n- **Personal commands**: `~/.claude/commands/` - Available across all your projects\n\nEach custom command is a markdown file where:\n- The filename (without `.md` extension) becomes the command name\n- The file content defines what the command does\n- Optional YAML frontmatter provides configuration\n\nCreate `.claude/commands/refactor.md`:\n\nThis creates the `/refactor` command that you can use through the SDK.\n\n#### With Frontmatter\n\nCreate `.claude/commands/security-check.md`:\n\n### Using Custom Commands in the SDK\n\nOnce defined in the filesystem, custom commands are automatically available through the SDK:\n\n### Advanced Features\n\n#### Arguments and Placeholders\n\nCustom commands support dynamic arguments using placeholders:\n\nCreate `.claude/commands/fix-issue.md`:\n\n#### Bash Command Execution\n\nCustom commands can execute bash commands and include their output:\n\nCreate `.claude/commands/git-commit.md`:\n\nInclude file contents using the `@` prefix:\n\nCreate `.claude/commands/review-config.md`:\n\n### Organization with Namespacing\n\nOrganize commands in subdirectories for better structure:\n\nThe subdirectory appears in the command description but doesn't affect the command name itself.\n\n### Practical Examples\n\n#### Code Review Command\n\nCreate `.claude/commands/code-review.md`:\n\n#### Test Runner Command\n\nCreate `.claude/commands/test.md`:\n\nUse these commands through the SDK:\n\n- [Slash Commands](https://code.claude.com/docs/en/slash-commands) - Complete slash command documentation\n- [Subagents in the SDK](/docs/en/agent-sdk/subagents) - Similar filesystem-based configuration for subagents\n- [TypeScript SDK reference](/docs/en/agent-sdk/typescript) - Complete API documentation\n- [SDK overview](/docs/en/agent-sdk/overview) - General SDK concepts\n- [CLI reference](https://code.claude.com/docs/en/cli-reference) - Command-line interface",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Sending Slash Commands\n\nSend slash commands by including them in your prompt string, just like regular text:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Common Slash Commands\n\n### `/compact` - Compact Conversation History\n\nThe `/compact` command reduces the size of your conversation history by summarizing older messages while preserving important context:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### `/clear` - Clear Conversation\n\nThe `/clear` command starts a fresh conversation by clearing all previous history:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Creating Custom Slash Commands\n\nIn addition to using built-in slash commands, you can create your own custom commands that are available through the SDK. Custom commands are defined as markdown files in specific directories, similar to how subagents are configured.\n\n### File Locations\n\nCustom slash commands are stored in designated directories based on their scope:\n\n- **Project commands**: `.claude/commands/` - Available only in the current project\n- **Personal commands**: `~/.claude/commands/` - Available across all your projects\n\n### File Format\n\nEach custom command is a markdown file where:\n- The filename (without `.md` extension) becomes the command name\n- The file content defines what the command does\n- Optional YAML frontmatter provides configuration\n\n#### Basic Example\n\nCreate `.claude/commands/refactor.md`:",
+      "language": "unknown"
+    },
+    {
+      "code": "This creates the `/refactor` command that you can use through the SDK.\n\n#### With Frontmatter\n\nCreate `.claude/commands/security-check.md`:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Using Custom Commands in the SDK\n\nOnce defined in the filesystem, custom commands are automatically available through the SDK:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Advanced Features\n\n#### Arguments and Placeholders\n\nCustom commands support dynamic arguments using placeholders:\n\nCreate `.claude/commands/fix-issue.md`:",
+      "language": "unknown"
+    },
+    {
+      "code": "Use in SDK:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### Bash Command Execution\n\nCustom commands can execute bash commands and include their output:\n\nCreate `.claude/commands/git-commit.md`:",
+      "language": "unknown"
+    },
+    {
+      "code": "#### File References\n\nInclude file contents using the `@` prefix:\n\nCreate `.claude/commands/review-config.md`:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Organization with Namespacing\n\nOrganize commands in subdirectories for better structure:",
+      "language": "unknown"
+    },
+    {
+      "code": "The subdirectory appears in the command description but doesn't affect the command name itself.\n\n### Practical Examples\n\n#### Code Review Command\n\nCreate `.claude/commands/code-review.md`:",
+      "language": "unknown"
+    },
+    {
+      "code": "#### Test Runner Command\n\nCreate `.claude/commands/test.md`:",
+      "language": "unknown"
+    },
+    {
+      "code": "Use these commands through the SDK:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Discovering Available Slash Commands",
+      "id": "discovering-available-slash-commands"
+    },
+    {
+      "level": "h2",
+      "text": "Sending Slash Commands",
+      "id": "sending-slash-commands"
+    },
+    {
+      "level": "h2",
+      "text": "Common Slash Commands",
+      "id": "common-slash-commands"
+    },
+    {
+      "level": "h3",
+      "text": "`/compact` - Compact Conversation History",
+      "id": "`/compact`---compact-conversation-history"
+    },
+    {
+      "level": "h3",
+      "text": "`/clear` - Clear Conversation",
+      "id": "`/clear`---clear-conversation"
+    },
+    {
+      "level": "h2",
+      "text": "Creating Custom Slash Commands",
+      "id": "creating-custom-slash-commands"
+    },
+    {
+      "level": "h3",
+      "text": "File Locations",
+      "id": "file-locations"
+    },
+    {
+      "level": "h3",
+      "text": "File Format",
+      "id": "file-format"
+    },
+    {
+      "level": "h3",
+      "text": "Using Custom Commands in the SDK",
+      "id": "using-custom-commands-in-the-sdk"
+    },
+    {
+      "level": "h3",
+      "text": "Advanced Features",
+      "id": "advanced-features"
+    },
+    {
+      "level": "h2",
+      "text": "Context",
+      "id": "context"
+    },
+    {
+      "level": "h2",
+      "text": "Task",
+      "id": "task"
+    },
+    {
+      "level": "h3",
+      "text": "Organization with Namespacing",
+      "id": "organization-with-namespacing"
+    },
+    {
+      "level": "h3",
+      "text": "Practical Examples",
+      "id": "practical-examples"
+    },
+    {
+      "level": "h2",
+      "text": "Changed Files",
+      "id": "changed-files"
+    },
+    {
+      "level": "h2",
+      "text": "Detailed Changes",
+      "id": "detailed-changes"
+    },
+    {
+      "level": "h2",
+      "text": "Review Checklist",
+      "id": "review-checklist"
+    },
+    {
+      "level": "h2",
+      "text": "See Also",
+      "id": "see-also"
+    }
+  ],
+  "url": "llms-txt#slash-commands-in-the-sdk",
+  "links": []
+}

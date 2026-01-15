@@ -1,0 +1,5361 @@
+{
+  "name": "claude-code",
+  "total_pages": 1338,
+  "base_url": "https://platform.claude.com/docs/en/docs/agents-and-tools/claude-code/",
+  "llms_txt_detected": true,
+  "llms_txt_variant": null,
+  "pages": [
+    {
+      "title": "Anthropic Developer Documentation - Full Content",
+      "url": "llms-txt#anthropic-developer-documentation---full-content"
+    },
+    {
+      "title": "English Documentation - Full Content",
+      "url": "llms-txt#english-documentation---full-content"
+    },
+    {
+      "title": "Get started with Claude",
+      "url": "llms-txt#get-started-with-claude"
+    },
+    {
+      "title": "Get started with Claude",
+      "url": "llms-txt#get-started-with-claude"
+    },
+    {
+      "title": "Intro to Claude",
+      "url": "llms-txt#intro-to-claude"
+    },
+    {
+      "title": "Intro to Claude",
+      "url": "llms-txt#intro-to-claude"
+    },
+    {
+      "title": "Models overview",
+      "url": "llms-txt#models-overview"
+    },
+    {
+      "title": "Models overview",
+      "url": "llms-txt#models-overview"
+    },
+    {
+      "title": "Choosing the right model",
+      "url": "llms-txt#choosing-the-right-model"
+    },
+    {
+      "title": "Choosing the right model",
+      "url": "llms-txt#choosing-the-right-model"
+    },
+    {
+      "title": "Migrating to Claude 4.5",
+      "url": "llms-txt#migrating-to-claude-4.5"
+    },
+    {
+      "title": "Migrating to Claude 4.5",
+      "url": "llms-txt#migrating-to-claude-4.5"
+    },
+    {
+      "title": "Before (Claude Sonnet 4)",
+      "url": "llms-txt#before-(claude-sonnet-4)"
+    },
+    {
+      "title": "After (Claude Sonnet 4.5)",
+      "url": "llms-txt#after-(claude-sonnet-4.5)"
+    },
+    {
+      "title": "Before (Claude Opus 4.1)",
+      "url": "llms-txt#before-(claude-opus-4.1)"
+    },
+    {
+      "title": "After (Claude Sonnet 4.5)",
+      "url": "llms-txt#after-(claude-sonnet-4.5)"
+    },
+    {
+      "title": "Before (Claude Opus 4.1)",
+      "url": "llms-txt#before-(claude-opus-4.1)"
+    },
+    {
+      "title": "After (Claude Opus 4.5)",
+      "url": "llms-txt#after-(claude-opus-4.5)"
+    },
+    {
+      "title": "Model deprecations",
+      "url": "llms-txt#model-deprecations"
+    },
+    {
+      "title": "Model deprecations",
+      "url": "llms-txt#model-deprecations"
+    },
+    {
+      "title": "Pricing",
+      "url": "llms-txt#pricing"
+    },
+    {
+      "title": "Pricing",
+      "url": "llms-txt#pricing"
+    },
+    {
+      "title": "What's new in Claude 4.5",
+      "url": "llms-txt#what's-new-in-claude-4.5"
+    },
+    {
+      "title": "What's new in Claude 4.5",
+      "url": "llms-txt#what's-new-in-claude-4.5"
+    },
+    {
+      "title": "Claude Sonnet 3.7",
+      "url": "llms-txt#claude-sonnet-3.7"
+    },
+    {
+      "title": "Claude 4 models",
+      "url": "llms-txt#claude-4-models"
+    },
+    {
+      "title": "Features overview",
+      "url": "llms-txt#features-overview"
+    },
+    {
+      "title": "Features overview",
+      "url": "llms-txt#features-overview"
+    },
+    {
+      "title": "Context windows",
+      "url": "llms-txt#context-windows"
+    },
+    {
+      "title": "Context windows",
+      "url": "llms-txt#context-windows"
+    },
+    {
+      "title": "Next steps",
+      "url": "llms-txt#next-steps"
+    },
+    {
+      "title": "Prompting best practices",
+      "url": "llms-txt#prompting-best-practices"
+    },
+    {
+      "title": "Prompting best practices",
+      "url": "llms-txt#prompting-best-practices"
+    },
+    {
+      "title": "Using the Messages API",
+      "url": "llms-txt#using-the-messages-api"
+    },
+    {
+      "title": "Using the Messages API",
+      "url": "llms-txt#using-the-messages-api"
+    },
+    {
+      "title": "Batch processing",
+      "url": "llms-txt#batch-processing"
+    },
+    {
+      "title": "Batch processing",
+      "url": "llms-txt#batch-processing"
+    },
+    {
+      "title": "Message Batches API",
+      "url": "llms-txt#message-batches-api"
+    },
+    {
+      "title": "Automatically fetches more pages as needed.",
+      "url": "llms-txt#automatically-fetches-more-pages-as-needed."
+    },
+    {
+      "title": "Stream results file in memory-efficient chunks, processing one at a time",
+      "url": "llms-txt#stream-results-file-in-memory-efficient-chunks,-processing-one-at-a-time"
+    },
+    {
+      "title": "Building with extended thinking",
+      "url": "llms-txt#building-with-extended-thinking"
+    },
+    {
+      "title": "Building with extended thinking",
+      "url": "llms-txt#building-with-extended-thinking"
+    },
+    {
+      "title": "The response will contain summarized thinking blocks and text blocks",
+      "url": "llms-txt#the-response-will-contain-summarized-thinking-blocks-and-text-blocks"
+    },
+    {
+      "title": "First request - Claude responds with thinking and tool request",
+      "url": "llms-txt#first-request---claude-responds-with-thinking-and-tool-request"
+    },
+    {
+      "title": "Extract thinking block and tool use block",
+      "url": "llms-txt#extract-thinking-block-and-tool-use-block"
+    },
+    {
+      "title": "Call your actual weather API, here is where your actual API call would go",
+      "url": "llms-txt#call-your-actual-weather-api,-here-is-where-your-actual-api-call-would-go"
+    },
+    {
+      "title": "let's pretend this is what we get back",
+      "url": "llms-txt#let's-pretend-this-is-what-we-get-back"
+    },
+    {
+      "title": "Second request - Include thinking block and tool result",
+      "url": "llms-txt#second-request---include-thinking-block-and-tool-result"
+    },
+    {
+      "title": "No new thinking blocks will be generated in the response",
+      "url": "llms-txt#no-new-thinking-blocks-will-be-generated-in-the-response"
+    },
+    {
+      "title": "Fetch the content of the article",
+      "url": "llms-txt#fetch-the-content-of-the-article"
+    },
+    {
+      "title": "Use just enough text for caching (first few chapters)",
+      "url": "llms-txt#use-just-enough-text-for-caching-(first-few-chapters)"
+    },
+    {
+      "title": "First request - establish cache",
+      "url": "llms-txt#first-request---establish-cache"
+    },
+    {
+      "title": "Second request - same thinking parameters (cache hit expected)",
+      "url": "llms-txt#second-request---same-thinking-parameters-(cache-hit-expected)"
+    },
+    {
+      "title": "Third request - different thinking parameters (cache miss for messages)",
+      "url": "llms-txt#third-request---different-thinking-parameters-(cache-miss-for-messages)"
+    },
+    {
+      "title": "Fetch the content of the article",
+      "url": "llms-txt#fetch-the-content-of-the-article"
+    },
+    {
+      "title": "Use just enough text for caching (first few chapters)",
+      "url": "llms-txt#use-just-enough-text-for-caching-(first-few-chapters)"
+    },
+    {
+      "title": "No system prompt - caching in messages instead",
+      "url": "llms-txt#no-system-prompt---caching-in-messages-instead"
+    },
+    {
+      "title": "First request - establish cache",
+      "url": "llms-txt#first-request---establish-cache"
+    },
+    {
+      "title": "Second request - same thinking parameters (cache hit expected)",
+      "url": "llms-txt#second-request---same-thinking-parameters-(cache-hit-expected)"
+    },
+    {
+      "title": "Third request - different thinking budget (cache miss expected)",
+      "url": "llms-txt#third-request---different-thinking-budget-(cache-miss-expected)"
+    },
+    {
+      "title": "Using a special prompt that triggers redacted thinking (for demonstration purposes only)",
+      "url": "llms-txt#using-a-special-prompt-that-triggers-redacted-thinking-(for-demonstration-purposes-only)"
+    },
+    {
+      "title": "Identify redacted thinking blocks",
+      "url": "llms-txt#identify-redacted-thinking-blocks"
+    },
+    {
+      "title": "Citations",
+      "url": "llms-txt#citations"
+    },
+    {
+      "title": "Citations",
+      "url": "llms-txt#citations"
+    },
+    {
+      "title": "Long document content (e.g., technical documentation)",
+      "url": "llms-txt#long-document-content-(e.g.,-technical-documentation)"
+    },
+    {
+      "title": "Context editing",
+      "url": "llms-txt#context-editing"
+    },
+    {
+      "title": "Context editing",
+      "url": "llms-txt#context-editing"
+    },
+    {
+      "title": "More frequent compaction for memory-constrained scenarios",
+      "url": "llms-txt#more-frequent-compaction-for-memory-constrained-scenarios"
+    },
+    {
+      "title": "Less frequent compaction when you need more context",
+      "url": "llms-txt#less-frequent-compaction-when-you-need-more-context"
+    },
+    {
+      "title": "Logs will show:",
+      "url": "llms-txt#logs-will-show:"
+    },
+    {
+      "title": "INFO: Token usage 105000 has exceeded the threshold of 100000. Performing compaction.",
+      "url": "llms-txt#info:-token-usage-105000-has-exceeded-the-threshold-of-100000.-performing-compaction."
+    },
+    {
+      "title": "INFO: Compaction complete. New token usage: 2500",
+      "url": "llms-txt#info:-compaction-complete.-new-token-usage:-2500"
+    },
+    {
+      "title": "Effort",
+      "url": "llms-txt#effort"
+    },
+    {
+      "title": "Effort",
+      "url": "llms-txt#effort"
+    },
+    {
+      "title": "Embeddings",
+      "url": "llms-txt#embeddings"
+    },
+    {
+      "title": "Embeddings",
+      "url": "llms-txt#embeddings"
+    },
+    {
+      "title": "This will automatically use the environment variable VOYAGE_API_KEY.",
+      "url": "llms-txt#this-will-automatically-use-the-environment-variable-voyage_api_key."
+    },
+    {
+      "title": "Alternatively, you can use vo = voyageai.Client(api_key=\"<your secret key>\")",
+      "url": "llms-txt#alternatively,-you-can-use-vo-=-voyageai.client(api_key=\"<your-secret-key>\")"
+    },
+    {
+      "title": "Embed the documents",
+      "url": "llms-txt#embed-the-documents"
+    },
+    {
+      "title": "Embed the query",
+      "url": "llms-txt#embed-the-query"
+    },
+    {
+      "title": "Compute the similarity",
+      "url": "llms-txt#compute-the-similarity"
+    },
+    {
+      "title": "Voyage embeddings are normalized to length 1, therefore dot-product",
+      "url": "llms-txt#voyage-embeddings-are-normalized-to-length-1,-therefore-dot-product"
+    },
+    {
+      "title": "and cosine similarity are the same.",
+      "url": "llms-txt#and-cosine-similarity-are-the-same."
+    },
+    {
+      "title": "Files API",
+      "url": "llms-txt#files-api"
+    },
+    {
+      "title": "Files API",
+      "url": "llms-txt#files-api"
+    },
+    {
+      "title": "Example: Reading a text file and sending it as plain text",
+      "url": "llms-txt#example:-reading-a-text-file-and-sending-it-as-plain-text"
+    },
+    {
+      "title": "Note: For files with special characters, consider base64 encoding",
+      "url": "llms-txt#note:-for-files-with-special-characters,-consider-base64-encoding"
+    },
+    {
+      "title": "Example: Reading a CSV file",
+      "url": "llms-txt#example:-reading-a-csv-file"
+    },
+    {
+      "title": "Send as plain text in the message",
+      "url": "llms-txt#send-as-plain-text-in-the-message"
+    },
+    {
+      "title": "Save to file",
+      "url": "llms-txt#save-to-file"
+    },
+    {
+      "title": "Multilingual support",
+      "url": "llms-txt#multilingual-support"
+    },
+    {
+      "title": "Multilingual support",
+      "url": "llms-txt#multilingual-support"
+    },
+    {
+      "title": "PDF support",
+      "url": "llms-txt#pdf-support"
+    },
+    {
+      "title": "PDF support",
+      "url": "llms-txt#pdf-support"
+    },
+    {
+      "title": "First, upload your PDF to the Files API",
+      "url": "llms-txt#first,-upload-your-pdf-to-the-files-api"
+    },
+    {
+      "title": "Then use the returned file_id in your message",
+      "url": "llms-txt#then-use-the-returned-file_id-in-your-message"
+    },
+    {
+      "title": "Upload the PDF file",
+      "url": "llms-txt#upload-the-pdf-file"
+    },
+    {
+      "title": "Use the uploaded file in a message",
+      "url": "llms-txt#use-the-uploaded-file-in-a-message"
+    },
+    {
+      "title": "Create a JSON request file using the pdf_base64.txt content",
+      "url": "llms-txt#create-a-json-request-file-using-the-pdf_base64.txt-content"
+    },
+    {
+      "title": "Then make the API call using the JSON file",
+      "url": "llms-txt#then-make-the-api-call-using-the-json-file"
+    },
+    {
+      "title": "Create a JSON request file using the pdf_base64.txt content",
+      "url": "llms-txt#create-a-json-request-file-using-the-pdf_base64.txt-content"
+    },
+    {
+      "title": "Then make the API call using the JSON file",
+      "url": "llms-txt#then-make-the-api-call-using-the-json-file"
+    },
+    {
+      "title": "Prompt caching",
+      "url": "llms-txt#prompt-caching"
+    },
+    {
+      "title": "Prompt caching",
+      "url": "llms-txt#prompt-caching"
+    },
+    {
+      "title": "Call the model again with the same inputs up to the cache checkpoint",
+      "url": "llms-txt#call-the-model-again-with-the-same-inputs-up-to-the-cache-checkpoint"
+    },
+    {
+      "title": "Call the model again with the same inputs up to the cache checkpoint",
+      "url": "llms-txt#call-the-model-again-with-the-same-inputs-up-to-the-cache-checkpoint"
+    },
+    {
+      "title": "Request 2 caches its request content (not the response)",
+      "url": "llms-txt#request-2-caches-its-request-content-(not-the-response)"
+    },
+    {
+      "title": "The cache includes: user message, thinking_block_1, tool_use block 1, and tool_result_1",
+      "url": "llms-txt#the-cache-includes:-user-message,-thinking_block_1,-tool_use-block-1,-and-tool_result_1"
+    },
+    {
+      "title": "Non-tool-result user block causes all thinking blocks to be ignored",
+      "url": "llms-txt#non-tool-result-user-block-causes-all-thinking-blocks-to-be-ignored"
+    },
+    {
+      "title": "This request is processed as if thinking blocks were never present",
+      "url": "llms-txt#this-request-is-processed-as-if-thinking-blocks-were-never-present"
+    },
+    {
+      "title": "Search results",
+      "url": "llms-txt#search-results"
+    },
+    {
+      "title": "Search results",
+      "url": "llms-txt#search-results"
+    },
+    {
+      "title": "Define a knowledge base search tool",
+      "url": "llms-txt#define-a-knowledge-base-search-tool"
+    },
+    {
+      "title": "Function to handle the tool call",
+      "url": "llms-txt#function-to-handle-the-tool-call"
+    },
+    {
+      "title": "Create a message with the tool",
+      "url": "llms-txt#create-a-message-with-the-tool"
+    },
+    {
+      "title": "When Claude calls the tool, provide the search results",
+      "url": "llms-txt#when-claude-calls-the-tool,-provide-the-search-results"
+    },
+    {
+      "title": "Provide search results directly in the user message",
+      "url": "llms-txt#provide-search-results-directly-in-the-user-message"
+    },
+    {
+      "title": "First message with top-level search results",
+      "url": "llms-txt#first-message-with-top-level-search-results"
+    },
+    {
+      "title": "Claude might respond and call a tool to search for pricing",
+      "url": "llms-txt#claude-might-respond-and-call-a-tool-to-search-for-pricing"
+    },
+    {
+      "title": "Then you provide tool results with more search results",
+      "url": "llms-txt#then-you-provide-tool-results-with-more-search-results"
+    },
+    {
+      "title": "In tool results",
+      "url": "llms-txt#in-tool-results"
+    },
+    {
+      "title": "In top-level content",
+      "url": "llms-txt#in-top-level-content"
+    },
+    {
+      "title": "Streaming Messages",
+      "url": "llms-txt#streaming-messages"
+    },
+    {
+      "title": "Streaming Messages",
+      "url": "llms-txt#streaming-messages"
+    },
+    {
+      "title": "Structured outputs",
+      "url": "llms-txt#structured-outputs"
+    },
+    {
+      "title": "Structured outputs",
+      "url": "llms-txt#structured-outputs"
+    },
+    {
+      "title": "With .create() - requires transform_schema()",
+      "url": "llms-txt#with-.create()---requires-transform_schema()"
+    },
+    {
+      "title": "With .parse() - can pass Pydantic model directly",
+      "url": "llms-txt#with-.parse()---can-pass-pydantic-model-directly"
+    },
+    {
+      "title": "Access the parsed output directly",
+      "url": "llms-txt#access-the-parsed-output-directly"
+    },
+    {
+      "title": "First convert Pydantic model to JSON schema, then transform",
+      "url": "llms-txt#first-convert-pydantic-model-to-json-schema,-then-transform"
+    },
+    {
+      "title": "Modify schema if needed",
+      "url": "llms-txt#modify-schema-if-needed"
+    },
+    {
+      "title": "Token counting",
+      "url": "llms-txt#token-counting"
+    },
+    {
+      "title": "Token counting",
+      "url": "llms-txt#token-counting"
+    },
+    {
+      "title": "Vision",
+      "url": "llms-txt#vision"
+    },
+    {
+      "title": "Vision",
+      "url": "llms-txt#vision"
+    },
+    {
+      "title": "For base64-encoded images",
+      "url": "llms-txt#for-base64-encoded-images"
+    },
+    {
+      "title": "For URL-based images, you can use the URLs directly in your requests",
+      "url": "llms-txt#for-url-based-images,-you-can-use-the-urls-directly-in-your-requests"
+    },
+    {
+      "title": "First, upload your image to the Files API",
+      "url": "llms-txt#first,-upload-your-image-to-the-files-api"
+    },
+    {
+      "title": "Then use the returned file_id in your message",
+      "url": "llms-txt#then-use-the-returned-file_id-in-your-message"
+    },
+    {
+      "title": "Upload the image file",
+      "url": "llms-txt#upload-the-image-file"
+    },
+    {
+      "title": "Use the uploaded file in a message",
+      "url": "llms-txt#use-the-uploaded-file-in-a-message"
+    },
+    {
+      "title": "Tool use with Claude",
+      "url": "llms-txt#tool-use-with-claude"
+    },
+    {
+      "title": "Tool use with Claude",
+      "url": "llms-txt#tool-use-with-claude"
+    },
+    {
+      "title": "Bash tool",
+      "url": "llms-txt#bash-tool"
+    },
+    {
+      "title": "Bash tool",
+      "url": "llms-txt#bash-tool"
+    },
+    {
+      "title": "User request",
+      "url": "llms-txt#user-request"
+    },
+    {
+      "title": "Claude's tool uses:",
+      "url": "llms-txt#claude's-tool-uses:"
+    },
+    {
+      "title": "1. Install package",
+      "url": "llms-txt#1.-install-package"
+    },
+    {
+      "title": "2. Create script",
+      "url": "llms-txt#2.-create-script"
+    },
+    {
+      "title": "3. Run script",
+      "url": "llms-txt#3.-run-script"
+    },
+    {
+      "title": "Commands run in the same session maintain state",
+      "url": "llms-txt#commands-run-in-the-same-session-maintain-state"
+    },
+    {
+      "title": "Code execution tool",
+      "url": "llms-txt#code-execution-tool"
+    },
+    {
+      "title": "Code execution tool",
+      "url": "llms-txt#code-execution-tool"
+    },
+    {
+      "title": "First, upload a file",
+      "url": "llms-txt#first,-upload-a-file"
+    },
+    {
+      "title": "Then use the file_id with code execution",
+      "url": "llms-txt#then-use-the-file_id-with-code-execution"
+    },
+    {
+      "title": "Upload a file",
+      "url": "llms-txt#upload-a-file"
+    },
+    {
+      "title": "Use the file_id with code execution",
+      "url": "llms-txt#use-the-file_id-with-code-execution"
+    },
+    {
+      "title": "Initialize the client",
+      "url": "llms-txt#initialize-the-client"
+    },
+    {
+      "title": "Request code execution that creates files",
+      "url": "llms-txt#request-code-execution-that-creates-files"
+    },
+    {
+      "title": "Extract file IDs from the response",
+      "url": "llms-txt#extract-file-ids-from-the-response"
+    },
+    {
+      "title": "Download the created files",
+      "url": "llms-txt#download-the-created-files"
+    },
+    {
+      "title": "First, upload a file",
+      "url": "llms-txt#first,-upload-a-file"
+    },
+    {
+      "title": "Extract file_id (using jq)",
+      "url": "llms-txt#extract-file_id-(using-jq)"
+    },
+    {
+      "title": "Then use it with code execution",
+      "url": "llms-txt#then-use-it-with-code-execution"
+    },
+    {
+      "title": "Upload a file",
+      "url": "llms-txt#upload-a-file"
+    },
+    {
+      "title": "Use it with code execution",
+      "url": "llms-txt#use-it-with-code-execution"
+    },
+    {
+      "title": "Claude might:",
+      "url": "llms-txt#claude-might:"
+    },
+    {
+      "title": "1. Use bash to check file size and preview data",
+      "url": "llms-txt#1.-use-bash-to-check-file-size-and-preview-data"
+    },
+    {
+      "title": "2. Use text_editor to write Python code to analyze the CSV and create visualizations",
+      "url": "llms-txt#2.-use-text_editor-to-write-python-code-to-analyze-the-csv-and-create-visualizations"
+    },
+    {
+      "title": "3. Use bash to run the Python code",
+      "url": "llms-txt#3.-use-bash-to-run-the-python-code"
+    },
+    {
+      "title": "4. Use text_editor to create a README.md with findings",
+      "url": "llms-txt#4.-use-text_editor-to-create-a-readme.md-with-findings"
+    },
+    {
+      "title": "5. Use bash to organize files into a report directory",
+      "url": "llms-txt#5.-use-bash-to-organize-files-into-a-report-directory"
+    },
+    {
+      "title": "Initialize the client",
+      "url": "llms-txt#initialize-the-client"
+    },
+    {
+      "title": "First request: Create a file with a random number",
+      "url": "llms-txt#first-request:-create-a-file-with-a-random-number"
+    },
+    {
+      "title": "Extract the container ID from the first response",
+      "url": "llms-txt#extract-the-container-id-from-the-first-response"
+    },
+    {
+      "title": "Second request: Reuse the container to read the file",
+      "url": "llms-txt#second-request:-reuse-the-container-to-read-the-file"
+    },
+    {
+      "title": "First request: Create a file with a random number",
+      "url": "llms-txt#first-request:-create-a-file-with-a-random-number"
+    },
+    {
+      "title": "Extract container ID from the response (using jq)",
+      "url": "llms-txt#extract-container-id-from-the-response-(using-jq)"
+    },
+    {
+      "title": "Second request: Reuse the container to read the file",
+      "url": "llms-txt#second-request:-reuse-the-container-to-read-the-file"
+    },
+    {
+      "title": "Enable programmatic calling for your tools",
+      "url": "llms-txt#enable-programmatic-calling-for-your-tools"
+    },
+    {
+      "title": "Computer use tool",
+      "url": "llms-txt#computer-use-tool"
+    },
+    {
+      "title": "Computer use tool",
+      "url": "llms-txt#computer-use-tool"
+    },
+    {
+      "title": "When capturing screenshot",
+      "url": "llms-txt#when-capturing-screenshot"
+    },
+    {
+      "title": "Resize image to scaled dimensions before sending to Claude",
+      "url": "llms-txt#resize-image-to-scaled-dimensions-before-sending-to-claude"
+    },
+    {
+      "title": "When handling Claude's coordinates, scale them back up",
+      "url": "llms-txt#when-handling-claude's-coordinates,-scale-them-back-up"
+    },
+    {
+      "title": "Fine-grained tool streaming",
+      "url": "llms-txt#fine-grained-tool-streaming"
+    },
+    {
+      "title": "Fine-grained tool streaming",
+      "url": "llms-txt#fine-grained-tool-streaming"
+    },
+    {
+      "title": "How to implement tool use",
+      "url": "llms-txt#how-to-implement-tool-use"
+    },
+    {
+      "title": "How to implement tool use",
+      "url": "llms-txt#how-to-implement-tool-use"
+    },
+    {
+      "title": "Initialize client",
+      "url": "llms-txt#initialize-client"
+    },
+    {
+      "title": "Define tools using the decorator",
+      "url": "llms-txt#define-tools-using-the-decorator"
+    },
+    {
+      "title": "Use the tool runner",
+      "url": "llms-txt#use-the-tool-runner"
+    },
+    {
+      "title": "Initialize client",
+      "url": "llms-txt#initialize-client"
+    },
+    {
+      "title": "Define input schema",
+      "url": "llms-txt#define-input-schema"
+    },
+    {
+      "title": "Define tool",
+      "url": "llms-txt#define-tool"
+    },
+    {
+      "title": "Use the tool runner",
+      "url": "llms-txt#use-the-tool-runner"
+    },
+    {
+      "title": "Manual step-by-step control",
+      "url": "llms-txt#manual-step-by-step-control"
+    },
+    {
+      "title": "Inject follow-up messages",
+      "url": "llms-txt#inject-follow-up-messages"
+    },
+    {
+      "title": "Access current parameters",
+      "url": "llms-txt#access-current-parameters"
+    },
+    {
+      "title": "View info-level logs including tool errors",
+      "url": "llms-txt#view-info-level-logs-including-tool-errors"
+    },
+    {
+      "title": "View debug-level logs for more verbose output",
+      "url": "llms-txt#view-debug-level-logs-for-more-verbose-output"
+    },
+    {
+      "title": "When streaming, the runner returns BetaMessageStream",
+      "url": "llms-txt#when-streaming,-the-runner-returns-betamessagestream"
+    },
+    {
+      "title": "Define tools",
+      "url": "llms-txt#define-tools"
+    },
+    {
+      "title": "Initial request",
+      "url": "llms-txt#initial-request"
+    },
+    {
+      "title": "Claude's response with parallel tool calls",
+      "url": "llms-txt#claude's-response-with-parallel-tool-calls"
+    },
+    {
+      "title": "Build the conversation with tool results",
+      "url": "llms-txt#build-the-conversation-with-tool-results"
+    },
+    {
+      "title": "Get final response",
+      "url": "llms-txt#get-final-response"
+    },
+    {
+      "title": "Initialize client",
+      "url": "llms-txt#initialize-client"
+    },
+    {
+      "title": "Define tools",
+      "url": "llms-txt#define-tools"
+    },
+    {
+      "title": "Test conversation with parallel tool calls",
+      "url": "llms-txt#test-conversation-with-parallel-tool-calls"
+    },
+    {
+      "title": "Make initial request",
+      "url": "llms-txt#make-initial-request"
+    },
+    {
+      "title": "Check for parallel tool calls",
+      "url": "llms-txt#check-for-parallel-tool-calls"
+    },
+    {
+      "title": "Simulate tool execution and format results correctly",
+      "url": "llms-txt#simulate-tool-execution-and-format-results-correctly"
+    },
+    {
+      "title": "Continue conversation with tool results",
+      "url": "llms-txt#continue-conversation-with-tool-results"
+    },
+    {
+      "title": "Get final response",
+      "url": "llms-txt#get-final-response"
+    },
+    {
+      "title": "Verify formatting",
+      "url": "llms-txt#verify-formatting"
+    },
+    {
+      "title": "Instead of:",
+      "url": "llms-txt#instead-of:"
+    },
+    {
+      "title": "Use:",
+      "url": "llms-txt#use:"
+    },
+    {
+      "title": "Or be explicit:",
+      "url": "llms-txt#or-be-explicit:"
+    },
+    {
+      "title": "Check if response was truncated during tool use",
+      "url": "llms-txt#check-if-response-was-truncated-during-tool-use"
+    },
+    {
+      "title": "Initial request with web search",
+      "url": "llms-txt#initial-request-with-web-search"
+    },
+    {
+      "title": "Check if the response has pause_turn stop reason",
+      "url": "llms-txt#check-if-the-response-has-pause_turn-stop-reason"
+    },
+    {
+      "title": "Calculate average tools per tool-calling message",
+      "url": "llms-txt#calculate-average-tools-per-tool-calling-message"
+    },
+    {
+      "title": "Should be > 1.0 if parallel calls are working",
+      "url": "llms-txt#should-be->-1.0-if-parallel-calls-are-working"
+    },
+    {
+      "title": "Memory tool",
+      "url": "llms-txt#memory-tool"
+    },
+    {
+      "title": "Memory tool",
+      "url": "llms-txt#memory-tool"
+    },
+    {
+      "title": "Programmatic tool calling",
+      "url": "llms-txt#programmatic-tool-calling"
+    },
+    {
+      "title": "Programmatic tool calling",
+      "url": "llms-txt#programmatic-tool-calling"
+    },
+    {
+      "title": "async wrapper omitted for clarity",
+      "url": "llms-txt#async-wrapper-omitted-for-clarity"
+    },
+    {
+      "title": "Process results programmatically",
+      "url": "llms-txt#process-results-programmatically"
+    },
+    {
+      "title": "async wrapper omitted for clarity",
+      "url": "llms-txt#async-wrapper-omitted-for-clarity"
+    },
+    {
+      "title": "async wrapper omitted for clarity",
+      "url": "llms-txt#async-wrapper-omitted-for-clarity"
+    },
+    {
+      "title": "async wrapper omitted for clarity",
+      "url": "llms-txt#async-wrapper-omitted-for-clarity"
+    },
+    {
+      "title": "Provide error information in the tool result",
+      "url": "llms-txt#provide-error-information-in-the-tool-result"
+    },
+    {
+      "title": "Text editor tool",
+      "url": "llms-txt#text-editor-tool"
+    },
+    {
+      "title": "Text editor tool",
+      "url": "llms-txt#text-editor-tool"
+    },
+    {
+      "title": "Tool search tool",
+      "url": "llms-txt#tool-search-tool"
+    },
+    {
+      "title": "Tool search tool",
+      "url": "llms-txt#tool-search-tool"
+    },
+    {
+      "title": "First request with tool search",
+      "url": "llms-txt#first-request-with-tool-search"
+    },
+    {
+      "title": "Add Claude's response to conversation",
+      "url": "llms-txt#add-claude's-response-to-conversation"
+    },
+    {
+      "title": "Second request with cache breakpoint",
+      "url": "llms-txt#second-request-with-cache-breakpoint"
+    },
+    {
+      "title": "Web fetch tool",
+      "url": "llms-txt#web-fetch-tool"
+    },
+    {
+      "title": "Web fetch tool",
+      "url": "llms-txt#web-fetch-tool"
+    },
+    {
+      "title": "First request with web fetch",
+      "url": "llms-txt#first-request-with-web-fetch"
+    },
+    {
+      "title": "Add Claude's response to conversation",
+      "url": "llms-txt#add-claude's-response-to-conversation"
+    },
+    {
+      "title": "Second request with cache breakpoint",
+      "url": "llms-txt#second-request-with-cache-breakpoint"
+    },
+    {
+      "title": "The second response benefits from cached fetch results",
+      "url": "llms-txt#the-second-response-benefits-from-cached-fetch-results"
+    },
+    {
+      "title": "Web search tool",
+      "url": "llms-txt#web-search-tool"
+    },
+    {
+      "title": "Web search tool",
+      "url": "llms-txt#web-search-tool"
+    },
+    {
+      "title": "First request with web search and cache breakpoint",
+      "url": "llms-txt#first-request-with-web-search-and-cache-breakpoint"
+    },
+    {
+      "title": "Add Claude's response to the conversation",
+      "url": "llms-txt#add-claude's-response-to-the-conversation"
+    },
+    {
+      "title": "Second request with cache breakpoint after the search results",
+      "url": "llms-txt#second-request-with-cache-breakpoint-after-the-search-results"
+    },
+    {
+      "title": "The second response will benefit from cached search results",
+      "url": "llms-txt#the-second-response-will-benefit-from-cached-search-results"
+    },
+    {
+      "title": "while still being able to perform new searches if needed",
+      "url": "llms-txt#while-still-being-able-to-perform-new-searches-if-needed"
+    },
+    {
+      "title": "Agent Skills",
+      "url": "llms-txt#agent-skills"
+    },
+    {
+      "title": "Agent Skills",
+      "url": "llms-txt#agent-skills"
+    },
+    {
+      "title": "PDF Processing",
+      "url": "llms-txt#pdf-processing"
+    },
+    {
+      "title": "Your Skill Name",
+      "url": "llms-txt#your-skill-name"
+    },
+    {
+      "title": "Get started with Agent Skills in the API",
+      "url": "llms-txt#get-started-with-agent-skills-in-the-api"
+    },
+    {
+      "title": "Get started with Agent Skills in the API",
+      "url": "llms-txt#get-started-with-agent-skills-in-the-api"
+    },
+    {
+      "title": "List Anthropic-managed Skills",
+      "url": "llms-txt#list-anthropic-managed-skills"
+    },
+    {
+      "title": "Create a message with the PowerPoint Skill",
+      "url": "llms-txt#create-a-message-with-the-powerpoint-skill"
+    },
+    {
+      "title": "Extract file ID from response",
+      "url": "llms-txt#extract-file-id-from-response"
+    },
+    {
+      "title": "Extract file_id from response (using jq)",
+      "url": "llms-txt#extract-file_id-from-response-(using-jq)"
+    },
+    {
+      "title": "Download the file",
+      "url": "llms-txt#download-the-file"
+    },
+    {
+      "title": "Skill authoring best practices",
+      "url": "llms-txt#skill-authoring-best-practices"
+    },
+    {
+      "title": "Skill authoring best practices",
+      "url": "llms-txt#skill-authoring-best-practices"
+    },
+    {
+      "title": "PDF Processing",
+      "url": "llms-txt#pdf-processing"
+    },
+    {
+      "title": "BigQuery Data Analysis",
+      "url": "llms-txt#bigquery-data-analysis"
+    },
+    {
+      "title": "DOCX Processing",
+      "url": "llms-txt#docx-processing"
+    },
+    {
+      "title": "SKILL.md",
+      "url": "llms-txt#skill.md"
+    },
+    {
+      "title": "advanced.md",
+      "url": "llms-txt#advanced.md"
+    },
+    {
+      "title": "details.md",
+      "url": "llms-txt#details.md"
+    },
+    {
+      "title": "SKILL.md",
+      "url": "llms-txt#skill.md"
+    },
+    {
+      "title": "API Reference",
+      "url": "llms-txt#api-reference"
+    },
+    {
+      "title": "[Analysis Title]",
+      "url": "llms-txt#[analysis-title]"
+    },
+    {
+      "title": "[Analysis Title]",
+      "url": "llms-txt#[analysis-title]"
+    },
+    {
+      "title": "HTTP requests typically complete within 30 seconds",
+      "url": "llms-txt#http-requests-typically-complete-within-30-seconds"
+    },
+    {
+      "title": "Longer timeout accounts for slow connections",
+      "url": "llms-txt#longer-timeout-accounts-for-slow-connections"
+    },
+    {
+      "title": "Three retries balances reliability vs speed",
+      "url": "llms-txt#three-retries-balances-reliability-vs-speed"
+    },
+    {
+      "title": "Most intermittent failures resolve by the second retry",
+      "url": "llms-txt#most-intermittent-failures-resolve-by-the-second-retry"
+    },
+    {
+      "title": "Returns: \"OK\" or lists conflicts",
+      "url": "llms-txt#returns:-\"ok\"-or-lists-conflicts"
+    },
+    {
+      "title": "Using Agent Skills with the API",
+      "url": "llms-txt#using-agent-skills-with-the-api"
+    },
+    {
+      "title": "Using Agent Skills with the API",
+      "url": "llms-txt#using-agent-skills-with-the-api"
+    },
+    {
+      "title": "Step 1: Use a Skill to create a file",
+      "url": "llms-txt#step-1:-use-a-skill-to-create-a-file"
+    },
+    {
+      "title": "Step 2: Extract file IDs from the response",
+      "url": "llms-txt#step-2:-extract-file-ids-from-the-response"
+    },
+    {
+      "title": "Step 3: Download the file using Files API",
+      "url": "llms-txt#step-3:-download-the-file-using-files-api"
+    },
+    {
+      "title": "Step 1: Use a Skill to create a file",
+      "url": "llms-txt#step-1:-use-a-skill-to-create-a-file"
+    },
+    {
+      "title": "Step 2: Extract file_id from response (using jq)",
+      "url": "llms-txt#step-2:-extract-file_id-from-response-(using-jq)"
+    },
+    {
+      "title": "Step 3: Get filename from metadata",
+      "url": "llms-txt#step-3:-get-filename-from-metadata"
+    },
+    {
+      "title": "Step 4: Download the file using Files API",
+      "url": "llms-txt#step-4:-download-the-file-using-files-api"
+    },
+    {
+      "title": "Get file metadata",
+      "url": "llms-txt#get-file-metadata"
+    },
+    {
+      "title": "List all files",
+      "url": "llms-txt#list-all-files"
+    },
+    {
+      "title": "Delete a file",
+      "url": "llms-txt#delete-a-file"
+    },
+    {
+      "title": "Get file metadata",
+      "url": "llms-txt#get-file-metadata"
+    },
+    {
+      "title": "List all files",
+      "url": "llms-txt#list-all-files"
+    },
+    {
+      "title": "Delete a file",
+      "url": "llms-txt#delete-a-file"
+    },
+    {
+      "title": "First request creates container",
+      "url": "llms-txt#first-request-creates-container"
+    },
+    {
+      "title": "Continue conversation with same container",
+      "url": "llms-txt#continue-conversation-with-same-container"
+    },
+    {
+      "title": "Handle pause_turn for long operations",
+      "url": "llms-txt#handle-pause_turn-for-long-operations"
+    },
+    {
+      "title": "Initial request",
+      "url": "llms-txt#initial-request"
+    },
+    {
+      "title": "Check stop_reason and handle pause_turn in a loop",
+      "url": "llms-txt#check-stop_reason-and-handle-pause_turn-in-a-loop"
+    },
+    {
+      "title": "Option 1: Using files_from_dir helper (Python only, recommended)",
+      "url": "llms-txt#option-1:-using-files_from_dir-helper-(python-only,-recommended)"
+    },
+    {
+      "title": "Option 2: Using a zip file",
+      "url": "llms-txt#option-2:-using-a-zip-file"
+    },
+    {
+      "title": "Option 3: Using file tuples (filename, file_content, mime_type)",
+      "url": "llms-txt#option-3:-using-file-tuples-(filename,-file_content,-mime_type)"
+    },
+    {
+      "title": "List all Skills",
+      "url": "llms-txt#list-all-skills"
+    },
+    {
+      "title": "List only custom Skills",
+      "url": "llms-txt#list-only-custom-skills"
+    },
+    {
+      "title": "List all Skills",
+      "url": "llms-txt#list-all-skills"
+    },
+    {
+      "title": "List only custom Skills",
+      "url": "llms-txt#list-only-custom-skills"
+    },
+    {
+      "title": "Step 1: Delete all versions",
+      "url": "llms-txt#step-1:-delete-all-versions"
+    },
+    {
+      "title": "Step 2: Delete the Skill",
+      "url": "llms-txt#step-2:-delete-the-skill"
+    },
+    {
+      "title": "Delete all versions first, then delete the Skill",
+      "url": "llms-txt#delete-all-versions-first,-then-delete-the-skill"
+    },
+    {
+      "title": "Create a new version",
+      "url": "llms-txt#create-a-new-version"
+    },
+    {
+      "title": "Use specific version",
+      "url": "llms-txt#use-specific-version"
+    },
+    {
+      "title": "Use latest version",
+      "url": "llms-txt#use-latest-version"
+    },
+    {
+      "title": "Create a new version",
+      "url": "llms-txt#create-a-new-version"
+    },
+    {
+      "title": "Use specific version",
+      "url": "llms-txt#use-specific-version"
+    },
+    {
+      "title": "Use latest version",
+      "url": "llms-txt#use-latest-version"
+    },
+    {
+      "title": "Create custom DCF analysis Skill",
+      "url": "llms-txt#create-custom-dcf-analysis-skill"
+    },
+    {
+      "title": "Use with Excel to create financial model",
+      "url": "llms-txt#use-with-excel-to-create-financial-model"
+    },
+    {
+      "title": "Create custom DCF analysis Skill",
+      "url": "llms-txt#create-custom-dcf-analysis-skill"
+    },
+    {
+      "title": "Use with Excel to create financial model",
+      "url": "llms-txt#use-with-excel-to-create-financial-model"
+    },
+    {
+      "title": "Pin to specific versions for stability",
+      "url": "llms-txt#pin-to-specific-versions-for-stability"
+    },
+    {
+      "title": "Use latest for active development",
+      "url": "llms-txt#use-latest-for-active-development"
+    },
+    {
+      "title": "First request creates cache",
+      "url": "llms-txt#first-request-creates-cache"
+    },
+    {
+      "title": "Adding/removing Skills breaks cache",
+      "url": "llms-txt#adding/removing-skills-breaks-cache"
+    },
+    {
+      "title": "First request creates cache",
+      "url": "llms-txt#first-request-creates-cache"
+    },
+    {
+      "title": "Adding/removing Skills breaks cache",
+      "url": "llms-txt#adding/removing-skills-breaks-cache"
+    },
+    {
+      "title": "Agent SDK overview",
+      "url": "llms-txt#agent-sdk-overview"
+    },
+    {
+      "title": "Agent SDK overview",
+      "url": "llms-txt#agent-sdk-overview"
+    },
+    {
+      "title": "Quickstart",
+      "url": "llms-txt#quickstart"
+    },
+    {
+      "title": "Quickstart",
+      "url": "llms-txt#quickstart"
+    },
+    {
+      "title": "Agent SDK reference - Python",
+      "url": "llms-txt#agent-sdk-reference---python"
+    },
+    {
+      "title": "Agent SDK reference - Python",
+      "url": "llms-txt#agent-sdk-reference---python"
+    },
+    {
+      "title": "Use with Claude",
+      "url": "llms-txt#use-with-claude"
+    },
+    {
+      "title": "Load all settings like SDK v0.0.x did",
+      "url": "llms-txt#load-all-settings-like-sdk-v0.0.x-did"
+    },
+    {
+      "title": "Load only project settings, ignore user and local",
+      "url": "llms-txt#load-only-project-settings,-ignore-user-and-local"
+    },
+    {
+      "title": "Ensure consistent behavior in CI by excluding local settings",
+      "url": "llms-txt#ensure-consistent-behavior-in-ci-by-excluding-local-settings"
+    },
+    {
+      "title": "Define everything programmatically (default behavior)",
+      "url": "llms-txt#define-everything-programmatically-(default-behavior)"
+    },
+    {
+      "title": "No filesystem dependencies - setting_sources defaults to None",
+      "url": "llms-txt#no-filesystem-dependencies---setting_sources-defaults-to-none"
+    },
+    {
+      "title": "Load project settings to include CLAUDE.md files",
+      "url": "llms-txt#load-project-settings-to-include-claude.md-files"
+    },
+    {
+      "title": "Example conversation:",
+      "url": "llms-txt#example-conversation:"
+    },
+    {
+      "title": "Turn 1 - You: \"Create a file called hello.py\"",
+      "url": "llms-txt#turn-1---you:-\"create-a-file-called-hello.py\""
+    },
+    {
+      "title": "Turn 1 - Claude: \"I'll create a hello.py file for you...\"",
+      "url": "llms-txt#turn-1---claude:-\"i'll-create-a-hello.py-file-for-you...\""
+    },
+    {
+      "title": "Turn 2 - You: \"What's in that file?\"",
+      "url": "llms-txt#turn-2---you:-\"what's-in-that-file?\""
+    },
+    {
+      "title": "Turn 2 - Claude: \"The hello.py file I just created contains...\" (remembers!)",
+      "url": "llms-txt#turn-2---claude:-\"the-hello.py-file-i-just-created-contains...\"-(remembers!)"
+    },
+    {
+      "title": "Turn 3 - You: \"Add a main function to it\"",
+      "url": "llms-txt#turn-3---you:-\"add-a-main-function-to-it\""
+    },
+    {
+      "title": "Turn 3 - Claude: \"I'll add a main function to hello.py...\" (knows which file!)",
+      "url": "llms-txt#turn-3---claude:-\"i'll-add-a-main-function-to-hello.py...\"-(knows-which-file!)"
+    },
+    {
+      "title": "Define custom tools with @tool decorator",
+      "url": "llms-txt#define-custom-tools-with-@tool-decorator"
+    },
+    {
+      "title": "Agent SDK reference - TypeScript",
+      "url": "llms-txt#agent-sdk-reference---typescript"
+    },
+    {
+      "title": "Agent SDK reference - TypeScript",
+      "url": "llms-txt#agent-sdk-reference---typescript"
+    },
+    {
+      "title": "Migrate to Claude Agent SDK",
+      "url": "llms-txt#migrate-to-claude-agent-sdk"
+    },
+    {
+      "title": "Migrate to Claude Agent SDK",
+      "url": "llms-txt#migrate-to-claude-agent-sdk"
+    },
+    {
+      "title": "Before",
+      "url": "llms-txt#before"
+    },
+    {
+      "title": "After",
+      "url": "llms-txt#after"
+    },
+    {
+      "title": "Before",
+      "url": "llms-txt#before"
+    },
+    {
+      "title": "After",
+      "url": "llms-txt#after"
+    },
+    {
+      "title": "BEFORE (v0.0.x)",
+      "url": "llms-txt#before-(v0.0.x)"
+    },
+    {
+      "title": "AFTER (v0.1.0)",
+      "url": "llms-txt#after-(v0.1.0)"
+    },
+    {
+      "title": "BEFORE (v0.0.x) - Used Claude Code's system prompt by default",
+      "url": "llms-txt#before-(v0.0.x)---used-claude-code's-system-prompt-by-default"
+    },
+    {
+      "title": "AFTER (v0.1.0) - Uses empty system prompt by default",
+      "url": "llms-txt#after-(v0.1.0)---uses-empty-system-prompt-by-default"
+    },
+    {
+      "title": "To get the old behavior, explicitly request Claude Code's preset:",
+      "url": "llms-txt#to-get-the-old-behavior,-explicitly-request-claude-code's-preset:"
+    },
+    {
+      "title": "Or use a custom system prompt:",
+      "url": "llms-txt#or-use-a-custom-system-prompt:"
+    },
+    {
+      "title": "BEFORE (v0.0.x) - Loaded all settings automatically",
+      "url": "llms-txt#before-(v0.0.x)---loaded-all-settings-automatically"
+    },
+    {
+      "title": "Would read from:",
+      "url": "llms-txt#would-read-from:"
+    },
+    {
+      "title": "- ~/.claude/settings.json (user)",
+      "url": "llms-txt#--~/.claude/settings.json-(user)"
+    },
+    {
+      "title": "- .claude/settings.json (project)",
+      "url": "llms-txt#--.claude/settings.json-(project)"
+    },
+    {
+      "title": "- .claude/settings.local.json (local)",
+      "url": "llms-txt#--.claude/settings.local.json-(local)"
+    },
+    {
+      "title": "- CLAUDE.md files",
+      "url": "llms-txt#--claude.md-files"
+    },
+    {
+      "title": "- Custom slash commands",
+      "url": "llms-txt#--custom-slash-commands"
+    },
+    {
+      "title": "AFTER (v0.1.0) - No settings loaded by default",
+      "url": "llms-txt#after-(v0.1.0)---no-settings-loaded-by-default"
+    },
+    {
+      "title": "To get the old behavior:",
+      "url": "llms-txt#to-get-the-old-behavior:"
+    },
+    {
+      "title": "Or load only specific sources:",
+      "url": "llms-txt#or-load-only-specific-sources:"
+    },
+    {
+      "title": "TypeScript SDK V2 interface (preview)",
+      "url": "llms-txt#typescript-sdk-v2-interface-(preview)"
+    },
+    {
+      "title": "TypeScript SDK V2 interface (preview)",
+      "url": "llms-txt#typescript-sdk-v2-interface-(preview)"
+    },
+    {
+      "title": "Agent Skills in the SDK",
+      "url": "llms-txt#agent-skills-in-the-sdk"
+    },
+    {
+      "title": "Agent Skills in the SDK",
+      "url": "llms-txt#agent-skills-in-the-sdk"
+    },
+    {
+      "title": "Wrong - Skills won't be loaded",
+      "url": "llms-txt#wrong---skills-won't-be-loaded"
+    },
+    {
+      "title": "Correct - Skills will be loaded",
+      "url": "llms-txt#correct---skills-will-be-loaded"
+    },
+    {
+      "title": "Ensure your cwd points to the directory containing .claude/skills/",
+      "url": "llms-txt#ensure-your-cwd-points-to-the-directory-containing-.claude/skills/"
+    },
+    {
+      "title": "Check project Skills",
+      "url": "llms-txt#check-project-skills"
+    },
+    {
+      "title": "Check personal Skills",
+      "url": "llms-txt#check-personal-skills"
+    },
+    {
+      "title": "Configure permissions",
+      "url": "llms-txt#configure-permissions"
+    },
+    {
+      "title": "Configure permissions",
+      "url": "llms-txt#configure-permissions"
+    },
+    {
+      "title": "Custom Tools",
+      "url": "llms-txt#custom-tools"
+    },
+    {
+      "title": "Custom Tools",
+      "url": "llms-txt#custom-tools"
+    },
+    {
+      "title": "Define a custom tool using the @tool decorator",
+      "url": "llms-txt#define-a-custom-tool-using-the-@tool-decorator"
+    },
+    {
+      "title": "Create an SDK MCP server with the custom tool",
+      "url": "llms-txt#create-an-sdk-mcp-server-with-the-custom-tool"
+    },
+    {
+      "title": "Use the custom tools with Claude",
+      "url": "llms-txt#use-the-custom-tools-with-claude"
+    },
+    {
+      "title": "Define multiple tools using the @tool decorator",
+      "url": "llms-txt#define-multiple-tools-using-the-@tool-decorator"
+    },
+    {
+      "title": "Allow only specific tools with streaming input",
+      "url": "llms-txt#allow-only-specific-tools-with-streaming-input"
+    },
+    {
+      "title": "Simple type mapping - recommended for most cases",
+      "url": "llms-txt#simple-type-mapping---recommended-for-most-cases"
+    },
+    {
+      "title": "For more complex schemas, you can use JSON Schema format",
+      "url": "llms-txt#for-more-complex-schemas,-you-can-use-json-schema-format"
+    },
+    {
+      "title": "For complex schemas with enums, use JSON Schema format",
+      "url": "llms-txt#for-complex-schemas-with-enums,-use-json-schema-format"
+    },
+    {
+      "title": "Handle approvals and user input",
+      "url": "llms-txt#handle-approvals-and-user-input"
+    },
+    {
+      "title": "Handle approvals and user input",
+      "url": "llms-txt#handle-approvals-and-user-input"
+    },
+    {
+      "title": "Required workaround: dummy hook keeps the stream open for can_use_tool",
+      "url": "llms-txt#required-workaround:-dummy-hook-keeps-the-stream-open-for-can_use_tool"
+    },
+    {
+      "title": "Allow the tool to execute",
+      "url": "llms-txt#allow-the-tool-to-execute"
+    },
+    {
+      "title": "Block the tool",
+      "url": "llms-txt#block-the-tool"
+    },
+    {
+      "title": "Required workaround: dummy hook keeps the stream open for can_use_tool",
+      "url": "llms-txt#required-workaround:-dummy-hook-keeps-the-stream-open-for-can_use_tool"
+    },
+    {
+      "title": "Hosting the Agent SDK",
+      "url": "llms-txt#hosting-the-agent-sdk"
+    },
+    {
+      "title": "Hosting the Agent SDK",
+      "url": "llms-txt#hosting-the-agent-sdk"
+    },
+    {
+      "title": "FAQ",
+      "url": "llms-txt#faq"
+    },
+    {
+      "title": "Intercept and control agent behavior with hooks",
+      "url": "llms-txt#intercept-and-control-agent-behavior-with-hooks"
+    },
+    {
+      "title": "Intercept and control agent behavior with hooks",
+      "url": "llms-txt#intercept-and-control-agent-behavior-with-hooks"
+    },
+    {
+      "title": "Define a hook callback that receives tool call details",
+      "url": "llms-txt#define-a-hook-callback-that-receives-tool-call-details"
+    },
+    {
+      "title": "MCP in the SDK",
+      "url": "llms-txt#mcp-in-the-sdk"
+    },
+    {
+      "title": "MCP in the SDK",
+      "url": "llms-txt#mcp-in-the-sdk"
+    },
+    {
+      "title": ".mcp.json configuration",
+      "url": "llms-txt#.mcp.json-configuration"
+    },
+    {
+      "title": "SSE server configuration",
+      "url": "llms-txt#sse-server-configuration"
+    },
+    {
+      "title": "HTTP server configuration",
+      "url": "llms-txt#http-server-configuration"
+    },
+    {
+      "title": "List available resources",
+      "url": "llms-txt#list-available-resources"
+    },
+    {
+      "title": ".mcp.json with environment variables",
+      "url": "llms-txt#.mcp.json-with-environment-variables"
+    },
+    {
+      "title": "Set environment variables",
+      "url": "llms-txt#set-environment-variables"
+    },
+    {
+      "title": "Modifying system prompts",
+      "url": "llms-txt#modifying-system-prompts"
+    },
+    {
+      "title": "Modifying system prompts",
+      "url": "llms-txt#modifying-system-prompts"
+    },
+    {
+      "title": "Project Guidelines",
+      "url": "llms-txt#project-guidelines"
+    },
+    {
+      "title": "IMPORTANT: You must specify setting_sources to load CLAUDE.md",
+      "url": "llms-txt#important:-you-must-specify-setting_sources-to-load-claude.md"
+    },
+    {
+      "title": "The claude_code preset alone does NOT load CLAUDE.md files",
+      "url": "llms-txt#the-claude_code-preset-alone-does-not-load-claude.md-files"
+    },
+    {
+      "title": "Now Claude has access to your project guidelines from CLAUDE.md",
+      "url": "llms-txt#now-claude-has-access-to-your-project-guidelines-from-claude.md"
+    },
+    {
+      "title": "Example: Create a code review specialist",
+      "url": "llms-txt#example:-create-a-code-review-specialist"
+    },
+    {
+      "title": "Assuming \"Code Reviewer\" output style is active (via /output-style)",
+      "url": "llms-txt#assuming-\"code-reviewer\"-output-style-is-active-(via-/output-style)"
+    },
+    {
+      "title": "Add session-specific focus areas",
+      "url": "llms-txt#add-session-specific-focus-areas"
+    },
+    {
+      "title": "Plugins in the SDK",
+      "url": "llms-txt#plugins-in-the-sdk"
+    },
+    {
+      "title": "Plugins in the SDK",
+      "url": "llms-txt#plugins-in-the-sdk"
+    },
+    {
+      "title": "Rewind file changes with checkpointing",
+      "url": "llms-txt#rewind-file-changes-with-checkpointing"
+    },
+    {
+      "title": "Rewind file changes with checkpointing",
+      "url": "llms-txt#rewind-file-changes-with-checkpointing"
+    },
+    {
+      "title": "Store checkpoint metadata for better tracking",
+      "url": "llms-txt#store-checkpoint-metadata-for-better-tracking"
+    },
+    {
+      "title": "Resume session with empty prompt, then rewind",
+      "url": "llms-txt#resume-session-with-empty-prompt,-then-rewind"
+    },
+    {
+      "title": "Securely deploying AI agents",
+      "url": "llms-txt#securely-deploying-ai-agents"
+    },
+    {
+      "title": "Securely deploying AI agents",
+      "url": "llms-txt#securely-deploying-ai-agents"
+    },
+    {
+      "title": "Session Management",
+      "url": "llms-txt#session-management"
+    },
+    {
+      "title": "Session Management",
+      "url": "llms-txt#session-management"
+    },
+    {
+      "title": "Session Management",
+      "url": "llms-txt#session-management"
+    },
+    {
+      "title": "Later, you can use the saved session_id to resume",
+      "url": "llms-txt#later,-you-can-use-the-saved-session_id-to-resume"
+    },
+    {
+      "title": "Resume a previous session using its ID",
+      "url": "llms-txt#resume-a-previous-session-using-its-id"
+    },
+    {
+      "title": "The conversation continues with full context from the previous session",
+      "url": "llms-txt#the-conversation-continues-with-full-context-from-the-previous-session"
+    },
+    {
+      "title": "First, capture the session ID",
+      "url": "llms-txt#first,-capture-the-session-id"
+    },
+    {
+      "title": "Fork the session to try a different approach",
+      "url": "llms-txt#fork-the-session-to-try-a-different-approach"
+    },
+    {
+      "title": "The original session remains unchanged and can still be resumed",
+      "url": "llms-txt#the-original-session-remains-unchanged-and-can-still-be-resumed"
+    },
+    {
+      "title": "Slash Commands in the SDK",
+      "url": "llms-txt#slash-commands-in-the-sdk"
+    },
+    {
+      "title": "Slash Commands in the SDK",
+      "url": "llms-txt#slash-commands-in-the-sdk"
+    },
+    {
+      "title": "Streaming Input",
+      "url": "llms-txt#streaming-input"
+    },
+    {
+      "title": "Streaming Input",
+      "url": "llms-txt#streaming-input"
+    },
+    {
+      "title": "Structured outputs in the SDK",
+      "url": "llms-txt#structured-outputs-in-the-sdk"
+    },
+    {
+      "title": "Structured outputs in the SDK",
+      "url": "llms-txt#structured-outputs-in-the-sdk"
+    },
+    {
+      "title": "Use in query",
+      "url": "llms-txt#use-in-query"
+    },
+    {
+      "title": "Define structure for TODO extraction",
+      "url": "llms-txt#define-structure-for-todo-extraction"
+    },
+    {
+      "title": "Agent uses Grep to find TODOs, Bash to get git blame info",
+      "url": "llms-txt#agent-uses-grep-to-find-todos,-bash-to-get-git-blame-info"
+    },
+    {
+      "title": "Subagents in the SDK",
+      "url": "llms-txt#subagents-in-the-sdk"
+    },
+    {
+      "title": "Subagents in the SDK",
+      "url": "llms-txt#subagents-in-the-sdk"
+    },
+    {
+      "title": "Factory function that returns an AgentDefinition",
+      "url": "llms-txt#factory-function-that-returns-an-agentdefinition"
+    },
+    {
+      "title": "This pattern lets you customize agents based on runtime conditions",
+      "url": "llms-txt#this-pattern-lets-you-customize-agents-based-on-runtime-conditions"
+    },
+    {
+      "title": "Todo Lists",
+      "url": "llms-txt#todo-lists"
+    },
+    {
+      "title": "Todo Lists",
+      "url": "llms-txt#todo-lists"
+    },
+    {
+      "title": "Usage",
+      "url": "llms-txt#usage"
+    },
+    {
+      "title": "Tracking Costs and Usage",
+      "url": "llms-txt#tracking-costs-and-usage"
+    },
+    {
+      "title": "Tracking Costs and Usage",
+      "url": "llms-txt#tracking-costs-and-usage"
+    },
+    {
+      "title": "SDK Cost Tracking",
+      "url": "llms-txt#sdk-cost-tracking"
+    },
+    {
+      "title": "Example: Tracking usage in a conversation",
+      "url": "llms-txt#example:-tracking-usage-in-a-conversation"
+    },
+    {
+      "title": "Usage",
+      "url": "llms-txt#usage"
+    },
+    {
+      "title": "MCP connector",
+      "url": "llms-txt#mcp-connector"
+    },
+    {
+      "title": "MCP connector",
+      "url": "llms-txt#mcp-connector"
+    },
+    {
+      "title": "Remote MCP servers",
+      "url": "llms-txt#remote-mcp-servers"
+    },
+    {
+      "title": "Remote MCP servers",
+      "url": "llms-txt#remote-mcp-servers"
+    },
+    {
+      "title": "Claude in Microsoft Foundry",
+      "url": "llms-txt#claude-in-microsoft-foundry"
+    },
+    {
+      "title": "Claude in Microsoft Foundry",
+      "url": "llms-txt#claude-in-microsoft-foundry"
+    },
+    {
+      "title": "Get Azure Entra ID token using token provider pattern",
+      "url": "llms-txt#get-azure-entra-id-token-using-token-provider-pattern"
+    },
+    {
+      "title": "Create client with Entra ID authentication",
+      "url": "llms-txt#create-client-with-entra-id-authentication"
+    },
+    {
+      "title": "Make request",
+      "url": "llms-txt#make-request"
+    },
+    {
+      "title": "Get Azure Entra ID token",
+      "url": "llms-txt#get-azure-entra-id-token"
+    },
+    {
+      "title": "Make request with token. Replace {resource} with your resource name",
+      "url": "llms-txt#make-request-with-token.-replace-{resource}-with-your-resource-name"
+    },
+    {
+      "title": "Claude on Amazon Bedrock",
+      "url": "llms-txt#claude-on-amazon-bedrock"
+    },
+    {
+      "title": "Claude on Amazon Bedrock",
+      "url": "llms-txt#claude-on-amazon-bedrock"
+    },
+    {
+      "title": "Using US regional endpoint (CRIS)",
+      "url": "llms-txt#using-us-regional-endpoint-(cris)"
+    },
+    {
+      "title": "Claude on Vertex AI",
+      "url": "llms-txt#claude-on-vertex-ai"
+    },
+    {
+      "title": "Claude on Vertex AI",
+      "url": "llms-txt#claude-on-vertex-ai"
+    },
+    {
+      "title": "Prompt engineering overview",
+      "url": "llms-txt#prompt-engineering-overview"
+    },
+    {
+      "title": "Prompt engineering overview",
+      "url": "llms-txt#prompt-engineering-overview"
+    },
+    {
+      "title": "Automatically generate first draft prompt templates",
+      "url": "llms-txt#automatically-generate-first-draft-prompt-templates"
+    },
+    {
+      "title": "Automatically generate first draft prompt templates",
+      "url": "llms-txt#automatically-generate-first-draft-prompt-templates"
+    },
+    {
+      "title": "Be clear, direct, and detailed",
+      "url": "llms-txt#be-clear,-direct,-and-detailed"
+    },
+    {
+      "title": "Be clear, direct, and detailed",
+      "url": "llms-txt#be-clear,-direct,-and-detailed"
+    },
+    {
+      "title": "Chain complex prompts for stronger performance",
+      "url": "llms-txt#chain-complex-prompts-for-stronger-performance"
+    },
+    {
+      "title": "Chain complex prompts for stronger performance",
+      "url": "llms-txt#chain-complex-prompts-for-stronger-performance"
+    },
+    {
+      "title": "Extended thinking tips",
+      "url": "llms-txt#extended-thinking-tips"
+    },
+    {
+      "title": "Extended thinking tips",
+      "url": "llms-txt#extended-thinking-tips"
+    },
+    {
+      "title": "Giving Claude a role with a system prompt",
+      "url": "llms-txt#giving-claude-a-role-with-a-system-prompt"
+    },
+    {
+      "title": "Giving Claude a role with a system prompt",
+      "url": "llms-txt#giving-claude-a-role-with-a-system-prompt"
+    },
+    {
+      "title": "Let Claude think (chain of thought prompting) to increase performance",
+      "url": "llms-txt#let-claude-think-(chain-of-thought-prompting)-to-increase-performance"
+    },
+    {
+      "title": "Let Claude think (chain of thought prompting) to increase performance",
+      "url": "llms-txt#let-claude-think-(chain-of-thought-prompting)-to-increase-performance"
+    },
+    {
+      "title": "Long context prompting tips",
+      "url": "llms-txt#long-context-prompting-tips"
+    },
+    {
+      "title": "Long context prompting tips",
+      "url": "llms-txt#long-context-prompting-tips"
+    },
+    {
+      "title": "Prefill Claude's response for greater output control",
+      "url": "llms-txt#prefill-claude's-response-for-greater-output-control"
+    },
+    {
+      "title": "Prefill Claude's response for greater output control",
+      "url": "llms-txt#prefill-claude's-response-for-greater-output-control"
+    },
+    {
+      "title": "Use examples (multishot prompting) to guide Claude's behavior",
+      "url": "llms-txt#use-examples-(multishot-prompting)-to-guide-claude's-behavior"
+    },
+    {
+      "title": "Use examples (multishot prompting) to guide Claude's behavior",
+      "url": "llms-txt#use-examples-(multishot-prompting)-to-guide-claude's-behavior"
+    },
+    {
+      "title": "Use our prompt improver to optimize your prompts",
+      "url": "llms-txt#use-our-prompt-improver-to-optimize-your-prompts"
+    },
+    {
+      "title": "Use our prompt improver to optimize your prompts",
+      "url": "llms-txt#use-our-prompt-improver-to-optimize-your-prompts"
+    },
+    {
+      "title": "Use prompt templates and variables",
+      "url": "llms-txt#use-prompt-templates-and-variables"
+    },
+    {
+      "title": "Use prompt templates and variables",
+      "url": "llms-txt#use-prompt-templates-and-variables"
+    },
+    {
+      "title": "When to use prompt templates and variables",
+      "url": "llms-txt#when-to-use-prompt-templates-and-variables"
+    },
+    {
+      "title": "Example prompt template",
+      "url": "llms-txt#example-prompt-template"
+    },
+    {
+      "title": "Use XML tags to structure your prompts",
+      "url": "llms-txt#use-xml-tags-to-structure-your-prompts"
+    },
+    {
+      "title": "Use XML tags to structure your prompts",
+      "url": "llms-txt#use-xml-tags-to-structure-your-prompts"
+    },
+    {
+      "title": "Create strong empirical evaluations",
+      "url": "llms-txt#create-strong-empirical-evaluations"
+    },
+    {
+      "title": "Create strong empirical evaluations",
+      "url": "llms-txt#create-strong-empirical-evaluations"
+    },
+    {
+      "title": "Example usage",
+      "url": "llms-txt#example-usage"
+    },
+    {
+      "title": "Define your success criteria",
+      "url": "llms-txt#define-your-success-criteria"
+    },
+    {
+      "title": "Define your success criteria",
+      "url": "llms-txt#define-your-success-criteria"
+    },
+    {
+      "title": "Reducing latency",
+      "url": "llms-txt#reducing-latency"
+    },
+    {
+      "title": "Reducing latency",
+      "url": "llms-txt#reducing-latency"
+    },
+    {
+      "title": "For time-sensitive applications, use Claude Haiku 4.5",
+      "url": "llms-txt#for-time-sensitive-applications,-use-claude-haiku-4.5"
+    },
+    {
+      "title": "Using the Evaluation Tool",
+      "url": "llms-txt#using-the-evaluation-tool"
+    },
+    {
+      "title": "Using the Evaluation Tool",
+      "url": "llms-txt#using-the-evaluation-tool"
+    },
+    {
+      "title": "Increase output consistency",
+      "url": "llms-txt#increase-output-consistency"
+    },
+    {
+      "title": "Increase output consistency",
+      "url": "llms-txt#increase-output-consistency"
+    },
+    {
+      "title": "Keep Claude in character with role prompting and prefilling",
+      "url": "llms-txt#keep-claude-in-character-with-role-prompting-and-prefilling"
+    },
+    {
+      "title": "Keep Claude in character with role prompting and prefilling",
+      "url": "llms-txt#keep-claude-in-character-with-role-prompting-and-prefilling"
+    },
+    {
+      "title": "Mitigate jailbreaks and prompt injections",
+      "url": "llms-txt#mitigate-jailbreaks-and-prompt-injections"
+    },
+    {
+      "title": "Mitigate jailbreaks and prompt injections",
+      "url": "llms-txt#mitigate-jailbreaks-and-prompt-injections"
+    },
+    {
+      "title": "Reduce hallucinations",
+      "url": "llms-txt#reduce-hallucinations"
+    },
+    {
+      "title": "Reduce hallucinations",
+      "url": "llms-txt#reduce-hallucinations"
+    },
+    {
+      "title": "Reduce prompt leak",
+      "url": "llms-txt#reduce-prompt-leak"
+    },
+    {
+      "title": "Reduce prompt leak",
+      "url": "llms-txt#reduce-prompt-leak"
+    },
+    {
+      "title": "Streaming refusals",
+      "url": "llms-txt#streaming-refusals"
+    },
+    {
+      "title": "Streaming refusals",
+      "url": "llms-txt#streaming-refusals"
+    },
+    {
+      "title": "Stream request and check for refusal",
+      "url": "llms-txt#stream-request-and-check-for-refusal"
+    },
+    {
+      "title": "Check for refusal in the stream",
+      "url": "llms-txt#check-for-refusal-in-the-stream"
+    },
+    {
+      "title": "Admin API overview",
+      "url": "llms-txt#admin-api-overview"
+    },
+    {
+      "title": "Admin API overview",
+      "url": "llms-txt#admin-api-overview"
+    },
+    {
+      "title": "List organization members",
+      "url": "llms-txt#list-organization-members"
+    },
+    {
+      "title": "Update member role",
+      "url": "llms-txt#update-member-role"
+    },
+    {
+      "title": "Remove member",
+      "url": "llms-txt#remove-member"
+    },
+    {
+      "title": "Create invite",
+      "url": "llms-txt#create-invite"
+    },
+    {
+      "title": "List invites",
+      "url": "llms-txt#list-invites"
+    },
+    {
+      "title": "Delete invite",
+      "url": "llms-txt#delete-invite"
+    },
+    {
+      "title": "Create workspace",
+      "url": "llms-txt#create-workspace"
+    },
+    {
+      "title": "List workspaces",
+      "url": "llms-txt#list-workspaces"
+    },
+    {
+      "title": "Archive workspace",
+      "url": "llms-txt#archive-workspace"
+    },
+    {
+      "title": "Add member to workspace",
+      "url": "llms-txt#add-member-to-workspace"
+    },
+    {
+      "title": "List workspace members",
+      "url": "llms-txt#list-workspace-members"
+    },
+    {
+      "title": "Update member role",
+      "url": "llms-txt#update-member-role"
+    },
+    {
+      "title": "Remove member from workspace",
+      "url": "llms-txt#remove-member-from-workspace"
+    },
+    {
+      "title": "List API keys",
+      "url": "llms-txt#list-api-keys"
+    },
+    {
+      "title": "Update API key",
+      "url": "llms-txt#update-api-key"
+    },
+    {
+      "title": "Claude Code Analytics API",
+      "url": "llms-txt#claude-code-analytics-api"
+    },
+    {
+      "title": "Claude Code Analytics API",
+      "url": "llms-txt#claude-code-analytics-api"
+    },
+    {
+      "title": "First request",
+      "url": "llms-txt#first-request"
+    },
+    {
+      "title": "Subsequent request using cursor from response",
+      "url": "llms-txt#subsequent-request-using-cursor-from-response"
+    },
+    {
+      "title": "Usage and Cost API",
+      "url": "llms-txt#usage-and-cost-api"
+    },
+    {
+      "title": "Usage and Cost API",
+      "url": "llms-txt#usage-and-cost-api"
+    },
+    {
+      "title": "First request",
+      "url": "llms-txt#first-request"
+    },
+    {
+      "title": "Response includes: \"has_more\": true, \"next_page\": \"page_xyz...\"",
+      "url": "llms-txt#response-includes:-\"has_more\":-true,-\"next_page\":-\"page_xyz...\""
+    },
+    {
+      "title": "Next request with pagination",
+      "url": "llms-txt#next-request-with-pagination"
+    },
+    {
+      "title": "Workspaces",
+      "url": "llms-txt#workspaces"
+    },
+    {
+      "title": "Workspaces",
+      "url": "llms-txt#workspaces"
+    },
+    {
+      "title": "Create a workspace",
+      "url": "llms-txt#create-a-workspace"
+    },
+    {
+      "title": "List workspaces",
+      "url": "llms-txt#list-workspaces"
+    },
+    {
+      "title": "Archive a workspace",
+      "url": "llms-txt#archive-a-workspace"
+    },
+    {
+      "title": "Add a member to a workspace",
+      "url": "llms-txt#add-a-member-to-a-workspace"
+    },
+    {
+      "title": "Update a member's role",
+      "url": "llms-txt#update-a-member's-role"
+    },
+    {
+      "title": "Remove a member from a workspace",
+      "url": "llms-txt#remove-a-member-from-a-workspace"
+    },
+    {
+      "title": "API Overview",
+      "url": "llms-txt#api-overview"
+    },
+    {
+      "title": "API Overview",
+      "url": "llms-txt#api-overview"
+    },
+    {
+      "title": "Beta headers",
+      "url": "llms-txt#beta-headers"
+    },
+    {
+      "title": "Beta headers",
+      "url": "llms-txt#beta-headers"
+    },
+    {
+      "title": "Client SDKs",
+      "url": "llms-txt#client-sdks"
+    },
+    {
+      "title": "Client SDKs",
+      "url": "llms-txt#client-sdks"
+    },
+    {
+      "title": "Errors",
+      "url": "llms-txt#errors"
+    },
+    {
+      "title": "Errors",
+      "url": "llms-txt#errors"
+    },
+    {
+      "title": "IP addresses",
+      "url": "llms-txt#ip-addresses"
+    },
+    {
+      "title": "IP addresses",
+      "url": "llms-txt#ip-addresses"
+    },
+    {
+      "title": "OpenAI SDK compatibility",
+      "url": "llms-txt#openai-sdk-compatibility"
+    },
+    {
+      "title": "OpenAI SDK compatibility",
+      "url": "llms-txt#openai-sdk-compatibility"
+    },
+    {
+      "title": "Rate limits",
+      "url": "llms-txt#rate-limits"
+    },
+    {
+      "title": "Rate limits",
+      "url": "llms-txt#rate-limits"
+    },
+    {
+      "title": "Service tiers",
+      "url": "llms-txt#service-tiers"
+    },
+    {
+      "title": "Service tiers",
+      "url": "llms-txt#service-tiers"
+    },
+    {
+      "title": "Supported regions",
+      "url": "llms-txt#supported-regions"
+    },
+    {
+      "title": "Supported regions",
+      "url": "llms-txt#supported-regions"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Admin",
+      "url": "llms-txt#admin"
+    },
+    {
+      "title": "Admin",
+      "url": "llms-txt#admin"
+    },
+    {
+      "title": "Organizations",
+      "url": "llms-txt#organizations"
+    },
+    {
+      "title": "Invites",
+      "url": "llms-txt#invites"
+    },
+    {
+      "title": "Users",
+      "url": "llms-txt#users"
+    },
+    {
+      "title": "Workspaces",
+      "url": "llms-txt#workspaces"
+    },
+    {
+      "title": "Members",
+      "url": "llms-txt#members"
+    },
+    {
+      "title": "API Keys",
+      "url": "llms-txt#api-keys"
+    },
+    {
+      "title": "Usage Report",
+      "url": "llms-txt#usage-report"
+    },
+    {
+      "title": "Cost Report",
+      "url": "llms-txt#cost-report"
+    },
+    {
+      "title": "API Keys",
+      "url": "llms-txt#api-keys"
+    },
+    {
+      "title": "API Keys",
+      "url": "llms-txt#api-keys"
+    },
+    {
+      "title": "Archive Workspace",
+      "url": "llms-txt#archive-workspace"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Beta)",
+      "url": "llms-txt#batches-(beta)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Beta) (Go)",
+      "url": "llms-txt#batches-(beta)-(go)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Beta) (Java)",
+      "url": "llms-txt#batches-(beta)-(java)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Beta) (Kotlin)",
+      "url": "llms-txt#batches-(beta)-(kotlin)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Beta) (Python)",
+      "url": "llms-txt#batches-(beta)-(python)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Beta) (Ruby)",
+      "url": "llms-txt#batches-(beta)-(ruby)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Beta) (TypeScript)",
+      "url": "llms-txt#batches-(beta)-(typescript)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Go)",
+      "url": "llms-txt#batches-(go)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Java)",
+      "url": "llms-txt#batches-(java)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Kotlin)",
+      "url": "llms-txt#batches-(kotlin)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Python)",
+      "url": "llms-txt#batches-(python)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (Ruby)",
+      "url": "llms-txt#batches-(ruby)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Batches (TypeScript)",
+      "url": "llms-txt#batches-(typescript)"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Beta (Beta)",
+      "url": "llms-txt#beta-(beta)"
+    },
+    {
+      "title": "Beta",
+      "url": "llms-txt#beta"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Beta (Beta) (Go)",
+      "url": "llms-txt#beta-(beta)-(go)"
+    },
+    {
+      "title": "Beta",
+      "url": "llms-txt#beta"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Beta (Beta) (Java)",
+      "url": "llms-txt#beta-(beta)-(java)"
+    },
+    {
+      "title": "Beta",
+      "url": "llms-txt#beta"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Beta (Beta) (Kotlin)",
+      "url": "llms-txt#beta-(beta)-(kotlin)"
+    },
+    {
+      "title": "Beta",
+      "url": "llms-txt#beta"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Beta (Beta) (Python)",
+      "url": "llms-txt#beta-(beta)-(python)"
+    },
+    {
+      "title": "Beta",
+      "url": "llms-txt#beta"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Beta (Beta) (Ruby)",
+      "url": "llms-txt#beta-(beta)-(ruby)"
+    },
+    {
+      "title": "Beta",
+      "url": "llms-txt#beta"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Beta (Beta) (TypeScript)",
+      "url": "llms-txt#beta-(beta)-(typescript)"
+    },
+    {
+      "title": "Beta",
+      "url": "llms-txt#beta"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Cancel a Message Batch",
+      "url": "llms-txt#cancel-a-message-batch"
+    },
+    {
+      "title": "Cancel a Message Batch (Beta)",
+      "url": "llms-txt#cancel-a-message-batch-(beta)"
+    },
+    {
+      "title": "Cancel a Message Batch (Beta) (Go)",
+      "url": "llms-txt#cancel-a-message-batch-(beta)-(go)"
+    },
+    {
+      "title": "Cancel a Message Batch (Beta) (Java)",
+      "url": "llms-txt#cancel-a-message-batch-(beta)-(java)"
+    },
+    {
+      "title": "Cancel a Message Batch (Beta) (Kotlin)",
+      "url": "llms-txt#cancel-a-message-batch-(beta)-(kotlin)"
+    },
+    {
+      "title": "Cancel a Message Batch (Beta) (Python)",
+      "url": "llms-txt#cancel-a-message-batch-(beta)-(python)"
+    },
+    {
+      "title": "Cancel a Message Batch (Beta) (Ruby)",
+      "url": "llms-txt#cancel-a-message-batch-(beta)-(ruby)"
+    },
+    {
+      "title": "Cancel a Message Batch (Beta) (TypeScript)",
+      "url": "llms-txt#cancel-a-message-batch-(beta)-(typescript)"
+    },
+    {
+      "title": "Cancel a Message Batch (Go)",
+      "url": "llms-txt#cancel-a-message-batch-(go)"
+    },
+    {
+      "title": "Cancel a Message Batch (Java)",
+      "url": "llms-txt#cancel-a-message-batch-(java)"
+    },
+    {
+      "title": "Cancel a Message Batch (Kotlin)",
+      "url": "llms-txt#cancel-a-message-batch-(kotlin)"
+    },
+    {
+      "title": "Cancel a Message Batch (Python)",
+      "url": "llms-txt#cancel-a-message-batch-(python)"
+    },
+    {
+      "title": "Cancel a Message Batch (Ruby)",
+      "url": "llms-txt#cancel-a-message-batch-(ruby)"
+    },
+    {
+      "title": "Cancel a Message Batch (TypeScript)",
+      "url": "llms-txt#cancel-a-message-batch-(typescript)"
+    },
+    {
+      "title": "Completions",
+      "url": "llms-txt#completions"
+    },
+    {
+      "title": "Completions",
+      "url": "llms-txt#completions"
+    },
+    {
+      "title": "Completions (Go)",
+      "url": "llms-txt#completions-(go)"
+    },
+    {
+      "title": "Completions",
+      "url": "llms-txt#completions"
+    },
+    {
+      "title": "Completions (Java)",
+      "url": "llms-txt#completions-(java)"
+    },
+    {
+      "title": "Completions",
+      "url": "llms-txt#completions"
+    },
+    {
+      "title": "Completions (Kotlin)",
+      "url": "llms-txt#completions-(kotlin)"
+    },
+    {
+      "title": "Completions",
+      "url": "llms-txt#completions"
+    },
+    {
+      "title": "Completions (Python)",
+      "url": "llms-txt#completions-(python)"
+    },
+    {
+      "title": "Completions",
+      "url": "llms-txt#completions"
+    },
+    {
+      "title": "Completions (Ruby)",
+      "url": "llms-txt#completions-(ruby)"
+    },
+    {
+      "title": "Completions",
+      "url": "llms-txt#completions"
+    },
+    {
+      "title": "Completions (TypeScript)",
+      "url": "llms-txt#completions-(typescript)"
+    },
+    {
+      "title": "Completions",
+      "url": "llms-txt#completions"
+    },
+    {
+      "title": "Cost Report",
+      "url": "llms-txt#cost-report"
+    },
+    {
+      "title": "Cost Report",
+      "url": "llms-txt#cost-report"
+    },
+    {
+      "title": "Count tokens in a Message",
+      "url": "llms-txt#count-tokens-in-a-message"
+    },
+    {
+      "title": "Count tokens in a Message (Beta)",
+      "url": "llms-txt#count-tokens-in-a-message-(beta)"
+    },
+    {
+      "title": "Count tokens in a Message (Beta) (Go)",
+      "url": "llms-txt#count-tokens-in-a-message-(beta)-(go)"
+    },
+    {
+      "title": "Count tokens in a Message (Beta) (Java)",
+      "url": "llms-txt#count-tokens-in-a-message-(beta)-(java)"
+    },
+    {
+      "title": "Count tokens in a Message (Beta) (Kotlin)",
+      "url": "llms-txt#count-tokens-in-a-message-(beta)-(kotlin)"
+    },
+    {
+      "title": "Count tokens in a Message (Beta) (Python)",
+      "url": "llms-txt#count-tokens-in-a-message-(beta)-(python)"
+    },
+    {
+      "title": "Count tokens in a Message (Beta) (Ruby)",
+      "url": "llms-txt#count-tokens-in-a-message-(beta)-(ruby)"
+    },
+    {
+      "title": "Count tokens in a Message (Beta) (TypeScript)",
+      "url": "llms-txt#count-tokens-in-a-message-(beta)-(typescript)"
+    },
+    {
+      "title": "Count tokens in a Message (Go)",
+      "url": "llms-txt#count-tokens-in-a-message-(go)"
+    },
+    {
+      "title": "Count tokens in a Message (Java)",
+      "url": "llms-txt#count-tokens-in-a-message-(java)"
+    },
+    {
+      "title": "Count tokens in a Message (Kotlin)",
+      "url": "llms-txt#count-tokens-in-a-message-(kotlin)"
+    },
+    {
+      "title": "Count tokens in a Message (Python)",
+      "url": "llms-txt#count-tokens-in-a-message-(python)"
+    },
+    {
+      "title": "Count tokens in a Message (Ruby)",
+      "url": "llms-txt#count-tokens-in-a-message-(ruby)"
+    },
+    {
+      "title": "Count tokens in a Message (TypeScript)",
+      "url": "llms-txt#count-tokens-in-a-message-(typescript)"
+    },
+    {
+      "title": "Create a Message",
+      "url": "llms-txt#create-a-message"
+    },
+    {
+      "title": "Create a Message (Beta)",
+      "url": "llms-txt#create-a-message-(beta)"
+    },
+    {
+      "title": "Create a Message (Beta) (Go)",
+      "url": "llms-txt#create-a-message-(beta)-(go)"
+    },
+    {
+      "title": "Create a Message (Beta) (Java)",
+      "url": "llms-txt#create-a-message-(beta)-(java)"
+    },
+    {
+      "title": "Create a Message (Beta) (Kotlin)",
+      "url": "llms-txt#create-a-message-(beta)-(kotlin)"
+    },
+    {
+      "title": "Create a Message (Beta) (Python)",
+      "url": "llms-txt#create-a-message-(beta)-(python)"
+    },
+    {
+      "title": "Create a Message (Beta) (Ruby)",
+      "url": "llms-txt#create-a-message-(beta)-(ruby)"
+    },
+    {
+      "title": "Create a Message (Beta) (TypeScript)",
+      "url": "llms-txt#create-a-message-(beta)-(typescript)"
+    },
+    {
+      "title": "Create a Message (Go)",
+      "url": "llms-txt#create-a-message-(go)"
+    },
+    {
+      "title": "Create a Message (Java)",
+      "url": "llms-txt#create-a-message-(java)"
+    },
+    {
+      "title": "Create a Message (Kotlin)",
+      "url": "llms-txt#create-a-message-(kotlin)"
+    },
+    {
+      "title": "Create a Message (Python)",
+      "url": "llms-txt#create-a-message-(python)"
+    },
+    {
+      "title": "Create a Message (Ruby)",
+      "url": "llms-txt#create-a-message-(ruby)"
+    },
+    {
+      "title": "Create a Message (TypeScript)",
+      "url": "llms-txt#create-a-message-(typescript)"
+    },
+    {
+      "title": "Create a Message Batch",
+      "url": "llms-txt#create-a-message-batch"
+    },
+    {
+      "title": "Create a Message Batch (Beta)",
+      "url": "llms-txt#create-a-message-batch-(beta)"
+    },
+    {
+      "title": "Create a Message Batch (Beta) (Go)",
+      "url": "llms-txt#create-a-message-batch-(beta)-(go)"
+    },
+    {
+      "title": "Create a Message Batch (Beta) (Java)",
+      "url": "llms-txt#create-a-message-batch-(beta)-(java)"
+    },
+    {
+      "title": "Create a Message Batch (Beta) (Kotlin)",
+      "url": "llms-txt#create-a-message-batch-(beta)-(kotlin)"
+    },
+    {
+      "title": "Create a Message Batch (Beta) (Python)",
+      "url": "llms-txt#create-a-message-batch-(beta)-(python)"
+    },
+    {
+      "title": "Create a Message Batch (Beta) (Ruby)",
+      "url": "llms-txt#create-a-message-batch-(beta)-(ruby)"
+    },
+    {
+      "title": "Create a Message Batch (Beta) (TypeScript)",
+      "url": "llms-txt#create-a-message-batch-(beta)-(typescript)"
+    },
+    {
+      "title": "Create a Message Batch (Go)",
+      "url": "llms-txt#create-a-message-batch-(go)"
+    },
+    {
+      "title": "Create a Message Batch (Java)",
+      "url": "llms-txt#create-a-message-batch-(java)"
+    },
+    {
+      "title": "Create a Message Batch (Kotlin)",
+      "url": "llms-txt#create-a-message-batch-(kotlin)"
+    },
+    {
+      "title": "Create a Message Batch (Python)",
+      "url": "llms-txt#create-a-message-batch-(python)"
+    },
+    {
+      "title": "Create a Message Batch (Ruby)",
+      "url": "llms-txt#create-a-message-batch-(ruby)"
+    },
+    {
+      "title": "Create a Message Batch (TypeScript)",
+      "url": "llms-txt#create-a-message-batch-(typescript)"
+    },
+    {
+      "title": "Create a Text Completion",
+      "url": "llms-txt#create-a-text-completion"
+    },
+    {
+      "title": "Create a Text Completion (Go)",
+      "url": "llms-txt#create-a-text-completion-(go)"
+    },
+    {
+      "title": "Create a Text Completion (Java)",
+      "url": "llms-txt#create-a-text-completion-(java)"
+    },
+    {
+      "title": "Create a Text Completion (Kotlin)",
+      "url": "llms-txt#create-a-text-completion-(kotlin)"
+    },
+    {
+      "title": "Create a Text Completion (Python)",
+      "url": "llms-txt#create-a-text-completion-(python)"
+    },
+    {
+      "title": "Create a Text Completion (Ruby)",
+      "url": "llms-txt#create-a-text-completion-(ruby)"
+    },
+    {
+      "title": "Create a Text Completion (TypeScript)",
+      "url": "llms-txt#create-a-text-completion-(typescript)"
+    },
+    {
+      "title": "Create Invite",
+      "url": "llms-txt#create-invite"
+    },
+    {
+      "title": "Create Skill (Beta)",
+      "url": "llms-txt#create-skill-(beta)"
+    },
+    {
+      "title": "Create Skill (Beta) (Go)",
+      "url": "llms-txt#create-skill-(beta)-(go)"
+    },
+    {
+      "title": "Create Skill (Beta) (Java)",
+      "url": "llms-txt#create-skill-(beta)-(java)"
+    },
+    {
+      "title": "Create Skill (Beta) (Kotlin)",
+      "url": "llms-txt#create-skill-(beta)-(kotlin)"
+    },
+    {
+      "title": "Create Skill (Beta) (Python)",
+      "url": "llms-txt#create-skill-(beta)-(python)"
+    },
+    {
+      "title": "Create Skill (Beta) (Ruby)",
+      "url": "llms-txt#create-skill-(beta)-(ruby)"
+    },
+    {
+      "title": "Create Skill (Beta) (TypeScript)",
+      "url": "llms-txt#create-skill-(beta)-(typescript)"
+    },
+    {
+      "title": "Create Skill Version (Beta)",
+      "url": "llms-txt#create-skill-version-(beta)"
+    },
+    {
+      "title": "Create Skill Version (Beta) (Go)",
+      "url": "llms-txt#create-skill-version-(beta)-(go)"
+    },
+    {
+      "title": "Create Skill Version (Beta) (Java)",
+      "url": "llms-txt#create-skill-version-(beta)-(java)"
+    },
+    {
+      "title": "Create Skill Version (Beta) (Kotlin)",
+      "url": "llms-txt#create-skill-version-(beta)-(kotlin)"
+    },
+    {
+      "title": "Create Skill Version (Beta) (Python)",
+      "url": "llms-txt#create-skill-version-(beta)-(python)"
+    },
+    {
+      "title": "Create Skill Version (Beta) (Ruby)",
+      "url": "llms-txt#create-skill-version-(beta)-(ruby)"
+    },
+    {
+      "title": "Create Skill Version (Beta) (TypeScript)",
+      "url": "llms-txt#create-skill-version-(beta)-(typescript)"
+    },
+    {
+      "title": "Create Workspace",
+      "url": "llms-txt#create-workspace"
+    },
+    {
+      "title": "Create Workspace Member",
+      "url": "llms-txt#create-workspace-member"
+    },
+    {
+      "title": "Delete a Message Batch",
+      "url": "llms-txt#delete-a-message-batch"
+    },
+    {
+      "title": "Delete a Message Batch (Beta)",
+      "url": "llms-txt#delete-a-message-batch-(beta)"
+    },
+    {
+      "title": "Delete a Message Batch (Beta) (Go)",
+      "url": "llms-txt#delete-a-message-batch-(beta)-(go)"
+    },
+    {
+      "title": "Delete a Message Batch (Beta) (Java)",
+      "url": "llms-txt#delete-a-message-batch-(beta)-(java)"
+    },
+    {
+      "title": "Delete a Message Batch (Beta) (Kotlin)",
+      "url": "llms-txt#delete-a-message-batch-(beta)-(kotlin)"
+    },
+    {
+      "title": "Delete a Message Batch (Beta) (Python)",
+      "url": "llms-txt#delete-a-message-batch-(beta)-(python)"
+    },
+    {
+      "title": "Delete a Message Batch (Beta) (Ruby)",
+      "url": "llms-txt#delete-a-message-batch-(beta)-(ruby)"
+    },
+    {
+      "title": "Delete a Message Batch (Beta) (TypeScript)",
+      "url": "llms-txt#delete-a-message-batch-(beta)-(typescript)"
+    },
+    {
+      "title": "Delete a Message Batch (Go)",
+      "url": "llms-txt#delete-a-message-batch-(go)"
+    },
+    {
+      "title": "Delete a Message Batch (Java)",
+      "url": "llms-txt#delete-a-message-batch-(java)"
+    },
+    {
+      "title": "Delete a Message Batch (Kotlin)",
+      "url": "llms-txt#delete-a-message-batch-(kotlin)"
+    },
+    {
+      "title": "Delete a Message Batch (Python)",
+      "url": "llms-txt#delete-a-message-batch-(python)"
+    },
+    {
+      "title": "Delete a Message Batch (Ruby)",
+      "url": "llms-txt#delete-a-message-batch-(ruby)"
+    },
+    {
+      "title": "Delete a Message Batch (TypeScript)",
+      "url": "llms-txt#delete-a-message-batch-(typescript)"
+    },
+    {
+      "title": "Delete File (Beta)",
+      "url": "llms-txt#delete-file-(beta)"
+    },
+    {
+      "title": "Delete File (Beta) (Go)",
+      "url": "llms-txt#delete-file-(beta)-(go)"
+    },
+    {
+      "title": "Delete File (Beta) (Java)",
+      "url": "llms-txt#delete-file-(beta)-(java)"
+    },
+    {
+      "title": "Delete File (Beta) (Kotlin)",
+      "url": "llms-txt#delete-file-(beta)-(kotlin)"
+    },
+    {
+      "title": "Delete File (Beta) (Python)",
+      "url": "llms-txt#delete-file-(beta)-(python)"
+    },
+    {
+      "title": "Delete File (Beta) (Ruby)",
+      "url": "llms-txt#delete-file-(beta)-(ruby)"
+    },
+    {
+      "title": "Delete File (Beta) (TypeScript)",
+      "url": "llms-txt#delete-file-(beta)-(typescript)"
+    },
+    {
+      "title": "Delete Invite",
+      "url": "llms-txt#delete-invite"
+    },
+    {
+      "title": "Delete Skill (Beta)",
+      "url": "llms-txt#delete-skill-(beta)"
+    },
+    {
+      "title": "Delete Skill (Beta) (Go)",
+      "url": "llms-txt#delete-skill-(beta)-(go)"
+    },
+    {
+      "title": "Delete Skill (Beta) (Java)",
+      "url": "llms-txt#delete-skill-(beta)-(java)"
+    },
+    {
+      "title": "Delete Skill (Beta) (Kotlin)",
+      "url": "llms-txt#delete-skill-(beta)-(kotlin)"
+    },
+    {
+      "title": "Delete Skill (Beta) (Python)",
+      "url": "llms-txt#delete-skill-(beta)-(python)"
+    },
+    {
+      "title": "Delete Skill (Beta) (Ruby)",
+      "url": "llms-txt#delete-skill-(beta)-(ruby)"
+    },
+    {
+      "title": "Delete Skill (Beta) (TypeScript)",
+      "url": "llms-txt#delete-skill-(beta)-(typescript)"
+    },
+    {
+      "title": "Delete Skill Version (Beta)",
+      "url": "llms-txt#delete-skill-version-(beta)"
+    },
+    {
+      "title": "Delete Skill Version (Beta) (Go)",
+      "url": "llms-txt#delete-skill-version-(beta)-(go)"
+    },
+    {
+      "title": "Delete Skill Version (Beta) (Java)",
+      "url": "llms-txt#delete-skill-version-(beta)-(java)"
+    },
+    {
+      "title": "Delete Skill Version (Beta) (Kotlin)",
+      "url": "llms-txt#delete-skill-version-(beta)-(kotlin)"
+    },
+    {
+      "title": "Delete Skill Version (Beta) (Python)",
+      "url": "llms-txt#delete-skill-version-(beta)-(python)"
+    },
+    {
+      "title": "Delete Skill Version (Beta) (Ruby)",
+      "url": "llms-txt#delete-skill-version-(beta)-(ruby)"
+    },
+    {
+      "title": "Delete Skill Version (Beta) (TypeScript)",
+      "url": "llms-txt#delete-skill-version-(beta)-(typescript)"
+    },
+    {
+      "title": "Delete Workspace Member",
+      "url": "llms-txt#delete-workspace-member"
+    },
+    {
+      "title": "Download File (Beta)",
+      "url": "llms-txt#download-file-(beta)"
+    },
+    {
+      "title": "Download File (Beta) (Go)",
+      "url": "llms-txt#download-file-(beta)-(go)"
+    },
+    {
+      "title": "Download File (Beta) (Java)",
+      "url": "llms-txt#download-file-(beta)-(java)"
+    },
+    {
+      "title": "Download File (Beta) (Kotlin)",
+      "url": "llms-txt#download-file-(beta)-(kotlin)"
+    },
+    {
+      "title": "Download File (Beta) (Python)",
+      "url": "llms-txt#download-file-(beta)-(python)"
+    },
+    {
+      "title": "Download File (Beta) (Ruby)",
+      "url": "llms-txt#download-file-(beta)-(ruby)"
+    },
+    {
+      "title": "Download File (Beta) (TypeScript)",
+      "url": "llms-txt#download-file-(beta)-(typescript)"
+    },
+    {
+      "title": "Files (Beta)",
+      "url": "llms-txt#files-(beta)"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Files (Beta) (Go)",
+      "url": "llms-txt#files-(beta)-(go)"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Files (Beta) (Java)",
+      "url": "llms-txt#files-(beta)-(java)"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Files (Beta) (Kotlin)",
+      "url": "llms-txt#files-(beta)-(kotlin)"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Files (Beta) (Python)",
+      "url": "llms-txt#files-(beta)-(python)"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Files (Beta) (Ruby)",
+      "url": "llms-txt#files-(beta)-(ruby)"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Files (Beta) (TypeScript)",
+      "url": "llms-txt#files-(beta)-(typescript)"
+    },
+    {
+      "title": "Files",
+      "url": "llms-txt#files"
+    },
+    {
+      "title": "Get a Model",
+      "url": "llms-txt#get-a-model"
+    },
+    {
+      "title": "Get a Model (Beta)",
+      "url": "llms-txt#get-a-model-(beta)"
+    },
+    {
+      "title": "Get a Model (Beta) (Go)",
+      "url": "llms-txt#get-a-model-(beta)-(go)"
+    },
+    {
+      "title": "Get a Model (Beta) (Java)",
+      "url": "llms-txt#get-a-model-(beta)-(java)"
+    },
+    {
+      "title": "Get a Model (Beta) (Kotlin)",
+      "url": "llms-txt#get-a-model-(beta)-(kotlin)"
+    },
+    {
+      "title": "Get a Model (Beta) (Python)",
+      "url": "llms-txt#get-a-model-(beta)-(python)"
+    },
+    {
+      "title": "Get a Model (Beta) (Ruby)",
+      "url": "llms-txt#get-a-model-(beta)-(ruby)"
+    },
+    {
+      "title": "Get a Model (Beta) (TypeScript)",
+      "url": "llms-txt#get-a-model-(beta)-(typescript)"
+    },
+    {
+      "title": "Get a Model (Go)",
+      "url": "llms-txt#get-a-model-(go)"
+    },
+    {
+      "title": "Get a Model (Java)",
+      "url": "llms-txt#get-a-model-(java)"
+    },
+    {
+      "title": "Get a Model (Kotlin)",
+      "url": "llms-txt#get-a-model-(kotlin)"
+    },
+    {
+      "title": "Get a Model (Python)",
+      "url": "llms-txt#get-a-model-(python)"
+    },
+    {
+      "title": "Get a Model (Ruby)",
+      "url": "llms-txt#get-a-model-(ruby)"
+    },
+    {
+      "title": "Get a Model (TypeScript)",
+      "url": "llms-txt#get-a-model-(typescript)"
+    },
+    {
+      "title": "Get Api Key",
+      "url": "llms-txt#get-api-key"
+    },
+    {
+      "title": "Get Claude Code Usage Report",
+      "url": "llms-txt#get-claude-code-usage-report"
+    },
+    {
+      "title": "Get Cost Report",
+      "url": "llms-txt#get-cost-report"
+    },
+    {
+      "title": "Get Current Organization",
+      "url": "llms-txt#get-current-organization"
+    },
+    {
+      "title": "Get File Metadata (Beta)",
+      "url": "llms-txt#get-file-metadata-(beta)"
+    },
+    {
+      "title": "Get File Metadata (Beta) (Go)",
+      "url": "llms-txt#get-file-metadata-(beta)-(go)"
+    },
+    {
+      "title": "Get File Metadata (Beta) (Java)",
+      "url": "llms-txt#get-file-metadata-(beta)-(java)"
+    },
+    {
+      "title": "Get File Metadata (Beta) (Kotlin)",
+      "url": "llms-txt#get-file-metadata-(beta)-(kotlin)"
+    },
+    {
+      "title": "Get File Metadata (Beta) (Python)",
+      "url": "llms-txt#get-file-metadata-(beta)-(python)"
+    },
+    {
+      "title": "Get File Metadata (Beta) (Ruby)",
+      "url": "llms-txt#get-file-metadata-(beta)-(ruby)"
+    },
+    {
+      "title": "Get File Metadata (Beta) (TypeScript)",
+      "url": "llms-txt#get-file-metadata-(beta)-(typescript)"
+    },
+    {
+      "title": "Get Invite",
+      "url": "llms-txt#get-invite"
+    },
+    {
+      "title": "Get Messages Usage Report",
+      "url": "llms-txt#get-messages-usage-report"
+    },
+    {
+      "title": "Get Skill (Beta)",
+      "url": "llms-txt#get-skill-(beta)"
+    },
+    {
+      "title": "Get Skill (Beta) (Go)",
+      "url": "llms-txt#get-skill-(beta)-(go)"
+    },
+    {
+      "title": "Get Skill (Beta) (Java)",
+      "url": "llms-txt#get-skill-(beta)-(java)"
+    },
+    {
+      "title": "Get Skill (Beta) (Kotlin)",
+      "url": "llms-txt#get-skill-(beta)-(kotlin)"
+    },
+    {
+      "title": "Get Skill (Beta) (Python)",
+      "url": "llms-txt#get-skill-(beta)-(python)"
+    },
+    {
+      "title": "Get Skill (Beta) (Ruby)",
+      "url": "llms-txt#get-skill-(beta)-(ruby)"
+    },
+    {
+      "title": "Get Skill (Beta) (TypeScript)",
+      "url": "llms-txt#get-skill-(beta)-(typescript)"
+    },
+    {
+      "title": "Get Skill Version (Beta)",
+      "url": "llms-txt#get-skill-version-(beta)"
+    },
+    {
+      "title": "Get Skill Version (Beta) (Go)",
+      "url": "llms-txt#get-skill-version-(beta)-(go)"
+    },
+    {
+      "title": "Get Skill Version (Beta) (Java)",
+      "url": "llms-txt#get-skill-version-(beta)-(java)"
+    },
+    {
+      "title": "Get Skill Version (Beta) (Kotlin)",
+      "url": "llms-txt#get-skill-version-(beta)-(kotlin)"
+    },
+    {
+      "title": "Get Skill Version (Beta) (Python)",
+      "url": "llms-txt#get-skill-version-(beta)-(python)"
+    },
+    {
+      "title": "Get Skill Version (Beta) (Ruby)",
+      "url": "llms-txt#get-skill-version-(beta)-(ruby)"
+    },
+    {
+      "title": "Get Skill Version (Beta) (TypeScript)",
+      "url": "llms-txt#get-skill-version-(beta)-(typescript)"
+    },
+    {
+      "title": "Get User",
+      "url": "llms-txt#get-user"
+    },
+    {
+      "title": "Get Workspace",
+      "url": "llms-txt#get-workspace"
+    },
+    {
+      "title": "Get Workspace Member",
+      "url": "llms-txt#get-workspace-member"
+    },
+    {
+      "title": "Invites",
+      "url": "llms-txt#invites"
+    },
+    {
+      "title": "Invites",
+      "url": "llms-txt#invites"
+    },
+    {
+      "title": "List Api Keys",
+      "url": "llms-txt#list-api-keys"
+    },
+    {
+      "title": "List Files (Beta)",
+      "url": "llms-txt#list-files-(beta)"
+    },
+    {
+      "title": "List Files (Beta) (Go)",
+      "url": "llms-txt#list-files-(beta)-(go)"
+    },
+    {
+      "title": "List Files (Beta) (Java)",
+      "url": "llms-txt#list-files-(beta)-(java)"
+    },
+    {
+      "title": "List Files (Beta) (Kotlin)",
+      "url": "llms-txt#list-files-(beta)-(kotlin)"
+    },
+    {
+      "title": "List Files (Beta) (Python)",
+      "url": "llms-txt#list-files-(beta)-(python)"
+    },
+    {
+      "title": "List Files (Beta) (Ruby)",
+      "url": "llms-txt#list-files-(beta)-(ruby)"
+    },
+    {
+      "title": "List Files (Beta) (TypeScript)",
+      "url": "llms-txt#list-files-(beta)-(typescript)"
+    },
+    {
+      "title": "List Invites",
+      "url": "llms-txt#list-invites"
+    },
+    {
+      "title": "List Message Batches",
+      "url": "llms-txt#list-message-batches"
+    },
+    {
+      "title": "List Message Batches (Beta)",
+      "url": "llms-txt#list-message-batches-(beta)"
+    },
+    {
+      "title": "List Message Batches (Beta) (Go)",
+      "url": "llms-txt#list-message-batches-(beta)-(go)"
+    },
+    {
+      "title": "List Message Batches (Beta) (Java)",
+      "url": "llms-txt#list-message-batches-(beta)-(java)"
+    },
+    {
+      "title": "List Message Batches (Beta) (Kotlin)",
+      "url": "llms-txt#list-message-batches-(beta)-(kotlin)"
+    },
+    {
+      "title": "List Message Batches (Beta) (Python)",
+      "url": "llms-txt#list-message-batches-(beta)-(python)"
+    },
+    {
+      "title": "List Message Batches (Beta) (Ruby)",
+      "url": "llms-txt#list-message-batches-(beta)-(ruby)"
+    },
+    {
+      "title": "List Message Batches (Beta) (TypeScript)",
+      "url": "llms-txt#list-message-batches-(beta)-(typescript)"
+    },
+    {
+      "title": "List Message Batches (Go)",
+      "url": "llms-txt#list-message-batches-(go)"
+    },
+    {
+      "title": "List Message Batches (Java)",
+      "url": "llms-txt#list-message-batches-(java)"
+    },
+    {
+      "title": "List Message Batches (Kotlin)",
+      "url": "llms-txt#list-message-batches-(kotlin)"
+    },
+    {
+      "title": "List Message Batches (Python)",
+      "url": "llms-txt#list-message-batches-(python)"
+    },
+    {
+      "title": "List Message Batches (Ruby)",
+      "url": "llms-txt#list-message-batches-(ruby)"
+    },
+    {
+      "title": "List Message Batches (TypeScript)",
+      "url": "llms-txt#list-message-batches-(typescript)"
+    },
+    {
+      "title": "List Models",
+      "url": "llms-txt#list-models"
+    },
+    {
+      "title": "List Models (Beta)",
+      "url": "llms-txt#list-models-(beta)"
+    },
+    {
+      "title": "List Models (Beta) (Go)",
+      "url": "llms-txt#list-models-(beta)-(go)"
+    },
+    {
+      "title": "List Models (Beta) (Java)",
+      "url": "llms-txt#list-models-(beta)-(java)"
+    },
+    {
+      "title": "List Models (Beta) (Kotlin)",
+      "url": "llms-txt#list-models-(beta)-(kotlin)"
+    },
+    {
+      "title": "List Models (Beta) (Python)",
+      "url": "llms-txt#list-models-(beta)-(python)"
+    },
+    {
+      "title": "List Models (Beta) (Ruby)",
+      "url": "llms-txt#list-models-(beta)-(ruby)"
+    },
+    {
+      "title": "List Models (Beta) (TypeScript)",
+      "url": "llms-txt#list-models-(beta)-(typescript)"
+    },
+    {
+      "title": "List Models (Go)",
+      "url": "llms-txt#list-models-(go)"
+    },
+    {
+      "title": "List Models (Java)",
+      "url": "llms-txt#list-models-(java)"
+    },
+    {
+      "title": "List Models (Kotlin)",
+      "url": "llms-txt#list-models-(kotlin)"
+    },
+    {
+      "title": "List Models (Python)",
+      "url": "llms-txt#list-models-(python)"
+    },
+    {
+      "title": "List Models (Ruby)",
+      "url": "llms-txt#list-models-(ruby)"
+    },
+    {
+      "title": "List Models (TypeScript)",
+      "url": "llms-txt#list-models-(typescript)"
+    },
+    {
+      "title": "List Skill Versions (Beta)",
+      "url": "llms-txt#list-skill-versions-(beta)"
+    },
+    {
+      "title": "List Skill Versions (Beta) (Go)",
+      "url": "llms-txt#list-skill-versions-(beta)-(go)"
+    },
+    {
+      "title": "List Skill Versions (Beta) (Java)",
+      "url": "llms-txt#list-skill-versions-(beta)-(java)"
+    },
+    {
+      "title": "List Skill Versions (Beta) (Kotlin)",
+      "url": "llms-txt#list-skill-versions-(beta)-(kotlin)"
+    },
+    {
+      "title": "List Skill Versions (Beta) (Python)",
+      "url": "llms-txt#list-skill-versions-(beta)-(python)"
+    },
+    {
+      "title": "List Skill Versions (Beta) (Ruby)",
+      "url": "llms-txt#list-skill-versions-(beta)-(ruby)"
+    },
+    {
+      "title": "List Skill Versions (Beta) (TypeScript)",
+      "url": "llms-txt#list-skill-versions-(beta)-(typescript)"
+    },
+    {
+      "title": "List Skills (Beta)",
+      "url": "llms-txt#list-skills-(beta)"
+    },
+    {
+      "title": "List Skills (Beta) (Go)",
+      "url": "llms-txt#list-skills-(beta)-(go)"
+    },
+    {
+      "title": "List Skills (Beta) (Java)",
+      "url": "llms-txt#list-skills-(beta)-(java)"
+    },
+    {
+      "title": "List Skills (Beta) (Kotlin)",
+      "url": "llms-txt#list-skills-(beta)-(kotlin)"
+    },
+    {
+      "title": "List Skills (Beta) (Python)",
+      "url": "llms-txt#list-skills-(beta)-(python)"
+    },
+    {
+      "title": "List Skills (Beta) (Ruby)",
+      "url": "llms-txt#list-skills-(beta)-(ruby)"
+    },
+    {
+      "title": "List Skills (Beta) (TypeScript)",
+      "url": "llms-txt#list-skills-(beta)-(typescript)"
+    },
+    {
+      "title": "List Users",
+      "url": "llms-txt#list-users"
+    },
+    {
+      "title": "List Workspace Members",
+      "url": "llms-txt#list-workspace-members"
+    },
+    {
+      "title": "List Workspaces",
+      "url": "llms-txt#list-workspaces"
+    },
+    {
+      "title": "Members",
+      "url": "llms-txt#members"
+    },
+    {
+      "title": "Members",
+      "url": "llms-txt#members"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Beta)",
+      "url": "llms-txt#messages-(beta)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Beta) (Go)",
+      "url": "llms-txt#messages-(beta)-(go)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Beta) (Java)",
+      "url": "llms-txt#messages-(beta)-(java)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Beta) (Kotlin)",
+      "url": "llms-txt#messages-(beta)-(kotlin)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Beta) (Python)",
+      "url": "llms-txt#messages-(beta)-(python)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Beta) (Ruby)",
+      "url": "llms-txt#messages-(beta)-(ruby)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Beta) (TypeScript)",
+      "url": "llms-txt#messages-(beta)-(typescript)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Go)",
+      "url": "llms-txt#messages-(go)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Java)",
+      "url": "llms-txt#messages-(java)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Kotlin)",
+      "url": "llms-txt#messages-(kotlin)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Python)",
+      "url": "llms-txt#messages-(python)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (Ruby)",
+      "url": "llms-txt#messages-(ruby)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Messages (TypeScript)",
+      "url": "llms-txt#messages-(typescript)"
+    },
+    {
+      "title": "Messages",
+      "url": "llms-txt#messages"
+    },
+    {
+      "title": "Batches",
+      "url": "llms-txt#batches"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Beta)",
+      "url": "llms-txt#models-(beta)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Beta) (Go)",
+      "url": "llms-txt#models-(beta)-(go)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Beta) (Java)",
+      "url": "llms-txt#models-(beta)-(java)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Beta) (Kotlin)",
+      "url": "llms-txt#models-(beta)-(kotlin)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Beta) (Python)",
+      "url": "llms-txt#models-(beta)-(python)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Beta) (Ruby)",
+      "url": "llms-txt#models-(beta)-(ruby)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Beta) (TypeScript)",
+      "url": "llms-txt#models-(beta)-(typescript)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Go)",
+      "url": "llms-txt#models-(go)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Java)",
+      "url": "llms-txt#models-(java)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Kotlin)",
+      "url": "llms-txt#models-(kotlin)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Python)",
+      "url": "llms-txt#models-(python)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (Ruby)",
+      "url": "llms-txt#models-(ruby)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Models (TypeScript)",
+      "url": "llms-txt#models-(typescript)"
+    },
+    {
+      "title": "Models",
+      "url": "llms-txt#models"
+    },
+    {
+      "title": "Organizations",
+      "url": "llms-txt#organizations"
+    },
+    {
+      "title": "Organizations",
+      "url": "llms-txt#organizations"
+    },
+    {
+      "title": "Remove User",
+      "url": "llms-txt#remove-user"
+    },
+    {
+      "title": "Retrieve a Message Batch",
+      "url": "llms-txt#retrieve-a-message-batch"
+    },
+    {
+      "title": "Retrieve a Message Batch (Beta)",
+      "url": "llms-txt#retrieve-a-message-batch-(beta)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Beta) (Go)",
+      "url": "llms-txt#retrieve-a-message-batch-(beta)-(go)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Beta) (Java)",
+      "url": "llms-txt#retrieve-a-message-batch-(beta)-(java)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Beta) (Kotlin)",
+      "url": "llms-txt#retrieve-a-message-batch-(beta)-(kotlin)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Beta) (Python)",
+      "url": "llms-txt#retrieve-a-message-batch-(beta)-(python)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Beta) (Ruby)",
+      "url": "llms-txt#retrieve-a-message-batch-(beta)-(ruby)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Beta) (TypeScript)",
+      "url": "llms-txt#retrieve-a-message-batch-(beta)-(typescript)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Go)",
+      "url": "llms-txt#retrieve-a-message-batch-(go)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Java)",
+      "url": "llms-txt#retrieve-a-message-batch-(java)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Kotlin)",
+      "url": "llms-txt#retrieve-a-message-batch-(kotlin)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Python)",
+      "url": "llms-txt#retrieve-a-message-batch-(python)"
+    },
+    {
+      "title": "Retrieve a Message Batch (Ruby)",
+      "url": "llms-txt#retrieve-a-message-batch-(ruby)"
+    },
+    {
+      "title": "Retrieve a Message Batch (TypeScript)",
+      "url": "llms-txt#retrieve-a-message-batch-(typescript)"
+    },
+    {
+      "title": "Retrieve Message Batch results",
+      "url": "llms-txt#retrieve-message-batch-results"
+    },
+    {
+      "title": "Retrieve Message Batch results (Beta)",
+      "url": "llms-txt#retrieve-message-batch-results-(beta)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Beta) (Go)",
+      "url": "llms-txt#retrieve-message-batch-results-(beta)-(go)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Beta) (Java)",
+      "url": "llms-txt#retrieve-message-batch-results-(beta)-(java)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Beta) (Kotlin)",
+      "url": "llms-txt#retrieve-message-batch-results-(beta)-(kotlin)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Beta) (Python)",
+      "url": "llms-txt#retrieve-message-batch-results-(beta)-(python)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Beta) (Ruby)",
+      "url": "llms-txt#retrieve-message-batch-results-(beta)-(ruby)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Beta) (TypeScript)",
+      "url": "llms-txt#retrieve-message-batch-results-(beta)-(typescript)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Go)",
+      "url": "llms-txt#retrieve-message-batch-results-(go)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Java)",
+      "url": "llms-txt#retrieve-message-batch-results-(java)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Kotlin)",
+      "url": "llms-txt#retrieve-message-batch-results-(kotlin)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Python)",
+      "url": "llms-txt#retrieve-message-batch-results-(python)"
+    },
+    {
+      "title": "Retrieve Message Batch results (Ruby)",
+      "url": "llms-txt#retrieve-message-batch-results-(ruby)"
+    },
+    {
+      "title": "Retrieve Message Batch results (TypeScript)",
+      "url": "llms-txt#retrieve-message-batch-results-(typescript)"
+    },
+    {
+      "title": "Skills (Beta)",
+      "url": "llms-txt#skills-(beta)"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Skills (Beta) (Go)",
+      "url": "llms-txt#skills-(beta)-(go)"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Skills (Beta) (Java)",
+      "url": "llms-txt#skills-(beta)-(java)"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Skills (Beta) (Kotlin)",
+      "url": "llms-txt#skills-(beta)-(kotlin)"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Skills (Beta) (Python)",
+      "url": "llms-txt#skills-(beta)-(python)"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Skills (Beta) (Ruby)",
+      "url": "llms-txt#skills-(beta)-(ruby)"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Skills (Beta) (TypeScript)",
+      "url": "llms-txt#skills-(beta)-(typescript)"
+    },
+    {
+      "title": "Skills",
+      "url": "llms-txt#skills"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Update Api Key",
+      "url": "llms-txt#update-api-key"
+    },
+    {
+      "title": "Update User",
+      "url": "llms-txt#update-user"
+    },
+    {
+      "title": "Update Workspace",
+      "url": "llms-txt#update-workspace"
+    },
+    {
+      "title": "Update Workspace Member",
+      "url": "llms-txt#update-workspace-member"
+    },
+    {
+      "title": "Upload File (Beta)",
+      "url": "llms-txt#upload-file-(beta)"
+    },
+    {
+      "title": "Upload File (Beta) (Go)",
+      "url": "llms-txt#upload-file-(beta)-(go)"
+    },
+    {
+      "title": "Upload File (Beta) (Java)",
+      "url": "llms-txt#upload-file-(beta)-(java)"
+    },
+    {
+      "title": "Upload File (Beta) (Kotlin)",
+      "url": "llms-txt#upload-file-(beta)-(kotlin)"
+    },
+    {
+      "title": "Upload File (Beta) (Python)",
+      "url": "llms-txt#upload-file-(beta)-(python)"
+    },
+    {
+      "title": "Upload File (Beta) (Ruby)",
+      "url": "llms-txt#upload-file-(beta)-(ruby)"
+    },
+    {
+      "title": "Upload File (Beta) (TypeScript)",
+      "url": "llms-txt#upload-file-(beta)-(typescript)"
+    },
+    {
+      "title": "Usage Report",
+      "url": "llms-txt#usage-report"
+    },
+    {
+      "title": "Usage Report",
+      "url": "llms-txt#usage-report"
+    },
+    {
+      "title": "Users",
+      "url": "llms-txt#users"
+    },
+    {
+      "title": "Users",
+      "url": "llms-txt#users"
+    },
+    {
+      "title": "Versions (Beta)",
+      "url": "llms-txt#versions-(beta)"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Versions (Beta) (Go)",
+      "url": "llms-txt#versions-(beta)-(go)"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Versions (Beta) (Java)",
+      "url": "llms-txt#versions-(beta)-(java)"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Versions (Beta) (Kotlin)",
+      "url": "llms-txt#versions-(beta)-(kotlin)"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Versions (Beta) (Python)",
+      "url": "llms-txt#versions-(beta)-(python)"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Versions (Beta) (Ruby)",
+      "url": "llms-txt#versions-(beta)-(ruby)"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Versions (Beta) (TypeScript)",
+      "url": "llms-txt#versions-(beta)-(typescript)"
+    },
+    {
+      "title": "Versions",
+      "url": "llms-txt#versions"
+    },
+    {
+      "title": "Workspaces",
+      "url": "llms-txt#workspaces"
+    },
+    {
+      "title": "Workspaces",
+      "url": "llms-txt#workspaces"
+    },
+    {
+      "title": "Members",
+      "url": "llms-txt#members"
+    },
+    {
+      "title": "Overview",
+      "url": "llms-txt#overview"
+    },
+    {
+      "title": "Glossary",
+      "url": "llms-txt#glossary"
+    },
+    {
+      "title": "Glossary",
+      "url": "llms-txt#glossary"
+    },
+    {
+      "title": "System Prompts",
+      "url": "llms-txt#system-prompts"
+    },
+    {
+      "title": "System Prompts",
+      "url": "llms-txt#system-prompts"
+    },
+    {
+      "title": "Guides to common use cases",
+      "url": "llms-txt#guides-to-common-use-cases"
+    },
+    {
+      "title": "Guides to common use cases",
+      "url": "llms-txt#guides-to-common-use-cases"
+    },
+    {
+      "title": "Content moderation",
+      "url": "llms-txt#content-moderation"
+    },
+    {
+      "title": "Content moderation",
+      "url": "llms-txt#content-moderation"
+    },
+    {
+      "title": "Sample user comments to test the content moderation",
+      "url": "llms-txt#sample-user-comments-to-test-the-content-moderation"
+    },
+    {
+      "title": "List of categories considered unsafe for content moderation",
+      "url": "llms-txt#list-of-categories-considered-unsafe-for-content-moderation"
+    },
+    {
+      "title": "Initialize the Anthropic client",
+      "url": "llms-txt#initialize-the-anthropic-client"
+    },
+    {
+      "title": "Process each comment and print the results",
+      "url": "llms-txt#process-each-comment-and-print-the-results"
+    },
+    {
+      "title": "Initialize the Anthropic client",
+      "url": "llms-txt#initialize-the-anthropic-client"
+    },
+    {
+      "title": "Process each comment and print the results",
+      "url": "llms-txt#process-each-comment-and-print-the-results"
+    },
+    {
+      "title": "Initialize the Anthropic client",
+      "url": "llms-txt#initialize-the-anthropic-client"
+    },
+    {
+      "title": "Dictionary of categories considered unsafe for content moderation, with their definitions",
+      "url": "llms-txt#dictionary-of-categories-considered-unsafe-for-content-moderation,-with-their-definitions"
+    },
+    {
+      "title": "Process each comment and print the results",
+      "url": "llms-txt#process-each-comment-and-print-the-results"
+    },
+    {
+      "title": "Initialize the Anthropic client",
+      "url": "llms-txt#initialize-the-anthropic-client"
+    },
+    {
+      "title": "Process the batch of comments and get the response",
+      "url": "llms-txt#process-the-batch-of-comments-and-get-the-response"
+    },
+    {
+      "title": "Print the results for each detected violation",
+      "url": "llms-txt#print-the-results-for-each-detected-violation"
+    },
+    {
+      "title": "Customer support agent",
+      "url": "llms-txt#customer-support-agent"
+    },
+    {
+      "title": "Customer support agent",
+      "url": "llms-txt#customer-support-agent"
+    },
+    {
+      "title": "Legal summarization",
+      "url": "llms-txt#legal-summarization"
+    },
+    {
+      "title": "Legal summarization",
+      "url": "llms-txt#legal-summarization"
+    },
+    {
+      "title": "Create the full URL from the GitHub repository",
+      "url": "llms-txt#create-the-full-url-from-the-github-repository"
+    },
+    {
+      "title": "Download the PDF file into memory",
+      "url": "llms-txt#download-the-pdf-file-into-memory"
+    },
+    {
+      "title": "Load the PDF from memory",
+      "url": "llms-txt#load-the-pdf-from-memory"
+    },
+    {
+      "title": "Initialize the Anthropic client",
+      "url": "llms-txt#initialize-the-anthropic-client"
+    },
+    {
+      "title": "Initialize the Anthropic client",
+      "url": "llms-txt#initialize-the-anthropic-client"
+    },
+    {
+      "title": "Ticket routing",
+      "url": "llms-txt#ticket-routing"
+    },
+    {
+      "title": "Ticket routing",
+      "url": "llms-txt#ticket-routing"
+    },
+    {
+      "title": "Create an instance of the Claude API client",
+      "url": "llms-txt#create-an-instance-of-the-claude-api-client"
+    },
+    {
+      "title": "Set the default model",
+      "url": "llms-txt#set-the-default-model"
+    },
+    {
+      "title": "Create an instance of the Claude API client",
+      "url": "llms-txt#create-an-instance-of-the-claude-api-client"
+    },
+    {
+      "title": "Set the default model",
+      "url": "llms-txt#set-the-default-model"
+    },
+    {
+      "title": "Adaptive editor",
+      "url": "llms-txt#adaptive-editor"
+    },
+    {
+      "title": "Adaptive editor",
+      "url": "llms-txt#adaptive-editor"
+    },
+    {
+      "title": "Airport code analyst",
+      "url": "llms-txt#airport-code-analyst"
+    },
+    {
+      "title": "Airport code analyst",
+      "url": "llms-txt#airport-code-analyst"
+    },
+    {
+      "title": "Alien anthropologist",
+      "url": "llms-txt#alien-anthropologist"
+    },
+    {
+      "title": "Alien anthropologist",
+      "url": "llms-txt#alien-anthropologist"
+    },
+    {
+      "title": "Alliteration alchemist",
+      "url": "llms-txt#alliteration-alchemist"
+    },
+    {
+      "title": "Alliteration alchemist",
+      "url": "llms-txt#alliteration-alchemist"
+    },
+    {
+      "title": "Babel's broadcasts",
+      "url": "llms-txt#babel's-broadcasts"
+    },
+    {
+      "title": "Babel's broadcasts",
+      "url": "llms-txt#babel's-broadcasts"
+    },
+    {
+      "title": "Brand builder",
+      "url": "llms-txt#brand-builder"
+    },
+    {
+      "title": "Brand builder",
+      "url": "llms-txt#brand-builder"
+    },
+    {
+      "title": "Career coach",
+      "url": "llms-txt#career-coach"
+    },
+    {
+      "title": "Career coach",
+      "url": "llms-txt#career-coach"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Cite your sources",
+      "url": "llms-txt#cite-your-sources"
+    },
+    {
+      "title": "Cite your sources",
+      "url": "llms-txt#cite-your-sources"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Code clarifier",
+      "url": "llms-txt#code-clarifier"
+    },
+    {
+      "title": "Code clarifier",
+      "url": "llms-txt#code-clarifier"
+    },
+    {
+      "title": "Code consultant",
+      "url": "llms-txt#code-consultant"
+    },
+    {
+      "title": "Code consultant",
+      "url": "llms-txt#code-consultant"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Corporate clairvoyant",
+      "url": "llms-txt#corporate-clairvoyant"
+    },
+    {
+      "title": "Corporate clairvoyant",
+      "url": "llms-txt#corporate-clairvoyant"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Cosmic Keystrokes",
+      "url": "llms-txt#cosmic-keystrokes"
+    },
+    {
+      "title": "Cosmic Keystrokes",
+      "url": "llms-txt#cosmic-keystrokes"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "CSV converter",
+      "url": "llms-txt#csv-converter"
+    },
+    {
+      "title": "CSV converter",
+      "url": "llms-txt#csv-converter"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Culinary creator",
+      "url": "llms-txt#culinary-creator"
+    },
+    {
+      "title": "Culinary creator",
+      "url": "llms-txt#culinary-creator"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Data organizer",
+      "url": "llms-txt#data-organizer"
+    },
+    {
+      "title": "Data organizer",
+      "url": "llms-txt#data-organizer"
+    },
+    {
+      "title": "Direction decoder",
+      "url": "llms-txt#direction-decoder"
+    },
+    {
+      "title": "Direction decoder",
+      "url": "llms-txt#direction-decoder"
+    },
+    {
+      "title": "Dream interpreter",
+      "url": "llms-txt#dream-interpreter"
+    },
+    {
+      "title": "Dream interpreter",
+      "url": "llms-txt#dream-interpreter"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Efficiency estimator",
+      "url": "llms-txt#efficiency-estimator"
+    },
+    {
+      "title": "Efficiency estimator",
+      "url": "llms-txt#efficiency-estimator"
+    },
+    {
+      "title": "Email extractor",
+      "url": "llms-txt#email-extractor"
+    },
+    {
+      "title": "Email extractor",
+      "url": "llms-txt#email-extractor"
+    },
+    {
+      "title": "Emoji encoder",
+      "url": "llms-txt#emoji-encoder"
+    },
+    {
+      "title": "Emoji encoder",
+      "url": "llms-txt#emoji-encoder"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Ethical dilemma navigator",
+      "url": "llms-txt#ethical-dilemma-navigator"
+    },
+    {
+      "title": "Ethical dilemma navigator",
+      "url": "llms-txt#ethical-dilemma-navigator"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Excel formula expert",
+      "url": "llms-txt#excel-formula-expert"
+    },
+    {
+      "title": "Excel formula expert",
+      "url": "llms-txt#excel-formula-expert"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Function fabricator",
+      "url": "llms-txt#function-fabricator"
+    },
+    {
+      "title": "Function fabricator",
+      "url": "llms-txt#function-fabricator"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Futuristic fashion advisor",
+      "url": "llms-txt#futuristic-fashion-advisor"
+    },
+    {
+      "title": "Futuristic fashion advisor",
+      "url": "llms-txt#futuristic-fashion-advisor"
+    },
+    {
+      "title": "Git gud",
+      "url": "llms-txt#git-gud"
+    },
+    {
+      "title": "Git gud",
+      "url": "llms-txt#git-gud"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Google apps scripter",
+      "url": "llms-txt#google-apps-scripter"
+    },
+    {
+      "title": "Google apps scripter",
+      "url": "llms-txt#google-apps-scripter"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Grading guru",
+      "url": "llms-txt#grading-guru"
+    },
+    {
+      "title": "Grading guru",
+      "url": "llms-txt#grading-guru"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Grammar genie",
+      "url": "llms-txt#grammar-genie"
+    },
+    {
+      "title": "Grammar genie",
+      "url": "llms-txt#grammar-genie"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Hal the humorous helper",
+      "url": "llms-txt#hal-the-humorous-helper"
+    },
+    {
+      "title": "Hal the humorous helper",
+      "url": "llms-txt#hal-the-humorous-helper"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Idiom illuminator",
+      "url": "llms-txt#idiom-illuminator"
+    },
+    {
+      "title": "Idiom illuminator",
+      "url": "llms-txt#idiom-illuminator"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Interview question crafter",
+      "url": "llms-txt#interview-question-crafter"
+    },
+    {
+      "title": "Interview question crafter",
+      "url": "llms-txt#interview-question-crafter"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "LaTeX legend",
+      "url": "llms-txt#latex-legend"
+    },
+    {
+      "title": "LaTeX legend",
+      "url": "llms-txt#latex-legend"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Lesson planner",
+      "url": "llms-txt#lesson-planner"
+    },
+    {
+      "title": "Lesson planner",
+      "url": "llms-txt#lesson-planner"
+    },
+    {
+      "title": "Master moderator",
+      "url": "llms-txt#master-moderator"
+    },
+    {
+      "title": "Master moderator",
+      "url": "llms-txt#master-moderator"
+    },
+    {
+      "title": "Meeting scribe",
+      "url": "llms-txt#meeting-scribe"
+    },
+    {
+      "title": "Meeting scribe",
+      "url": "llms-txt#meeting-scribe"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Memo maestro",
+      "url": "llms-txt#memo-maestro"
+    },
+    {
+      "title": "Memo maestro",
+      "url": "llms-txt#memo-maestro"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Mindfulness mentor",
+      "url": "llms-txt#mindfulness-mentor"
+    },
+    {
+      "title": "Mindfulness mentor",
+      "url": "llms-txt#mindfulness-mentor"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Mood colorizer",
+      "url": "llms-txt#mood-colorizer"
+    },
+    {
+      "title": "Mood colorizer",
+      "url": "llms-txt#mood-colorizer"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Motivational muse",
+      "url": "llms-txt#motivational-muse"
+    },
+    {
+      "title": "Motivational muse",
+      "url": "llms-txt#motivational-muse"
+    },
+    {
+      "title": "Neologism creator",
+      "url": "llms-txt#neologism-creator"
+    },
+    {
+      "title": "Neologism creator",
+      "url": "llms-txt#neologism-creator"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Perspectives ponderer",
+      "url": "llms-txt#perspectives-ponderer"
+    },
+    {
+      "title": "Perspectives ponderer",
+      "url": "llms-txt#perspectives-ponderer"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Philosophical musings",
+      "url": "llms-txt#philosophical-musings"
+    },
+    {
+      "title": "Philosophical musings",
+      "url": "llms-txt#philosophical-musings"
+    },
+    {
+      "title": "PII purifier",
+      "url": "llms-txt#pii-purifier"
+    },
+    {
+      "title": "PII purifier",
+      "url": "llms-txt#pii-purifier"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Polyglot superpowers",
+      "url": "llms-txt#polyglot-superpowers"
+    },
+    {
+      "title": "Polyglot superpowers",
+      "url": "llms-txt#polyglot-superpowers"
+    },
+    {
+      "title": "Portmanteau poet",
+      "url": "llms-txt#portmanteau-poet"
+    },
+    {
+      "title": "Portmanteau poet",
+      "url": "llms-txt#portmanteau-poet"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Product naming pro",
+      "url": "llms-txt#product-naming-pro"
+    },
+    {
+      "title": "Product naming pro",
+      "url": "llms-txt#product-naming-pro"
+    },
+    {
+      "title": "Prose polisher",
+      "url": "llms-txt#prose-polisher"
+    },
+    {
+      "title": "Prose polisher",
+      "url": "llms-txt#prose-polisher"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Pun-dit",
+      "url": "llms-txt#pun-dit"
+    },
+    {
+      "title": "Pun-dit",
+      "url": "llms-txt#pun-dit"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Python bug buster",
+      "url": "llms-txt#python-bug-buster"
+    },
+    {
+      "title": "Python bug buster",
+      "url": "llms-txt#python-bug-buster"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Review classifier",
+      "url": "llms-txt#review-classifier"
+    },
+    {
+      "title": "Review classifier",
+      "url": "llms-txt#review-classifier"
+    },
+    {
+      "title": "Riddle me this",
+      "url": "llms-txt#riddle-me-this"
+    },
+    {
+      "title": "Riddle me this",
+      "url": "llms-txt#riddle-me-this"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Sci-fi scenario simulator",
+      "url": "llms-txt#sci-fi-scenario-simulator"
+    },
+    {
+      "title": "Sci-fi scenario simulator",
+      "url": "llms-txt#sci-fi-scenario-simulator"
+    },
+    {
+      "title": "Second-grade simplifier",
+      "url": "llms-txt#second-grade-simplifier"
+    },
+    {
+      "title": "Second-grade simplifier",
+      "url": "llms-txt#second-grade-simplifier"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Simile savant",
+      "url": "llms-txt#simile-savant"
+    },
+    {
+      "title": "Simile savant",
+      "url": "llms-txt#simile-savant"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Socratic sage",
+      "url": "llms-txt#socratic-sage"
+    },
+    {
+      "title": "Socratic sage",
+      "url": "llms-txt#socratic-sage"
+    },
+    {
+      "title": "Spreadsheet sorcerer",
+      "url": "llms-txt#spreadsheet-sorcerer"
+    },
+    {
+      "title": "Spreadsheet sorcerer",
+      "url": "llms-txt#spreadsheet-sorcerer"
+    },
+    {
+      "title": "SQL sorcerer",
+      "url": "llms-txt#sql-sorcerer"
+    },
+    {
+      "title": "SQL sorcerer",
+      "url": "llms-txt#sql-sorcerer"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Storytelling sidekick",
+      "url": "llms-txt#storytelling-sidekick"
+    },
+    {
+      "title": "Storytelling sidekick",
+      "url": "llms-txt#storytelling-sidekick"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Time travel consultant",
+      "url": "llms-txt#time-travel-consultant"
+    },
+    {
+      "title": "Time travel consultant",
+      "url": "llms-txt#time-travel-consultant"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Tongue twister",
+      "url": "llms-txt#tongue-twister"
+    },
+    {
+      "title": "Tongue twister",
+      "url": "llms-txt#tongue-twister"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Trivia generator",
+      "url": "llms-txt#trivia-generator"
+    },
+    {
+      "title": "Trivia generator",
+      "url": "llms-txt#trivia-generator"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Tweet tone detector",
+      "url": "llms-txt#tweet-tone-detector"
+    },
+    {
+      "title": "Tweet tone detector",
+      "url": "llms-txt#tweet-tone-detector"
+    },
+    {
+      "title": "VR fitness innovator",
+      "url": "llms-txt#vr-fitness-innovator"
+    },
+    {
+      "title": "VR fitness innovator",
+      "url": "llms-txt#vr-fitness-innovator"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Website wizard",
+      "url": "llms-txt#website-wizard"
+    },
+    {
+      "title": "Website wizard",
+      "url": "llms-txt#website-wizard"
+    },
+    {
+      "title": "See https://docs.claude.com/claude/reference/claude-on-amazon-bedrock",
+      "url": "llms-txt#see-https://docs.claude.com/claude/reference/claude-on-amazon-bedrock"
+    },
+    {
+      "title": "for authentication options",
+      "url": "llms-txt#for-authentication-options"
+    },
+    {
+      "title": "Claude Developer Platform",
+      "url": "llms-txt#claude-developer-platform"
+    },
+    {
+      "title": "Claude Developer Platform",
+      "url": "llms-txt#claude-developer-platform"
+    }
+  ]
+}

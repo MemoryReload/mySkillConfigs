@@ -1,0 +1,34 @@
+{
+  "title": "Get Messages Usage Report",
+  "content": "URL: https://platform.claude.com/docs/en/api/admin/usage_report/retrieve_messages\n\n**get** `/v1/organizations/usage_report/messages`\n\nGet Messages Usage Report\n\n- `starting_at: string`\n\nTime buckets that start on or after this RFC 3339 timestamp will be returned.\n  Each time bucket will be snapped to the start of the minute/hour/day in UTC.\n\n- `api_key_ids: optional array of string`\n\nRestrict usage returned to the specified API key ID(s).\n\n- `bucket_width: optional \"1d\" or \"1m\" or \"1h\"`\n\nTime granularity of the response data.\n\n- `context_window: optional array of \"0-200k\" or \"200k-1M\"`\n\nRestrict usage returned to the specified context window(s).\n\n- `ending_at: optional string`\n\nTime buckets that end before this RFC 3339 timestamp will be returned.\n\n- `group_by: optional array of \"api_key_id\" or \"workspace_id\" or \"model\" or 2 more`\n\nGroup by any subset of the available options.\n\n- `limit: optional number`\n\nMaximum number of time buckets to return in the response.\n\nThe default and max limits depend on `bucket_width`:\n  • `\"1d\"`: Default of 7 days, maximum of 31 days\n  • `\"1h\"`: Default of 24 hours, maximum of 168 hours\n  • `\"1m\"`: Default of 60 minutes, maximum of 1440 minutes\n\n- `models: optional array of string`\n\nRestrict usage returned to the specified model(s).\n\n- `page: optional string`\n\nOptionally set to the `next_page` token from the previous response.\n\n- `service_tiers: optional array of \"standard\" or \"batch\" or \"priority\" or 3 more`\n\nRestrict usage returned to the specified service tier(s).\n\n- `\"priority_on_demand\"`\n\n- `workspace_ids: optional array of string`\n\nRestrict usage returned to the specified workspace ID(s).\n\n- `MessagesUsageReport = object { data, has_more, next_page }`\n\n- `data: array of object { ending_at, results, starting_at }`\n\n- `ending_at: string`\n\nEnd of the time bucket (exclusive) in RFC 3339 format.\n\n- `results: array of object { api_key_id, cache_creation, cache_read_input_tokens, 7 more }`\n\nList of usage items for this time bucket.  There may be multiple items if one or more `group_by[]` parameters are specified.\n\n- `api_key_id: string`\n\nID of the API key used. Null if not grouping by API key or for usage in the Anthropic Console.\n\n- `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`\n\nThe number of input tokens for cache creation.\n\n- `ephemeral_1h_input_tokens: number`\n\nThe number of input tokens used to create the 1 hour cache entry.\n\n- `ephemeral_5m_input_tokens: number`\n\nThe number of input tokens used to create the 5 minute cache entry.\n\n- `cache_read_input_tokens: number`\n\nThe number of input tokens read from the cache.\n\n- `context_window: \"0-200k\" or \"200k-1M\"`\n\nContext window used. Null if not grouping by context window.\n\nModel used. Null if not grouping by model.\n\n- `output_tokens: number`\n\nThe number of output tokens generated.\n\n- `server_tool_use: object { web_search_requests }`\n\nServer-side tool usage metrics.\n\n- `web_search_requests: number`\n\nThe number of web search requests made.\n\n- `service_tier: \"standard\" or \"batch\" or \"priority\" or 3 more`\n\nService tier used. Null if not grouping by service tier.\n\n- `\"priority_on_demand\"`\n\n- `uncached_input_tokens: number`\n\nThe number of uncached input tokens processed.\n\n- `workspace_id: string`\n\nID of the Workspace used. Null if not grouping by workspace or for the default workspace.\n\n- `starting_at: string`\n\nStart of the time bucket (inclusive) in RFC 3339 format.\n\n- `has_more: boolean`\n\nIndicates if there are more results.\n\n- `next_page: string`\n\nToken to provide in as `page` in the subsequent request to retrieve the next page of data.",
+  "code_samples": [
+    {
+      "code": "curl https://api.anthropic.com/v1/organizations/usage_report/messages \\\n    -H \"X-Api-Key: $ANTHROPIC_ADMIN_API_KEY\"",
+      "language": "http"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Retrieve Messages",
+      "id": "retrieve-messages"
+    },
+    {
+      "level": "h3",
+      "text": "Query Parameters",
+      "id": "query-parameters"
+    },
+    {
+      "level": "h3",
+      "text": "Returns",
+      "id": "returns"
+    },
+    {
+      "level": "h3",
+      "text": "Example",
+      "id": "example"
+    }
+  ],
+  "url": "llms-txt#get-messages-usage-report",
+  "links": []
+}

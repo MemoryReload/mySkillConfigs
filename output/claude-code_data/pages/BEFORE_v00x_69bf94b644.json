@@ -1,0 +1,8 @@
+{
+  "title": "BEFORE (v0.0.x)",
+  "content": "from claude_agent_sdk import query, ClaudeCodeOptions\n\noptions = ClaudeCodeOptions(\n    model=\"claude-sonnet-4-5\",\n    permission_mode=\"acceptEdits\"\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#before-(v0.0.x)",
+  "links": []
+}

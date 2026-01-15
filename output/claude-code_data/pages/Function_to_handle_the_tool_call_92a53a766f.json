@@ -1,0 +1,8 @@
+{
+  "title": "Function to handle the tool call",
+  "content": "def search_knowledge_base(query):\n    # Your search logic here\n    # Returns search results in the correct format\n    return [\n        SearchResultBlockParam(\n            type=\"search_result\",\n            source=\"https://docs.company.com/product-guide\",\n            title=\"Product Configuration Guide\",\n            content=[\n                TextBlockParam(\n                    type=\"text\",\n                    text=\"To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs.\"\n                )\n            ],\n            citations={\"enabled\": True}\n        ),\n        SearchResultBlockParam(\n            type=\"search_result\",\n            source=\"https://docs.company.com/troubleshooting\",\n            title=\"Troubleshooting Guide\",\n            content=[\n                TextBlockParam(\n                    type=\"text\",\n                    text=\"If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values.\"\n                )\n            ],\n            citations={\"enabled\": True}\n        )\n    ]",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#function-to-handle-the-tool-call",
+  "links": []
+}

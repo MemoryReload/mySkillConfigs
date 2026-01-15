@@ -1,0 +1,42 @@
+{
+  "title": "Claude Code Analytics API",
+  "content": "Programmatically access your organization's Claude Code usage analytics and productivity metrics with the Claude Code Analytics Admin API.\n\n<Tip>\n**The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.\n</Tip>\n\nThe Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API bridges the gap between our basic [Analytics dashboard](/claude-code) and the complex OpenTelemetry integration.\n\nThis API enables you to better monitor, analyze, and optimize your Claude Code adoption:\n\n* **Developer Productivity Analysis:** Track sessions, lines of code added/removed, commits, and pull requests created using Claude Code\n* **Tool Usage Metrics:** Monitor acceptance and rejection rates for different Claude Code tools (Edit, Write, NotebookEdit)\n* **Cost Analysis:** View estimated costs and token usage broken down by Claude model\n* **Custom Reporting:** Export data to build executive dashboards and reports for management teams\n* **Usage Justification:** Provide metrics to justify and expand Claude Code adoption internally\n\n<Check>\n  **Admin API key required**\n  \n  This API is part of the [Admin API](/docs/en/build-with-claude/administration-api). These endpoints require an Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the [Claude Console](/settings/admin-keys).\n</Check>\n\nGet your organization's Claude Code analytics for a specific day:\n\n<Tip>\n  **Set a User-Agent header for integrations**\n  \n  If you're building an integration, set your User-Agent header to help us understand usage patterns:\n  \n</Tip>\n\n## Claude Code Analytics API\n\nTrack Claude Code usage, productivity metrics, and developer activity across your organization with the `/v1/organizations/usage_report/claude_code` endpoint.\n\n- **Daily aggregation**: Returns metrics for a single day specified by the `starting_at` parameter\n- **User-level data**: Each record represents one user's activity for the specified day\n- **Productivity metrics**: Track sessions, lines of code, commits, pull requests, and tool usage\n- **Token and cost data**: Monitor usage and estimated costs broken down by Claude model\n- **Cursor-based pagination**: Handle large datasets with stable pagination using opaque cursors\n- **Data freshness**: Metrics are available with up to 1-hour delay for consistency\n\nFor complete parameter details and response schemas, see the [Claude Code Analytics API reference](/docs/en/api/admin-api/claude-code/get-claude-code-usage-report).\n\n#### Get analytics for a specific day\n\n#### Get analytics with pagination",
+  "code_samples": [
+    {
+      "code": "curl \"https://api.anthropic.com/v1/organizations/usage_report/claude_code?\\\nstarting_at=2025-09-08&\\\nlimit=20\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ADMIN_API_KEY\"",
+      "language": "bash"
+    },
+    {
+      "code": "User-Agent: YourApp/1.0.0 (https://yourapp.com)",
+      "language": "unknown"
+    },
+    {
+      "code": "curl \"https://api.anthropic.com/v1/organizations/usage_report/claude_code?\\\nstarting_at=2025-09-08\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ADMIN_API_KEY\"",
+      "language": "bash"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h2",
+      "text": "Claude Code Analytics API",
+      "id": "claude-code-analytics-api"
+    },
+    {
+      "level": "h3",
+      "text": "Key concepts",
+      "id": "key-concepts"
+    },
+    {
+      "level": "h3",
+      "text": "Basic examples",
+      "id": "basic-examples"
+    }
+  ],
+  "url": "llms-txt#claude-code-analytics-api",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Use prompt templates and variables",
+  "content": "When deploying an LLM-based application with Claude, your API calls will typically consist of two types of content:\n- **Fixed content:** Static instructions or context that remain constant across multiple interactions\n- **Variable content:** Dynamic elements that change with each request or conversation, such as:\n    - User inputs\n    - Retrieved content for Retrieval-Augmented Generation (RAG)\n    - Conversation context such as user account history\n    - System-generated data such as tool use results fed in from other independent calls to Claude\n\nA **prompt template** combines these fixed and variable parts, using placeholders for the dynamic content. In the [Claude Console](/), these placeholders are denoted with **\\{\\{double brackets\\}\\}**, making them easily identifiable and allowing for quick testing of different values.",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#use-prompt-templates-and-variables",
+  "links": []
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Admin API overview",
+  "content": "<Tip>\n**The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.\n</Tip>\n\nThe [Admin API](/docs/en/api/admin) allows you to programmatically manage your organization's resources, including organization members, workspaces, and API keys. This provides programmatic control over administrative tasks that would otherwise require manual configuration in the [Claude Console](/).\n\n<Check>\n  **The Admin API requires special access**\n\nThe Admin API requires a special Admin API key (starting with `sk-ant-admin...`) that differs from standard API keys. Only organization members with the admin role can provision Admin API keys through the Claude Console.\n</Check>\n\n## How the Admin API works\n\nWhen you use the Admin API:\n\n1. You make requests using your Admin API key in the `x-api-key` header\n2. The API allows you to manage:\n   - Organization members and their roles\n   - Organization member invites\n   - Workspaces and their members\n   - API keys\n\nThis is useful for:\n- Automating user onboarding/offboarding\n- Programmatically managing workspace access\n- Monitoring and managing API key usage\n\n## Organization roles and permissions\n\nThere are five organization-level roles. See more details [here](https://support.claude.com/en/articles/10186004-api-console-roles-and-permissions).\n\n| Role | Permissions |\n|------|-------------|\n| user | Can use Workbench |\n| claude_code_user | Can use Workbench and [Claude Code](https://code.claude.com/docs/en/overview) |\n| developer | Can use Workbench and manage API keys |\n| billing | Can use Workbench and manage billing details |\n| admin | Can do all of the above, plus manage users |\n\n### Organization Members\n\nYou can list [organization members](/docs/en/api/admin-api/users/get-user), update member roles, and remove members.\n\n<CodeGroup>\n```bash Shell",
+  "code_samples": [],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How the Admin API works",
+      "id": "how-the-admin-api-works"
+    },
+    {
+      "level": "h2",
+      "text": "Organization roles and permissions",
+      "id": "organization-roles-and-permissions"
+    },
+    {
+      "level": "h2",
+      "text": "Key concepts",
+      "id": "key-concepts"
+    },
+    {
+      "level": "h3",
+      "text": "Organization Members",
+      "id": "organization-members"
+    }
+  ],
+  "url": "llms-txt#admin-api-overview",
+  "links": []
+}

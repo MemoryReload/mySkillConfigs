@@ -1,0 +1,133 @@
+{
+  "title": "Programmatic tool calling",
+  "content": "Programmatic tool calling allows Claude to write code that calls your tools programmatically within a [code execution](/docs/en/agents-and-tools/tool-use/code-execution-tool) container, rather than requiring round trips through the model for each tool invocation. This reduces latency for multi-tool workflows and decreases token consumption by allowing Claude to filter or process data before it reaches the model's context window.\n\n<Note>\nProgrammatic tool calling is currently in public beta.\n\nTo use this feature, add the `\"advanced-tool-use-2025-11-20\"` [beta header](/docs/en/api/beta-headers) to your API requests.\n\nThis feature requires the code execution tool to be enabled.\n\nPlease reach out through our [feedback form](https://forms.gle/MVGTnrHe73HpMiho8) to share your feedback on this feature.\n</Note>\n\n## Model compatibility\n\nProgrammatic tool calling is available on the following models:\n\n| Model | Tool Version |\n|-------|--------------|\n| Claude Opus 4.5 (`claude-opus-4-5-20251101`) | `code_execution_20250825` |\n| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) | `code_execution_20250825` |\n\n<Warning>\nProgrammatic tool calling is available via the Claude API and Microsoft Foundry.\n</Warning>\n\nHere's a simple example where Claude programmatically queries a database multiple times and aggregates results:\n\n## How programmatic tool calling works\n\nWhen you configure a tool to be callable from code execution and Claude decides to use that tool:\n\n1. Claude writes Python code that invokes the tool as a function, potentially including multiple tool calls and pre/post-processing logic\n2. Claude runs this code in a sandboxed container via code execution\n3. When a tool function is called, code execution pauses and the API returns a `tool_use` block\n4. You provide the tool result, and code execution continues (intermediate results are not loaded into Claude's context window)\n5. Once all code execution completes, Claude receives the final output and continues working on the task\n\nThis approach is particularly useful for:\n- **Large data processing**: Filter or aggregate tool results before they reach Claude's context\n- **Multi-step workflows**: Save tokens and latency by calling tools serially or in a loop without sampling Claude in-between tool calls\n- **Conditional logic**: Make decisions based on intermediate tool results\n\n<Note>\nCustom tools are converted to async Python functions to support parallel tool calling. When Claude writes code that calls your tools, it uses `await` (e.g., `result = await query_database(\"<sql>\")`) and automatically includes the appropriate async wrapper function.\n\nThe async wrapper is omitted from code examples in this documentation for clarity.\n</Note>\n\n### The `allowed_callers` field\n\nThe `allowed_callers` field specifies which contexts can invoke a tool:\n\n**Possible values:**\n- `[\"direct\"]` - Only Claude can call this tool directly (default if omitted)\n- `[\"code_execution_20250825\"]` - Only callable from within code execution\n- `[\"direct\", \"code_execution_20250825\"]` - Callable both directly and from code execution\n\n<Tip>\nWe recommend choosing either `[\"direct\"]` or `[\"code_execution_20250825\"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.\n</Tip>\n\n### The `caller` field in responses\n\nEvery tool use block includes a `caller` field indicating how it was invoked:\n\n**Direct invocation (traditional tool use):**\n\n**Programmatic invocation:**\n\nThe `tool_id` references the code execution tool that made the programmatic call.\n\n### Container lifecycle\n\nProgrammatic tool calling uses the same containers as code execution:\n\n- **Container creation**: A new container is created for each session unless you reuse an existing one\n- **Expiration**: Containers expire after approximately 4.5 minutes of inactivity (subject to change)\n- **Container ID**: Returned in responses via the `container` field\n- **Reuse**: Pass the container ID to maintain state across requests\n\n<Warning>\nWhen a tool is called programmatically and the container is waiting for your tool result, you must respond before the container expires. Monitor the `expires_at` field. If the container expires, Claude may treat the tool call as timed out and retry it.\n</Warning>\n\nHere's how a complete programmatic tool calling flow works:\n\n### Step 1: Initial request\n\nSend a request with code execution and a tool that allows programmatic calling. To enable programmatic calling, add the `allowed_callers` field to your tool definition.\n\n<Note>\nProvide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude will attempt to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.\n</Note>\n\n### Step 2: API response with tool call\n\nClaude writes code that calls your tool. The API pauses and returns:\n\n### Step 3: Provide tool result\n\nInclude the full conversation history plus your tool result:\n\n### Step 4: Next tool call or completion\n\nThe code execution continues and processes the results. If additional tool calls are needed, repeat Step 3 until all tool calls are satisfied.\n\n### Step 5: Final response\n\nOnce the code execution completes, Claude provides the final response:\n\n### Batch processing with loops\n\nClaude can write code that processes multiple items efficiently:",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## How programmatic tool calling works\n\nWhen you configure a tool to be callable from code execution and Claude decides to use that tool:\n\n1. Claude writes Python code that invokes the tool as a function, potentially including multiple tool calls and pre/post-processing logic\n2. Claude runs this code in a sandboxed container via code execution\n3. When a tool function is called, code execution pauses and the API returns a `tool_use` block\n4. You provide the tool result, and code execution continues (intermediate results are not loaded into Claude's context window)\n5. Once all code execution completes, Claude receives the final output and continues working on the task\n\nThis approach is particularly useful for:\n- **Large data processing**: Filter or aggregate tool results before they reach Claude's context\n- **Multi-step workflows**: Save tokens and latency by calling tools serially or in a loop without sampling Claude in-between tool calls\n- **Conditional logic**: Make decisions based on intermediate tool results\n\n<Note>\nCustom tools are converted to async Python functions to support parallel tool calling. When Claude writes code that calls your tools, it uses `await` (e.g., `result = await query_database(\"<sql>\")`) and automatically includes the appropriate async wrapper function. \n\nThe async wrapper is omitted from code examples in this documentation for clarity.\n</Note>\n\n## Core concepts\n\n### The `allowed_callers` field\n\nThe `allowed_callers` field specifies which contexts can invoke a tool:",
+      "language": "unknown"
+    },
+    {
+      "code": "**Possible values:**\n- `[\"direct\"]` - Only Claude can call this tool directly (default if omitted)\n- `[\"code_execution_20250825\"]` - Only callable from within code execution\n- `[\"direct\", \"code_execution_20250825\"]` - Callable both directly and from code execution\n\n<Tip>\nWe recommend choosing either `[\"direct\"]` or `[\"code_execution_20250825\"]` for each tool rather than enabling both, as this provides clearer guidance to Claude for how best to use the tool.\n</Tip>\n\n### The `caller` field in responses\n\nEvery tool use block includes a `caller` field indicating how it was invoked:\n\n**Direct invocation (traditional tool use):**",
+      "language": "unknown"
+    },
+    {
+      "code": "**Programmatic invocation:**",
+      "language": "unknown"
+    },
+    {
+      "code": "The `tool_id` references the code execution tool that made the programmatic call.\n\n### Container lifecycle\n\nProgrammatic tool calling uses the same containers as code execution:\n\n- **Container creation**: A new container is created for each session unless you reuse an existing one\n- **Expiration**: Containers expire after approximately 4.5 minutes of inactivity (subject to change)\n- **Container ID**: Returned in responses via the `container` field\n- **Reuse**: Pass the container ID to maintain state across requests\n\n<Warning>\nWhen a tool is called programmatically and the container is waiting for your tool result, you must respond before the container expires. Monitor the `expires_at` field. If the container expires, Claude may treat the tool call as timed out and retry it.\n</Warning>\n\n## Example workflow\n\nHere's how a complete programmatic tool calling flow works:\n\n### Step 1: Initial request\n\nSend a request with code execution and a tool that allows programmatic calling. To enable programmatic calling, add the `allowed_callers` field to your tool definition.\n\n<Note>\nProvide detailed descriptions of your tool's output format in the tool description. If you specify that the tool returns JSON, Claude will attempt to deserialize and process the result in code. The more detail you provide about the output schema, the better Claude can handle the response programmatically.\n</Note>\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Step 2: API response with tool call\n\nClaude writes code that calls your tool. The API pauses and returns:",
+      "language": "unknown"
+    },
+    {
+      "code": "### Step 3: Provide tool result\n\nInclude the full conversation history plus your tool result:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Step 4: Next tool call or completion\n\nThe code execution continues and processes the results. If additional tool calls are needed, repeat Step 3 until all tool calls are satisfied.\n\n### Step 5: Final response\n\nOnce the code execution completes, Claude provides the final response:",
+      "language": "unknown"
+    },
+    {
+      "code": "## Advanced patterns\n\n### Batch processing with loops\n\nClaude can write code that processes multiple items efficiently:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Model compatibility",
+      "id": "model-compatibility"
+    },
+    {
+      "level": "h2",
+      "text": "Quick start",
+      "id": "quick-start"
+    },
+    {
+      "level": "h2",
+      "text": "How programmatic tool calling works",
+      "id": "how-programmatic-tool-calling-works"
+    },
+    {
+      "level": "h2",
+      "text": "Core concepts",
+      "id": "core-concepts"
+    },
+    {
+      "level": "h3",
+      "text": "The `allowed_callers` field",
+      "id": "the-`allowed_callers`-field"
+    },
+    {
+      "level": "h3",
+      "text": "The `caller` field in responses",
+      "id": "the-`caller`-field-in-responses"
+    },
+    {
+      "level": "h3",
+      "text": "Container lifecycle",
+      "id": "container-lifecycle"
+    },
+    {
+      "level": "h2",
+      "text": "Example workflow",
+      "id": "example-workflow"
+    },
+    {
+      "level": "h3",
+      "text": "Step 1: Initial request",
+      "id": "step-1:-initial-request"
+    },
+    {
+      "level": "h3",
+      "text": "Step 2: API response with tool call",
+      "id": "step-2:-api-response-with-tool-call"
+    },
+    {
+      "level": "h3",
+      "text": "Step 3: Provide tool result",
+      "id": "step-3:-provide-tool-result"
+    },
+    {
+      "level": "h3",
+      "text": "Step 4: Next tool call or completion",
+      "id": "step-4:-next-tool-call-or-completion"
+    },
+    {
+      "level": "h3",
+      "text": "Step 5: Final response",
+      "id": "step-5:-final-response"
+    },
+    {
+      "level": "h2",
+      "text": "Advanced patterns",
+      "id": "advanced-patterns"
+    },
+    {
+      "level": "h3",
+      "text": "Batch processing with loops",
+      "id": "batch-processing-with-loops"
+    }
+  ],
+  "url": "llms-txt#programmatic-tool-calling",
+  "links": []
+}

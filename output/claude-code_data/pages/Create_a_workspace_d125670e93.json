@@ -1,0 +1,8 @@
+{
+  "title": "Create a workspace",
+  "content": "curl --request POST \"https://api.anthropic.com/v1/organizations/workspaces\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ANTHROPIC_ADMIN_KEY\" \\\n  --data '{\"name\": \"Production\"}'",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#create-a-workspace",
+  "links": []
+}

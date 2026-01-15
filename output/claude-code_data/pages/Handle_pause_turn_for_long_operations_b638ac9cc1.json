@@ -1,0 +1,17 @@
+{
+  "title": "Handle pause_turn for long operations",
+  "content": "for i in range(max_retries):\n    if response.stop_reason != \"pause_turn\":\n        break\n\nmessages.append({\"role\": \"assistant\", \"content\": response.content})\n    response = client.beta.messages.create(\n        model=\"claude-sonnet-4-5-20250929\",\n        max_tokens=4096,\n        betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n        container={\n            \"id\": response.container.id,\n            \"skills\": [\n                {\"type\": \"custom\", \"skill_id\": \"skill_01AbCdEfGhIjKlMnOpQrStUv\", \"version\": \"latest\"}\n            ]\n        },\n        messages=messages,\n        tools=[{\"type\": \"code_execution_20250825\", \"name\": \"code_execution\"}]\n    )\ntypescript TypeScript\nlet messages = [{role: 'user' as const, content: 'Process this large dataset'}];\nconst maxRetries = 10;\n\nlet response = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    skills: [\n      {type: 'custom', skill_id: 'skill_01AbCdEfGhIjKlMnOpQrStUv', version: 'latest'}\n    ]\n  },\n  messages,\n  tools: [{type: 'code_execution_20250825', name: 'code_execution'}]\n});\n\n// Handle pause_turn for long operations\nfor (let i = 0; i < maxRetries; i++) {\n  if (response.stop_reason !== 'pause_turn') {\n    break;\n  }\n\nmessages.push({role: 'assistant', content: response.content});\n  response = await client.beta.messages.create({\n    model: 'claude-sonnet-4-5-20250929',\n    max_tokens: 4096,\n    betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n    container: {\n      id: response.container.id,\n      skills: [\n        {type: 'custom', skill_id: 'skill_01AbCdEfGhIjKlMnOpQrStUv', version: 'latest'}\n      ]\n    },\n    messages,\n    tools: [{type: 'code_execution_20250825', name: 'code_execution'}]\n  });\n}\nbash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#handle-pause_turn-for-long-operations",
+  "links": []
+}

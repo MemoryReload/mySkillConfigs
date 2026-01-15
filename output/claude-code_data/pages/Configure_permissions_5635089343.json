@@ -1,0 +1,52 @@
+{
+  "title": "Configure permissions",
+  "content": "Control how your agent uses tools with permission modes, hooks, and declarative allow/deny rules.\n\nThe Claude Agent SDK provides permission controls to manage how Claude uses tools. Use permission modes and rules to define what's allowed automatically, and the [`canUseTool` callback](/docs/en/agent-sdk/user-input) to handle everything else at runtime.\n\n<Note>\nThis page covers permission modes and rules. To build interactive approval flows where users approve or deny tool requests at runtime, see [Handle approvals and user input](/docs/en/agent-sdk/user-input).\n</Note>\n\n## How permissions are evaluated\n\nWhen Claude requests a tool, the SDK checks permissions in this order:\n\n<Steps>\n  <Step title=\"Hooks\">\n    Run [hooks](/docs/en/agent-sdk/hooks) first, which can allow, deny, or continue to the next step\n  </Step>\n  <Step title=\"Permission rules\">\n    Check rules defined in [settings.json](https://code.claude.com/docs/en/settings#permission-settings) in this order: `deny` rules first (block regardless of other rules), then `allow` rules (permit if matched), then `ask` rules (prompt for approval). These declarative rules let you pre-approve, block, or require approval for specific tools without writing code.\n  </Step>\n  <Step title=\"Permission mode\">\n    Apply the active [permission mode](#permission-modes) (`bypassPermissions`, `acceptEdits`, `dontAsk`, etc.)\n  </Step>\n  <Step title=\"canUseTool callback\">\n    If not resolved by rules or modes, call your [`canUseTool` callback](/docs/en/agent-sdk/user-input) for a decision\n  </Step>\n</Steps>\n\n![Permission evaluation flow diagram](/docs/images/agent-sdk/permissions-flow.svg)\n\nThis page focuses on **permission modes** (step 3), the static configuration that controls default behavior. For the other steps:\n\n- **Hooks**: run custom code to allow, deny, or modify tool requests. See [Control execution with hooks](/docs/en/agent-sdk/hooks).\n- **Permission rules**: configure declarative allow/deny rules in `settings.json`. See [Permission settings](https://code.claude.com/docs/en/settings#permission-settings).\n- **canUseTool callback**: prompt users for approval at runtime. See [Handle approvals and user input](/docs/en/agent-sdk/user-input).\n\nPermission modes provide global control over how Claude uses tools. You can set the permission mode when calling `query()` or change it dynamically during streaming sessions.\n\nThe SDK supports these permission modes:\n\n| Mode | Description | Tool behavior |\n| :--- | :---------- | :------------ |\n| `default` | Standard permission behavior | No auto-approvals; unmatched tools trigger your `canUseTool` callback |\n| `acceptEdits` | Auto-accept file edits | File edits and [filesystem operations](#accept-edits-mode-acceptedits) (`mkdir`, `rm`, `mv`, etc.) are automatically approved |\n| `dontAsk` | Skip approval prompts | Auto-deny tools unless explicitly allowed by an [allow rule](https://code.claude.com/docs/en/settings#permission-settings) |\n| `bypassPermissions` | Bypass all permission checks | All tools run without permission prompts (use with caution) |\n\n<Note>\n`plan` mode is not currently supported in the SDK.\n</Note>\n\n### Set permission mode\n\nYou can set the permission mode once when starting a query, or change it dynamically while the session is active.\n\n<Tabs>\n  <Tab title=\"At query time\">\n    Pass `permission_mode` (Python) or `permissionMode` (TypeScript) when creating a query. This mode applies for the entire session unless changed dynamically.\n\n</CodeGroup>\n  </Tab>\n  <Tab title=\"During streaming\">\n    Call `set_permission_mode()` (Python) or `setPermissionMode()` (TypeScript) to change the mode mid-session. The new mode takes effect immediately for all subsequent tool requests. This lets you start restrictive and loosen permissions as trust builds, for example switching to `acceptEdits` after reviewing Claude's initial approach.\n\n</CodeGroup>\n  </Tab>\n</Tabs>\n\n#### Accept edits mode (`acceptEdits`)\n\nAuto-approves file operations so Claude can edit code without prompting. Other tools (like Bash commands that aren't filesystem operations) still require normal permissions.\n\n**Auto-approved operations:**\n- File edits (Edit, Write tools)\n- Filesystem commands: `mkdir`, `touch`, `rm`, `mv`, `cp`\n\n**Use when:** you trust Claude's edits and want faster iteration, such as during prototyping or when working in an isolated directory.\n\n#### Don't ask mode (`dontAsk`)\n\nAuto-denies all tools unless explicitly permitted by an [allow rule](https://code.claude.com/docs/en/settings#permission-settings) in `settings.json`. No prompts are shown.\n\n**Use when:** running in non-interactive environments (CI/CD, batch processing) where you can't prompt users. Configure allow rules for the specific tools you need.\n\n#### Bypass permissions mode (`bypassPermissions`)\n\nAuto-approves all tool uses without prompts. Hooks still execute and can block operations if needed.\n\n<Warning>\nUse with extreme caution. Claude has full system access in this mode. Only use in controlled environments where you trust all possible operations.\n</Warning>\n\nFor the other steps in the permission evaluation flow:\n\n- [Handle approvals and user input](/docs/en/agent-sdk/user-input): interactive approval prompts and clarifying questions\n- [Hooks guide](/docs/en/agent-sdk/hooks): run custom code at key points in the agent lifecycle\n- [Permission rules](https://code.claude.com/docs/en/settings#permission-settings): declarative allow/deny rules in `settings.json`",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n  </Tab>\n  <Tab title=\"During streaming\">\n    Call `set_permission_mode()` (Python) or `setPermissionMode()` (TypeScript) to change the mode mid-session. The new mode takes effect immediately for all subsequent tool requests. This lets you start restrictive and loosen permissions as trust builds, for example switching to `acceptEdits` after reviewing Claude's initial approach.\n\n    <CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "How permissions are evaluated",
+      "id": "how-permissions-are-evaluated"
+    },
+    {
+      "level": "h2",
+      "text": "Permission modes",
+      "id": "permission-modes"
+    },
+    {
+      "level": "h3",
+      "text": "Available modes",
+      "id": "available-modes"
+    },
+    {
+      "level": "h3",
+      "text": "Set permission mode",
+      "id": "set-permission-mode"
+    },
+    {
+      "level": "h3",
+      "text": "Mode details",
+      "id": "mode-details"
+    },
+    {
+      "level": "h2",
+      "text": "Related resources",
+      "id": "related-resources"
+    }
+  ],
+  "url": "llms-txt#configure-permissions",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Define multiple tools using the @tool decorator",
+  "content": "@tool(\"calculate\", \"Perform calculations\", {\"expression\": str})\nasync def calculate(args: dict[str, Any]) -> dict[str, Any]:\n    result = eval(args[\"expression\"])  # Use safe eval in production\n    return {\"content\": [{\"type\": \"text\", \"text\": f\"Result: {result}\"}]}\n\n@tool(\"translate\", \"Translate text\", {\"text\": str, \"target_lang\": str})\nasync def translate(args: dict[str, Any]) -> dict[str, Any]:\n    # Translation logic here\n    return {\"content\": [{\"type\": \"text\", \"text\": f\"Translated: {args['text']}\"}]}\n\n@tool(\"search_web\", \"Search the web\", {\"query\": str})\nasync def search_web(args: dict[str, Any]) -> dict[str, Any]:\n    # Search logic here\n    return {\"content\": [{\"type\": \"text\", \"text\": f\"Search results for: {args['query']}\"}]}\n\nmulti_tool_server = create_sdk_mcp_server(\n    name=\"utilities\",\n    version=\"1.0.0\",\n    tools=[calculate, translate, search_web]  # Pass decorated functions\n)",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#define-multiple-tools-using-the-@tool-decorator",
+  "links": []
+}

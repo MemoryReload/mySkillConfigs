@@ -1,0 +1,8 @@
+{
+  "title": "Intercept and control agent behavior with hooks",
+  "content": "Intercept and customize agent behavior at key execution points with hooks\n\nHooks let you intercept agent execution at key points to add validation, logging, security controls, or custom logic. With hooks, you can:\n\n- **Block dangerous operations** before they execute, like destructive shell commands or unauthorized file access\n- **Log and audit** every tool call for compliance, debugging, or analytics\n- **Transform inputs and outputs** to sanitize data, inject credentials, or redirect file paths\n- **Require human approval** for sensitive actions like database writes or API calls\n- **Track session lifecycle** to manage state, clean up resources, or send notifications\n\nA hook has two parts:\n\n1. **The callback function**: the logic that runs when the hook fires\n2. **The hook configuration**: tells the SDK which event to hook into (like `PreToolUse`) and which tools to match\n\nThe following example blocks the agent from modifying `.env` files. First, define a callback that checks the file path, then pass it to `query()` to run before any Write or Edit tool call:\n\n```python Python\nimport asyncio\nfrom claude_agent_sdk import query, ClaudeAgentOptions, HookMatcher",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#intercept-and-control-agent-behavior-with-hooks",
+  "links": []
+}

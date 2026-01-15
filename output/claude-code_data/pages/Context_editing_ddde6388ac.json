@@ -1,0 +1,196 @@
+{
+  "title": "Context editing",
+  "content": "Automatically manage conversation context as it grows with context editing.\n\nContext editing allows you to automatically manage conversation context as it grows, helping you optimize costs and stay within context window limits. You can use server-side API strategies, client-side SDK features, or both together.\n\n| Approach | Where it runs | Strategies | How it works |\n|----------|---------------|------------|--------------|\n| **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`)<br/>Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |\n| **Client-side** | SDK | Compaction | Available in [Python and TypeScript SDKs](/docs/en/api/client-sdks) when using [`tool_runner`](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta). Generates a summary and replaces full conversation history. See [Compaction](#client-side-compaction-sdk) below. |\n\n## Server-side strategies\n\n<Note>\nContext editing is currently in beta with support for tool result clearing and thinking block clearing. To enable it, use the beta header `context-management-2025-06-27` in your API requests.\n\nPlease reach out through our [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.\n</Note>\n\n### Tool result clearing\n\nThe `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. When activated, the API automatically clears the oldest tool results in chronological order, replacing them with placeholder text to let Claude know the tool result was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.\n\n### Thinking block clearing\n\nThe `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy automatically clears older thinking blocks from previous turns.\n\n<Tip>\n**Default behavior**: When extended thinking is enabled without configuring the `clear_thinking_20251015` strategy, the API automatically keeps only the thinking blocks from the last assistant turn (equivalent to `keep: {type: \"thinking_turns\", value: 1}`).\n\nTo maximize cache hits, preserve all thinking blocks by setting `keep: \"all\"`.\n</Tip>\n\n<Note>\nAn assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](/docs/en/build-with-claude/extended-thinking#interleaved-thinking)).\n</Note>\n\n<Tip>\n**Context editing happens server-side**\n\nContext editing is applied **server-side** before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history—you do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.\n</Tip>\n\n<Tip>\n**Context editing and prompt caching**\n\nContext editing's interaction with [prompt caching](/docs/en/build-with-claude/prompt-caching) varies by strategy:\n\n- **Tool result clearing**: Invalidates cached prompt prefixes when content is cleared. To account for this, we recommend clearing enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You'll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.\n\n- **Thinking block clearing**: When thinking blocks are **kept** in context (not cleared), the prompt cache is preserved, enabling cache hits and reducing input token costs. When thinking blocks are **cleared**, the cache is invalidated at the point where clearing occurs. Configure the `keep` parameter based on whether you want to prioritize cache performance or context window availability.\n</Tip>\n\nContext editing is available on:\n\n- Claude Opus 4.5 (`claude-opus-4-5-20251101`)\n- Claude Opus 4.1 (`claude-opus-4-1-20250805`)\n- Claude Opus 4 (`claude-opus-4-20250514`)\n- Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)\n- Claude Sonnet 4 (`claude-sonnet-4-20250514`)\n- Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)\n\n## Tool result clearing usage\n\nThe simplest way to enable tool result clearing is to specify only the strategy type, as all other [configuration options](#configuration-options-for-tool-result-clearing) will use their default values:\n\n### Advanced configuration\n\nYou can customize the tool result clearing behavior with additional parameters:\n\n## Thinking block clearing usage\n\nEnable thinking block clearing to manage context and prompt caching effectively when extended thinking is enabled:\n\n### Configuration options for thinking block clearing\n\nThe `clear_thinking_20251015` strategy supports the following configuration:\n\n| Configuration option | Default | Description |\n|---------------------|---------|-------------|\n| `keep` | `{type: \"thinking_turns\", value: 1}` | Defines how many recent assistant turns with thinking blocks to preserve. Use `{type: \"thinking_turns\", value: N}` where N must be > 0 to keep the last N turns, or `\"all\"` to keep all thinking blocks. |\n\n**Example configurations:**\n\n### Combining strategies\n\nYou can use both thinking block clearing and tool result clearing together:\n\n<Note>\nWhen using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.\n</Note>\n\n## Configuration options for tool result clearing\n\n| Configuration option | Default | Description |\n|---------------------|---------|-------------|\n| `trigger` | 100,000 input tokens | Defines when the context editing strategy activates. Once the prompt exceeds this threshold, clearing will begin. You can specify this value in either `input_tokens` or `tool_uses`. |\n| `keep` | 3 tool uses | Defines how many recent tool use/result pairs to keep after clearing occurs. The API removes the oldest tool interactions first, preserving the most recent ones. |\n| `clear_at_least` | None | Ensures a minimum number of tokens is cleared each time the strategy activates. If the API can't clear at least the specified amount, the strategy will not be applied. This helps determine if context clearing is worth breaking your prompt cache. |\n| `exclude_tools` | None | List of tool names whose tool uses and results should never be cleared. Useful for preserving important context. |\n| `clear_tool_inputs` | `false` | Controls whether the tool call parameters are cleared along with the tool results. By default, only the tool results are cleared while keeping Claude's original tool calls visible. |\n\n## Context editing response\n\nYou can see which context edits were applied to your request using the `context_management` response field, along with helpful statistics about the content and input tokens cleared.\n\nFor streaming responses, the context edits will be included in the final `message_delta` event:\n\nThe [token counting](/docs/en/build-with-claude/token-counting) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.\n\nThe response shows both the final token count after context management is applied (`input_tokens`) and the original token count before any clearing occurred (`original_input_tokens`).\n\n## Using with the Memory Tool\n\nContext editing can be combined with the [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This enables Claude to save tool results or context to its memory files before they're cleared from the conversation history.\n\nThis combination allows you to:\n\n- **Preserve important context**: Claude can write essential information from tool results to memory files before those results are cleared\n- **Maintain long-running workflows**: Enable agentic workflows that would otherwise exceed context limits by offloading information to persistent storage\n- **Access information on demand**: Claude can look up previously cleared information from memory files when needed, rather than keeping everything in the active context window\n\nFor example, in a file editing workflow where Claude performs many operations, Claude can summarize completed changes to memory files as the context grows. When tool results are cleared, Claude retains access to that information through its memory system and can continue working effectively.\n\nTo use both features together, enable them in your API request:\n\n## Client-side compaction (SDK)\n\n<Note>\nCompaction is available in the [Python and TypeScript SDKs](/docs/en/api/client-sdks) when using the [`tool_runner` method](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta).\n</Note>\n\nCompaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](/docs/en/build-with-claude/context-windows).\n\n### How compaction works\n\nWhen compaction is enabled, the SDK monitors token usage after each model response:\n\n1. **Threshold check**: The SDK calculates total tokens as `input_tokens + cache_creation_input_tokens + cache_read_input_tokens + output_tokens`\n2. **Summary generation**: When the threshold is exceeded, a summary prompt is injected as a user turn, and Claude generates a structured summary wrapped in `<summary></summary>` tags\n3. **Context replacement**: The SDK extracts the summary and replaces the entire message history with it\n4. **Continuation**: The conversation resumes from the summary, with Claude picking up where it left off\n\nAdd `compaction_control` to your `tool_runner` call:\n\n#### What happens during compaction\n\nAs the conversation grows, the message history accumulates:\n\n**Before compaction (approaching 100k tokens):**\n\nWhen tokens exceed the threshold, the SDK injects a summary request and Claude generates a summary. The entire history is then replaced:\n\n**After compaction (back to ~2-3k tokens):**\n\nClaude continues working from this summary as if it were the original conversation history.\n\n### Configuration options\n\n| Parameter | Type | Required | Default | Description |\n|-----------|------|----------|---------|-------------|\n| `enabled` | boolean | Yes | - | Whether to enable automatic compaction |\n| `context_token_threshold` | number | No | 100,000 | Token count at which compaction triggers |\n| `model` | string | No | Same as main model | Model to use for generating summaries |\n| `summary_prompt` | string | No | See below | Custom prompt for summary generation |\n\n#### Choosing a token threshold\n\nThe threshold determines when compaction occurs. A lower threshold means more frequent compactions with smaller context windows. A higher threshold allows more context but risks hitting limits.",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Advanced configuration\n\nYou can customize the tool result clearing behavior with additional parameters:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Thinking block clearing usage\n\nEnable thinking block clearing to manage context and prompt caching effectively when extended thinking is enabled:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Configuration options for thinking block clearing\n\nThe `clear_thinking_20251015` strategy supports the following configuration:\n\n| Configuration option | Default | Description |\n|---------------------|---------|-------------|\n| `keep` | `{type: \"thinking_turns\", value: 1}` | Defines how many recent assistant turns with thinking blocks to preserve. Use `{type: \"thinking_turns\", value: N}` where N must be > 0 to keep the last N turns, or `\"all\"` to keep all thinking blocks. |\n\n**Example configurations:**",
+      "language": "unknown"
+    },
+    {
+      "code": "### Combining strategies\n\nYou can use both thinking block clearing and tool result clearing together:\n\n<Note>\nWhen using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.\n</Note>\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Configuration options for tool result clearing\n\n| Configuration option | Default | Description |\n|---------------------|---------|-------------|\n| `trigger` | 100,000 input tokens | Defines when the context editing strategy activates. Once the prompt exceeds this threshold, clearing will begin. You can specify this value in either `input_tokens` or `tool_uses`. |\n| `keep` | 3 tool uses | Defines how many recent tool use/result pairs to keep after clearing occurs. The API removes the oldest tool interactions first, preserving the most recent ones. |\n| `clear_at_least` | None | Ensures a minimum number of tokens is cleared each time the strategy activates. If the API can't clear at least the specified amount, the strategy will not be applied. This helps determine if context clearing is worth breaking your prompt cache. |\n| `exclude_tools` | None | List of tool names whose tool uses and results should never be cleared. Useful for preserving important context. |\n| `clear_tool_inputs` | `false` | Controls whether the tool call parameters are cleared along with the tool results. By default, only the tool results are cleared while keeping Claude's original tool calls visible. |\n\n## Context editing response\n\nYou can see which context edits were applied to your request using the `context_management` response field, along with helpful statistics about the content and input tokens cleared.",
+      "language": "unknown"
+    },
+    {
+      "code": "For streaming responses, the context edits will be included in the final `message_delta` event:",
+      "language": "unknown"
+    },
+    {
+      "code": "## Token counting\n\nThe [token counting](/docs/en/build-with-claude/token-counting) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "The response shows both the final token count after context management is applied (`input_tokens`) and the original token count before any clearing occurred (`original_input_tokens`).\n\n## Using with the Memory Tool\n\nContext editing can be combined with the [memory tool](/docs/en/agents-and-tools/tool-use/memory-tool). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This enables Claude to save tool results or context to its memory files before they're cleared from the conversation history.\n\nThis combination allows you to:\n\n- **Preserve important context**: Claude can write essential information from tool results to memory files before those results are cleared\n- **Maintain long-running workflows**: Enable agentic workflows that would otherwise exceed context limits by offloading information to persistent storage\n- **Access information on demand**: Claude can look up previously cleared information from memory files when needed, rather than keeping everything in the active context window\n\nFor example, in a file editing workflow where Claude performs many operations, Claude can summarize completed changes to memory files as the context grows. When tool results are cleared, Claude retains access to that information through its memory system and can continue working effectively.\n\nTo use both features together, enable them in your API request:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n## Client-side compaction (SDK)\n\n<Note>\nCompaction is available in the [Python and TypeScript SDKs](/docs/en/api/client-sdks) when using the [`tool_runner` method](/docs/en/agents-and-tools/tool-use/implement-tool-use#tool-runner-beta).\n</Note>\n\nCompaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](/docs/en/build-with-claude/context-windows).\n\n### How compaction works\n\nWhen compaction is enabled, the SDK monitors token usage after each model response:\n\n1. **Threshold check**: The SDK calculates total tokens as `input_tokens + cache_creation_input_tokens + cache_read_input_tokens + output_tokens`\n2. **Summary generation**: When the threshold is exceeded, a summary prompt is injected as a user turn, and Claude generates a structured summary wrapped in `<summary></summary>` tags\n3. **Context replacement**: The SDK extracts the summary and replaces the entire message history with it\n4. **Continuation**: The conversation resumes from the summary, with Claude picking up where it left off\n\n### Using compaction\n\nAdd `compaction_control` to your `tool_runner` call:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n#### What happens during compaction\n\nAs the conversation grows, the message history accumulates:\n\n**Before compaction (approaching 100k tokens):**",
+      "language": "unknown"
+    },
+    {
+      "code": "When tokens exceed the threshold, the SDK injects a summary request and Claude generates a summary. The entire history is then replaced:\n\n**After compaction (back to ~2-3k tokens):**",
+      "language": "unknown"
+    },
+    {
+      "code": "Claude continues working from this summary as if it were the original conversation history.\n\n### Configuration options\n\n| Parameter | Type | Required | Default | Description |\n|-----------|------|----------|---------|-------------|\n| `enabled` | boolean | Yes | - | Whether to enable automatic compaction |\n| `context_token_threshold` | number | No | 100,000 | Token count at which compaction triggers |\n| `model` | string | No | Same as main model | Model to use for generating summaries |\n| `summary_prompt` | string | No | See below | Custom prompt for summary generation |\n\n#### Choosing a token threshold\n\nThe threshold determines when compaction occurs. A lower threshold means more frequent compactions with smaller context windows. A higher threshold allows more context but risks hitting limits.\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Overview",
+      "id": "overview"
+    },
+    {
+      "level": "h2",
+      "text": "Server-side strategies",
+      "id": "server-side-strategies"
+    },
+    {
+      "level": "h3",
+      "text": "Tool result clearing",
+      "id": "tool-result-clearing"
+    },
+    {
+      "level": "h3",
+      "text": "Thinking block clearing",
+      "id": "thinking-block-clearing"
+    },
+    {
+      "level": "h2",
+      "text": "Supported models",
+      "id": "supported-models"
+    },
+    {
+      "level": "h2",
+      "text": "Tool result clearing usage",
+      "id": "tool-result-clearing-usage"
+    },
+    {
+      "level": "h3",
+      "text": "Advanced configuration",
+      "id": "advanced-configuration"
+    },
+    {
+      "level": "h2",
+      "text": "Thinking block clearing usage",
+      "id": "thinking-block-clearing-usage"
+    },
+    {
+      "level": "h3",
+      "text": "Configuration options for thinking block clearing",
+      "id": "configuration-options-for-thinking-block-clearing"
+    },
+    {
+      "level": "h3",
+      "text": "Combining strategies",
+      "id": "combining-strategies"
+    },
+    {
+      "level": "h2",
+      "text": "Configuration options for tool result clearing",
+      "id": "configuration-options-for-tool-result-clearing"
+    },
+    {
+      "level": "h2",
+      "text": "Context editing response",
+      "id": "context-editing-response"
+    },
+    {
+      "level": "h2",
+      "text": "Token counting",
+      "id": "token-counting"
+    },
+    {
+      "level": "h2",
+      "text": "Using with the Memory Tool",
+      "id": "using-with-the-memory-tool"
+    },
+    {
+      "level": "h2",
+      "text": "Client-side compaction (SDK)",
+      "id": "client-side-compaction-(sdk)"
+    },
+    {
+      "level": "h3",
+      "text": "How compaction works",
+      "id": "how-compaction-works"
+    },
+    {
+      "level": "h3",
+      "text": "Using compaction",
+      "id": "using-compaction"
+    },
+    {
+      "level": "h3",
+      "text": "Configuration options",
+      "id": "configuration-options"
+    }
+  ],
+  "url": "llms-txt#context-editing",
+  "links": []
+}

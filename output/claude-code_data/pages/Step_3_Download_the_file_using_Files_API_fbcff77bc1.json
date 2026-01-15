@@ -1,0 +1,17 @@
+{
+  "title": "Step 3: Download the file using Files API",
+  "content": "for file_id in extract_file_ids(response):\n    file_metadata = client.beta.files.retrieve_metadata(\n        file_id=file_id,\n        betas=[\"files-api-2025-04-14\"]\n    )\n    file_content = client.beta.files.download(\n        file_id=file_id,\n        betas=[\"files-api-2025-04-14\"]\n    )\n\n# Step 4: Save to disk\n    file_content.write_to_file(file_metadata.filename)\n    print(f\"Downloaded: {file_metadata.filename}\")\ntypescript TypeScript\nimport Anthropic from '@anthropic-ai/sdk';\n\nconst client = new Anthropic();\n\n// Step 1: Use a Skill to create a file\nconst response = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    skills: [\n      {type: 'anthropic', skill_id: 'xlsx', version: 'latest'}\n    ]\n  },\n  messages: [{\n    role: 'user',\n    content: 'Create an Excel file with a simple budget spreadsheet'\n  }],\n  tools: [{type: 'code_execution_20250825', name: 'code_execution'}]\n});\n\n// Step 2: Extract file IDs from the response\nfunction extractFileIds(response: any): string[] {\n  const fileIds: string[] = [];\n  for (const item of response.content) {\n    if (item.type === 'bash_code_execution_tool_result') {\n      const contentItem = item.content;\n      if (contentItem.type === 'bash_code_execution_result') {\n        for (const file of contentItem.content) {\n          if ('file_id' in file) {\n            fileIds.push(file.file_id);\n          }\n        }\n      }\n    }\n  }\n  return fileIds;\n}\n\n// Step 3: Download the file using Files API\nconst fs = require('fs');\nfor (const fileId of extractFileIds(response)) {\n  const fileMetadata = await client.beta.files.retrieve_metadata(fileId, {\n    betas: ['files-api-2025-04-14']\n  });\n  const fileContent = await client.beta.files.download(fileId, {\n    betas: ['files-api-2025-04-14']\n  });\n\n// Step 4: Save to disk\n  fs.writeFileSync(fileMetadata.filename, Buffer.from(await fileContent.arrayBuffer()));\n  console.log(`Downloaded: ${fileMetadata.filename}`);\n}\nbash Shell",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#step-3:-download-the-file-using-files-api",
+  "links": []
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Update member role",
+  "content": "curl --request POST \"https://api.anthropic.com/v1/organizations/workspaces/{workspace_id}/members/{user_id}\" \\\n  --header \"anthropic-version: 2023-06-01\" \\\n  --header \"x-api-key: $ANTHROPIC_ADMIN_KEY\" \\\n  --data '{\n    \"workspace_role\": \"workspace_admin\"\n  }'",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#update-member-role",
+  "links": []
+}

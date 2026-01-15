@@ -1,0 +1,33 @@
+{
+  "title": "Create an SDK MCP server with the custom tool",
+  "content": "custom_server = create_sdk_mcp_server(\n    name=\"my-custom-tools\",\n    version=\"1.0.0\",\n    tools=[get_weather]  # Pass the decorated function\n)\ntypescript TypeScript\nimport { query } from \"@anthropic-ai/claude-agent-sdk\";\n\n// Use the custom tools in your query with streaming input\nasync function* generateMessages() {\n  yield {\n    type: \"user\" as const,\n    message: {\n      role: \"user\" as const,\n      content: \"What's the weather in San Francisco?\"\n    }\n  };\n}\n\nfor await (const message of query({\n  prompt: generateMessages(),  // Use async generator for streaming input\n  options: {\n    mcpServers: {\n      \"my-custom-tools\": customServer  // Pass as object/dictionary, not array\n    },\n    // Optionally specify which tools Claude can use\n    allowedTools: [\n      \"mcp__my-custom-tools__get_weather\",  // Allow the weather tool\n      // Add other tools as needed\n    ],\n    maxTurns: 3\n  }\n})) {\n  if (message.type === \"result\" && message.subtype === \"success\") {\n    console.log(message.result);\n  }\n}\npython Python\nfrom claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions\nimport asyncio",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n## Using Custom Tools\n\nPass the custom server to the `query` function via the `mcpServers` option as a dictionary/object.\n\n<Note>\n**Important:** Custom MCP tools require streaming input mode. You must use an async generator/iterable for the `prompt` parameter - a simple string will not work with MCP servers.\n</Note>\n\n### Tool Name Format\n\nWhen MCP tools are exposed to Claude, their names follow a specific format:\n- Pattern: `mcp__{server_name}__{tool_name}`\n- Example: A tool named `get_weather` in server `my-custom-tools` becomes `mcp__my-custom-tools__get_weather`\n\n### Configuring Allowed Tools\n\nYou can control which tools Claude can use via the `allowedTools` option:\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Using Custom Tools",
+      "id": "using-custom-tools"
+    },
+    {
+      "level": "h3",
+      "text": "Tool Name Format",
+      "id": "tool-name-format"
+    },
+    {
+      "level": "h3",
+      "text": "Configuring Allowed Tools",
+      "id": "configuring-allowed-tools"
+    }
+  ],
+  "url": "llms-txt#create-an-sdk-mcp-server-with-the-custom-tool",
+  "links": []
+}

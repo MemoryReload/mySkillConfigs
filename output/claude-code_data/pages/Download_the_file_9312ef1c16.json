@@ -1,0 +1,71 @@
+{
+  "title": "Download the file",
+  "content": "curl \"https://api.anthropic.com/v1/files/$FILE_ID/content\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: files-api-2025-04-14\" \\\n  --output renewable_energy.pptx\n\necho \"Presentation saved to renewable_energy.pptx\"\npython Python\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    max_tokens=4096,\n    betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n    container={\n        \"skills\": [\n            {\n                \"type\": \"anthropic\",\n                \"skill_id\": \"xlsx\",\n                \"version\": \"latest\"\n            }\n        ]\n    },\n    messages=[{\n        \"role\": \"user\",\n        \"content\": \"Create a quarterly sales tracking spreadsheet with sample data\"\n    }],\n    tools=[{\n        \"type\": \"code_execution_20250825\",\n        \"name\": \"code_execution\"\n    }]\n)\ntypescript TypeScript\nconst response = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    skills: [\n      {\n        type: 'anthropic',\n        skill_id: 'xlsx',\n        version: 'latest'\n      }\n    ]\n  },\n  messages: [{\n    role: 'user',\n    content: 'Create a quarterly sales tracking spreadsheet with sample data'\n  }],\n  tools: [{\n    type: 'code_execution_20250825',\n    name: 'code_execution'\n  }]\n});\nbash Shell\ncurl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5-20250929\",\n    \"max_tokens\": 4096,\n    \"container\": {\n      \"skills\": [\n        {\n          \"type\": \"anthropic\",\n          \"skill_id\": \"xlsx\",\n          \"version\": \"latest\"\n        }\n      ]\n    },\n    \"messages\": [{\n      \"role\": \"user\",\n      \"content\": \"Create a quarterly sales tracking spreadsheet with sample data\"\n    }],\n    \"tools\": [{\n      \"type\": \"code_execution_20250825\",\n      \"name\": \"code_execution\"\n    }]\n  }'\npython Python\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    max_tokens=4096,\n    betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n    container={\n        \"skills\": [\n            {\n                \"type\": \"anthropic\",\n                \"skill_id\": \"docx\",\n                \"version\": \"latest\"\n            }\n        ]\n    },\n    messages=[{\n        \"role\": \"user\",\n        \"content\": \"Write a 2-page report on the benefits of renewable energy\"\n    }],\n    tools=[{\n        \"type\": \"code_execution_20250825\",\n        \"name\": \"code_execution\"\n    }]\n)\ntypescript TypeScript\nconst response = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    skills: [\n      {\n        type: 'anthropic',\n        skill_id: 'docx',\n        version: 'latest'\n      }\n    ]\n  },\n  messages: [{\n    role: 'user',\n    content: 'Write a 2-page report on the benefits of renewable energy'\n  }],\n  tools: [{\n    type: 'code_execution_20250825',\n    name: 'code_execution'\n  }]\n});\nbash Shell\ncurl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5-20250929\",\n    \"max_tokens\": 4096,\n    \"container\": {\n      \"skills\": [\n        {\n          \"type\": \"anthropic\",\n          \"skill_id\": \"docx\",\n          \"version\": \"latest\"\n        }\n      ]\n    },\n    \"messages\": [{\n      \"role\": \"user\",\n      \"content\": \"Write a 2-page report on the benefits of renewable energy\"\n    }],\n    \"tools\": [{\n      \"type\": \"code_execution_20250825\",\n      \"name\": \"code_execution\"\n    }]\n  }'\npython Python\nresponse = client.beta.messages.create(\n    model=\"claude-sonnet-4-5-20250929\",\n    max_tokens=4096,\n    betas=[\"code-execution-2025-08-25\", \"skills-2025-10-02\"],\n    container={\n        \"skills\": [\n            {\n                \"type\": \"anthropic\",\n                \"skill_id\": \"pdf\",\n                \"version\": \"latest\"\n            }\n        ]\n    },\n    messages=[{\n        \"role\": \"user\",\n        \"content\": \"Generate a PDF invoice template\"\n    }],\n    tools=[{\n        \"type\": \"code_execution_20250825\",\n        \"name\": \"code_execution\"\n    }]\n)\ntypescript TypeScript\nconst response = await client.beta.messages.create({\n  model: 'claude-sonnet-4-5-20250929',\n  max_tokens: 4096,\n  betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],\n  container: {\n    skills: [\n      {\n        type: 'anthropic',\n        skill_id: 'pdf',\n        version: 'latest'\n      }\n    ]\n  },\n  messages: [{\n    role: 'user',\n    content: 'Generate a PDF invoice template'\n  }],\n  tools: [{\n    type: 'code_execution_20250825',\n    name: 'code_execution'\n  }]\n});\nbash Shell\ncurl https://api.anthropic.com/v1/messages \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: code-execution-2025-08-25,skills-2025-10-02\" \\\n  -H \"content-type: application/json\" \\\n  -d '{\n    \"model\": \"claude-sonnet-4-5-20250929\",\n    \"max_tokens\": 4096,\n    \"container\": {\n      \"skills\": [\n        {\n          \"type\": \"anthropic\",\n          \"skill_id\": \"pdf\",\n          \"version\": \"latest\"\n        }\n      ]\n    },\n    \"messages\": [{\n      \"role\": \"user\",\n      \"content\": \"Generate a PDF invoice template\"\n    }],\n    \"tools\": [{\n      \"type\": \"code_execution_20250825\",\n      \"name\": \"code_execution\"\n    }]\n  }'\n```\n</CodeGroup>\n\nNow that you've used pre-built Agent Skills, you can:\n\n<CardGroup cols={2}>\n  <Card\n    title=\"API Guide\"\n    icon=\"book\"\n    href=\"/docs/en/build-with-claude/skills-guide\"\n  >\n    Use Skills with the Claude API\n  </Card>\n  <Card\n    title=\"Create Custom Skills\"\n    icon=\"code\"\n    href=\"/docs/en/api/skills/create-skill\"\n  >\n    Upload your own Skills for specialized tasks\n  </Card>\n  <Card\n    title=\"Authoring Guide\"\n    icon=\"edit\"\n    href=\"/docs/en/agents-and-tools/agent-skills/best-practices\"\n  >\n    Learn best practices for writing effective Skills\n  </Card>\n  <Card\n    title=\"Use Skills in Claude Code\"\n    icon=\"terminal\"\n    href=\"https://code.claude.com/docs/en/skills\"\n  >\n    Learn about Skills in Claude Code\n  </Card>\n  <Card\n    title=\"Use Skills in the Agent SDK\"\n    icon=\"cube\"\n    href=\"/docs/en/agent-sdk/skills\"\n  >\n    Use Skills programmatically in TypeScript and Python\n  </Card>\n  <Card\n    title=\"Agent Skills Cookbook\"\n    icon=\"book\"\n    href=\"https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction\"\n  >\n    Explore example Skills and implementation patterns\n  </Card>\n</CardGroup>",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\n<Note>\nFor complete details on working with generated files, see the [code execution tool documentation](/docs/en/agents-and-tools/tool-use/code-execution-tool#retrieve-generated-files).\n</Note>\n\n## Try more examples\n\nNow that you've created your first document with Skills, try these variations:\n\n### Create a spreadsheet\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Create a Word document\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\n### Generate a PDF\n\n<CodeGroup>",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Try more examples",
+      "id": "try-more-examples"
+    },
+    {
+      "level": "h3",
+      "text": "Create a spreadsheet",
+      "id": "create-a-spreadsheet"
+    },
+    {
+      "level": "h3",
+      "text": "Create a Word document",
+      "id": "create-a-word-document"
+    },
+    {
+      "level": "h3",
+      "text": "Generate a PDF",
+      "id": "generate-a-pdf"
+    },
+    {
+      "level": "h2",
+      "text": "Next steps",
+      "id": "next-steps"
+    }
+  ],
+  "url": "llms-txt#download-the-file",
+  "links": []
+}

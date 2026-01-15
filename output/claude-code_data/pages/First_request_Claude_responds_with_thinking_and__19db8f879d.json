@@ -1,0 +1,25 @@
+{
+  "title": "First request - Claude responds with thinking and tool request",
+  "content": "response = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=16000,\n    thinking={\n        \"type\": \"enabled\",\n        \"budget_tokens\": 10000\n    },\n    tools=[weather_tool],\n    messages=[\n        {\"role\": \"user\", \"content\": \"What's the weather in Paris?\"}\n    ]\n)\ntypescript TypeScript\nconst weatherTool = {\n  name: \"get_weather\",\n  description: \"Get current weather for a location\",\n  input_schema: {\n    type: \"object\",\n    properties: {\n      location: { type: \"string\" }\n    },\n    required: [\"location\"]\n  }\n};\n\n// First request - Claude responds with thinking and tool request\nconst response = await client.messages.create({\n  model: \"claude-sonnet-4-5\",\n  max_tokens: 16000,\n  thinking: {\n    type: \"enabled\",\n    budget_tokens: 10000\n  },\n  tools: [weatherTool],\n  messages: [\n    { role: \"user\", content: \"What's the weather in Paris?\" }\n  ]\n});\njava Java\nimport java.util.List;\nimport java.util.Map;\n\nimport com.anthropic.client.AnthropicClient;\nimport com.anthropic.client.okhttp.AnthropicOkHttpClient;\nimport com.anthropic.core.JsonValue;\nimport com.anthropic.models.beta.messages.BetaMessage;\nimport com.anthropic.models.beta.messages.MessageCreateParams;\nimport com.anthropic.models.beta.messages.BetaThinkingConfigEnabled;\nimport com.anthropic.models.beta.messages.BetaTool;\nimport com.anthropic.models.beta.messages.BetaTool.InputSchema;\nimport com.anthropic.models.messages.Model;\n\npublic class ThinkingWithToolsExample {\n    public static void main(String[] args) {\n        AnthropicClient client = AnthropicOkHttpClient.fromEnv();\n\nInputSchema schema = InputSchema.builder()\n                .properties(JsonValue.from(Map.of(\n                        \"location\", Map.of(\"type\", \"string\")\n                )))\n                .putAdditionalProperty(\"required\", JsonValue.from(List.of(\"location\")))\n                .build();\n\nBetaTool weatherTool = BetaTool.builder()\n                .name(\"get_weather\")\n                .description(\"Get current weather for a location\")\n                .inputSchema(schema)\n                .build();\n\nBetaMessage response = client.beta().messages().create(\n                MessageCreateParams.builder()\n                        .model(Model.CLAUDE_OPUS_4_0)\n                        .maxTokens(16000)\n                        .thinking(BetaThinkingConfigEnabled.builder().budgetTokens(10000).build())\n                        .addTool(weatherTool)\n                        .addUserMessage(\"What's the weather in Paris?\")\n                        .build()\n        );\n\nSystem.out.println(response);\n    }\n}\njson\n{\n    \"content\": [\n        {\n            \"type\": \"thinking\",\n            \"thinking\": \"The user wants to know the current weather in Paris. I have access to a function `get_weather`...\",\n            \"signature\": \"BDaL4VrbR2Oj0hO4XpJxT28J5TILnCrrUXoKiiNBZW9P+nr8XSj1zuZzAl4egiCCpQNvfyUuFFJP5CncdYZEQPPmLxYsNrcs....\"\n        },\n        {\n            \"type\": \"text\",\n            \"text\": \"I can help you get the current weather information for Paris. Let me check that for you\"\n        },\n        {\n            \"type\": \"tool_use\",\n            \"id\": \"toolu_01CswdEQBMshySk6Y9DFKrfq\",\n            \"name\": \"get_weather\",\n            \"input\": {\n                \"location\": \"Paris\"\n            }\n        }\n    ]\n}\npython Python",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nThe API response will include thinking, text, and tool_use blocks:",
+      "language": "unknown"
+    },
+    {
+      "code": "Now let's continue the conversation and use the tool\n\n<CodeGroup>",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#first-request---claude-responds-with-thinking-and-tool-request",
+  "links": []
+}

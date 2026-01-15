@@ -1,0 +1,8 @@
+{
+  "title": "List all Skills",
+  "content": "curl \"https://api.anthropic.com/v1/skills\" \\\n  -H \"x-api-key: $ANTHROPIC_API_KEY\" \\\n  -H \"anthropic-version: 2023-06-01\" \\\n  -H \"anthropic-beta: skills-2025-10-02\"",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#list-all-skills",
+  "links": []
+}

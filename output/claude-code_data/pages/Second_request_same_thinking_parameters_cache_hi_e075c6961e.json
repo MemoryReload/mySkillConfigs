@@ -1,0 +1,8 @@
+{
+  "title": "Second request - same thinking parameters (cache hit expected)",
+  "content": "print(\"\\nSecond request - same thinking parameters (cache hit expected)\")\nresponse2 = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=20000,\n    thinking={\n        \"type\": \"enabled\",\n        \"budget_tokens\": 4000  # Same thinking budget\n    },\n    messages=MESSAGES\n)\n\nprint(f\"Second response usage: {response2.usage}\")\n\nMESSAGES.append({\n    \"role\": \"assistant\",\n    \"content\": response2.content\n})\nMESSAGES.append({\n    \"role\": \"user\",\n    \"content\": \"Analyze the setting in this passage.\"\n})",
+  "code_samples": [],
+  "headings": [],
+  "url": "llms-txt#second-request---same-thinking-parameters-(cache-hit-expected)",
+  "links": []
+}

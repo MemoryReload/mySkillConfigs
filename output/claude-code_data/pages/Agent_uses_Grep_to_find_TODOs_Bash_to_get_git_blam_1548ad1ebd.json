@@ -1,0 +1,24 @@
+{
+  "title": "Agent uses Grep to find TODOs, Bash to get git blame info",
+  "content": "async for message in query(\n    prompt=\"Find all TODO comments in src/ and identify who added them\",\n    options={\n        \"output_format\": {\n            \"type\": \"json_schema\",\n            \"schema\": todo_schema\n        }\n    }\n):\n    if hasattr(message, 'structured_output'):\n        data = message.structured_output\n        print(f\"Found {data['total_count']} TODOs\")\n        for todo in data['todos']:\n            print(f\"{todo['file']}:{todo['line']} - {todo['text']}\")\n            if 'author' in todo:\n                print(f\"  Added by {todo['author']} on {todo['date']}\")\ntypescript\nfor await (const msg of query({\n  prompt: 'Analyze the data',\n  options: {\n    outputFormat: {\n      type: 'json_schema',\n      schema: mySchema\n    }\n  }\n})) {\n  if (msg.type === 'result') {\n    if (msg.subtype === 'success' && msg.structured_output) {\n      console.log(msg.structured_output)\n    } else if (msg.subtype === 'error_max_structured_output_retries') {\n      console.error('Could not produce valid output')\n    }\n  }\n}\n```\n\n- [JSON Schema documentation](https://json-schema.org/)\n- [API Structured Outputs](/docs/en/build-with-claude/structured-outputs) - For single API calls\n- [Custom tools](/docs/en/agent-sdk/custom-tools) - Define tools for your agents\n- [TypeScript SDK reference](/docs/en/agent-sdk/typescript) - Full TypeScript API\n- [Python SDK reference](/docs/en/agent-sdk/python) - Full Python API",
+  "code_samples": [
+    {
+      "code": "</CodeGroup>\n\nThe agent autonomously uses the right tools (Grep, Bash) to gather information and returns validated data.\n\n## Error handling\n\nIf the agent cannot produce valid output matching your schema, you'll receive an error result:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Error handling",
+      "id": "error-handling"
+    },
+    {
+      "level": "h2",
+      "text": "Related resources",
+      "id": "related-resources"
+    }
+  ],
+  "url": "llms-txt#agent-uses-grep-to-find-todos,-bash-to-get-git-blame-info",
+  "links": []
+}

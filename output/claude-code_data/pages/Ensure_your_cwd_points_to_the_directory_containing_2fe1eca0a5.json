@@ -1,0 +1,17 @@
+{
+  "title": "Ensure your cwd points to the directory containing .claude/skills/",
+  "content": "options = ClaudeAgentOptions(\n    cwd=\"/path/to/project\",  # Must contain .claude/skills/\n    setting_sources=[\"user\", \"project\"],  # Required to load Skills\n    allowed_tools=[\"Skill\"]\n)\ntypescript TypeScript\n// Ensure your cwd points to the directory containing .claude/skills/\nconst options = {\n  cwd: \"/path/to/project\",  // Must contain .claude/skills/\n  settingSources: [\"user\", \"project\"],  // Required to load Skills\n  allowedTools: [\"Skill\"]\n};\nbash",
+  "code_samples": [
+    {
+      "code": "",
+      "language": "unknown"
+    },
+    {
+      "code": "</CodeGroup>\n\nSee the \"Using Skills with the SDK\" section above for the complete pattern.\n\n**Verify filesystem location**:",
+      "language": "unknown"
+    }
+  ],
+  "headings": [],
+  "url": "llms-txt#ensure-your-cwd-points-to-the-directory-containing-.claude/skills/",
+  "links": []
+}
